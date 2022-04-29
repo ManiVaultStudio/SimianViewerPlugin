@@ -1,0 +1,183 @@
+Original_name,Numbered representation
+chimp,1
+gorilla,2
+human,3
+rhesus,4
+marmoset,5
+Astro_1,6
+Astro_2,7
+Endo_1,8
+Micro-PVM_1,9
+Micro-PVM_2,10
+Oligo_1,11
+Oligo_2,12
+OPC_1,13
+OPC_2,14
+VLMC_1,15
+Astro_3,16
+Astro_4,17
+Endo_2,18
+Micro-PVM_3,19
+OPC_3,20
+VLMC_2,21
+VLMC_3,22
+VLMC_4,23
+Astro_5,24
+Oligo_3,25
+Oligo_4,26
+L2/3 IT_1,27
+L2/3 IT_2,28
+L2/3 IT_3,29
+L2/3 IT_4,30
+L2/3 IT_5,31
+L2/3 IT_6,32
+L2/3 IT_7,33
+L4 IT_1,34
+L4 IT_2,35
+L4 IT_3,36
+L4 IT_4,37
+L5 IT_1,38
+L5 IT_2,39
+L5 IT_3,40
+L5 IT_4,41
+L6 IT Car3_1,42
+L6 IT Car3_2,43
+L6 IT_1,44
+L4 IT_5,45
+L6 IT Car3_3,46
+L6 IT_2,47
+L6 IT_3,48
+L2/3 IT_10,49
+L2/3 IT_11,50
+L2/3 IT_12,51
+L2/3 IT_13,52
+L2/3 IT_8,53
+L2/3 IT_9,54
+L5 IT_5,55
+L5 IT_6,56
+L5 IT_7,57
+L2/3 IT_14,58
+L2/3 IT_15,59
+L6 IT_4,60
+L5 ET_1,61
+L5 ET_2,62
+L5/6 NP_1,63
+L5/6 NP_2,64
+L6 CT_1,65
+L6 CT_2,66
+L6 CT_3,67
+L6b_1,68
+L6b_2,69
+L6b_3,70
+L6b_4,71
+L6b_5,72
+L6b_6,73
+L5 ET_3,74
+L5 ET_4,75
+L5/6 NP_3,76
+L5/6 NP_4,77
+L5/6 NP_5,78
+L5/6 NP_6,79
+L6 CT_4,80
+L5/6 NP_7,81
+L5/6 NP_8,82
+Lamp5_1,83
+Lamp5_2,84
+Lamp5_3,85
+Lamp5_Lhx6_1,86
+Lamp5_Lhx6_2,87
+Pax6_1,88
+Pax6_2,89
+Pax6_3,90
+Pax6_4,91
+Sncg_1,92
+Sncg_10,93
+Sncg_2,94
+Sncg_3,95
+Sncg_4,96
+Sncg_5,97
+Sncg_6,98
+Sncg_7,99
+Sncg_8,100
+Sncg_9,101
+Vip_1,102
+Vip_10,103
+Vip_11,104
+Vip_12,105
+Vip_13,106
+Vip_14,107
+Vip_15,108
+Vip_16,109
+Vip_17,110
+Vip_18,111
+Vip_19,112
+Vip_2,113
+Vip_20,114
+Vip_3,115
+Vip_4,116
+Vip_5,117
+Vip_6,118
+Vip_7,119
+Vip_8,120
+Vip_9,121
+Lamp5_4,122
+Lamp5_5,123
+Lamp5_6,124
+Vip_21,125
+Vip_22,126
+Vip_23,127
+Chandelier_1,128
+Chandelier_2,129
+Pvalb_1,130
+Pvalb_2,131
+Pvalb_3,132
+Pvalb_4,133
+Pvalb_5,134
+Pvalb_6,135
+Pvalb_7,136
+Pvalb_8,137
+Pvalb_9,138
+Sst Chodl_1,139
+Sst_1,140
+Sst_10,141
+Sst_11,142
+Sst_12,143
+Sst_13,144
+Sst_14,145
+Sst_15,146
+Sst_2,147
+Sst_3,148
+Sst_4,149
+Sst_5,150
+Sst_6,151
+Sst_7,152
+Sst_8,153
+Sst_9,154
+Sst Chodl_2,155
+Sst Chodl_3,156
+Sst_16,157
+Sst_17,158
+Sst_18,159
+Pvalb_10,160
+Pvalb_11,161
+Pvalb_12,162
+Pvalb_13,163
+Pvalb_14,164
+Pvalb_15,165
+Sst_19,166
+Sst_20,167
+Sst_21,168
+Sst_22,169
+Sst_23,170
+Sst_24,171
+Sst_25,172
+Sst_26,173
+Endo_3,174
+Micro-PVM_4,175
+OPC_4,176
+L4 IT_6,177
+glia,178
+it_types,179
+l5et_l56np_l6ct_l6b,180
+lamp5_sncg_vip,181
+sst_sst_chodl_pvalb,182
