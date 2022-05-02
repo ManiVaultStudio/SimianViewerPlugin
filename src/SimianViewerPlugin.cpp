@@ -39,47 +39,60 @@ void SimianViewerPlugin::init()
     _simianOptionsAction = new SimianOptionsAction(*this, _core);
     connect(_simian_viewer, &SimianViewerWidget::passSelectionToQt, this, &SimianViewerPlugin::publishSelection);
 
-    QFrame* sideBar = new QFrame;
-    QStackedWidget* contentStack = new QStackedWidget;
-    QFrame* contentPage = new QFrame;
-    QWidget* centralWidget = new QWidget;
+    //QFrame* sideBar = new QFrame;
+    //QStackedWidget* contentStack = new QStackedWidget;
+    //QFrame* contentPage = new QFrame;
+    //QWidget* centralWidget = new QWidget;
 
-    QVBoxLayout* sideBarLayout = new QVBoxLayout;
-    QGridLayout* pageGridLayout = new QGridLayout;
-    QGridLayout* centralLayout = new QGridLayout;
+    //QVBoxLayout* sideBarLayout = new QVBoxLayout;
+    //QGridLayout* pageGridLayout = new QGridLayout;
+    //QGridLayout* centralLayout = new QGridLayout;
 
 
-    /* Setup the sidebar: */
-    sideBarLayout->addWidget(_simianOptionsAction->getSpeciesAction().createCollapsedWidget(&_widget));
-    sideBarLayout->addWidget(_simianOptionsAction->getDistanceNeighborhoodAction().createCollapsedWidget(&_widget));
-    sideBarLayout->addWidget(_simianOptionsAction->getClusterAction().createCollapsedWidget(&_widget));
-    sideBarLayout->addStretch();
+    ///* Setup the sidebar: */
+    //sideBarLayout->addWidget(_simianOptionsAction->getSpeciesAction().createCollapsedWidget(&_widget));
+    //sideBarLayout->addWidget(_simianOptionsAction->getDistanceNeighborhoodAction().createCollapsedWidget(&_widget));
+    //sideBarLayout->addWidget(_simianOptionsAction->getClusterAction().createCollapsedWidget(&_widget));
+    //sideBarLayout->addStretch();
 
-    sideBar->setAutoFillBackground(true);
-    sideBar->setWindowTitle("Simian Options");
-    sideBar->setLayout(sideBarLayout);
-    sideBar->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+    //sideBar->setAutoFillBackground(true);
+    //sideBar->setWindowTitle("Simian Options");
+    //sideBar->setLayout(sideBarLayout);
+    //sideBar->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
 
-    /* Setup the content stacked widget */
-    pageGridLayout->addWidget(_simian_viewer, 0, 0, 3, 1);
-    contentPage->setLayout(pageGridLayout);
-    contentStack->addWidget(contentPage);
-    contentStack->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    ///* Setup the content stacked widget */
+    //pageGridLayout->addWidget(_simian_viewer, 0, 0, 3, 1);
+    //contentPage->setLayout(pageGridLayout);
+    //contentStack->addWidget(contentPage);
+    //contentStack->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-    /* Finally we setup the main elements into the central layout... */
+    ///* Finally we setup the main elements into the central layout... */
 
-    centralLayout->addWidget(sideBar, 0, 0, 1, 1);
-    centralLayout->addWidget(contentStack, 0, 1, 1, 1);
-    //centralWidget->setLayout(centralLayout);
-    
-    //setCentralWidget(centralWidget);
+    //centralLayout->addWidget(sideBar, 0, 0, 1, 1);
+    //centralLayout->addWidget(contentStack, 0, 1, 1, 1);
+    ////centralWidget->setLayout(centralLayout);
+    //
+    ////setCentralWidget(centralWidget);
 
-    _widget.setLayout(centralLayout);
+    //_widget.setLayout(centralLayout);
 
-    _widget.setStyleSheet("QWidget {"
-        //"border: 0.5px solid grey;"
-        "color: black"
-        "}");
+    //_widget.setStyleSheet("QWidget {"
+    //    //"border: 0.5px solid grey;"
+    //    "color: black"
+    //    "}");
+
+    auto topToolbarWidget = new QWidget();
+    auto topToolbarLayout = new QHBoxLayout();
+    topToolbarWidget->setAutoFillBackground(true);
+    topToolbarWidget->setLayout(topToolbarLayout);
+    topToolbarLayout->addWidget(_simianOptionsAction->getSpeciesAction().createCollapsedWidget(&_widget));
+    topToolbarLayout->addWidget(_simianOptionsAction->getDistanceNeighborhoodAction().createCollapsedWidget(&_widget));
+    topToolbarLayout->addWidget(_simianOptionsAction->getClusterAction().createCollapsedWidget(&_widget));
+    auto layout = new QVBoxLayout();
+    layout->addWidget(topToolbarWidget);
+    layout->addWidget(_simian_viewer, 100);
+    _widget.setLayout(layout);
+
 
 }
 

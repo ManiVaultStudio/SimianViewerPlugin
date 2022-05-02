@@ -35,7 +35,7 @@ const simianVis = () => {
     d3.select("svg").remove();
     var svg = d3.select("#my_dataviz")
     svg.selectAll("*").remove();
-    var margin = { top: 35, right: 25, bottom: 80, left: 75 },
+    var margin = { top: 35, right: 5, bottom: 80, left: 75 },
         width = window.innerWidth * 0.90 - margin.left - margin.right,
         height = window.innerHeight * 0.95 - margin.top - margin.bottom;
     // append the svg object to the body of the page
