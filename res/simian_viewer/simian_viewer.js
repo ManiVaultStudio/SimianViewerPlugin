@@ -120,22 +120,6 @@ const simianVis = () => {
     // Build color scaled3.scaleSequential(d3Chromatic.interpolatePiYG);
     var myColor = d3.scaleSequential(d3.interpolateGreys).domain([maxdistanceColor, mindistanceColor]);//d3 https://github.com/d3/d3-scale-chromatic
 
-/*    svg.append("line")
-        .attr("x1", 0)
-        .attr("x2", width)
-        .attr("y1", height)
-        .attr("y2", height)
-        .attr("stroke-width", 10)
-        .attr("stroke", "red")
-        .style("paint-order", "stroke");
-    svg.append("line")
-        .attr("x1", 0)
-        .attr("x2", 0)
-        .attr("y1", height)
-        .attr("y2", 0)
-        .attr("stroke-width", 10)
-        .attr("stroke", "blue")
-        .style("paint-order", "stroke");*/
     var valnow1;
     var valuenext1;
     var colorNow1;
@@ -187,13 +171,13 @@ const simianVis = () => {
         }
 
         if (species2ValueIdentify == "chimp") {
-            colorNow2 = cross_speciesClustercolors[mapDataforBorderHuman[uniqueClusters2List[i]]];
-        }
-        else if (species2ValueIdentify == "gorilla") {
             colorNow2 = cross_speciesClustercolors[mapDataforBorderChimp[uniqueClusters2List[i]]];
         }
-        else if (species2ValueIdentify == "marmoset") {
+        else if (species2ValueIdentify == "gorilla") {
             colorNow2 = cross_speciesClustercolors[mapDataforBorderGorilla[uniqueClusters2List[i]]];
+        }
+        else if (species2ValueIdentify == "marmoset") {
+            colorNow2 = cross_speciesClustercolors[mapDataforBorderMarmoset[uniqueClusters2List[i]]];
         }
         else if (species2ValueIdentify == "rhesus") {
             colorNow2 = cross_speciesClustercolors[mapDataforBorderRhesus[uniqueClusters2List[i]]];
@@ -423,16 +407,6 @@ function queueData(d) {
     species2ValueIdentify = _data[0].species_2;
     uniqueClusters1List = [...new Set(_data.map(item => item.cluster_1))]; 
     uniqueClusters2List = [...new Set(_data.map(item => item.cluster_2))];
-    //log(uniqueClusters1List.length);
-/*    _data.forEach(itemValues => {
-        for (let key in itemValues) {
-            if (itemValues["cross_species_cluster1_species_1"] == itemValues["cross_species_cluster2_species_2"]) {
-                if (arrayOfUniqueCrossspeciesClusters.indexOf(itemValues[key]) == -1) arrayOfUniqueCrossspeciesClusters.push(itemValues[key]);
-            }
-        }
-    });
-    dictOfCrossspeciesClusterCordinates = arrayOfUniqueCrossspeciesClusters.map(x => ({ "id": x, "minX": 0.0, "maxX": 0.0, "minY": 0.0, "maxY": 0.0}));
-    log(dictOfCrossspeciesClusterCordinates);*/
     simianVis();
     flag = true;
 }
