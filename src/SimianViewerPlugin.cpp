@@ -83,11 +83,14 @@ void SimianViewerPlugin::init()
 
     auto topToolbarWidget = new QWidget();
     auto topToolbarLayout = new QHBoxLayout();
+    topToolbarLayout->addWidget(_simianOptionsAction->getSpeciesAction().createCollapsedWidget(&_widget));
+    topToolbarLayout->addStretch(1);
+    topToolbarLayout->addWidget(_simianOptionsAction->getDistanceNeighborhoodAction().createCollapsedWidget(&_widget));
+    topToolbarLayout->addStretch(1);
+    topToolbarLayout->addWidget(_simianOptionsAction->getClusterAction().createCollapsedWidget(&_widget));
+    topToolbarLayout->addStretch(1);
     topToolbarWidget->setAutoFillBackground(true);
     topToolbarWidget->setLayout(topToolbarLayout);
-    topToolbarLayout->addWidget(_simianOptionsAction->getSpeciesAction().createCollapsedWidget(&_widget));
-    topToolbarLayout->addWidget(_simianOptionsAction->getDistanceNeighborhoodAction().createCollapsedWidget(&_widget));
-    topToolbarLayout->addWidget(_simianOptionsAction->getClusterAction().createCollapsedWidget(&_widget));
     auto layout = new QVBoxLayout();
     layout->addWidget(topToolbarWidget);
     layout->addWidget(_simian_viewer, 100);
