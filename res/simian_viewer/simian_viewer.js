@@ -265,7 +265,7 @@ const simianVis = () => {
                 + crossSpeciesAddToTooltip
             )
             .style("left", d3.mouse(this)[0] + 105 + "px")
-            .style("top", d3.mouse(this)[1]+1 +"px")
+            .style("top", d3.mouse(this)[1] + "px")
             .style("position", "absolute")
             .style("cursor","default");
     };
@@ -284,10 +284,10 @@ const simianVis = () => {
             .style("opacity", 0.9).style("stroke-width", function (d) {
 
                 if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
-                    return 0.2;
+                    return 0.8;
                 }
                 else {
-                    return 0.2;
+                    return 0.4;
                 }
             });
     };
@@ -334,10 +334,10 @@ const simianVis = () => {
         .style("stroke-width", function (d) {
 
             if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
-                return 0.2;
+                return 0.8;
             }
             else {
-                return 0.2;
+                return 0.4;
             }
         })
         .style("stroke", function (d) {
