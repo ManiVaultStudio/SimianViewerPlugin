@@ -141,10 +141,6 @@ const simianVis = () => {
     var colorNow1;
     for (var i = 0; i < uniqueClusters1List.length; i++)
     {
-/*        if (i == 0) {
-            valnow1 = 0;
-            valuenext1 = x(uniqueClusters1List[i]);
-        }*/
          if (i == uniqueClusters1List.length - 1) {
             valnow1 = x(uniqueClusters1List[i]);
             valuenext1 = width;
@@ -180,17 +176,14 @@ const simianVis = () => {
     var valuenext2;
     var colorNow2;
     for (var i = 0; i < uniqueClusters2List.length; i++) {
-/*        if (i == 0) {
-            valnow2 = 0;
+
+        if (i == 0) {
+            valnow2 =height;
             valuenext2 = y(uniqueClusters2List[i]);
-        }*/
-         if (i == uniqueClusters2List.length - 1) {
-            valnow2 = y(uniqueClusters2List[i]);
-            valuenext2 = height;
         }
         else {
-            valnow2 = y(uniqueClusters2List[i]);
-            valuenext2 = y(uniqueClusters2List[i+1]);
+            valnow2 = y(uniqueClusters2List[i-1]);
+            valuenext2 = y(uniqueClusters2List[i]);
         }
 
         if (species2ValueIdentify == "chimp") {
@@ -307,7 +300,7 @@ const simianVis = () => {
             .style("opacity", 0.9).style("stroke-width", function (d) {
 
                 if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
-                    return 2;
+                    return 0.2;
                 }
                 else {
                     return 0.2;
@@ -335,11 +328,9 @@ const simianVis = () => {
         .enter()
         .append("rect")
         .attr("x", function (d) {
-
             return x(d.cluster_1);
         })
         .attr("y", function (d) {
-
             return y(d.cluster_2);
         })
 
@@ -359,14 +350,13 @@ const simianVis = () => {
         .style("stroke-width", function (d) {
 
             if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
-                return 2;
+                return 0.2;
             }
             else {
                 return 0.2;
             }
         })
         .style("stroke", function (d) {
-
             if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
                 return cross_speciesClustercolors[d.cross_species_cluster1_species_1];
             }
