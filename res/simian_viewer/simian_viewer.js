@@ -6,7 +6,8 @@ var cellsForLegend = 6;
 var flag = false;
 var species1ValueIdentify = "";
 var species2ValueIdentify = "";
-
+var uniqueClusters1List = [];
+var uniqueClusters2List = [];
 /*var dictOfCrossspeciesClusterCordinates = {};
 var arrayOfUniqueCrossspeciesClusters = [];*/
 window.onresize = doALoadOfStuff;
@@ -80,7 +81,7 @@ const simianVis = () => {
         .style("font-size", 9)
         //.attr("font-weight", 500)
         .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x).tickSize(1))
+        .call(d3.axisBottom(x).tickSize(0))
         .selectAll("text")
         //.attr("fill", "black")
         //.attr("fill", "black")
@@ -101,7 +102,7 @@ const simianVis = () => {
         .append("g")
         .style("font-size", 8)
         //.attr("font-weight", 500)
-        .call(d3.axisLeft(y).tickSize(1))
+        .call(d3.axisLeft(y).tickSize(0))
         .selectAll("text")
         //.attr("fill", "black")
         //.attr("fill", "black")
@@ -135,6 +136,87 @@ const simianVis = () => {
         .attr("stroke-width", 10)
         .attr("stroke", "blue")
         .style("paint-order", "stroke");*/
+    var valnow1;
+    var valuenext1;
+    var colorNow1;
+    for (var i = 0; i < uniqueClusters1List.length; i++)
+    {
+/*        if (i == 0) {
+            valnow1 = 0;
+            valuenext1 = x(uniqueClusters1List[i]);
+        }*/
+         if (i == uniqueClusters1List.length - 1) {
+            valnow1 = x(uniqueClusters1List[i]);
+            valuenext1 = width;
+        }
+        else{
+            valnow1 = x(uniqueClusters1List[i]);
+            valuenext1 = x(uniqueClusters1List[i+1]);
+        }
+                
+        if (species1ValueIdentify == "human") {
+             colorNow1 = cross_speciesClustercolors[mapDataforBorderHuman[uniqueClusters1List[i]]];
+        }
+        else if (species1ValueIdentify == "chimp") {
+            colorNow1 = cross_speciesClustercolors[mapDataforBorderChimp[uniqueClusters1List[i]]];
+        }
+        else if (species1ValueIdentify == "gorilla") {
+           colorNow1 = cross_speciesClustercolors[mapDataforBorderGorilla[uniqueClusters1List[i]]];
+        }
+        else if (species1ValueIdentify == "rhesus") {
+             colorNow1 = cross_speciesClustercolors[mapDataforBorderRhesus[uniqueClusters1List[i]]];
+        }
+        svg.append("line")
+            .attr("x1", valnow1)
+            .attr("x2", valuenext1)
+            .attr("y1", height)
+            .attr("y2", height)
+            .attr("stroke-width", 10)
+            .attr("stroke", colorNow1)
+            .style("paint-order", "stroke");
+
+    }
+    var valnow2;
+    var valuenext2;
+    var colorNow2;
+    for (var i = 0; i < uniqueClusters2List.length; i++) {
+/*        if (i == 0) {
+            valnow2 = 0;
+            valuenext2 = y(uniqueClusters2List[i]);
+        }*/
+         if (i == uniqueClusters2List.length - 1) {
+            valnow2 = y(uniqueClusters2List[i]);
+            valuenext2 = height;
+        }
+        else {
+            valnow2 = y(uniqueClusters2List[i]);
+            valuenext2 = y(uniqueClusters2List[i+1]);
+        }
+
+        if (species2ValueIdentify == "chimp") {
+            colorNow2 = cross_speciesClustercolors[mapDataforBorderHuman[uniqueClusters2List[i]]];
+        }
+        else if (species2ValueIdentify == "gorilla") {
+            colorNow2 = cross_speciesClustercolors[mapDataforBorderChimp[uniqueClusters2List[i]]];
+        }
+        else if (species2ValueIdentify == "marmoset") {
+            colorNow2 = cross_speciesClustercolors[mapDataforBorderGorilla[uniqueClusters2List[i]]];
+        }
+        else if (species2ValueIdentify == "rhesus") {
+            colorNow2 = cross_speciesClustercolors[mapDataforBorderRhesus[uniqueClusters2List[i]]];
+        }
+        svg.append("line")
+            .attr("x1", 0)
+            .attr("x2", 0)
+            .attr("y1", valuenext2)
+            .attr("y2", valnow2)
+            .attr("stroke-width", 10)
+            .attr("stroke", colorNow2)
+            .style("paint-order", "stroke");
+
+    }
+
+
 
     // create a tooltip
     var tooltip = d3
@@ -347,8 +429,11 @@ function queueData(d) {
     else {
         cellsForLegend = 6;
     }
-    var species1ValueIdentify = _data[0].species_1;
-    var species2ValueIdentify = _data[0].species_2;
+    species1ValueIdentify = _data[0].species_1;
+    species2ValueIdentify = _data[0].species_2;
+    uniqueClusters1List = [...new Set(_data.map(item => item.cluster_1))]; 
+    uniqueClusters2List = [...new Set(_data.map(item => item.cluster_2))];
+    //log(uniqueClusters1List.length);
 /*    _data.forEach(itemValues => {
         for (let key in itemValues) {
             if (itemValues["cross_species_cluster1_species_1"] == itemValues["cross_species_cluster2_species_2"]) {
