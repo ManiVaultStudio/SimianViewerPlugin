@@ -112,7 +112,7 @@ const simianVis = () => {
         //.style("stroke-width", 0.2)
         .style("text-anchor", "end")
         .attr("dx", "-0.5em")
-        .attr("dy", "1.0em")
+        .attr("dy", "0.1em")
         .attr("transform", "rotate(0)")
         .select(".domain")
         .remove();
