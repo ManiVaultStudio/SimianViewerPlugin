@@ -26,6 +26,7 @@ SimianViewerPlugin::SimianViewerPlugin(const PluginFactory* factory) :
     _simianOptionsAction(nullptr)
 {
     _simian_viewer = new SimianViewerWidget();
+   /*registerDataEventByType(ClusterType, std::bind(&SimianViewerPlugin::onDataEvent, this, std::placeholders::_1));*/
 }
 
 SimianViewerPlugin::~SimianViewerPlugin()
@@ -38,7 +39,7 @@ void SimianViewerPlugin::init()
 
     _simianOptionsAction = new SimianOptionsAction(*this, _core);
     connect(_simian_viewer, &SimianViewerWidget::passSelectionToQt, this, &SimianViewerPlugin::publishSelection);
-
+    registerDataEventByType(ClusterType, std::bind(&SimianViewerPlugin::onDataEvent, this, std::placeholders::_1));
     //QFrame* sideBar = new QFrame;
     //QStackedWidget* contentStack = new QStackedWidget;
     //QFrame* contentPage = new QFrame;
@@ -101,7 +102,15 @@ void SimianViewerPlugin::init()
 
 void SimianViewerPlugin::onDataEvent(hdps::DataEvent* dataEvent)
 {
-
+    //qDebug() << "dataset has changed" << (int) dataEvent->getType() << dataEvent->getDataset()->getGuiName();
+    if (dataEvent->getType() == hdps::EventType::DataSelectionChanged)
+    {
+        const auto selectionChangedEvent = static_cast<DataSelectionChangedEvent*>(dataEvent);
+        const auto& changedDataSet = _core->requestDataset<Clusters>(selectionChangedEvent->getDataset()->getGuid());
+        const auto& selectionSet = changedDataSet->getSelectionNames(); 
+        qDebug() << selectionSet;
+    }
+ 
 }
 
 void SimianViewerPlugin::publishSelection(std::vector<std::string> selectedIDs)
