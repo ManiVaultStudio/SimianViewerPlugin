@@ -123,6 +123,8 @@ const simianVis = () => {
 
     // Build color scaled3.scaleSequential(d3Chromatic.interpolatePiYG);
     var myColor = d3.scaleSequential(d3.interpolateGreys).domain([maxdistanceColor, mindistanceColor]);//d3 https://github.com/d3/d3-scale-chromatic
+////////
+    //bottom
 
     var valnow1;
     var valuenext1;
@@ -160,6 +162,8 @@ const simianVis = () => {
             .style("paint-order", "stroke");
 
     }
+
+    //////left
     var valnow2;
     var valuenext2;
     var colorNow2;
@@ -197,7 +201,46 @@ const simianVis = () => {
 
     }
 
+    ///////bottom
+    var valnow1;
+    var valuenext1;
+    var colorNow1;
+    for (var i = 0; i < uniqueClusters1List.length; i++) {
+        if (i == uniqueClusters1List.length - 1) {
+            valnow1 = x(uniqueClusters1List[i]);
+            valuenext1 = width;
+        }
+        else {
+            valnow1 = x(uniqueClusters1List[i]);
+            valuenext1 = x(uniqueClusters1List[i + 1]);
+        }
 
+        if (species1ValueIdentify == "human") {
+            colorNow1 = cross_speciesClustercolors[mapDataforBorderHuman[uniqueClusters1List[i]]];
+        }
+        else if (species1ValueIdentify == "chimp") {
+            colorNow1 = cross_speciesClustercolors[mapDataforBorderChimp[uniqueClusters1List[i]]];
+        }
+        else if (species1ValueIdentify == "gorilla") {
+            colorNow1 = cross_speciesClustercolors[mapDataforBorderGorilla[uniqueClusters1List[i]]];
+        }
+        else if (species1ValueIdentify == "rhesus") {
+            colorNow1 = cross_speciesClustercolors[mapDataforBorderRhesus[uniqueClusters1List[i]]];
+        }
+        svg.append("line")
+            .attr("x1", valnow1)
+            .attr("x2", valuenext1)
+            .attr("y1", 0)
+            .attr("y2", 0)
+            .attr("stroke-width", 1)
+            .attr("stroke", colorNow1)
+            .style("paint-order", "stroke");
+
+    }
+
+
+
+    //////////
 
     // create a tooltip
     var tooltip = d3
@@ -502,7 +545,7 @@ const simianVis = () => {
     var valy2;
     var colorNow1;
     var speciesCompare;
-    for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
+    for (var i = 0; i <= crossSpeciesFilterspecies2Cluster.length; i++) {
         if (i == 0) {
             valx1 = x(crossSpeciesFilterspecies1Cluster[i]);
             valx2 = x(crossSpeciesFilterspecies1Cluster[i]);
@@ -512,8 +555,8 @@ const simianVis = () => {
         else if (i == crossSpeciesFilterspecies1Cluster.length-1) {
             valx1 = x(crossSpeciesFilterspecies1Cluster[i]);
             valx2 = x(crossSpeciesFilterspecies1Cluster[i]);
-            valy1 =0;
-            valy2 = y(crossSpeciesFilterspecies2Cluster[i - 1]);
+            valy1 = y(crossSpeciesFilterspecies2Cluster[i - 1]);
+            valy2 = y(crossSpeciesFilterspecies2Cluster[i-1]);
         }
         else {
             valx1 = x(crossSpeciesFilterspecies1Cluster[i]);
@@ -565,7 +608,7 @@ const simianVis = () => {
     var valy2;
     var colorNow1;
     var speciesCompare;
-    for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
+    for (var i = 0; i <= crossSpeciesFilterspecies2Cluster.length; i++) {
         if (i == crossSpeciesFilterspecies1Cluster.length-1) {
             valx1 = width;//x(crossSpeciesFilterspecies1Cluster[i + 1]);
             valx2 = width;//x(crossSpeciesFilterspecies1Cluster[i + 1]);
