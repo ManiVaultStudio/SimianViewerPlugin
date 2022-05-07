@@ -111,6 +111,10 @@ void SimianViewerPlugin::onDataEvent(hdps::DataEvent* dataEvent)
         qDebug() << selectionSet;
         _simian_viewer->setClusters(selectionSet);
     }
+    //if (dataEvent->getType() == hdps::EventType::Data)
+    //{
+    //    _simian_viewer->setClusters(QStringList());
+    //}
  
 }
 

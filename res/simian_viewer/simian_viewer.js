@@ -338,7 +338,7 @@ const simianVis = () => {
             if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
 
                 if (_clustersReceived.indexOf(d.cross_species_cluster1_species_1) !== -1) {
-                    return 10.0;
+                    return 6.0;
                 } else {
                     return 2.0;
                 }
