@@ -120,7 +120,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
         if (_species2Action.getCurrentText().isValidUtf16())
         {
             _neighborhoodAction.setEnabled(true);
-            _distanceAction.setEnabled(true);
+            //_distanceAction.setEnabled(true);
             _species1DatasetLinkerAction.setEnabled(true);
             _species2DatasetLinkerAction.setEnabled(true);
             _crossSpeciesFilterAction.setEnabled(true);
