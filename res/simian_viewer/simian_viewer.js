@@ -375,6 +375,7 @@ const simianVis = () => {
     var valy1;
     var valy2;
     var colorNow1;
+    var speciesCompare;
     for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
         if (i == crossSpeciesFilterspecies1Cluster.length - 1) {
             valx1 = x(crossSpeciesFilterspecies1Cluster[i]);
@@ -392,22 +393,36 @@ const simianVis = () => {
 
         if (species1ValueIdentify == "human") {
             colorNow1 = cross_speciesClustercolors[mapDataforBorderHuman[crossSpeciesFilterspecies1Cluster[i]]];
+            speciesCompare = mapDataforBorderHuman[crossSpeciesFilterspecies1Cluster[i]];
         }
         else if (species1ValueIdentify == "chimp") {
             colorNow1 = cross_speciesClustercolors[mapDataforBorderChimp[crossSpeciesFilterspecies1Cluster[i]]];
+            speciesCompare = mapDataforBorderChimp[crossSpeciesFilterspecies1Cluster[i]];
         }
         else if (species1ValueIdentify == "gorilla") {
             colorNow1 = cross_speciesClustercolors[mapDataforBorderGorilla[crossSpeciesFilterspecies1Cluster[i]]];
+            speciesCompare = mapDataforBorderGorilla[crossSpeciesFilterspecies1Cluster[i]];
         }
         else if (species1ValueIdentify == "rhesus") {
             colorNow1 = cross_speciesClustercolors[mapDataforBorderRhesus[crossSpeciesFilterspecies1Cluster[i]]];
+            speciesCompare = mapDataforBorderRhesus[crossSpeciesFilterspecies1Cluster[i]];
         }
         svg.append("line")
             .attr("x1", valx1)
             .attr("x2", valx2)
             .attr("y1", valy1)
             .attr("y2", valy2)
-            .attr("stroke-width", 5)
+            .attr("stroke-width", function (d) {
+
+
+                if (_clustersReceived.indexOf(speciesCompare) !== -1) {
+                            return 6.0;
+                        } else {
+                            return 2.0;
+                        }
+
+
+            })
             .attr("stroke", colorNow1)
             .style("paint-order", "stroke");
 
@@ -420,6 +435,7 @@ const simianVis = () => {
     var valy1;
     var valy2;
     var colorNow1;
+    var speciesCompare;
     for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
         if (i == 0) {
             valx1 = x(crossSpeciesFilterspecies1Cluster[i]);
@@ -444,22 +460,36 @@ const simianVis = () => {
 
         if (species1ValueIdentify == "human") {
             colorNow1 = cross_speciesClustercolors[mapDataforBorderHuman[crossSpeciesFilterspecies1Cluster[i]]];
+            speciesCompare = mapDataforBorderHuman[crossSpeciesFilterspecies1Cluster[i]];
         }
         else if (species1ValueIdentify == "chimp") {
             colorNow1 = cross_speciesClustercolors[mapDataforBorderChimp[crossSpeciesFilterspecies1Cluster[i]]];
+            speciesCompare = mapDataforBorderChimp[crossSpeciesFilterspecies1Cluster[i]];
         }
         else if (species1ValueIdentify == "gorilla") {
             colorNow1 = cross_speciesClustercolors[mapDataforBorderGorilla[crossSpeciesFilterspecies1Cluster[i]]];
+            speciesCompare = mapDataforBorderGorilla[crossSpeciesFilterspecies1Cluster[i]];
         }
         else if (species1ValueIdentify == "rhesus") {
             colorNow1 = cross_speciesClustercolors[mapDataforBorderRhesus[crossSpeciesFilterspecies1Cluster[i]]];
+            speciesCompare = mapDataforBorderRhesus[crossSpeciesFilterspecies1Cluster[i]];
         }
         svg.append("line")
             .attr("x1", valx1)
             .attr("x2", valx2)
             .attr("y1", valy1)
             .attr("y2", valy2)
-            .attr("stroke-width", 5)
+            .attr("stroke-width", function (d) {
+
+
+                if (_clustersReceived.indexOf(speciesCompare) !== -1) {
+                    return 6.0;
+                } else {
+                    return 2.0;
+                }
+
+
+            })
             .attr("stroke", colorNow1)
             .style("paint-order", "stroke");
 
