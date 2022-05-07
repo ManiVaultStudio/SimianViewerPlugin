@@ -502,12 +502,18 @@ const simianVis = () => {
     var valy2;
     var colorNow1;
     var speciesCompare;
-    for (var i = 0; i < crossSpeciesFilterspecies2Cluster.length; i++) {
+    for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
         if (i == 0) {
             valx1 = x(crossSpeciesFilterspecies1Cluster[i]);
             valx2 = x(crossSpeciesFilterspecies1Cluster[i]);
             valy1 = y(crossSpeciesFilterspecies2Cluster[i]);
             valy2 = height;
+        }
+        else if (i == crossSpeciesFilterspecies1Cluster.length-1) {
+            valx1 = x(crossSpeciesFilterspecies1Cluster[i]);
+            valx2 = x(crossSpeciesFilterspecies1Cluster[i]);
+            valy1 =0;
+            valy2 = y(crossSpeciesFilterspecies2Cluster[i - 1]);
         }
         else {
             valx1 = x(crossSpeciesFilterspecies1Cluster[i]);
@@ -559,14 +565,14 @@ const simianVis = () => {
     var valy2;
     var colorNow1;
     var speciesCompare;
-    for (var i = 0; i < crossSpeciesFilterspecies2Cluster.length; i++) {
-        if (i == crossSpeciesFilterspecies2Cluster.length-1) {
+    for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
+        if (i == crossSpeciesFilterspecies1Cluster.length-1) {
             valx1 = width;//x(crossSpeciesFilterspecies1Cluster[i + 1]);
             valx2 = width;//x(crossSpeciesFilterspecies1Cluster[i + 1]);
             valy1 = y(crossSpeciesFilterspecies2Cluster[i - 1]);
-            valy2 = y(crossSpeciesFilterspecies2Cluster[i]);
+            valy2 =0.0;
         }
-        if (i == 0) {
+        else if (i == 0) {
             valx1 = x(crossSpeciesFilterspecies1Cluster[i + 1]);
             valx2 = x(crossSpeciesFilterspecies1Cluster[i + 1]);
             valy1 = height;//y(crossSpeciesFilterspecies2Cluster[i - 1]);
