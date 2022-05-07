@@ -237,7 +237,43 @@ const simianVis = () => {
             .style("paint-order", "stroke");
 
     }
+    //////right
+    var valnow2;
+    var valuenext2;
+    var colorNow2;
+    for (var i = 0; i < uniqueClusters2List.length; i++) {
 
+        if (i == 0) {
+            valnow2 = height;
+            valuenext2 = y(uniqueClusters2List[i]);
+        }
+        else {
+            valnow2 = y(uniqueClusters2List[i - 1]);
+            valuenext2 = y(uniqueClusters2List[i]);
+        }
+
+        if (species2ValueIdentify == "chimp") {
+            colorNow2 = cross_speciesClustercolors[mapDataforBorderChimp[uniqueClusters2List[i]]];
+        }
+        else if (species2ValueIdentify == "gorilla") {
+            colorNow2 = cross_speciesClustercolors[mapDataforBorderGorilla[uniqueClusters2List[i]]];
+        }
+        else if (species2ValueIdentify == "marmoset") {
+            colorNow2 = cross_speciesClustercolors[mapDataforBorderMarmoset[uniqueClusters2List[i]]];
+        }
+        else if (species2ValueIdentify == "rhesus") {
+            colorNow2 = cross_speciesClustercolors[mapDataforBorderRhesus[uniqueClusters2List[i]]];
+        }
+        svg.append("line")
+            .attr("x1", width)
+            .attr("x2", width)
+            .attr("y1", valuenext2)
+            .attr("y2", valnow2)
+            .attr("stroke-width", 1)
+            .attr("stroke", colorNow2)
+            .style("paint-order", "stroke");
+
+    }
 
 
     //////////
