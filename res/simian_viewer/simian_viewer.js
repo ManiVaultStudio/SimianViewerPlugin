@@ -286,13 +286,13 @@ const simianVis = () => {
             //        
         })
             .style("opacity", 0.9).style("stroke-width", function (d) {
-
-                if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
-                    return 2.0;
-                }
-                else {
-                    return 0.2;
-                }
+                return 0;
+                //if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
+                //    return 2.0;
+                //}
+                //else {
+                //    return 0.2;
+                //}
             });
     };
 
@@ -338,16 +338,16 @@ const simianVis = () => {
         .style("stroke-width", function (d) {
 
             if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
-
-                if (_clustersReceived.indexOf(d.cross_species_cluster1_species_1) !== -1) {
-                    return 6.0;
-                } else {
-                    return 2.0;
-                }
+                return 0;
+            //    if (_clustersReceived.indexOf(d.cross_species_cluster1_species_1) !== -1) {
+            //        return 6.0;
+            //    } else {
+            //        return 2.0;
+            //    }
               
-            }
-            else {
-                return 0.2;
+            //}
+            //else {
+            //    return 0.2;
             }
         })
         .style("stroke", function (d) {
@@ -364,6 +364,59 @@ const simianVis = () => {
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
         .on("click", mouseclick);
+
+
+
+
+    ///////////////////////////////////////////
+
+    var valx1;
+    var valx2;
+    var valy1;
+    var valy2;
+    var colorNow1;
+    for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
+        if (i == crossSpeciesFilterspecies1Cluster.length - 1) {
+            valx1 = x(crossSpeciesFilterspecies1Cluster[i]);
+            valx2 = width;
+            valy1 = y(crossSpeciesFilterspecies2Cluster[i]);
+            valy2 = y(crossSpeciesFilterspecies2Cluster[i]);
+
+        }
+        else {
+            valx1 = x(crossSpeciesFilterspecies1Cluster[i]);
+            valx2 = x(crossSpeciesFilterspecies1Cluster[i + 1]);
+            valy1 = y(crossSpeciesFilterspecies2Cluster[i]);
+            valy2 = y(crossSpeciesFilterspecies2Cluster[i]);
+        }
+
+        if (species1ValueIdentify == "human") {
+            colorNow1 = cross_speciesClustercolors[mapDataforBorderHuman[crossSpeciesFilterspecies1Cluster[i]]];
+        }
+        else if (species1ValueIdentify == "chimp") {
+            colorNow1 = cross_speciesClustercolors[mapDataforBorderChimp[crossSpeciesFilterspecies1Cluster[i]]];
+        }
+        else if (species1ValueIdentify == "gorilla") {
+            colorNow1 = cross_speciesClustercolors[mapDataforBorderGorilla[crossSpeciesFilterspecies1Cluster[i]]];
+        }
+        else if (species1ValueIdentify == "rhesus") {
+            colorNow1 = cross_speciesClustercolors[mapDataforBorderRhesus[crossSpeciesFilterspecies1Cluster[i]]];
+        }
+        svg.append("line")
+            .attr("x1", valx1)
+            .attr("x2", valx2)
+            .attr("y1", valy1)
+            .attr("y2", valy2)
+            .attr("stroke-width", 5)
+            .attr("stroke", colorNow1)
+            .style("paint-order", "stroke");
+
+    }
+
+
+
+
+
 
     var svg = d3.select("svg");
 
@@ -385,6 +438,11 @@ const simianVis = () => {
 
     svg.select(".legendSequential")
         .call(legendSequential);
+
+
+
+
+
 
 /*    var x = document.getElementById("fullVIS");
     x.style.display = "block";*/
@@ -438,26 +496,49 @@ function queueData(d) {
     var container = "";
     crossSpeciesFilterspecies1Cluster = [];
     crossSpeciesFilterspecies2Cluster = [];
+    crossSpeciesFilterspecies2ClusterTemp = [];
     for (var i = 0; i < _data.length; i++)
     {
         if (_data[i].cross_species_cluster1_species_1 == _data[i].cross_species_cluster2_species_2) {
             if (i == 0) {
                 container = _data[i].cross_species_cluster1_species_1;
                 crossSpeciesFilterspecies1Cluster.push(_data[i].cluster_1);
-                crossSpeciesFilterspecies2Cluster.push(_data[i].cluster_2);
+                //crossSpeciesFilterspecies2Cluster.push(_data[i].cluster_2);
             }
             else {
                 if (container != _data[i].cross_species_cluster1_species_1) {
                     container = _data[i].cross_species_cluster1_species_1;
-                    crossSpeciesFilterspecies1Cluster.push(_data[i-1].cluster_1);
-                    crossSpeciesFilterspecies2Cluster.push(_data[i-1].cluster_2);
                     crossSpeciesFilterspecies1Cluster.push(_data[i].cluster_1);
-                    crossSpeciesFilterspecies2Cluster.push(_data[i].cluster_2);
+                    //crossSpeciesFilterspecies2Cluster.push(_data[i].cluster_2);
                 }
             }
 
         }
     }
+    for (var i = _data.length-1; i >=0; i--) {
+        if (_data[i].cross_species_cluster1_species_1 == _data[i].cross_species_cluster2_species_2) {
+            if (i == _data.length) {
+                container = _data[i].cross_species_cluster1_species_1;
+                //crossSpeciesFilterspecies1Cluster.push(_data[i].cluster_1);
+                crossSpeciesFilterspecies2ClusterTemp.push(_data[i].cluster_2);
+            }
+            else {
+                if (container != _data[i].cross_species_cluster1_species_1) {
+                    container = _data[i].cross_species_cluster1_species_1;
+                    //crossSpeciesFilterspecies1Cluster.push(_data[i].cluster_1);
+                    crossSpeciesFilterspecies2ClusterTemp.push(_data[i].cluster_2);
+                }
+            }
+
+        }
+    }
+    for (var i = crossSpeciesFilterspecies2ClusterTemp.length-1; i >= 0; i--) {
+        crossSpeciesFilterspecies2Cluster.push(crossSpeciesFilterspecies2ClusterTemp[i]);
+    }
+    log(crossSpeciesFilterspecies1Cluster.length);
+    log(crossSpeciesFilterspecies1Cluster);
+    log(crossSpeciesFilterspecies2Cluster.length);
+    log(crossSpeciesFilterspecies2Cluster);
     simianVis();
     flag = true;
 }
