@@ -723,13 +723,13 @@ function queueData(d) {
     for (var i = _data.length-1; i >=0; i--) {
         if (_data[i].cross_species_cluster1_species_1 == _data[i].cross_species_cluster2_species_2) {
             if (i == _data.length) {
-                container = _data[i].cross_species_cluster1_species_1;
+                container = _data[i].cross_species_cluster2_species_2;
                 //crossSpeciesFilterspecies1Cluster.push(_data[i].cluster_1);
                 crossSpeciesFilterspecies2ClusterTemp.push(_data[i].cluster_2);
             }
             else {
-                if (container != _data[i].cross_species_cluster1_species_1) {
-                    container = _data[i].cross_species_cluster1_species_1;
+                if (container != _data[i].cross_species_cluster2_species_2) {
+                    container = _data[i].cross_species_cluster2_species_2;
                     //crossSpeciesFilterspecies1Cluster.push(_data[i].cluster_1);
                     crossSpeciesFilterspecies2ClusterTemp.push(_data[i].cluster_2);
                 }
