@@ -337,7 +337,7 @@ const simianVis = () => {
         })
         .style("stroke-width", function (d) {
 
-            if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
+            //if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
                 return 0;
             //    if (_clustersReceived.indexOf(d.cross_species_cluster1_species_1) !== -1) {
             //        return 6.0;
@@ -348,7 +348,7 @@ const simianVis = () => {
             //}
             //else {
             //    return 0.2;
-            }
+           // }
         })
         .style("stroke", function (d) {
             if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
