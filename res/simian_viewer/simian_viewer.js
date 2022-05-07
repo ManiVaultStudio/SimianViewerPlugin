@@ -414,6 +414,58 @@ const simianVis = () => {
     }
 
 
+    ////bottom
+    var valx1;
+    var valx2;
+    var valy1;
+    var valy2;
+    var colorNow1;
+    for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
+        if (i == 0) {
+            valx1 = x(crossSpeciesFilterspecies1Cluster[i]);
+            valx2 = x(crossSpeciesFilterspecies1Cluster[i + 1]);
+            valy1 = height;//y(crossSpeciesFilterspecies2Cluster[i - 1]);
+            valy2 = height;//y(crossSpeciesFilterspecies2Cluster[i - 1]);
+
+        }
+        else if (i==crossSpeciesFilterspecies1Cluster.length-1)
+        {
+            valx1 = x(crossSpeciesFilterspecies1Cluster[i]);
+            valx2 = width;//x(crossSpeciesFilterspecies1Cluster[i + 1]);
+            valy1 = y(crossSpeciesFilterspecies2Cluster[i - 1]);
+            valy2 = y(crossSpeciesFilterspecies2Cluster[i - 1]);
+        }
+        else {
+            valx1 = x(crossSpeciesFilterspecies1Cluster[i]);
+            valx2 = x(crossSpeciesFilterspecies1Cluster[i + 1]);
+            valy1 = y(crossSpeciesFilterspecies2Cluster[i-1]);
+            valy2 = y(crossSpeciesFilterspecies2Cluster[i-1]);
+        }
+
+        if (species1ValueIdentify == "human") {
+            colorNow1 = cross_speciesClustercolors[mapDataforBorderHuman[crossSpeciesFilterspecies1Cluster[i]]];
+        }
+        else if (species1ValueIdentify == "chimp") {
+            colorNow1 = cross_speciesClustercolors[mapDataforBorderChimp[crossSpeciesFilterspecies1Cluster[i]]];
+        }
+        else if (species1ValueIdentify == "gorilla") {
+            colorNow1 = cross_speciesClustercolors[mapDataforBorderGorilla[crossSpeciesFilterspecies1Cluster[i]]];
+        }
+        else if (species1ValueIdentify == "rhesus") {
+            colorNow1 = cross_speciesClustercolors[mapDataforBorderRhesus[crossSpeciesFilterspecies1Cluster[i]]];
+        }
+        svg.append("line")
+            .attr("x1", valx1)
+            .attr("x2", valx2)
+            .attr("y1", valy1)
+            .attr("y2", valy2)
+            .attr("stroke-width", 5)
+            .attr("stroke", colorNow1)
+            .style("paint-order", "stroke");
+
+    }
+
+/////////////////
 
 
 
