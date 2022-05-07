@@ -1,4 +1,5 @@
 var _data = null;
+var _clustersReceived = new Array();
 var mindistanceColor= 0;
 var maxdistanceColor = 0;
 var _dataQueue = new SimianViewerDataQueue(1, queueData);
@@ -26,6 +27,7 @@ try {
     new QWebChannel(qt.webChannelTransport, function (channel) {
         QtBridge = channel.objects.QtBridge;
         QtBridge.qt_setData.connect(function () { setData(arguments[0]); });
+        QtBridge.qt_setClusters.connect(function () { setClusters(arguments[0]); });
         notifyBridgeAvailable();
     });
 } catch (error) {
@@ -74,7 +76,7 @@ const simianVis = () => {
         .keys();
 
     // Build X scales and axis:
-    var x = d3.scaleBand().range([0, width]).domain(cluster_1_Groups).padding(0.05);
+   var  x = d3.scaleBand().range([0, width]).domain(cluster_1_Groups).padding(0.05);
 
     svg
         .append("g")
@@ -284,7 +286,7 @@ const simianVis = () => {
             .style("opacity", 0.9).style("stroke-width", function (d) {
 
                 if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
-                    return 0.8;
+                    return 2.0;
                 }
                 else {
                     return 0.4;
@@ -334,7 +336,13 @@ const simianVis = () => {
         .style("stroke-width", function (d) {
 
             if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
-                return 0.8;
+
+                if (_clustersReceived.indexOf(d.cross_species_cluster1_species_1) !== -1) {
+                    return 10.0;
+                } else {
+                    return 2.0;
+                }
+              
             }
             else {
                 return 0.4;
@@ -388,6 +396,27 @@ function setData(d) {
     _dataQueue.addData(d);
 }
 
+function setClusters(d) {
+    log("Clusters received");
+    queueClusters(d);
+}
+
+function queueClusters(d) {
+    _clustersReceived = [];
+    log("here clusters");
+    //log(d);
+    obj = JSON.parse(d);
+   // _clustersReceived = obj[0];
+    for (const [key, value] of Object.entries(obj[0])) {
+        //log(`${key}: ${value}`);
+        _clustersReceived.push(value);
+    }
+    for (var i = 0; i < _clustersReceived.length; i++) {
+        log(_clustersReceived[i]);
+    }
+    simianVis();
+
+}
 
 
 function queueData(d) {

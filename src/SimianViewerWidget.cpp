@@ -98,6 +98,35 @@ void SimianViewerWidget::setData(std::string visDataContent)
 }
 
 
+void SimianViewerWidget::setClusters(QStringList visClusterContent)
+{
+    qDebug() << "Sending clusters";
+
+    std::string _jsonObject;
+    _jsonObject += "[";
+    int i = 0;
+    _jsonObject += "{";
+    for (int j =  0; j < visClusterContent.size(); j++)
+    {
+        _jsonObject += '"';
+        _jsonObject += std::to_string(j);
+        _jsonObject += '"';
+        _jsonObject += ':';
+        _jsonObject += '"';
+        _jsonObject += (visClusterContent[i]).toStdString();
+        _jsonObject += '"';
+        if (j < visClusterContent.size() - 1)
+        {
+            _jsonObject += ',';
+        }
+        i = i + 1;
+    }
+        _jsonObject += "}]";
+
+    emit _communicationObject->qt_setClusters(QString((_jsonObject).c_str()));
+}
+
+
 
 
 void SimianViewerWidget::initWebPage()
