@@ -9,6 +9,8 @@ var species1ValueIdentify = "";
 var species2ValueIdentify = "";
 var uniqueClusters1List = [];
 var uniqueClusters2List = [];
+var crossSpeciesFilterspecies1Cluster = [];
+var crossSpeciesFilterspecies2Cluster = [];
 /*var dictOfCrossspeciesClusterCordinates = {};
 var arrayOfUniqueCrossspeciesClusters = [];*/
 window.onresize = doALoadOfStuff;
@@ -420,12 +422,9 @@ function queueClusters(d) {
 
 
 function queueData(d) {
-
     _data = JSON.parse(d);
-
     maxdistanceColor = parseInt(Math.max.apply(Math, _data.map(function (o) { return (o.dist); })));
     mindistanceColor = parseInt(Math.min.apply(Math, _data.map(function (o) { return (o.dist); })));
-
     if (maxdistanceColor == mindistanceColor) {
         cellsForLegend = 2;
     }
@@ -436,10 +435,32 @@ function queueData(d) {
     species2ValueIdentify = _data[0].species_2;
     uniqueClusters1List = [...new Set(_data.map(item => item.cluster_1))]; 
     uniqueClusters2List = [...new Set(_data.map(item => item.cluster_2))];
+    var container = "";
+    crossSpeciesFilterspecies1Cluster = [];
+    crossSpeciesFilterspecies2Cluster = [];
+    for (var i = 0; i < _data.length; i++)
+    {
+        if (_data[i].cross_species_cluster1_species_1 == _data[i].cross_species_cluster2_species_2) {
+            if (i == 0) {
+                container = _data[i].cross_species_cluster1_species_1;
+                crossSpeciesFilterspecies1Cluster.push(_data[i].cluster_1);
+                crossSpeciesFilterspecies2Cluster.push(_data[i].cluster_2);
+            }
+            else {
+                if (container != _data[i].cross_species_cluster1_species_1) {
+                    container = _data[i].cross_species_cluster1_species_1;
+                    crossSpeciesFilterspecies1Cluster.push(_data[i-1].cluster_1);
+                    crossSpeciesFilterspecies2Cluster.push(_data[i-1].cluster_2);
+                    crossSpeciesFilterspecies1Cluster.push(_data[i].cluster_1);
+                    crossSpeciesFilterspecies2Cluster.push(_data[i].cluster_2);
+                }
+            }
+
+        }
+    }
     simianVis();
     flag = true;
 }
-
 
 
 function doALoadOfStuff() {
