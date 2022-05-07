@@ -369,7 +369,7 @@ const simianVis = () => {
 
 
     ///////////////////////////////////////////
-
+//top
     var valx1;
     var valx2;
     var valy1;
@@ -424,14 +424,14 @@ const simianVis = () => {
         if (i == 0) {
             valx1 = x(crossSpeciesFilterspecies1Cluster[i]);
             valx2 = x(crossSpeciesFilterspecies1Cluster[i + 1]);
-            valy1 = height;//y(crossSpeciesFilterspecies2Cluster[i - 1]);
-            valy2 = height;//y(crossSpeciesFilterspecies2Cluster[i - 1]);
+            valy1 = height;
+            valy2 = height;
 
         }
         else if (i==crossSpeciesFilterspecies1Cluster.length-1)
         {
             valx1 = x(crossSpeciesFilterspecies1Cluster[i]);
-            valx2 = width;//x(crossSpeciesFilterspecies1Cluster[i + 1]);
+            valx2 = width;
             valy1 = y(crossSpeciesFilterspecies2Cluster[i - 1]);
             valy2 = y(crossSpeciesFilterspecies2Cluster[i - 1]);
         }
