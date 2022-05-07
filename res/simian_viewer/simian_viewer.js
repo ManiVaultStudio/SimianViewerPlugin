@@ -289,7 +289,7 @@ const simianVis = () => {
                     return 2.0;
                 }
                 else {
-                    return 0.4;
+                    return 0.2;
                 }
             });
     };
@@ -345,7 +345,7 @@ const simianVis = () => {
               
             }
             else {
-                return 0.4;
+                return 0.2;
             }
         })
         .style("stroke", function (d) {
