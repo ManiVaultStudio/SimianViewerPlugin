@@ -825,10 +825,10 @@ function queueData(d) {
     for (var i = crossSpeciesFilterspecies2ClusterTemp.length-1; i >= 0; i--) {
         crossSpeciesFilterspecies2Cluster.push(crossSpeciesFilterspecies2ClusterTemp[i]);
     }
-    log(crossSpeciesFilterspecies1Cluster.length);
-    log(crossSpeciesFilterspecies1Cluster);
-    log(crossSpeciesFilterspecies2Cluster.length);
-    log(crossSpeciesFilterspecies2Cluster);
+    //log(crossSpeciesFilterspecies1Cluster.length);
+    //log(crossSpeciesFilterspecies1Cluster);
+    //log(crossSpeciesFilterspecies2Cluster.length);
+    //log(crossSpeciesFilterspecies2Cluster);
     simianVis();
     flag = true;
 }
