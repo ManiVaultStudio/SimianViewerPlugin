@@ -44,9 +44,9 @@ const simianVis = () => {
     d3.select("svg").remove();
     var svg = d3.select("#my_dataviz")
     svg.selectAll("*").remove();
-    var margin = { top: 35, right: 5, bottom: 80, left: 75 },
-        width = window.innerWidth * 0.90 - margin.left - margin.right,
-        height = window.innerHeight * 0.95 - margin.top - margin.bottom;
+    var margin = { top: 5, right: 5, bottom: 80, left: 75 },
+        width = window.innerWidth * 0.98 - margin.left - margin.right,
+        height = window.innerHeight * 0.98 - margin.top - margin.bottom;
     // append the svg object to the body of the page
     svg = d3
         .select("#my_dataviz")
@@ -708,7 +708,7 @@ const simianVis = () => {
 
 
 
-    var svg = d3.select("svg");
+/*    var svg = d3.select("svg");
 
     svg.append("g")
         .attr("class", "legendSequential")
@@ -728,7 +728,7 @@ const simianVis = () => {
 
     svg.select(".legendSequential")
         .call(legendSequential);
-
+*/
 
 
 
