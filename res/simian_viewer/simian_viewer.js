@@ -47,7 +47,7 @@ const simianVis = () => {
     svg.selectAll("*").remove();
     var margin = { top: 5, right: 5, bottom: 80, left: 75 },
         width = window.innerWidth * 0.99 - margin.left - margin.right,
-        height = window.innerHeight * 0.98 - margin.top - margin.bottom;
+        height = window.innerHeight * 0.97 - margin.top - margin.bottom;
     // append the svg object to the body of the page
     svg = d3
         .select("#my_dataviz")
@@ -629,12 +629,12 @@ const simianVis = () => {
             .style("cursor", "default");
 
         if (d3.mouse(this)[0] > height - height/2) {
-            tooltip.style("top", d3.mouse(this)[1]+/*(height/6)+*/ "px");
+            tooltip.style("top", d3.mouse(this)[1]/*(height/6)+*/+10+ "px");
             //tooltip.style("transform", "translateY(-100%)");
         }
 
         else {
-            tooltip.style("top", d3.mouse(this)[1] /*- (height /6)*/  + "px");
+            tooltip.style("top", d3.mouse(this)[1] /*- (height /6)*/ +10 + "px");
             //tooltip.style("transform", "translateY(0)");
         }
 
