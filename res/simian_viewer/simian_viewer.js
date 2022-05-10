@@ -45,7 +45,7 @@ const simianVis = () => {
     var svg = d3.select("#my_dataviz")
     svg.selectAll("*").remove();
     var margin = { top: 5, right: 5, bottom: 80, left: 75 },
-        width = window.innerWidth * 0.98 - margin.left - margin.right,
+        width = window.innerWidth * 0.99 - margin.left - margin.right,
         height = window.innerHeight * 0.98 - margin.top - margin.bottom;
     // append the svg object to the body of the page
     svg = d3
@@ -77,6 +77,13 @@ const simianVis = () => {
         })
         .keys();
 
+    function clickAxisLabels(d) {    
+        log(d);
+        log(x(d));
+        log(y(d));      
+    }
+
+
     // Build X scales and axis:
    var  x = d3.scaleBand().range([0, width]).domain(cluster_1_Groups).padding(0.05);
 
@@ -87,6 +94,8 @@ const simianVis = () => {
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x).tickSize(0))
         .selectAll("text")
+        .on('click', clickAxisLabels)
+        .style("cursor", "pointer") 
         //.attr("fill", "black")
         //.attr("fill", "black")
         .attr("fill", function (d) {
@@ -108,6 +117,8 @@ const simianVis = () => {
         //.attr("font-weight", 500)
         .call(d3.axisLeft(y).tickSize(0))
         .selectAll("text")
+        .on('click', clickAxisLabels)
+        .style("cursor", "pointer") 
         //.attr("fill", "black")
         //.attr("fill", "black")
         .attr("fill", function (d) {
@@ -324,9 +335,8 @@ const simianVis = () => {
         var crossSpeciesAddToTooltip = "";
         var species1AddToTooltip = "";
         var species2AddToTooltip = "";
-        if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2)
-        {
-            crossSpeciesAddToTooltip = "<div style=\"color: " + cross_speciesClustercolors[d.cross_species_cluster1_species_1] +"; -webkit-text-stroke: 0.2 black; cursor:pointer;\"> Cross species cluster: <b>" + d.cross_species_cluster1_species_1+"</b></div>";//labelcolorsforAxis[parseInt(d.cross_species_cluster1_species_1)];
+        if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
+            crossSpeciesAddToTooltip = "<div style=\"color: " + cross_speciesClustercolors[d.cross_species_cluster1_species_1] + "; -webkit-text-stroke: 0.2 black; cursor:pointer;\"> Cross species cluster: <b>" + d.cross_species_cluster1_species_1 + "</b></div>";//labelcolorsforAxis[parseInt(d.cross_species_cluster1_species_1)];
         }
         species1AddToTooltip = "<div style=\"color: " + in_speciesClustercolors[d.cluster_1] + ";-webkit-text-stroke: 0.2 black;  cursor:pointer;\"> Cluster1 : <b>" + d.cluster_1 + "</b></div>";
 
@@ -334,24 +344,43 @@ const simianVis = () => {
         //log("see value: "+addtoToolTip);
         tooltip
             .html(
-/*                "Cluster_1: " +
-                "<b>" + d.cluster_1 +"</b>"  +
-                "<br/> Cluster_2: " +
-                "<b>" + d.cluster_2 +"</b>" +*/
+                /*                "Cluster_1: " +
+                                "<b>" + d.cluster_1 +"</b>"  +
+                                "<br/> Cluster_2: " +
+                                "<b>" + d.cluster_2 +"</b>" +*/
 
                 "Distance between clusters: "
-                +"<b>" + d.dist +"</b>"/*+
+                + "<b>" + d.dist + "</b>"/*+
                 "<br/> Neighborhood: " +
                 "<b>" + d.neighborhood + "</b>"*/
                 + species1AddToTooltip
                 + species2AddToTooltip
                 + crossSpeciesAddToTooltip
             )
-            .style("left", d3.mouse(this)[0] + 105 + "px")
-            .style("top", d3.mouse(this)[1] + "px")
             .style("position", "absolute")
-            .style("cursor","default");
-    };
+            .style("cursor", "default");
+
+        if (d3.mouse(this)[0] > height - height/2) {
+            tooltip.style("top", d3.mouse(this)[1]+/*(height/6)+*/ "px");
+            //tooltip.style("transform", "translateY(-100%)");
+        }
+
+        else {
+            tooltip.style("top", d3.mouse(this)[1] /*- (height /6)*/  + "px");
+            //tooltip.style("transform", "translateY(0)");
+        }
+
+        if (d3.mouse(this)[0] > width-width/2) {
+            tooltip.style("left", d3.mouse(this)[0] - (width/4) + "px");
+            //tooltip.style("transform", "translateX(-100%)");
+        }
+
+        else {
+            tooltip.style("left", d3.mouse(this)[0] + (width / 4)  + "px");
+            //tooltip.style("transform", "translateX(0)");
+        }
+
+        };
     var mouseleave = function (d) {
         tooltip.style("opacity", 0);
         d3.select(this).style("stroke", function (d) {
