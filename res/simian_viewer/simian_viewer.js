@@ -906,11 +906,11 @@ const simianVis = () => {
             colorNow1 = cross_speciesClustercolors[mapDataforBorderRhesus[crossSpeciesFilterspecies2Cluster[i]]];
             speciesCompare = mapDataforBorderRhesus[crossSpeciesFilterspecies2Cluster[i]];
         }
-        log("left");
+/*        log("left");
         log(valx1);
         log(valx2);
         log(valy1);
-        log(valy2);
+        log(valy2);*/
         svg.append("line")
             .attr("x1", valx1)
             .attr("x2", valx2)
@@ -974,11 +974,11 @@ const simianVis = () => {
             colorNow1 = cross_speciesClustercolors[mapDataforBorderRhesus[crossSpeciesFilterspecies2Cluster[i]]];
             speciesCompare = mapDataforBorderRhesus[crossSpeciesFilterspecies2Cluster[i]];
         }
-        log("Right");
+/*        log("Right");
         log(valx1);
         log(valx2);
         log(valy1);
-        log(valy2);
+        log(valy2);*/
         svg.append("line")
             .attr("x1", valx1)
             .attr("x2", valx2)
