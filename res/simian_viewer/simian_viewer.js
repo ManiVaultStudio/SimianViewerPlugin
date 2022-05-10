@@ -329,7 +329,8 @@ const simianVis = () => {
                 }
             })
             .style("paint-order", "stroke")
-            .style("opacity", 1);
+            .style("opacity", 1)
+            .style("cursor", "pointer");
     };
     var mousemove = function (d) {
         var crossSpeciesAddToTooltip = "";
