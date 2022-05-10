@@ -93,7 +93,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
     const auto colormapFilter = [this]() -> void
     {
-        qDebug() << _colorMapAction.getColorMap();
+       // qDebug() << _colorMapAction.getColorMap();
 
         _simianViewerPlugin.getWidget()->setColor(_colorMapAction.getColorMap());
 

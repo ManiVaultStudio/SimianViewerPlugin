@@ -400,7 +400,67 @@ const simianVis = () => {
         .remove();
 
     // Build color scaled3.scaleSequential(d3Chromatic.interpolatePiYG);
-    var myColor = d3.scaleSequential(d3.interpolateGreys).domain([maxdistanceColor, mindistanceColor]);//d3 https://github.com/d3/d3-scale-chromatic
+    if (qtColor == "qualitative") {
+        var myColor = d3.scaleSequential(d3.interpolateCubehelixDefault).domain([maxdistanceColor, mindistanceColor]);
+    }
+    else if (qtColor == "RdYlBu") {
+        var myColor = d3.scaleSequential(d3.interpolateRdYlBu).domain([maxdistanceColor, mindistanceColor]);
+    }
+    else if (qtColor == "YlGn") {
+        var myColor = d3.scaleSequential(d3.interpolateYlGn).domain([maxdistanceColor, mindistanceColor]);
+    }
+    else if (qtColor == "RdYlGn") {
+        var myColor = d3.scaleSequential(d3.interpolateRdYlGn).domain([maxdistanceColor, mindistanceColor]);
+    }
+    else if (qtColor == "GnBu") {
+        var myColor = d3.scaleSequential(d3.interpolateGnBu).domain([maxdistanceColor, mindistanceColor]);
+    }
+    else if (qtColor == "YlGnBu") {
+        var myColor = d3.scaleSequential(d3.interpolateYlGnBu).domain([maxdistanceColor, mindistanceColor]);
+    }
+    else if (qtColor == "Spectral") {
+        var myColor = d3.scaleSequential(d3.interpolateSpectral).domain([maxdistanceColor, mindistanceColor]);
+    }
+    else if (qtColor == "BrBG") {
+        var myColor = d3.scaleSequential(d3.interpolateBrBG).domain([maxdistanceColor, mindistanceColor]);
+    }
+    else if (qtColor == "YlOrBr") {
+        var myColor = d3.scaleSequential(d3.interpolateYlOrBr).domain([maxdistanceColor, mindistanceColor]);
+    }
+    else if (qtColor == "RdBu") {
+        var myColor = d3.scaleSequential(d3.interpolateRdBu).domain([maxdistanceColor, mindistanceColor]);
+    }
+    else if (qtColor == "RdPu") {
+        var myColor = d3.scaleSequential(d3.interpolateRdPu).domain([maxdistanceColor, mindistanceColor]);
+    }
+    else if (qtColor == "Plasma") {
+        var myColor = d3.scaleSequential(d3.interpolatePlasma).domain([maxdistanceColor, mindistanceColor]);
+    }
+    else if (qtColor == "PuOr") {
+        var myColor = d3.scaleSequential(d3.interpolatePuOr).domain([maxdistanceColor, mindistanceColor]);
+    }
+    else if (qtColor == "BuPu") {
+        var myColor = d3.scaleSequential(d3.interpolateBuPu).domain([maxdistanceColor, mindistanceColor]);
+    }
+    else if (qtColor == "Reds") {
+        var myColor = d3.scaleSequential(d3.interpolateReds).domain([maxdistanceColor, mindistanceColor]);
+    }
+    else if (qtColor == "Viridis") {
+        var myColor = d3.scaleSequential(d3.interpolateViridis).domain([maxdistanceColor, mindistanceColor]);
+    }
+    else if (qtColor == "Q_BlGrRd") {
+        var myColor = d3.scaleSequential(d3.interpolateRdGy).domain([maxdistanceColor, mindistanceColor]);
+    }
+    else if (qtColor == "Magma") {
+        var myColor = d3.scaleSequential(d3.interpolateMagma).domain([maxdistanceColor, mindistanceColor]);
+    }
+    else if (qtColor == "PiYG") {
+        var myColor = d3.scaleSequential(d3.interpolatePiYG).domain([maxdistanceColor, mindistanceColor]);
+    }
+    else {
+        var myColor = d3.scaleSequential(d3.interpolateGreys).domain([maxdistanceColor, mindistanceColor]);//d3 https://github.com/d3/d3-scale-chromatic
+    }
+
 ////////
     //bottom axis
 
@@ -1066,10 +1126,10 @@ function setColor(d) {
 }
 
 function queueColor(d) {
-    log("Color Received");
-    log(d);
+/*    log("Color Received");
+    log(d);*/
     qtColor = d;
-    //simianVis();
+    simianVis();
 }
 
 
