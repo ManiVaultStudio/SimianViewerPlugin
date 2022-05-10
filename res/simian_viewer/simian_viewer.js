@@ -124,7 +124,7 @@ const simianVis = () => {
     // Build color scaled3.scaleSequential(d3Chromatic.interpolatePiYG);
     var myColor = d3.scaleSequential(d3.interpolateGreys).domain([maxdistanceColor, mindistanceColor]);//d3 https://github.com/d3/d3-scale-chromatic
 ////////
-    //bottom
+    //bottom axis
 
     var valnow1;
     var valuenext1;
@@ -163,7 +163,7 @@ const simianVis = () => {
 
     }
 
-    //////left
+    //////left axis
     var valnow2;
     var valuenext2;
     var colorNow2;
@@ -201,7 +201,7 @@ const simianVis = () => {
 
     }
 
-    ///////bottom
+    ///////top axis
     var valnow1;
     var valuenext1;
     var colorNow1;
@@ -232,12 +232,12 @@ const simianVis = () => {
             .attr("x2", valuenext1)
             .attr("y1", 0)
             .attr("y2", 0)
-            .attr("stroke-width", 1)
+            .attr("stroke-width", 2)
             .attr("stroke", colorNow1)
             .style("paint-order", "stroke");
 
     }
-    //////right
+    //////right axis
     var valnow2;
     var valuenext2;
     var colorNow2;
@@ -269,7 +269,7 @@ const simianVis = () => {
             .attr("x2", width)
             .attr("y1", valuenext2)
             .attr("y2", valnow2)
-            .attr("stroke-width", 1)
+            .attr("stroke-width", 2)
             .attr("stroke", colorNow2)
             .style("paint-order", "stroke");
 
@@ -495,7 +495,7 @@ const simianVis = () => {
 
 
                 if (_clustersReceived.indexOf(speciesCompare) !== -1) {
-                            return 6.0;
+                            return 8.0;
                         } else {
                             return 2.0;
                         }
@@ -562,7 +562,7 @@ const simianVis = () => {
 
 
                 if (_clustersReceived.indexOf(speciesCompare) !== -1) {
-                    return 6.0;
+                    return 8.0;
                 } else {
                     return 2.0;
                 }
@@ -626,7 +626,7 @@ const simianVis = () => {
 
 
                 if (_clustersReceived.indexOf(speciesCompare) !== -1) {
-                    return 6.0;
+                    return 8.0;
                 } else {
                     return 2.0;
                 }
@@ -689,7 +689,7 @@ const simianVis = () => {
 
 
                 if (_clustersReceived.indexOf(speciesCompare) !== -1) {
-                    return 6.0;
+                    return 8.0;
                 } else {
                     return 2.0;
                 }
