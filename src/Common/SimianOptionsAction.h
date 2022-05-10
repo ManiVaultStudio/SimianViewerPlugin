@@ -28,7 +28,6 @@
 #include <QString>
 #include <string>
 #include "../simianViewerPlugin.h"
-
 #include <event/Event.h>
 
 #include <QDebug>
@@ -68,7 +67,28 @@ public:
 
         friend class SimianOptionsAction;
     };
+    class ColorMapOptionAction : public WidgetAction
+    {
+    protected:
+        class Widget : public hdps::gui::WidgetActionWidget {
+        public:
+            Widget(QWidget* parent, ColorMapOptionAction* speciesAction);
 
+            friend class ColorMapOptionAction;
+        };
+
+        QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
+            return new ColorMapOptionAction::Widget(parent, this);
+        };
+
+    public:
+        ColorMapOptionAction(SimianOptionsAction& simianOptionsAction);
+
+    protected:
+        SimianOptionsAction& _simianOptionsAction;
+
+        friend class SimianOptionsAction;
+    };
     class ClusterAction : public WidgetAction
     {
     protected:
@@ -149,6 +169,7 @@ public: // Action getters
     SpeciesAction& getSpeciesAction() { return _speciesAction; }
     ClusterAction& getClusterAction() { return _clusterAction; }
     DistanceNeighborhoodAction& getDistanceNeighborhoodAction() { return _distanceNeighborhoodAction; }
+    ColorMapAction& getColorMapAction() { return _colorMapAction; }
 
 protected:
     SimianViewerPlugin&          _simianViewerPlugin;
@@ -169,5 +190,6 @@ protected:
     ClusterAction               _clusterAction;
     DistanceNeighborhoodAction               _distanceNeighborhoodAction;
     bool _isStarted;
+    ColorMapAction          _colorMapAction;
     friend class ChannelAction;
 };

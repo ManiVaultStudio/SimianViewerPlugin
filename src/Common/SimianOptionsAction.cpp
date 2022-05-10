@@ -17,6 +17,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _species2DatasetLinkerAction(this, "Species2 cluster dataset :"),
     _crossSpeciesFilterAction(this, "Filter clusters :"),
     _multiSelectClusterFilterAction(this, "Select cross-species clusters :"),
+    _colorMapAction(this, "Select color map"),
     _isLoading(false),
     _speciesAction(*this),
     _clusterAction(*this), 
@@ -34,6 +35,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _species2DatasetLinkerAction.setEnabled(false);
     _crossSpeciesFilterAction.setEnabled(false);
     _multiSelectClusterFilterAction.setEnabled(false);
+    _colorMapAction.setEnabled(false);
     _clusterAction.setEnabled(false);
     _distanceNeighborhoodAction.setEnabled(false);
     _species1Action.setDefaultWidgetFlags(OptionAction::ComboBox);
@@ -50,6 +52,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _multiSelectClusterFilterAction.setDefaultWidgetFlags(OptionsAction::ComboBox | OptionsAction::ListView | OptionsAction::Selection | OptionsAction::File);
     _multiSelectClusterFilterAction.initialize(QStringList{ "" });
     _multiSelectClusterFilterAction.setSelectedOptions(QStringList());
+
+
 
     _neighborhoodAction.setDefaultWidgetFlags(OptionAction::ComboBox);
     _neighborhoodAction.initialize(QStringList({ "glia","it_types","l5et_l56np_l6ct_l6b","lamp5_sncg_vip","sst_sst_chodl_pvalb" }), "sst_sst_chodl_pvalb", "sst_sst_chodl_pvalb");
@@ -89,6 +93,11 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
         }
     };
 
+    const auto colormapFilter = [this]() -> void
+    {
+
+    };
+
 
     const auto updateSpecies1 = [this]() -> void
     {
@@ -105,6 +114,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             _crossSpeciesFilterAction.setEnabled(false);
             _multiSelectClusterFilterAction.setEnabled(false);
             _multiSelectClusterFilterAction.setSelectedOptions(QStringList());
+            _colorMapAction.setEnabled(false);
             _clusterAction.setEnabled(false);
             _distanceNeighborhoodAction.setEnabled(false);
         }
@@ -125,6 +135,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             _species2DatasetLinkerAction.setEnabled(true);
             _crossSpeciesFilterAction.setEnabled(true);
             _multiSelectClusterFilterAction.setEnabled(true);
+            _colorMapAction.setEnabled(true);
             _clusterAction.setEnabled(true);
             _distanceNeighborhoodAction.setEnabled(true);
         }
@@ -136,6 +147,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             _crossSpeciesFilterAction.setEnabled(false);
             _multiSelectClusterFilterAction.setEnabled(false);
             _multiSelectClusterFilterAction.setSelectedOptions(QStringList());
+            _colorMapAction.setEnabled(false);
             _clusterAction.setEnabled(false);
             _distanceNeighborhoodAction.setEnabled(false);
         }
@@ -181,6 +193,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
         multiSelectClusterFilter();
 
         });
+
+    connect(&_colorMapAction, &ColorMapAction::imageChanged, this, colormapFilter);
 
     connect(&_species1Action, &OptionAction::currentIndexChanged, [this, updateSpecies1](const std::int32_t& currentIndex) {
         updateSpecies1();
@@ -416,6 +430,37 @@ inline SimianOptionsAction::SpeciesAction::SpeciesAction(SimianOptionsAction& si
     setText("Species Options");
     setIcon(Application::getIconFont("FontAwesome").getIcon("search"));
 }
+
+
+SimianOptionsAction::ColorMapOptionAction::Widget::Widget(QWidget* parent, ColorMapOptionAction* colorMapAction) :
+    WidgetActionWidget(parent, colorMapAction)
+{
+    auto& simianOptionsAction = colorMapAction->_simianOptionsAction;
+
+    auto colorMapWidget = simianOptionsAction._colorMapAction.createWidget(this);
+    colorMapWidget->setFixedWidth(150);
+    //colorMapWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+
+    auto colorSelectionLayout = new QFormLayout();
+
+    colorSelectionLayout->setMargin(2);
+    colorSelectionLayout->addRow(new QLabel("heatmap color: *"), colorMapWidget);
+    colorSelectionLayout->setObjectName("Color Options");
+    colorSelectionLayout->setSpacing(2);
+    colorSelectionLayout->setVerticalSpacing(2);
+
+    setPopupLayout(colorSelectionLayout);
+}
+
+inline SimianOptionsAction::ColorMapOptionAction::ColorMapOptionAction(SimianOptionsAction& simianOptionsAction) :
+    _simianOptionsAction(simianOptionsAction)
+{
+    setText("Color Options");
+    setIcon(Application::getIconFont("FontAwesome").getIcon("search"));
+}
+
+
+
 
 void SimianOptionsAction::updateMultiSelectionDropdown(std::vector<std::vector<std::string>>&    filteredVisData)
 {
