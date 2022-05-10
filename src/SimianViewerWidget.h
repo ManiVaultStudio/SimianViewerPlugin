@@ -28,6 +28,7 @@ signals:
 
 public slots:
     void js_passSelectionToQt(QVariantList data);
+    void js_passClusterToQt(QVariant data);
 
 private:
     SimianViewerWidget* _parent;
@@ -49,10 +50,12 @@ protected:
 signals:
 
     void passSelectionToQt(std::vector<std::string> selectedIDs);
+    void passClusterToQt(std::string clusterName);
 
 public:
 
     void js_passSelectionToQt(std::vector<std::string> selectedIDs);
+    void js_passClusterToQt(std::string clusterName);
 
 private slots:
     void initWebPage() override;

@@ -203,7 +203,10 @@ const simianVis = () => {
             .attr("stroke-width", 10)
             .attr('fill', 'none');
 
- 
+        if (isQtAvailable) {
+            // log("sending from js...");
+            QtBridge.js_passClusterToQt(correspondingCrossspeciescluster.toString());
+        }
 
     }
     function clickYAxisLabels(d) {
@@ -339,6 +342,11 @@ const simianVis = () => {
             .attr('stroke', cross_speciesClustercolors[correspondingCrossspeciescluster])
             .attr("stroke-width", 10)
             .attr('fill', 'none');
+
+        if (isQtAvailable) {
+            // log("sending from js...");
+            QtBridge.js_passClusterToQt(correspondingCrossspeciescluster.toString());
+        }
     }
 
     // Build X scales and axis:

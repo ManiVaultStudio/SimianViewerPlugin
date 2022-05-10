@@ -48,6 +48,7 @@ protected slots:
 private:
 
     void publishSelection(std::vector<std::string> selectedIDs);
+    void publishCluster(std::string clusterName);
     void selectCrossSpeciesClusterPoints(std::vector<std::string> selectedIDs);
     void selectIndividualSpeciesClusterPoints(std::vector<std::string> selectedIDs);
 
