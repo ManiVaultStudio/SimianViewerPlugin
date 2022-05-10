@@ -24,6 +24,7 @@ public:
 signals:
     void qt_setData(QString data);
     void qt_setClusters(QString data);
+    void qt_setColor(QString data);
     void qt_addAvailableData(QString name);
 
 public slots:
@@ -44,6 +45,7 @@ public:
     void addDataOption(const QString option);
     void setData(std::string visDataContent);
     void setClusters(QStringList visClusterContent);
+    void setColor(QString visColorContent);
 protected:
 
 

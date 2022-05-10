@@ -12,6 +12,7 @@ var uniqueClusters2List = [];
 var crossSpeciesFilterspecies1Cluster = [];
 var crossSpeciesFilterspecies2Cluster = [];
 var svg;
+var qtColor = "Black to white";
 /*var dictOfCrossspeciesClusterCordinates = {};
 var arrayOfUniqueCrossspeciesClusters = [];*/
 window.onresize = doALoadOfStuff;
@@ -31,6 +32,7 @@ try {
         QtBridge = channel.objects.QtBridge;
         QtBridge.qt_setData.connect(function () { setData(arguments[0]); });
         QtBridge.qt_setClusters.connect(function () { setClusters(arguments[0]); });
+        QtBridge.qt_setColor.connect(function () { setColor(arguments[0]); });
         notifyBridgeAvailable();
     });
 } catch (error) {
@@ -1057,6 +1059,19 @@ function setClusters(d) {
     //log("Clusters received");
     queueClusters(d);
 }
+
+function setColor(d) {
+    //log("Clusters received");
+    queueColor(d);
+}
+
+function queueColor(d) {
+    log("Color Received");
+    log(d);
+    qtColor = d;
+    //simianVis();
+}
+
 
 function queueClusters(d) {
     _clustersReceived = [];

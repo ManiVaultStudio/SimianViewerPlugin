@@ -132,7 +132,10 @@ void SimianViewerWidget::setClusters(QStringList visClusterContent)
     emit _communicationObject->qt_setClusters(QString((_jsonObject).c_str()));
 }
 
-
+void SimianViewerWidget::setColor(QString visColorContent)
+{
+    emit _communicationObject->qt_setColor(visColorContent);
+}
 
 
 void SimianViewerWidget::initWebPage()

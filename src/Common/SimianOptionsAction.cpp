@@ -52,9 +52,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _multiSelectClusterFilterAction.setDefaultWidgetFlags(OptionsAction::ComboBox | OptionsAction::ListView | OptionsAction::Selection | OptionsAction::File);
     _multiSelectClusterFilterAction.initialize(QStringList{ "" });
     _multiSelectClusterFilterAction.setSelectedOptions(QStringList());
-
-
-
+    _colorMapAction.initialize("Black to white","Black to white");
     _neighborhoodAction.setDefaultWidgetFlags(OptionAction::ComboBox);
     _neighborhoodAction.initialize(QStringList({ "glia","it_types","l5et_l56np_l6ct_l6b","lamp5_sncg_vip","sst_sst_chodl_pvalb" }), "sst_sst_chodl_pvalb", "sst_sst_chodl_pvalb");
     
@@ -95,6 +93,9 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
     const auto colormapFilter = [this]() -> void
     {
+        qDebug() << _colorMapAction.getColorMap();
+
+        _simianViewerPlugin.getWidget()->setColor(_colorMapAction.getColorMap());
 
     };
 
@@ -438,11 +439,9 @@ SimianOptionsAction::ColorMapOptionAction::Widget::Widget(QWidget* parent, Color
     auto& simianOptionsAction = colorMapAction->_simianOptionsAction;
 
     auto colorMapWidget = simianOptionsAction._colorMapAction.createWidget(this);
-    colorMapWidget->setFixedWidth(150);
     //colorMapWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
     auto colorSelectionLayout = new QFormLayout();
-
     colorSelectionLayout->setMargin(2);
     colorSelectionLayout->addRow(new QLabel("heatmap color: *"), colorMapWidget);
     colorSelectionLayout->setObjectName("Color Options");
