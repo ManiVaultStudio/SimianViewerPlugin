@@ -177,18 +177,19 @@ const simianVis = () => {
                 }
             }
         }
-/*        if (YLastElement == "") {
-            YLastElement = height;
-        }
+/*        
         if (XLastElement == "") {
             XLastElement = width;
         }
         if (XFirstElement == "") {
             XFirstElement = x(crossSpeciesFilterspecies1Cluster[-1]);
+        }*/
+        if (YLastElement == "") {
+            YLastElement = "0.00";
         }
         if (YFirstElement == "") {
-            YFirstElement = y(crossSpeciesFilterspecies2Cluster[-1]);
-        }*/
+            YFirstElement = y(crossSpeciesFilterspecies2Cluster[crossSpeciesFilterspecies2Cluster.length -1]);
+        }
 
 
         log(XFirstElement);
@@ -321,6 +322,12 @@ const simianVis = () => {
             YFirstElement = y(crossSpeciesFilterspecies2Cluster[-1]);
         }*/
 
+        if (YLastElement == "") {
+            YLastElement = "0.00";
+        }
+        if (YFirstElement == "") {
+            YFirstElement = y(crossSpeciesFilterspecies2Cluster[crossSpeciesFilterspecies2Cluster.length - 1]);
+        }
 
         log(XFirstElement);
         log(XLastElement);
