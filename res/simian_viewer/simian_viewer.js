@@ -35,12 +35,12 @@ try {
     });
 } catch (error) {
     isQtAvailable = false;
-    log("could not connect qt");
+    //log("could not connect qt");
 }
 
 
 const simianVis = () => {
-    log("Creating visualization");
+    //log("Creating visualization");
     d3.select("g").remove();
     d3.select("svg").remove();
     svg = d3.select("#my_dataviz")
@@ -90,8 +90,8 @@ const simianVis = () => {
             correspondingCrossspeciescluster = [mapDataforBorderHuman[uniqueClusters1List[indexOfElement]]];
             for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
                 if (mapDataforBorderHuman[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
-                    log(mapDataforBorderHuman[crossSpeciesFilterspecies1Cluster[i]]);
-                    log(correspondingCrossspeciescluster);
+                    //log(mapDataforBorderHuman[crossSpeciesFilterspecies1Cluster[i]]);
+                    //log(correspondingCrossspeciescluster);
                     XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
                     if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i+1]); }
                     else { XLastElement = width;}
@@ -132,7 +132,7 @@ const simianVis = () => {
                 }
             }
         }
-        log(correspondingCrossspeciescluster);
+       // log(correspondingCrossspeciescluster);
 
 
         ////y
@@ -192,10 +192,10 @@ const simianVis = () => {
         }
 
 
-        log(XFirstElement);
-        log(XLastElement);
-        log(YFirstElement);
-        log(YLastElement);
+       // log(XFirstElement);
+        //log(XLastElement);
+       // log(YFirstElement);
+       // log(YLastElement);
         var poly = XFirstElement + ',' + YFirstElement + ' ' + XLastElement + ',' + YFirstElement + ' ' + XLastElement + ',' + YLastElement + ' ' + XFirstElement + ',' + YLastElement + ' ' + XFirstElement + ',' + YFirstElement;
         svg.append('polygon')
             .attr('points', poly)
@@ -266,8 +266,8 @@ const simianVis = () => {
         if (species1ValueIdentify == "human") {
             for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
                 if (mapDataforBorderHuman[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
-                    log(mapDataforBorderHuman[crossSpeciesFilterspecies1Cluster[i]]);
-                    log(correspondingCrossspeciescluster);
+                    //log(mapDataforBorderHuman[crossSpeciesFilterspecies1Cluster[i]]);
+                   // log(correspondingCrossspeciescluster);
                     XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
                     if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i+1]); }
                     else { XLastElement = width;}
@@ -305,7 +305,7 @@ const simianVis = () => {
                 }
             }
         }
-        log(correspondingCrossspeciescluster);
+        //log(correspondingCrossspeciescluster);
 
 
 
@@ -329,10 +329,10 @@ const simianVis = () => {
             YFirstElement = y(crossSpeciesFilterspecies2Cluster[crossSpeciesFilterspecies2Cluster.length - 1]);
         }
 
-        log(XFirstElement);
-        log(XLastElement);
-        log(YFirstElement);
-        log(YLastElement);
+        //log(XFirstElement);
+        //log(XLastElement);
+       // log(YFirstElement);
+       // log(YLastElement);
         var poly = XFirstElement + ',' + YFirstElement + ' ' + XLastElement + ',' + YFirstElement + ' ' + XLastElement + ',' + YLastElement + ' ' + XFirstElement + ',' + YLastElement + ' ' + XFirstElement + ',' + YFirstElement;
         svg.append('polygon')
             .attr('points', poly)
@@ -670,7 +670,7 @@ const simianVis = () => {
         selectionIDs.push(d.cross_species_cluster1_species_1);
         selectionIDs.push(d.cross_species_cluster2_species_2);
         if (isQtAvailable) {
-            log("sending from js...");
+           // log("sending from js...");
             QtBridge.js_passSelectionToQt(selectionIDs);
         }
     };
@@ -906,6 +906,11 @@ const simianVis = () => {
             colorNow1 = cross_speciesClustercolors[mapDataforBorderRhesus[crossSpeciesFilterspecies2Cluster[i]]];
             speciesCompare = mapDataforBorderRhesus[crossSpeciesFilterspecies2Cluster[i]];
         }
+        log("left");
+        log(valx1);
+        log(valx2);
+        log(valy1);
+        log(valy2);
         svg.append("line")
             .attr("x1", valx1)
             .attr("x2", valx2)
@@ -969,6 +974,11 @@ const simianVis = () => {
             colorNow1 = cross_speciesClustercolors[mapDataforBorderRhesus[crossSpeciesFilterspecies2Cluster[i]]];
             speciesCompare = mapDataforBorderRhesus[crossSpeciesFilterspecies2Cluster[i]];
         }
+        log("Right");
+        log(valx1);
+        log(valx2);
+        log(valy1);
+        log(valy2);
         svg.append("line")
             .attr("x1", valx1)
             .attr("x2", valx2)
@@ -1031,18 +1041,18 @@ const simianVis = () => {
 
 
 function setData(d) {
-    log("Data received");
+    //log("Data received");
     _dataQueue.addData(d);
 }
 
 function setClusters(d) {
-    log("Clusters received");
+    //log("Clusters received");
     queueClusters(d);
 }
 
 function queueClusters(d) {
     _clustersReceived = [];
-    log("here clusters");
+    //log("here clusters");
     //log(d);
     obj = JSON.parse(d);
    // _clustersReceived = obj[0];
@@ -1051,7 +1061,7 @@ function queueClusters(d) {
         _clustersReceived.push(value);
     }
     for (var i = 0; i < _clustersReceived.length; i++) {
-        log(_clustersReceived[i]);
+        //log(_clustersReceived[i]);
     }
     simianVis();
 
