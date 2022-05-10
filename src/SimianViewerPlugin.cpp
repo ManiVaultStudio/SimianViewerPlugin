@@ -141,7 +141,7 @@ void SimianViewerPlugin::publishSelection(std::vector<std::string> selectedIDs)
 
 void SimianViewerPlugin::publishCluster(std::string clusterName)
 {
-    qDebug()<< QString::fromStdString(clusterName);
+   // qDebug()<< QString::fromStdString(clusterName);
     if (clusterName!="")
     {
         if (_simianOptionsAction->getSpecies1DatasetLinkerAction().getCurrentText() != "")
