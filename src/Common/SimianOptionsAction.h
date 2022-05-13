@@ -42,7 +42,7 @@ namespace hdps
 {
     class CoreInterface;
 }
-class SimianOptionsAction : public WidgetAction, public hdps::EventListener
+class SimianOptionsAction : public WidgetAction//, public hdps::EventListener
 {
 public:
     class SpeciesAction : public WidgetAction
@@ -191,5 +191,6 @@ protected:
     DistanceNeighborhoodAction               _distanceNeighborhoodAction;
     bool _isStarted;
     ColorMapAction          _colorMapAction;
+    hdps::EventListener         _eventListener;
     friend class ChannelAction;
 };
