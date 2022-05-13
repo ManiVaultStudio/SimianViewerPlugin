@@ -55,6 +55,7 @@ private:
     SimianOptionsAction*        _simianOptionsAction;
     /** SimianViewer widget displaying cluster data */
     SimianViewerWidget*             _simian_viewer;
+    hdps::EventListener     _eventListener;
 };
 
 // =============================================================================

@@ -1,6 +1,7 @@
 #include "SimianOptionsAction.h"
 #include "SimianViewerPlugin.h"
 
+using namespace hdps;
 using namespace hdps::gui;
 
 SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin, hdps::CoreInterface* core) :
@@ -22,10 +23,15 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _distanceNeighborhoodAction(*this),
     _isStarted(false)
 {
-   /* _eventListener.setEventCore(core);*/
-    _eventListener.setEventCore(Application::core());
+    _eventListener.setEventCore(core);
+    _eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataAdded));
+    _eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataRemoved));
+    _eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataChildAdded));
+    _eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataChildRemoved));
     _eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataChanged));
+    _eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataGuiNameChanged));
     _eventListener.registerDataEventByType(PointType, std::bind(&SimianOptionsAction::onDataEvent, this, std::placeholders::_1));
+
     _metaData = new FetchMetaData();
      _metaData->getData(&_simianData);
     _species2Action.setEnabled(false);
