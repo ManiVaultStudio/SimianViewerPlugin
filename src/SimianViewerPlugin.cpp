@@ -40,7 +40,10 @@ void SimianViewerPlugin::init()
     _simianOptionsAction = new SimianOptionsAction(*this, _core);
     connect(_simian_viewer, &SimianViewerWidget::passSelectionToQt, this, &SimianViewerPlugin::publishSelection);
     connect(_simian_viewer, &SimianViewerWidget::passClusterToQt, this, &SimianViewerPlugin::publishCluster);
-    registerDataEventByType(ClusterType, std::bind(&SimianViewerPlugin::onDataEvent, this, std::placeholders::_1));
+    
+    _eventListener.setEventCore(Application::core());
+    _eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataSelectionChanged));
+    _eventListener.registerDataEventByType(ClusterType, std::bind(&SimianViewerPlugin::onDataEvent, this, std::placeholders::_1));
     //QFrame* sideBar = new QFrame;
     //QStackedWidget* contentStack = new QStackedWidget;
     //QFrame* contentPage = new QFrame;
