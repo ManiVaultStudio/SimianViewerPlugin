@@ -114,8 +114,14 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
         const auto& rangeAction = _colorMapAction.getSettingsAction().getHorizontalAxisAction().getRangeAction();
         //qDebug() << rangeAction.getMinimum();
         //qDebug() << rangeAction.getMaximum();
+        std::string s1 = std::to_string(rangeAction.getMinimum());
+        std::string s2 = " ";
+        std::string s3 = std::to_string(rangeAction.getMaximum());
+        
+        std::string full = s1.substr(0, s1.find(".") + 3) + s2 + s3.substr(0, s3.find(".") + 3);
 
-        //_simianViewerPlugin.getWidget()->setColor(_colorMapAction.getColorMap());
+
+        _simianViewerPlugin.getWidget()->setRangeValue(QString::fromStdString(full));
 
     };
 
