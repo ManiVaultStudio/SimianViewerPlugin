@@ -65,11 +65,12 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _distanceAction.setDefaultWidgetFlags(IntegralAction::SpinBox | IntegralAction::Slider);
     _distanceAction.initialize(0, 105, 105, 105);
    
-
     _species1DatasetLinkerAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 
     _species2DatasetLinkerAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 
+    _colorMapAction.getSettingsAction().getDiscreteAction().setVisible(false);
+    _colorMapAction.getSettingsAction().getEditor1DAction().setVisible(false);
 
     const auto updateCrossSpeciesFilter = [this]() -> void
     {
@@ -99,10 +100,11 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
     const auto colormapFilter = [this]() -> void
     {
-        qDebug() << _colorMapAction.getColorMapImage().mirrored(false, true);
-        
+        //qDebug() << _colorMapAction.getColorMapImage();// .mirrored(false, true);
+        //qDebug() << _colorMapAction.getColorMapImage().mirrored();
+        const auto& mirrorAction = _colorMapAction.getSettingsAction().getHorizontalAxisAction().getMirrorAction();
+        //qDebug() << mirrorAction.isChecked();
         _simianViewerPlugin.getWidget()->setColor(_colorMapAction.getColorMap());
-
     };
     
         const auto updateColorMapRange = [this]() -> void
@@ -110,8 +112,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
        
         // Get color map range action
         const auto& rangeAction = _colorMapAction.getSettingsAction().getHorizontalAxisAction().getRangeAction();
-        qDebug() << rangeAction.getMinimum();
-        qDebug() << rangeAction.getMaximum();
+        //qDebug() << rangeAction.getMinimum();
+        //qDebug() << rangeAction.getMaximum();
 
         //_simianViewerPlugin.getWidget()->setColor(_colorMapAction.getColorMap());
 
