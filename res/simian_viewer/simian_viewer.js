@@ -33,6 +33,7 @@ try {
         QtBridge.qt_setData.connect(function () { setData(arguments[0]); });
         QtBridge.qt_setClusters.connect(function () { setClusters(arguments[0]); });
         QtBridge.qt_setColor.connect(function () { setColor(arguments[0]); });
+        QtBridge.qt_setRangeValue.connect(function () { setRangeValue(arguments[0]); });
         notifyBridgeAvailable();
     });
 } catch (error) {
@@ -1129,6 +1130,18 @@ function queueColor(d) {
 /*    log("Color Received");
     log(d);*/
     qtColor = d;
+    simianVis();
+}
+
+function setRangeValue(d) {
+    //log("Clusters received");
+    const valRa = d.split(" ");
+    queueRangeValue(parseFloat(valRa[0]), parseFloat(valRa[1]));
+}
+
+function queueRangeValue(minRangeVal, maxRangeVal) {
+    mindistanceColor = minRangeVal;
+    maxdistanceColor = maxRangeVal;
     simianVis();
 }
 
