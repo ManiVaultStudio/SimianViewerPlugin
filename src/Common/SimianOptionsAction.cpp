@@ -99,12 +99,23 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
     const auto colormapFilter = [this]() -> void
     {
-       // qDebug() << _colorMapAction.getColorMap();
+        qDebug() << _colorMapAction.getColorMap();
 
         _simianViewerPlugin.getWidget()->setColor(_colorMapAction.getColorMap());
 
     };
+    
+        const auto updateColorMapRange = [this]() -> void
+    {
+       
+        // Get color map range action
+        const auto& rangeAction = _colorMapAction.getSettingsAction().getHorizontalAxisAction().getRangeAction();
+        qDebug() << rangeAction.getMinimum();
+        qDebug() << rangeAction.getMaximum();
 
+        //_simianViewerPlugin.getWidget()->setColor(_colorMapAction.getColorMap());
+
+    };
 
     const auto updateSpecies1 = [this]() -> void
     {
@@ -202,6 +213,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
         });
 
     connect(&_colorMapAction, &ColorMapAction::imageChanged, this, colormapFilter);
+
+    connect(&_colorMapAction.getSettingsAction().getHorizontalAxisAction().getRangeAction(), &DecimalRangeAction::rangeChanged, this, updateColorMapRange);
 
     connect(&_species1Action, &OptionAction::currentIndexChanged, [this, updateSpecies1](const std::int32_t& currentIndex) {
         updateSpecies1();
@@ -336,6 +349,25 @@ void SimianOptionsAction::updateData(std::string Species1, std::string Species2,
     _jsonObject.chop(1);
     _jsonObject += "]";
     _simianViewerPlugin.getWidget()->setData(_jsonObject.toStdString());
+
+    auto& colorMapRangeAction = _colorMapAction.getSettingsAction().getHorizontalAxisAction().getRangeAction();
+    float colorMapRangeMin=1200.0;
+    float colorMapRangeMax=0.0;
+    for (int i = 0; i < filteredVisData.size(); i++)
+    {
+        const float temp = std::stof(filteredVisData[i][5]);
+        if (temp < colorMapRangeMin)
+        {
+            colorMapRangeMin = temp;
+        }
+        if (temp > colorMapRangeMax)
+        {
+            colorMapRangeMax = temp;
+        }
+    }
+    // Initialize the color map range action with the color map range from the scatter plot 
+    colorMapRangeAction.initialize(colorMapRangeMin, colorMapRangeMax, colorMapRangeMin, colorMapRangeMax, colorMapRangeMin, colorMapRangeMax);
+
     if (!_isStarted)
     {
         _isStarted = true;
