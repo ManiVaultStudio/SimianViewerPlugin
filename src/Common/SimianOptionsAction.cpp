@@ -99,8 +99,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
     const auto colormapFilter = [this]() -> void
     {
-        qDebug() << _colorMapAction.getColorMap();
-
+        qDebug() << _colorMapAction.getColorMapImage().mirrored(false, true);
+        
         _simianViewerPlugin.getWidget()->setColor(_colorMapAction.getColorMap());
 
     };
@@ -666,6 +666,23 @@ void SimianOptionsAction::filterMultiSelect()
     _jsonObject.chop(1);
     _jsonObject += "]";
     _simianViewerPlugin.getWidget()->setData(_jsonObject.toStdString());
+    auto& colorMapRangeAction = _colorMapAction.getSettingsAction().getHorizontalAxisAction().getRangeAction();
+    float colorMapRangeMin = 1200.0;
+    float colorMapRangeMax = 0.0;
+    for (int i = 0; i < clusterfilteredVisData.size(); i++)
+    {
+        const float temp = std::stof(clusterfilteredVisData[i][5]);
+        if (temp < colorMapRangeMin)
+        {
+            colorMapRangeMin = temp;
+        }
+        if (temp > colorMapRangeMax)
+        {
+            colorMapRangeMax = temp;
+        }
+    }
+    // Initialize the color map range action with the color map range from the scatter plot 
+    colorMapRangeAction.initialize(colorMapRangeMin, colorMapRangeMax, colorMapRangeMin, colorMapRangeMax, colorMapRangeMin, colorMapRangeMax);
     if (!_isStarted)
     {
         _isStarted = true;
