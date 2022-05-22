@@ -13,6 +13,7 @@ var crossSpeciesFilterspecies1Cluster = [];
 var crossSpeciesFilterspecies2Cluster = [];
 var svg;
 var qtColor = "Black to white";
+var colorMirror = false;
 /*var dictOfCrossspeciesClusterCordinates = {};
 var arrayOfUniqueCrossspeciesClusters = [];*/
 window.onresize = doALoadOfStuff;
@@ -402,64 +403,189 @@ const simianVis = () => {
 
     // Build color scaled3.scaleSequential(d3Chromatic.interpolatePiYG);
     if (qtColor == "qualitative") {
-        var myColor = d3.scaleSequential(d3.interpolateCubehelixDefault).domain([maxdistanceColor, mindistanceColor]);
+        if (colorMirror) {
+            var myColor = d3.scaleSequential(d3.interpolateCubehelixDefault).domain([maxdistanceColor, mindistanceColor]);
+        }
+        else {
+            var myColor = d3.scaleSequential(d3.interpolateCubehelixDefault).domain([maxdistanceColor, mindistanceColor]);
+        }
     }
     else if (qtColor == "RdYlBu") {
-        var myColor = d3.scaleSequential(d3.interpolateRdYlBu).domain([maxdistanceColor, mindistanceColor]);
+        
+        if (colorMirror) {
+            var myColor = d3.scaleSequential(d3.interpolateRdYlBu).domain([mindistanceColor, maxdistanceColor]);
+        }
+        else {
+            var myColor = d3.scaleSequential(d3.interpolateRdYlBu).domain([maxdistanceColor, mindistanceColor]);
+        }
     }
     else if (qtColor == "YlGn") {
-        var myColor = d3.scaleSequential(d3.interpolateYlGn).domain([maxdistanceColor, mindistanceColor]);
+       
+        if (colorMirror) {
+            var myColor = d3.scaleSequential(d3.interpolateYlGn).domain([mindistanceColor, maxdistanceColor]);
+        }
+        else {
+            var myColor = d3.scaleSequential(d3.interpolateYlGn).domain([maxdistanceColor, mindistanceColor]);
+        }
     }
     else if (qtColor == "RdYlGn") {
-        var myColor = d3.scaleSequential(d3.interpolateRdYlGn).domain([maxdistanceColor, mindistanceColor]);
+        
+        if (colorMirror) {
+            var myColor = d3.scaleSequential(d3.interpolateRdYlGn).domain([mindistanceColor, maxdistanceColor]);
+        }
+        else {
+            var myColor = d3.scaleSequential(d3.interpolateRdYlGn).domain([maxdistanceColor, mindistanceColor]);
+        }
     }
     else if (qtColor == "GnBu") {
-        var myColor = d3.scaleSequential(d3.interpolateGnBu).domain([maxdistanceColor, mindistanceColor]);
+        
+        if (colorMirror) {
+            var myColor = d3.scaleSequential(d3.interpolateGnBu).domain([mindistanceColor, maxdistanceColor]);
+        }
+        else {
+            var myColor = d3.scaleSequential(d3.interpolateGnBu).domain([maxdistanceColor, mindistanceColor]);
+        }
     }
     else if (qtColor == "YlGnBu") {
-        var myColor = d3.scaleSequential(d3.interpolateYlGnBu).domain([maxdistanceColor, mindistanceColor]);
+        
+        if (colorMirror) {
+            var myColor = d3.scaleSequential(d3.interpolateYlGnBu).domain([mindistanceColor, maxdistanceColor]);
+        }
+        else {
+            var myColor = d3.scaleSequential(d3.interpolateYlGnBu).domain([maxdistanceColor, mindistanceColor]);
+        }
     }
     else if (qtColor == "Spectral") {
-        var myColor = d3.scaleSequential(d3.interpolateSpectral).domain([maxdistanceColor, mindistanceColor]);
+        
+        if (colorMirror) {
+            var myColor = d3.scaleSequential(d3.interpolateSpectral).domain([mindistanceColor, maxdistanceColor]);
+        }
+        else {
+            var myColor = d3.scaleSequential(d3.interpolateSpectral).domain([maxdistanceColor, mindistanceColor]);
+        }
     }
     else if (qtColor == "BrBG") {
-        var myColor = d3.scaleSequential(d3.interpolateBrBG).domain([maxdistanceColor, mindistanceColor]);
+        
+        if (colorMirror) {
+            var myColor = d3.scaleSequential(d3.interpolateBrBG).domain([mindistanceColor, maxdistanceColor]);
+        }
+        else {
+            var myColor = d3.scaleSequential(d3.interpolateBrBG).domain([maxdistanceColor, mindistanceColor]);
+        }
     }
     else if (qtColor == "YlOrBr") {
-        var myColor = d3.scaleSequential(d3.interpolateYlOrBr).domain([maxdistanceColor, mindistanceColor]);
+        
+        if (colorMirror) {
+            var myColor = d3.scaleSequential(d3.interpolateYlOrBr).domain([mindistanceColor, maxdistanceColor]);
+        }
+        else {
+            var myColor = d3.scaleSequential(d3.interpolateYlOrBr).domain([maxdistanceColor, mindistanceColor]);
+        }
     }
     else if (qtColor == "RdBu") {
-        var myColor = d3.scaleSequential(d3.interpolateRdBu).domain([maxdistanceColor, mindistanceColor]);
+       
+        if (colorMirror) {
+            var myColor = d3.scaleSequential(d3.interpolateRdBu).domain([mindistanceColor, maxdistanceColor]);
+        }
+        else {
+            var myColor = d3.scaleSequential(d3.interpolateRdBu).domain([maxdistanceColor, mindistanceColor]);
+        }
     }
     else if (qtColor == "RdPu") {
-        var myColor = d3.scaleSequential(d3.interpolateRdPu).domain([maxdistanceColor, mindistanceColor]);
+        
+        if (colorMirror) {
+            var myColor = d3.scaleSequential(d3.interpolateRdPu).domain([mindistanceColor, maxdistanceColor]);
+        }
+        else {
+            var myColor = d3.scaleSequential(d3.interpolateRdPu).domain([maxdistanceColor, mindistanceColor]);
+        }
     }
     else if (qtColor == "Plasma") {
-        var myColor = d3.scaleSequential(d3.interpolatePlasma).domain([maxdistanceColor, mindistanceColor]);
+        
+        if (colorMirror) {
+            var myColor = d3.scaleSequential(d3.interpolatePlasma).domain([mindistanceColor, maxdistanceColor]);
+        }
+        else {
+            var myColor = d3.scaleSequential(d3.interpolatePlasma).domain([maxdistanceColor, mindistanceColor]);
+        }
     }
     else if (qtColor == "PuOr") {
-        var myColor = d3.scaleSequential(d3.interpolatePuOr).domain([maxdistanceColor, mindistanceColor]);
+       
+        if (colorMirror) {
+            var myColor = d3.scaleSequential(d3.interpolatePuOr).domain([mindistanceColor, maxdistanceColor]);
+        }
+        else {
+            var myColor = d3.scaleSequential(d3.interpolatePuOr).domain([maxdistanceColor, mindistanceColor]);
+        }
     }
     else if (qtColor == "BuPu") {
-        var myColor = d3.scaleSequential(d3.interpolateBuPu).domain([maxdistanceColor, mindistanceColor]);
+
+        if (colorMirror) {
+            
+            var myColor = d3.scaleSequential(d3.interpolateBuPu).domain([mindistanceColor, maxdistanceColor]);
+        }
+        else {
+            var myColor = d3.scaleSequential(d3.interpolateBuPu).domain([maxdistanceColor, mindistanceColor]);
+        }
     }
     else if (qtColor == "Reds") {
-        var myColor = d3.scaleSequential(d3.interpolateReds).domain([maxdistanceColor, mindistanceColor]);
+       
+        if (colorMirror) {
+            var myColor = d3.scaleSequential(d3.interpolateReds).domain([mindistanceColor, maxdistanceColor]);
+        }
+        else {
+            
+            var myColor = d3.scaleSequential(d3.interpolateReds).domain([maxdistanceColor, mindistanceColor]);
+        }
     }
     else if (qtColor == "Viridis") {
-        var myColor = d3.scaleSequential(d3.interpolateViridis).domain([maxdistanceColor, mindistanceColor]);
+
+        if (colorMirror) {
+            var myColor = d3.scaleSequential(d3.interpolateViridis).domain([mindistanceColor, maxdistanceColor]);
+        }
+        else {
+            
+            var myColor = d3.scaleSequential(d3.interpolateViridis).domain([maxdistanceColor, mindistanceColor]);
+        }
     }
     else if (qtColor == "Q_BlGrRd") {
-        var myColor = d3.scaleSequential(d3.interpolateRdGy).domain([maxdistanceColor, mindistanceColor]);
+
+        if (colorMirror) {
+            var myColor = d3.scaleSequential(d3.interpolateRdGy).domain([mindistanceColor, maxdistanceColor]);
+        }
+        else {
+            
+            var myColor = d3.scaleSequential(d3.interpolateRdGy).domain([maxdistanceColor, mindistanceColor]);
+        }
     }
     else if (qtColor == "Magma") {
-        var myColor = d3.scaleSequential(d3.interpolateMagma).domain([maxdistanceColor, mindistanceColor]);
+        
+        if (colorMirror) {
+            var myColor = d3.scaleSequential(d3.interpolateMagma).domain([mindistanceColor, maxdistanceColor]);
+        }
+        else {
+            
+            var myColor = d3.scaleSequential(d3.interpolateMagma).domain([maxdistanceColor, mindistanceColor]);
+        }
     }
     else if (qtColor == "PiYG") {
-        var myColor = d3.scaleSequential(d3.interpolatePiYG).domain([maxdistanceColor, mindistanceColor]);
+
+        if (colorMirror) {
+            var myColor = d3.scaleSequential(d3.interpolatePiYG).domain([mindistanceColor, maxdistanceColor]);
+        }
+        else {
+            
+            var myColor = d3.scaleSequential(d3.interpolatePiYG).domain([maxdistanceColor, mindistanceColor]);
+        }
     }
     else {
-        var myColor = d3.scaleSequential(d3.interpolateGreys).domain([maxdistanceColor, mindistanceColor]);//d3 https://github.com/d3/d3-scale-chromatic
+        if (colorMirror) {          
+            var myColor = d3.scaleSequential(d3.interpolateGreys).domain([mindistanceColor, maxdistanceColor]);
+        }
+        else {
+            var myColor = d3.scaleSequential(d3.interpolateGreys).domain([maxdistanceColor, mindistanceColor]);
+        }
+        //d3 https://github.com/d3/d3-scale-chromatic
     }
 
 ////////
@@ -1122,14 +1248,21 @@ function setClusters(d) {
 }
 
 function setColor(d) {
-    //log("Clusters received");
-    queueColor(d);
+    const valRa = d.split("*%*");
+    queueColor(valRa[0] , valRa[1]);
 }
 
-function queueColor(d) {
-/*    log("Color Received");
-    log(d);*/
-    qtColor = d;
+function queueColor(colorName, mirrorValue) {
+    log(colorName);
+    log(mirrorValue);
+    qtColor = colorName;
+    if (mirrorValue=="F") {
+        colorMirror = false;
+    }
+    else {
+        colorMirror = true;
+    }
+    
     simianVis();
 }
 
