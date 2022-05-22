@@ -404,10 +404,10 @@ const simianVis = () => {
     // Build color scaled3.scaleSequential(d3Chromatic.interpolatePiYG);
     if (qtColor == "qualitative") {
         if (colorMirror) {
-            var myColor = d3.scaleSequential(d3.interpolateCubehelixDefault).domain([maxdistanceColor, mindistanceColor]);
+            var myColor = d3.scaleOrdinal(d3.schemeSet3).domain([maxdistanceColor, mindistanceColor]);
         }
         else {
-            var myColor = d3.scaleSequential(d3.interpolateCubehelixDefault).domain([maxdistanceColor, mindistanceColor]);
+            var myColor = d3.scaleOrdinal(d3.schemeSet3).domain([maxdistanceColor, mindistanceColor]);
         }
     }
     else if (qtColor == "RdYlBu") {
@@ -1253,8 +1253,8 @@ function setColor(d) {
 }
 
 function queueColor(colorName, mirrorValue) {
-    log(colorName);
-    log(mirrorValue);
+    //log(colorName);
+    //log(mirrorValue);
     qtColor = colorName;
     if (mirrorValue=="F") {
         colorMirror = false;
