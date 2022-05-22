@@ -104,7 +104,20 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
         //qDebug() << _colorMapAction.getColorMapImage().mirrored();
         const auto& mirrorAction = _colorMapAction.getSettingsAction().getHorizontalAxisAction().getMirrorAction();
         //qDebug() << mirrorAction.isChecked();
-        _simianViewerPlugin.getWidget()->setColor(_colorMapAction.getColorMap());
+
+        std::string s1 = _colorMapAction.getColorMap().toStdString();
+        std::string s2 = "*%*";
+        std::string s3;
+        if (mirrorAction.isChecked())
+        {
+            s3 = "T";
+        }
+        else
+        {
+            s3 = "F";
+        }
+        std::string full = s1+s2+s3;
+        _simianViewerPlugin.getWidget()->setColor(QString::fromStdString(full));
     };
     
         const auto updateColorMapRange = [this]() -> void
