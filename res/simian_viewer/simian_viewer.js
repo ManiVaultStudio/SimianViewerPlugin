@@ -688,8 +688,6 @@ const simianVis = () => {
     }
 
 
-    //////////
-
     // create a tooltip
     var tooltip = d3
         .select("#my_dataviz")
@@ -786,7 +784,6 @@ const simianVis = () => {
                 return 0;
             });
     };
-
     var mouseclick = function (d) {
 
         let selectionIDs = [];
@@ -836,7 +833,6 @@ const simianVis = () => {
         .on("click", mouseclick);
 
 
-    ///////////////////////////////////////////
     //top
     var valx1;
     var valx2;
