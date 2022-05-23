@@ -37,6 +37,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _species2Action.setEnabled(false);
     _neighborhoodAction.setEnabled(false);
     _distanceAction.setEnabled(false);
+    _distanceAction.setVisible(false);
     _species1DatasetLinkerAction.setEnabled(false);
     _species2DatasetLinkerAction.setEnabled(false);
     _crossSpeciesFilterAction.setEnabled(false);
@@ -553,7 +554,7 @@ SimianOptionsAction::DistanceNeighborhoodAction::Widget::Widget(QWidget* parent,
     auto filterOptionLayout = new QFormLayout();
     filterOptionLayout->setMargin(2);
     filterOptionLayout->addRow(new QLabel("Neighborhood:"), selectionNeighborhoodWidget);
-    filterOptionLayout->addRow(new QLabel("Distance:") , selectionDistanceWidget);
+    //filterOptionLayout->addRow(new QLabel("Distance:") , selectionDistanceWidget);
 
     filterOptionLayout->setObjectName("Simian Options");
     filterOptionLayout->setSpacing(2);
@@ -565,8 +566,8 @@ SimianOptionsAction::DistanceNeighborhoodAction::Widget::Widget(QWidget* parent,
 inline SimianOptionsAction::DistanceNeighborhoodAction::DistanceNeighborhoodAction(SimianOptionsAction& simianOptionsAction) :
     _simianOptionsAction(simianOptionsAction)
 {
-    setText("Distance-Neighborhood Options");
-
+    //setText("Distance-Neighborhood Options");
+    setText("Neighborhood Option");
 
     setIcon(Application::getIconFont("FontAwesome").getIcon("cog"));
 }
