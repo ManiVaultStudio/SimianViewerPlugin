@@ -149,7 +149,6 @@ void SimianViewerWidget::initWebPage()
         emit _communicationObject->qt_addAvailableData(option);
     }
     dataOptionBuffer.clear();
-    //qDebug() << "JS Ready for events";
 }
 
 
