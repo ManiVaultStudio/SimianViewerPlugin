@@ -26,7 +26,6 @@ SimianViewerPlugin::SimianViewerPlugin(const PluginFactory* factory) :
     _simianOptionsAction(nullptr)
 {
     _simian_viewer = new SimianViewerWidget();
-   /*registerDataEventByType(ClusterType, std::bind(&SimianViewerPlugin::onDataEvent, this, std::placeholders::_1));*/
 }
 
 SimianViewerPlugin::~SimianViewerPlugin()
@@ -44,47 +43,6 @@ void SimianViewerPlugin::init()
     _eventListener.setEventCore(Application::core());
     _eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataSelectionChanged));
     _eventListener.registerDataEventByType(ClusterType, std::bind(&SimianViewerPlugin::onDataEvent, this, std::placeholders::_1));
-    //QFrame* sideBar = new QFrame;
-    //QStackedWidget* contentStack = new QStackedWidget;
-    //QFrame* contentPage = new QFrame;
-    //QWidget* centralWidget = new QWidget;
-
-    //QVBoxLayout* sideBarLayout = new QVBoxLayout;
-    //QGridLayout* pageGridLayout = new QGridLayout;
-    //QGridLayout* centralLayout = new QGridLayout;
-
-
-    ///* Setup the sidebar: */
-    //sideBarLayout->addWidget(_simianOptionsAction->getSpeciesAction().createCollapsedWidget(&_widget));
-    //sideBarLayout->addWidget(_simianOptionsAction->getDistanceNeighborhoodAction().createCollapsedWidget(&_widget));
-    //sideBarLayout->addWidget(_simianOptionsAction->getClusterAction().createCollapsedWidget(&_widget));
-    //sideBarLayout->addStretch();
-
-    //sideBar->setAutoFillBackground(true);
-    //sideBar->setWindowTitle("Simian Options");
-    //sideBar->setLayout(sideBarLayout);
-    //sideBar->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
-
-    ///* Setup the content stacked widget */
-    //pageGridLayout->addWidget(_simian_viewer, 0, 0, 3, 1);
-    //contentPage->setLayout(pageGridLayout);
-    //contentStack->addWidget(contentPage);
-    //contentStack->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-
-    ///* Finally we setup the main elements into the central layout... */
-
-    //centralLayout->addWidget(sideBar, 0, 0, 1, 1);
-    //centralLayout->addWidget(contentStack, 0, 1, 1, 1);
-    ////centralWidget->setLayout(centralLayout);
-    //
-    ////setCentralWidget(centralWidget);
-
-    //_widget.setLayout(centralLayout);
-
-    //_widget.setStyleSheet("QWidget {"
-    //    //"border: 0.5px solid grey;"
-    //    "color: black"
-    //    "}");
 
     auto topToolbarWidget = new QWidget();
     auto topToolbarLayout = new QHBoxLayout();
@@ -93,9 +51,7 @@ void SimianViewerPlugin::init()
     topToolbarLayout->addWidget(_simianOptionsAction->getSpeciesAction().createCollapsedWidget(&_widget));
     topToolbarLayout->addWidget(_simianOptionsAction->getDistanceNeighborhoodAction().createCollapsedWidget(&_widget));
     topToolbarLayout->addWidget(_simianOptionsAction->getColorMapAction().createCollapsedWidget(&_widget));
-    //topToolbarLayout->addStretch(1);
     topToolbarLayout->addWidget(_simianOptionsAction->getClusterAction().createCollapsedWidget(&_widget));
-    //topToolbarLayout->addStretch(1);
     topToolbarLayout->addStretch(0);
     topToolbarWidget->setAutoFillBackground(true);
     topToolbarWidget->setLayout(topToolbarLayout);
@@ -111,7 +67,6 @@ void SimianViewerPlugin::init()
 
 void SimianViewerPlugin::onDataEvent(hdps::DataEvent* dataEvent)
 {
-    //qDebug() << "dataset has changed" << (int) dataEvent->getType() << dataEvent->getDataset()->getGuiName();
     if (dataEvent->getType() == hdps::EventType::DataSelectionChanged)
     {
         const auto selectionChangedEvent = static_cast<DataSelectionChangedEvent*>(dataEvent);
@@ -120,11 +75,6 @@ void SimianViewerPlugin::onDataEvent(hdps::DataEvent* dataEvent)
         qDebug() << selectionSet;
         _simian_viewer->setClusters(selectionSet);
     }
-    //if (dataEvent->getType() == hdps::EventType::Data)
-    //{
-    //    _simian_viewer->setClusters(QStringList());
-    //}
- 
 }
 
 void SimianViewerPlugin::publishSelection(std::vector<std::string> selectedIDs)
@@ -145,7 +95,6 @@ void SimianViewerPlugin::publishSelection(std::vector<std::string> selectedIDs)
 
 void SimianViewerPlugin::publishCluster(std::string clusterName)
 {
-   // qDebug()<< QString::fromStdString(clusterName);
     if (clusterName!="")
     {
         if (_simianOptionsAction->getSpecies1DatasetLinkerAction().getCurrentText() != "")
