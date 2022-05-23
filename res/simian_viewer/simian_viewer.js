@@ -83,7 +83,7 @@ const simianVis = () => {
         .keys();
 
     function clickXAxisLabels(d) {    
-        svg.selectAll("polygon").remove();
+        svg.select("#axisSelectionpolygon").remove();
         var correspondingCrossspeciescluster;
         var XFirstElement="";
         var XLastElement="";
@@ -202,6 +202,7 @@ const simianVis = () => {
        // log(YLastElement);
         var poly = XFirstElement + ',' + YFirstElement + ' ' + XLastElement + ',' + YFirstElement + ' ' + XLastElement + ',' + YLastElement + ' ' + XFirstElement + ',' + YLastElement + ' ' + XFirstElement + ',' + YFirstElement;
         svg.append('polygon')
+            .attr("id", "axisSelectionpolygon")  
             .attr('points', poly)
             .attr('stroke', cross_speciesClustercolors[correspondingCrossspeciescluster])
             .attr("stroke-width", 10)
@@ -214,7 +215,7 @@ const simianVis = () => {
 
     }
     function clickYAxisLabels(d) {
-        svg.selectAll("polygon").remove();
+        svg.select("#axisSelectionpolygon").remove();
         var correspondingCrossspeciescluster;
         var XFirstElement="";
         var XLastElement="";
@@ -342,6 +343,7 @@ const simianVis = () => {
        // log(YLastElement);
         var poly = XFirstElement + ',' + YFirstElement + ' ' + XLastElement + ',' + YFirstElement + ' ' + XLastElement + ',' + YLastElement + ' ' + XFirstElement + ',' + YLastElement + ' ' + XFirstElement + ',' + YFirstElement;
         svg.append('polygon')
+            .attr("id", "axisSelectionpolygon")  
             .attr('points', poly)
             .attr('stroke', cross_speciesClustercolors[correspondingCrossspeciescluster])
             .attr("stroke-width", 10)
@@ -758,7 +760,7 @@ const simianVis = () => {
 
     // Three function that change the tooltip when user hover / move / leave a cell
     var mouseover = function (d) {
-        svg.selectAll("polygon").remove();
+        svg.select("#axisSelectionpolygon").remove();
         tooltip.style("opacity", 1);
         tooltip.style("z-index", 1);
         d3.select(this)
@@ -788,7 +790,7 @@ const simianVis = () => {
             .style("cursor", "pointer");
     };
     var mousemove = function (d) {
-        svg.selectAll("polygon").remove();
+        svg.select("#axisSelectionpolygon").remove();
         var crossSpeciesAddToTooltip = "";
         var species1AddToTooltip = "";
         var species2AddToTooltip = "";
