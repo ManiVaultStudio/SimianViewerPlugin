@@ -156,6 +156,7 @@ private:
     void filterMultiSelect();
 protected:
     void updateDatasetPickerAction();
+    void sendClusterCountInfoToJS();
     void updateMultiSelectionDropdown(std::vector<std::vector<std::string>>& filteredVisData);
 public: // Action getters
 
@@ -163,6 +164,7 @@ public: // Action getters
     OptionAction& getSpecies2Action() { return _species2Action; }
     OptionAction& getNeighborhoodAction() { return _neighborhoodAction; }
     IntegralAction& getDistanceAction() { return _distanceAction; };
+    IntegralAction& getHistBarAction() { return _histBarAction; };
     DatasetPickerAction& getCrossSpecies1DatasetLinkerAction() { return _crossSpecies1DatasetLinkerAction; };
     DatasetPickerAction& getCrossSpecies2DatasetLinkerAction() { return _crossSpecies2DatasetLinkerAction; };
     DatasetPickerAction& getInSpecies1DatasetLinkerAction() { return _inSpecies1DatasetLinkerAction; };
@@ -188,7 +190,7 @@ protected:
     FetchMetaData*                _metaData;
     std::vector<std::vector<std::string>>                _simianData;
     OptionsAction                 _multiSelectClusterFilterAction;
-
+    IntegralAction _histBarAction;
     bool                        _isLoading;
     SpeciesAction               _speciesAction;
     ClusterAction               _clusterAction;
