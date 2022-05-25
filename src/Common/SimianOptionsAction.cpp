@@ -339,18 +339,30 @@ void SimianOptionsAction::sendClusterCountInfoToJS()
     auto dataset2 = _inSpecies2DatasetLinkerAction.getCurrentDataset();
     const auto candidateDataset1 = _core->requestDataset<Clusters>(dataset1.getDatasetGuid());
     const auto candidateDataset2 = _core->requestDataset<Clusters>(dataset2.getDatasetGuid());
-
+    std::string jsonSend="";
     for (const auto& cluster : candidateDataset1->getClusters())
     {
-        qDebug() << cluster.getName();
-        qDebug() << cluster.getNumberOfIndices();
+        //qDebug() << cluster.getName();
+        //qDebug() << cluster.getNumberOfIndices();
+        jsonSend= jsonSend+ cluster.getName().toStdString();
+        jsonSend = jsonSend + "*|*";
+        jsonSend = jsonSend + std::to_string(cluster.getNumberOfIndices());
+        jsonSend = jsonSend + "*||*";
     }
-
+    jsonSend = jsonSend + "*|||*";
     for (const auto& cluster : candidateDataset2->getClusters())
     {
-        qDebug() << cluster.getName();
-        qDebug() << cluster.getNumberOfIndices();
+        //qDebug() << cluster.getName();
+        //qDebug() << cluster.getNumberOfIndices();
+        jsonSend = jsonSend + cluster.getName().toStdString();
+        jsonSend = jsonSend + "*|*";
+        jsonSend = jsonSend + std::to_string(cluster.getNumberOfIndices());
+        jsonSend = jsonSend + "*||*";
     }
+
+
+    _simianViewerPlugin.getWidget()->inspeciesClusterCounts(QString::fromStdString(jsonSend) );
+
 }
 
 void SimianOptionsAction::onDataEvent(hdps::DataEvent* dataEvent)

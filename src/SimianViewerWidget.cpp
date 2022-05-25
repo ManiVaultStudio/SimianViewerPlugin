@@ -142,6 +142,12 @@ void SimianViewerWidget::histChart(QString visColorContent)
     emit _communicationObject->qt_histChart(visColorContent);
 }
 
+void SimianViewerWidget::inspeciesClusterCounts(QString visCountClusterContent)
+{
+    emit _communicationObject->qt_inspeciesClusterCounts(visCountClusterContent);
+}
+
+
 void SimianViewerWidget::setRangeValue(QString visRangeValueContent)
 {
     emit _communicationObject->qt_setRangeValue(visRangeValueContent);

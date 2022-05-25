@@ -12,6 +12,10 @@ var uniqueClusters1List = [];
 var uniqueClusters2List = [];
 var crossSpeciesFilterspecies1Cluster = [];
 var crossSpeciesFilterspecies2Cluster = [];
+var inspecies2ClusterCounts = {};
+var inspecies1ClusterCounts = {};
+var totalInspeciescluster1counts = 0;
+var totalInspeciescluster2counts = 0;
 var svg;
 var qtColor = "Black to white";
 var colorMirror = false;
@@ -44,6 +48,7 @@ try {
         QtBridge.qt_setColor.connect(function () { setColor(arguments[0]); });
         QtBridge.qt_histChart.connect(function () { histChart(arguments[0]); });
         QtBridge.qt_setRangeValue.connect(function () { setRangeValue(arguments[0]); });
+        QtBridge.qt_inspeciesClusterCounts.connect(function () { setInspeciesClusterCounts(arguments[0]); });
         notifyBridgeAvailable();
     });
 } catch (error) { isQtAvailable = false; }
@@ -54,7 +59,7 @@ const simianVis = () => {
     d3.select("svg").remove();
     svg = d3.select("#my_dataviz")
     svg.selectAll("*").remove();
-    var margin = { top: 40, right: 40, bottom: 80, left: 75 },
+    var margin = { top: 45, right: 50, bottom: 80, left: 75 },
         width = window.innerWidth * 0.99 - margin.left - margin.right,
         height = window.innerHeight * 0.98 - margin.top - margin.bottom;
     // append the svg object to the body of the page
@@ -656,13 +661,12 @@ const simianVis = () => {
             .attr("stroke", colorNow1)
             .style("paint-order", "stroke");
         if (barflag) {
-            const cars = [49, 94, 19, 14, 8, 92, 47, 67, 52, 23, 12, 40, 65, 4, 86, 69, 22, 75, 26, 28, 3, 54, 91, 15, 16, 77, 60, 36, 27, 97, 34, 87, 90, 11, 44, 88, 39, 100, 74, 17, 73, 89, 68, 57, 7];
-            svg.append("rect")
+           svg.append("rect")
                 .attr("x", valnow1 + ((valuenext1 - valnow1) / 4))
-                .attr("y", -cars[i] / 4)
+               .attr("y", -((inspecies1ClusterCounts[uniqueClusters1List[i]]))/10  )
                 .attr("width", (valuenext1 - valnow1) / 2)
-                .attr("height", cars[i] / 4)
-                .attr("fill", colorNow1);
+               .attr("height", ((inspecies1ClusterCounts[uniqueClusters1List[i]]) / 10 ))
+               .attr("fill", colorNow1);
         }
     }
     //////right axis
@@ -701,11 +705,10 @@ const simianVis = () => {
             .attr("stroke", colorNow2)
             .style("paint-order", "stroke");
         if (barflag) {
-            const cars = [49, 94, 19, 14, 8, 92, 47, 67, 52, 23, 12, 40, 65, 4, 86, 69, 22, 75, 26, 28, 3, 54, 91, 15, 16, 77, 60, 36, 27, 97, 34, 87, 90, 11, 44, 88, 39, 100, 74, 17, 73, 89, 68, 57, 7];
             svg.append("rect")
                 .attr("x", width)
                 .attr("y", valuenext2 + ((valnow2 - valuenext2) / 4))
-                .attr("width", cars[i] / 4)
+                .attr("width", ((inspecies2ClusterCounts[uniqueClusters2List[i]]) / 10 ))
                 .attr("height", (valnow2 - valuenext2) / 2)
                 .attr("fill", colorNow2);
         }
@@ -765,18 +768,27 @@ const simianVis = () => {
         var crossSpeciesAddToTooltip = "";
         var species1AddToTooltip = "";
         var species2AddToTooltip = "";
+        var species1AddToTooltip1 = "";
+        var species2AddToTooltip2 = "";
         if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
             crossSpeciesAddToTooltip = "<div style=\"color: " + cross_speciesClustercolors[d.cross_species_cluster1_species_1] + "; -webkit-text-stroke: 0.2 black; cursor:pointer;\"> Cross species cluster: <b>" + d.cross_species_cluster1_species_1 + "</b></div>";//labelcolorsforAxis[parseInt(d.cross_species_cluster1_species_1)];
         }
         species1AddToTooltip = "<div style=\"color: " + in_speciesClustercolors[d.cluster_1] + ";-webkit-text-stroke: 0.2 black;  cursor:pointer;\"> Cluster1 : <b>" + d.cluster_1 + "</b></div>";
         species2AddToTooltip = "<div style=\"color: " + in_speciesClustercolors[d.cluster_2] + ";-webkit-text-stroke: 0.2 black;  cursor:pointer;\"> Cluster2 : <b>" + d.cluster_2 + "</b></div>";
+        if (barflag) {
+            species1AddToTooltip1 = "<div style=\"color: " + in_speciesClustercolors[d.cluster_1] + ";-webkit-text-stroke: 0.2 black;  cursor:pointer;\"> Cell count cluster1 : <b>" + inspecies1ClusterCounts[d.cluster_1] + "</b></div>";
+            species2AddToTooltip2 = "<div style=\"color: " + in_speciesClustercolors[d.cluster_2] + ";-webkit-text-stroke: 0.2 black;  cursor:pointer;\"> Cell count cluster2 : <b>" + inspecies2ClusterCounts[d.cluster_2] + "</b></div>";
+
+        }
 
         tooltip
             .html(
                 "Distance between clusters: "
                 + "<b>" + d.dist + "</b>"
                 + species1AddToTooltip
+                + species1AddToTooltip1
                 + species2AddToTooltip
+                + species2AddToTooltip2
                 + crossSpeciesAddToTooltip
             )
             .style("position", "absolute")
@@ -1258,4 +1270,37 @@ function queueClusters(d) {
 //Resize on window dimension change
 function doALoadOfStuff() {
     if (flag) { simianVis(); }
+}
+
+
+
+function setInspeciesClusterCounts(d) {
+    const valRa = d.split("*|||*"); 
+    queueInspeciesClusterCounts(valRa[0], valRa[1]);
+}
+function queueInspeciesClusterCounts(clusterspecies1, clusterspecies2) {
+    const valRa1 = clusterspecies1.split("*||*"); 
+    const valRa2 = clusterspecies2.split("*||*"); 
+
+    for (var i = 0; i < valRa1.length; i++)
+    {
+        var temp = valRa1[i].split("*|*");
+        if (temp[0] !== "" && parseInt(temp[1]) !== undefined) {
+            inspecies1ClusterCounts[temp[0]] = parseInt(temp[1]);
+
+            totalInspeciescluster1counts = totalInspeciescluster1counts + parseInt(temp[1]);
+        }
+    }
+
+    for (var i = 0; i < valRa2.length; i++)
+    {
+        var temp = valRa2[i].split("*|*");
+        if (temp[0] !== "" && parseInt(temp[1]) !== undefined) {
+            inspecies2ClusterCounts[temp[0]] = parseInt(temp[1]);
+
+            totalInspeciescluster2counts = totalInspeciescluster2counts + parseInt(temp[1]);
+        }
+    }
+
+    simianVis();
 }
