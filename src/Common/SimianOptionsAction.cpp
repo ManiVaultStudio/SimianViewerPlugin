@@ -12,8 +12,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _species2Action(this, "Select species2 :"),
     _neighborhoodAction(this, "Select neighborhood :"),
     _distanceAction(this, "Filter distance :"),
-    _species1DatasetLinkerAction(this, "Species1 cluster dataset :"),
-    _species2DatasetLinkerAction(this, "Species2 cluster dataset :"),
+    _crossSpecies1DatasetLinkerAction(this, "Cross-species cluster dataset1 :"),
+    _crossSpecies2DatasetLinkerAction(this, "Cross-species  cluster dataset2 :"),
+    _inSpecies1DatasetLinkerAction(this, "In-species  cluster dataset1 :"),
+    _inSpecies2DatasetLinkerAction(this, "In-species  cluster dataset2 :"),
     _crossSpeciesFilterAction(this, "Filter clusters :"),
     _multiSelectClusterFilterAction(this, "Select cross-species clusters :"),
     _colorMapAction(this, "Select color map"),
@@ -38,8 +40,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _neighborhoodAction.setEnabled(false);
     _distanceAction.setEnabled(false);
     _distanceAction.setVisible(false);
-    _species1DatasetLinkerAction.setEnabled(false);
-    _species2DatasetLinkerAction.setEnabled(false);
+    _crossSpecies1DatasetLinkerAction.setEnabled(false);
+    _crossSpecies2DatasetLinkerAction.setEnabled(false);
+    _inSpecies1DatasetLinkerAction.setEnabled(false);
+    _inSpecies2DatasetLinkerAction.setEnabled(false);
     _crossSpeciesFilterAction.setEnabled(false);
     _multiSelectClusterFilterAction.setEnabled(false);
     _colorMapAction.setEnabled(false);
@@ -61,8 +65,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _neighborhoodAction.initialize(QStringList({ "glia","it_types","l5et_l56np_l6ct_l6b","lamp5_sncg_vip","sst_sst_chodl_pvalb" }), "sst_sst_chodl_pvalb", "sst_sst_chodl_pvalb");
     _distanceAction.setDefaultWidgetFlags(IntegralAction::SpinBox | IntegralAction::Slider);
     _distanceAction.initialize(0, 105, 105, 105); 
-    _species1DatasetLinkerAction.setDefaultWidgetFlags(OptionAction::ComboBox);
-    _species2DatasetLinkerAction.setDefaultWidgetFlags(OptionAction::ComboBox);
+    _crossSpecies1DatasetLinkerAction.setDefaultWidgetFlags(OptionAction::ComboBox);
+    _crossSpecies2DatasetLinkerAction.setDefaultWidgetFlags(OptionAction::ComboBox);
+    _inSpecies1DatasetLinkerAction.setDefaultWidgetFlags(OptionAction::ComboBox);
+    _inSpecies2DatasetLinkerAction.setDefaultWidgetFlags(OptionAction::ComboBox);
     _colorMapAction.getSettingsAction().getDiscreteAction().setVisible(false);
     _colorMapAction.getSettingsAction().getEditor1DAction().setVisible(false);
 
@@ -129,8 +135,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             _species2Action.setEnabled(false);
             _neighborhoodAction.setEnabled(false);
             _distanceAction.setEnabled(false);
-            _species1DatasetLinkerAction.setEnabled(false);
-            _species2DatasetLinkerAction.setEnabled(false);
+            _crossSpecies1DatasetLinkerAction.setEnabled(false);
+            _crossSpecies2DatasetLinkerAction.setEnabled(false);
+            _inSpecies1DatasetLinkerAction.setEnabled(false);
+            _inSpecies2DatasetLinkerAction.setEnabled(false);
             _crossSpeciesFilterAction.setEnabled(false);
             _multiSelectClusterFilterAction.setEnabled(false);
             _multiSelectClusterFilterAction.setSelectedOptions(QStringList());
@@ -148,8 +156,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
         if (_species2Action.getCurrentText().isValidUtf16())
         {
             _neighborhoodAction.setEnabled(true);
-            _species1DatasetLinkerAction.setEnabled(true);
-            _species2DatasetLinkerAction.setEnabled(true);
+            _crossSpecies1DatasetLinkerAction.setEnabled(true);
+            _crossSpecies2DatasetLinkerAction.setEnabled(true);
+            _inSpecies1DatasetLinkerAction.setEnabled(true);
+            _inSpecies2DatasetLinkerAction.setEnabled(true);
             _crossSpeciesFilterAction.setEnabled(true);
             _multiSelectClusterFilterAction.setEnabled(true);
             _colorMapAction.setEnabled(true);
@@ -159,8 +169,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
         else {
             _neighborhoodAction.setEnabled(false);
             _distanceAction.setEnabled(false);
-            _species2DatasetLinkerAction.setEnabled(false);
-            _species1DatasetLinkerAction.setEnabled(false);
+            _crossSpecies1DatasetLinkerAction.setEnabled(false);
+            _crossSpecies2DatasetLinkerAction.setEnabled(false);
+            _inSpecies1DatasetLinkerAction.setEnabled(false);
+            _inSpecies2DatasetLinkerAction.setEnabled(false);
             _crossSpeciesFilterAction.setEnabled(false);
             _multiSelectClusterFilterAction.setEnabled(false);
             _multiSelectClusterFilterAction.setSelectedOptions(QStringList());
@@ -190,16 +202,24 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     };
 
 
-    const auto updateSpecies1DatasetLinker = [this]() -> void
+    const auto updateCrossSpecies1DatasetLinker = [this]() -> void
     {
 
     };
 
-    const auto updateSpecies2DatasetLinker = [this]() -> void
+    const auto updateCrossSpecies2DatasetLinker = [this]() -> void
+    {
+
+    };
+    const auto updateInSpecies1DatasetLinker = [this]() -> void
     {
 
     };
 
+    const auto updateInSpecies2DatasetLinker = [this]() -> void
+    {
+
+    };
 
     connect(&_crossSpeciesFilterAction, &OptionAction::currentIndexChanged, [this, updateCrossSpeciesFilter](const std::int32_t& currentIndex) {
         updateCrossSpeciesFilter();
@@ -229,13 +249,18 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             updateDistance();
         });
 
-    connect(&_species1DatasetLinkerAction, &OptionAction::currentIndexChanged, this, [this, updateSpecies1DatasetLinker](const std::int32_t& value) {
-        updateSpecies1DatasetLinker();
+    connect(&_crossSpecies1DatasetLinkerAction, &OptionAction::currentIndexChanged, this, [this, updateCrossSpecies1DatasetLinker](const std::int32_t& value) {
+        updateCrossSpecies1DatasetLinker();
         });
-    connect(&_species2DatasetLinkerAction, &OptionAction::currentIndexChanged, this, [this, updateSpecies2DatasetLinker](const std::int32_t& value) {
-        updateSpecies2DatasetLinker();
+    connect(&_crossSpecies2DatasetLinkerAction, &OptionAction::currentIndexChanged, this, [this, updateCrossSpecies2DatasetLinker](const std::int32_t& value) {
+        updateCrossSpecies2DatasetLinker();
         });
-
+    connect(&_inSpecies1DatasetLinkerAction, &OptionAction::currentIndexChanged, this, [this, updateCrossSpecies1DatasetLinker](const std::int32_t& value) {
+        updateCrossSpecies1DatasetLinker();
+        });
+    connect(&_inSpecies2DatasetLinkerAction, &OptionAction::currentIndexChanged, this, [this, updateCrossSpecies2DatasetLinker](const std::int32_t& value) {
+        updateCrossSpecies2DatasetLinker();
+        });
     updateDatasetPickerAction();
 
 }
@@ -368,7 +393,8 @@ void SimianOptionsAction::updateData(std::string Species1, std::string Species2,
 void SimianOptionsAction::updateDatasetPickerAction()
 {
     auto datasets = _core->requestAllDataSets(QVector<hdps::DataType> {ClusterType});
-    auto filteredDatasets = datasets;
+    auto filteredCrossSpeciesDatasets = datasets;
+    auto filteredInSpeciesDatasets = datasets;
     for (auto dataset : datasets)
     {
         std::string str1 = dataset->getGuiName().toStdString();
@@ -377,46 +403,39 @@ void SimianOptionsAction::updateDatasetPickerAction()
         {
         }
         else {
-            filteredDatasets.removeOne(dataset);
+            filteredCrossSpeciesDatasets.removeOne(dataset);
+            filteredInSpeciesDatasets.removeOne(dataset);
         }
     }
 
-    datasets = filteredDatasets;
+    datasets = filteredCrossSpeciesDatasets;
     for (auto dataset : datasets) 
     {
         std::string str3 = dataset->getGuiName().toStdString();
         std::string str4 = "cross";
 
-        if (getCrossSpeciesFilterAction().getCurrentText() == "cross-species clusters")
-        {
             if (strstr(str3.c_str(), str4.c_str()))
             {
-
+                filteredInSpeciesDatasets.removeOne(dataset);
             }
             else
             {
-                filteredDatasets.removeOne(dataset);
+                filteredCrossSpeciesDatasets.removeOne(dataset);
             }
-        }
-        else 
-        {
-            if (strstr(str3.c_str(), str4.c_str()))
-            {
-                filteredDatasets.removeOne(dataset);
-            }
-            else 
-            {
-
-            }
-        }
     }
-    _species1DatasetLinkerAction.setDatasets(filteredDatasets);
-    _species1DatasetLinkerAction.setPlaceHolderString("Species1 clusters");
-    _species2DatasetLinkerAction.setDatasets(filteredDatasets);
-    _species2DatasetLinkerAction.setPlaceHolderString("Species2 clusters");
+
+    _crossSpecies1DatasetLinkerAction.setDatasets(filteredCrossSpeciesDatasets);
+    _crossSpecies1DatasetLinkerAction.setPlaceHolderString("Species1 cross-species clusters");
+    _crossSpecies2DatasetLinkerAction.setDatasets(filteredCrossSpeciesDatasets);
+    _crossSpecies2DatasetLinkerAction.setPlaceHolderString("Species2 cross-species clusters");
+    _inSpecies1DatasetLinkerAction.setDatasets(filteredInSpeciesDatasets);
+    _inSpecies1DatasetLinkerAction.setPlaceHolderString("Species1 in-species clusters");
+    _inSpecies2DatasetLinkerAction.setDatasets(filteredInSpeciesDatasets);
+    _inSpecies2DatasetLinkerAction.setPlaceHolderString("Species2 in-species clusters");
 
 
 }
+
 
 SimianOptionsAction::SpeciesAction::Widget::Widget(QWidget* parent, SpeciesAction* speciesAction) :
     WidgetActionWidget(parent, speciesAction)
@@ -431,21 +450,31 @@ SimianOptionsAction::SpeciesAction::Widget::Widget(QWidget* parent, SpeciesActio
     selectionSpecies2Widget->setFixedWidth(150);
     selectionSpecies2Widget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
-    auto selectionSpecies1DatasetLinkerWidget = simianOptionsAction._species1DatasetLinkerAction.createWidget(this);
-    selectionSpecies1DatasetLinkerWidget->setFixedWidth(300);
-    selectionSpecies1DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+    auto selectionCrossSpecies1DatasetLinkerWidget = simianOptionsAction._crossSpecies1DatasetLinkerAction.createWidget(this);
+    selectionCrossSpecies1DatasetLinkerWidget->setFixedWidth(300);
+    selectionCrossSpecies1DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
-    auto selectionSpecies2DatasetLinkerWidget = simianOptionsAction._species2DatasetLinkerAction.createWidget(this);
-    selectionSpecies2DatasetLinkerWidget->setFixedWidth(300);
-    selectionSpecies2DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+    auto selectionCrossSpecies2DatasetLinkerWidget = simianOptionsAction._crossSpecies2DatasetLinkerAction.createWidget(this);
+    selectionCrossSpecies2DatasetLinkerWidget->setFixedWidth(300);
+    selectionCrossSpecies2DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+
+    auto selectionInSpecies1DatasetLinkerWidget = simianOptionsAction._inSpecies1DatasetLinkerAction.createWidget(this);
+    selectionInSpecies1DatasetLinkerWidget->setFixedWidth(300);
+    selectionInSpecies1DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+
+    auto selectionInSpecies2DatasetLinkerWidget = simianOptionsAction._inSpecies2DatasetLinkerAction.createWidget(this);
+    selectionInSpecies2DatasetLinkerWidget->setFixedWidth(300);
+    selectionInSpecies2DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
     auto speciesSelectionLayout = new QFormLayout();
 
     speciesSelectionLayout->setMargin(2);
     speciesSelectionLayout->addRow(new QLabel("Species1: *"), selectionSpecies1Widget);
     speciesSelectionLayout->addRow(new QLabel("Species2: *"), selectionSpecies2Widget);
-    speciesSelectionLayout->addRow(new QLabel("Species1 linker:"), selectionSpecies1DatasetLinkerWidget);
-    speciesSelectionLayout->addRow(new QLabel("Species2 linker:"), selectionSpecies2DatasetLinkerWidget);
+    speciesSelectionLayout->addRow(new QLabel("Cross-Species1 linker:"), selectionCrossSpecies1DatasetLinkerWidget);
+    speciesSelectionLayout->addRow(new QLabel("Cross-Species2 linker:"), selectionCrossSpecies2DatasetLinkerWidget);
+    speciesSelectionLayout->addRow(new QLabel("In-Species1 linker:"), selectionInSpecies1DatasetLinkerWidget);
+    speciesSelectionLayout->addRow(new QLabel("In-Species2 linker:"), selectionInSpecies2DatasetLinkerWidget);
     speciesSelectionLayout->setObjectName("Species Options");
     speciesSelectionLayout->setSpacing(2);
     speciesSelectionLayout->setVerticalSpacing(2);
