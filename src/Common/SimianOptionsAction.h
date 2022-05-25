@@ -163,8 +163,10 @@ public: // Action getters
     OptionAction& getSpecies2Action() { return _species2Action; }
     OptionAction& getNeighborhoodAction() { return _neighborhoodAction; }
     IntegralAction& getDistanceAction() { return _distanceAction; };
-    DatasetPickerAction& getSpecies1DatasetLinkerAction() { return _species1DatasetLinkerAction; };
-    DatasetPickerAction& getSpecies2DatasetLinkerAction() { return _species2DatasetLinkerAction; };
+    DatasetPickerAction& getCrossSpecies1DatasetLinkerAction() { return _crossSpecies1DatasetLinkerAction; };
+    DatasetPickerAction& getCrossSpecies2DatasetLinkerAction() { return _crossSpecies2DatasetLinkerAction; };
+    DatasetPickerAction& getInSpecies1DatasetLinkerAction() { return _inSpecies1DatasetLinkerAction; };
+    DatasetPickerAction& getInSpecies2DatasetLinkerAction() { return _inSpecies2DatasetLinkerAction; };
     OptionAction& getCrossSpeciesFilterAction() { return _crossSpeciesFilterAction; }
     SpeciesAction& getSpeciesAction() { return _speciesAction; }
     ClusterAction& getClusterAction() { return _clusterAction; }
@@ -177,8 +179,10 @@ protected:
     OptionAction                 _species2Action;
     OptionAction                 _neighborhoodAction;
     IntegralAction               _distanceAction;
-    DatasetPickerAction           _species1DatasetLinkerAction;
-    DatasetPickerAction          _species2DatasetLinkerAction;
+    DatasetPickerAction           _crossSpecies1DatasetLinkerAction;
+    DatasetPickerAction          _crossSpecies2DatasetLinkerAction;
+    DatasetPickerAction           _inSpecies1DatasetLinkerAction;
+    DatasetPickerAction          _inSpecies2DatasetLinkerAction;
     OptionAction                 _crossSpeciesFilterAction;
     hdps::CoreInterface*         _core;
     FetchMetaData*                _metaData;
