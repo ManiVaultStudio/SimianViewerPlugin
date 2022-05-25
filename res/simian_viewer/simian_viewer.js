@@ -827,6 +827,9 @@ const simianVis = () => {
     };
     var mouseclick = function (d) {
         d3.select("#marker1").remove();
+        d3.select("#marker2").remove();
+        if (barflag)
+        {
         svg.append("line")
             .attr("id", "marker1")
             .attr("x1", 0)
@@ -837,7 +840,7 @@ const simianVis = () => {
             .style("stroke-dasharray", ("3, 3"))
             .style("stroke-opacity", 0.9)
             .attr("stroke", in_speciesClustercolors[d.cluster_2])
-        d3.select("#marker2").remove();
+
         svg.append("line")
             .attr("id", "marker2")
             .attr("x1", d3.mouse(this)[0])
@@ -849,7 +852,31 @@ const simianVis = () => {
             .style("stroke-opacity", 0.9)
             .attr("stroke", in_speciesClustercolors[d.cluster_1])
 
+        }
+        else
+        {
+            svg.append("line")
+                .attr("id", "marker1")
+                .attr("x1", 0)
+                .attr("y1", d3.mouse(this)[1])
+                .attr("x2", d3.mouse(this)[0])
+                .attr("y2", d3.mouse(this)[1])
+                .attr("stroke-width", 2)
+                .style("stroke-dasharray", ("3, 3"))
+                .style("stroke-opacity", 0.9)
+                .attr("stroke", in_speciesClustercolors[d.cluster_2])
 
+            svg.append("line")
+                .attr("id", "marker2")
+                .attr("x1", d3.mouse(this)[0])
+                .attr("y1", d3.mouse(this)[1])
+                .attr("x2", d3.mouse(this)[0])
+                .attr("y2", height)
+                .attr("stroke-width", 2)
+                .style("stroke-dasharray", ("3, 3"))
+                .style("stroke-opacity", 0.9)
+                .attr("stroke", in_speciesClustercolors[d.cluster_1])
+        }
 
 
         let selectionIDs = [];
