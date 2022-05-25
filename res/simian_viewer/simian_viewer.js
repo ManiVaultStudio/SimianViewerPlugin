@@ -15,7 +15,7 @@ var crossSpeciesFilterspecies2Cluster = [];
 var svg;
 var qtColor = "Black to white";
 var colorMirror = false;
-
+var barflag = true;
 //onresize adjust chart dimensions
 window.onresize = doALoadOfStuff;
 
@@ -27,6 +27,13 @@ const mapDataforBorderGorilla = { 'Astro_1': 'Astro_1', 'Astro_2': 'Astro_1', 'A
 const mapDataforBorderHuman = { 'Astro_1': 'Astro_1', 'Astro_2': 'Astro_1', 'Astro_3': 'Astro_1', 'Astro_4': 'Astro_1', 'Astro_5': 'Astro_1', 'Chandelier_1': 'Chandelier_1', 'Chandelier_2': 'Chandelier_1', 'Endo_1': 'Endo_1', 'L2/3 IT_1': 'L2/3 IT_1', 'L2/3 IT_10': 'L2/3 IT_3', 'L2/3 IT_11': 'L2/3 IT_1', 'L2/3 IT_12': 'L2/3 IT_1', 'L2/3 IT_13': 'L2/3 IT_1', 'L2/3 IT_2': 'L2/3 IT_1', 'L2/3 IT_3': 'L2/3 IT_1', 'L2/3 IT_4': 'L2/3 IT_1', 'L2/3 IT_5': 'L2/3 IT_1', 'L2/3 IT_6': 'L2/3 IT_3', 'L2/3 IT_7': 'L2/3 IT_3', 'L2/3 IT_8': 'L2/3 IT_3', 'L2/3 IT_9': 'L2/3 IT_3', 'L4 IT_1': 'L4 IT_2', 'L4 IT_2': 'L4 IT_1', 'L4 IT_3': 'L4 IT_1', 'L4 IT_4': 'L2/3 IT_2', 'L5/6 NP_1': 'L5/6 NP_1', 'L5/6 NP_2': 'L5/6 NP_2', 'L5/6 NP_3': 'L5/6 NP_1', 'L5/6 NP_4': 'L5/6 NP_1', 'L5/6 NP_5': 'L5/6 NP_1', 'L5/6 NP_6': 'L5/6 NP_1', 'L5 ET_1': 'L5 ET_1', 'L5 ET_2': 'L5 ET_2', 'L5 IT_1': 'L5 IT_1', 'L5 IT_2': 'L5 IT_2', 'L5 IT_3': 'L5 IT_1', 'L5 IT_4': 'L5 IT_2', 'L5 IT_5': 'L5 IT_2', 'L5 IT_6': 'L5 IT_2', 'L5 IT_7': 'L5 IT_2', 'L6 CT_1': 'L6 CT_1', 'L6 CT_2': 'L6 CT_1', 'L6 CT_3': 'L6 CT_2', 'L6 CT_4': 'L6 CT_2', 'L6 IT Car3_1': 'L6 IT Car3_1', 'L6 IT Car3_2': 'L6 IT Car3_2', 'L6 IT Car3_3': 'L6 IT Car3_2', 'L6 IT_1': 'L6 IT_1', 'L6 IT_2': 'L6 IT_1', 'L6b_1': 'L6b_3', 'L6b_2': 'L6b_1', 'L6b_3': 'L6b_2', 'L6b_4': 'L6b_2', 'L6b_5': 'L6b_2', 'L6b_6': 'L6b_2', 'Lamp5_1': 'Lamp5_1', 'Lamp5_2': 'Lamp5_1', 'Lamp5_3': 'Lamp5_1', 'Lamp5_4': 'Lamp5_2', 'Lamp5_5': 'Lamp5_2', 'Lamp5_6': 'Lamp5_2', 'Lamp5_Lhx6_1': 'Lamp5_Lhx6_1', 'Micro-PVM_1': 'Micro-PVM_1', 'Micro-PVM_2': 'Micro-PVM_1', 'Micro-PVM_3': 'Micro-PVM_1', 'OPC_1': 'OPC_1', 'OPC_2': 'OPC_2', 'Oligo_1': 'Oligo_1', 'Oligo_2': 'Oligo_1', 'Oligo_3': 'Oligo_1', 'Oligo_4': 'Oligo_1', 'Pax6_1': 'Pax6_1', 'Pax6_2': 'Pax6_1', 'Pax6_3': 'Pax6_2', 'Pax6_4': 'Sncg_3', 'Pvalb_1': 'Pvalb_4', 'Pvalb_10': 'Pvalb_3', 'Pvalb_11': 'Pvalb_3', 'Pvalb_12': 'Pvalb_3', 'Pvalb_13': 'Pvalb_3', 'Pvalb_14': 'Pvalb_4', 'Pvalb_15': 'Pvalb_4', 'Pvalb_2': 'Pvalb_4', 'Pvalb_3': 'Pvalb_4', 'Pvalb_4': 'Pvalb_4', 'Pvalb_5': 'Pvalb_4', 'Pvalb_6': 'Pvalb_4', 'Pvalb_7': 'Pvalb_1', 'Pvalb_8': 'Sst_5', 'Pvalb_9': 'Pvalb_2', 'Sncg_1': 'Vip_8', 'Sncg_2': 'Vip_8', 'Sncg_3': 'Sncg_1', 'Sncg_4': 'Sncg_2', 'Sncg_5': 'Sncg_2', 'Sncg_6': 'Sncg_3', 'Sncg_7': 'Sncg_2', 'Sncg_8': 'Vip_8', 'Sst Chodl_1': 'Sst Chodl_1', 'Sst Chodl_2': 'Sst_6', 'Sst_1': 'Sst_1', 'Sst_10': 'Sst_3', 'Sst_11': 'Sst_6', 'Sst_12': 'Sst_2', 'Sst_13': 'Sst_3', 'Sst_14': 'Sst_3', 'Sst_15': 'Sst_2', 'Sst_16': 'Sst_4', 'Sst_17': 'Sst_4', 'Sst_18': 'Sst_3', 'Sst_19': 'Sst_4', 'Sst_2': 'Sst_5', 'Sst_20': 'Sst_5', 'Sst_21': 'Sst_5', 'Sst_22': 'Sst_6', 'Sst_23': 'Sst_7', 'Sst_24': 'Sst_7', 'Sst_25': 'Sst_7', 'Sst_26': 'Sst_7', 'Sst_3': 'Sst_5', 'Sst_4': 'Sst_8', 'Sst_5': 'Sst_8', 'Sst_6': 'Sst_8', 'Sst_7': 'Sst_8', 'Sst_8': 'Sst_3', 'Sst_9': 'Sst_9', 'VLMC_1': 'VLMC_1', 'VLMC_2': 'VLMC_1', 'Vip_1': 'Vip_1', 'Vip_10': 'Vip_7', 'Vip_11': 'Vip_1', 'Vip_12': 'Vip_2', 'Vip_13': 'Vip_1', 'Vip_14': 'Vip_8', 'Vip_15': 'Vip_8', 'Vip_16': 'Vip_8', 'Vip_17': 'Vip_2', 'Vip_18': 'Vip_2', 'Vip_19': 'Vip_2', 'Vip_2': 'Vip_3', 'Vip_20': 'Vip_2', 'Vip_21': 'Vip_4', 'Vip_22': 'Vip_4', 'Vip_23': 'Vip_3', 'Vip_3': 'Vip_3', 'Vip_4': 'Vip_5', 'Vip_5': 'Vip_6', 'Vip_6': 'Vip_7', 'Vip_7': 'Vip_5', 'Vip_8': 'Vip_7', 'Vip_9': 'Vip_7' };
 const mapDataforBorderMarmoset = { 'Astro_1': 'Astro_1', 'Astro_2': 'Astro_1', 'Astro_3': 'Astro_1', 'Astro_4': 'Astro_1', 'Chandelier_1': 'Chandelier_1', 'Endo_1': 'Endo_1', 'Endo_2': 'Endo_1', 'Endo_3': 'Endo_1', 'L2/3 IT_1': 'L2/3 IT_3', 'L2/3 IT_2': 'L2/3 IT_1', 'L2/3 IT_3': 'L2/3 IT_1', 'L2/3 IT_4': 'L2/3 IT_1', 'L4 IT_1': 'L2/3 IT_2', 'L4 IT_2': 'L2/3 IT_2', 'L4 IT_3': 'L2/3 IT_1', 'L4 IT_4': 'L4 IT_2', 'L4 IT_5': 'L2/3 IT_2', 'L4 IT_6': 'L4 IT_1', 'L5/6 NP_1': 'L5/6 NP_1', 'L5/6 NP_2': 'L5/6 NP_2', 'L5 ET_1': 'L5 ET_1', 'L5 ET_2': 'L5 ET_2', 'L5 IT_1': 'L5 IT_2', 'L5 IT_2': 'L5 IT_2', 'L5 IT_3': 'L5 IT_1', 'L6 CT_1': 'L6 CT_2', 'L6 CT_2': 'L6 CT_1', 'L6 CT_3': 'L6 CT_2', 'L6 IT Car3_1': 'L6 IT Car3_2', 'L6 IT Car3_2': 'L6 IT Car3_2', 'L6 IT Car3_3': 'L6 IT Car3_1', 'L6 IT_1': 'L6 IT_1', 'L6 IT_2': 'L6 IT_1', 'L6 IT_3': 'L6 IT_1', 'L6b_1': 'L6b_2', 'L6b_2': 'L6b_3', 'L6b_3': 'L6b_1', 'Lamp5_1': 'Lamp5_2', 'Lamp5_2': 'Lamp5_1', 'Lamp5_Lhx6_1': 'Lamp5_Lhx6_1', 'Micro-PVM_1': 'Micro-PVM_1', 'Micro-PVM_2': 'Micro-PVM_1', 'Micro-PVM_3': 'Micro-PVM_1', 'Micro-PVM_4': 'Micro-PVM_1', 'OPC_1': 'OPC_1', 'OPC_2': 'OPC_2', 'OPC_3': 'OPC_2', 'OPC_4': 'OPC_2', 'Oligo_1': 'Oligo_1', 'Oligo_2': 'Oligo_1', 'Pax6_1': 'Pax6_1', 'Pax6_2': 'Pax6_1', 'Pax6_3': 'Sncg_3', 'Pvalb_1': 'Pvalb_3', 'Pvalb_2': 'Pvalb_4', 'Pvalb_3': 'Pvalb_4', 'Pvalb_4': 'Pvalb_4', 'Pvalb_5': 'Pvalb_1', 'Pvalb_6': 'Pvalb_2', 'Sncg_1': 'Pax6_2', 'Sncg_2': 'Vip_8', 'Sncg_3': 'Sncg_2', 'Sncg_4': 'Sncg_3', 'Sncg_5': 'Pax6_2', 'Sncg_6': 'Sncg_3', 'Sncg_7': 'Sncg_1', 'Sncg_8': 'Sncg_1', 'Sncg_9': 'Vip_8', 'Sst Chodl_1': 'Sst Chodl_1', 'Sst Chodl_2': 'Sst_6', 'Sst_1': 'Sst_7', 'Sst_10': 'Sst_8', 'Sst_11': 'Sst_8', 'Sst_12': 'Sst_7', 'Sst_13': 'Sst_6', 'Sst_14': 'Sst_5', 'Sst_15': 'Sst_7', 'Sst_16': 'Sst_5', 'Sst_2': 'Sst_4', 'Sst_3': 'Sst_9', 'Sst_4': 'Sst_3', 'Sst_5': 'Sst_9', 'Sst_6': 'Sst_3', 'Sst_7': 'Sst_1', 'Sst_8': 'Sst_2', 'Sst_9': 'Sst_2', 'VLMC_1': 'VLMC_1', 'VLMC_2': 'VLMC_1', 'VLMC_3': 'VLMC_1', 'VLMC_4': 'VLMC_1', 'Vip_1': 'Vip_6', 'Vip_10': 'Vip_3', 'Vip_11': 'Vip_7', 'Vip_12': 'Vip_7', 'Vip_13': 'Vip_1', 'Vip_2': 'Vip_4', 'Vip_3': 'Vip_5', 'Vip_4': 'Vip_8', 'Vip_5': 'Vip_8', 'Vip_6': 'Vip_2', 'Vip_7': 'Vip_2', 'Vip_8': 'Vip_2', 'Vip_9': 'Vip_2' };
 const mapDataforBorderRhesus = { 'Astro_1': 'Astro_1', 'Astro_2': 'Astro_1', 'Astro_3': 'Astro_1', 'Chandelier_1': 'Chandelier_1', 'Chandelier_2': 'Chandelier_1', 'Endo_1': 'Endo_1', 'L2/3 IT_1': 'L2/3 IT_1', 'L2/3 IT_10': 'L2/3 IT_3', 'L2/3 IT_11': 'L2/3 IT_1', 'L2/3 IT_12': 'L2/3 IT_1', 'L2/3 IT_13': 'L2/3 IT_1', 'L2/3 IT_14': 'L2/3 IT_1', 'L2/3 IT_15': 'L2/3 IT_1', 'L2/3 IT_2': 'L2/3 IT_1', 'L2/3 IT_3': 'L2/3 IT_3', 'L2/3 IT_4': 'L2/3 IT_3', 'L2/3 IT_5': 'L2/3 IT_3', 'L2/3 IT_6': 'L2/3 IT_3', 'L2/3 IT_7': 'L2/3 IT_1', 'L2/3 IT_8': 'L2/3 IT_1', 'L2/3 IT_9': 'L2/3 IT_1', 'L4 IT_1': 'L4 IT_1', 'L4 IT_2': 'L4 IT_2', 'L4 IT_3': 'L2/3 IT_2', 'L5/6 NP_1': 'L5/6 NP_2', 'L5/6 NP_2': 'L5/6 NP_1', 'L5/6 NP_3': 'L5/6 NP_1', 'L5/6 NP_4': 'L5/6 NP_1', 'L5/6 NP_5': 'L5/6 NP_1', 'L5/6 NP_6': 'L5/6 NP_1', 'L5/6 NP_7': 'L5/6 NP_1', 'L5/6 NP_8': 'L5/6 NP_1', 'L5 ET_1': 'L5 ET_2', 'L5 ET_2': 'L5 ET_1', 'L5 IT_1': 'L5 IT_2', 'L5 IT_2': 'L5 IT_1', 'L5 IT_3': 'L5 IT_2', 'L5 IT_4': 'L5 IT_2', 'L6 CT_1': 'L6 CT_2', 'L6 CT_2': 'L6 CT_1', 'L6 CT_3': 'L6 CT_1', 'L6 CT_4': 'L6 CT_1', 'L6 IT Car3_1': 'L6 IT Car3_1', 'L6 IT Car3_2': 'L6 IT Car3_2', 'L6 IT_1': 'L6 IT_1', 'L6 IT_2': 'L6 IT_1', 'L6 IT_3': 'L6 IT_1', 'L6 IT_4': 'L6 IT_1', 'L6b_1': 'L6b_2', 'L6b_2': 'L6b_2', 'L6b_3': 'L6b_1', 'L6b_4': 'L6b_3', 'Lamp5_1': 'Lamp5_2', 'Lamp5_2': 'Lamp5_2', 'Lamp5_3': 'Lamp5_1', 'Lamp5_4': 'Lamp5_1', 'Lamp5_Lhx6_1': 'Lamp5_Lhx6_1', 'Micro-PVM_1': 'Micro-PVM_1', 'Micro-PVM_2': 'Micro-PVM_1', 'Micro-PVM_3': 'Micro-PVM_1', 'OPC_1': 'OPC_1', 'OPC_2': 'OPC_2', 'OPC_3': 'OPC_2', 'Oligo_1': 'Oligo_1', 'Oligo_2': 'Oligo_1', 'Pax6_1': 'Pax6_1', 'Pax6_2': 'Pax6_1', 'Pax6_3': 'Pax6_2', 'Pax6_4': 'Sncg_3', 'Pvalb_1': 'Pvalb_3', 'Pvalb_10': 'Pvalb_4', 'Pvalb_2': 'Pvalb_4', 'Pvalb_3': 'Pvalb_2', 'Pvalb_4': 'Pvalb_1', 'Pvalb_5': 'Pvalb_1', 'Pvalb_6': 'Pvalb_4', 'Pvalb_7': 'Pvalb_4', 'Pvalb_8': 'Pvalb_4', 'Pvalb_9': 'Pvalb_4', 'Sncg_1': 'Sncg_2', 'Sncg_2': 'Sncg_2', 'Sncg_3': 'Sncg_2', 'Sncg_4': 'Sncg_2', 'Sncg_5': 'Vip_8', 'Sncg_6': 'Vip_8', 'Sncg_7': 'Sncg_1', 'Sst Chodl_1': 'Sst Chodl_1', 'Sst Chodl_2': 'Sst_6', 'Sst_1': 'Sst_1', 'Sst_10': 'Sst_7', 'Sst_11': 'Sst_6', 'Sst_12': 'Sst_8', 'Sst_13': 'Sst_5', 'Sst_14': 'Sst_2', 'Sst_2': 'Sst_4', 'Sst_3': 'Sst_4', 'Sst_4': 'Sst_9', 'Sst_5': 'Sst_9', 'Sst_6': 'Sst_3', 'Sst_7': 'Sst_3', 'Sst_8': 'Sst_7', 'Sst_9': 'Sst_7', 'VLMC_1': 'VLMC_1', 'VLMC_2': 'VLMC_1', 'Vip_1': 'Vip_8', 'Vip_10': 'Vip_5', 'Vip_11': 'Vip_6', 'Vip_12': 'Vip_7', 'Vip_13': 'Vip_7', 'Vip_14': 'Vip_7', 'Vip_15': 'Vip_7', 'Vip_2': 'Vip_7', 'Vip_3': 'Vip_2', 'Vip_4': 'Vip_1', 'Vip_5': 'Vip_3', 'Vip_6': 'Vip_3', 'Vip_7': 'Vip_4', 'Vip_8': 'Vip_8', 'Vip_9': 'Vip_8' };
+
+
+const mapDataBarChimp = {};
+const mapDataBarHuman = {};
+const mapDataBarGorilla = {};
+const mapDataBarMarmoset = {};
+const mapDataBarRhesus = {};
 
 //Qt Connections
 try {
@@ -46,9 +53,9 @@ const simianVis = () => {
     d3.select("svg").remove();
     svg = d3.select("#my_dataviz")
     svg.selectAll("*").remove();
-    var margin = { top: 5, right: 5, bottom: 80, left: 75 },
+    var margin = { top: 40, right: 40, bottom: 80, left: 75 },
         width = window.innerWidth * 0.99 - margin.left - margin.right,
-        height = window.innerHeight * 0.97 - margin.top - margin.bottom;
+        height = window.innerHeight * 0.98 - margin.top - margin.bottom;
     // append the svg object to the body of the page
     svg = d3
         .select("#my_dataviz")
@@ -647,7 +654,15 @@ const simianVis = () => {
             .attr("stroke-width", 2)
             .attr("stroke", colorNow1)
             .style("paint-order", "stroke");
-
+        if (barflag) {
+            const cars = [49, 94, 19, 14, 8, 92, 47, 67, 52, 23, 12, 40, 65, 4, 86, 69, 22, 75, 26, 28, 3, 54, 91, 15, 16, 77, 60, 36, 27, 97, 34, 87, 90, 11, 44, 88, 39, 100, 74, 17, 73, 89, 68, 57, 7];
+            svg.append("rect")
+                .attr("x", valnow1 + ((valuenext1 - valnow1) / 4))
+                .attr("y", -cars[i] / 4)
+                .attr("width", (valuenext1 - valnow1) / 2)
+                .attr("height", cars[i] / 4)
+                .attr("fill", colorNow1);
+        }
     }
     //////right axis
     var valnow2;
@@ -684,6 +699,15 @@ const simianVis = () => {
             .attr("stroke-width", 2)
             .attr("stroke", colorNow2)
             .style("paint-order", "stroke");
+        if (barflag) {
+            const cars = [49, 94, 19, 14, 8, 92, 47, 67, 52, 23, 12, 40, 65, 4, 86, 69, 22, 75, 26, 28, 3, 54, 91, 15, 16, 77, 60, 36, 27, 97, 34, 87, 90, 11, 44, 88, 39, 100, 74, 17, 73, 89, 68, 57, 7];
+            svg.append("rect")
+                .attr("x", width)
+                .attr("y", valuenext2 + ((valnow2 - valuenext2) / 4))
+                .attr("width", cars[i] / 4)
+                .attr("height", (valnow2 - valuenext2) / 2)
+                .attr("fill", colorNow2);
+        }
 
     }
 
@@ -730,9 +754,13 @@ const simianVis = () => {
             .style("paint-order", "stroke")
             .style("opacity", 1)
             .style("cursor", "pointer");
+
+
     };
     var mousemove = function (d) {
         svg.select("#axisSelectionpolygon").remove();
+        d3.select("#marker2").remove();
+        d3.select("#marker1").remove();
         var crossSpeciesAddToTooltip = "";
         var species1AddToTooltip = "";
         var species2AddToTooltip = "";
@@ -785,6 +813,31 @@ const simianVis = () => {
             });
     };
     var mouseclick = function (d) {
+        d3.select("#marker1").remove();
+        svg.append("line")
+            .attr("id", "marker1")
+            .attr("x1", 0)
+            .attr("y1", d3.mouse(this)[1])
+            .attr("x2", width)
+            .attr("y2", d3.mouse(this)[1])
+            .attr("stroke-width", 2)
+            .style("stroke-dasharray", ("3, 3"))
+            .style("stroke-opacity", 0.9)
+            .attr("stroke", in_speciesClustercolors[d.cluster_2])
+        d3.select("#marker2").remove();
+        svg.append("line")
+            .attr("id", "marker2")
+            .attr("x1", d3.mouse(this)[0])
+            .attr("y1", 0)
+            .attr("x2", d3.mouse(this)[0])
+            .attr("y2", height)
+            .attr("stroke-width", 2)
+            .style("stroke-dasharray", ("3, 3"))
+            .style("stroke-opacity", 0.9)
+            .attr("stroke", in_speciesClustercolors[d.cluster_1])
+
+
+
 
         let selectionIDs = [];
         selectionIDs.push(d.cross_species_cluster1_species_1);
