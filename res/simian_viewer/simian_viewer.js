@@ -15,7 +15,7 @@ var crossSpeciesFilterspecies2Cluster = [];
 var svg;
 var qtColor = "Black to white";
 var colorMirror = false;
-var barflag = true;
+var barflag = false;
 //onresize adjust chart dimensions
 window.onresize = doALoadOfStuff;
 
@@ -42,6 +42,7 @@ try {
         QtBridge.qt_setData.connect(function () { setData(arguments[0]); });
         QtBridge.qt_setClusters.connect(function () { setClusters(arguments[0]); });
         QtBridge.qt_setColor.connect(function () { setColor(arguments[0]); });
+        QtBridge.qt_histChart.connect(function () { histChart(arguments[0]); });
         QtBridge.qt_setRangeValue.connect(function () { setRangeValue(arguments[0]); });
         notifyBridgeAvailable();
     });
@@ -1207,6 +1208,21 @@ function queueColor(colorName, mirrorValue) {
     }
     else {
         colorMirror = true;
+    }
+
+    simianVis();
+}
+
+function histChart(d) {
+
+    queuehistChart(d);
+}
+function queuehistChart(valD) {
+    if (valD == "F") {
+        barflag = false;
+    }
+    else {
+        barflag = true;
     }
 
     simianVis();

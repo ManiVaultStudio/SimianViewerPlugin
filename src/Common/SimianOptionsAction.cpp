@@ -209,6 +209,15 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     
         const auto updateHistBar = [this]() -> void
     {
+            if (_histBarAction.getValue() == 0)
+            {
+                _simianViewerPlugin.getWidget()->histChart(QString::fromStdString("F"));
+            }
+            else
+            {
+                _simianViewerPlugin.getWidget()->histChart(QString::fromStdString("T"));
+            }
+
 
     };
 
