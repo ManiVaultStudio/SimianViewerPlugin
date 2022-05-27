@@ -59,9 +59,21 @@ const simianVis = () => {
     d3.select("svg").remove();
     svg = d3.select("#my_dataviz")
     svg.selectAll("*").remove();
-    var margin = { top: 45, right: 50, bottom: 80, left: 75 },
-        width = window.innerWidth * 0.99 - margin.left - margin.right,
-        height = window.innerHeight * 0.98 - margin.top - margin.bottom;
+    var margin;
+    if (barflag) {
+        margin = { top: 50, right: 50, bottom: 80, left: 75 },
+            width = window.innerWidth * 0.99 - margin.left - margin.right,
+            height = window.innerHeight * 0.98 - margin.top - margin.bottom;
+
+    }
+    else {
+            margin = { top: 5, right: 5, bottom: 80, left: 75 },
+            width = window.innerWidth * 0.99 - margin.left - margin.right,
+            height = window.innerHeight * 0.97 - margin.top - margin.bottom;
+    }
+     
+
+
     // append the svg object to the body of the page
     svg = d3
         .select("#my_dataviz")
@@ -663,9 +675,9 @@ const simianVis = () => {
         if (barflag) {
            svg.append("rect")
                 .attr("x", valnow1 + ((valuenext1 - valnow1) / 4))
-               .attr("y", -((inspecies1ClusterCounts[uniqueClusters1List[i]]))/10  )
+               .attr("y", -((inspecies1ClusterCounts[uniqueClusters1List[i]]))/100  )
                 .attr("width", (valuenext1 - valnow1) / 2)
-               .attr("height", ((inspecies1ClusterCounts[uniqueClusters1List[i]]) / 10 ))
+               .attr("height", ((inspecies1ClusterCounts[uniqueClusters1List[i]]) / 100 ))
                .attr("fill", colorNow1);
         }
     }
@@ -708,7 +720,7 @@ const simianVis = () => {
             svg.append("rect")
                 .attr("x", width)
                 .attr("y", valuenext2 + ((valnow2 - valuenext2) / 4))
-                .attr("width", ((inspecies2ClusterCounts[uniqueClusters2List[i]]) / 10 ))
+                .attr("width", ((inspecies2ClusterCounts[uniqueClusters2List[i]]) / 100 ))
                 .attr("height", (valnow2 - valuenext2) / 2)
                 .attr("fill", colorNow2);
         }
@@ -861,7 +873,9 @@ const simianVis = () => {
                 .attr("cx", d3.mouse(this)[0])
                 .attr("cy", d3.mouse(this)[1])
                 .attr("r", 5)
-                .style("fill",  myColor(d.dist));
+                .style("fill", myColor(d.dist))
+                .style("stroke", "black")
+                .attr("stroke-width", 1);
 
         }
         else
@@ -895,7 +909,9 @@ const simianVis = () => {
                 .attr("cx", d3.mouse(this)[0])
                 .attr("cy", d3.mouse(this)[1])
                 .attr("r", 5)
-                .style("fill", myColor(d.dist));
+                .style("fill", myColor(d.dist))
+                .style("stroke", "black")
+                .attr("stroke-width", 1);
         }
 
 
