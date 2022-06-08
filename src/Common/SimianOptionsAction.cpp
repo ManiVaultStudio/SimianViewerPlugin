@@ -673,19 +673,19 @@ SimianOptionsAction::DistanceNeighborhoodAction::Widget::Widget(QWidget* parent,
 
     auto selectionNeighborhoodWidget = simianOptionsAction._neighborhoodAction.createWidget(this);
     selectionNeighborhoodWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-
-    auto selectionDistanceWidget = simianOptionsAction._distanceAction.createWidget(this);
-    selectionDistanceWidget->setFixedWidth(200);
-    selectionDistanceWidget->findChild<QSlider*>("Slider");
-    selectionDistanceWidget->findChild<QSpinBox*>("SpinBox");
+    selectionNeighborhoodWidget->setMaximumWidth(150);
+    //auto selectionDistanceWidget = simianOptionsAction._distanceAction.createWidget(this);
+    //selectionDistanceWidget->setFixedWidth(200);
+    //selectionDistanceWidget->findChild<QSlider*>("Slider");
+    //selectionDistanceWidget->findChild<QSpinBox*>("SpinBox");
     auto filterOptionLayout = new QFormLayout();
-    filterOptionLayout->setMargin(2);
+    filterOptionLayout->setMargin(0);
     filterOptionLayout->addRow(new QLabel("Neighborhood:"), selectionNeighborhoodWidget);
     //filterOptionLayout->addRow(new QLabel("Distance:") , selectionDistanceWidget);
 
-    filterOptionLayout->setObjectName("Simian Options");
-    filterOptionLayout->setSpacing(2);
-    filterOptionLayout->setVerticalSpacing(2);
+    //filterOptionLayout->setObjectName("Simian Options");
+    //filterOptionLayout->setSpacing(2);
+    //filterOptionLayout->setVerticalSpacing(2);
 
     setPopupLayout(filterOptionLayout);
 }
@@ -694,9 +694,9 @@ inline SimianOptionsAction::DistanceNeighborhoodAction::DistanceNeighborhoodActi
     _simianOptionsAction(simianOptionsAction)
 {
     //setText("Distance-Neighborhood Options");
-    setText("Neighborhood Option");
+    //setText("Neighborhood Option");
 
-    setIcon(Application::getIconFont("FontAwesome").getIcon("cog"));
+    //setIcon(Application::getIconFont("FontAwesome").getIcon("cog"));
 }
 
 
