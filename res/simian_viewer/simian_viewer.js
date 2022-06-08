@@ -1211,47 +1211,47 @@ const simianVis = () => {
     var ximage="";
     var yimage="";
     if (species2ValueIdentify == "gorilla") {
-        yimage ='https://i.ibb.co/35XJNcq/gorilla.png';
+        yimage ='https://i.ibb.co/RNxHKTF/gorilla.png';
     }
     else if (species2ValueIdentify == "marmoset")
     {
-        yimage ='https://i.ibb.co/N1GBBcd/monkey-2.png';
+        yimage ='https://i.ibb.co/SXjQXNN/marmoset.png';
     }
     else if (species2ValueIdentify == "rhesus") {
-        yimage ='https://i.ibb.co/89H4JD5/monkey-shape.png';
+        yimage ='https://i.ibb.co/k8FjPSP/rhesus.png';
     }
     else if (species2ValueIdentify == "chimp") {
-        yimage ='https://i.ibb.co/BL4KQy8/chimpanzee.png';
+        yimage ='https://i.ibb.co/ccvYdHY/chimpanzee.png';
     }
 
     if (species1ValueIdentify == "gorilla") {
-        ximage ='https://i.ibb.co/35XJNcq/gorilla.png';
+        ximage ='https://i.ibb.co/RNxHKTF/gorilla.png';
     }
     else if (species1ValueIdentify == "chimp") {
-        ximage ='https://i.ibb.co/BL4KQy8/chimpanzee.png';
+        ximage ='https://i.ibb.co/ccvYdHY/chimpanzee.png';
     }
     else if (species1ValueIdentify == "rhesus") {
-        ximage ='https://i.ibb.co/89H4JD5/monkey-shape.png';
+        ximage ='https://i.ibb.co/k8FjPSP/rhesus.png';
     }
     else if (species1ValueIdentify == "human") {
-        ximage ='https://i.ibb.co/ZYQZpgD/human.png';
+        ximage ='https://i.ibb.co/nD675k0/human.png';
     }
 
     if (yimage!=="") {
         svg.append('image')
             .attr('xlink:href', yimage)
-            .attr('width', 20)
-            .attr('height', 20)
-            .attr("x", 0-40)
+            .attr('width', width / 20)
+            .attr('height', height / 25)
+            .attr("x", 0-50)
             .attr("y", height);
     }
 
     if (ximage!=="") {
         svg.append('image')
             .attr('xlink:href', ximage)
-            .attr('width', 20)
-            .attr('height', 20)
-            .attr("x", 0-20)
+            .attr('width', width / 20)
+            .attr('height', height / 25)
+            .attr("x", 0-30)
             .attr("y", height+25);
     }
 
