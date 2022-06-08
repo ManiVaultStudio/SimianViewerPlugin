@@ -29,7 +29,6 @@
 #include <string>
 #include "../simianViewerPlugin.h"
 #include <event/Event.h>
-
 #include <QDebug>
 #include <QLabel>
 
@@ -83,6 +82,28 @@ public:
 
     public:
         ColorMapOptionAction(SimianOptionsAction& simianOptionsAction);
+
+    protected:
+        SimianOptionsAction& _simianOptionsAction;
+
+        friend class SimianOptionsAction;
+    };
+    class BackgroundColorOptionAction : public WidgetAction
+    {
+    protected:
+        class Widget : public hdps::gui::WidgetActionWidget {
+        public:
+            Widget(QWidget* parent, BackgroundColorOptionAction* speciesAction);
+
+            friend class BackgroundColorOptionAction;
+        };
+
+        QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
+            return new BackgroundColorOptionAction::Widget(parent, this);
+        };
+
+    public:
+        BackgroundColorOptionAction(SimianOptionsAction& simianOptionsAction);
 
     protected:
         SimianOptionsAction& _simianOptionsAction;
@@ -174,7 +195,7 @@ public: // Action getters
     ClusterAction& getClusterAction() { return _clusterAction; }
     DistanceNeighborhoodAction& getDistanceNeighborhoodAction() { return _distanceNeighborhoodAction; }
     ColorMapAction& getColorMapAction() { return _colorMapAction; }
-
+    ColorAction& getBackgroundColoringAction() { return _backgroundColoringAction; }
 protected:
     SimianViewerPlugin&          _simianViewerPlugin;
     OptionAction                 _species1Action;
@@ -197,7 +218,9 @@ protected:
     DistanceNeighborhoodAction               _distanceNeighborhoodAction;
     bool _isStarted;
     ColorMapAction          _colorMapAction;
+    ColorAction              _backgroundColoringAction;
     hdps::EventListener     _eventListener;
-
+    /** Default constant color */
+    static const QColor DEFAULT_CONSTANT_COLOR;
     friend class ChannelAction;
 };
