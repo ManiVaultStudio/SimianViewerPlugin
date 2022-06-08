@@ -3,6 +3,7 @@
 
 using namespace hdps;
 using namespace hdps::gui;
+const QColor SimianOptionsAction::DEFAULT_CONSTANT_COLOR = qRgb(255, 255, 255);
 
 SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin, hdps::CoreInterface* core) :
     WidgetAction(&simianViewerPlugin),
@@ -19,6 +20,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _crossSpeciesFilterAction(this, "Filter clusters :"),
     _multiSelectClusterFilterAction(this, "Select cross-species clusters :"),
     _colorMapAction(this, "Select color map"),
+    _backgroundColoringAction(this, "Select background color", DEFAULT_CONSTANT_COLOR, DEFAULT_CONSTANT_COLOR),
     _isLoading(false),
     _speciesAction(*this),
     _clusterAction(*this), 
@@ -49,6 +51,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _crossSpeciesFilterAction.setEnabled(false);
     _multiSelectClusterFilterAction.setEnabled(false);
     _colorMapAction.setEnabled(false);
+    _backgroundColoringAction.setEnabled(false);
     _clusterAction.setEnabled(false);
     _distanceNeighborhoodAction.setEnabled(false);
     _species1Action.setDefaultWidgetFlags(OptionAction::ComboBox);
@@ -63,6 +66,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _multiSelectClusterFilterAction.initialize(QStringList{ "" });
     _multiSelectClusterFilterAction.setSelectedOptions(QStringList());
     _colorMapAction.initialize("Black to white","Black to white");
+    _backgroundColoringAction.initialize(DEFAULT_CONSTANT_COLOR, DEFAULT_CONSTANT_COLOR);
     _neighborhoodAction.setDefaultWidgetFlags(OptionAction::ComboBox);
     _neighborhoodAction.initialize(QStringList({ "glia","it_types","l5et_l56np_l6ct_l6b","lamp5_sncg_vip","sst_sst_chodl_pvalb" }), "sst_sst_chodl_pvalb", "sst_sst_chodl_pvalb");
     _distanceAction.setDefaultWidgetFlags(IntegralAction::SpinBox | IntegralAction::Slider);
@@ -118,7 +122,12 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
         std::string full = s1+s2+s3;
         _simianViewerPlugin.getWidget()->setColor(QString::fromStdString(full));
     };
-    
+    const auto backgroundColoringFilter = [this]() -> void
+    {
+        const auto& color= _backgroundColoringAction.getColor();
+        //const auto& colorName=  color.name().toStdString();
+        _simianViewerPlugin.getWidget()->setBackgroundColor(color.name());
+    };
         const auto updateColorMapRange = [this]() -> void
     {
         const auto& rangeAction = _colorMapAction.getSettingsAction().getHorizontalAxisAction().getRangeAction();
@@ -148,6 +157,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             _multiSelectClusterFilterAction.setEnabled(false);
             _multiSelectClusterFilterAction.setSelectedOptions(QStringList());
             _colorMapAction.setEnabled(false);
+            _backgroundColoringAction.setEnabled(false);
             _clusterAction.setEnabled(false);
             _distanceNeighborhoodAction.setEnabled(false);
         }
@@ -168,6 +178,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             _crossSpeciesFilterAction.setEnabled(true);
             _multiSelectClusterFilterAction.setEnabled(true);
             _colorMapAction.setEnabled(true);
+            _backgroundColoringAction.setEnabled(true);
             _clusterAction.setEnabled(true);
             _distanceNeighborhoodAction.setEnabled(true);
         }
@@ -183,6 +194,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             _multiSelectClusterFilterAction.setEnabled(false);
             _multiSelectClusterFilterAction.setSelectedOptions(QStringList());
             _colorMapAction.setEnabled(false);
+            _backgroundColoringAction.setEnabled(false);
             _clusterAction.setEnabled(false);
             _distanceNeighborhoodAction.setEnabled(false);
         }
@@ -288,6 +300,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
         });
 
     connect(&_colorMapAction, &ColorMapAction::imageChanged, this, colormapFilter);
+
+    connect(&_backgroundColoringAction, &ColorAction::colorChanged, this, backgroundColoringFilter);
 
     connect(&_colorMapAction.getSettingsAction().getHorizontalAxisAction().getRangeAction(), &DecimalRangeAction::rangeChanged, this, updateColorMapRange);
 
@@ -610,7 +624,30 @@ inline SimianOptionsAction::ColorMapOptionAction::ColorMapOptionAction(SimianOpt
     setIcon(Application::getIconFont("FontAwesome").getIcon("search"));
 }
 
+//
+SimianOptionsAction::BackgroundColorOptionAction::Widget::Widget(QWidget* parent, BackgroundColorOptionAction* colorAction) :
+    WidgetActionWidget(parent, colorAction)
+{
+    auto& simianOptionsAction = colorAction->_simianOptionsAction;
+    auto backgroundColoringWidget = simianOptionsAction._backgroundColoringAction.createWidget(this);
+    auto backgroundColorSelectionLayout = new QFormLayout();
+    backgroundColorSelectionLayout->setMargin(2);
+    backgroundColorSelectionLayout->addRow(new QLabel("background color: *"), backgroundColoringWidget);
+    backgroundColorSelectionLayout->setObjectName("background Color Options");
+    backgroundColorSelectionLayout->setSpacing(2);
+    backgroundColorSelectionLayout->setVerticalSpacing(2);
 
+    setPopupLayout(backgroundColorSelectionLayout);
+}
+
+inline SimianOptionsAction::BackgroundColorOptionAction::BackgroundColorOptionAction(SimianOptionsAction& simianOptionsAction) :
+    _simianOptionsAction(simianOptionsAction)
+{
+    setText("Background color Options");
+    setIcon(Application::getIconFont("FontAwesome").getIcon("search"));
+}
+
+//
 
 
 void SimianOptionsAction::updateMultiSelectionDropdown(std::vector<std::vector<std::string>>&    filteredVisData)

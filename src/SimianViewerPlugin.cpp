@@ -50,6 +50,7 @@ void SimianViewerPlugin::init()
     topToolbarLayout->setSpacing(0);
     topToolbarLayout->addWidget(_simianOptionsAction->getSpeciesAction().createCollapsedWidget(&_widget));
     topToolbarLayout->addWidget(_simianOptionsAction->getColorMapAction().createCollapsedWidget(&_widget));
+    topToolbarLayout->addWidget(_simianOptionsAction->getBackgroundColoringAction().createCollapsedWidget(&_widget));
     topToolbarLayout->addWidget(_simianOptionsAction->getClusterAction().createCollapsedWidget(&_widget));
     topToolbarLayout->addWidget(_simianOptionsAction->getDistanceNeighborhoodAction().createWidget(&_widget));
  

@@ -20,6 +20,7 @@ var svg;
 var qtColor = "Black to white";
 var colorMirror = false;
 var barflag = false;
+var backgroundColor = "#ffffff";
 //onresize adjust chart dimensions
 window.onresize = doALoadOfStuff;
 
@@ -46,6 +47,7 @@ try {
         QtBridge.qt_setData.connect(function () { setData(arguments[0]); });
         QtBridge.qt_setClusters.connect(function () { setClusters(arguments[0]); });
         QtBridge.qt_setColor.connect(function () { setColor(arguments[0]); });
+        QtBridge.qt_setBackgroundColor.connect(function () { setBackgroundColor(arguments[0]); });
         QtBridge.qt_histChart.connect(function () { histChart(arguments[0]); });
         QtBridge.qt_setRangeValue.connect(function () { setRangeValue(arguments[0]); });
         QtBridge.qt_inspeciesClusterCounts.connect(function () { setInspeciesClusterCounts(arguments[0]); });
@@ -78,6 +80,7 @@ const simianVis = () => {
     svg = d3
         .select("#my_dataviz")
         .append("svg")
+        .style("background", backgroundColor)
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
@@ -1332,6 +1335,15 @@ function queueColor(colorName, mirrorValue) {
         colorMirror = true;
     }
 
+    simianVis();
+}
+
+//BackgroundColor Options
+function setBackgroundColor(d) {
+    queueColor(d);
+}
+function queueColor(colorName) {
+    backgroundColor = colorName;
     simianVis();
 }
 

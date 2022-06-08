@@ -137,6 +137,11 @@ void SimianViewerWidget::setColor(QString visColorContent)
     emit _communicationObject->qt_setColor(visColorContent);
 }
 
+void SimianViewerWidget::setBackgroundColor(QString visColorContent)
+{
+    emit _communicationObject->qt_setColor(visColorContent);
+}
+
 void SimianViewerWidget::histChart(QString visColorContent)
 {
     emit _communicationObject->qt_histChart(visColorContent);
