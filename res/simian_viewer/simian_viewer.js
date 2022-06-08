@@ -63,13 +63,13 @@ const simianVis = () => {
     svg.selectAll("*").remove();
     var margin;
     if (barflag) {
-        margin = { top: 50, right: 50, bottom: 80, left: 75 },
+        margin = { top: 50, right: 50, bottom: 80, left: 60 },
             width = window.innerWidth * 0.99 - margin.left - margin.right,
-            height = window.innerHeight * 0.98 - margin.top - margin.bottom;
+            height = window.innerHeight * 0.99 - margin.top - margin.bottom;
 
     }
     else {
-            margin = { top: 5, right: 5, bottom: 80, left: 75 },
+            margin = { top: 5, right: 5, bottom: 80, left: 60 },
             width = window.innerWidth * 0.99 - margin.left - margin.right,
             height = window.innerHeight * 0.97 - margin.top - margin.bottom;
     }
@@ -1245,7 +1245,7 @@ const simianVis = () => {
             .attr('xlink:href', yimage)
             .attr('width', width / 20)
             .attr('height', height / 25)
-            .attr("x", 0-50)
+            .attr("x", 0-60)
             .attr("y", height);
     }
 
@@ -1255,7 +1255,7 @@ const simianVis = () => {
             .attr('width', width / 20)
             .attr('height', height / 25)
             .attr("x", 0-30)
-            .attr("y", height+25);
+            .attr("y", height+20);
     }
 
 };
@@ -1340,9 +1340,9 @@ function queueColor(colorName, mirrorValue) {
 
 //BackgroundColor Options
 function setBackgroundColor(d) {
-    queueColor(d);
+    queueBackgroundColor(d);
 }
-function queueColor(colorName) {
+function queueBackgroundColor(colorName) {
     backgroundColor = colorName;
     simianVis();
 }
