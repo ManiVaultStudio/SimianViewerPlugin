@@ -63,13 +63,13 @@ const simianVis = () => {
     svg.selectAll("*").remove();
     var margin;
     if (barflag) {
-        margin = { top: 50, right: 50, bottom: 80, left: 60 },
+        margin = { top: 50, right: 50, bottom: 80, left: 65 },
             width = window.innerWidth * 0.99 - margin.left - margin.right,
             height = window.innerHeight * 0.99 - margin.top - margin.bottom;
 
     }
     else {
-            margin = { top: 5, right: 5, bottom: 80, left: 60 },
+            margin = { top: 5, right: 5, bottom: 80, left: 65 },
             width = window.innerWidth * 0.99 - margin.left - margin.right,
             height = window.innerHeight * 0.97 - margin.top - margin.bottom;
     }
