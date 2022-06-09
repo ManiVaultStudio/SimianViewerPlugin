@@ -1210,35 +1210,85 @@ const simianVis = () => {
             .style("paint-order", "stroke");
 
     }
-    species2ValueIdentify
+    var c = backgroundColor.substring(1);      // strip #
+    var rgb = parseInt(c, 16);   // convert rrggbb to decimal
+    var r = (rgb >> 16) & 0xff;  // extract red
+    var g = (rgb >> 8) & 0xff;  // extract green
+    var b = (rgb >> 0) & 0xff;  // extract blue
+
+    var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
+    
+
     var ximage="";
     var yimage="";
     if (species2ValueIdentify == "gorilla") {
-        yimage ='https://i.ibb.co/RNxHKTF/gorilla.png';
+        
+        if (luma < 40) {
+            yimage = 'https://i.ibb.co/0CYCryh/gorilla-light.png';
+        }
+        else {
+            yimage = 'https://i.ibb.co/RNxHKTF/gorilla-dark.png';
+        }
     }
     else if (species2ValueIdentify == "marmoset")
     {
-        yimage ='https://i.ibb.co/SXjQXNN/marmoset.png';
+        if (luma < 40) {          
+            yimage = 'https://i.ibb.co/b3mDHXN/marmoset-light.png';
+        }
+        else {
+            yimage = 'https://i.ibb.co/SXjQXNN/marmoset-dark.png';
+        }
     }
     else if (species2ValueIdentify == "rhesus") {
-        yimage ='https://i.ibb.co/k8FjPSP/rhesus.png';
+        if (luma < 40) {
+            yimage = 'https://i.ibb.co/YTdCB33/rhesus-light.png';
+        }
+        else {
+            yimage = 'https://i.ibb.co/k8FjPSP/rhesus-dark.png';
+        }
     }
     else if (species2ValueIdentify == "chimp") {
-        yimage ='https://i.ibb.co/ccvYdHY/chimpanzee.png';
+        if (luma < 40) {
+            yimage = 'https://i.ibb.co/j4gpfjp/chimpanzee-light.png';
+        }
+        else {
+            yimage = 'https://i.ibb.co/mvDVVhz/chimpanzee-dark.png';
+        }
     }
 
     if (species1ValueIdentify == "gorilla") {
-        ximage ='https://i.ibb.co/RNxHKTF/gorilla.png';
+        if (luma < 40) {
+            ximage = 'https://i.ibb.co/0CYCryh/gorilla-light.png';
+        }
+        else {
+            ximage = 'https://i.ibb.co/RNxHKTF/gorilla-dark.png';
+        }
     }
     else if (species1ValueIdentify == "chimp") {
-        ximage ='https://i.ibb.co/ccvYdHY/chimpanzee.png';
+        if (luma < 40) {
+            ximage = 'https://i.ibb.co/j4gpfjp/chimpanzee-light.png';
+        }
+        else {
+            ximage = 'https://i.ibb.co/mvDVVhz/chimpanzee-dark.png';
+        }
     }
     else if (species1ValueIdentify == "rhesus") {
-        ximage ='https://i.ibb.co/k8FjPSP/rhesus.png';
+        if (luma < 40) {
+            ximage = 'https://i.ibb.co/YTdCB33/rhesus-light.png';
+        }
+        else {
+            ximage = 'https://i.ibb.co/k8FjPSP/rhesus-dark.png';
+        }
     }
     else if (species1ValueIdentify == "human") {
-        ximage ='https://i.ibb.co/nD675k0/human.png';
+        if (luma < 40) {
+            ximage = 'https://i.ibb.co/9bBsDpZ/human-light.png';
+        }
+        else {
+            ximage = 'https://i.ibb.co/nD675k0/human-dark.png';
+        }
     }
+
 
     if (yimage!=="") {
         svg.append('image')
