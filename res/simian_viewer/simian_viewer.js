@@ -231,10 +231,12 @@ const simianVis = () => {
             .attr("width", 300)
             .attr("height", 100)
             .html(function (d) {
+                var average = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']) / parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']);
                 var value = "<div>Number of cells:<b>" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']
                     + " </b><br/> Minimum distance:<b>" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']
                     + " </b> <br/> Maximum distance: <b>" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']
-                    + "</b><br/>Average distance: <b>" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']+"</b></div>";
+                    + "</b><br/>Average distance: <b>" + average
+                    + "</b></div>";
                 return value;
             })
         
@@ -370,10 +372,11 @@ const simianVis = () => {
             .attr("width", 300)
             .attr("height", 100)
             .html(function (d) {
+                var average = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']) / parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']);
                 var value = "<div>Number of cells:<b>" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']
                     + " </b><br/> Minimum distance:<b>" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']
                     + " </b> <br/> Maximum distance: <b>" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']
-                    + "</b><br/>Average distance: <b>" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']
+                    + "</b><br/>Average distance: <b>" + average
                     + "</b></div>";
                 return value;
             })
@@ -1421,11 +1424,12 @@ function queueData(d) {
             temp = parseFloat(temp) + parseFloat(_data[i].dist);
             cross_speciesClusterInfo[_data[i].cross_species_cluster1_species_1]['averageDistance'] = temp;
             cross_speciesClusterInfo[_data[i].cross_species_cluster1_species_1]['numberOfCells'] = cross_speciesClusterInfo[_data[i].cross_species_cluster1_species_1]['numberOfCells'] + 1;
-            if (cross_speciesClusterInfo[_data[i].cross_species_cluster1_species_1]['maxDistance'] < _data[i].dist) {
+
+            if (parseFloat(cross_speciesClusterInfo[_data[i].cross_species_cluster1_species_1]['maxDistance']) < parseFloat( _data[i].dist)) {
                 cross_speciesClusterInfo[_data[i].cross_species_cluster1_species_1]['maxDistance'] = _data[i].dist;
             }
             
-            if (cross_speciesClusterInfo[_data[i].cross_species_cluster1_species_1]['minDistance'] > _data[i].dist) {
+            if (parseFloat(cross_speciesClusterInfo[_data[i].cross_species_cluster1_species_1]['minDistance']) > parseFloat(_data[i].dist)) {
                 cross_speciesClusterInfo[_data[i].cross_species_cluster1_species_1]['minDistance'] = _data[i].dist;
             }
             
