@@ -1345,7 +1345,7 @@ const simianVis = () => {
             .attr('width', width / 20)
             .attr('height', height / 25)
             .attr("x", 0-70)
-            .attr("y", height);
+            .attr("y", -20);//height
     }
 
     if (ximage!=="") {
@@ -1353,7 +1353,7 @@ const simianVis = () => {
             .attr('xlink:href', ximage)
             .attr('width', width / 20)
             .attr('height', height / 25)
-            .attr("x", 0-40)
+            .attr("x", 0-37)
             .attr("y", height+20);
     }
 
