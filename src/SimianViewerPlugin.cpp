@@ -46,7 +46,7 @@ void SimianViewerPlugin::init()
 
     auto topToolbarWidget = new QWidget();
     auto topToolbarLayout = new QHBoxLayout();
-    topToolbarLayout->setMargin(0);
+    topToolbarLayout->setContentsMargins(0, 0, 0, 0);
     topToolbarLayout->setSpacing(0);
     topToolbarLayout->addWidget(_simianOptionsAction->getSpeciesAction().createCollapsedWidget(&_widget));
     topToolbarLayout->addWidget(_simianOptionsAction->getColorMapAction().createCollapsedWidget(&_widget));
@@ -58,7 +58,7 @@ void SimianViewerPlugin::init()
     topToolbarWidget->setAutoFillBackground(true);
     topToolbarWidget->setLayout(topToolbarLayout);
     auto layout = new QVBoxLayout();
-    layout->setMargin(0);
+    layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
     layout->addWidget(topToolbarWidget);
     layout->addWidget(_simian_viewer, 1);

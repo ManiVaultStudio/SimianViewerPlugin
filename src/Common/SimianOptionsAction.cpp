@@ -579,7 +579,7 @@ SimianOptionsAction::SpeciesAction::Widget::Widget(QWidget* parent, SpeciesActio
 
     auto speciesSelectionLayout = new QFormLayout();
 
-    speciesSelectionLayout->setMargin(2);
+    speciesSelectionLayout->setContentsMargins(2, 2, 2, 2);
     speciesSelectionLayout->addRow(new QLabel("Species1: *"), selectionSpecies1Widget);
     speciesSelectionLayout->addRow(new QLabel("Species2: *"), selectionSpecies2Widget);
     speciesSelectionLayout->addRow(new QLabel("Cross-Species1 linker:"), selectionCrossSpecies1DatasetLinkerWidget);
@@ -608,7 +608,7 @@ SimianOptionsAction::ColorMapOptionAction::Widget::Widget(QWidget* parent, Color
     auto& simianOptionsAction = colorMapAction->_simianOptionsAction;
     auto colorMapWidget = simianOptionsAction._colorMapAction.createWidget(this);
     auto colorSelectionLayout = new QFormLayout();
-    colorSelectionLayout->setMargin(2);
+    colorSelectionLayout->setContentsMargins(2, 2, 2, 2);
     colorSelectionLayout->addRow(new QLabel("heatmap color: *"), colorMapWidget);
     colorSelectionLayout->setObjectName("Color Options");
     colorSelectionLayout->setSpacing(2);
@@ -631,7 +631,7 @@ SimianOptionsAction::BackgroundColorOptionAction::Widget::Widget(QWidget* parent
     auto& simianOptionsAction = colorAction->_simianOptionsAction;
     auto backgroundColoringWidget = simianOptionsAction._backgroundColoringAction.createWidget(this);
     auto backgroundColorSelectionLayout = new QFormLayout();
-    backgroundColorSelectionLayout->setMargin(2);
+    backgroundColorSelectionLayout->setContentsMargins(2, 2, 2, 2);
     backgroundColorSelectionLayout->addRow(new QLabel("background color: *"), backgroundColoringWidget);
     backgroundColorSelectionLayout->setObjectName("background Color Options");
     backgroundColorSelectionLayout->setSpacing(2);
@@ -685,7 +685,7 @@ SimianOptionsAction::ClusterAction::Widget::Widget(QWidget* parent, ClusterActio
     crossSpeciesClusterSelectionWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
     auto crossSpeciesClusterSelectionLayout = new QFormLayout();
-    crossSpeciesClusterSelectionLayout->setMargin(2);
+    crossSpeciesClusterSelectionLayout->setContentsMargins(2, 2, 2, 2);
     crossSpeciesClusterSelectionLayout->setObjectName("Cluster Options");
     crossSpeciesClusterSelectionLayout->setSpacing(2);
     crossSpeciesClusterSelectionLayout->setVerticalSpacing(2);
@@ -716,7 +716,7 @@ SimianOptionsAction::DistanceNeighborhoodAction::Widget::Widget(QWidget* parent,
     //selectionDistanceWidget->findChild<QSlider*>("Slider");
     //selectionDistanceWidget->findChild<QSpinBox*>("SpinBox");
     auto filterOptionLayout = new QFormLayout();
-    filterOptionLayout->setMargin(0);
+    filterOptionLayout->setContentsMargins(0, 0, 0, 0);
     filterOptionLayout->addRow(new QLabel("Neighborhood:"), selectionNeighborhoodWidget);
     //filterOptionLayout->addRow(new QLabel("Distance:") , selectionDistanceWidget);
 
