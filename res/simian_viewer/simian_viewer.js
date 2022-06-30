@@ -648,7 +648,8 @@ const simianVis = () => {
             .attr("y2", height)
             .attr("stroke-width", 10)
             .attr("stroke", colorNow1)
-            .style("paint-order", "stroke");
+            //.style("paint-order", "stroke")
+            .style("stroke-location", "inside");
 
     }
 
@@ -686,7 +687,8 @@ const simianVis = () => {
             .attr("y2", valnow2)
             .attr("stroke-width", 10)
             .attr("stroke", colorNow2)
-            .style("paint-order", "stroke");
+            //.style("paint-order", "stroke")
+            .style("stroke-location", "inside");
 
     }
 
@@ -723,7 +725,8 @@ const simianVis = () => {
             .attr("y2", 0)
             .attr("stroke-width", 2)
             .attr("stroke", colorNow1)
-            .style("paint-order", "stroke");
+            //.style("paint-order", "stroke")
+            .style("stroke-location", "inside");
         if (barflag) {
            svg.append("rect")
                 .attr("x", valnow1 + ((valuenext1 - valnow1) / 4))
@@ -767,7 +770,8 @@ const simianVis = () => {
             .attr("y2", valnow2)
             .attr("stroke-width", 2)
             .attr("stroke", colorNow2)
-            .style("paint-order", "stroke");
+            //.style("paint-order", "stroke")
+            .style("stroke-location", "inside");
         if (barflag) {
             svg.append("rect")
                 .attr("x", width)
@@ -814,13 +818,14 @@ const simianVis = () => {
             .style("stroke-width", function (d) {
 
                 if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
-                    return 10;
+                    return 8;
                 }
                 else {
                     return 5;
                 }
             })
-            .style("paint-order", "stroke")
+            //.style("paint-order", "stroke")
+            .style("stroke-location", "inside")
             .style("opacity", 1)
             .style("cursor", "pointer");
 
