@@ -68,7 +68,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _colorMapAction.initialize("Black to white","Black to white");
     _backgroundColoringAction.initialize(DEFAULT_CONSTANT_COLOR, DEFAULT_CONSTANT_COLOR);
     _neighborhoodAction.setDefaultWidgetFlags(OptionAction::ComboBox);
-    _neighborhoodAction.initialize(QStringList({ "glia","it_types","l5et_l56np_l6ct_l6b","lamp5_sncg_vip","sst_sst_chodl_pvalb" }), "sst_sst_chodl_pvalb", "sst_sst_chodl_pvalb");
+    _neighborhoodAction.initialize(QStringList({ "glia","it_types","l5et_l56np_l6ct_l6b","lamp5_sncg_vip","sst_sst_chodl_pvalb" }), "it_types", "it_types");
     _distanceAction.setDefaultWidgetFlags(IntegralAction::SpinBox | IntegralAction::Slider);
     _distanceAction.initialize(0, 105, 105, 105); 
     _histBarAction.setDefaultWidgetFlags(IntegralAction::Slider);
