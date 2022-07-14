@@ -16,9 +16,9 @@ if(MSVC)
     set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MD")
 endif(MSVC)
 
-find_package(Qt5 COMPONENTS Widgets WebEngineWidgets REQUIRED)
+find_package(Qt6 COMPONENTS Widgets WebEngineWidgets REQUIRED)
 
-qt5_add_resources(RESOURCE_FILES res/simian_viewer_resources.qrc)
+qt6_add_resources(RESOURCE_FILES res/simian_viewer_resources.qrc)
 
 set(SOURCES
     src/SimianViewerPlugin.h
@@ -81,22 +81,24 @@ include_directories(${PROJECT_SOURCE_DIR}/src)
 
 add_library(${PROJECT} SHARED ${SOURCES} ${RESOURCES} ${RESOURCE_FILES} ${Data} ${Web} ${Common})
 
-qt5_use_modules(${PROJECT} Widgets WebEngineWidgets)
-
-target_link_libraries(${PROJECT} Qt5::Widgets)
-target_link_libraries(${PROJECT} Qt5::WebEngineWidgets)
+target_link_libraries(${PROJECT} Qt6::Widgets)
+target_link_libraries(${PROJECT} Qt6::WebEngineWidgets)
 target_link_libraries(${PROJECT} "$ENV{HDPS_INSTALL_DIR}/$<CONFIGURATION>/lib/HDPS_Public.lib")
 target_link_libraries(${PROJECT} "$ENV{HDPS_INSTALL_DIR}/$<CONFIGURATION>/lib/PointData.lib")
 target_link_libraries(${PROJECT} "$ENV{HDPS_INSTALL_DIR}/$<CONFIGURATION>/lib/ClusterData.lib")
 
-add_custom_command(TARGET ${PROJECT} POST_BUILD
-    COMMAND "${CMAKE_COMMAND}" -E copy_if_different
-    "$<TARGET_FILE:${PROJECT}>"
-    "$ENV{HDPS_INSTALL_DIR}/$<CONFIGURATION>/Plugins/$<TARGET_FILE_NAME:${PROJECT}>"
+install(TARGETS ${PROJECT}
+   RUNTIME DESTINATION Plugins COMPONENT SHAREDLIB
+   LIBRARY DESTINATION Plugins COMPONENT LINKLIB
+   ARCHIVE DESTINATION lib COMPONENT LINKLIB
 )
 
-#file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/src/Data/
-#     DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Data/)
+add_custom_command(TARGET ${PROJECT} POST_BUILD
+    COMMAND "${CMAKE_COMMAND}"
+        --install ${CMAKE_CURRENT_BINARY_DIR}
+        --config $<CONFIGURATION>
+        --prefix ${INSTALL_DIR}/$<CONFIGURATION>
+)
 
 # Automatically set the debug environment (command + working directory) for MSVC in debug and release mode
 set_property(TARGET ${PROJECT} PROPERTY VS_DEBUGGER_WORKING_DIRECTORY $<IF:$<CONFIG:DEBUG>,${INSTALL_DIR}/debug,${INSTALL_DIR}/release>)
