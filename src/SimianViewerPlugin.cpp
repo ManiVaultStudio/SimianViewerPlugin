@@ -82,14 +82,14 @@ void SimianViewerPlugin::onDataEvent(hdps::DataEvent* dataEvent)
 void SimianViewerPlugin::publishSelection(std::vector<std::string> selectedIDs)
 {
     
-    if (_simianOptionsAction->getCrossSpeciesFilterAction().getCurrentText() == "cross species clusters")
-    {
-        selectCrossSpeciesClusterPoints(selectedIDs);
-    }
-    else
-    {
+   // if (_simianOptionsAction->getCrossSpeciesFilterAction().getCurrentText() == "cross species clusters")
+   // {
+    //    selectCrossSpeciesClusterPoints(selectedIDs);
+   // }
+    //else
+    //{
         selectIndividualSpeciesClusterPoints(selectedIDs);
-    }
+    //}
 
 
 
