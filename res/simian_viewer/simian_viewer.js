@@ -235,7 +235,7 @@ const simianVis = () => {
             .attr("height", 100)
             .html(function (d) {
                 var average = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']) / parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']);
-                var value = "<div>Number of cells:<b>" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']
+                var value = "<div>Number of cluster blocks:<b>" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']
                     + " </b><br/> Minimum distance:<b>" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']
                     + " </b> <br/> Maximum distance: <b>" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']
                     + "</b><br/>Average distance: <b>" + average
