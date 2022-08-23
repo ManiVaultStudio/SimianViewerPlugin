@@ -856,11 +856,23 @@ const simianVis = () => {
             finaltooltip = finaltooltip + "<table border=\"1\" ><tr><th></th><th><img src=\"" + ximage + "\" alt=\"Human\" height=50 width=50 /></th><th><img src=\"" + yimage + "\" alt=\"Marmoset\" height=50 width=50 /></th></tr><tr><td rowspan=\"1\"><i>In-species cluster</i></div></td><td><div style=\"color:" + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</div></td><td><div style=\"color:" + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</div></td></tr>";
         }
         if (barflag) {
-            finaltooltip = finaltooltip + "<tr><td rowspan=\"1\"><div><i>Cluster cell count</i></div></td><td>" + inspecies1ClusterCounts[d.cluster_1] + "</td><td>" + inspecies2ClusterCounts[d.cluster_2] + "</td></tr><tr><td rowspan=\"1\"><div><i>Subclass</i></div></td><td>Row 1 Cell 2</td><td>Row 1 Cell 3</td></tr><tr><td rowspan=\"1\"><div><i>Class</i></div></td><td>Row 1 Cell 2</td><td>Row 1 Cell 3</td></tr>";
+            finaltooltip = finaltooltip + "<tr><td rowspan=\"1\"><div><i>Cluster cell count</i></div></td><td>" + inspecies1ClusterCounts[d.cluster_1] + "</td><td>" + inspecies2ClusterCounts[d.cluster_2] + "</td></tr>";
+            finaltooltip = finaltooltip +"<tr><td rowspan=\"1\"><div><i>Subclass</i></div></td><td>Row 1 Cell 2</td><td>Data not available</td></tr><tr><td rowspan=\"1\"><div><i>Class</i></div></td><td>Row 1 Cell 2</td><td>Data not available</td></tr>";
         }
 
-        if (layerFlag) {
-            finaltooltip = finaltooltip + "<tr><td rowspan=\"1\"><i><div style=\"color:#7fc97f;-webkit-text-stroke: 0.5 black;\"> Layer 1</div> <div style=\"color:#beaed4;-webkit-text-stroke: 0.5 black;\"> Layer 2</div> <div style=\"color:#fdc086;-webkit-text-stroke: 0.5 black;\"> Layer 3</div> <div style=\"color:#ffff99;-webkit-text-stroke: 0.5 black;\"> Layer 4</div> <div style=\"color:#386cb0;-webkit-text-stroke: 0.5 black; \"> Layer 5</div> </i></td><td><div style=\"background: conic-gradient( #7fc97f 0.55% 6.08%, #beaed4 6.08% 13.68%, #fdc086 13.68% 23.27%, #ffff99 23.27% 40.47%, #386cb0 40.47%);  border-radius: 50%;width: 80px;height: 80px;\"></div></td><td><div style=\"background: conic-gradient( #7fc97f 0.55% 6.08%, #beaed4 6.08% 13.68%, #fdc086 13.68% 23.27%, #ffff99 23.27% 40.47%, #386cb0 40.47%);  border-radius: 50%;width: 80px;height: 80px;\"></div></td></tr>";
+        //if (layerFlag
+        layercheck = ['human','gorilla','chimp'];
+        {
+            if (layercheck.includes(species1ValueIdentify)) {
+                finaltooltip = finaltooltip + "<tr><td rowspan=\"1\"><i><div style=\"color:#7fc97f;-webkit-text-stroke: 0.5 black;\"> Layer 1</div> <div style=\"color:#beaed4;-webkit-text-stroke: 0.5 black;\"> Layer 2</div> <div style=\"color:#fdc086;-webkit-text-stroke: 0.5 black;\"> Layer 3</div> <div style=\"color:#ffff99;-webkit-text-stroke: 0.5 black;\"> Layer 4</div> <div style=\"color:#386cb0;-webkit-text-stroke: 0.5 black; \"> Layer 5</div> </i></td>";
+            }
+            finaltooltip = finaltooltip + "<td><div style=\"background: conic-gradient( #7fc97f 0.55% 6.08%, #beaed4 6.08% 13.68%, #fdc086 13.68% 23.27%, #ffff99 23.27% 40.47%, #386cb0 40.47%);  border-radius: 50%;width: 80px;height: 80px;\"></div></td>";
+            if (layercheck.includes(species2ValueIdentify)) {
+                finaltooltip = finaltooltip + "<td><div style=\"background: conic-gradient( #7fc97f 0.55% 6.08%, #beaed4 6.08% 13.68%, #fdc086 13.68% 23.27%, #ffff99 23.27% 40.47%, #386cb0 40.47%);  border-radius: 50%;width: 80px;height: 80px;\"></div></td>";
+
+            }
+            
+            finaltooltip = finaltooltip + "</tr>";
         }
         finaltooltip = finaltooltip + "<tr><td rowspan=\"1\"><div><i>Cluster distance</i></div></td><td colspan=\"2\">" + d.dist + "</td></tr>";
         if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
