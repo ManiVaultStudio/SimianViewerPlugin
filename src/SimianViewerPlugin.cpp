@@ -74,7 +74,7 @@ void SimianViewerPlugin::onDataEvent(hdps::DataEvent* dataEvent)
         const auto selectionChangedEvent = static_cast<DataSelectionChangedEvent*>(dataEvent);
         const auto& changedDataSet = _core->requestDataset<Clusters>(selectionChangedEvent->getDataset()->getGuid());
         const auto& selectionSet = changedDataSet->getSelectionNames(); 
-        qDebug() << selectionSet;
+        //qDebug() << selectionSet;
         _simian_viewer->setClusters(selectionSet);
     }
 }
