@@ -227,24 +227,34 @@ const simianVis = () => {
 
         svg.append("foreignObject")
             .attr("id", "axisSelectionText")
-            .style("background-color", "white")
-            .style("border", "solid" + cross_speciesClustercolors[correspondingCrossspeciescluster])
-            .style("border-width", "4px")
-            .style("border-radius", "5px")
+            .style("background-color", "transparent")
+            //.style("border", "solid" + cross_speciesClustercolors[correspondingCrossspeciescluster])
+            //.style("border-width", "4px")
+            //.style("border-radius", "5px")
             .style("padding", "5px")
             .style("position", "absolute")
             .attr("x", 30)
             .attr("y", 30)
-            .attr("width", 300)
-            .attr("height", 120)
+            .attr("width", 250)
+            .attr("height", 150)
             .html(function (d) {
                 var average = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']) / parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']);
-                var value = "<div>Number of cluster blocks:<b>" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']
-                    + " </b><br/> Minimum distance:<b>" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']
-                    + " </b> <br/> Maximum distance: <b>" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']
-                    + "</b><br/>Average distance: <b>" + average
-                    + "</b><br/>Cross-species cluster: <b>" + correspondingCrossspeciescluster
-                    + "</b></div>";
+                //var value = "<div>Number of cluster blocks:<b>" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']
+                //    + " </b><br/> Minimum distance:<b>" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']
+                //    + " </b> <br/> Maximum distance: <b>" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']
+                //    + "</b><br/>Average distance: <b>" + average
+                //    + "</b><br/>Cross-species cluster: <b>" + correspondingCrossspeciescluster
+                //    + "</b></div>";
+                let minVal = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']).toFixed(2);
+                let maxVal = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']).toFixed(2);
+                let avgVal = parseFloat(average).toFixed(2);
+                var value = "<table border=\"1\" ><tr><td rowspan=\"1\" bgcolor=\"white\"><i>Cluster block count</i></td><td bgcolor=\"white\">" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells'] + "</td></tr>"
+                    + "<tr><td rowspan=\"1\" bgcolor=\"white\"><i>Minimum distance</i></td><td bgcolor=\"white\">" + minVal + "</td></tr>"
+                    + "<tr><td rowspan=\"1\" bgcolor=\"white\"><i>Maximum distance</i></td><td bgcolor=\"white\">" + maxVal + "</td></tr>"
+                    + "<tr><td rowspan=\"1\" bgcolor=\"white\"><i>Average distance</i></td><td bgcolor=\"white\">" + avgVal + "</td></tr>"
+                    + "<tr><td rowspan=\"1\" bgcolor=\"white\"><i>Cross-species cluster</i></td><td colspan=\"2\" bgcolor=\"white\">" + correspondingCrossspeciescluster + "</td></tr></table>";
+
+
                 return value;
             })
         
@@ -369,24 +379,35 @@ const simianVis = () => {
 
         svg.append("foreignObject")
             .attr("id", "axisSelectionText")
-            .style("background-color", "white")
-            .style("border", "solid" + cross_speciesClustercolors[correspondingCrossspeciescluster])
-            .style("border-width", "4px")
-            .style("border-radius", "5px")
+            .style("background-color", "transparent")
+            //.style("border", "solid" + cross_speciesClustercolors[correspondingCrossspeciescluster])
+            //.style("border-width", "4px")
+            //.style("border-radius", "5px")
             .style("padding", "5px")
             .style("position", "absolute")
             .attr("x", width - (300+30))
-            .attr("y", height - (100+30) )
-            .attr("width", 300)
-            .attr("height", 120)
+            .attr("y", height - (150+30) )
+            .attr("width", 250)
+            .attr("height", 150)
             .html(function (d) {
                 var average = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']) / parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']);
-                var value = "<div>Number of cluster blocks:<b>" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']
-                    + " </b><br/> Minimum distance:<b>" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']
-                    + " </b> <br/> Maximum distance: <b>" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']
-                    + "</b><br/>Average distance: <b>" + average
-                    + "</b><br/>Cross-species cluster: <b>" + correspondingCrossspeciescluster
-                    + "</b></div>";
+                //var value = "<div>Number of cluster blocks:<b>" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']
+                //    + " </b><br/> Minimum distance:<b>" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']
+                //    + " </b> <br/> Maximum distance: <b>" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']
+                //    + "</b><br/>Average distance: <b>" + average
+                //    + "</b><br/>Cross-species cluster: <b>" + correspondingCrossspeciescluster
+                //    + "</b></div>";
+
+                let minVal = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']).toFixed(2);
+                let maxVal = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']).toFixed(2);
+                let avgVal = parseFloat(average).toFixed(2);
+                var value = "<table border=\"1\" ><tr><td rowspan=\"1\" bgcolor=\"white\"><i>Cluster block count</i></td><td bgcolor=\"white\">" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells'] + "</td></tr>"
+                    + "<tr><td rowspan=\"1\" bgcolor=\"white\"><i>Minimum distance</i></td><td bgcolor=\"white\">" + minVal + "</td></tr>"
+                    + "<tr><td rowspan=\"1\" bgcolor=\"white\"><i>Maximum distance</i></td><td bgcolor=\"white\">" + maxVal + "</td></tr>"
+                    + "<tr><td rowspan=\"1\" bgcolor=\"white\"><i>Average distance</i></td><td bgcolor=\"white\">" + avgVal + "</td></tr>"
+                    + "<tr><td rowspan=\"1\" bgcolor=\"white\"><i>Cross-species cluster</i></td><td colspan=\"2\" bgcolor=\"white\">" + correspondingCrossspeciescluster + "</td></tr></table>";
+
+
                 return value;
             })
         if (isQtAvailable) {
@@ -850,33 +871,35 @@ const simianVis = () => {
         //var species2AddToTooltip2 = "";
         var finaltooltip = "";
         if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
-            finaltooltip = finaltooltip + "<table border=\"1\" ><tr><th></th><th><img src=\"" + ximage + "\" alt=\"Human\" height=50 width=50 /></th><th><img src=\"" + yimage + "\" alt=\"Marmoset\" height=50 width=50 /></th></tr><tr><td rowspan=\"1\"><div><i>In-species cluster</i></div></td><td><div style=\"color:" + in_speciesClustercolors[d.cluster_1] + "; -webkit-text-stroke: 0.5 black;\">" + d.cluster_1 + "</div></td><td><div style=\"color:" + in_speciesClustercolors[d.cluster_2] +"; -webkit-text-stroke: 0.5 black;\">" + d.cluster_2 + "</div></td></tr>";
+            finaltooltip = finaltooltip + "<table border=\"1\" ><tr><th></th><th  bgcolor=\"white\"><img src=\"" + ximage + "\" alt=\"Human\" height=50 width=50 /></th><th  bgcolor=\"white\"><img src=\"" + yimage + "\" alt=\"Marmoset\" height=50 width=50 /></th></tr><tr><td rowspan=\"1\"  bgcolor=\"white\"><div><i>In-species cluster</i></div></td><td  bgcolor=\"white\"><div style=\"color:" + in_speciesClustercolors[d.cluster_1] + "; -webkit-text-stroke: 0.5 black;\">" + d.cluster_1 + "</div></td><td  bgcolor=\"white\"><div style=\"color:" + in_speciesClustercolors[d.cluster_2] +"; -webkit-text-stroke: 0.5 black;\">" + d.cluster_2 + "</div></td></tr>";
         }
         else {
-            finaltooltip = finaltooltip + "<table border=\"1\" ><tr><th></th><th><img src=\"" + ximage + "\" alt=\"Human\" height=50 width=50 /></th><th><img src=\"" + yimage + "\" alt=\"Marmoset\" height=50 width=50 /></th></tr><tr><td rowspan=\"1\"><i>In-species cluster</i></div></td><td><div style=\"color:" + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</div></td><td><div style=\"color:" + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</div></td></tr>";
+            finaltooltip = finaltooltip + "<table border=\"1\" ><tr><th></th><th  bgcolor=\"white\"><img src=\"" + ximage + "\" alt=\"Human\" height=50 width=50 /></th><th  bgcolor=\"white\"><img src=\"" + yimage + "\" alt=\"Marmoset\" height=50 width=50 /></th></tr><tr><td rowspan=\"1\"  bgcolor=\"white\"><i>In-species cluster</i></div></td><td  bgcolor=\"white\"><div style=\"color:" + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</div></td><td  bgcolor=\"white\"><div style=\"color:" + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</div></td></tr>";
         }
         if (barflag) {
-            finaltooltip = finaltooltip + "<tr><td rowspan=\"1\"><div><i>Cluster cell count</i></div></td><td>" + inspecies1ClusterCounts[d.cluster_1] + "</td><td>" + inspecies2ClusterCounts[d.cluster_2] + "</td></tr>";
-            finaltooltip = finaltooltip +"<tr><td rowspan=\"1\"><div><i>Subclass</i></div></td><td>Row 1 Cell 2</td><td>Data not available</td></tr><tr><td rowspan=\"1\"><div><i>Class</i></div></td><td>Row 1 Cell 2</td><td>Data not available</td></tr>";
+            finaltooltip = finaltooltip + "<tr><td rowspan=\"1\"  bgcolor=\"white\"><div><i>Cluster cell count</i></div></td><td  bgcolor=\"white\">" + inspecies1ClusterCounts[d.cluster_1] + "</td><td  bgcolor=\"white\">" + inspecies2ClusterCounts[d.cluster_2] + "</td></tr>";
+            finaltooltip = finaltooltip +"<tr><td rowspan=\"1\"  bgcolor=\"white\"><div><i>Subclass</i></div></td><td  bgcolor=\"white\">Row 1 Cell 2</td><td  bgcolor=\"white\">Data not available</td></tr><tr><td rowspan=\"1\"  bgcolor=\"white\"><div><i>Class</i></div></td><td  bgcolor=\"white\">Row 1 Cell 2</td><td  bgcolor=\"white\">Data not available</td></tr>";
         }
 
         //if (layerFlag
         layercheck = ['human','gorilla','chimp'];
         {
             if (layercheck.includes(species1ValueIdentify)) {
-                finaltooltip = finaltooltip + "<tr><td rowspan=\"1\"><i><div style=\"color:#7fc97f;-webkit-text-stroke: 0.5 black;\"> Layer 1</div> <div style=\"color:#beaed4;-webkit-text-stroke: 0.5 black;\"> Layer 2</div> <div style=\"color:#fdc086;-webkit-text-stroke: 0.5 black;\"> Layer 3</div> <div style=\"color:#ffff99;-webkit-text-stroke: 0.5 black;\"> Layer 4</div> <div style=\"color:#386cb0;-webkit-text-stroke: 0.5 black; \"> Layer 5</div> </i></td>";
+                finaltooltip = finaltooltip + "<tr><td rowspan=\"1\" bgcolor=\"white\"><i><div style=\"color:#7fc97f;-webkit-text-stroke: 0.5 black;\"> Layer 1</div> <div style=\"color:#beaed4;-webkit-text-stroke: 0.5 black;\"> Layer 2</div> <div style=\"color:#fdc086;-webkit-text-stroke: 0.5 black;\"> Layer 3</div> <div style=\"color:#ffff99;-webkit-text-stroke: 0.5 black;\"> Layer 4</div> <div style=\"color:#386cb0;-webkit-text-stroke: 0.5 black; \"> Layer 5</div> </i></td>";
             }
-            finaltooltip = finaltooltip + "<td><div style=\"background: conic-gradient( #7fc97f 0.55% 6.08%, #beaed4 6.08% 13.68%, #fdc086 13.68% 23.27%, #ffff99 23.27% 40.47%, #386cb0 40.47%);  border-radius: 50%;width: 80px;height: 80px;\"></div></td>";
+            finaltooltip = finaltooltip + "<td bgcolor=\"white\"><div style=\"background: conic-gradient( #7fc97f 0.55% 6.08%, #beaed4 6.08% 13.68%, #fdc086 13.68% 23.27%, #ffff99 23.27% 40.47%, #386cb0 40.47%);  border-radius: 50%;width: 80px;height: 80px;\"></div></td>";
             if (layercheck.includes(species2ValueIdentify)) {
-                finaltooltip = finaltooltip + "<td><div style=\"background: conic-gradient( #7fc97f 0.55% 6.08%, #beaed4 6.08% 13.68%, #fdc086 13.68% 23.27%, #ffff99 23.27% 40.47%, #386cb0 40.47%);  border-radius: 50%;width: 80px;height: 80px;\"></div></td>";
+                finaltooltip = finaltooltip + "<td bgcolor=\"white\"><div style=\"background: conic-gradient( #7fc97f 0.55% 6.08%, #beaed4 6.08% 13.68%, #fdc086 13.68% 23.27%, #ffff99 23.27% 40.47%, #386cb0 40.47%);  border-radius: 50%;width: 80px;height: 80px;\"></div></td>";
 
             }
             
             finaltooltip = finaltooltip + "</tr>";
         }
-        finaltooltip = finaltooltip + "<tr><td rowspan=\"1\"><div><i>Cluster distance</i></div></td><td colspan=\"2\">" + d.dist + "</td></tr>";
+        let clustDistVal = parseFloat(d.dist).toFixed(2);
+        finaltooltip = finaltooltip + "<tr><td rowspan=\"1\" bgcolor=\"white\"><div><i>Cluster distance</i></div></td><td colspan=\"2\" bgcolor=\"white\">" + clustDistVal + "</td></tr>";
+
         if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
-            finaltooltip = finaltooltip + "<tr><td rowspan=\"1\"><div><i>Cross-species cluster</i></div></td><td colspan=\"2\"><div style=\"color:" + cross_speciesClustercolors[d.cross_species_cluster1_species_1] +"; -webkit-text-stroke: 0.2 black;\" >" + d.cross_species_cluster1_species_1+"</div></td></tr>";
+            finaltooltip = finaltooltip + "<tr><td rowspan=\"1\" bgcolor=\"white\"><div><i>Cross-species cluster</i></div></td><td colspan=\"2\" bgcolor=\"white\"><div style=\"color:" + cross_speciesClustercolors[d.cross_species_cluster1_species_1] +"; -webkit-text-stroke: 0.2 black;\" >" + d.cross_species_cluster1_species_1+"</div></td></tr>";
         }
         finaltooltip = finaltooltip + "</table>";
 
@@ -894,6 +917,7 @@ const simianVis = () => {
         tooltip
             .html(finaltooltip)
             .style("position", "absolute")
+            .style("background-color", "transparent")
             .style("cursor", "default");
 
         if (d3.mouse(this)[0] > height - height / 2) {
