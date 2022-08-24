@@ -882,8 +882,9 @@ const simianVis = () => {
         }
         if (barflag) {
             finaltooltip = finaltooltip + "<tr><td rowspan=\"1\"  bgcolor=\"white\"><div><i>Cluster cell count</i></div></td><td  bgcolor=\"white\">" + inspecies1ClusterCounts[d.cluster_1] + "</td><td  bgcolor=\"white\">" + inspecies2ClusterCounts[d.cluster_2] + "</td></tr>";
-            finaltooltip = finaltooltip +"<tr><td rowspan=\"1\"  bgcolor=\"white\"><div><i>Subclass</i></div></td><td  bgcolor=\"white\">Row 1 Cell 2</td><td  bgcolor=\"white\">Data not available</td></tr><tr><td rowspan=\"1\"  bgcolor=\"white\"><div><i>Class</i></div></td><td  bgcolor=\"white\">Row 1 Cell 2</td><td  bgcolor=\"white\">Data not available</td></tr>";
         }
+            finaltooltip = finaltooltip + "<tr><td rowspan=\"1\"  bgcolor=\"white\"><div><i>Subclass</i></div></td><td  bgcolor=\"white\">"+d.subclass_1+"</td><td  bgcolor=\"white\">"+d.subclass_2+"</td></tr><tr><td rowspan=\"1\"  bgcolor=\"white\"><div><i>Class</i></div></td><td  bgcolor=\"white\">"+d.class_1+"</td><td  bgcolor=\"white\">"+d.class_2+"</td></tr>";
+        
 
         //if (layerFlag
         layercheck = ['human','gorilla','chimp'];
