@@ -451,7 +451,7 @@ void SimianOptionsAction::updateData(std::string Species1, std::string Species2,
     QString _jsonObject;
     _jsonObject += "[";
 
-    QStringList columnNames = { "RowNumber", "species_1", "cluster_1", "species_2", "cluster_2", "dist", "neighborhood", "cross_species_cluster1_species_1", "cross_species_cluster2_species_2", "sortColumn" };
+    QStringList columnNames = { "RowNumber", "species_1", "cluster_1", "species_2", "cluster_2", "dist", "neighborhood", "cross_species_cluster1_species_1", "cross_species_cluster2_species_2", "sortColumn","subclass_1","class_1","subclass_2","class_2"};
 
     for (int i = 0; i < filteredVisData.size(); i++)
     {
@@ -798,7 +798,7 @@ void SimianOptionsAction::filterMultiSelect()
     QString _jsonObject;
     _jsonObject += "[";
 
-    QStringList columnNames = { "RowNumber", "species_1", "cluster_1", "species_2", "cluster_2", "dist", "neighborhood", "cross_species_cluster1_species_1", "cross_species_cluster2_species_2", "sortColumn" };
+    QStringList columnNames = { "RowNumber", "species_1", "cluster_1", "species_2", "cluster_2", "dist", "neighborhood", "cross_species_cluster1_species_1", "cross_species_cluster2_species_2", "sortColumn","subclass_1","class_1","subclass_2","class_2" };
 
     for (int i = 0; i < clusterfilteredVisData.size(); i++)
     {
