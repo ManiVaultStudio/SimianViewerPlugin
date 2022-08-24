@@ -764,7 +764,7 @@ const simianVis = () => {
                .attr("y", -((inspecies1ClusterCounts[uniqueClusters1List[i]]))/100  )
                 .attr("width", (valuenext1 - valnow1) / 2)
                .attr("height", ((inspecies1ClusterCounts[uniqueClusters1List[i]]) / 100 ))
-               .attr("fill", colorNow1);
+               .attr("fill", in_speciesClustercolors[uniqueClusters1List[i]]);
         }
     }
     //////right axis
@@ -809,7 +809,7 @@ const simianVis = () => {
                 .attr("y", valuenext2 + ((valnow2 - valuenext2) / 4))
                 .attr("width", ((inspecies2ClusterCounts[uniqueClusters2List[i]]) / 100 ))
                 .attr("height", (valnow2 - valuenext2) / 2)
-                .attr("fill", colorNow2);
+                .attr("fill", in_speciesClustercolors[uniqueClusters2List[i]]);
         }
 
     }
