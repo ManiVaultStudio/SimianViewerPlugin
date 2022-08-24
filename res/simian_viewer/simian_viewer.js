@@ -887,14 +887,26 @@ const simianVis = () => {
         layercheck = ['human','gorilla','chimp'];
         {
             if (layercheck.includes(species1ValueIdentify) || layercheck.includes(species2ValueIdentify)){
-                finaltooltip = finaltooltip + "<tr><td rowspan=\"1\" bgcolor=\"white\"><i><div> Layer distribution</div><div style=\"color:#7fc97f;-webkit-text-stroke: 0.5 black;font-size: 10px;\"> Layer 1</div> <div style=\"color:#beaed4;-webkit-text-stroke: 0.5 black; font-size: 10px;\"> Layer 2</div> <div style=\"color:#fdc086;-webkit-text-stroke: 0.5 black; font-size: 10px;\"> Layer 3</div> <div style=\"color:#ffff99;-webkit-text-stroke: 0.5 black; font-size: 10px;\"> Layer 4</div> <div style=\"color:#386cb0;-webkit-text-stroke: 0.5 black; font-size: 10px; \"> Layer 5</div> </i></td>";
+                finaltooltip = finaltooltip + "<tr><td rowspan=\"1\" bgcolor=\"white\"><i><div> Layer distribution</div><div style=\" text-align: center;\"><div style=\"color:#7fc97f;-webkit-text-stroke: 0.5 black;font-size: 8px;\"> Layer 1</div> <div style=\"color:#beaed4;-webkit-text-stroke: 0.5 black; font-size: 8px;\"> Layer 2</div> <div style=\"color:#fdc086;-webkit-text-stroke: 0.5 black; font-size: 8px;\"> Layer 3</div> <div style=\"color:#ffff99;-webkit-text-stroke: 0.5 black; font-size: 8px;\"> Layer 4</div> <div style=\"color:#386cb0;-webkit-text-stroke: 0.5 black; font-size: 8px;\"> Layer 5</div> <div style=\"color:#f0027f;-webkit-text-stroke: 0.5 black; font-size: 8px; \"> Layer 6</div></div> </i></td>";
             }
 
             if (layercheck.includes(species1ValueIdentify)) {
-            finaltooltip = finaltooltip + "<td bgcolor=\"white\"><div style=\"background: conic-gradient( #7fc97f 0.55% 6.08%, #beaed4 6.08% 13.68%, #fdc086 13.68% 23.27%, #ffff99 23.27% 40.47%, #386cb0 40.47%);  border-radius: 50%;width: 90px;height: 90px;\"></div></td>";
+                let angle1Sp1 =0.13* 360;
+                let angle2Sp1 =0.30* 360;
+                let angle3Sp1 =0.22* 360;
+                let angle4Sp1 =0.10* 360;
+                let angle5Sp1 =0.16* 360;
+                let angle6Sp1 =0.09* 360;
+                finaltooltip = finaltooltip + "<td bgcolor=\"white\"><div style=\"background: conic-gradient(#7fc97f " + angle1Sp1 + "deg, #beaed4 " + angle1Sp1 + "deg " + angle2Sp1 + "deg, #fdc086 " + angle2Sp1 + "deg " + angle3Sp1 + "deg, #ffff99 " + angle3Sp1 + "deg " + angle4Sp1 + "deg, #386cb0 " + angle4Sp1 + "deg " + angle5Sp1 + "deg, #f0027f " + angle6Sp1 +"deg);  border-radius: 50%;width: 90px;height: 90px;\"></div></td>";
             }
             if (layercheck.includes(species2ValueIdentify)) {
-                finaltooltip = finaltooltip + "<td bgcolor=\"white\"><div style=\"background: conic-gradient( #7fc97f 0.55% 6.08%, #beaed4 6.08% 13.68%, #fdc086 13.68% 23.27%, #ffff99 23.27% 40.47%, #386cb0 40.47%);  border-radius: 50%;width: 90px;height: 90px;\"></div></td>";
+                let angle1Sp2 = 0.30* 360;
+                let angle2Sp2 =0.18* 360;
+                let angle3Sp2 =0.14* 360;
+                let angle4Sp2 =0.09* 360;
+                let angle5Sp2 =0.13* 360;
+                let angle6Sp2 =0.16* 360;
+                finaltooltip = finaltooltip + "<td bgcolor=\"white\"><div style=\"background: conic-gradient(#7fc97f " + angle1Sp2 + "deg, #beaed4 " + angle1Sp2 + "deg " + angle2Sp2 + "deg, #fdc086 " + angle2Sp2 + "deg " + angle3Sp2 + "deg, #ffff99 " + angle3Sp2 + "deg " + angle4Sp2 + "deg, #386cb0 " + angle4Sp2 + "deg " + angle5Sp2 + "deg, #f0027f " + angle6Sp2 +"deg);  border-radius: 50%;width: 90px;height: 90px;\"></div></td>";
 
             }
             
