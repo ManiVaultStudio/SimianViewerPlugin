@@ -933,7 +933,7 @@ const simianVis = () => {
                 let angle4Sp2 = 0.0 * 360;
                 let angle5Sp2 = 0.0 * 360;
                 let angle6Sp2 = 0.0 * 360;
-                if (species1ValueIdentify == 'human') {
+                if (species2ValueIdentify == 'human') {
                     angle1Sp2 = layerInfoForHuman[d.cluster_2][1] * 360;
                     angle2Sp2 = layerInfoForHuman[d.cluster_2][2] * 360;
                     angle3Sp2 = layerInfoForHuman[d.cluster_2][3] * 360;
@@ -941,7 +941,7 @@ const simianVis = () => {
                     angle5Sp2 = layerInfoForHuman[d.cluster_2][5] * 360;
                     angle6Sp2 = layerInfoForHuman[d.cluster_2][6] * 360;
                 }
-                else if (species1ValueIdentify == 'gorilla') {
+                else if (species2ValueIdentify == 'gorilla') {
                     angle1Sp2 = layerInfoForGorilla[d.cluster_2][1] * 360;
                     angle2Sp2 = layerInfoForGorilla[d.cluster_2][2] * 360;
                     angle3Sp2 = layerInfoForGorilla[d.cluster_2][3] * 360;
@@ -949,7 +949,7 @@ const simianVis = () => {
                     angle5Sp2 = layerInfoForGorilla[d.cluster_2][5] * 360;
                     angle6Sp2 = layerInfoForGorilla[d.cluster_2][6] * 360;
                 }
-                else if (species1ValueIdentify == 'chimp') {
+                else if (species2ValueIdentify == 'chimp') {
                     angle1Sp2 = layerInfoForChimp[d.cluster_2][1] * 360;
                     angle2Sp2 = layerInfoForChimp[d.cluster_2][2] * 360;
                     angle3Sp2 = layerInfoForChimp[d.cluster_2][3] * 360;
