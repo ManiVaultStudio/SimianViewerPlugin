@@ -50,7 +50,8 @@ const mapDataBarHuman = {};
 const mapDataBarGorilla = {};
 const mapDataBarMarmoset = {};
 const mapDataBarRhesus = {};
-
+const crossSpecies_ClassMap = { 'Oligo_1': 'glia', 'OPC_2': 'glia', 'Astro_1': 'glia', 'Micro-PVM_1': 'glia', 'Endo_1': 'glia', 'VLMC_1': 'glia', 'OPC_1': 'glia', 'L6 CT_1': 'exc', 'L6b_2': 'exc', 'L5/6 NP_1': 'exc', 'L5/6 NP_2': 'exc', 'L6 CT_2': 'exc', 'L6b_3': 'exc', 'L5 ET_2': 'exc', 'L5 ET_1': 'exc', 'L6b_1': 'exc', 'Lamp5_1': 'inh', 'Vip_5': 'inh', 'Vip_4': 'inh', 'Pax6_1': 'inh', 'Lamp5_2': 'inh', 'Sncg_3': 'inh', 'Vip_8': 'inh', 'Sncg_2': 'inh', 'Vip_1': 'inh', 'Vip_3': 'inh', 'Lamp5_Lhx6_1': 'inh', 'Vip_7': 'inh', 'Vip_2': 'inh', 'Vip_6': 'inh', 'Sncg_1': 'inh', 'Pax6_2': 'inh', 'Sst_3': 'inh', 'Pvalb_4': 'inh', 'Sst_8': 'inh', 'Pvalb_3': 'inh', 'Sst_1': 'inh', 'Sst_2': 'inh', 'Sst_7': 'inh', 'Sst_6': 'inh', 'Sst_5': 'inh', 'Sst_4': 'inh', 'Chandelier_1': 'inh', 'Sst Chodl_1': 'inh', 'Pvalb_2': 'inh', 'Sst_9': 'inh', 'Pvalb_1': 'inh', 'L5 IT_1': 'exc', 'L4 IT_1': 'exc', 'L5 IT_2': 'exc', 'L6 IT_1': 'exc', 'L6 IT Car3_2': 'exc', 'L4 IT_2': 'exc', 'L2/3 IT_1': 'exc', 'L2/3 IT_3': 'exc', 'L2/3 IT_2': 'exc', 'L6 IT Car3_1': 'exc' };
+const crossSpecies_SubClassMap = { 'Oligo_1': 'Oligo', 'OPC_2': 'OPC', 'Astro_1': 'Astro', 'Micro-PVM_1': 'Micro-PVM', 'Endo_1': 'Endo', 'VLMC_1': 'VLMC', 'OPC_1': 'OPC', 'L6 CT_1': 'L6 CT', 'L6b_2': 'L6b', 'L5/6 NP_1': 'L5/6 NP', 'L5/6 NP_2': 'L5/6 NP', 'L6 CT_2': 'L6 CT', 'L6b_3': 'L6b', 'L5 ET_2': 'L5 ET', 'L5 ET_1': 'L5 ET', 'L6b_1': 'L6b', 'Lamp5_1': 'Lamp5', 'Vip_5': 'Vip', 'Vip_4': 'Vip', 'Pax6_1': 'Pax6', 'Lamp5_2': 'Lamp5', 'Sncg_3': 'Pax6', 'Vip_8': 'Sncg', 'Sncg_2': 'Sncg', 'Vip_1': 'Vip', 'Vip_3': 'Vip', 'Lamp5_Lhx6_1': 'Lamp5_Lhx6', 'Vip_7': 'Vip', 'Vip_2': 'Vip', 'Vip_6': 'Vip', 'Sncg_1': 'Sncg', 'Pax6_2': 'Pax6', 'Sst_3': 'Sst', 'Pvalb_4': 'Pvalb', 'Sst_8': 'Sst', 'Pvalb_3': 'Pvalb', 'Sst_1': 'Sst', 'Sst_2': 'Sst', 'Sst_7': 'Sst', 'Sst_6': 'Sst Chodl', 'Sst_5': 'Sst', 'Sst_4': 'Sst', 'Chandelier_1': 'Chandelier', 'Sst Chodl_1': 'Sst Chodl', 'Pvalb_2': 'Pvalb', 'Sst_9': 'Sst', 'Pvalb_1': 'Pvalb', 'L5 IT_1': 'L5 IT', 'L4 IT_1': 'L4 IT', 'L5 IT_2': 'L5 IT', 'L6 IT_1': 'L6 IT', 'L6 IT Car3_2': 'L6 IT Car3', 'L4 IT_2': 'L4 IT', 'L2/3 IT_1': 'L2/3 IT', 'L2/3 IT_3': 'L2/3 IT', 'L2/3 IT_2': 'L4 IT', 'L6 IT Car3_1': 'L6 IT Car3' };
 //Qt Connections
 try {
     new QWebChannel(qt.webChannelTransport, function (channel) {
@@ -240,7 +241,7 @@ const simianVis = () => {
             .attr("x", 30)
             .attr("y", 30)
             .attr("width", 250)
-            .attr("height", 150)
+            .attr("height", 200)
             .html(function (d) {
                 var average = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']) / parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']);
                 //var value = "<div>Number of cluster blocks:<b>" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']
@@ -257,7 +258,10 @@ const simianVis = () => {
                     + "<tr><td rowspan=\"1\" bgcolor=\"white\"><div><i>Minimum distance</i></div></td><td bgcolor=\"white\"><div>" + minVal + "</div></td></tr>"
                     + "<tr><td rowspan=\"1\" bgcolor=\"white\"><div><i>Maximum distance</i></div></td><td bgcolor=\"white\"><div>" + maxVal + "</div></td></tr>"
                     + "<tr><td rowspan=\"1\" bgcolor=\"white\"><div><i>Average distance</i></div></td><td bgcolor=\"white\"><div>" + avgVal + "</div></td></tr>"
-                    + "<tr><td rowspan=\"1\" bgcolor=\"white\"><div><i>Cross-species cluster</i></div></td><td colspan=\"2\" bgcolor=\"white\"><div style=\"color:" + cross_speciesClustercolors[correspondingCrossspeciescluster] + "; -webkit-text-stroke: 0.2 black;\">" + correspondingCrossspeciescluster + "</div></td></tr></table>";
+                    + "<tr><td rowspan=\"1\" bgcolor=\"white\"><div><i>Cross-species cluster</i></div></td><td colspan=\"2\" bgcolor=\"white\"><div style=\"color:" + cross_speciesClustercolors[correspondingCrossspeciescluster] + "; -webkit-text-stroke: 0.2 black;\">" + correspondingCrossspeciescluster + "</div></td></tr>"
+                    + "<tr><td rowspan=\"1\" bgcolor=\"white\"><div><i>Class</i></div></td><td colspan=\"2\" bgcolor=\"white\"><div style=\"color:" + classColors[crossSpecies_ClassMap[correspondingCrossspeciescluster]] + "; -webkit-text-stroke: 0.2 black;\">" + crossSpecies_ClassMap[correspondingCrossspeciescluster] + "</div></td></tr>"
+                    + "<tr><td rowspan=\"1\" bgcolor=\"white\"><div><i>Subclass</i></div></td><td colspan=\"2\" bgcolor=\"white\"><div style=\"color:" + subClassColors[crossSpecies_SubClassMap[correspondingCrossspeciescluster]] + "; -webkit-text-stroke: 0.2 black;\">" + crossSpecies_SubClassMap[correspondingCrossspeciescluster] + "</div></td></tr>"
+                    + "</table>";
 
 
                 return value;
@@ -390,10 +394,10 @@ const simianVis = () => {
             //.style("border-radius", "5px")
             .style("padding", "5px")
             .style("position", "absolute")
-            .attr("x", width - (300+30))
-            .attr("y", height - (150+30) )
+            .attr("x", width - (280))
+            .attr("y", height - (220) )
             .attr("width", 250)
-            .attr("height", 150)
+            .attr("height", 200)
             .html(function (d) {
                 var average = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']) / parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']);
                 //var value = "<div>Number of cluster blocks:<b>" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']
@@ -411,7 +415,10 @@ const simianVis = () => {
                     + "<tr><td rowspan=\"1\" bgcolor=\"white\"><div><i>Minimum distance</i></div></td><td bgcolor=\"white\"><div>" + minVal + "</div></td></tr>"
                     + "<tr><td rowspan=\"1\" bgcolor=\"white\"><div><i>Maximum distance</i></div></td><td bgcolor=\"white\"><div>" + maxVal + "</div></td></tr>"
                     + "<tr><td rowspan=\"1\" bgcolor=\"white\"><div><i>Average distance</i></div></td><td bgcolor=\"white\"><div>" + avgVal + "</div></td></tr>"
-                    + "<tr><td rowspan=\"1\" bgcolor=\"white\"><div><i>Cross-species cluster</i></div></td><td colspan=\"2\" bgcolor=\"white\"><div style=\"color:" + cross_speciesClustercolors[correspondingCrossspeciescluster] +"; -webkit-text-stroke: 0.2 black;\">" + correspondingCrossspeciescluster + "</div></td></tr></table>";
+                    + "<tr><td rowspan=\"1\" bgcolor=\"white\"><div><i>Cross-species cluster</i></div></td><td colspan=\"2\" bgcolor=\"white\"><div style=\"color:" + cross_speciesClustercolors[correspondingCrossspeciescluster] + "; -webkit-text-stroke: 0.2 black;\">" + correspondingCrossspeciescluster + "</div></td></tr>"
+                    + "<tr><td rowspan=\"1\" bgcolor=\"white\"><div><i>Class</i></div></td><td colspan=\"2\" bgcolor=\"white\"><div style=\"color:" + classColors[crossSpecies_ClassMap[correspondingCrossspeciescluster]] + "; -webkit-text-stroke: 0.2 black;\">" + crossSpecies_ClassMap[correspondingCrossspeciescluster] + "</div></td></tr>"
+                    + "<tr><td rowspan=\"1\" bgcolor=\"white\"><div><i>Subclass</i></div></td><td colspan=\"2\" bgcolor=\"white\"><div style=\"color:" + subClassColors[crossSpecies_SubClassMap[correspondingCrossspeciescluster]] + "; -webkit-text-stroke: 0.2 black;\">" + crossSpecies_SubClassMap[correspondingCrossspeciescluster] + "</div></td></tr>"
+                    + "</table>";
 
 
                 return value;
@@ -1015,7 +1022,7 @@ const simianVis = () => {
         }
 
 
-        if (d3.mouse(this)[1] > height / 2) {
+        if (d3.mouse(this)[1] > height / 2.2) {
             if (d3.mouse(this)[1] < height / 2 + height / 4) {
                 tooltip.style("top", d3.mouse(this)[1] - height/3 + "px");
             }
