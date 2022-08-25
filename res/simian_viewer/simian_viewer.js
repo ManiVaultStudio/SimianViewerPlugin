@@ -993,21 +993,6 @@ const simianVis = () => {
             .style("background-color", "transparent")
             .style("cursor", "default");
 
-        if (d3.mouse(this)[0] > height - height / 2) {
-            tooltip.style("top", d3.mouse(this)[1] + 10 + "px");
-        }
-
-        else {
-
-            if (d3.mouse(this)[1] < 0 + height /2 ) {
-                tooltip.style("top", d3.mouse(this)[1] + 50 + "px");
-            }
-
-            else {
-                tooltip.style("top", d3.mouse(this)[1] - 250 + "px");
-}
-
-        }
 
         if (d3.mouse(this)[0] > width - width / 2) {
             tooltip.style("left", d3.mouse(this)[0] - (width / 2) + "px");
@@ -1016,6 +1001,25 @@ const simianVis = () => {
         else {
             tooltip.style("left", d3.mouse(this)[0] + (width / 4) + "px");
         }
+
+        if (d3.mouse(this)[1] > height / 2) {
+            if (d3.mouse(this)[1] < height / 2 + height / 4) {
+                tooltip.style("top", d3.mouse(this)[1] - 150 + "px");
+            }
+            else {
+            tooltip.style("top", d3.mouse(this)[1] - 300 + "px");
+        }
+        }
+        else
+        {
+            if (d3.mouse(this)[1] < height / 2 - height / 4) {
+                tooltip.style("top", d3.mouse(this)[1] + 100 + "px");
+            }
+            else {
+                tooltip.style("top", d3.mouse(this)[1] + 50 + "px");
+            }
+        }
+
 
     };
     var mouseleave = function (d) {
