@@ -996,7 +996,15 @@ const simianVis = () => {
         }
 
         else {
-            tooltip.style("top", d3.mouse(this)[1] - 300 + "px");
+
+            if (d3.mouse(this)[1] < 0 + height /2 ) {
+                tooltip.style("top", d3.mouse(this)[1] + 50 + "px");
+            }
+
+            else {
+                tooltip.style("top", d3.mouse(this)[1] - 250 + "px");
+}
+
         }
 
         if (d3.mouse(this)[0] > width - width / 2) {
