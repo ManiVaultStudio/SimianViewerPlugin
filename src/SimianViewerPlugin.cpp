@@ -3,6 +3,9 @@
 #include "PointData.h"
 #include "event/Event.h"
 #include "ColorData.h"
+
+#include <actions/PluginTriggerAction.h>
+
 #include <QtCore>
 #include <QtDebug>
 #include <QWebEngineView>
@@ -206,9 +209,9 @@ void SimianViewerPlugin::publishCluster(std::string clusterName)
 // Factory
 // =============================================================================
 
-QIcon SimianViewerPluginFactory::getIcon() const
+QIcon SimianViewerPluginFactory::getIcon(const QColor& color /*= Qt::black*/) const
 {
-    return Application::getIconFont("FontAwesome").getIcon("braille");
+    return Application::getIconFont("FontAwesome").getIcon("braille", color);
 }
 
 ViewPlugin* SimianViewerPluginFactory::produce()
@@ -222,6 +225,34 @@ hdps::DataTypes SimianViewerPluginFactory::supportedDataTypes() const
     return supportedTypes;
 }
 
+
+hdps::gui::PluginTriggerActions SimianViewerPluginFactory::getPluginTriggerActions(const hdps::Datasets& datasets) const
+{
+	PluginTriggerActions pluginTriggerActions;
+
+	const auto getInstance = [this]() -> SimianViewerPlugin* {
+		return dynamic_cast<SimianViewerPlugin*>(Application::core()->requestPlugin(getKind()));
+	};
+
+	const auto numberOfDatasets = datasets.count();
+
+	if (PluginFactory::areAllDatasetsOfTheSameType(datasets, PointType)) {
+		if (numberOfDatasets >= 1) {
+			if (datasets.first()->getDataType() == PointType) {
+				auto pluginTriggerAction = createPluginTriggerAction("Simian viewer", "Load dataset in Simian viewer", datasets, "braille");
+
+				connect(pluginTriggerAction, &QAction::triggered, [this, getInstance, datasets]() -> void {
+					for (auto dataset : datasets)
+						getInstance()->loadData(Datasets({ dataset }));
+                });
+
+				pluginTriggerActions << pluginTriggerAction;
+			}
+		}
+	}
+
+	return pluginTriggerActions;
+}
 
 void SimianViewerPlugin::selectCrossSpeciesClusterPoints(std::vector<std::string> selectedIDs)
 {
