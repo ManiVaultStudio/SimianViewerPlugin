@@ -56,10 +56,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _distanceNeighborhoodAction.setEnabled(false);
     _species1Action.setDefaultWidgetFlags(OptionAction::ComboBox);
     _species1Action.setPlaceHolderString(QString("Choose Species1"));
-    _species1Action.initialize(QStringList({ "chimp","gorilla","human","rhesus" }), _species1Action.getPlaceholderString(), _species1Action.getPlaceholderString());
+    _species1Action.initialize(QStringList({ "chimp","gorilla","human","rhesus","marmoset"}), _species1Action.getPlaceholderString(), _species1Action.getPlaceholderString());
     _species2Action.setDefaultWidgetFlags(OptionAction::ComboBox);
     _species2Action.setPlaceHolderString(QString("Choose Species2"));
-    _species2Action.initialize(QStringList({ "gorilla","marmoset","rhesus","chimp" }), _species2Action.getPlaceholderString(), _species2Action.getPlaceholderString());
+    _species2Action.initialize(QStringList({ "gorilla","marmoset","rhesus","chimp","human"}), _species2Action.getPlaceholderString(), _species2Action.getPlaceholderString());
     _crossSpeciesFilterAction.setDefaultWidgetFlags(OptionAction:: ComboBox);
     _crossSpeciesFilterAction.initialize(QStringList({ "all clusters","cross-species clusters" }), "cross-species clusters", "cross-species clusters");
     _multiSelectClusterFilterAction.setDefaultWidgetFlags(OptionsAction::ComboBox | OptionsAction::ListView | OptionsAction::Selection | OptionsAction::File);

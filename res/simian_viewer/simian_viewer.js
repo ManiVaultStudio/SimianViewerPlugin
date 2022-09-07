@@ -899,77 +899,77 @@ const simianVis = () => {
         layercheck = ['human','gorilla','chimp'];
         {
             if (layercheck.includes(species1ValueIdentify) || layercheck.includes(species2ValueIdentify)){
-                finaltooltip = finaltooltip + "<tr><td rowspan=\"1\" bgcolor=\"white\"><i><div> Layer distribution</div><div style=\" text-align: center;\"><div style=\"color:#7fc97f;-webkit-text-stroke: 0.5 black;font-size: 8px;\"> Layer 1</div> <div style=\"color:#beaed4;-webkit-text-stroke: 0.5 black; font-size: 8px;\"> Layer 2</div> <div style=\"color:#fdc086;-webkit-text-stroke: 0.5 black; font-size: 8px;\"> Layer 3</div> <div style=\"color:#ffff99;-webkit-text-stroke: 0.5 black; font-size: 8px;\"> Layer 4</div> <div style=\"color:#386cb0;-webkit-text-stroke: 0.5 black; font-size: 8px;\"> Layer 5</div> <div style=\"color:#f0027f;-webkit-text-stroke: 0.5 black; font-size: 8px; \"> Layer 6</div></div> </i></td>";
+                finaltooltip = finaltooltip + "<tr><td rowspan=\"1\" bgcolor=\"white\"><i><div> Layer distribution</div><div style=\" text-align: center;\"><div style=\"color:#7fc97f;text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;\"> Layer 1</div> <div style=\"color:#beaed4;text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;\"> Layer 2</div> <div style=\"color:#fdc086;text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;\"> Layer 3</div> <div style=\"color:#ffff99;text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;\"> Layer 4</div> <div style=\"color:#386cb0;text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black; \"> Layer 5</div> <div style=\"color:#f0027f;text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black; \"> Layer 6</div></div> </i></td>";
             }
 
             if (layercheck.includes(species1ValueIdentify)) {
-                let angle1Sp1 = 0.0 * 360;
-                let angle2Sp1 = 0.0 * 360;
-                let angle3Sp1 = 0.0 * 360;
-                let angle4Sp1 = 0.0 * 360;
-                let angle5Sp1 = 0.0 * 360;
-                let angle6Sp1 = 0.0 * 360;
+                let angle1Sp1 = 0.0 * 100;
+                let angle2Sp1 = 0.0 * 100;
+                let angle3Sp1 = 0.0 * 100;
+                let angle4Sp1 = 0.0 * 100;
+                let angle5Sp1 = 0.0 * 100;
+                let angle6Sp1 = 0.0 * 100;
                 if (species1ValueIdentify == 'human') {
-                    angle1Sp1 = layerInfoForHuman[d.cluster_1][1] * 360;
-                    angle2Sp1 = layerInfoForHuman[d.cluster_1][2] * 360;
-                    angle3Sp1 = layerInfoForHuman[d.cluster_1][3] * 360;
-                    angle4Sp1 = layerInfoForHuman[d.cluster_1][4] * 360;
-                    angle5Sp1 = layerInfoForHuman[d.cluster_1][5] * 360;
-                    angle6Sp1 = layerInfoForHuman[d.cluster_1][6] * 360;
+                    angle1Sp1 = layerInfoForHuman[d.cluster_1][1] * 100;
+                    angle2Sp1 = layerInfoForHuman[d.cluster_1][2] * 100;
+                    angle3Sp1 = layerInfoForHuman[d.cluster_1][3] * 100;
+                    angle4Sp1 = layerInfoForHuman[d.cluster_1][4] * 100;
+                    angle5Sp1 = layerInfoForHuman[d.cluster_1][5] * 100;
+                    angle6Sp1 = layerInfoForHuman[d.cluster_1][6] * 100;
                 }
                 else if (species1ValueIdentify == 'gorilla') {
-                    angle1Sp1 = layerInfoForGorilla[d.cluster_1][1] * 360;
-                    angle2Sp1 = layerInfoForGorilla[d.cluster_1][2] * 360;
-                    angle3Sp1 = layerInfoForGorilla[d.cluster_1][3] * 360;
-                    angle4Sp1 = layerInfoForGorilla[d.cluster_1][4] * 360;
-                    angle5Sp1 = layerInfoForGorilla[d.cluster_1][5] * 360;
-                    angle6Sp1 = layerInfoForGorilla[d.cluster_1][6] * 360;
+                    angle1Sp1 = layerInfoForGorilla[d.cluster_1][1] * 100;
+                    angle2Sp1 = layerInfoForGorilla[d.cluster_1][2] * 100;
+                    angle3Sp1 = layerInfoForGorilla[d.cluster_1][3] * 100;
+                    angle4Sp1 = layerInfoForGorilla[d.cluster_1][4] * 100;
+                    angle5Sp1 = layerInfoForGorilla[d.cluster_1][5] * 100;
+                    angle6Sp1 = layerInfoForGorilla[d.cluster_1][6] * 100;
                 }
                 else if (species1ValueIdentify == 'chimp') {
-                    angle1Sp1 = layerInfoForChimp[d.cluster_1][1] * 360;
-                    angle2Sp1 = layerInfoForChimp[d.cluster_1][2] * 360;
-                    angle3Sp1 = layerInfoForChimp[d.cluster_1][3] * 360;
-                    angle4Sp1 = layerInfoForChimp[d.cluster_1][4] * 360;
-                    angle5Sp1 = layerInfoForChimp[d.cluster_1][5] * 360;
-                    angle6Sp1 = layerInfoForChimp[d.cluster_1][6] * 360;
+                    angle1Sp1 = layerInfoForChimp[d.cluster_1][1] * 100;
+                    angle2Sp1 = layerInfoForChimp[d.cluster_1][2] * 100;
+                    angle3Sp1 = layerInfoForChimp[d.cluster_1][3] * 100;
+                    angle4Sp1 = layerInfoForChimp[d.cluster_1][4] * 100;
+                    angle5Sp1 = layerInfoForChimp[d.cluster_1][5] * 100;
+                    angle6Sp1 = layerInfoForChimp[d.cluster_1][6] * 100;
                 }
+                finaltooltip = finaltooltip + "<td bgcolor=\"white\"><br/><div style=\"width:110px; align-items: left\"><div>" + "<div style=\"background-color:#7fc97f; width:" + angle1Sp1 + "px\">" + (angle1Sp1 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#beaed4; width:" + angle2Sp1 + "px\">" + (angle2Sp1 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#fdc086; width:" + angle3Sp1 + "px\">" + (angle3Sp1 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#ffff99; width:" + angle4Sp1 + "px\">" + (angle4Sp1 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#386cb0; width:" + angle5Sp1 + "px\">" + (angle5Sp1 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#f0027f; width:" + angle6Sp1 + "px\">" + (angle6Sp1 / 100).toFixed(2) + "</div>" + "</div></div></td>";
 
-                finaltooltip = finaltooltip + "<td bgcolor=\"white\"><div style=\"background: conic-gradient(#7fc97f " + angle1Sp1 + "deg, #beaed4 " + angle1Sp1 + "deg " + angle2Sp1 + "deg, #fdc086 " + angle2Sp1 + "deg " + angle3Sp1 + "deg, #ffff99 " + angle3Sp1 + "deg " + angle4Sp1 + "deg, #386cb0 " + angle4Sp1 + "deg " + angle5Sp1 + "deg, #f0027f " + angle6Sp1 +"deg);  border-radius: 50%;width: 90px;height: 90px;\"></div></td>";
-            }
+                }
             if (layercheck.includes(species2ValueIdentify)) {
-                let angle1Sp2 = 0.0 * 360;
-                let angle2Sp2 = 0.0 * 360;
-                let angle3Sp2 = 0.0 * 360;
-                let angle4Sp2 = 0.0 * 360;
-                let angle5Sp2 = 0.0 * 360;
-                let angle6Sp2 = 0.0 * 360;
+                let angle1Sp2 = 0.0 * 100;
+                let angle2Sp2 = 0.0 * 100;
+                let angle3Sp2 = 0.0 * 100;
+                let angle4Sp2 = 0.0 * 100;
+                let angle5Sp2 = 0.0 * 100;
+                let angle6Sp2 = 0.0 * 100;
                 if (species2ValueIdentify == 'human') {
-                    angle1Sp2 = layerInfoForHuman[d.cluster_2][1] * 360;
-                    angle2Sp2 = layerInfoForHuman[d.cluster_2][2] * 360;
-                    angle3Sp2 = layerInfoForHuman[d.cluster_2][3] * 360;
-                    angle4Sp2 = layerInfoForHuman[d.cluster_2][4] * 360;
-                    angle5Sp2 = layerInfoForHuman[d.cluster_2][5] * 360;
-                    angle6Sp2 = layerInfoForHuman[d.cluster_2][6] * 360;
+                    angle1Sp2 = layerInfoForHuman[d.cluster_2][1] * 100;
+                    angle2Sp2 = layerInfoForHuman[d.cluster_2][2] * 100;
+                    angle3Sp2 = layerInfoForHuman[d.cluster_2][3] * 100;
+                    angle4Sp2 = layerInfoForHuman[d.cluster_2][4] * 100;
+                    angle5Sp2 = layerInfoForHuman[d.cluster_2][5] * 100;
+                    angle6Sp2 = layerInfoForHuman[d.cluster_2][6] * 100;
                 }
                 else if (species2ValueIdentify == 'gorilla') {
-                    angle1Sp2 = layerInfoForGorilla[d.cluster_2][1] * 360;
-                    angle2Sp2 = layerInfoForGorilla[d.cluster_2][2] * 360;
-                    angle3Sp2 = layerInfoForGorilla[d.cluster_2][3] * 360;
-                    angle4Sp2 = layerInfoForGorilla[d.cluster_2][4] * 360;
-                    angle5Sp2 = layerInfoForGorilla[d.cluster_2][5] * 360;
-                    angle6Sp2 = layerInfoForGorilla[d.cluster_2][6] * 360;
+                    angle1Sp2 = layerInfoForGorilla[d.cluster_2][1] * 100;
+                    angle2Sp2 = layerInfoForGorilla[d.cluster_2][2] * 100;
+                    angle3Sp2 = layerInfoForGorilla[d.cluster_2][3] * 100;
+                    angle4Sp2 = layerInfoForGorilla[d.cluster_2][4] * 100;
+                    angle5Sp2 = layerInfoForGorilla[d.cluster_2][5] * 100;
+                    angle6Sp2 = layerInfoForGorilla[d.cluster_2][6] * 100;
                 }
                 else if (species2ValueIdentify == 'chimp') {
-                    angle1Sp2 = layerInfoForChimp[d.cluster_2][1] * 360;
-                    angle2Sp2 = layerInfoForChimp[d.cluster_2][2] * 360;
-                    angle3Sp2 = layerInfoForChimp[d.cluster_2][3] * 360;
-                    angle4Sp2 = layerInfoForChimp[d.cluster_2][4] * 360;
-                    angle5Sp2 = layerInfoForChimp[d.cluster_2][5] * 360;
-                    angle6Sp2 = layerInfoForChimp[d.cluster_2][6] * 360;
+                    angle1Sp2 = layerInfoForChimp[d.cluster_2][1] * 100;
+                    angle2Sp2 = layerInfoForChimp[d.cluster_2][2] * 100;
+                    angle3Sp2 = layerInfoForChimp[d.cluster_2][3] * 100;
+                    angle4Sp2 = layerInfoForChimp[d.cluster_2][4] * 100;
+                    angle5Sp2 = layerInfoForChimp[d.cluster_2][5] * 100;
+                    angle6Sp2 = layerInfoForChimp[d.cluster_2][6] * 100;
                 }
 
 
-                finaltooltip = finaltooltip + "<td bgcolor=\"white\"><div style=\"background: conic-gradient(#7fc97f " + angle1Sp2 + "deg, #beaed4 " + angle1Sp2 + "deg " + angle2Sp2 + "deg, #fdc086 " + angle2Sp2 + "deg " + angle3Sp2 + "deg, #ffff99 " + angle3Sp2 + "deg " + angle4Sp2 + "deg, #386cb0 " + angle4Sp2 + "deg " + angle5Sp2 + "deg, #f0027f " + angle6Sp2 +"deg);  border-radius: 50%;width: 90px;height: 90px;\"></div></td>";
+                finaltooltip = finaltooltip + "<td bgcolor=\"white\"><br/><div style=\"width:110px ; align-items: right\"><div>" + "<div style=\"background-color:#7fc97f; width:" + angle1Sp2 + "px\">" + (angle1Sp2 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#beaed4; width:" + angle2Sp2 + "px\">" + (angle2Sp2 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#fdc086; width:" + angle3Sp2 + "px\">" + (angle3Sp2 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#ffff99; width:" + angle4Sp2 + "px\">" + (angle4Sp2 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#386cb0; width:" + angle5Sp2 + "px\">" + (angle5Sp2 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#f0027f; width:" + angle6Sp2 + "px\">" + (angle6Sp2 / 100).toFixed(2) + "</div>" + "</div></div></td>";
 
             }
             
