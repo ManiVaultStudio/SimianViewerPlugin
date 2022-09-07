@@ -237,8 +237,8 @@ const simianVis = () => {
             //.style("border-radius", "5px")
             .style("padding", "5px")
             .style("position", "absolute")
-            .attr("x", 30)
-            .attr("y", 30)
+            .attr("x", width)
+            .attr("y", 0)
             .attr("width", 250)
             .attr("height", 200)
             .html(function (d) {
@@ -393,8 +393,8 @@ const simianVis = () => {
             //.style("border-radius", "5px")
             .style("padding", "5px")
             .style("position", "absolute")
-            .attr("x", width - (280))
-            .attr("y", height - (220) )
+            .attr("x", width)
+            .attr("y", 0)
             .attr("width", 250)
             .attr("height", 200)
             .html(function (d) {
