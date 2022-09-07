@@ -75,17 +75,16 @@ const simianVis = () => {
     svg.selectAll("*").remove();
     var margin;
     if (barflag) {
-        margin = { top: 50, right: 50, bottom: 80, left: 65 },
+        margin = { top: 50, right: 370, bottom: 80, left: 75 },
             width = window.innerWidth * 0.99 - margin.left - margin.right,
             height = window.innerHeight * 0.99 - margin.top - margin.bottom;
 
     }
     else {
-            margin = { top: 5, right: 5, bottom: 80, left: 65 },
+            margin = { top: 5, right: 325, bottom: 80, left: 75 },
             width = window.innerWidth * 0.99 - margin.left - margin.right,
             height = window.innerHeight * 0.97 - margin.top - margin.bottom;
     }
-     
 
 
     // append the svg object to the body of the page
@@ -823,6 +822,30 @@ const simianVis = () => {
 
     }
 
+    var tooltipWidth;
+    if (barflag) {
+        tooltipWidth = window.innerWidth -width;
+
+    }
+    else {
+        tooltipWidth = window.innerWidth -width;
+    }
+
+
+    var m;
+    var w;
+    var h;
+    if (barflag) {
+        m = { top: 50, right: 350, bottom: 80, left: 65 },
+            w = window.innerWidth-(window.innerWidth * 0.99 - m.left - m.right),
+            h = window.innerHeight-(window.innerHeight * 0.99 - m.top - m.bottom);
+
+    }
+    else {
+        m = { top: 5, right: 305, bottom: 80, left: 65 },
+            w = window.innerWidth-(window.innerWidth * 0.99 - m.left - m.right),
+            h = window.innerHeight-(window.innerHeight * 0.97 - m.top - m.bottom);
+    }
 
     // create a tooltip
     var tooltip = d3
@@ -831,10 +854,11 @@ const simianVis = () => {
         .style("opacity", 0)
         .attr("class", "tooltip")
         .style("background-color", "white")
-        .style("border", "solid")
-        .style("border-width", "2px")
-        .style("border-radius", "5px")
-        .style("padding", "5px")
+        //.style("border", "solid")
+        .style("width", w)
+        //.style("border-width", "2px")
+        //.style("border-radius", "5px")
+        //.style("padding", "5px")
         .style("position", "absolute");
 
     // Three function that change the tooltip when user hover / move / leave a cell
@@ -884,10 +908,10 @@ const simianVis = () => {
         //var species2AddToTooltip2 = "";
         var finaltooltip = "";
         if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
-            finaltooltip = finaltooltip + "<table border=\"1\" ><tr><th></th><th  bgcolor=\"white\"><img src=\"" + ximage + "\" alt=\"Human\" height=50 width=50 /></th><th  bgcolor=\"white\"><img src=\"" + yimage + "\" alt=\"Marmoset\" height=50 width=50 /></th></tr><tr><td rowspan=\"1\"  bgcolor=\"white\"><div><i>In-species cluster</i></div></td><td  bgcolor=\"white\"><div style=\"color:" + in_speciesClustercolors[d.cluster_1] + "; -webkit-text-stroke: 0.5 black;\">" + d.cluster_1 + "</div></td><td  bgcolor=\"white\"><div style=\"color:" + in_speciesClustercolors[d.cluster_2] +"; -webkit-text-stroke: 0.5 black;\">" + d.cluster_2 + "</div></td></tr>";
+            finaltooltip = finaltooltip + "<table border=\"1\"; style=\"table-layout: auto;width: auto;\" ><tr><th></th><th  bgcolor=\"white\"><img src=\"" + ximage + "\" alt=\"Human\" height=50 width=50 /></th><th  bgcolor=\"white\"><img src=\"" + yimage + "\" alt=\"Marmoset\" height=50 width=50 /></th></tr><tr><td rowspan=\"1\"  bgcolor=\"white\"><div><i>In-species cluster</i></div></td><td  bgcolor=\"white\"><div style=\"color:" + in_speciesClustercolors[d.cluster_1] + "; -webkit-text-stroke: 0.5 black;\">" + d.cluster_1 + "</div></td><td  bgcolor=\"white\"><div style=\"color:" + in_speciesClustercolors[d.cluster_2] +"; -webkit-text-stroke: 0.5 black;\">" + d.cluster_2 + "</div></td></tr>";
         }
         else {
-            finaltooltip = finaltooltip + "<table border=\"1\" ><tr><th></th><th  bgcolor=\"white\"><img src=\"" + ximage + "\" alt=\"Human\" height=50 width=50 /></th><th  bgcolor=\"white\"><img src=\"" + yimage + "\" alt=\"Marmoset\" height=50 width=50 /></th></tr><tr><td rowspan=\"1\"  bgcolor=\"white\"><i>In-species cluster</i></div></td><td  bgcolor=\"white\"><div style=\"color:" + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</div></td><td  bgcolor=\"white\"><div style=\"color:" + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</div></td></tr>";
+            finaltooltip = finaltooltip + "<table border=\"1\" ; style=\"table-layout: auto;width: auto;\"><tr><th></th><th  bgcolor=\"white\"><img src=\"" + ximage + "\" alt=\"Human\" height=50 width=50 /></th><th  bgcolor=\"white\"><img src=\"" + yimage + "\" alt=\"Marmoset\" height=50 width=50 /></th></tr><tr><td rowspan=\"1\"  bgcolor=\"white\"><i>In-species cluster</i></div></td><td  bgcolor=\"white\"><div style=\"color:" + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</div></td><td  bgcolor=\"white\"><div style=\"color:" + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</div></td></tr>";
         }
         if (barflag) {
             finaltooltip = finaltooltip + "<tr><td rowspan=\"1\"  bgcolor=\"white\"><div><i>Cluster cell count</i></div></td><td  bgcolor=\"white\">" + inspecies1ClusterCounts[d.cluster_1] + "</td><td  bgcolor=\"white\">" + inspecies2ClusterCounts[d.cluster_2] + "</td></tr>";
@@ -899,7 +923,7 @@ const simianVis = () => {
         layercheck = ['human','gorilla','chimp'];
         {
             if (layercheck.includes(species1ValueIdentify) || layercheck.includes(species2ValueIdentify)){
-                finaltooltip = finaltooltip + "<tr><td rowspan=\"1\" bgcolor=\"white\"><i><div> Layer distribution</div><div style=\" text-align: center;\"><div style=\"color:#7fc97f;text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;\"> Layer 1</div> <div style=\"color:#beaed4;text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;\"> Layer 2</div> <div style=\"color:#fdc086;text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;\"> Layer 3</div> <div style=\"color:#ffff99;text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;\"> Layer 4</div> <div style=\"color:#386cb0;text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black; \"> Layer 5</div> <div style=\"color:#f0027f;text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black; \"> Layer 6</div></div> </i></td>";
+                finaltooltip = finaltooltip + "<tr><td rowspan=\"1\" bgcolor=\"white\"><i><div> Layer distribution</div><div style=\" text-align: center;\"><div style=\"color:#7fc97f;text-shadow: black, black,  black,  black;\"> Layer 1</div> <div style=\"color:#beaed4;text-shadow:  black,  black, black, black;\"> Layer 2</div> <div style=\"color:#fdc086;text-shadow:  black,  black,  black, black;\"> Layer 3</div> <div style=\"color:#ffff99;text-shadow:  black,  black,  black,  black;\"> Layer 4</div> <div style=\"color:#386cb0;text-shadow:  black, black,  black,  black; \"> Layer 5</div> <div style=\"color:#f0027f;text-shadow:  black,  black,  black, black; \"> Layer 6</div></div> </i></td>";
             }
 
             if (layercheck.includes(species1ValueIdentify)) {
@@ -933,7 +957,7 @@ const simianVis = () => {
                     angle5Sp1 = layerInfoForChimp[d.cluster_1][5] * 100;
                     angle6Sp1 = layerInfoForChimp[d.cluster_1][6] * 100;
                 }
-                finaltooltip = finaltooltip + "<td bgcolor=\"white\"><br/><div style=\"width:110px; align-items: left\"><div>" + "<div style=\"background-color:#7fc97f; width:" + angle1Sp1 + "px\">" + (angle1Sp1 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#beaed4; width:" + angle2Sp1 + "px\">" + (angle2Sp1 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#fdc086; width:" + angle3Sp1 + "px\">" + (angle3Sp1 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#ffff99; width:" + angle4Sp1 + "px\">" + (angle4Sp1 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#386cb0; width:" + angle5Sp1 + "px\">" + (angle5Sp1 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#f0027f; width:" + angle6Sp1 + "px\">" + (angle6Sp1 / 100).toFixed(2) + "</div>" + "</div></div></td>";
+                finaltooltip = finaltooltip + "<td bgcolor=\"white\"><br/><div style=\" align-items: left\"><div>" + "<div style=\"background-color:#7fc97f; width:" + angle1Sp1 + "%\">" + (angle1Sp1 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#beaed4; width:" + angle2Sp1 + "%\">" + (angle2Sp1 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#fdc086; width:" + angle3Sp1 + "%\">" + (angle3Sp1 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#ffff99; width:" + angle4Sp1 + "%\">" + (angle4Sp1 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#386cb0; width:" + angle5Sp1 + "%\">" + (angle5Sp1 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#f0027f; width:" + angle6Sp1 + "%\">" + (angle6Sp1 / 100).toFixed(2) + "</div>" + "</div></div></td>";
 
                 }
             if (layercheck.includes(species2ValueIdentify)) {
@@ -969,7 +993,7 @@ const simianVis = () => {
                 }
 
 
-                finaltooltip = finaltooltip + "<td bgcolor=\"white\"><br/><div style=\"width:110px ; align-items: right\"><div>" + "<div style=\"background-color:#7fc97f; width:" + angle1Sp2 + "px\">" + (angle1Sp2 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#beaed4; width:" + angle2Sp2 + "px\">" + (angle2Sp2 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#fdc086; width:" + angle3Sp2 + "px\">" + (angle3Sp2 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#ffff99; width:" + angle4Sp2 + "px\">" + (angle4Sp2 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#386cb0; width:" + angle5Sp2 + "px\">" + (angle5Sp2 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#f0027f; width:" + angle6Sp2 + "px\">" + (angle6Sp2 / 100).toFixed(2) + "</div>" + "</div></div></td>";
+                finaltooltip = finaltooltip + "<td bgcolor=\"white\"><br/><div style=\" align-items: right\"><div>" + "<div style=\"background-color:#7fc97f; width:" + angle1Sp2 + "%\">" + (angle1Sp2 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#beaed4; width:" + angle2Sp2 + "%\">" + (angle2Sp2 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#fdc086; width:" + angle3Sp2 + "%\">" + (angle3Sp2 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#ffff99; width:" + angle4Sp2 + "%\">" + (angle4Sp2 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#386cb0; width:" + angle5Sp2 + "%\">" + (angle5Sp2 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#f0027f; width:" + angle6Sp2 + "%\">" + (angle6Sp2 / 100).toFixed(2) + "</div>" + "</div></div></td>";
 
             }
             
@@ -994,51 +1018,53 @@ const simianVis = () => {
 
         //}
 
+
         tooltip
             .html(finaltooltip)
-            .style("position", "absolute")
             .style("background-color", "transparent")
-            .style("cursor", "default");
+            //.style("width", tooltipWidth)
+            .style("right", 0)
+            .style("top", 0);
 
 
-        if (d3.mouse(this)[0] > width/2.5) {
-            if (d3.mouse(this)[0] < width / 2+width/4) {
-                tooltip.style("left", d3.mouse(this)[0] - (width / 2.5) + "px");
-            }
-            else {
-                tooltip.style("left", d3.mouse(this)[0] - (width / 2.5) + "px");
-            }
+        //if (d3.mouse(this)[0] > width/2.5) {
+        //    if (d3.mouse(this)[0] < width / 2+width/4) {
+        //        tooltip.style("left", d3.mouse(this)[0] - (width / 2.5) + "px");
+        //    }
+        //    else {
+        //        tooltip.style("left", d3.mouse(this)[0] - (width / 2.5) + "px");
+        //    }
 
-        }
+        //}
 
-        else {
-            if (d3.mouse(this)[0] < width / 2 - width / 4) {
-                tooltip.style("left", d3.mouse(this)[0] + (width / 4) + "px");
-            }
-            else {
-                tooltip.style("left", d3.mouse(this)[0] + (width / 4) + "px");
-            }
+        //else {
+        //    if (d3.mouse(this)[0] < width / 2 - width / 4) {
+        //        tooltip.style("left", d3.mouse(this)[0] + (width / 4) + "px");
+        //    }
+        //    else {
+        //        tooltip.style("left", d3.mouse(this)[0] + (width / 4) + "px");
+        //    }
 
-        }
+        //}
 
 
-        if (d3.mouse(this)[1] > height / 2.2) {
-            if (d3.mouse(this)[1] < height / 2 + height / 4) {
-                tooltip.style("top", d3.mouse(this)[1] - height/3 + "px");
-            }
-            else {
-            tooltip.style("top", d3.mouse(this)[1] - height/2 + "px");
-        }
-        }
-        else
-        {
-            if (d3.mouse(this)[1] < height / 2 - height / 4) {
-                tooltip.style("top", d3.mouse(this)[1] + height/6 + "px");
-            }
-            else {
-                tooltip.style("top", d3.mouse(this)[1] + height/8 + "px");
-            }
-        }
+        //if (d3.mouse(this)[1] > height / 2.2) {
+        //    if (d3.mouse(this)[1] < height / 2 + height / 4) {
+        //        tooltip.style("top", d3.mouse(this)[1] - height/3 + "px");
+        //    }
+        //    else {
+        //    tooltip.style("top", d3.mouse(this)[1] - height/2 + "px");
+        //}
+        //}
+        //else
+        //{
+        //    if (d3.mouse(this)[1] < height / 2 - height / 4) {
+        //        tooltip.style("top", d3.mouse(this)[1] + height/6 + "px");
+        //    }
+        //    else {
+        //        tooltip.style("top", d3.mouse(this)[1] + height/8 + "px");
+        //    }
+        //}
 
 
     };
