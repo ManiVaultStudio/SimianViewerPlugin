@@ -27,6 +27,7 @@ signals:
     void qt_setColor(QString data);
     void qt_setBackgroundColor(QString data);
     void qt_histChart(QString data);
+    void qt_absoluteLayerValues(QString data);
     void qt_inspeciesClusterCounts(QString data);
     void qt_setRangeValue(QString data);
     void qt_addAvailableData(QString name);
@@ -52,6 +53,7 @@ public:
     void setColor(QString visColorContent);
     void setBackgroundColor(QString visColorContent);
     void histChart(QString visColorContent);
+    void absoluteLayerValues(QString visColorContent);
     void inspeciesClusterCounts(QString visCountClusterContent);
     void setRangeValue(QString visRangeValueContent);
 protected:

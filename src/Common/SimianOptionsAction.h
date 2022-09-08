@@ -186,6 +186,7 @@ public: // Action getters
     OptionAction& getNeighborhoodAction() { return _neighborhoodAction; }
     IntegralAction& getDistanceAction() { return _distanceAction; };
     IntegralAction& getHistBarAction() { return _histBarAction; };
+    IntegralAction& getAbsoluteLayerValuesAction() { return _absoluteLayerValuesAction; };
     DatasetPickerAction& getCrossSpecies1DatasetLinkerAction() { return _crossSpecies1DatasetLinkerAction; };
     DatasetPickerAction& getCrossSpecies2DatasetLinkerAction() { return _crossSpecies2DatasetLinkerAction; };
     DatasetPickerAction& getInSpecies1DatasetLinkerAction() { return _inSpecies1DatasetLinkerAction; };
@@ -212,6 +213,7 @@ protected:
     std::vector<std::vector<std::string>>                _simianData;
     OptionsAction                 _multiSelectClusterFilterAction;
     IntegralAction _histBarAction;
+    IntegralAction _absoluteLayerValuesAction;
     bool                        _isLoading;
     SpeciesAction               _speciesAction;
     ClusterAction               _clusterAction;
