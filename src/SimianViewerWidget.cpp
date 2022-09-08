@@ -147,6 +147,11 @@ void SimianViewerWidget::histChart(QString visColorContent)
     emit _communicationObject->qt_histChart(visColorContent);
 }
 
+void SimianViewerWidget::absoluteLayerValues(QString visColorContent)
+{
+    emit _communicationObject->qt_absoluteLayerValues(visColorContent);
+}
+
 void SimianViewerWidget::inspeciesClusterCounts(QString visCountClusterContent)
 {
     emit _communicationObject->qt_inspeciesClusterCounts(visCountClusterContent);

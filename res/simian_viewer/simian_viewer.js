@@ -23,6 +23,7 @@ var svg;
 var qtColor = "Black to white";
 var colorMirror = false;
 var barflag = false;
+var absoluteLayerValuesflag = false;
 var layerFlag = false;
 var backgroundColor = "#ffffff";
 //onresize adjust chart dimensions
@@ -61,6 +62,7 @@ try {
         QtBridge.qt_setColor.connect(function () { setColor(arguments[0]); });
         QtBridge.qt_setBackgroundColor.connect(function () { setBackgroundColor(arguments[0]); });
         QtBridge.qt_histChart.connect(function () { histChart(arguments[0]); });
+        QtBridge.qt_absoluteLayerValues.connect(function () { absoluteLayerValues(arguments[0]); });
         QtBridge.qt_setRangeValue.connect(function () { setRangeValue(arguments[0]); });
         QtBridge.qt_inspeciesClusterCounts.connect(function () { setInspeciesClusterCounts(arguments[0]); });
         notifyBridgeAvailable();
@@ -1673,6 +1675,24 @@ function queuehistChart(valD) {
 
     simianVis();
 }
+
+
+
+function absoluteLayerValues(d) {
+
+    queueabsoluteLayerValues(d);
+}
+function queueabsoluteLayerValues(valD) {
+    if (valD == "F") {
+        absoluteLayerValuesflag = false;
+    }
+    else {
+        absoluteLayerValuesflag = true;
+    }
+
+    simianVis();
+}
+
 
 //Range Options
 function setRangeValue(d) {
