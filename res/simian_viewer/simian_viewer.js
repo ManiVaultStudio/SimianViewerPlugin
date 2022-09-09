@@ -910,10 +910,10 @@ const simianVis = () => {
         //var species2AddToTooltip2 = "";
         var finaltooltip = "";
         if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
-            finaltooltip = finaltooltip + "<table border=\"1\"; style=\"table-layout: auto;width: auto;\" ><tr><th></th><th  bgcolor=\"white\"><img src=\"" + ximage + "\" alt=\"Human\" height=50 width=50 /></th><th  bgcolor=\"white\"><img src=\"" + yimage + "\" alt=\"Marmoset\" height=50 width=50 /></th></tr><tr><td rowspan=\"1\"  bgcolor=\"white\"><div><i>In-species cluster</i></div></td><td  bgcolor=\"white\"><div style=\"color:" + in_speciesClustercolors[d.cluster_1] + "; -webkit-text-stroke: 0.5 black;\">" + d.cluster_1 + "</div></td><td  bgcolor=\"white\"><div style=\"color:" + in_speciesClustercolors[d.cluster_2] +"; -webkit-text-stroke: 0.5 black;\">" + d.cluster_2 + "</div></td></tr>";
+            finaltooltip = finaltooltip + "<table border=\"1\"; style=\"table-layout: auto;width: auto;\" ><tr><th></th><th  bgcolor=\"white\"><img src=\"" + ximage + "\" alt=\"" + species1ValueIdentify + "\" height=50 width=50 /></th><th  bgcolor=\"white\"><img src=\"" + yimage + "\" alt=\"" + species2ValueIdentify+"\" height=50 width=50 /></th></tr><tr><td rowspan=\"1\"  bgcolor=\"white\"><div><i>In-species cluster</i></div></td><td  bgcolor=\"white\"><div style=\"color:" + in_speciesClustercolors[d.cluster_1] + "; -webkit-text-stroke: 0.5 black;\">" + d.cluster_1 + "</div></td><td  bgcolor=\"white\"><div style=\"color:" + in_speciesClustercolors[d.cluster_2] +"; -webkit-text-stroke: 0.5 black;\">" + d.cluster_2 + "</div></td></tr>";
         }
         else {
-            finaltooltip = finaltooltip + "<table border=\"1\" ; style=\"table-layout: auto;width: auto;\"><tr><th></th><th  bgcolor=\"white\"><img src=\"" + ximage + "\" alt=\"Human\" height=50 width=50 /></th><th  bgcolor=\"white\"><img src=\"" + yimage + "\" alt=\"Marmoset\" height=50 width=50 /></th></tr><tr><td rowspan=\"1\"  bgcolor=\"white\"><i>In-species cluster</i></div></td><td  bgcolor=\"white\"><div style=\"color:" + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</div></td><td  bgcolor=\"white\"><div style=\"color:" + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</div></td></tr>";
+            finaltooltip = finaltooltip + "<table border=\"1\" ; style=\"table-layout: auto;width: auto;\"><tr><th></th><th  bgcolor=\"white\"><img src=\"" + ximage + "\" alt=\"" + species1ValueIdentify + "\" height=50 width=50 /></th><th  bgcolor=\"white\"><img src=\"" + yimage + "\" alt=\"" + species2ValueIdentify+"\" height=50 width=50 /></th></tr><tr><td rowspan=\"1\"  bgcolor=\"white\"><i>In-species cluster</i></div></td><td  bgcolor=\"white\"><div style=\"color:" + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</div></td><td  bgcolor=\"white\"><div style=\"color:" + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</div></td></tr>";
         }
         if (barflag) {
             finaltooltip = finaltooltip + "<tr><td rowspan=\"1\"  bgcolor=\"white\"><div><i>Cluster cell count</i></div></td><td  bgcolor=\"white\">" + inspecies1ClusterCounts[d.cluster_1] + "</td><td  bgcolor=\"white\">" + inspecies2ClusterCounts[d.cluster_2] + "</td></tr>";
@@ -1561,6 +1561,14 @@ const simianVis = () => {
             yimage = 'https://i.ibb.co/SXjQXNN/marmoset-dark.png';
         }
     }
+    else if (species2ValueIdentify == "human") {
+        if (luma < 40) {
+            ximage = 'https://i.ibb.co/9bBsDpZ/human-light.png';
+        }
+        else {
+            ximage = 'https://i.ibb.co/nD675k0/human-dark.png';
+        }
+    }
     else if (species2ValueIdentify == "rhesus") {
         if (luma < 40) {
             yimage = 'https://i.ibb.co/YTdCB33/rhesus-light.png';
@@ -1610,7 +1618,14 @@ const simianVis = () => {
             ximage = 'https://i.ibb.co/nD675k0/human-dark.png';
         }
     }
-
+    else if (species1ValueIdentify == "marmoset") {
+        if (luma < 40) {
+            yimage = 'https://i.ibb.co/b3mDHXN/marmoset-light.png';
+        }
+        else {
+            yimage = 'https://i.ibb.co/SXjQXNN/marmoset-dark.png';
+        }
+    }
 
     if (yimage!=="") {
         svg.append('image')
