@@ -22,8 +22,9 @@ public:
     SimianViewerCommunicationObject(SimianViewerWidget* parent);
 
 signals:
-    void qt_setData(QString data);
+    void qt_setData(QString data); 
     void qt_setClusters(QString data);
+    void qt_resetView(QString data);
     void qt_setColor(QString data);
     void qt_setBackgroundColor(QString data);
     void qt_histChart(QString data);
@@ -48,7 +49,8 @@ public:
     ~SimianViewerWidget() override;
 
     void addDataOption(const QString option);
-    void setData(std::string visDataContent);
+    void setData(std::string visDataContent); 
+    void resetView(std::string visDataContent);
     void setClusters(QStringList visClusterContent);
     void setColor(QString visColorContent);
     void setBackgroundColor(QString visColorContent);

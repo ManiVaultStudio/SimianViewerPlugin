@@ -58,6 +58,7 @@ try {
     new QWebChannel(qt.webChannelTransport, function (channel) {
         QtBridge = channel.objects.QtBridge;
         QtBridge.qt_setData.connect(function () { setData(arguments[0]); });
+        QtBridge.qt_resetView.connect(function () { resetView(arguments[0]); });
         QtBridge.qt_setClusters.connect(function () { setClusters(arguments[0]); });
         QtBridge.qt_setColor.connect(function () { setColor(arguments[0]); });
         QtBridge.qt_setBackgroundColor.connect(function () { setBackgroundColor(arguments[0]); });
@@ -174,6 +175,17 @@ const simianVis = () => {
                 }
             }
         }
+        else if (species1ValueIdentify == "marmoset") {
+            correspondingCrossspeciescluster = [mapDataforBorderMarmoset[uniqueClusters1List[indexOfElement]]];
+            for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
+                if (mapDataforBorderMarmoset[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
+                    XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
+                    if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i + 1]); }
+                    else { XLastElement = width; }
+                    break;
+                }
+            }
+        }
         ////y
         if (species2ValueIdentify == "chimp") {
             for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
@@ -208,6 +220,16 @@ const simianVis = () => {
         else if (species2ValueIdentify == "rhesus") {
             for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
                 if (mapDataforBorderRhesus[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
+                    YFirstElement = y(crossSpeciesFilterspecies2Cluster[i]);
+                    if (i > 0) { YLastElement = y(crossSpeciesFilterspecies2Cluster[i - 1]); }
+                    else { YLastElement = height; }
+                    break;
+                }
+            }
+        }
+        else if (species2ValueIdentify == "human") {
+            for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
+                if (mapDataforBorderHuman[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
                     YFirstElement = y(crossSpeciesFilterspecies2Cluster[i]);
                     if (i > 0) { YLastElement = y(crossSpeciesFilterspecies2Cluster[i - 1]); }
                     else { YLastElement = height; }
@@ -329,6 +351,17 @@ const simianVis = () => {
                 }
             }
         }
+        else if (species2ValueIdentify == "human") {
+            correspondingCrossspeciescluster = [mapDataforBorderHuman[uniqueClusters2List[indexOfElement]]];
+            for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
+                if (mapDataforBorderHuman[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
+                    YFirstElement = y(crossSpeciesFilterspecies2Cluster[i]);
+                    if (i > 0) { YLastElement = y(crossSpeciesFilterspecies2Cluster[i - 1]); }
+                    else { YLastElement = height; }
+                    break;
+                }
+            }
+        }
         ////x
 
         if (species1ValueIdentify == "human") {
@@ -364,6 +397,16 @@ const simianVis = () => {
         else if (species1ValueIdentify == "rhesus") {
             for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
                 if (mapDataforBorderRhesus[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
+                    XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
+                    if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i + 1]); }
+                    else { XLastElement = width; }
+                    break;
+                }
+            }
+        }
+        else if (species1ValueIdentify == "marmoset") {
+            for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
+                if (mapDataforBorderMarmoset[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
                     XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
                     if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i + 1]); }
                     else { XLastElement = width; }
@@ -682,6 +725,9 @@ const simianVis = () => {
         else if (species1ValueIdentify == "rhesus") {
             colorNow1 = cross_speciesClustercolors[mapDataforBorderRhesus[uniqueClusters1List[i]]];
         }
+        else if (species1ValueIdentify == "marmoset") {
+            colorNow1 = cross_speciesClustercolors[mapDataforBorderMarmoset[uniqueClusters1List[i]]];
+        }
         svg.append("line")
             .attr("x1", valnow1)
             .attr("x2", valuenext1)
@@ -721,6 +767,9 @@ const simianVis = () => {
         else if (species2ValueIdentify == "rhesus") {
             colorNow2 = cross_speciesClustercolors[mapDataforBorderRhesus[uniqueClusters2List[i]]];
         }
+        else if (species2ValueIdentify == "human") {
+            colorNow2 = cross_speciesClustercolors[mapDataforBorderHuman[uniqueClusters2List[i]]];
+        }
         svg.append("line")
             .attr("x1", 0)
             .attr("x2", 0)
@@ -758,6 +807,9 @@ const simianVis = () => {
         }
         else if (species1ValueIdentify == "rhesus") {
             colorNow1 = cross_speciesClustercolors[mapDataforBorderRhesus[uniqueClusters1List[i]]];
+        }
+        else if (species1ValueIdentify == "marmoset") {
+            colorNow1 = cross_speciesClustercolors[mapDataforBorderMarmoset[uniqueClusters1List[i]]];
         }
         svg.append("line")
             .attr("x1", valnow1)
@@ -803,6 +855,9 @@ const simianVis = () => {
         }
         else if (species2ValueIdentify == "rhesus") {
             colorNow2 = cross_speciesClustercolors[mapDataforBorderRhesus[uniqueClusters2List[i]]];
+        }
+        else if (species2ValueIdentify == "human") {
+            colorNow2 = cross_speciesClustercolors[mapDataforBorderHuman[uniqueClusters2List[i]]];
         }
         svg.append("line")
             .attr("x1", width)
@@ -1347,6 +1402,17 @@ const simianVis = () => {
                     }
                 }
             }
+            else if (species1ValueIdentify == "marmoset") {
+                correspondingCrossspeciescluster = mapDataforBorderMarmoset[elementVal];
+                for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
+                    if (mapDataforBorderMarmoset[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
+                        XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
+                        if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i + 1]); }
+                        else { XLastElement = width; }
+                        break;
+                    }
+                }
+            }
             ////y
             if (species2ValueIdentify == "chimp") {
                 for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
@@ -1381,6 +1447,16 @@ const simianVis = () => {
             else if (species2ValueIdentify == "rhesus") {
                 for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
                     if (mapDataforBorderRhesus[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
+                        YFirstElement = y(crossSpeciesFilterspecies2Cluster[i]);
+                        if (i > 0) { YLastElement = y(crossSpeciesFilterspecies2Cluster[i - 1]); }
+                        else { YLastElement = height; }
+                        break;
+                    }
+                }
+            }
+            else if (species2ValueIdentify == "human") {
+                for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
+                    if (mapDataforBorderHuman[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
                         YFirstElement = y(crossSpeciesFilterspecies2Cluster[i]);
                         if (i > 0) { YLastElement = y(crossSpeciesFilterspecies2Cluster[i - 1]); }
                         else { YLastElement = height; }
@@ -1464,6 +1540,17 @@ const simianVis = () => {
                     }
                 }
             }
+            else if (species2ValueIdentify == "human") {
+                correspondingCrossspeciescluster = mapDataforBorderHuman[elementVal];
+                for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
+                    if (mapDataforBorderHuman[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
+                        YFirstElement = y(crossSpeciesFilterspecies2Cluster[i]);
+                        if (i > 0) { YLastElement = y(crossSpeciesFilterspecies2Cluster[i - 1]); }
+                        else { YLastElement = height; }
+                        break;
+                    }
+                }
+            }
             ////x
 
             if (species1ValueIdentify == "human") {
@@ -1499,6 +1586,16 @@ const simianVis = () => {
             else if (species1ValueIdentify == "rhesus") {
                 for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
                     if (mapDataforBorderRhesus[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
+                        XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
+                        if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i + 1]); }
+                        else { XLastElement = width; }
+                        break;
+                    }
+                }
+            }
+            else if (species1ValueIdentify == "marmoset") {
+                for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
+                    if (mapDataforBorderMarmoset[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
                         XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
                         if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i + 1]); }
                         else { XLastElement = width; }
@@ -1653,6 +1750,8 @@ const simianVis = () => {
 function setData(d) {
     _dataQueue.addData(d);
 }
+
+
 function queueData(d) {
     cross_speciesClusterInfo = { 'Chandelier_1': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'L2/3 IT_1': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'L2/3 IT_2': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'L2/3 IT_3': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'L4 IT_1': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'L4 IT_2': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'L5 ET_1': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'L5 ET_2': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'L5 IT_1': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'L5 IT_2': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'L5/6 NP_1': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'L5/6 NP_2': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'L6 CT_1': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'L6 CT_2': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'L6 IT_1': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'L6 IT Car3_1': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'L6 IT Car3_2': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'L6b_1': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'L6b_2': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'L6b_3': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Lamp5_1': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Lamp5_2': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Lamp5_Lhx6_1': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Pax6_1': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Pax6_2': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Pvalb_1': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Pvalb_2': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Pvalb_3': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Pvalb_4': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Sncg_1': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Sncg_2': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Sncg_3': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Sst_1': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Sst_2': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Sst_3': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Sst_4': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Sst_5': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Sst_6': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Sst_7': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Sst_8': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Sst_9': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Sst Chodl_1': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Vip_1': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Vip_2': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Vip_3': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Vip_4': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Vip_5': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Vip_6': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Vip_7': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Vip_8': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Astro_1': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Endo_1': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Micro-PVM_1': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'Oligo_1': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'OPC_1': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'OPC_2': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 }, 'VLMC_1': { 'averageDistance': 0.0, 'maxDistance': 0.0, 'minDistance': 9999.0, 'numberOfCells': 0 } }
 
@@ -1808,6 +1907,23 @@ function queueRangeValue(minRangeVal, maxRangeVal) {
 function setClusters(d) {
     queueClusters(d);
 }
+function resetView(d) {
+    queueresetView(d);
+}
+function queueresetView(d) {
+/*    log("\n\n\n\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+    log(d);
+    log("Its here");
+
+    log("\n\n\n\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+    if (d == "Reset")
+    {
+        d3.selectAll('svg').remove();
+    }*/
+    d3.selectAll('svg').remove();
+}
+
+
 function queueClusters(d) {
     _clustersReceived = [];
     obj = JSON.parse(d);

@@ -61,7 +61,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _species1Action.initialize(QStringList({ "chimp","gorilla","human","rhesus","marmoset"}), _species1Action.getPlaceholderString(), _species1Action.getPlaceholderString());
     _species2Action.setDefaultWidgetFlags(OptionAction::ComboBox);
     _species2Action.setPlaceHolderString(QString("Choose Species2"));
-    _species2Action.initialize(QStringList({ "gorilla","marmoset","rhesus","chimp","human"}), _species2Action.getPlaceholderString(), _species2Action.getPlaceholderString());
+ //   _species2Action.initialize(QStringList({ "gorilla","marmoset","rhesus","chimp","human"}), _species2Action.getPlaceholderString(), _species2Action.getPlaceholderString());
     _crossSpeciesFilterAction.setDefaultWidgetFlags(OptionAction:: ComboBox);
     _crossSpeciesFilterAction.initialize(QStringList({ "all clusters","cross-species clusters" }), "cross-species clusters", "cross-species clusters");
     _multiSelectClusterFilterAction.setDefaultWidgetFlags(OptionsAction::ComboBox | OptionsAction::ListView | OptionsAction::Selection | OptionsAction::File);
@@ -147,6 +147,13 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
         if (_species1Action.getCurrentText().isValidUtf16())
         {
             _species2Action.setEnabled(true);
+            _simianViewerPlugin.getWidget()->resetView("Reset");
+            _species2Action.setCurrentIndex(0);
+            _species2Action.setPlaceHolderString(QString("Choose Species2"));
+            _species2Action.initialize(QStringList({ }), _species2Action.getPlaceholderString(), _species2Action.getPlaceholderString());
+            QStringList speciesNames = { "gorilla","marmoset","rhesus","chimp","human" };
+            speciesNames.removeAll(_species1Action.getCurrentText());
+            _species2Action.initialize(QStringList({ speciesNames }), _species2Action.getPlaceholderString(), _species2Action.getPlaceholderString());
         }
         else {
             _species2Action.setEnabled(false);
@@ -166,10 +173,12 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             _clusterAction.setEnabled(false);
             _distanceNeighborhoodAction.setEnabled(false);
         }
-        if (_species1Action.getCurrentText() !="" && _species2Action.getCurrentText() != "")
-        {
-            updateData((_species1Action.getCurrentText()).toStdString(), (_species2Action.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString(), (_distanceAction.getValue()), (_crossSpeciesFilterAction.getCurrentText()).toStdString());
-        }
+
+
+        //if (_species1Action.getCurrentText() !="" && _species2Action.getCurrentText() != "")
+        //{
+        //    updateData((_species1Action.getCurrentText()).toStdString(), (_species2Action.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString(), (_distanceAction.getValue()), (_crossSpeciesFilterAction.getCurrentText()).toStdString());
+        //}
     };
     const auto updateSpecies2 = [this]() -> void
     {
