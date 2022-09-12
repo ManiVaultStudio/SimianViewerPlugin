@@ -1114,7 +1114,12 @@ const simianVis = () => {
                 }
 
             }
+
+
+            
+
             let totalAbsoluteValues = angle1Sp2 + angle1Sp1 + angle2Sp2 + angle2Sp1 + angle3Sp2 + angle3Sp1 + angle4Sp2 + angle4Sp1 + angle5Sp2 + angle5Sp1 + angle6Sp2 + angle6Sp1;
+
             if (layercheck.includes(species1ValueIdentify)) {
 
                 if (absoluteLayerValuesflag) {
@@ -1134,6 +1139,88 @@ const simianVis = () => {
                 else {
                     finaltooltip = finaltooltip + "<td bgcolor=\"white\"><br/><div style=\" align-items: right\"><div>" + "<div style=\"background-color:#7fc97f; width:" + angle1Sp2 + "%\">" + (angle1Sp2 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#beaed4; width:" + angle2Sp2 + "%\">" + (angle2Sp2 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#fdc086; width:" + angle3Sp2 + "%\">" + (angle3Sp2 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#ffff99; width:" + angle4Sp2 + "%\">" + (angle4Sp2 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#386cb0; width:" + angle5Sp2 + "%\">" + (angle5Sp2 / 100).toFixed(2) + "</div>" + "<div style=\"background-color:#f0027f; width:" + angle6Sp2 + "%\">" + (angle6Sp2 / 100).toFixed(2) + "</div>" + "</div></div></td>";
                 }
+            }
+
+            if (absoluteLayerValuesflag && layercheck.includes(species2ValueIdentify) && layercheck.includes(species1ValueIdentify)) {
+
+
+                let ang1 = angle1Sp1 - angle1Sp2;
+                let ang2 = angle2Sp1 - angle2Sp2;
+                let ang3 = angle3Sp1 - angle3Sp2;
+                let ang4 = angle4Sp1 - angle4Sp2;
+                let ang5 = angle5Sp1 - angle5Sp2;
+                let ang6 = angle6Sp1 - angle6Sp2;
+
+                let least = Math.min(ang1 , ang2 , ang3, ang4, ang5 , ang6)
+                let angTot = (ang1 + least) + (ang2 + least) + (ang3 + least) + (ang4 + least) + (ang5 + least) + (ang6 + least);
+
+                let ang1Width = ang1 / angTot * 10;
+                let ang1Color = "";
+                if (ang1Width < 0) {
+                    ang1Width = ang1Width * (-1);
+                    ang1Color = "#e41a1c";
+                }
+                else {
+                    ang1Color = "#377eb8";
+                }
+                let ang2Width = ang2 / angTot * 10;
+                let ang2Color = "";
+                if (ang2Width < 0) {
+                    ang2Width = ang2Width * (-1);
+                    ang2Color = "#e41a1c";
+                }
+                else {
+                    ang2Color = "#377eb8";
+                }
+                let ang3Width = ang3 / angTot * 10;
+                let ang3Color = "";
+                if (ang3Width < 0) {
+                    ang3Width = ang3Width * (-1);
+                    ang3Color = "#e41a1c";
+                }
+                else {
+                    ang3Color = "#377eb8";
+                }
+                let ang4Width = ang4 / angTot*10;
+                let ang4Color = "";
+                if (ang4Width < 0) {
+                    ang4Width = ang4Width * (-1);
+                    ang4Color = "#e41a1c";
+
+                }
+                else {
+                    ang4Color = "#377eb8";
+                }
+                let ang5Width = ang5 / angTot * 10;
+                let ang5Color = "";
+                if (ang5Width < 0) {
+                    ang5Width = ang5Width * (-1);
+                    ang5Color = "#e41a1c";
+
+                }
+                else {
+                    ang5Color = "#377eb8";
+
+                }
+                let ang6Width = ang6 / angTot * 10;
+                let ang6Color = "";
+                if (ang6Width < 0) {
+                    ang6Width = ang6Width * (-1);
+                    ang6Color = "#e41a1c";
+
+                }
+                else {
+                    ang6Color = "#377eb8";
+               }
+
+
+
+
+
+
+                finaltooltip = finaltooltip + "<tr><td rowspan=\"1\" bgcolor=\"white\"><i><div> Difference <div/><div>(" + "<a  style=\"color: #377eb8;\" >" + species1ValueIdentify + "</a>" + "-" + "<a style=\"color: #e41a1c;\" >" + species2ValueIdentify + "</a>" + ")</div><div style=\" text-align: center;\"><div style=\"color:#7fc97f;text-shadow: 0.01px 0.01px 0.01px black;\"> Layer 1</div> <div style=\"color:#beaed4;;text-shadow: 0px 0px 0px black;\"> Layer 2</div> <div style=\"color:#fdc086;text-shadow: 0px 0px 0px black;\"> Layer 3</div> <div style=\"color:#ffff99;text-shadow: 0px 0px 0px black;\"> Layer 4</div> <div style=\"color:#386cb0;text-shadow: 0.01px 0.01px 0.01px black; \"> Layer 5</div> <div style=\"color:#f0027f;text-shadow: 0.01px 0.01px 0.01px black; \"> Layer 6</div></div> </i></td>";
+                finaltooltip = finaltooltip + "<td colspan=\"2\" bgcolor=\"white\"><br/><br/><div style=\" align-items: right\"><div>" + "<div style=\"background-color:" + ang1Color + "; width:" + ang1Width + "%\">" + (ang1).toFixed(2) + "</div>" + "<div style=\"background-color:" + ang2Color + "; width:" + ang2Width + "%\">" + (ang2).toFixed(2) + "</div>" + "<div style=\"background-color:" + ang3Color + "; width:" + ang3Width + "%\">" + (ang3).toFixed(2) + "</div>" + "<div style=\"background-color:" + ang4Color + "; width:" + ang4Width + "%\">" + (ang4).toFixed(2) + "</div>" + "<div style=\"background-color:" + ang5Color + "; width:" + ang5Width + "%\">" + (ang5).toFixed(2) + "</div>" + "<div style=\"background-color:" + ang6Color +"; width:" + ang6Width + "%\">" + (ang6).toFixed(2) + "</div>" + "</div></div></td>";
+                finaltooltip = finaltooltip + "</tr>";
             }
 
 
