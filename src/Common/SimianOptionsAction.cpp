@@ -26,8 +26,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _clusterAction(*this), 
     _distanceNeighborhoodAction(*this),
     _isStarted(false),
-    _histBarAction(this, "Show bar :"),
-    _absoluteLayerValuesAction(this, "Absolute values for layer:")
+    _histBarAction(this)
 {
     _eventListener.setEventCore(core);
     _eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataAdded));
@@ -37,7 +36,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataChanged));
     _eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataGuiNameChanged));
     _eventListener.registerDataEventByType(PointType, std::bind(&SimianOptionsAction::onDataEvent, this, std::placeholders::_1));
-
+    _histBarAction.setToolTip("Show histogram bars");
     _metaData = new FetchMetaData();
      _metaData->getData(&_simianData);
     _species2Action.setEnabled(false);
@@ -45,7 +44,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _distanceAction.setEnabled(false);
     _distanceAction.setVisible(false);
     _histBarAction.setEnabled(false);
-    _absoluteLayerValuesAction.setEnabled(false);
     _crossSpecies1DatasetLinkerAction.setEnabled(false);
     _crossSpecies2DatasetLinkerAction.setEnabled(false);
     _inSpecies1DatasetLinkerAction.setEnabled(false);
@@ -73,10 +71,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _neighborhoodAction.initialize(QStringList({ "glia","it_types","l5et_l56np_l6ct_l6b","lamp5_sncg_vip","sst_sst_chodl_pvalb" }), "it_types", "it_types");
     _distanceAction.setDefaultWidgetFlags(IntegralAction::SpinBox | IntegralAction::Slider);
     _distanceAction.initialize(0, 105, 105, 105); 
-    _histBarAction.setDefaultWidgetFlags(IntegralAction::Slider);
-    _histBarAction.initialize(0, 1, 0, 0);
-    _absoluteLayerValuesAction.setDefaultWidgetFlags(IntegralAction::Slider);
-    _absoluteLayerValuesAction.initialize(0, 1, 0, 0);
+    _histBarAction.setDefaultWidgetFlags(ToggleAction::CheckBox);
+    _histBarAction.initialize(false,false);
     _crossSpecies1DatasetLinkerAction.setDefaultWidgetFlags(OptionAction::ComboBox);
     _crossSpecies2DatasetLinkerAction.setDefaultWidgetFlags(OptionAction::ComboBox);
     _inSpecies1DatasetLinkerAction.setDefaultWidgetFlags(OptionAction::ComboBox);
@@ -160,7 +156,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             _neighborhoodAction.setEnabled(false);
             _distanceAction.setEnabled(false);
             _histBarAction.setEnabled(false);
-            _absoluteLayerValuesAction.setEnabled(false);
             _crossSpecies1DatasetLinkerAction.setEnabled(false);
             _crossSpecies2DatasetLinkerAction.setEnabled(false);
             _inSpecies1DatasetLinkerAction.setEnabled(false);
@@ -200,7 +195,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             _neighborhoodAction.setEnabled(false);
             _distanceAction.setEnabled(false);
             _histBarAction.setEnabled(false);
-            _absoluteLayerValuesAction.setEnabled(false);
             _crossSpecies1DatasetLinkerAction.setEnabled(false);
             _crossSpecies2DatasetLinkerAction.setEnabled(false);
             _inSpecies1DatasetLinkerAction.setEnabled(false);
@@ -236,31 +230,19 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     
         const auto updateHistBar = [this]() -> void
     {
-            if (_histBarAction.getValue() == 0)
+            if (_histBarAction.isChecked())
             {
-                _simianViewerPlugin.getWidget()->histChart(QString::fromStdString("F"));
+                _simianViewerPlugin.getWidget()->histChart(QString::fromStdString("T"));
             }
             else
             {
-                _simianViewerPlugin.getWidget()->histChart(QString::fromStdString("T"));
+                _simianViewerPlugin.getWidget()->histChart(QString::fromStdString("F"));
             }
 
 
     };
 
-        const auto updateAbsoluteValuesBar = [this]() -> void
-        {
-            if (_absoluteLayerValuesAction.getValue() == 0)
-            {
-                _simianViewerPlugin.getWidget()->absoluteLayerValues(QString::fromStdString("F"));
-            }
-            else
-            {
-                _simianViewerPlugin.getWidget()->absoluteLayerValues(QString::fromStdString("T"));
-            }
 
-
-        };
 
     const auto updateCrossSpecies1DatasetLinker = [this]() -> void
     {
@@ -279,24 +261,22 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             if (_inSpecies1DatasetLinkerAction.getCurrentDataset().isValid() && _inSpecies2DatasetLinkerAction.getCurrentDataset().isValid())
             {
                 _histBarAction.setEnabled(true);
-                _absoluteLayerValuesAction.setEnabled(true);
+
 
             }
             else
             {
                 _histBarAction.setEnabled(false);
-                _histBarAction.setValue(0);
-                _absoluteLayerValuesAction.setEnabled(false);
-                _absoluteLayerValuesAction.setValue(0);
+                _histBarAction.setChecked(false);
+
                 //updateHistBar();
             }
         }
         else
         {
             _histBarAction.setEnabled(false);
-            _histBarAction.setValue(0);
-            _absoluteLayerValuesAction.setEnabled(false);
-            _absoluteLayerValuesAction.setValue(0);
+            _histBarAction.setChecked(false);
+
             //updateHistBar();
         }
     };
@@ -309,23 +289,21 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             if (_inSpecies1DatasetLinkerAction.getCurrentDataset().isValid()  && _inSpecies2DatasetLinkerAction.getCurrentDataset().isValid())
             {
                 _histBarAction.setEnabled(true);
-                _absoluteLayerValuesAction.setEnabled(true);
+
             }
             else
             {
                 _histBarAction.setEnabled(false);
-                _histBarAction.setValue(0);
-                _absoluteLayerValuesAction.setEnabled(false);
-                _absoluteLayerValuesAction.setValue(0);
+                _histBarAction.setChecked(false);
+
                 //updateHistBar();
             }          
         }
         else
         {
             _histBarAction.setEnabled(false);
-            _histBarAction.setValue(0);
-            _absoluteLayerValuesAction.setEnabled(false);
-            _absoluteLayerValuesAction.setValue(0);
+            _histBarAction.setChecked(false);
+
             //updateHistBar();
         }
     };
@@ -359,15 +337,13 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
         {
             updateDistance();
         });
-    connect(&_histBarAction, &IntegralAction::valueChanged, this, [this, updateHistBar](const std::int32_t& value)
+    connect(&_histBarAction, &ToggleAction::toggled, this, [this, updateHistBar](const bool& toggled)
         {
             updateHistBar();
         });
 
-    connect(&_absoluteLayerValuesAction, &IntegralAction::valueChanged, this, [this, updateAbsoluteValuesBar](const std::int32_t& value)
-        {
-            updateAbsoluteValuesBar();
-        });
+
+
 
     connect(&_crossSpecies1DatasetLinkerAction, &OptionAction::currentIndexChanged, this, [this, updateCrossSpecies1DatasetLinker](const std::int32_t& value) {
         updateCrossSpecies1DatasetLinker();
@@ -618,13 +594,8 @@ SimianOptionsAction::SpeciesAction::Widget::Widget(QWidget* parent, SpeciesActio
 
 
     auto selectionHistBarWidget = simianOptionsAction._histBarAction.createWidget(this);
-    selectionHistBarWidget->findChild<QSlider*>("Slider");
+    selectionHistBarWidget->findChild<QCheckBox*>("Checkbox");
     selectionHistBarWidget->setFixedWidth(100);
-
-
-    auto selectionAbsoluteValuesWidget = simianOptionsAction._absoluteLayerValuesAction.createWidget(this);
-    selectionAbsoluteValuesWidget->findChild<QSlider*>("Slider");
-    selectionAbsoluteValuesWidget->setFixedWidth(100);
 
 
     auto speciesSelectionLayout = new QFormLayout();
@@ -636,7 +607,6 @@ SimianOptionsAction::SpeciesAction::Widget::Widget(QWidget* parent, SpeciesActio
     speciesSelectionLayout->addRow(new QLabel("Cross-Species2 linker:"), selectionCrossSpecies2DatasetLinkerWidget);
     speciesSelectionLayout->addRow(new QLabel("In-Species1 linker:"), selectionInSpecies1DatasetLinkerWidget);
     speciesSelectionLayout->addRow(new QLabel("In-Species2 linker:"), selectionInSpecies2DatasetLinkerWidget);
-    speciesSelectionLayout->addRow(new QLabel("Absolute values for layer:"), selectionAbsoluteValuesWidget);
     speciesSelectionLayout->addRow(new QLabel("Species cluster count:"), selectionHistBarWidget);
     speciesSelectionLayout->setObjectName("Species Options");
     speciesSelectionLayout->setSpacing(2);
