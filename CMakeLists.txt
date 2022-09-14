@@ -16,6 +16,8 @@ if(MSVC)
     set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MD")
 endif(MSVC)
 
+file(TO_CMAKE_PATH $ENV{HDPS_INSTALL_DIR} INSTALL_DIR)
+
 find_package(Qt6 COMPONENTS Widgets WebEngineWidgets REQUIRED)
 
 qt6_add_resources(RESOURCE_FILES res/simian_viewer_resources.qrc)
