@@ -140,17 +140,41 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
     const auto updateSpecies1 = [this]() -> void
     {
-        if (_species1Action.getCurrentText().isValidUtf16())
+        if (_species1Action.getCurrentText()!="" && _species1Action.getCurrentText().isValidUtf16())
         {
             _species2Action.setEnabled(true);
-            _simianViewerPlugin.getWidget()->resetView("Reset");
-            _species2Action.setCurrentIndex(0);
-            _species2Action.setPlaceHolderString(QString("Choose Species2"));
-            _species2Action.initialize(QStringList({ }), _species2Action.getPlaceholderString(), _species2Action.getPlaceholderString());
-            QStringList speciesNames = { "gorilla","marmoset","rhesus","chimp","human" };
-            speciesNames.removeAll(_species1Action.getCurrentText());
-            _species2Action.initialize(QStringList({ speciesNames }), _species2Action.getPlaceholderString(), _species2Action.getPlaceholderString());
+
+            if (_species2Action.getCurrentText().isValidUtf16() && _species2Action.getCurrentText() != "")
+            {
+                    if (_species2Action.getCurrentText() == _species1Action.getCurrentText())
+                    {
+                        _simianViewerPlugin.getWidget()->resetView("Reset");
+                        _species2Action.setCurrentIndex(0);
+                        _species2Action.setPlaceHolderString(QString("Choose Species2"));
+                        _species2Action.initialize(QStringList({ }), _species2Action.getPlaceholderString(), _species2Action.getPlaceholderString());
+                        QStringList speciesNames = { "gorilla","marmoset","rhesus","chimp","human" };
+                        speciesNames.removeAll(_species1Action.getCurrentText());
+                        _species2Action.initialize(QStringList({ speciesNames }), _species2Action.getPlaceholderString(), _species2Action.getPlaceholderString());
+                    }
+                    else
+                    {
+                        updateData((_species1Action.getCurrentText()).toStdString(), (_species2Action.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString(), (_distanceAction.getValue()), (_crossSpeciesFilterAction.getCurrentText()).toStdString());
+                    }
+            }
+            else {
+                
+                _simianViewerPlugin.getWidget()->resetView("Reset");
+                _species2Action.setCurrentIndex(0);
+                _species2Action.setPlaceHolderString(QString("Choose Species2"));
+                _species2Action.initialize(QStringList({ }), _species2Action.getPlaceholderString(), _species2Action.getPlaceholderString());
+                QStringList speciesNames = { "gorilla","marmoset","rhesus","chimp","human" };
+                speciesNames.removeAll(_species1Action.getCurrentText());
+                _species2Action.initialize(QStringList({ speciesNames }), _species2Action.getPlaceholderString(), _species2Action.getPlaceholderString());
+
+            }
+
         }
+
         else {
             _species2Action.setEnabled(false);
             _neighborhoodAction.setEnabled(false);

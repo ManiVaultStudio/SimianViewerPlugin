@@ -38,7 +38,6 @@ SimianViewerPlugin::~SimianViewerPlugin()
 void SimianViewerPlugin::init()
 {
     _simian_viewer->setPage(":/simian_viewer/simian_viewer.html", "qrc:/simian_viewer/");
-
     _simianOptionsAction = new SimianOptionsAction(*this, _core);
     connect(_simian_viewer, &SimianViewerWidget::passSelectionToQt, this, &SimianViewerPlugin::publishSelection);
     connect(_simian_viewer, &SimianViewerWidget::passClusterToQt, this, &SimianViewerPlugin::publishCluster);
