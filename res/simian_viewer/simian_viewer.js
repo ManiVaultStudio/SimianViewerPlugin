@@ -88,7 +88,7 @@ const simianVis = () => {
     svg.selectAll("*").remove();
     var margin;
     if (barflag) {
-        margin = { top: 25, right: 20, bottom: 80, left: 75 },
+        margin = { top: 55, right: 50, bottom: 80, left: 75 },
             width = (70/100*window.innerWidth) * 0.99 - margin.left - margin.right,
             height = window.innerHeight * 0.99 - margin.top - margin.bottom;
 
@@ -957,109 +957,11 @@ const simianVis = () => {
         });
 
     svg.call(tip);
-
-    // Three function that change the tooltip when user hover / move / leave a cell
-    var mouseover = function (d) {
-        document.getElementById("clearTooltip");
-        tooltipValue = "";
-        var svgTipdiv = d3.select("#tipDiv")
-        svgTipdiv.text("");
-        tip.hide();
-        svg.select("#axisSelectionpolygon").remove();
-        svg.select("#axisSelectionText").remove();
-
-        d3.select(this)
-            .style("stroke", function (d) {
-                if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
-                    return cross_speciesClustercolors[d.cross_species_cluster1_species_1];
-                }
-                else {
-                    return "black";
-                }
-            })
-            .style("fill", function (d) {
-                return myColor(d.dist);
-            })
-            .style("stroke-width", function (d) {
-
-                if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
-                    return 8;
-                }
-                else {
-                    return 5;
-                }
-            })
-            .style("stroke-location", "inside")
-            .style("opacity", 1)
-            .style("cursor", "pointer");
-
-
-    };
-    var mousemove = function (d) {
-/*        document.getElementById("clearTooltip");
-        tooltipValue = "";
-        var svgTipdiv = d3.select("#tipDiv")
-        svgTipdiv.text("");*/
-        tip.hide();
-        svg.select("#axisSelectionpolygon").remove();       
-        svg.select("#axisSelectionText").remove();
-        d3.select("#marker2").remove();
-        d3.select("#marker1").remove();
-        d3.select("#marker3").remove();
-        tip.show(d, this);
-
-        var wTooltip = (15 / 100 * window.innerWidth);
-        var hTooltip = window.innerHeight / 8;
-        var marginTooltip = { topTooltip: 2, rightTooltip: 2, bottomTooltip: 2, leftTooltip: 2, middleTooltip: 2 };
-        var regionWidthTooltip = wTooltip / 2 - marginTooltip.middleTooltip;
-        var pointATooltip = regionWidthTooltip, pointBTooltip = wTooltip - regionWidthTooltip;
-        var exampleDataTooltip = [{ group: 'Layer 6', species1: angle1Sp1, species2: angle1Sp2 }, { group: 'Layer 5', species1: angle2Sp1, species2: angle2Sp2 }, { group: 'Layer 4', species1: angle3Sp1, species2: angle3Sp2 }, { group: 'Layer 3', species1: angle4Sp1, species2: angle4Sp2 }, { group: 'Layer 2', species1: angle5Sp1, species2: angle5Sp2 }, { group: 'Layer 1', species1: angle6Sp1, species2: angle6Sp2 }];
-        var svgTooltip = d3.select('#tipDiv').append('svg').attr('width', marginTooltip.leftTooltip + wTooltip + marginTooltip.rightTooltip).attr('height', marginTooltip.topTooltip + hTooltip + marginTooltip.bottomTooltip).append('g').attr('transform', translation(marginTooltip.leftTooltip, marginTooltip.topTooltip));
-        var maxValueTooltip = Math.max(d3.max(exampleDataTooltip, function (d) { return d.species1; }), d3.max(exampleDataTooltip, function (d) { return d.species2; }));
-        var xScaleTooltip = d3.scaleLinear().domain([0, maxValueTooltip]).range([0, regionWidthTooltip]).nice();
-        var xScaleLeftTooltip = d3.scaleLinear().domain([0, maxValueTooltip]).range([regionWidthTooltip, 0]);
-        var xScaleRightTooltip = d3.scaleLinear().domain([0, maxValueTooltip]).range([0, regionWidthTooltip]);
-        var yScaleTooltip = d3.scaleBand().domain(exampleDataTooltip.map(function (d) { return d.group; })).rangeRound([hTooltip, 0]).padding(0.1);
-        var yAxisLeftTooltip = d3.axisRight().scale(yScaleTooltip).tickSize(4, 0).tickPadding(marginTooltip.middleTooltip - 4);
-        var yAxisRightTooltip = d3.axisLeft().scale(yScaleTooltip).tickSize(4, 0).tickFormat('');
-        var xAxisRightTooltip = d3.axisBottom().scale(xScaleTooltip).ticks(2);
-        var xAxisLeftTooltip = d3.axisBottom().scale(xScaleTooltip.copy().range([pointATooltip, 0])).ticks(2);
-        var leftBarGroupTooltip = svgTooltip.append('g').attr('transform', translation(pointATooltip, 0) + 'scale(-1,1)');
-        var rightBarGroupTooltip = svgTooltip.append('g').attr('transform', translation(pointBTooltip, 0));
-        svgTooltip.append('g').attr('class', 'axis y left').attr('transform', translation(pointATooltip, 0)).call(yAxisLeftTooltip).selectAll('text').attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#555').attr('font-size', '12px').style('text-anchor', 'middle');
-        svgTooltip.append('g').attr('class', 'axis y right').attr('transform', translation(pointBTooltip, 0)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#555').attr('font-size', '8px').call(yAxisRightTooltip);
-        svgTooltip.append('g').attr('class', 'axis x left').attr('transform', translation(0, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#555').call(xAxisLeftTooltip);
-        svgTooltip.append('g').attr('class', 'axis x right').attr('transform', translation(pointBTooltip, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#555').call(xAxisRightTooltip); leftBarGroupTooltip.selectAll('.bar.left').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar left').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species1); }).attr('stroke', 'black').attr('fill', '#1b9e77').attr('height', yScaleTooltip.bandwidth());
-        rightBarGroupTooltip.selectAll('.bar.right').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar right').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species2); }).attr('stroke', 'black').attr('fill', '#d95f02').attr('height', yScaleTooltip.bandwidth());
-        function translation(x, y) { return 'translate(' + x + ',' + y + ')'; }
-    };
-    var mouseleave = function (d) {
-/*        document.getElementById("clearTooltip");
-        tooltipValue = "";
-        var svgTipdiv = d3.select("#tipDiv")
-        svgTipdiv.text("");*/
-        tip.hide();
-        d3.select(this).style("stroke", function (d) {
-            if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
-                return cross_speciesClustercolors[d.cross_species_cluster1_species_1];
-            }
-            else {
-                return "black";
-            }
-        })
-            .style("opacity", 0.9).style("stroke-width", function (d) {
-                return 0;
-            });
-    };
-    var mouseclick = function (d) {
-/*        document.getElementById("clearTooltip");
-        tooltipValue = "";
-        var svgTipdiv = d3.select("#tipDiv")
-        svgTipdiv.text("");
-        tip.hide();*/
+    var dblclick  = function (d) {
         d3.select("#marker1").remove();
         d3.select("#marker2").remove();
         d3.select("#marker3").remove();
+
         if (barflag) {
             svg.append("line")
                 .attr("id", "marker1")
@@ -1129,7 +1031,146 @@ const simianVis = () => {
                 .style("stroke", "black")
                 .attr("stroke-width", 1);
         }
+        let selectionIDs = [];
+        selectionIDs.push(d.cluster_1);
+        selectionIDs.push(d.cluster_2);
+        if (isQtAvailable) {
+            QtBridge.js_passSelectionToQt(selectionIDs);
+        }
+    };
+    var mouseout = function (d) {
+        tip.hide();
 
+    };
+    var contextmenu = function (d) {
+        tip.hide();
+
+    };
+    var mouseenter = function (d) {
+        
+
+    };
+
+
+
+    // Three function that change the tooltip when user hover / move / leave a cell
+    var mouseover = function (d) {
+        //tip.hide();
+        svg.select("#axisSelectionpolygon").remove();
+        svg.select("#axisSelectionText").remove();
+
+        d3.select(this)
+            .style("stroke", function (d) {
+                if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
+                    return cross_speciesClustercolors[d.cross_species_cluster1_species_1];
+                }
+                else {
+                    return "black";
+                }
+            })
+            .style("fill", function (d) {
+                return myColor(d.dist);
+            })
+            .style("stroke-width", function (d) {
+
+                if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
+                    return 8;
+                }
+                else {
+                    return 5;
+                }
+            })
+            .style("stroke-location", "inside")
+            .style("opacity", 1)
+            .style("cursor", "pointer");
+
+
+    };
+    var mousemove = function (d) {
+/*        document.getElementById("clearTooltip");
+        tooltipValue = "";
+        var svgTipdiv = d3.select("#tipDiv")
+        svgTipdiv.text("");*/
+        tip.hide();
+        svg.select("#axisSelectionpolygon").remove();       
+        svg.select("#axisSelectionText").remove();
+        d3.select("#marker2").remove();
+        d3.select("#marker1").remove();
+        d3.select("#marker3").remove();
+        tip.show(d, this);
+
+        var wTooltip = (15 / 100 * window.innerWidth);
+        var hTooltip = window.innerHeight / 8;
+        var marginTooltip = { topTooltip: 2, rightTooltip: 2, bottomTooltip: 2, leftTooltip: 2, middleTooltip: 2 };
+        var regionWidthTooltip = wTooltip / 2 - marginTooltip.middleTooltip;
+        var pointATooltip = regionWidthTooltip, pointBTooltip = wTooltip - regionWidthTooltip;
+        var exampleDataTooltip = [{ group: 'Layer 6', species1: angle1Sp1, species2: angle1Sp2 }, { group: 'Layer 5', species1: angle2Sp1, species2: angle2Sp2 }, { group: 'Layer 4', species1: angle3Sp1, species2: angle3Sp2 }, { group: 'Layer 3', species1: angle4Sp1, species2: angle4Sp2 }, { group: 'Layer 2', species1: angle5Sp1, species2: angle5Sp2 }, { group: 'Layer 1', species1: angle6Sp1, species2: angle6Sp2 }];
+        var svgTooltip = d3.select('#tipDiv').append('svg').attr('width', marginTooltip.leftTooltip + wTooltip + marginTooltip.rightTooltip).attr('height', marginTooltip.topTooltip + hTooltip + marginTooltip.bottomTooltip).append('g').attr('transform', translation(marginTooltip.leftTooltip, marginTooltip.topTooltip));
+        var maxValueTooltip = Math.max(d3.max(exampleDataTooltip, function (d) { return d.species1; }), d3.max(exampleDataTooltip, function (d) { return d.species2; }));
+        var xScaleTooltip = d3.scaleLinear().domain([0, maxValueTooltip]).range([0, regionWidthTooltip]).nice();
+        var xScaleLeftTooltip = d3.scaleLinear().domain([0, maxValueTooltip]).range([regionWidthTooltip, 0]);
+        var xScaleRightTooltip = d3.scaleLinear().domain([0, maxValueTooltip]).range([0, regionWidthTooltip]);
+        var yScaleTooltip = d3.scaleBand().domain(exampleDataTooltip.map(function (d) { return d.group; })).rangeRound([hTooltip, 0]).padding(0.1);
+        var yAxisLeftTooltip = d3.axisRight().scale(yScaleTooltip).tickSize(4, 0).tickPadding(marginTooltip.middleTooltip - 4);
+        var yAxisRightTooltip = d3.axisLeft().scale(yScaleTooltip).tickSize(4, 0).tickFormat('');
+        var xAxisRightTooltip = d3.axisBottom().scale(xScaleTooltip).ticks(2);
+        var xAxisLeftTooltip = d3.axisBottom().scale(xScaleTooltip.copy().range([pointATooltip, 0])).ticks(2);
+        var leftBarGroupTooltip = svgTooltip.append('g').attr('transform', translation(pointATooltip, 0) + 'scale(-1,1)');
+        var rightBarGroupTooltip = svgTooltip.append('g').attr('transform', translation(pointBTooltip, 0));
+        svgTooltip.append('g').attr('class', 'axis y left').attr('transform', translation(pointATooltip, 0)).call(yAxisLeftTooltip).selectAll('text').attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#555').attr('font-size', '12px').style('text-anchor', 'middle');
+        svgTooltip.append('g').attr('class', 'axis y right').attr('transform', translation(pointBTooltip, 0)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#555').attr('font-size', '8px').call(yAxisRightTooltip);
+        svgTooltip.append('g').attr('class', 'axis x left').attr('transform', translation(0, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#555').call(xAxisLeftTooltip);
+        svgTooltip.append('g').attr('class', 'axis x right').attr('transform', translation(pointBTooltip, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#555').call(xAxisRightTooltip); leftBarGroupTooltip.selectAll('.bar.left').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar left').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species1); }).attr('stroke', 'black').attr('fill', '#1b9e77').attr('height', yScaleTooltip.bandwidth());
+        rightBarGroupTooltip.selectAll('.bar.right').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar right').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species2); }).attr('stroke', 'black').attr('fill', '#d95f02').attr('height', yScaleTooltip.bandwidth());
+        function translation(x, y) { return 'translate(' + x + ',' + y + ')'; }
+    };
+    var mouseleave = function (d) {
+        //tip.hide();
+        d3.select(this).style("stroke", function (d) {
+            if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
+                return cross_speciesClustercolors[d.cross_species_cluster1_species_1];
+            }
+            else {
+                return "black";
+            }
+        })
+            .style("opacity", 0.9).style("stroke-width", function (d) {
+                return 0;
+            });
+    };
+    var mouseclick = function (d) {
+
+        d3.select("#marker1").remove();
+        d3.select("#marker2").remove();
+        d3.select("#marker3").remove();
+
+
+        tip.show(d, this);
+
+        var wTooltip = (15 / 100 * window.innerWidth);
+        var hTooltip = window.innerHeight / 8;
+        var marginTooltip = { topTooltip: 2, rightTooltip: 2, bottomTooltip: 2, leftTooltip: 2, middleTooltip: 2 };
+        var regionWidthTooltip = wTooltip / 2 - marginTooltip.middleTooltip;
+        var pointATooltip = regionWidthTooltip, pointBTooltip = wTooltip - regionWidthTooltip;
+        var exampleDataTooltip = [{ group: 'Layer 6', species1: angle1Sp1, species2: angle1Sp2 }, { group: 'Layer 5', species1: angle2Sp1, species2: angle2Sp2 }, { group: 'Layer 4', species1: angle3Sp1, species2: angle3Sp2 }, { group: 'Layer 3', species1: angle4Sp1, species2: angle4Sp2 }, { group: 'Layer 2', species1: angle5Sp1, species2: angle5Sp2 }, { group: 'Layer 1', species1: angle6Sp1, species2: angle6Sp2 }];
+        var svgTooltip = d3.select('#tipDiv').append('svg').attr('width', marginTooltip.leftTooltip + wTooltip + marginTooltip.rightTooltip).attr('height', marginTooltip.topTooltip + hTooltip + marginTooltip.bottomTooltip).append('g').attr('transform', translation(marginTooltip.leftTooltip, marginTooltip.topTooltip));
+        var maxValueTooltip = Math.max(d3.max(exampleDataTooltip, function (d) { return d.species1; }), d3.max(exampleDataTooltip, function (d) { return d.species2; }));
+        var xScaleTooltip = d3.scaleLinear().domain([0, maxValueTooltip]).range([0, regionWidthTooltip]).nice();
+        var xScaleLeftTooltip = d3.scaleLinear().domain([0, maxValueTooltip]).range([regionWidthTooltip, 0]);
+        var xScaleRightTooltip = d3.scaleLinear().domain([0, maxValueTooltip]).range([0, regionWidthTooltip]);
+        var yScaleTooltip = d3.scaleBand().domain(exampleDataTooltip.map(function (d) { return d.group; })).rangeRound([hTooltip, 0]).padding(0.1);
+        var yAxisLeftTooltip = d3.axisRight().scale(yScaleTooltip).tickSize(4, 0).tickPadding(marginTooltip.middleTooltip - 4);
+        var yAxisRightTooltip = d3.axisLeft().scale(yScaleTooltip).tickSize(4, 0).tickFormat('');
+        var xAxisRightTooltip = d3.axisBottom().scale(xScaleTooltip).ticks(2);
+        var xAxisLeftTooltip = d3.axisBottom().scale(xScaleTooltip.copy().range([pointATooltip, 0])).ticks(2);
+        var leftBarGroupTooltip = svgTooltip.append('g').attr('transform', translation(pointATooltip, 0) + 'scale(-1,1)');
+        var rightBarGroupTooltip = svgTooltip.append('g').attr('transform', translation(pointBTooltip, 0));
+        svgTooltip.append('g').attr('class', 'axis y left').attr('transform', translation(pointATooltip, 0)).call(yAxisLeftTooltip).selectAll('text').attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#555').attr('font-size', '12px').style('text-anchor', 'middle');
+        svgTooltip.append('g').attr('class', 'axis y right').attr('transform', translation(pointBTooltip, 0)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#555').attr('font-size', '8px').call(yAxisRightTooltip);
+        svgTooltip.append('g').attr('class', 'axis x left').attr('transform', translation(0, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#555').call(xAxisLeftTooltip);
+        svgTooltip.append('g').attr('class', 'axis x right').attr('transform', translation(pointBTooltip, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#555').call(xAxisRightTooltip); leftBarGroupTooltip.selectAll('.bar.left').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar left').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species1); }).attr('stroke', 'black').attr('fill', '#1b9e77').attr('height', yScaleTooltip.bandwidth());
+        rightBarGroupTooltip.selectAll('.bar.right').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar right').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species2); }).attr('stroke', 'black').attr('fill', '#d95f02').attr('height', yScaleTooltip.bandwidth());
+        function translation(x, y) { return 'translate(' + x + ',' + y + ')'; }
 
         let selectionIDs = [];
         selectionIDs.push(d.cluster_1);
@@ -1137,6 +1178,10 @@ const simianVis = () => {
         if (isQtAvailable) {
             QtBridge.js_passSelectionToQt(selectionIDs);
         }
+
+
+
+
     };
 
     // add the squares
@@ -1173,8 +1218,12 @@ const simianVis = () => {
         })
         .style("opacity", 0.9)
         .on("mouseover", mouseover)
+        .on("mouseout", mouseout)
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
+        .on("mouseenter", mouseenter)
+        .on("contextmenu ", contextmenu)
+        .on("dblclick ", dblclick)
         .on("click", mouseclick);
 
 
@@ -1488,10 +1537,10 @@ const simianVis = () => {
     }
     else if (species2ValueIdentify == "human") {
         if (luma < 40) {
-            ximage = 'https://i.ibb.co/9bBsDpZ/human-light.png';
+            yimage = 'https://i.ibb.co/9bBsDpZ/human-light.png';
         }
         else {
-            ximage = 'https://i.ibb.co/nD675k0/human-dark.png';
+            yimage = 'https://i.ibb.co/nD675k0/human-dark.png';
         }
     }
     else if (species2ValueIdentify == "rhesus") {
@@ -1545,18 +1594,18 @@ const simianVis = () => {
     }
     else if (species1ValueIdentify == "marmoset") {
         if (luma < 40) {
-            yimage = 'https://i.ibb.co/b3mDHXN/marmoset-light.png';
+            ximage = 'https://i.ibb.co/b3mDHXN/marmoset-light.png';
         }
         else {
-            yimage = 'https://i.ibb.co/SXjQXNN/marmoset-dark.png';
+            ximage = 'https://i.ibb.co/SXjQXNN/marmoset-dark.png';
         }
     }
 
     if (yimage !== "") {
         svg.append('image')
             .attr('xlink:href', yimage)
-            .attr('width', width / 20)
-            .attr('height', height / 25)
+            .attr('width', 30)
+            .attr('height', 40)
             .attr("x", 0 - 70)
             .attr("y", height);//
     }
@@ -1564,10 +1613,10 @@ const simianVis = () => {
     if (ximage !== "") {
         svg.append('image')
             .attr('xlink:href', ximage)
-            .attr('width', width / 20)
-            .attr('height', height / 25)
+            .attr('width', 30)
+            .attr('height', 40)
             .attr("x", 0 - 39)
-            .attr("y", height + 20);
+            .attr("y", height + 10);
     }
 
 };
@@ -1722,7 +1771,8 @@ function resetView(d) {
     queueresetView(d);
 }
 function queueresetView(d) {
-    d3.selectAll('svg').remove();
+    var svg = d3.select("svg");
+    svg.selectAll("*").remove();
 }
 
 
