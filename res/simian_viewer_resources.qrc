@@ -11,6 +11,7 @@
     <qresource prefix="">
         <file>jslibs/d3.v4.js</file>
 		<file>jslibs/d3-tip.min.js</file>
+		<file>jslibs/d3-tip.js</file>
         <file>jslibs/d3-context-menu.js</file>
         <file>jslibs/d3-scale-chromatic.js</file>
         <file>jslibs/nouislider.css</file>

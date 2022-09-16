@@ -19,6 +19,8 @@ var inspecies1ClusterCounts = {};
 var totalInspeciescluster1counts = 0;
 var totalInspeciescluster2counts = 0;
 var svg;
+var heatmapWidth;
+var containerwidth;
 var angle1Sp1 = 0.0;
 var angle2Sp1 = 0.0;
 var angle3Sp1 = 0.0;
@@ -88,16 +90,28 @@ const simianVis = () => {
     d3.select("svg").remove();
     svg = d3.select("#my_dataviz")
     svg.selectAll("*").remove();
+    if (showFullHeatmapflag) {
+        document.getElementById('my_dataviz').setAttribute("style", "width:99%");
+        document.getElementById('my_container').setAttribute("style", "width:1%");
+        containerwidth = 20;
+        heatmapWidth = 99;
+    }
+    else {
+        document.getElementById('my_dataviz').setAttribute("style", "width:70%");
+        document.getElementById('my_container').setAttribute("style", "width:30%");
+        containerwidth = 20;
+        heatmapWidth = 70;
+    }
     var margin;
     if (barflag) {
         margin = { top: 55, right: 50, bottom: 80, left: 75 },
-            width = (70/100*window.innerWidth) * 0.99 - margin.left - margin.right,
+            width = (heatmapWidth/100*window.innerWidth) * 0.99 - margin.left - margin.right,
             height = window.innerHeight * 0.99 - margin.top - margin.bottom;
 
     }
     else {
         margin = { top: 5, right: 35, bottom: 80, left: 75 },
-            width = (70 / 100 * window.innerWidth) * 0.99 - margin.left - margin.right,
+            width = (heatmapWidth / 100 * window.innerWidth) * 0.99 - margin.left - margin.right,
             height = window.innerHeight * 0.97 - margin.top - margin.bottom;
     }
 
@@ -849,13 +863,132 @@ const simianVis = () => {
         }
 
     }
-
+    var tip;
     document.getElementById('my_container').innerHTML = "";
+    const elements = document.getElementsByClassName("d3-tip");
+    while (elements.length > 0) {
+        elements[0].parentNode.removeChild(elements[0]);
+    }
+    if (showFullHeatmapflag) {
+        // create a tooltip
+         tip = d3.tipFull()
+             .attr("class", "d3-tip")
+             .style("background-color", "white")
+             .direction(function (d, mouse) {
+                 if (mouse[0] > width / 2 && mouse[1] < height / 2) { return "sw" }
+                 if (mouse[0] > width / 2 && mouse[1] > height / 2) { return "nw" }
+                 if (mouse[0] < width / 2 && mouse[1] > height / 2) { return "ne" }
+                 if (mouse[0] < width / 2 && mouse[1] < height / 2) { return "se" }
+
+
+            })
+            .html(function (d,mouse) {
+                tooltipValue = "";
+                let clustDistVal = parseFloat(d.dist).toFixed(1);
+                angle1Sp1 = 0.0;
+                angle2Sp1 = 0.0;
+                angle3Sp1 = 0.0;
+                angle4Sp1 = 0.0;
+                angle5Sp1 = 0.0;
+                angle6Sp1 = 0.0;
+                angle1Sp2 = 0.0;
+                angle2Sp2 = 0.0;
+                angle3Sp2 = 0.0;
+                angle4Sp2 = 0.0;
+                angle5Sp2 = 0.0;
+                angle6Sp2 = 0.0;
+                var layercheck = ['human', 'gorilla', 'chimp'];
+                if (layercheck.includes(species1ValueIdentify)) {
+
+
+
+                    if (species1ValueIdentify == 'human') {
+                        angle1Sp1 = layerInfoForHuman[d.cluster_1][1].toFixed(2);
+                        angle2Sp1 = layerInfoForHuman[d.cluster_1][2].toFixed(2);
+                        angle3Sp1 = layerInfoForHuman[d.cluster_1][3].toFixed(2);
+                        angle4Sp1 = layerInfoForHuman[d.cluster_1][4].toFixed(2);
+                        angle5Sp1 = layerInfoForHuman[d.cluster_1][5].toFixed(2);
+                        angle6Sp1 = layerInfoForHuman[d.cluster_1][6].toFixed(2);
+                    }
+                    else if (species1ValueIdentify == 'gorilla') {
+                        angle1Sp1 = layerInfoForGorilla[d.cluster_1][1].toFixed(2);
+                        angle2Sp1 = layerInfoForGorilla[d.cluster_1][2].toFixed(2);
+                        angle3Sp1 = layerInfoForGorilla[d.cluster_1][3].toFixed(2);
+                        angle4Sp1 = layerInfoForGorilla[d.cluster_1][4].toFixed(2);
+                        angle5Sp1 = layerInfoForGorilla[d.cluster_1][5].toFixed(2);
+                        angle6Sp1 = layerInfoForGorilla[d.cluster_1][6].toFixed(2);
+                    }
+                    else if (species1ValueIdentify == 'chimp') {
+                        angle1Sp1 = layerInfoForChimp[d.cluster_1][1].toFixed(2);
+                        angle2Sp1 = layerInfoForChimp[d.cluster_1][2].toFixed(2);
+                        angle3Sp1 = layerInfoForChimp[d.cluster_1][3].toFixed(2);
+                        angle4Sp1 = layerInfoForChimp[d.cluster_1][4].toFixed(2);
+                        angle5Sp1 = layerInfoForChimp[d.cluster_1][5].toFixed(2);
+                        angle6Sp1 = layerInfoForChimp[d.cluster_1][6].toFixed(2);
+                    }
+
+
+                }
+
+                if (layercheck.includes(species2ValueIdentify)) {
+
+
+
+                    if (species2ValueIdentify == 'human') {
+                        angle1Sp2 = layerInfoForHuman[d.cluster_2][1].toFixed(2);
+                        angle2Sp2 = layerInfoForHuman[d.cluster_2][2].toFixed(2);
+                        angle3Sp2 = layerInfoForHuman[d.cluster_2][3].toFixed(2);
+                        angle4Sp2 = layerInfoForHuman[d.cluster_2][4].toFixed(2);
+                        angle5Sp2 = layerInfoForHuman[d.cluster_2][5].toFixed(2);
+                        angle6Sp2 = layerInfoForHuman[d.cluster_2][6].toFixed(2);
+                    }
+                    else if (species2ValueIdentify == 'gorilla') {
+                        angle1Sp2 = layerInfoForGorilla[d.cluster_2][1].toFixed(2);
+                        angle2Sp2 = layerInfoForGorilla[d.cluster_2][2].toFixed(2);
+                        angle3Sp2 = layerInfoForGorilla[d.cluster_2][3].toFixed(2);
+                        angle4Sp2 = layerInfoForGorilla[d.cluster_2][4].toFixed(2);
+                        angle5Sp2 = layerInfoForGorilla[d.cluster_2][5].toFixed(2);
+                        angle6Sp2 = layerInfoForGorilla[d.cluster_2][6].toFixed(2);
+                    }
+                    else if (species2ValueIdentify == 'chimp') {
+                        angle1Sp2 = layerInfoForChimp[d.cluster_2][1].toFixed(2);
+                        angle2Sp2 = layerInfoForChimp[d.cluster_2][2].toFixed(2);
+                        angle3Sp2 = layerInfoForChimp[d.cluster_2][3].toFixed(2);
+                        angle4Sp2 = layerInfoForChimp[d.cluster_2][4].toFixed(2);
+                        angle5Sp2 = layerInfoForChimp[d.cluster_2][5].toFixed(2);
+                        angle6Sp2 = layerInfoForChimp[d.cluster_2][6].toFixed(2);
+                    }
+
+
+                }
+                var formatTooltipContents = "";
+                formatTooltipContents = "<div id=\"clearTooltip\"> <table  style=\"width:100% border: solid thin;border-collapse: collapse;border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" border: solid thin; color: #1b9e77;\" ><img src=\"" + ximage + "\" alt=\"" + species1ValueIdentify + "\" height=50 width=50 /></th><th style=\" border: solid thin; color: #d95f02;\" ><img src=\"" + yimage + "\" alt=\"" + species2ValueIdentify + "\" height=50 width=50 /></th></tr><tr><td  style=\" border: solid thin; \" ><i>In-species cluster<i/></td><td   style=\" border: solid thin;color: #1b9e77;  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</td><td  style=\" border: solid thin; color: #d95f02; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</td></tr>";
+                if (barflag) {
+                    formatTooltipContents = formatTooltipContents + "<tr><td   style=\" border: solid thin; \"><i>Cluster cell count<i/></td><td  style=\" border: solid thin;color: #1b9e77; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: #1b9e77;\">" + inspecies1ClusterCounts[d.cluster_1] + "</td><td   style=\" border: solid thin;color: #d95f02; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: #d95f02;\">" + inspecies1ClusterCounts[d.cluster_2] + "</td></tr>";
+                }
+                formatTooltipContents = formatTooltipContents + "<tr><td   style=\" border: solid thin;\"><i>Subclass<i/></td><td  style=\" border: solid thin;color: #1b9e77; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + subClassColors[d.subclass_1] + "; \"> " + d.subclass_1 + "</td><td   style=\" border: solid thin;color: #d95f02; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + subClassColors[d.subclass_2] + "; \">" + d.subclass_2 + "</td></tr><tr><td   style=\" border: solid thin;\"><i>Class<i/></td><td   style=\" border: solid thin;color: #1b9e77; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + d.class_1 + "</td><td   style=\" border: solid thin;color: #d95f02;  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + classColors[d.class_2] + ";\">" + d.class_2 + "</td></tr>"
+                if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
+                    formatTooltipContents = formatTooltipContents + "<tr ><td style=\" border: solid thin;\"><i>Cross-species cluster<i/></td><td colspan=\"2\" style=\" border: solid thin;color: #1b9e77;  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster1_species_1] + ";\">" + d.cross_species_cluster1_species_1 + "</td></tr>"
+                }
+                else {
+                    formatTooltipContents = formatTooltipContents + "<tr ><td style=\" border: solid thin;\"><i>Cross-species cluster<i/></td><td  style=\" border: solid thin;color: #1b9e77;  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster1_species_1] + ";\">" + d.cross_species_cluster1_species_1 + "</td><td   style=\" border: solid thin;color: #d95f02;  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster2_species_2] + ";\">" + d.cross_species_cluster2_species_2 + "</td></tr>"
+                }
+                formatTooltipContents = formatTooltipContents + "<tr><td   style=\" border: solid thin;\"><i>Cluster distance<i/></td><td colspan=\"2\"    style=\" border: solid thin;color: #7A7F3D; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: #D3D3D3;\">" + clustDistVal + "</td></tr>";
+                if (layercheck.includes(species1ValueIdentify) || layercheck.includes(species2ValueIdentify)) {
+                    formatTooltipContents = formatTooltipContents + "<tr><td  style=\" border: solid thin;\"><i>Layer distribution<div style=\"  padding-left: 10px;\"><div style=\" font-size:9px; text-align: left;\"><li style=\" color: #1b9e77;\">" + species1ValueIdentify + "</li><li style=\" color: #d95f02; \">" + species2ValueIdentify + "</li></div></div><i/></td><td colspan=\"2\"  style=\" border: solid thin;color: #7A7F3D;\"><div style=\"width:100%\"><div id=\"tipDiv\"></div></div></td></tr>";
+                }
+                formatTooltipContents = formatTooltipContents + "</table></div>";
+                return formatTooltipContents;
+            });
+
+    }
+    else {
+
     // create a tooltip
-     var tip = d3.tip()
+      tip = d3.tip()
         .attr("class", "d3-tip").rootElement(document.getElementById('my_container'))
-        .style("background-color", "white")
-        .html(function (d) {
+         .style("background-color", "white")
+        .html(function (d,mouse) {
             tooltipValue = "";
             let clustDistVal = parseFloat(d.dist).toFixed(1);
              angle1Sp1 = 0.0;
@@ -953,8 +1086,12 @@ const simianVis = () => {
             formatTooltipContents = formatTooltipContents + "</table></div>";
             return formatTooltipContents;
         });
+        
+    }
 
-    svg.call(tip);
+        svg.call(tip);
+
+
     var dblclick  = function (d) {
         d3.select("#marker1").remove();
         d3.select("#marker2").remove();
@@ -1094,9 +1231,9 @@ const simianVis = () => {
         d3.select("#marker2").remove();
         d3.select("#marker1").remove();
         d3.select("#marker3").remove();
-        tip.show(d, this);
+        tip.show(d, d3.mouse(this), this);
 
-        var wTooltip = (20/ 100 * window.innerWidth);
+        var wTooltip = ((containerwidth)/ 100 * window.innerWidth);
         var hTooltip = window.innerHeight / 8;
         var marginTooltip = { topTooltip: 2, rightTooltip: 2, bottomTooltip: 2, leftTooltip: 2, middleTooltip: 2 };
         var regionWidthTooltip = wTooltip / 2 - marginTooltip.middleTooltip;
@@ -1143,10 +1280,10 @@ const simianVis = () => {
         d3.select("#marker3").remove();
 
 
-        tip.show(d, this);
+        tip.show(d, d3.mouse(this), this);
 
 
-        var wTooltip = (20 / 100 * window.innerWidth);
+        var wTooltip = ((containerwidth) / 100 * window.innerWidth);
         var hTooltip = window.innerHeight / 8;
         var marginTooltip = { topTooltip: 2, rightTooltip: 2, bottomTooltip: 2, leftTooltip: 2, middleTooltip: 2 };
         var regionWidthTooltip = wTooltip / 2 - marginTooltip.middleTooltip;
@@ -1838,3 +1975,4 @@ function queueInspeciesClusterCounts(clusterspecies1, clusterspecies2) {
 
     simianVis();
 }
+
