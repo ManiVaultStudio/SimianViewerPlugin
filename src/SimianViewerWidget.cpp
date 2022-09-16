@@ -150,6 +150,10 @@ void SimianViewerWidget::histChart(QString visColorContent)
     emit _communicationObject->qt_histChart(visColorContent);
 }
 
+void SimianViewerWidget::showFullHeatmap(QString visColorContent)
+{
+    emit _communicationObject->qt_showFullHeatmap(visColorContent);
+}
 
 void SimianViewerWidget::inspeciesClusterCounts(QString visCountClusterContent)
 {

@@ -35,6 +35,7 @@ var tooltipValue = "";
 var qtColor = "Black to white";
 var colorMirror = false;
 var barflag = false;
+var showFullHeatmapflag = false;
 var layerFlag = false;
 var backgroundColor = "#ffffff";
 //onresize adjust chart dimensions
@@ -74,6 +75,7 @@ try {
         QtBridge.qt_setColor.connect(function () { setColor(arguments[0]); });
         QtBridge.qt_setBackgroundColor.connect(function () { setBackgroundColor(arguments[0]); });
         QtBridge.qt_histChart.connect(function () { histChart(arguments[0]); });
+        QtBridge.qt_showFullHeatmap.connect(function () { showFullHeatmap(arguments[0]); });
         QtBridge.qt_setRangeValue.connect(function () { setRangeValue(arguments[0]); });
         QtBridge.qt_inspeciesClusterCounts.connect(function () { setInspeciesClusterCounts(arguments[0]); });
         notifyBridgeAvailable();
@@ -1748,6 +1750,20 @@ function queuehistChart(valD) {
     simianVis();
 }
 
+function showFullHeatmap(d) {
+
+    queueshowFullHeatmap(d);
+}
+function queueshowFullHeatmap(valD) {
+    if (valD == "F") {
+        showFullHeatmapflag = false;
+    }
+    else {
+        showFullHeatmapflag = true;
+    }
+
+    simianVis();
+}
 
 
 
