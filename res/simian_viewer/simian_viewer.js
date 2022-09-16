@@ -964,7 +964,11 @@ const simianVis = () => {
             else {
                 formatTooltipContents = formatTooltipContents + "<tr ><td style=\" border: solid thin;\"><i>Cross-species cluster<i/></td><td  style=\" border: solid thin;color: #1b9e77;  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster1_species_1] + ";\">" + d.cross_species_cluster1_species_1 + "</td><td   style=\" border: solid thin;color: #d95f02;  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster2_species_2] + ";\">" + d.cross_species_cluster2_species_2 + "</td></tr>"
             }            
-            formatTooltipContents = formatTooltipContents + "<tr><td   style=\" border: solid thin;\"><i>Cluster distance<i/></td><td colspan=\"2\"    style=\" border: solid thin;color: #7A7F3D; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: #D3D3D3;\">" + clustDistVal + "</td></tr><tr><td  style=\" border: solid thin;\"><i>Layer distribution<div ><li style=\" color: #1b9e77;\">" + species1ValueIdentify + "</li><li style=\" color: #d95f02; \">" + species2ValueIdentify + "</li></div><i/></td><td colspan=\"2\"  style=\" border: solid thin;color: #7A7F3D;\"><div id=\"tipDiv\"></div></td></tr></table></div>";
+            formatTooltipContents = formatTooltipContents + "<tr><td   style=\" border: solid thin;\"><i>Cluster distance<i/></td><td colspan=\"2\"    style=\" border: solid thin;color: #7A7F3D; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: #D3D3D3;\">" + clustDistVal + "</td></tr>";
+            if (layercheck.includes(species1ValueIdentify) || layercheck.includes(species2ValueIdentify)) {
+                formatTooltipContents = formatTooltipContents + "<tr><td  style=\" border: solid thin;\"><i>Layer distribution<div ><li style=\" color: #1b9e77;\">" + species1ValueIdentify + "</li><li style=\" color: #d95f02; \">" + species2ValueIdentify + "</li></div><i/></td><td colspan=\"2\"  style=\" border: solid thin;color: #7A7F3D;\"><div style=\"width:100%\"><div id=\"tipDiv\"></div></div></td></tr>";
+            }
+            formatTooltipContents = formatTooltipContents + "</table></div>";
             return formatTooltipContents;
         });
 
@@ -1111,7 +1115,7 @@ const simianVis = () => {
         d3.select("#marker3").remove();
         tip.show(d, this);
 
-        var wTooltip = (15 / 100 * window.innerWidth);
+        var wTooltip = (20/ 100 * window.innerWidth);
         var hTooltip = window.innerHeight / 8;
         var marginTooltip = { topTooltip: 2, rightTooltip: 2, bottomTooltip: 2, leftTooltip: 2, middleTooltip: 2 };
         var regionWidthTooltip = wTooltip / 2 - marginTooltip.middleTooltip;
@@ -1124,15 +1128,17 @@ const simianVis = () => {
         var xScaleRightTooltip = d3.scaleLinear().domain([0, maxValueTooltip]).range([0, regionWidthTooltip]);
         var yScaleTooltip = d3.scaleBand().domain(exampleDataTooltip.map(function (d) { return d.group; })).rangeRound([hTooltip, 0]).padding(0.1);
         var yAxisLeftTooltip = d3.axisRight().scale(yScaleTooltip).tickSize(4, 0).tickPadding(marginTooltip.middleTooltip - 4);
-        var yAxisRightTooltip = d3.axisLeft().scale(yScaleTooltip).tickSize(4, 0).tickFormat('');
+        var yAxisRightTooltip = d3.axisLeft().scale(yScaleTooltip).tickSize(4, 0).tickFormat(''); 
         var xAxisRightTooltip = d3.axisBottom().scale(xScaleTooltip).ticks(2);
         var xAxisLeftTooltip = d3.axisBottom().scale(xScaleTooltip.copy().range([pointATooltip, 0])).ticks(2);
         var leftBarGroupTooltip = svgTooltip.append('g').attr('transform', translation(pointATooltip, 0) + 'scale(-1,1)');
         var rightBarGroupTooltip = svgTooltip.append('g').attr('transform', translation(pointBTooltip, 0));
         svgTooltip.append('g').attr('class', 'axis y left').attr('transform', translation(pointATooltip, 0)).call(yAxisLeftTooltip).selectAll('text').attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '8px').style('text-anchor', 'middle');
         svgTooltip.append('g').attr('class', 'axis y right').attr('transform', translation(pointBTooltip, 0)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '8px').call(yAxisRightTooltip);
-        svgTooltip.append('g').attr('class', 'axis x left').attr('transform', translation(0, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').call(xAxisLeftTooltip);
-        svgTooltip.append('g').attr('class', 'axis x right').attr('transform', translation(pointBTooltip, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#555').call(xAxisRightTooltip); leftBarGroupTooltip.selectAll('.bar.left').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar left').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species1); }).attr('stroke', 'black').attr('fill', '#1b9e77').attr('height', yScaleTooltip.bandwidth());
+        svgTooltip.append('g').attr('class', 'axis x left').attr('transform', translation(0, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#808080').call(xAxisLeftTooltip).selectAll('text').attr('dy', '-0.9em').attr('dx', '+0.5em');
+        svgTooltip.append('g').attr('class', 'axis x right').attr('transform', translation(pointBTooltip, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#808080').call(xAxisRightTooltip).selectAll('text').attr('dy', '-0.9em').attr('dx', '-0.6em');
+        svgTooltip.selectAll(".tick").each(function (d) { if (d === 0.0 || d === 0 || d === 1.0 ) { this.remove(); } });
+        leftBarGroupTooltip.selectAll('.bar.left').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar left').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species1); }).attr('stroke', 'black').attr('fill', '#1b9e77').attr('height', yScaleTooltip.bandwidth());
         rightBarGroupTooltip.selectAll('.bar.right').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar right').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species2); }).attr('stroke', 'black').attr('fill', '#d95f02').attr('height', yScaleTooltip.bandwidth());
         function translation(x, y) { return 'translate(' + x + ',' + y + ')'; }
     };
@@ -1158,7 +1164,7 @@ const simianVis = () => {
 
         tip.show(d, this);
 
-        var wTooltip = (15 / 100 * window.innerWidth);
+        var wTooltip = (20 / 100 * window.innerWidth);
         var hTooltip = window.innerHeight / 8;
         var marginTooltip = { topTooltip: 2, rightTooltip: 2, bottomTooltip: 2, leftTooltip: 2, middleTooltip: 2 };
         var regionWidthTooltip = wTooltip / 2 - marginTooltip.middleTooltip;
@@ -1178,8 +1184,10 @@ const simianVis = () => {
         var rightBarGroupTooltip = svgTooltip.append('g').attr('transform', translation(pointBTooltip, 0));
         svgTooltip.append('g').attr('class', 'axis y left').attr('transform', translation(pointATooltip, 0)).call(yAxisLeftTooltip).selectAll('text').attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '8px').style('text-anchor', 'middle');
         svgTooltip.append('g').attr('class', 'axis y right').attr('transform', translation(pointBTooltip, 0)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '8px').call(yAxisRightTooltip);
-        svgTooltip.append('g').attr('class', 'axis x left').attr('transform', translation(0, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').call(xAxisLeftTooltip);
-        svgTooltip.append('g').attr('class', 'axis x right').attr('transform', translation(pointBTooltip, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#555').call(xAxisRightTooltip); leftBarGroupTooltip.selectAll('.bar.left').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar left').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species1); }).attr('stroke', 'black').attr('fill', '#1b9e77').attr('height', yScaleTooltip.bandwidth());
+        svgTooltip.append('g').attr('class', 'axis x left').attr('transform', translation(0, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#808080').call(xAxisLeftTooltip).selectAll('text').attr('dy', '-0.9em');
+        svgTooltip.append('g').attr('class', 'axis x right').attr('transform', translation(pointBTooltip, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#808080').call(xAxisRightTooltip).selectAll('text').attr('dy', '-0.9em');
+        svgTooltip.selectAll(".tick").each(function (d) { if (d === 0.0 || d === 0 || d === 1.0) { this.remove(); } });
+        leftBarGroupTooltip.selectAll('.bar.left').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar left').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species1); }).attr('stroke', 'black').attr('fill', '#1b9e77').attr('height', yScaleTooltip.bandwidth());
         rightBarGroupTooltip.selectAll('.bar.right').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar right').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species2); }).attr('stroke', 'black').attr('fill', '#d95f02').attr('height', yScaleTooltip.bandwidth());
         function translation(x, y) { return 'translate(' + x + ',' + y + ')'; }
 
