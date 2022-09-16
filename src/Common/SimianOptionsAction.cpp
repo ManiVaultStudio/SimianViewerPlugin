@@ -158,7 +158,17 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
                     }
                     else
                     {
+                        QString storeSpecies = _species2Action.getCurrentText();
+                        //_species2Action.setPlaceHolderString(QString("Choose Species2"));
+                        _species2Action.initialize(QStringList({ }), _species2Action.getPlaceholderString(), _species2Action.getPlaceholderString());
+                        QStringList speciesNames = { "gorilla","marmoset","rhesus","chimp","human" };
+                        speciesNames.removeAll(_species1Action.getCurrentText());
+                        _species2Action.initialize(QStringList({ speciesNames }), _species2Action.getPlaceholderString(), _species2Action.getPlaceholderString());
+                        _species2Action.setCurrentText(storeSpecies);
+                        
                         updateData((_species1Action.getCurrentText()).toStdString(), (_species2Action.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString(), (_distanceAction.getValue()), (_crossSpeciesFilterAction.getCurrentText()).toStdString());
+
+
                     }
             }
             else {

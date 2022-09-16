@@ -1164,6 +1164,7 @@ const simianVis = () => {
 
         tip.show(d, this);
 
+
         var wTooltip = (20 / 100 * window.innerWidth);
         var hTooltip = window.innerHeight / 8;
         var marginTooltip = { topTooltip: 2, rightTooltip: 2, bottomTooltip: 2, leftTooltip: 2, middleTooltip: 2 };
@@ -1184,8 +1185,8 @@ const simianVis = () => {
         var rightBarGroupTooltip = svgTooltip.append('g').attr('transform', translation(pointBTooltip, 0));
         svgTooltip.append('g').attr('class', 'axis y left').attr('transform', translation(pointATooltip, 0)).call(yAxisLeftTooltip).selectAll('text').attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '8px').style('text-anchor', 'middle');
         svgTooltip.append('g').attr('class', 'axis y right').attr('transform', translation(pointBTooltip, 0)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '8px').call(yAxisRightTooltip);
-        svgTooltip.append('g').attr('class', 'axis x left').attr('transform', translation(0, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#808080').call(xAxisLeftTooltip).selectAll('text').attr('dy', '-0.9em');
-        svgTooltip.append('g').attr('class', 'axis x right').attr('transform', translation(pointBTooltip, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#808080').call(xAxisRightTooltip).selectAll('text').attr('dy', '-0.9em');
+        svgTooltip.append('g').attr('class', 'axis x left').attr('transform', translation(0, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#808080').call(xAxisLeftTooltip).selectAll('text').attr('dy', '-0.9em').attr('dx', '+0.5em');
+        svgTooltip.append('g').attr('class', 'axis x right').attr('transform', translation(pointBTooltip, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#808080').call(xAxisRightTooltip).selectAll('text').attr('dy', '-0.9em').attr('dx', '-0.6em');
         svgTooltip.selectAll(".tick").each(function (d) { if (d === 0.0 || d === 0 || d === 1.0) { this.remove(); } });
         leftBarGroupTooltip.selectAll('.bar.left').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar left').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species1); }).attr('stroke', 'black').attr('fill', '#1b9e77').attr('height', yScaleTooltip.bandwidth());
         rightBarGroupTooltip.selectAll('.bar.right').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar right').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species2); }).attr('stroke', 'black').attr('fill', '#d95f02').attr('height', yScaleTooltip.bandwidth());
