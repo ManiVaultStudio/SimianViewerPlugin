@@ -132,7 +132,28 @@ public:
 
         friend class SimianOptionsAction;
     };
+    class VisSettingAction : public WidgetAction
+    {
+    protected:
+        class Widget : public hdps::gui::WidgetActionWidget {
+        public:
+            Widget(QWidget* parent, VisSettingAction* visSettingAction);
 
+            friend class VisSettingAction;
+        };
+
+        QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
+            return new VisSettingAction::Widget(parent, this);
+        };
+
+    public:
+        VisSettingAction(SimianOptionsAction& simianOptionsAction);
+
+    protected:
+        SimianOptionsAction& _simianOptionsAction;
+
+        friend class SimianOptionsAction;
+    };
     class DistanceNeighborhoodAction : public WidgetAction
     {
     protected:
@@ -186,6 +207,7 @@ public: // Action getters
     OptionAction& getNeighborhoodAction() { return _neighborhoodAction; }
     IntegralAction& getDistanceAction() { return _distanceAction; };
     ToggleAction& getHistBarAction() { return _histBarAction; };
+    ToggleAction& getFullHeatmapAction() { return _fullHeatMapAction; };
     DatasetPickerAction& getCrossSpecies1DatasetLinkerAction() { return _crossSpecies1DatasetLinkerAction; };
     DatasetPickerAction& getCrossSpecies2DatasetLinkerAction() { return _crossSpecies2DatasetLinkerAction; };
     DatasetPickerAction& getInSpecies1DatasetLinkerAction() { return _inSpecies1DatasetLinkerAction; };
@@ -193,6 +215,7 @@ public: // Action getters
     OptionAction& getCrossSpeciesFilterAction() { return _crossSpeciesFilterAction; }
     SpeciesAction& getSpeciesAction() { return _speciesAction; }
     ClusterAction& getClusterAction() { return _clusterAction; }
+    VisSettingAction& getVisSettingAction() { return _visSettingAction; }
     DistanceNeighborhoodAction& getDistanceNeighborhoodAction() { return _distanceNeighborhoodAction; }
     ColorMapAction& getColorMapAction() { return _colorMapAction; }
     ColorAction& getBackgroundColoringAction() { return _backgroundColoringAction; }
@@ -212,9 +235,11 @@ protected:
     std::vector<std::vector<std::string>>                _simianData;
     OptionsAction                 _multiSelectClusterFilterAction;
     ToggleAction _histBarAction;
+    ToggleAction _fullHeatMapAction;
     bool                        _isLoading;
     SpeciesAction               _speciesAction;
     ClusterAction               _clusterAction;
+    VisSettingAction               _visSettingAction;
     DistanceNeighborhoodAction               _distanceNeighborhoodAction;
     bool _isStarted;
     ColorMapAction          _colorMapAction;
