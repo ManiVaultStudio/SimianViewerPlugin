@@ -875,7 +875,7 @@ const simianVis = () => {
         .style("background-color", "white")
         .html(function (d) {
             tooltipValue = "";
-            let clustDistVal = parseFloat(d.dist).toFixed(2);
+            let clustDistVal = parseFloat(d.dist).toFixed(1);
              angle1Sp1 = 0.0;
              angle2Sp1 = 0.0;
              angle3Sp1 = 0.0;
@@ -966,7 +966,7 @@ const simianVis = () => {
             }            
             formatTooltipContents = formatTooltipContents + "<tr><td   style=\" border: solid thin;\"><i>Cluster distance<i/></td><td colspan=\"2\"    style=\" border: solid thin;color: #7A7F3D; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: #D3D3D3;\">" + clustDistVal + "</td></tr>";
             if (layercheck.includes(species1ValueIdentify) || layercheck.includes(species2ValueIdentify)) {
-                formatTooltipContents = formatTooltipContents + "<tr><td  style=\" border: solid thin;\"><i>Layer distribution<div ><li style=\" color: #1b9e77;\">" + species1ValueIdentify + "</li><li style=\" color: #d95f02; \">" + species2ValueIdentify + "</li></div><i/></td><td colspan=\"2\"  style=\" border: solid thin;color: #7A7F3D;\"><div style=\"width:100%\"><div id=\"tipDiv\"></div></div></td></tr>";
+                formatTooltipContents = formatTooltipContents + "<tr><td  style=\" border: solid thin;\"><i>Layer distribution<div style=\"  padding-left: 10px;\"><div style=\" font-size:8px; text-align: left;\"><li style=\" color: #1b9e77;\">" + species1ValueIdentify + "</li><li style=\" color: #d95f02; \">" + species2ValueIdentify + "</li></div></div><i/></td><td colspan=\"2\"  style=\" border: solid thin;color: #7A7F3D;\"><div style=\"width:100%\"><div id=\"tipDiv\"></div></div></td></tr>";
             }
             formatTooltipContents = formatTooltipContents + "</table></div>";
             return formatTooltipContents;
