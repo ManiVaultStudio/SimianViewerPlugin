@@ -154,6 +154,28 @@ public:
 
         friend class SimianOptionsAction;
     };
+    class LinkerSettingAction : public WidgetAction
+    {
+    protected:
+        class Widget : public hdps::gui::WidgetActionWidget {
+        public:
+            Widget(QWidget* parent, LinkerSettingAction* linkerSettingAction);
+
+            friend class LinkerSettingAction;
+        };
+
+        QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
+            return new LinkerSettingAction::Widget(parent, this);
+        };
+
+    public:
+        LinkerSettingAction(SimianOptionsAction& simianOptionsAction);
+
+    protected:
+        SimianOptionsAction& _simianOptionsAction;
+
+        friend class SimianOptionsAction;
+    };
     class DistanceNeighborhoodAction : public WidgetAction
     {
     protected:
@@ -196,6 +218,7 @@ public:
 private:
     void updateData(std::string Species1, std::string Species2, std::string neighborhood, int distance, std::string CrossSpeciesFilter);
     void filterMultiSelect();
+    bool QStringlistContainsQString(const QStringList& list, const QString& str);
 protected:
     void updateDatasetPickerAction();
     void sendClusterCountInfoToJS();
@@ -213,9 +236,14 @@ public: // Action getters
     DatasetPickerAction& getInSpecies1DatasetLinkerAction() { return _inSpecies1DatasetLinkerAction; };
     DatasetPickerAction& getInSpecies2DatasetLinkerAction() { return _inSpecies2DatasetLinkerAction; };
     OptionAction& getCrossSpeciesFilterAction() { return _crossSpeciesFilterAction; }
+    OptionAction& getInSpecies1HeatMapCellAction() { return _inSpecies1HeatMapCellAction; }
+    OptionAction& getInSpecies2HeatMapCellAction() { return _inSpecies2HeatMapCellAction; }
+    OptionAction& getCrossSpecies1HeatMapCellAction() { return _crossSpecies1HeatMapCellAction; }
+    OptionAction& getCrossSpecies2HeatMapCellAction() { return _crossSpecies2HeatMapCellAction; }
     SpeciesAction& getSpeciesAction() { return _speciesAction; }
     ClusterAction& getClusterAction() { return _clusterAction; }
     VisSettingAction& getVisSettingAction() { return _visSettingAction; }
+    LinkerSettingAction& getLinkerSettingAction() { return _linkerSettingAction; }
     DistanceNeighborhoodAction& getDistanceNeighborhoodAction() { return _distanceNeighborhoodAction; }
     ColorMapAction& getColorMapAction() { return _colorMapAction; }
     ColorAction& getBackgroundColoringAction() { return _backgroundColoringAction; }
@@ -236,10 +264,15 @@ protected:
     OptionsAction                 _multiSelectClusterFilterAction;
     ToggleAction _histBarAction;
     ToggleAction _fullHeatMapAction;
+    OptionAction                 _inSpecies1HeatMapCellAction;
+    OptionAction                 _inSpecies2HeatMapCellAction;
+    OptionAction                 _crossSpecies1HeatMapCellAction;
+    OptionAction                 _crossSpecies2HeatMapCellAction;
     bool                        _isLoading;
     SpeciesAction               _speciesAction;
     ClusterAction               _clusterAction;
     VisSettingAction               _visSettingAction;
+    LinkerSettingAction               _linkerSettingAction;
     DistanceNeighborhoodAction               _distanceNeighborhoodAction;
     bool _isStarted;
     ColorMapAction          _colorMapAction;
