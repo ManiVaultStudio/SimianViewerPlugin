@@ -875,7 +875,7 @@ const simianVis = () => {
              .attr("class", "d3-tip")
              .style("background-color", "white")
              .direction(function (d, mouse) {
-                 if (mouse[0] > width / 2 && mouse[1] < height / 2) { return "sw" }
+                 if (mouse[0] >= width / 2 && mouse[1] <= height / 2) { return "sw" }
                  if (mouse[0] > width / 2 && mouse[1] > height / 2) { return "nw" }
                  if (mouse[0] < width / 2 && mouse[1] > height / 2) { return "ne" }
                  if (mouse[0] < width / 2 && mouse[1] < height / 2) { return "se" }
@@ -968,7 +968,7 @@ const simianVis = () => {
                 }
                 formatTooltipContents = formatTooltipContents + "<tr><td   style=\" border: solid thin;\"><i>Subclass<i/></td><td  style=\" border: solid thin;color: #1b9e77; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + subClassColors[d.subclass_1] + "; \"> " + d.subclass_1 + "</td><td   style=\" border: solid thin;color: #d95f02; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + subClassColors[d.subclass_2] + "; \">" + d.subclass_2 + "</td></tr><tr><td   style=\" border: solid thin;\"><i>Class<i/></td><td   style=\" border: solid thin;color: #1b9e77; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + d.class_1 + "</td><td   style=\" border: solid thin;color: #d95f02;  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + classColors[d.class_2] + ";\">" + d.class_2 + "</td></tr>"
                 if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
-                    formatTooltipContents = formatTooltipContents + "<tr ><td style=\" border: solid thin;\"><i>Cross-species cluster<i/></td><td colspan=\"2\" style=\" border: solid thin;color: #1b9e77;  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster1_species_1] + ";\">" + d.cross_species_cluster1_species_1 + "</td></tr>"
+                    formatTooltipContents = formatTooltipContents + "<tr ><td style=\" border: solid thin;\"><i>Cross-species cluster<i/></td><td colspan=\"2\" style=\" border: solid thin;color: #7A7F3D;  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster1_species_1] + ";\">" + d.cross_species_cluster1_species_1 + "</td></tr>"
                 }
                 else {
                     formatTooltipContents = formatTooltipContents + "<tr ><td style=\" border: solid thin;\"><i>Cross-species cluster<i/></td><td  style=\" border: solid thin;color: #1b9e77;  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster1_species_1] + ";\">" + d.cross_species_cluster1_species_1 + "</td><td   style=\" border: solid thin;color: #d95f02;  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster2_species_2] + ";\">" + d.cross_species_cluster2_species_2 + "</td></tr>"
@@ -1659,83 +1659,83 @@ const simianVis = () => {
     if (species2ValueIdentify == "gorilla") {
 
         if (luma < 40) {
-            yimage = 'https://i.ibb.co/0CYCryh/gorilla-light.png';
+            yimage = 'images/light/gorilla-light.png';
         }
         else {
-            yimage = 'https://i.ibb.co/RNxHKTF/gorilla-dark.png';
+            yimage = 'images/dark/gorilla-dark.png';
         }
     }
     else if (species2ValueIdentify == "marmoset") {
         if (luma < 40) {
-            yimage = 'https://i.ibb.co/b3mDHXN/marmoset-light.png';
+            yimage = 'images/light/marmoset-light.png';
         }
         else {
-            yimage = 'https://i.ibb.co/SXjQXNN/marmoset-dark.png';
+            yimage = 'images/dark/marmoset-dark.png';
         }
     }
     else if (species2ValueIdentify == "human") {
         if (luma < 40) {
-            yimage = 'https://i.ibb.co/9bBsDpZ/human-light.png';
+            yimage = 'images/light/human-light.png';
         }
         else {
-            yimage = 'https://i.ibb.co/nD675k0/human-dark.png';
+            yimage = 'images/dark/human-dark.png';
         }
     }
     else if (species2ValueIdentify == "rhesus") {
         if (luma < 40) {
-            yimage = 'https://i.ibb.co/YTdCB33/rhesus-light.png';
+            yimage = 'images/light/rhesus-light.png';
         }
         else {
-            yimage = 'https://i.ibb.co/k8FjPSP/rhesus-dark.png';
+            yimage = 'images/dark/rhesus-dark.png';
         }
     }
     else if (species2ValueIdentify == "chimp") {
         if (luma < 40) {
-            yimage = 'https://i.ibb.co/j4gpfjp/chimpanzee-light.png';
+            yimage = 'images/light/chimpanzee-light.png';
         }
         else {
-            yimage = 'https://i.ibb.co/mvDVVhz/chimpanzee-dark.png';
+            yimage = 'images/dark/chimpanzee-dark.png';
         }
     }
 
     if (species1ValueIdentify == "gorilla") {
         if (luma < 40) {
-            ximage = 'https://i.ibb.co/0CYCryh/gorilla-light.png';
+            ximage = 'images/light/gorilla-light.png';
         }
         else {
-            ximage = 'https://i.ibb.co/RNxHKTF/gorilla-dark.png';
+            ximage = 'images/dark/gorilla-dark.png';
         }
     }
     else if (species1ValueIdentify == "chimp") {
         if (luma < 40) {
-            ximage = 'https://i.ibb.co/j4gpfjp/chimpanzee-light.png';
+            ximage = 'images/light/chimpanzee-light.png';
         }
         else {
-            ximage = 'https://i.ibb.co/mvDVVhz/chimpanzee-dark.png';
+            ximage = 'images/dark/chimpanzee-dark.png';
         }
     }
     else if (species1ValueIdentify == "rhesus") {
         if (luma < 40) {
-            ximage = 'https://i.ibb.co/YTdCB33/rhesus-light.png';
+            ximage = 'images/light/rhesus-light.png';
         }
         else {
-            ximage = 'https://i.ibb.co/k8FjPSP/rhesus-dark.png';
+            ximage = 'images/dark/rhesus-dark.png';
         }
     }
     else if (species1ValueIdentify == "human") {
         if (luma < 40) {
-            ximage = 'https://i.ibb.co/9bBsDpZ/human-light.png';
+            ximage = 'images/light/human-light.png';
         }
         else {
-            ximage = 'https://i.ibb.co/nD675k0/human-dark.png';
+            ximage = 'images/dark/human-dark.png';
         }
     }
     else if (species1ValueIdentify == "marmoset") {
         if (luma < 40) {
-            ximage = 'https://i.ibb.co/b3mDHXN/marmoset-light.png';
+            ximage = 'images/light/marmoset-light.png';
         }
         else {
-            ximage = 'https://i.ibb.co/SXjQXNN/marmoset-dark.png';
+            ximage = 'images/dark/marmoset-dark.png';
         }
     }
 
