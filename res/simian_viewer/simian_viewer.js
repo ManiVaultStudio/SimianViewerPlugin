@@ -67,6 +67,8 @@ const mapDataBarMarmoset = {};
 const mapDataBarRhesus = {};
 const crossSpecies_ClassMap = { 'Oligo_1': 'glia', 'OPC_2': 'glia', 'Astro_1': 'glia', 'Micro-PVM_1': 'glia', 'Endo_1': 'glia', 'VLMC_1': 'glia', 'OPC_1': 'glia', 'L6 CT_1': 'exc', 'L6b_2': 'exc', 'L5/6 NP_1': 'exc', 'L5/6 NP_2': 'exc', 'L6 CT_2': 'exc', 'L6b_3': 'exc', 'L5 ET_2': 'exc', 'L5 ET_1': 'exc', 'L6b_1': 'exc', 'Lamp5_1': 'inh', 'Vip_5': 'inh', 'Vip_4': 'inh', 'Pax6_1': 'inh', 'Lamp5_2': 'inh', 'Sncg_3': 'inh', 'Vip_8': 'inh', 'Sncg_2': 'inh', 'Vip_1': 'inh', 'Vip_3': 'inh', 'Lamp5_Lhx6_1': 'inh', 'Vip_7': 'inh', 'Vip_2': 'inh', 'Vip_6': 'inh', 'Sncg_1': 'inh', 'Pax6_2': 'inh', 'Sst_3': 'inh', 'Pvalb_4': 'inh', 'Sst_8': 'inh', 'Pvalb_3': 'inh', 'Sst_1': 'inh', 'Sst_2': 'inh', 'Sst_7': 'inh', 'Sst_6': 'inh', 'Sst_5': 'inh', 'Sst_4': 'inh', 'Chandelier_1': 'inh', 'Sst Chodl_1': 'inh', 'Pvalb_2': 'inh', 'Sst_9': 'inh', 'Pvalb_1': 'inh', 'L5 IT_1': 'exc', 'L4 IT_1': 'exc', 'L5 IT_2': 'exc', 'L6 IT_1': 'exc', 'L6 IT Car3_2': 'exc', 'L4 IT_2': 'exc', 'L2/3 IT_1': 'exc', 'L2/3 IT_3': 'exc', 'L2/3 IT_2': 'exc', 'L6 IT Car3_1': 'exc' };
 const crossSpecies_SubClassMap = { 'Oligo_1': 'Oligo', 'OPC_2': 'OPC', 'Astro_1': 'Astro', 'Micro-PVM_1': 'Micro-PVM', 'Endo_1': 'Endo', 'VLMC_1': 'VLMC', 'OPC_1': 'OPC', 'L6 CT_1': 'L6 CT', 'L6b_2': 'L6b', 'L5/6 NP_1': 'L5/6 NP', 'L5/6 NP_2': 'L5/6 NP', 'L6 CT_2': 'L6 CT', 'L6b_3': 'L6b', 'L5 ET_2': 'L5 ET', 'L5 ET_1': 'L5 ET', 'L6b_1': 'L6b', 'Lamp5_1': 'Lamp5', 'Vip_5': 'Vip', 'Vip_4': 'Vip', 'Pax6_1': 'Pax6', 'Lamp5_2': 'Lamp5', 'Sncg_3': 'Pax6', 'Vip_8': 'Sncg', 'Sncg_2': 'Sncg', 'Vip_1': 'Vip', 'Vip_3': 'Vip', 'Lamp5_Lhx6_1': 'Lamp5_Lhx6', 'Vip_7': 'Vip', 'Vip_2': 'Vip', 'Vip_6': 'Vip', 'Sncg_1': 'Sncg', 'Pax6_2': 'Pax6', 'Sst_3': 'Sst', 'Pvalb_4': 'Pvalb', 'Sst_8': 'Sst', 'Pvalb_3': 'Pvalb', 'Sst_1': 'Sst', 'Sst_2': 'Sst', 'Sst_7': 'Sst', 'Sst_6': 'Sst Chodl', 'Sst_5': 'Sst', 'Sst_4': 'Sst', 'Chandelier_1': 'Chandelier', 'Sst Chodl_1': 'Sst Chodl', 'Pvalb_2': 'Pvalb', 'Sst_9': 'Sst', 'Pvalb_1': 'Pvalb', 'L5 IT_1': 'L5 IT', 'L4 IT_1': 'L4 IT', 'L5 IT_2': 'L5 IT', 'L6 IT_1': 'L6 IT', 'L6 IT Car3_2': 'L6 IT Car3', 'L4 IT_2': 'L4 IT', 'L2/3 IT_1': 'L2/3 IT', 'L2/3 IT_3': 'L2/3 IT', 'L2/3 IT_2': 'L4 IT', 'L6 IT Car3_1': 'L6 IT Car3' };
+const speciesColors = { 'human': '#ED5564', 'chimp': '#9FD568', 'gorilla': '#FA6900', 'rhesus': '#4FC1E8', 'marmoset': '#AB92EB' };
+
 //Qt Connections
 try {
     new QWebChannel(qt.webChannelTransport, function (channel) {
@@ -1257,9 +1259,9 @@ const simianVis = () => {
         svgTooltip.append('g').attr('class', 'axis y right').attr('transform', translation(pointBTooltip, 0)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '8').call(yAxisRightTooltip);
         svgTooltip.append('g').attr('class', 'axis x left').attr('transform', translation(0, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#808080').call(xAxisLeftTooltip).selectAll('text').attr('dy', '.71em');
         svgTooltip.append('g').attr('class', 'axis x right').attr('transform', translation(pointBTooltip, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#808080').call(xAxisRightTooltip).selectAll('text').attr('dy', '.71em');
-        svgTooltip.selectAll(".tick").each(function (d) { if (d === 0.0 || d === 0 || d === 1.0 ) { this.remove(); } });
-        leftBarGroupTooltip.selectAll('.bar.left').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar left').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species1); }).attr('stroke', 'black').attr('fill', '#1b9e77').attr('height', yScaleTooltip.bandwidth());
-        rightBarGroupTooltip.selectAll('.bar.right').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar right').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species2); }).attr('stroke', 'black').attr('fill', '#d95f02').attr('height', yScaleTooltip.bandwidth());
+        svgTooltip.selectAll(".tick").each(function (d) { if (d === 0.0 || d === 0 || d === 1.0) { this.remove(); } });
+        leftBarGroupTooltip.selectAll('.bar.left').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar left').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species1); }).attr('stroke', 'black').attr('fill', speciesColors[species1ValueIdentify]).attr('height', yScaleTooltip.bandwidth());
+        rightBarGroupTooltip.selectAll('.bar.right').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar right').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species2); }).attr('stroke', 'black').attr('fill', speciesColors[species2ValueIdentify]).attr('height', yScaleTooltip.bandwidth());
         function translation(x, y) { return 'translate(' + x + ',' + y + ')'; }
     };
     var mouseleave = function (d) {
@@ -1308,8 +1310,8 @@ const simianVis = () => {
         svgTooltip.append('g').attr('class', 'axis x left').attr('transform', translation(0, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#808080').call(xAxisLeftTooltip).selectAll('text').attr('dy', '.71em');
         svgTooltip.append('g').attr('class', 'axis x right').attr('transform', translation(pointBTooltip, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#808080').call(xAxisRightTooltip).selectAll('text').attr('dy', '.71em');
         svgTooltip.selectAll(".tick").each(function (d) { if (d === 0.0 || d === 0 || d === 1.0) { this.remove(); } });
-        leftBarGroupTooltip.selectAll('.bar.left').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar left').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species1); }).attr('stroke', 'black').attr('fill', '#1b9e77').attr('height', yScaleTooltip.bandwidth());
-        rightBarGroupTooltip.selectAll('.bar.right').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar right').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species2); }).attr('stroke', 'black').attr('fill', '#d95f02').attr('height', yScaleTooltip.bandwidth());
+        leftBarGroupTooltip.selectAll('.bar.left').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar left').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species1); }).attr('stroke', 'black').attr('fill', speciesColors[species1ValueIdentify]).attr('height', yScaleTooltip.bandwidth());
+        rightBarGroupTooltip.selectAll('.bar.right').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar right').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species2); }).attr('stroke', 'black').attr('fill', speciesColors[species2ValueIdentify]).attr('height', yScaleTooltip.bandwidth());
         function translation(x, y) { return 'translate(' + x + ',' + y + ')'; }
 
         let selectionIDs = [];
@@ -1666,7 +1668,7 @@ const simianVis = () => {
             yimage = 'images/light/gorilla-light.png';
         }
         else {
-            yimage = 'images/dark/gorilla-dark.png';
+            yimage = 'images/color/gorilla-color.png';
         }
     }
     else if (species2ValueIdentify == "marmoset") {
@@ -1674,7 +1676,7 @@ const simianVis = () => {
             yimage = 'images/light/marmoset-light.png';
         }
         else {
-            yimage = 'images/dark/marmoset-dark.png';
+            yimage = 'images/color/marmoset-color.png';
         }
     }
     else if (species2ValueIdentify == "human") {
@@ -1682,7 +1684,7 @@ const simianVis = () => {
             yimage = 'images/light/human-light.png';
         }
         else {
-            yimage = 'images/dark/human-dark.png';
+            yimage = 'images/color/human-color.png';
         }
     }
     else if (species2ValueIdentify == "rhesus") {
@@ -1690,7 +1692,7 @@ const simianVis = () => {
             yimage = 'images/light/rhesus-light.png';
         }
         else {
-            yimage = 'images/dark/rhesus-dark.png';
+            yimage = 'images/color/rhesus-color.png';
         }
     }
     else if (species2ValueIdentify == "chimp") {
@@ -1698,7 +1700,7 @@ const simianVis = () => {
             yimage = 'images/light/chimpanzee-light.png';
         }
         else {
-            yimage = 'images/dark/chimpanzee-dark.png';
+            yimage = 'images/color/chimpanzee-color.png';
         }
     }
 
@@ -1707,7 +1709,7 @@ const simianVis = () => {
             ximage = 'images/light/gorilla-light.png';
         }
         else {
-            ximage = 'images/dark/gorilla-dark.png';
+            ximage = 'images/color/gorilla-color.png';
         }
     }
     else if (species1ValueIdentify == "chimp") {
@@ -1715,7 +1717,7 @@ const simianVis = () => {
             ximage = 'images/light/chimpanzee-light.png';
         }
         else {
-            ximage = 'images/dark/chimpanzee-dark.png';
+            ximage = 'images/color/chimpanzee-color.png';
         }
     }
     else if (species1ValueIdentify == "rhesus") {
@@ -1723,7 +1725,7 @@ const simianVis = () => {
             ximage = 'images/light/rhesus-light.png';
         }
         else {
-            ximage = 'images/dark/rhesus-dark.png';
+            ximage = 'images/color/rhesus-color.png';
         }
     }
     else if (species1ValueIdentify == "human") {
@@ -1731,7 +1733,7 @@ const simianVis = () => {
             ximage = 'images/light/human-light.png';
         }
         else {
-            ximage = 'images/dark/human-dark.png';
+            ximage = 'images/color/human-color.png';
         }
     }
     else if (species1ValueIdentify == "marmoset") {
@@ -1739,7 +1741,7 @@ const simianVis = () => {
             ximage = 'images/light/marmoset-light.png';
         }
         else {
-            ximage = 'images/dark/marmoset-dark.png';
+            ximage = 'images/color/marmoset-color.png';
         }
     }
 
