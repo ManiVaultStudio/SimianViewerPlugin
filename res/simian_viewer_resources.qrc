@@ -7,6 +7,16 @@
         <file>simian_viewer/simian_viewer.keys.js</file>
         <file>simian_viewer/simian_viewer.queue.js</file>
 		<file>fullDataSimian.csv</file>
+		<file>simian_viewer/images/dark/chimpanzee-dark.png</file>
+		<file>simian_viewer/images/dark/human-dark.png</file>
+		<file>simian_viewer/images/dark/marmoset-dark.png</file>
+		<file>simian_viewer/images/dark/gorilla-dark.png</file>
+		<file>simian_viewer/images/dark/rhesus-dark.png</file>
+		<file>simian_viewer/images/light/chimpanzee-light.png</file>
+		<file>simian_viewer/images/light/human-light.png</file>
+		<file>simian_viewer/images/light/marmoset-light.png</file>
+		<file>simian_viewer/images/light/gorilla-light.png</file>
+		<file>simian_viewer/images/light/rhesus-light.png</file>
     </qresource>
     <qresource prefix="">
         <file>jslibs/d3.v4.js</file>
