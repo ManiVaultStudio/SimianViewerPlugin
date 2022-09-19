@@ -17,6 +17,11 @@
 		<file>simian_viewer/images/light/marmoset-light.png</file>
 		<file>simian_viewer/images/light/gorilla-light.png</file>
 		<file>simian_viewer/images/light/rhesus-light.png</file>
+		<file>simian_viewer/images/color/chimpanzee-color.png</file>
+		<file>simian_viewer/images/color/human-color.png</file>
+		<file>simian_viewer/images/color/marmoset-color.png</file>
+		<file>simian_viewer/images/color/gorilla-color.png</file>
+		<file>simian_viewer/images/color/rhesus-color.png</file>
     </qresource>
     <qresource prefix="">
         <file>jslibs/d3.v4.js</file>
