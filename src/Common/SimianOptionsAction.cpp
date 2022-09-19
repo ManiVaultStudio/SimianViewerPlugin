@@ -773,7 +773,7 @@ inline SimianOptionsAction::ColorMapOptionAction::ColorMapOptionAction(SimianOpt
     _simianOptionsAction(simianOptionsAction)
 {
     setText("Color Options");
-    setIcon(Application::getIconFont("FontAwesome").getIcon("search"));
+    setIcon(Application::getIconFont("FontAwesome").getIcon("palette"));
 }
 
 //
