@@ -18,6 +18,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _inSpecies1DatasetLinkerAction(this, "In-species  cluster dataset1 :"),
     _inSpecies2DatasetLinkerAction(this, "In-species  cluster dataset2 :"),
     _crossSpeciesFilterAction(this, "Filter clusters :"),
+    _inSpecies1HeatMapCellAction(this, "Link species1 heatmap cell :"),
+    _inSpecies2HeatMapCellAction(this, "Link species2 heatmap cell :"),
+    _crossSpecies1HeatMapCellAction(this, "Link species1 heatmap cell :"),
+    _crossSpecies2HeatMapCellAction(this, "Link species2 heatmap cell :"),
     _multiSelectClusterFilterAction(this, "Select cross-species clusters :"),
     _colorMapAction(this, "Select color map"),
     _backgroundColoringAction(this, "Select background color", DEFAULT_CONSTANT_COLOR, DEFAULT_CONSTANT_COLOR),
@@ -25,6 +29,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _speciesAction(*this),
     _clusterAction(*this), 
     _visSettingAction(*this),
+    _linkerSettingAction(*this),
     _distanceNeighborhoodAction(*this),
     _isStarted(false),
     _histBarAction(this),
@@ -53,11 +58,16 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _inSpecies1DatasetLinkerAction.setEnabled(false);
     _inSpecies2DatasetLinkerAction.setEnabled(false);
     _crossSpeciesFilterAction.setEnabled(false);
+    _crossSpecies1HeatMapCellAction.setEnabled(false);
+    _crossSpecies2HeatMapCellAction.setEnabled(false);
+    _inSpecies1HeatMapCellAction.setEnabled(false);
+    _inSpecies2HeatMapCellAction.setEnabled(false);
     _multiSelectClusterFilterAction.setEnabled(false);
     _colorMapAction.setEnabled(false);
     _backgroundColoringAction.setEnabled(false);
     _clusterAction.setEnabled(false);
     _visSettingAction.setEnabled(false);
+    _linkerSettingAction.setEnabled(false);
     _distanceNeighborhoodAction.setEnabled(false);
     _species1Action.setDefaultWidgetFlags(OptionAction::ComboBox);
     _species1Action.setPlaceHolderString(QString("Choose Species1"));
@@ -67,6 +77,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
  //   _species2Action.initialize(QStringList({ "gorilla","marmoset","rhesus","chimp","human"}), _species2Action.getPlaceholderString(), _species2Action.getPlaceholderString());
     _crossSpeciesFilterAction.setDefaultWidgetFlags(OptionAction:: ComboBox);
     _crossSpeciesFilterAction.initialize(QStringList({ "all clusters","cross-species clusters" }), "cross-species clusters", "cross-species clusters");
+    _inSpecies1HeatMapCellAction.setDefaultWidgetFlags(OptionAction::ComboBox);
+    _inSpecies2HeatMapCellAction.setDefaultWidgetFlags(OptionAction::ComboBox);
+    _crossSpecies1HeatMapCellAction.setDefaultWidgetFlags(OptionAction::ComboBox);
+    _crossSpecies2HeatMapCellAction.setDefaultWidgetFlags(OptionAction::ComboBox);
     _multiSelectClusterFilterAction.setDefaultWidgetFlags(OptionsAction::ComboBox | OptionsAction::ListView | OptionsAction::Selection | OptionsAction::File);
     _multiSelectClusterFilterAction.initialize(QStringList{ "" });
     _multiSelectClusterFilterAction.setSelectedOptions(QStringList());
@@ -99,6 +113,9 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             _multiSelectClusterFilterAction.setEnabled(true);
         }
         updateData((_species1Action.getCurrentText()).toStdString(), (_species2Action.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString(), (_distanceAction.getValue()),(_crossSpeciesFilterAction.getCurrentText()).toStdString());
+
+
+
     };
 
     const auto multiSelectClusterFilter = [this]() -> void
@@ -209,6 +226,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             _backgroundColoringAction.setEnabled(false);
             _clusterAction.setEnabled(false);
             _visSettingAction.setEnabled(false);
+            _linkerSettingAction.setEnabled(false);
             _distanceNeighborhoodAction.setEnabled(false);
         }
 
@@ -234,6 +252,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             _backgroundColoringAction.setEnabled(true);
             _clusterAction.setEnabled(true);
             _visSettingAction.setEnabled(true);
+            _linkerSettingAction.setEnabled(true);
             _distanceNeighborhoodAction.setEnabled(true);
         }
         else {
@@ -252,6 +271,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             _backgroundColoringAction.setEnabled(false);
             _clusterAction.setEnabled(false);
             _visSettingAction.setEnabled(false);
+            _linkerSettingAction.setEnabled(false);
             _distanceNeighborhoodAction.setEnabled(false);
         }
         
@@ -267,6 +287,28 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             updateData((_species1Action.getCurrentText()).toStdString(), (_species2Action.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString(), (_distanceAction.getValue()), (_crossSpeciesFilterAction.getCurrentText()).toStdString());
         }
     };
+
+
+    const auto updateInSpecies1HeatMapCell = [this]() -> void
+    {
+
+    };
+
+    const auto updateInSpecies2HeatMapCell = [this]() -> void
+    {
+
+    };
+
+    const auto updateCrossSpecies1HeatMapCell = [this]() -> void
+    {
+
+    };
+
+    const auto updateCrossSpecies2HeatMapCell = [this]() -> void
+    {
+
+    };
+
     const auto updateDistance = [this]() -> void
     {
         if (_species1Action.getCurrentText() != "" && _species2Action.getCurrentText() != "")
@@ -392,6 +434,23 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     connect(&_neighborhoodAction, &OptionAction::currentIndexChanged, this, [this, updateNeighborhood](const std::int32_t& currentIndex)
         {
             updateNeighborhood();
+        });
+
+    connect(&_inSpecies1HeatMapCellAction, &OptionAction::currentIndexChanged, this, [this, updateInSpecies1HeatMapCell](const std::int32_t& currentIndex)
+        {
+            updateInSpecies1HeatMapCell();
+        });
+    connect(&_inSpecies2HeatMapCellAction, &OptionAction::currentIndexChanged, this, [this, updateInSpecies2HeatMapCell](const std::int32_t& currentIndex)
+        {
+            updateInSpecies2HeatMapCell();
+        });
+    connect(&_crossSpecies1HeatMapCellAction, &OptionAction::currentIndexChanged, this, [this, updateCrossSpecies1HeatMapCell](const std::int32_t& currentIndex)
+        {
+            updateCrossSpecies1HeatMapCell();
+        });
+    connect(&_crossSpecies2HeatMapCellAction, &OptionAction::currentIndexChanged, this, [this, updateCrossSpecies2HeatMapCell](const std::int32_t& currentIndex)
+        {
+            updateCrossSpecies2HeatMapCell();
         });
     connect(&_distanceAction, &IntegralAction::valueChanged, this, [this, updateDistance](const std::int32_t& value)
         {
@@ -576,7 +635,35 @@ void SimianOptionsAction::updateData(std::string Species1, std::string Species2,
     {
         _isStarted = true;
     }
+
+    QStringList inSpecies1List; QStringList inSpecies2List; QStringList crossSpecies1List; QStringList crossSpecies2List;
+    for (int i = 0; i < filteredVisData.size(); i++)
+    {
+        if(!QStringlistContainsQString(inSpecies1List, QString::fromStdString(filteredVisData[i][2])))
+        { 
+        inSpecies1List.append(QString::fromStdString(filteredVisData[i][2]));
+        }
+        if (!QStringlistContainsQString(inSpecies2List, QString::fromStdString(filteredVisData[i][4])))
+        {
+            inSpecies2List.append(QString::fromStdString(filteredVisData[i][4]));
+        }
+        if (!QStringlistContainsQString(crossSpecies1List, QString::fromStdString(filteredVisData[i][7])))
+        {
+            crossSpecies1List.append(QString::fromStdString(filteredVisData[i][7]));
+        } 
+        if (!QStringlistContainsQString(crossSpecies2List, QString::fromStdString(filteredVisData[i][8])))
+        {
+            crossSpecies2List.append(QString::fromStdString(filteredVisData[i][8]));
+        }
+    }
+    _crossSpecies2HeatMapCellAction.initialize(crossSpecies2List, "", "");
+_crossSpecies1HeatMapCellAction.initialize(crossSpecies1List, "", "");
+
+_inSpecies2HeatMapCellAction.initialize(inSpecies2List, "", "");
+_inSpecies1HeatMapCellAction.initialize(inSpecies1List, "", "");
+
 }
+
 
 
 void SimianOptionsAction::updateDatasetPickerAction()
@@ -639,21 +726,7 @@ SimianOptionsAction::SpeciesAction::Widget::Widget(QWidget* parent, SpeciesActio
     selectionSpecies2Widget->setFixedWidth(150);
     selectionSpecies2Widget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
-    auto selectionCrossSpecies1DatasetLinkerWidget = simianOptionsAction._crossSpecies1DatasetLinkerAction.createWidget(this);
-    selectionCrossSpecies1DatasetLinkerWidget->setFixedWidth(300);
-    selectionCrossSpecies1DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
-    auto selectionCrossSpecies2DatasetLinkerWidget = simianOptionsAction._crossSpecies2DatasetLinkerAction.createWidget(this);
-    selectionCrossSpecies2DatasetLinkerWidget->setFixedWidth(300);
-    selectionCrossSpecies2DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-
-    auto selectionInSpecies1DatasetLinkerWidget = simianOptionsAction._inSpecies1DatasetLinkerAction.createWidget(this);
-    selectionInSpecies1DatasetLinkerWidget->setFixedWidth(300);
-    selectionInSpecies1DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-
-    auto selectionInSpecies2DatasetLinkerWidget = simianOptionsAction._inSpecies2DatasetLinkerAction.createWidget(this);
-    selectionInSpecies2DatasetLinkerWidget->setFixedWidth(300);
-    selectionInSpecies2DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
 
     auto selectionHistBarWidget = simianOptionsAction._histBarAction.createWidget(this);
@@ -665,10 +738,6 @@ SimianOptionsAction::SpeciesAction::Widget::Widget(QWidget* parent, SpeciesActio
     speciesSelectionLayout->setContentsMargins(2, 2, 2, 2);
     speciesSelectionLayout->addRow(new QLabel("Species1: *"), selectionSpecies1Widget);
     speciesSelectionLayout->addRow(new QLabel("Species2: *"), selectionSpecies2Widget);
-    speciesSelectionLayout->addRow(new QLabel("Cross-Species1 linker:"), selectionCrossSpecies1DatasetLinkerWidget);
-    speciesSelectionLayout->addRow(new QLabel("Cross-Species2 linker:"), selectionCrossSpecies2DatasetLinkerWidget);
-    speciesSelectionLayout->addRow(new QLabel("In-Species1 linker:"), selectionInSpecies1DatasetLinkerWidget);
-    speciesSelectionLayout->addRow(new QLabel("In-Species2 linker:"), selectionInSpecies2DatasetLinkerWidget);
     speciesSelectionLayout->addRow(new QLabel("Species cluster count:"), selectionHistBarWidget);
     speciesSelectionLayout->setObjectName("Species Options");
     speciesSelectionLayout->setSpacing(2);
@@ -815,6 +884,68 @@ inline SimianOptionsAction::VisSettingAction::VisSettingAction(SimianOptionsActi
 }
 
 
+SimianOptionsAction::LinkerSettingAction::Widget::Widget(QWidget* parent, LinkerSettingAction* linkerSettingAction) :
+    WidgetActionWidget(parent, linkerSettingAction)
+{
+    auto& simianOptionsAction = linkerSettingAction->_simianOptionsAction;
+
+    auto selectionCrossSpecies1DatasetLinkerWidget = simianOptionsAction._crossSpecies1DatasetLinkerAction.createWidget(this);
+    selectionCrossSpecies1DatasetLinkerWidget->setFixedWidth(300);
+    selectionCrossSpecies1DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+
+    auto selectionCrossSpecies2DatasetLinkerWidget = simianOptionsAction._crossSpecies2DatasetLinkerAction.createWidget(this);
+    selectionCrossSpecies2DatasetLinkerWidget->setFixedWidth(300);
+    selectionCrossSpecies2DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+
+    auto selectionInSpecies1DatasetLinkerWidget = simianOptionsAction._inSpecies1DatasetLinkerAction.createWidget(this);
+    selectionInSpecies1DatasetLinkerWidget->setFixedWidth(300);
+    selectionInSpecies1DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+
+    auto selectionInSpecies2DatasetLinkerWidget = simianOptionsAction._inSpecies2DatasetLinkerAction.createWidget(this);
+    selectionInSpecies2DatasetLinkerWidget->setFixedWidth(300);
+    selectionInSpecies2DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+
+
+    auto selectionInSpecies1HeatMapCellWidget = simianOptionsAction._inSpecies1HeatMapCellAction.createWidget(this);
+    selectionInSpecies1HeatMapCellWidget->setFixedWidth(300);
+    selectionInSpecies1HeatMapCellWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+    auto selectionInSpecies2HeatMapCellWidget = simianOptionsAction._inSpecies2HeatMapCellAction.createWidget(this);
+    selectionInSpecies2HeatMapCellWidget->setFixedWidth(300);
+    selectionInSpecies2HeatMapCellWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+    auto selectionCrossSpecies1HeatMapCellWidget = simianOptionsAction._crossSpecies1HeatMapCellAction.createWidget(this);
+    selectionCrossSpecies1HeatMapCellWidget->setFixedWidth(300);
+    selectionCrossSpecies1HeatMapCellWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+    auto selectionCrossSpecies2HeatMapCellWidget = simianOptionsAction._crossSpecies2HeatMapCellAction.createWidget(this);
+    selectionCrossSpecies2HeatMapCellWidget->setFixedWidth(300);
+    selectionCrossSpecies2HeatMapCellWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+
+    auto linkerSettingSelectionLayout = new QFormLayout();
+    linkerSettingSelectionLayout->setContentsMargins(2, 2, 2, 2);
+    linkerSettingSelectionLayout->setObjectName("Linker Setting Options");
+    linkerSettingSelectionLayout->setSpacing(2);
+    linkerSettingSelectionLayout->setVerticalSpacing(2);
+    linkerSettingSelectionLayout->addRow(new QLabel("Cross-Species1 :"), selectionCrossSpecies1DatasetLinkerWidget);
+    linkerSettingSelectionLayout->addRow(new QLabel("Cross-Species2 :"), selectionCrossSpecies2DatasetLinkerWidget);
+    linkerSettingSelectionLayout->addRow(new QLabel("In-Species1 :"), selectionInSpecies1DatasetLinkerWidget);
+    linkerSettingSelectionLayout->addRow(new QLabel("In-Species2 :"), selectionInSpecies2DatasetLinkerWidget);
+
+    linkerSettingSelectionLayout->addRow(new QLabel("In-Species1 heatmap cell:"), selectionInSpecies1HeatMapCellWidget);
+    linkerSettingSelectionLayout->addRow(new QLabel("In-Species2 heatmap cell:"), selectionInSpecies2HeatMapCellWidget);
+    linkerSettingSelectionLayout->addRow(new QLabel("Cross-Species1 heatmap cell:"), selectionCrossSpecies1HeatMapCellWidget);
+    linkerSettingSelectionLayout->addRow(new QLabel("Cross-Species2 heatmap cell:"), selectionCrossSpecies2HeatMapCellWidget);
+
+    setPopupLayout(linkerSettingSelectionLayout);
+
+}
+
+inline SimianOptionsAction::LinkerSettingAction::LinkerSettingAction(SimianOptionsAction& simianOptionsAction) :
+    _simianOptionsAction(simianOptionsAction)
+{
+    setText("Linker Setting Options");
+    setIcon(Application::getIconFont("FontAwesome").getIcon("database"));
+}
+
+
 
 SimianOptionsAction::DistanceNeighborhoodAction::Widget::Widget(QWidget* parent, DistanceNeighborhoodAction* distanceNeighborhoodAction) :
     WidgetActionWidget(parent, distanceNeighborhoodAction)
@@ -951,4 +1082,13 @@ void SimianOptionsAction::filterMultiSelect()
     {
         _isStarted = true;
     }
+}
+
+bool SimianOptionsAction::QStringlistContainsQString(const QStringList& list, const QString& str)
+{
+    QStringMatcher matcher(str);
+    foreach(const QString & listitem, list) {
+        if (matcher.indexIn(listitem) != -1) return true;
+    }
+    return false;
 }

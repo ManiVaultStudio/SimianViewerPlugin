@@ -1169,6 +1169,8 @@ const simianVis = () => {
         let selectionIDs = [];
         selectionIDs.push(d.cluster_1);
         selectionIDs.push(d.cluster_2);
+        selectionIDs.push(d.cross_species_cluster1_species_1);
+        selectionIDs.push(d.cross_species_cluster2_species_2);
         if (isQtAvailable) {
             QtBridge.js_passSelectionToQt(selectionIDs);
         }
@@ -1313,6 +1315,8 @@ const simianVis = () => {
         let selectionIDs = [];
         selectionIDs.push(d.cluster_1);
         selectionIDs.push(d.cluster_2);
+        selectionIDs.push(d.cross_species_cluster1_species_1);
+        selectionIDs.push(d.cross_species_cluster2_species_2);
         if (isQtAvailable) {
             QtBridge.js_passSelectionToQt(selectionIDs);
         }
