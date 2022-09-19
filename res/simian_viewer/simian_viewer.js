@@ -1081,7 +1081,7 @@ const simianVis = () => {
             }            
             formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Distance<b/></td><td colspan=\"2\"    style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: #D3D3D3;\">" + clustDistVal + "</td></tr>";
             if (layercheck.includes(species1ValueIdentify) || layercheck.includes(species2ValueIdentify)) {
-                formatTooltipContents = formatTooltipContents + "<tr><td  style=\" \"><b>Layer distribution<div style=\"  padding-left: 10px;\"><div style=\" font-size:8; text-align: left;\"><li style=\" color: #1b9e77;\">" + species1ValueIdentify + "</li><li style=\" color: #d95f02; \">" + species2ValueIdentify + "</li></div></div><b/></td><td colspan=\"2\"  style=\" \"><div style=\"width:100%\"><div id=\"tipDiv\"></div></div></td></tr>";
+                formatTooltipContents = formatTooltipContents + "<tr><td  style=\" \"><b>Layer distribution<b/></td><td colspan=\"2\"  style=\" \"><div style=\"width:100%\"><div id=\"tipDiv\"></div></div></td></tr>";
             }
             formatTooltipContents = formatTooltipContents + "</table></div>";
             return formatTooltipContents;
@@ -1237,7 +1237,7 @@ const simianVis = () => {
 
         var wTooltip = ((containerwidth)/ 100 * window.innerWidth);
         var hTooltip = window.innerHeight / 8;
-        var marginTooltip = { topTooltip: 5, rightTooltip: 5, bottomTooltip: 5, leftTooltip: 5, middleTooltip: 10 };
+        var marginTooltip = { topTooltip: 20, rightTooltip: 20, bottomTooltip: 20, leftTooltip: 20, middleTooltip: 10 };
         var regionWidthTooltip = wTooltip / 2 - marginTooltip.middleTooltip;
         var pointATooltip = regionWidthTooltip, pointBTooltip = wTooltip - regionWidthTooltip;
         var exampleDataTooltip = [{ group: '6', species1: angle1Sp1, species2: angle1Sp2 }, { group: '5', species1: angle2Sp1, species2: angle2Sp2 }, { group: '4', species1: angle3Sp1, species2: angle3Sp2 }, { group: '3', species1: angle4Sp1, species2: angle4Sp2 }, { group: '2', species1: angle5Sp1, species2: angle5Sp2 }, { group: '1', species1: angle6Sp1, species2: angle6Sp2 }];
@@ -1255,8 +1255,8 @@ const simianVis = () => {
         var rightBarGroupTooltip = svgTooltip.append('g').attr('transform', translation(pointBTooltip, 0));
         svgTooltip.append('g').attr('class', 'axis y left').attr('transform', translation(pointATooltip, 0)).call(yAxisLeftTooltip).selectAll('text').attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '8').style('text-anchor', 'middle');
         svgTooltip.append('g').attr('class', 'axis y right').attr('transform', translation(pointBTooltip, 0)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '8').call(yAxisRightTooltip);
-        svgTooltip.append('g').attr('class', 'axis x left').attr('transform', translation(0, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#808080').call(xAxisLeftTooltip).selectAll('text').attr('dy', '-0.9em').attr('dx', '+0.5em');
-        svgTooltip.append('g').attr('class', 'axis x right').attr('transform', translation(pointBTooltip, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#808080').call(xAxisRightTooltip).selectAll('text').attr('dy', '-0.9em').attr('dx', '-0.6em');
+        svgTooltip.append('g').attr('class', 'axis x left').attr('transform', translation(0, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#808080').call(xAxisLeftTooltip).selectAll('text').attr('dy', '.71em');
+        svgTooltip.append('g').attr('class', 'axis x right').attr('transform', translation(pointBTooltip, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#808080').call(xAxisRightTooltip).selectAll('text').attr('dy', '.71em');
         svgTooltip.selectAll(".tick").each(function (d) { if (d === 0.0 || d === 0 || d === 1.0 ) { this.remove(); } });
         leftBarGroupTooltip.selectAll('.bar.left').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar left').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species1); }).attr('stroke', 'black').attr('fill', '#1b9e77').attr('height', yScaleTooltip.bandwidth());
         rightBarGroupTooltip.selectAll('.bar.right').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar right').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species2); }).attr('stroke', 'black').attr('fill', '#d95f02').attr('height', yScaleTooltip.bandwidth());
@@ -1287,7 +1287,7 @@ const simianVis = () => {
 
         var wTooltip = ((containerwidth) / 100 * window.innerWidth);
         var hTooltip = window.innerHeight / 8;
-        var marginTooltip = { topTooltip: 5, rightTooltip: 5, bottomTooltip: 5, leftTooltip: 5, middleTooltip: 10 };
+        var marginTooltip = { topTooltip: 20, rightTooltip: 20, bottomTooltip: 20, leftTooltip: 20, middleTooltip: 10 };
         var regionWidthTooltip = wTooltip / 2 - marginTooltip.middleTooltip;
         var pointATooltip = regionWidthTooltip, pointBTooltip = wTooltip - regionWidthTooltip;
         var exampleDataTooltip = [{ group: '6', species1: angle1Sp1, species2: angle1Sp2 }, { group: '5', species1: angle2Sp1, species2: angle2Sp2 }, { group: '4', species1: angle3Sp1, species2: angle3Sp2 }, { group: '3', species1: angle4Sp1, species2: angle4Sp2 }, { group: '2', species1: angle5Sp1, species2: angle5Sp2 }, { group: '1', species1: angle6Sp1, species2: angle6Sp2 }];
@@ -1305,8 +1305,8 @@ const simianVis = () => {
         var rightBarGroupTooltip = svgTooltip.append('g').attr('transform', translation(pointBTooltip, 0));
         svgTooltip.append('g').attr('class', 'axis y left').attr('transform', translation(pointATooltip, 0)).call(yAxisLeftTooltip).selectAll('text').attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '8').style('text-anchor', 'middle');
         svgTooltip.append('g').attr('class', 'axis y right').attr('transform', translation(pointBTooltip, 0)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '8').call(yAxisRightTooltip);
-        svgTooltip.append('g').attr('class', 'axis x left').attr('transform', translation(0, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#808080').call(xAxisLeftTooltip).selectAll('text').attr('dy', '-0.9em').attr('dx', '+0.5em');
-        svgTooltip.append('g').attr('class', 'axis x right').attr('transform', translation(pointBTooltip, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#808080').call(xAxisRightTooltip).selectAll('text').attr('dy', '-0.9em').attr('dx', '-0.6em');
+        svgTooltip.append('g').attr('class', 'axis x left').attr('transform', translation(0, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#808080').call(xAxisLeftTooltip).selectAll('text').attr('dy', '.71em');
+        svgTooltip.append('g').attr('class', 'axis x right').attr('transform', translation(pointBTooltip, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#808080').call(xAxisRightTooltip).selectAll('text').attr('dy', '.71em');
         svgTooltip.selectAll(".tick").each(function (d) { if (d === 0.0 || d === 0 || d === 1.0) { this.remove(); } });
         leftBarGroupTooltip.selectAll('.bar.left').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar left').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species1); }).attr('stroke', 'black').attr('fill', '#1b9e77').attr('height', yScaleTooltip.bandwidth());
         rightBarGroupTooltip.selectAll('.bar.right').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar right').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species2); }).attr('stroke', 'black').attr('fill', '#d95f02').attr('height', yScaleTooltip.bandwidth());
