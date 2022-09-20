@@ -9,20 +9,20 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     WidgetAction(&simianViewerPlugin),
     _simianViewerPlugin(simianViewerPlugin),
     _core(core),
-    _species1Action(this, "Select species1 :"),
-    _species2Action(this, "Select species2 :"),
+    _species1Action(this, "Select species1"),
+    _species2Action(this, "Select species2"),
     _neighborhoodAction(this, "Select neighborhood :"),
     _distanceAction(this, "Filter distance :"),
-    _crossSpecies1DatasetLinkerAction(this, "Cross-species cluster dataset1 :"),
-    _crossSpecies2DatasetLinkerAction(this, "Cross-species  cluster dataset2 :"),
-    _inSpecies1DatasetLinkerAction(this, "In-species  cluster dataset1 :"),
-    _inSpecies2DatasetLinkerAction(this, "In-species  cluster dataset2 :"),
-    _crossSpeciesFilterAction(this, "Filter clusters :"),
-    _inSpecies1HeatMapCellAction(this, "Link species1 heatmap cell :"),
-    _inSpecies2HeatMapCellAction(this, "Link species2 heatmap cell :"),
-    _crossSpecies1HeatMapCellAction(this, "Link species1 heatmap cell :"),
-    _crossSpecies2HeatMapCellAction(this, "Link species2 heatmap cell :"),
-    _multiSelectClusterFilterAction(this, "Select cross-species clusters :"),
+    _crossSpecies1DatasetLinkerAction(this, "Cross-species cluster dataset1"),
+    _crossSpecies2DatasetLinkerAction(this, "Cross-species  cluster dataset2"),
+    _inSpecies1DatasetLinkerAction(this, "In-species  cluster dataset1"),
+    _inSpecies2DatasetLinkerAction(this, "In-species  cluster dataset2"),
+    _crossSpeciesFilterAction(this, "Filter clusters"),
+    _inSpecies1HeatMapCellAction(this, "Link in-species1 heatmap cell"),
+    _inSpecies2HeatMapCellAction(this, "Link in-species2 heatmap cell"),
+    _crossSpecies1HeatMapCellAction(this, "Link cross-species1 heatmap cell"),
+    _crossSpecies2HeatMapCellAction(this, "Link cross-species2 heatmap cell"),
+    _multiSelectClusterFilterAction(this, "Select cross-species clusters"),
     _colorMapAction(this, "Select color map"),
     _backgroundColoringAction(this, "Select background color", DEFAULT_CONSTANT_COLOR, DEFAULT_CONSTANT_COLOR),
     _isLoading(false),
@@ -32,8 +32,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _linkerSettingAction(*this),
     _distanceNeighborhoodAction(*this),
     _isStarted(false),
-    _histBarAction(this),
-    _fullHeatMapAction(this)
+    _histBarAction(this,"Show cell counts"),
+    _fullHeatMapAction(this,"Show full heatmap")
 {
     _eventListener.setEventCore(core);
     _eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataAdded));
@@ -58,10 +58,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _inSpecies1DatasetLinkerAction.setEnabled(false);
     _inSpecies2DatasetLinkerAction.setEnabled(false);
     _crossSpeciesFilterAction.setEnabled(false);
-    _crossSpecies1HeatMapCellAction.setEnabled(false);
-    _crossSpecies2HeatMapCellAction.setEnabled(false);
-    _inSpecies1HeatMapCellAction.setEnabled(false);
-    _inSpecies2HeatMapCellAction.setEnabled(false);
+    //_crossSpecies1HeatMapCellAction.setEnabled(false);
+    //_crossSpecies2HeatMapCellAction.setEnabled(false);
+    //_inSpecies1HeatMapCellAction.setEnabled(false);
+    //_inSpecies2HeatMapCellAction.setEnabled(false);
     _multiSelectClusterFilterAction.setEnabled(false);
     _colorMapAction.setEnabled(false);
     _backgroundColoringAction.setEnabled(false);
@@ -736,9 +736,9 @@ SimianOptionsAction::SpeciesAction::Widget::Widget(QWidget* parent, SpeciesActio
     auto speciesSelectionLayout = new QFormLayout();
 
     speciesSelectionLayout->setContentsMargins(2, 2, 2, 2);
-    speciesSelectionLayout->addRow(new QLabel("Species1: *"), selectionSpecies1Widget);
-    speciesSelectionLayout->addRow(new QLabel("Species2: *"), selectionSpecies2Widget);
-    speciesSelectionLayout->addRow(new QLabel("Species cluster count:"), selectionHistBarWidget);
+    speciesSelectionLayout->addRow(simianOptionsAction._species1Action.createLabelWidget(this), selectionSpecies1Widget);
+    speciesSelectionLayout->addRow(simianOptionsAction._species2Action.createLabelWidget(this), selectionSpecies2Widget);
+    speciesSelectionLayout->addRow(simianOptionsAction._histBarAction.createLabelWidget(this), selectionHistBarWidget);
     speciesSelectionLayout->setObjectName("Species Options");
     speciesSelectionLayout->setSpacing(2);
     speciesSelectionLayout->setVerticalSpacing(2);
@@ -761,7 +761,7 @@ SimianOptionsAction::ColorMapOptionAction::Widget::Widget(QWidget* parent, Color
     auto colorMapWidget = simianOptionsAction._colorMapAction.createWidget(this);
     auto colorSelectionLayout = new QFormLayout();
     colorSelectionLayout->setContentsMargins(2, 2, 2, 2);
-    colorSelectionLayout->addRow(new QLabel("heatmap color: *"), colorMapWidget);
+    colorSelectionLayout->addRow(simianOptionsAction._colorMapAction.createLabelWidget(this), colorMapWidget);
     colorSelectionLayout->setObjectName("Color Options");
     colorSelectionLayout->setSpacing(2);
     colorSelectionLayout->setVerticalSpacing(2);
@@ -784,7 +784,7 @@ SimianOptionsAction::BackgroundColorOptionAction::Widget::Widget(QWidget* parent
     auto backgroundColoringWidget = simianOptionsAction._backgroundColoringAction.createWidget(this);
     auto backgroundColorSelectionLayout = new QFormLayout();
     backgroundColorSelectionLayout->setContentsMargins(2, 2, 2, 2);
-    backgroundColorSelectionLayout->addRow(new QLabel("background color: *"), backgroundColoringWidget);
+    backgroundColorSelectionLayout->addRow(simianOptionsAction._backgroundColoringAction.createLabelWidget(this), backgroundColoringWidget);
     backgroundColorSelectionLayout->setObjectName("background Color Options");
     backgroundColorSelectionLayout->setSpacing(2);
     backgroundColorSelectionLayout->setVerticalSpacing(2);
@@ -841,8 +841,8 @@ SimianOptionsAction::ClusterAction::Widget::Widget(QWidget* parent, ClusterActio
     crossSpeciesClusterSelectionLayout->setObjectName("Cluster Options");
     crossSpeciesClusterSelectionLayout->setSpacing(2);
     crossSpeciesClusterSelectionLayout->setVerticalSpacing(2);
-    crossSpeciesClusterSelectionLayout->addRow(new QLabel("Cluster filter:"), filterCrossSpeciesWidget);
-    crossSpeciesClusterSelectionLayout->addRow(new QLabel("Cross-species cluster filter:"), crossSpeciesClusterSelectionWidget);
+    crossSpeciesClusterSelectionLayout->addRow(simianOptionsAction._crossSpeciesFilterAction.createLabelWidget(this), filterCrossSpeciesWidget);
+    crossSpeciesClusterSelectionLayout->addRow(simianOptionsAction._multiSelectClusterFilterAction.createLabelWidget(this), crossSpeciesClusterSelectionWidget);
 
     setPopupLayout(crossSpeciesClusterSelectionLayout);
 }
@@ -869,7 +869,7 @@ SimianOptionsAction::VisSettingAction::Widget::Widget(QWidget* parent, VisSettin
     visSettingSelectionLayout->setObjectName("Vis Setting Options");
     visSettingSelectionLayout->setSpacing(2);
     visSettingSelectionLayout->setVerticalSpacing(2);
-    visSettingSelectionLayout->addRow(new QLabel("Select full heatmap:"), fullHeatMapSelectionWidget);
+    visSettingSelectionLayout->addRow(simianOptionsAction._fullHeatMapAction.createLabelWidget(this), fullHeatMapSelectionWidget);
 
 
     setPopupLayout(visSettingSelectionLayout);
@@ -924,15 +924,15 @@ SimianOptionsAction::LinkerSettingAction::Widget::Widget(QWidget* parent, Linker
     linkerSettingSelectionLayout->setObjectName("Linker Setting Options");
     linkerSettingSelectionLayout->setSpacing(2);
     linkerSettingSelectionLayout->setVerticalSpacing(2);
-    linkerSettingSelectionLayout->addRow(new QLabel("Cross-Species1 :"), selectionCrossSpecies1DatasetLinkerWidget);
-    linkerSettingSelectionLayout->addRow(new QLabel("Cross-Species2 :"), selectionCrossSpecies2DatasetLinkerWidget);
-    linkerSettingSelectionLayout->addRow(new QLabel("In-Species1 :"), selectionInSpecies1DatasetLinkerWidget);
-    linkerSettingSelectionLayout->addRow(new QLabel("In-Species2 :"), selectionInSpecies2DatasetLinkerWidget);
+    linkerSettingSelectionLayout->addRow(simianOptionsAction._crossSpecies1DatasetLinkerAction.createLabelWidget(this), selectionCrossSpecies1DatasetLinkerWidget);
+    linkerSettingSelectionLayout->addRow(simianOptionsAction._crossSpecies2DatasetLinkerAction.createLabelWidget(this), selectionCrossSpecies2DatasetLinkerWidget);
+    linkerSettingSelectionLayout->addRow(simianOptionsAction._inSpecies1DatasetLinkerAction.createLabelWidget(this), selectionInSpecies1DatasetLinkerWidget);
+    linkerSettingSelectionLayout->addRow(simianOptionsAction._inSpecies2DatasetLinkerAction.createLabelWidget(this), selectionInSpecies2DatasetLinkerWidget);
 
-    linkerSettingSelectionLayout->addRow(new QLabel("In-Species1 heatmap cell:"), selectionInSpecies1HeatMapCellWidget);
-    linkerSettingSelectionLayout->addRow(new QLabel("In-Species2 heatmap cell:"), selectionInSpecies2HeatMapCellWidget);
-    linkerSettingSelectionLayout->addRow(new QLabel("Cross-Species1 heatmap cell:"), selectionCrossSpecies1HeatMapCellWidget);
-    linkerSettingSelectionLayout->addRow(new QLabel("Cross-Species2 heatmap cell:"), selectionCrossSpecies2HeatMapCellWidget);
+    linkerSettingSelectionLayout->addRow(simianOptionsAction._inSpecies1HeatMapCellAction.createLabelWidget(this), selectionInSpecies1HeatMapCellWidget);
+    linkerSettingSelectionLayout->addRow(simianOptionsAction._inSpecies2HeatMapCellAction.createLabelWidget(this), selectionInSpecies2HeatMapCellWidget);
+    linkerSettingSelectionLayout->addRow(simianOptionsAction._crossSpecies1HeatMapCellAction.createLabelWidget(this), selectionCrossSpecies1HeatMapCellWidget);
+    linkerSettingSelectionLayout->addRow(simianOptionsAction._crossSpecies2HeatMapCellAction.createLabelWidget(this), selectionCrossSpecies2HeatMapCellWidget);
 
     setPopupLayout(linkerSettingSelectionLayout);
 
@@ -961,7 +961,7 @@ SimianOptionsAction::DistanceNeighborhoodAction::Widget::Widget(QWidget* parent,
     //selectionDistanceWidget->findChild<QSpinBox*>("SpinBox");
     auto filterOptionLayout = new QFormLayout();
     filterOptionLayout->setContentsMargins(0, 0, 0, 0);
-    filterOptionLayout->addRow(new QLabel("Neighborhood:"), selectionNeighborhoodWidget);
+    filterOptionLayout->addRow(simianOptionsAction._neighborhoodAction.createLabelWidget(this), selectionNeighborhoodWidget);
     //filterOptionLayout->addRow(new QLabel("Distance:") , selectionDistanceWidget);
 
     //filterOptionLayout->setObjectName("Simian Options");
