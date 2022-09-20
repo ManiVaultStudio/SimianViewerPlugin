@@ -977,7 +977,7 @@ const simianVis = () => {
                 }
                 formatTooltipContents = formatTooltipContents + "<tr><td   style=\"\"><b>Distance<b/></td><td colspan=\"2\"    style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: #D3D3D3;\">" + clustDistVal + "</td></tr>";
                 if (layercheck.includes(species1ValueIdentify) || layercheck.includes(species2ValueIdentify)) {
-                    formatTooltipContents = formatTooltipContents + "<tr><td  style=\" \"><b>Layer distribution<div style=\"  padding-left: 10px;\"><div style=\" font-size:8; text-align: left;\"><li style=\" color: #1b9e77;\">" + species1ValueIdentify + "</li><li style=\" color: #d95f02; \">" + species2ValueIdentify + "</li></div></div><b/></td><td colspan=\"2\"  style=\" \"><div style=\"width:100%\"><div id=\"tipDiv\"></div></div></td></tr>";
+                    formatTooltipContents = formatTooltipContents + "<tr><td  style=\" \"><b>Layer distribution<b/></td><td colspan=\"2\"  style=\" \"><div style=\"width:100%\"><div id=\"tipDiv\"></div></div></td></tr>";
                 }
                 formatTooltipContents = formatTooltipContents + "</table></div>";
                 return formatTooltipContents;
