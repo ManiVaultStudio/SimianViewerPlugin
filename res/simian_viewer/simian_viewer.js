@@ -97,13 +97,13 @@ const simianVis = () => {
     if (showFullHeatmapflag) {
         document.getElementById('my_dataviz').setAttribute("style", "width:99%");
         document.getElementById('my_container').setAttribute("style", "width:1%");
-        containerwidth = 18;
+        containerwidth = 14;
         heatmapWidth = 99;
     }
     else {
         document.getElementById('my_dataviz').setAttribute("style", "width:70%");
         document.getElementById('my_container').setAttribute("style", "width:30%");
-        containerwidth = 18;
+        containerwidth = 22;
         heatmapWidth = 68;
     }
     var margin;
@@ -478,12 +478,12 @@ const simianVis = () => {
         .attr("fill", function (d) {
             return "black";
         })
-        .attr("stroke", function (d) {
+/*        .attr("stroke", function (d) {
             return in_speciesClustercolors[d];
         })
         .attr("stroke-width", function (d) {
             return 0.1;
-        })
+        })*/
         .style("text-anchor", "end")
         .attr("dx", "-1.0em")
         .attr("dy", "0.0em")
@@ -503,12 +503,12 @@ const simianVis = () => {
         .attr("fill", function (d) {
             return "black";
         })
-        .attr("stroke", function (d) {
+/*        .attr("stroke", function (d) {
             return in_speciesClustercolors[d];
         })
         .attr("stroke-width", function (d) {
             return 0.1;
-        })
+        })*/
         .style("text-anchor", "end")
         .attr("dx", "-0.5em")
         .attr("dy", "0.1em")
@@ -978,7 +978,7 @@ const simianVis = () => {
 
                 }
                 var formatTooltipContents = "";
-                formatTooltipContents = "<div id=\"clearTooltip\"> <table  style=\"font-size: 8px; width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=50 width=50 /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=50 width=50 /></th></tr><tr><td  style=\"  \" ><b>In-species <b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</td><td  style=\"-webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</td></tr>";
+                formatTooltipContents = "<div id=\"clearTooltip\"> <table  style=\"font-size: 10px; width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=50 width=50 /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=50 width=50 /></th></tr><tr><td  style=\"  \" ><b>In-species <b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</td><td  style=\"-webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</td></tr>";
                 if (barflag) {
                     formatTooltipContents = formatTooltipContents + "<tr><td   style=\"  \"><b >Cell count<b/></td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: #1b9e77;\">" + inspecies1ClusterCounts[d.cluster_1] + "</td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: #d95f02;\">" + inspecies1ClusterCounts[d.cluster_2] + "</td></tr>";
                 }
@@ -1084,7 +1084,7 @@ const simianVis = () => {
 
             }
             var formatTooltipContents = "";
-            formatTooltipContents = "<div id=\"clearTooltip\"> <table style=\"font-size: 8px;  width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=50 width=50 /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=50 width=50 /></th></tr><tr><td  style=\"  \" ><b>In-species <b/></td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</td></tr>";
+            formatTooltipContents = "<div id=\"clearTooltip\"> <table style=\"font-size: 10px;  width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=50 width=50 /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=50 width=50 /></th></tr><tr><td  style=\"  \" ><b>In-species <b/></td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</td></tr>";
             if (barflag) {
                 formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Cell count<b/></td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: #1b9e77;\">" + inspecies1ClusterCounts[d.cluster_1] + "</td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: #d95f02;\">" + inspecies1ClusterCounts[d.cluster_2] + "</td></tr>";
             }            
