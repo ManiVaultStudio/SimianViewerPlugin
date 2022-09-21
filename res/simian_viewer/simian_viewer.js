@@ -1118,12 +1118,14 @@ const simianVis = () => {
 
 
     var dblclick  = function (d) {
-        d3.select("#marker1").remove();
+/*        d3.select("#marker1").remove();
         d3.select("#marker2").remove();
         d3.select("#marker3").remove();
-        d3.select("#exploreViewMarker").remove();
-
-        if (barflag) {
+        d3.select("#exploreViewMarker").remove();*/
+        d3.select("#exploreViewMarker1").remove();
+        d3.select("#exploreViewMarker2").remove();
+        d3.select("#exploreViewMarker3").remove();
+/*        if (barflag) {
             svg.append("line")
                 .attr("id", "marker1")
                 .attr("x1", 0)
@@ -1199,7 +1201,7 @@ const simianVis = () => {
         selectionIDs.push(d.cross_species_cluster2_species_2);
         if (isQtAvailable) {
             QtBridge.js_passSelectionToQt(selectionIDs);
-        }
+        }*/
     };
     var mouseout = function (d) {
         if (!showExplorationModeflag) {
@@ -1260,9 +1262,9 @@ const simianVis = () => {
                 svgTipdiv.text("");*/
         svg.select("#axisSelectionpolygon").remove();
         svg.select("#axisSelectionText").remove();
-        d3.select("#marker2").remove();
+/*        d3.select("#marker2").remove();
         d3.select("#marker1").remove();
-        d3.select("#marker3").remove();
+        d3.select("#marker3").remove();*/
         if (!showExplorationModeflag) { 
         tip.hide();
     
@@ -1317,9 +1319,10 @@ const simianVis = () => {
     };
     var mouseclick = function (d) {
 
-        d3.select("#marker1").remove();
+/*        d3.select("#marker1").remove();
         d3.select("#marker2").remove();
-        d3.select("#marker3").remove();
+        d3.select("#marker3").remove();*/
+
         tip.show(d, d3.mouse(this), this);
 
 
@@ -1363,6 +1366,45 @@ const simianVis = () => {
             d3.select("#exploreViewMarker1").remove();
             d3.select("#exploreViewMarker2").remove();
             d3.select("#exploreViewMarker3").remove();
+
+
+            if (barflag) {
+                svg.append("line")
+                    .attr("id", "exploreViewMarker1")
+                    .attr("x1", 0)
+                    .attr("y1", d3.mouse(this)[1])
+                    .attr("x2", width)
+                    .attr("y2", d3.mouse(this)[1])
+                    .attr("stroke-width", 2)
+                    .style("stroke-dasharray", ("3, 3"))
+                    .style("stroke-opacity", 0.9)
+                    .attr("stroke", in_speciesClustercolors[d.cluster_2])
+                    .attr("marker-end", "url(#triangle)");
+
+                svg.append("line")
+                    .attr("id", "exploreViewMarker2")
+                    .attr("x1", d3.mouse(this)[0])
+                    .attr("y1", 0)
+                    .attr("x2", d3.mouse(this)[0])
+                    .attr("y2", height)
+                    .attr("stroke-width", 2)
+                    .style("stroke-dasharray", ("3, 3"))
+                    .style("stroke-opacity", 0.9)
+                    .attr("stroke", in_speciesClustercolors[d.cluster_1])
+                    .attr("marker-end", "url(#triangle)");
+
+                svg.append("circle")
+                    .attr("id", "exploreViewMarker3")
+                    .attr("cx", d3.mouse(this)[0])
+                    .attr("cy", d3.mouse(this)[1])
+                    .attr("r", 5)
+                    .style("fill", myColor(d.dist))
+                    .style("stroke", "black")
+                    .attr("stroke-width", 1);
+
+            }
+            else {
+
             svg.append("line")
                 .attr("id", "exploreViewMarker1")
                 .attr("x1", 0)
@@ -1395,6 +1437,7 @@ const simianVis = () => {
                 .style("fill", myColor(d.dist))
                 .style("stroke", "black")
                 .attr("stroke-width", 1);
+        }
         }
 
 
