@@ -33,7 +33,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _distanceNeighborhoodAction(*this),
     _isStarted(false),
     _histBarAction(this,"Show cell counts"),
-    _fullHeatMapAction(this,"Show full heatmap")
+    _fullHeatMapAction(this,"Show full heatmap"),
+    _explorationModeAction(this, "Exploration mode")
 {
     _eventListener.setEventCore(core);
     _eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataAdded));
@@ -45,6 +46,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _eventListener.registerDataEventByType(PointType, std::bind(&SimianOptionsAction::onDataEvent, this, std::placeholders::_1));
     _histBarAction.setToolTip("Show histogram bars");
     _fullHeatMapAction.setToolTip("Show full Heatmap");
+    _explorationModeAction.setToolTip("Exploration mode");
     _metaData = new FetchMetaData();
      _metaData->getData(&_simianData);
     _species2Action.setEnabled(false);
@@ -53,6 +55,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _distanceAction.setVisible(false);
     _histBarAction.setEnabled(false);
     _fullHeatMapAction.setEnabled(false);
+    _explorationModeAction.setEnabled(false);
     _crossSpecies1DatasetLinkerAction.setEnabled(false);
     _crossSpecies2DatasetLinkerAction.setEnabled(false);
     _inSpecies1DatasetLinkerAction.setEnabled(false);
@@ -94,6 +97,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _histBarAction.initialize(false,false);
     _fullHeatMapAction.setDefaultWidgetFlags(ToggleAction::CheckBox);
     _fullHeatMapAction.initialize(false, false);
+    _explorationModeAction.setDefaultWidgetFlags(ToggleAction::CheckBox);
+    _explorationModeAction.initialize(false, false);
     _crossSpecies1DatasetLinkerAction.setDefaultWidgetFlags(OptionAction::ComboBox);
     _crossSpecies2DatasetLinkerAction.setDefaultWidgetFlags(OptionAction::ComboBox);
     _inSpecies1DatasetLinkerAction.setDefaultWidgetFlags(OptionAction::ComboBox);
@@ -215,6 +220,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             _distanceAction.setEnabled(false);
             _histBarAction.setEnabled(false);
             _fullHeatMapAction.setEnabled(false);
+            _explorationModeAction.setEnabled(false);
             _crossSpecies1DatasetLinkerAction.setEnabled(false);
             _crossSpecies2DatasetLinkerAction.setEnabled(false);
             _inSpecies1DatasetLinkerAction.setEnabled(false);
@@ -247,6 +253,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             _inSpecies2DatasetLinkerAction.setEnabled(true);
             _crossSpeciesFilterAction.setEnabled(true);
             _fullHeatMapAction.setEnabled(true);
+            _explorationModeAction.setEnabled(true);
             _multiSelectClusterFilterAction.setEnabled(true);
             _colorMapAction.setEnabled(true);
             _backgroundColoringAction.setEnabled(true);
@@ -260,6 +267,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             _distanceAction.setEnabled(false);
             _histBarAction.setEnabled(false);
             _fullHeatMapAction.setEnabled(false);
+            _explorationModeAction.setEnabled(false);
             _crossSpecies1DatasetLinkerAction.setEnabled(false);
             _crossSpecies2DatasetLinkerAction.setEnabled(false);
             _inSpecies1DatasetLinkerAction.setEnabled(false);
@@ -340,6 +348,19 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             else
             {
                 _simianViewerPlugin.getWidget()->showFullHeatmap(QString::fromStdString("F"));
+            }
+
+
+        };
+        const auto updateShowExplorationMode = [this]() -> void
+        {
+            if (_explorationModeAction.isChecked())
+            {
+                _simianViewerPlugin.getWidget()->showExplorationMode(QString::fromStdString("T"));
+            }
+            else
+            {
+                _simianViewerPlugin.getWidget()->showExplorationMode(QString::fromStdString("F"));
             }
 
 
@@ -465,8 +486,11 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
         {
             updateShowFullHeatmap();
         });
-
-
+    
+    connect(&_explorationModeAction, &ToggleAction::toggled, this, [this, updateShowExplorationMode](const bool& toggled)
+        {
+            updateShowExplorationMode();
+        });
     connect(&_crossSpecies1DatasetLinkerAction, &OptionAction::currentIndexChanged, this, [this, updateCrossSpecies1DatasetLinker](const std::int32_t& value) {
         updateCrossSpecies1DatasetLinker();
         });
@@ -864,13 +888,17 @@ SimianOptionsAction::VisSettingAction::Widget::Widget(QWidget* parent, VisSettin
     fullHeatMapSelectionWidget->findChild<QCheckBox*>("Checkbox");
     fullHeatMapSelectionWidget->setFixedWidth(100);
 
+    auto explorationModeSelectionWidget = simianOptionsAction._explorationModeAction.createWidget(this);
+    explorationModeSelectionWidget->findChild<QCheckBox*>("Checkbox");
+    explorationModeSelectionWidget->setFixedWidth(100);
+
     auto visSettingSelectionLayout = new QFormLayout();
     visSettingSelectionLayout->setContentsMargins(2, 2, 2, 2);
     visSettingSelectionLayout->setObjectName("Vis Setting Options");
     visSettingSelectionLayout->setSpacing(2);
     visSettingSelectionLayout->setVerticalSpacing(2);
     visSettingSelectionLayout->addRow(simianOptionsAction._fullHeatMapAction.createLabelWidget(this), fullHeatMapSelectionWidget);
-
+    visSettingSelectionLayout->addRow(simianOptionsAction._explorationModeAction.createLabelWidget(this), explorationModeSelectionWidget);
 
     setPopupLayout(visSettingSelectionLayout);
 

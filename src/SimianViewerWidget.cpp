@@ -155,6 +155,12 @@ void SimianViewerWidget::showFullHeatmap(QString visColorContent)
     emit _communicationObject->qt_showFullHeatmap(visColorContent);
 }
 
+void SimianViewerWidget::showExplorationMode(QString visColorContent)
+{
+    emit _communicationObject->qt_showExplorationMode(visColorContent);
+}
+
+
 void SimianViewerWidget::inspeciesClusterCounts(QString visCountClusterContent)
 {
     emit _communicationObject->qt_inspeciesClusterCounts(visCountClusterContent);
