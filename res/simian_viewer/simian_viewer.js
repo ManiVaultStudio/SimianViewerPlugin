@@ -44,6 +44,8 @@ var backgroundColor = "#ffffff";
 window.onresize = doALoadOfStuff;
 var ximage = "";
 var yimage = "";
+var xTooltipimage = "";
+var yTooltipimage = "";
 //Species Colors and cluster information
 const cross_speciesClustercolors = { 'Chandelier_1': '#F87CC3', 'L2/3 IT_1': '#D9F982', 'L2/3 IT_2': '#99B348', 'L2/3 IT_3': '#596D0F', 'L4 IT_1': '#C1F4F1', 'L4 IT_2': '#00E5E5', 'L5 ET_1': '#79B7C6', 'L5 ET_2': '#0D5B78', 'L5 IT_1': '#A0CEC9', 'L5 IT_2': '#2A5E5A', 'L5/6 NP_1': '#75C591', 'L5/6 NP_2': '#3C7D53', 'L6 CT_1': '#87D7F4', 'L6 CT_2': '#3E7E96', 'L6 IT_1': '#BEB867', 'L6 IT Car3_1': '#B29FF7', 'L6 IT Car3_2': '#8054F7', 'L6b_1': '#C4A4F7', 'L6b_2': '#7E64A9', 'L6b_3': '#39245B', 'Lamp5_1': '#F9B9C5', 'Lamp5_2': '#94606B', 'Lamp5_Lhx6_1': '#B49186', 'Pax6_1': '#CD8CEA', 'Pax6_2': '#6D3C82', 'Pvalb_1': '#F98089', 'Pvalb_2': '#CF5F67', 'Pvalb_3': '#A53E46', 'Pvalb_4': '#7C1E25', 'Sncg_1': '#E99CFF', 'Sncg_2': '#B06DC5', 'Sncg_3': '#773F8C', 'Sst_1': '#FFB84F', 'Sst_2': '#EEA945', 'Sst_3': '#DD9A3C', 'Sst_4': '#CC8C33', 'Sst_5': '#BB7D2A', 'Sst_6': '#AA6E20', 'Sst_7': '#996017', 'Sst_8': '#88510E', 'Sst_9': '#774305', 'Sst Chodl_1': '#C9C958', 'Vip_1': '#E5B9FC', 'Vip_2': '#CBA3E0', 'Vip_3': '#B18DC5', 'Vip_4': '#9877AA', 'Vip_5': '#7E628E', 'Vip_6': '#654C73', 'Vip_7': '#4B3658', 'Vip_8': '#32213D', 'Astro_1': '#D8D4CB', 'Endo_1': '#B09A93', 'Micro-PVM_1': '#798C7A', 'Oligo_1': '#B4D1C8', 'OPC_1': '#939E9C', 'OPC_2': '#263430', 'VLMC_1': '#979E8A' };
 const in_speciesClustercolors = { 'Astro_1': '#958F80', 'Astro_2': '#484132', 'Astro_2': '#665C47', 'Astro_2': '#756D5A', 'Astro_2': '#7D7563', 'Astro_3': '#484132', 'Astro_3': '#5C5340', 'Astro_3': '#665C47', 'Astro_4': '#484132', 'Astro_4': '#574E3C', 'Astro_5': '#484132', 'Chandelier_1': '#F87CC3', 'Chandelier_2': '#AD2D76', 'Chandelier_2': '#F641A8', 'Endo_1': '#B09A93', 'Endo_2': '#634C45', 'Endo_2': '#987B72', 'Endo_3': '#7F6158', 'L2/3 IT_1': '#BDEE50', 'L2/3 IT_1': '#C9F170', 'L2/3 IT_10': '#9DD12A', 'L2/3 IT_10': '#A3DA2C', 'L2/3 IT_11': '#94C627', 'L2/3 IT_11': '#9DD12A', 'L2/3 IT_12': '#8CBB25', 'L2/3 IT_12': '#97C928', 'L2/3 IT_13': '#84B023', 'L2/3 IT_13': '#90C026', 'L2/3 IT_14': '#8AB724', 'L2/3 IT_15': '#7DA621', 'L2/3 IT_2': '#B1EC30', 'L2/3 IT_2': '#BDEE50', 'L2/3 IT_2': '#C2EF5D', 'L2/3 IT_2': '#C5F066', 'L2/3 IT_2': '#C6F068', 'L2/3 IT_3': '#97C928', 'L2/3 IT_3': '#B1EC30', 'L2/3 IT_3': '#BBEE4B', 'L2/3 IT_3': '#C1EF5C', 'L2/3 IT_3': '#C3EF60', 'L2/3 IT_4': '#7DA621', 'L2/3 IT_4': '#97C928', 'L2/3 IT_4': '#B4EC39', 'L2/3 IT_4': '#BDEE52', 'L2/3 IT_4': '#C0EF58', 'L2/3 IT_5': '#A9E22D', 'L2/3 IT_5': '#BAED48', 'L2/3 IT_5': '#BDEE50', 'L2/3 IT_6': '#9ACE29', 'L2/3 IT_6': '#B6ED3E', 'L2/3 IT_6': '#BAED48', 'L2/3 IT_7': '#8BBA25', 'L2/3 IT_7': '#B2EC34', 'L2/3 IT_7': '#B7ED40', 'L2/3 IT_8': '#ACE62E', 'L2/3 IT_8': '#B1EC30', 'L2/3 IT_9': '#A4DB2C', 'L2/3 IT_9': '#AAE32E', 'L4 IT_1': '#4FEDED', 'L4 IT_1': '#54E8E4', 'L4 IT_2': '#00A1A1', 'L4 IT_2': '#00E5E5', 'L4 IT_2': '#1AE7E7', 'L4 IT_2': '#2FE9E9', 'L4 IT_3': '#00A1A1', 'L4 IT_3': '#00CECE', 'L4 IT_3': '#0FE6E6', 'L4 IT_3': '#54E8E4', 'L4 IT_4': '#00A1A1', 'L4 IT_4': '#00D7D7', 'L4 IT_4': '#54E8E4', 'L4 IT_5': '#00BCBC', 'L4 IT_5': '#54E8E4', 'L4 IT_6': '#00A1A1', 'L5 ET_1': '#588EA2', 'L5 ET_2': '#094054', 'L5 ET_2': '#0D5B78', 'L5 ET_2': '#32748D', 'L5 ET_3': '#0B4D66', 'L5 ET_4': '#094054', 'L5 IT_1': '#86CAC6', 'L5 IT_2': '#50B2AD', 'L5 IT_2': '#62BAB5', 'L5 IT_2': '#67BCB7', 'L5 IT_2': '#6BBEB9', 'L5 IT_3': '#387D7A', 'L5 IT_3': '#48A09C', 'L5 IT_3': '#50B2AD', 'L5 IT_3': '#57B5B0', 'L5 IT_4': '#387D7A', 'L5 IT_4': '#449793', 'L5 IT_4': '#4CAAA5', 'L5 IT_5': '#459B97', 'L5 IT_6': '#3E8C88', 'L5 IT_7': '#387D7A', 'L5/6 NP_1': '#3E9E64', 'L5/6 NP_1': '#68B386', 'L5/6 NP_1': '#7ABC94', 'L5/6 NP_2': '#2B6F46', 'L5/6 NP_2': '#57AA78', 'L5/6 NP_2': '#5CAD7C', 'L5/6 NP_2': '#6CB589', 'L5/6 NP_3': '#3B975F', 'L5/6 NP_3': '#3E9E64', 'L5/6 NP_3': '#5FAE7E', 'L5/6 NP_4': '#348655', 'L5/6 NP_4': '#358957', 'L5/6 NP_4': '#44A169', 'L5/6 NP_5': '#307C4E', 'L5/6 NP_5': '#3B9860', 'L5/6 NP_6': '#2B6F46', 'L5/6 NP_6': '#378E5A', 'L5/6 NP_7': '#338353', 'L5/6 NP_8': '#2B6F46', 'L6 CT_1': '#4298BF', 'L6 CT_1': '#6EB0CE', 'L6 CT_2': '#1F6282', 'L6 CT_2': '#287EA6', 'L6 CT_2': '#2D8CB8', 'L6 CT_2': '#4D9EC3', 'L6 CT_3': '#1F6282', 'L6 CT_3': '#26779D', 'L6 CT_3': '#2D8CB8', 'L6 CT_4': '#1F6282', 'L6 CT_4': '#26779D', 'L6 IT Car3_1': '#874FFF', 'L6 IT Car3_2': '#3900B4', 'L6 IT Car3_2': '#5100FF', 'L6 IT Car3_2': '#631AFF', 'L6 IT Car3_3': '#3900B4', 'L6 IT Car3_3': '#4900E6', 'L6 IT_1': '#716C18', 'L6 IT_1': '#AFA844', 'L6 IT_1': '#BEB867', 'L6 IT_2': '#716C18', 'L6 IT_2': '#A19922', 'L6 IT_2': '#AAA338', 'L6 IT_3': '#716C18', 'L6 IT_3': '#89821D', 'L6 IT_3': '#918A1E', 'L6 IT_4': '#716C18', 'L6b_1': '#9C7EC4', 'L6b_2': '#7044AA', 'L6b_2': '#764CAD', 'L6b_2': '#7E57B2', 'L6b_2': '#8A66B9', 'L6b_3': '#4F3078', 'L6b_3': '#653D99', 'L6b_3': '#6B41A2', 'L6b_3': '#784FAF', 'L6b_4': '#4F3078', 'L6b_4': '#613B94', 'L6b_4': '#6940A0', 'L6b_5': '#583586', 'L6b_5': '#5C388B', 'L6b_6': '#4F3078', 'Lamp5_1': '#E5A7B0', 'Lamp5_2': '#9A5A62', 'Lamp5_2': '#DA808C', 'Lamp5_2': '#DD8D98', 'Lamp5_2': '#E097A1', 'Lamp5_3': '#9A5A62', 'Lamp5_3': '#C4737E', 'Lamp5_3': '#DC8793', 'Lamp5_4': '#9A5A62', 'Lamp5_4': '#CD7883', 'Lamp5_5': '#B36972', 'Lamp5_6': '#9A5A62', 'Lamp5_Lhx6_1': '#B49186', 'Lamp5_Lhx6_2': '#674338', 'Micro-PVM_1': '#8BA48E', 'Micro-PVM_1': '#B5C8B7', 'Micro-PVM_2': '#687B6A', 'Micro-PVM_2': '#798F7C', 'Micro-PVM_2': '#859D88', 'Micro-PVM_2': '#94AF97', 'Micro-PVM_2': '#9FB7A1', 'Micro-PVM_3': '#687B6A', 'Micro-PVM_3': '#859D88', 'Micro-PVM_4': '#687B6A', 'OPC_1': '#75827F', 'OPC_2': '#263430', 'OPC_2': '#374A45', 'OPC_2': '#4B5C58', 'OPC_3': '#263430', 'OPC_3': '#31423E', 'OPC_4': '#263430', 'Oligo_1': '#88A19A', 'Oligo_2': '#3A544C', 'Oligo_2': '#53776C', 'Oligo_2': '#64857B', 'Oligo_3': '#4A6B61', 'Oligo_4': '#3A544C', 'Pax6_1': '#9D67B0', 'Pax6_2': '#71238C', 'Pax6_2': '#7F3998', 'Pax6_3': '#4F1862', 'Pax6_3': '#651F7E', 'Pax6_4': '#4F1862', 'Pvalb_1': '#DD4C51', 'Pvalb_1': '#E47175', 'Pvalb_10': '#992226', 'Pvalb_10': '#CC2E33', 'Pvalb_11': '#C32C31', 'Pvalb_12': '#BB2A2F', 'Pvalb_13': '#B2282C', 'Pvalb_14': '#AA262A', 'Pvalb_15': '#992226', 'Pvalb_2': '#DA3A3F', 'Pvalb_2': '#E16165', 'Pvalb_2': '#E16267', 'Pvalb_2': '#E2686C', 'Pvalb_3': '#CF2E34', 'Pvalb_3': '#DE5156', 'Pvalb_3': '#DF5459', 'Pvalb_3': '#E15F64', 'Pvalb_4': '#BD2A2F', 'Pvalb_4': '#D93137', 'Pvalb_4': '#DC464B', 'Pvalb_4': '#DF575C', 'Pvalb_5': '#AB262A', 'Pvalb_5': '#C92D32', 'Pvalb_5': '#D12F35', 'Pvalb_5': '#DA383D', 'Pvalb_5': '#DE4E53', 'Pvalb_6': '#992226', 'Pvalb_6': '#B9292E', 'Pvalb_6': '#C32C31', 'Pvalb_6': '#D12F35', 'Pvalb_6': '#DC464B', 'Pvalb_7': '#A9252A', 'Pvalb_7': '#B5282D', 'Pvalb_7': '#C32C31', 'Pvalb_7': '#DB3D43', 'Pvalb_8': '#992226', 'Pvalb_8': '#A72529', 'Pvalb_8': '#B5282D', 'Pvalb_8': '#D9353B', 'Pvalb_9': '#992226', 'Pvalb_9': '#A72529', 'Pvalb_9': '#D43035', 'Sncg_1': '#E99CFF', 'Sncg_10': '#9D4FB4', 'Sncg_2': '#E58DFF', 'Sncg_2': '#E691FF', 'Sncg_2': '#E692FF', 'Sncg_3': '#E27EFF', 'Sncg_3': '#E386FF', 'Sncg_3': '#E488FF', 'Sncg_4': '#DF70FF', 'Sncg_4': '#E17BFF', 'Sncg_4': '#E27EFF', 'Sncg_5': '#C965E6', 'Sncg_5': '#DF70FF', 'Sncg_5': '#E074FF', 'Sncg_6': '#B35ACD', 'Sncg_6': '#CE67EC', 'Sncg_6': '#D76CF6', 'Sncg_7': '#9D4FB4', 'Sncg_7': '#BE5FD9', 'Sncg_7': '#C965E6', 'Sncg_8': '#9D4FB4', 'Sncg_8': '#AD57C6', 'Sncg_8': '#BA5DD5', 'Sncg_9': '#9D4FB4', 'Sncg_9': '#AB56C4', 'Sst Chodl_1': '#C9C958', 'Sst Chodl_2': '#7D7D08', 'Sst Chodl_2': '#B1B10C', 'Sst Chodl_3': '#7D7D08', 'Sst_1': '#FFB446', 'Sst_1': '#FFB84F', 'Sst_10': '#E28700', 'Sst_10': '#F09000', 'Sst_10': '#F69300', 'Sst_10': '#FA9600', 'Sst_10': '#FFA012', 'Sst_11': '#D68000', 'Sst_11': '#E68A00', 'Sst_11': '#EE8F00', 'Sst_11': '#F19100', 'Sst_11': '#FF9D0C', 'Sst_12': '#CB7900', 'Sst_12': '#DC8400', 'Sst_12': '#E68A00', 'Sst_12': '#E88B00', 'Sst_12': '#FF9B06', 'Sst_13': '#BF7200', 'Sst_13': '#C87800', 'Sst_13': '#DD8500', 'Sst_13': '#E08600', 'Sst_13': '#FF9900', 'Sst_14': '#B46C00', 'Sst_14': '#BE7100', 'Sst_14': '#D58000', 'Sst_14': '#D78100', 'Sst_14': '#F99500', 'Sst_15': '#B46C00', 'Sst_15': '#BC7100', 'Sst_15': '#CD7B00', 'Sst_15': '#F39200', 'Sst_16': '#B46C00', 'Sst_16': '#C47600', 'Sst_16': '#ED8E00', 'Sst_17': '#BC7100', 'Sst_17': '#E78B00', 'Sst_18': '#B46C00', 'Sst_18': '#E28700', 'Sst_19': '#DC8400', 'Sst_2': '#FFB13D', 'Sst_2': '#FFB342', 'Sst_2': '#FFB344', 'Sst_2': '#FFB445', 'Sst_20': '#D68000', 'Sst_21': '#D07D00', 'Sst_22': '#CB7900', 'Sst_23': '#C57600', 'Sst_24': '#BF7200', 'Sst_25': '#B96F00', 'Sst_26': '#B46C00', 'Sst_3': '#FFAD34', 'Sst_3': '#FFAE36', 'Sst_3': '#FFAF39', 'Sst_3': '#FFB03C', 'Sst_4': '#FFA92A', 'Sst_4': '#FFAA2B', 'Sst_4': '#FFAB2F', 'Sst_4': '#FFAD33', 'Sst_4': '#FFAE36', 'Sst_5': '#FFA41E', 'Sst_5': '#FFA623', 'Sst_5': '#FFA724', 'Sst_5': '#FFA929', 'Sst_5': '#FFAC30', 'Sst_6': '#FFA012', 'Sst_6': '#FFA31A', 'Sst_6': '#FFA520', 'Sst_6': '#FFA92A', 'Sst_7': '#FF9B06', 'Sst_7': '#FF9F0F', 'Sst_7': '#FF9F11', 'Sst_7': '#FFA217', 'Sst_7': '#FFA724', 'Sst_8': '#F99500', 'Sst_8': '#FF9B05', 'Sst_8': '#FF9C08', 'Sst_8': '#FF9E0D', 'Sst_8': '#FFA41E', 'Sst_9': '#ED8E00', 'Sst_9': '#FA9600', 'Sst_9': '#FF9900', 'Sst_9': '#FF9A04', 'Sst_9': '#FFA218', 'VLMC_1': '#697255', 'VLMC_1': '#848C74', 'VLMC_1': '#979E8A', 'VLMC_2': '#4A503C', 'VLMC_2': '#626B50', 'VLMC_2': '#788066', 'VLMC_3': '#565D45', 'VLMC_3': '#5E664C', 'VLMC_4': '#4A503C', 'Vip_1': '#C091D3', 'Vip_10': '#8B51A3', 'Vip_10': '#9657AF', 'Vip_10': '#9D5BB8', 'Vip_10': '#A561C0', 'Vip_10': '#A968C2', 'Vip_11': '#834C99', 'Vip_11': '#8F53A7', 'Vip_11': '#9758B1', 'Vip_11': '#A15DBC', 'Vip_11': '#A663C0', 'Vip_12': '#7B4790', 'Vip_12': '#884F9F', 'Vip_12': '#9154AA', 'Vip_12': '#9C5AB6', 'Vip_12': '#A45FBF', 'Vip_13': '#734387', 'Vip_13': '#814B97', 'Vip_13': '#8B51A3', 'Vip_13': '#9757B0', 'Vip_13': '#9F5CB9', 'Vip_14': '#7A478F', 'Vip_14': '#854D9C', 'Vip_14': '#9154AA', 'Vip_14': '#9B59B4', 'Vip_15': '#734387', 'Vip_15': '#7F4A95', 'Vip_15': '#8C51A4', 'Vip_15': '#9657AF', 'Vip_16': '#79468E', 'Vip_16': '#874E9E', 'Vip_16': '#9254AA', 'Vip_17': '#734387', 'Vip_17': '#824B98', 'Vip_17': '#8D52A5', 'Vip_18': '#7D4892', 'Vip_18': '#894FA0', 'Vip_19': '#78458C', 'Vip_19': '#844D9B', 'Vip_2': '#BB88CF', 'Vip_2': '#BC89D0', 'Vip_2': '#BC8AD0', 'Vip_2': '#BD8BD0', 'Vip_2': '#BD8CD1', 'Vip_20': '#734387', 'Vip_20': '#804A96', 'Vip_21': '#7B4891', 'Vip_22': '#77458C', 'Vip_23': '#734387', 'Vip_3': '#B680CC', 'Vip_3': '#B882CD', 'Vip_3': '#B984CE', 'Vip_3': '#BA86CE', 'Vip_3': '#BA87CF', 'Vip_4': '#B278C9', 'Vip_4': '#B47BCA', 'Vip_4': '#B57ECB', 'Vip_4': '#B781CC', 'Vip_4': '#B883CD', 'Vip_5': '#AD6FC5', 'Vip_5': '#B074C7', 'Vip_5': '#B278C9', 'Vip_5': '#B47BCA', 'Vip_5': '#B57ECB', 'Vip_6': '#A867C2', 'Vip_6': '#AC6DC4', 'Vip_6': '#AE71C6', 'Vip_6': '#B176C8', 'Vip_6': '#B37AC9', 'Vip_7': '#A45FBF', 'Vip_7': '#A866C1', 'Vip_7': '#AB6BC3', 'Vip_7': '#AE71C6', 'Vip_7': '#B075C8', 'Vip_8': '#9B5AB5', 'Vip_8': '#A45FBF', 'Vip_8': '#A765C1', 'Vip_8': '#AB6CC4', 'Vip_8': '#AE71C6', 'Vip_9': '#9355AC', 'Vip_9': '#9D5BB7', 'Vip_9': '#A45FBF', 'Vip_9': '#A866C2', 'Vip_9': '#AB6CC4', };
@@ -964,7 +966,7 @@ const simianVis = () => {
 
                 }
                 var formatTooltipContents = "";
-                formatTooltipContents = "<div id=\"clearTooltip\"> <table  style=\"font-size: 5; width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + ximage + "\" alt=\"" + species1ValueIdentify + "\" height=50 width=50 /></th><th style=\" \" ><img src=\"" + yimage + "\" alt=\"" + species2ValueIdentify + "\" height=50 width=50 /></th></tr><tr><td  style=\"  \" ><b>In-species <b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</td><td  style=\"-webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</td></tr>";
+                formatTooltipContents = "<div id=\"clearTooltip\"> <table  style=\"font-size: 5; width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=50 width=50 /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=50 width=50 /></th></tr><tr><td  style=\"  \" ><b>In-species <b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</td><td  style=\"-webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</td></tr>";
                 if (barflag) {
                     formatTooltipContents = formatTooltipContents + "<tr><td   style=\"  font-size: 5;\"><b >Cell count<b/></td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: #1b9e77;\">" + inspecies1ClusterCounts[d.cluster_1] + "</td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: #d95f02;\">" + inspecies1ClusterCounts[d.cluster_2] + "</td></tr>";
                 }
@@ -1070,7 +1072,7 @@ const simianVis = () => {
 
             }
             var formatTooltipContents = "";
-            formatTooltipContents = "<div id=\"clearTooltip\"> <table font-size: 5; style=\"width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + ximage + "\" alt=\"" + species1ValueIdentify + "\" height=50 width=50 /></th><th style=\" \" ><img src=\"" + yimage + "\" alt=\"" + species2ValueIdentify + "\" height=50 width=50 /></th></tr><tr><td  style=\"  \" ><b>In-species <b/></td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</td></tr>";
+            formatTooltipContents = "<div id=\"clearTooltip\"> <table font-size: 5; style=\"width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=50 width=50 /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=50 width=50 /></th></tr><tr><td  style=\"  \" ><b>In-species <b/></td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</td></tr>";
             if (barflag) {
                 formatTooltipContents = formatTooltipContents + "<tr><td   style=\" font-size: 5; \"><b>Cell count<b/></td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: #1b9e77;\">" + inspecies1ClusterCounts[d.cluster_1] + "</td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: #d95f02;\">" + inspecies1ClusterCounts[d.cluster_2] + "</td></tr>";
             }            
@@ -1662,46 +1664,53 @@ const simianVis = () => {
 
     ximage = "";
     yimage = "";
+    xTooltipimage = "";
+    yTooltipimage = "";
     if (species2ValueIdentify == "gorilla") {
 
         if (luma < 40) {
             yimage = 'images/light/gorilla-light.png';
         }
         else {
-            yimage = 'images/color/gorilla-color.png';
+            yimage = 'images/dark/gorilla-dark.png';
         }
+        yTooltipimage = 'images/color/gorilla-color.png';
     }
     else if (species2ValueIdentify == "marmoset") {
         if (luma < 40) {
             yimage = 'images/light/marmoset-light.png';
         }
         else {
-            yimage = 'images/color/marmoset-color.png';
+            yimage = 'images/dark/marmoset-dark.png';
         }
+        yTooltipimage = 'images/color/marmoset-color.png';
     }
     else if (species2ValueIdentify == "human") {
         if (luma < 40) {
             yimage = 'images/light/human-light.png';
         }
         else {
-            yimage = 'images/color/human-color.png';
+            yimage = 'images/dark/human-dark.png';
         }
+        yTooltipimage = 'images/color/human-color.png';
     }
     else if (species2ValueIdentify == "rhesus") {
         if (luma < 40) {
             yimage = 'images/light/rhesus-light.png';
         }
         else {
-            yimage = 'images/color/rhesus-color.png';
+            yimage = 'images/dark/rhesus-dark.png';
         }
+        yTooltipimage = 'images/color/rhesus-color.png';
     }
     else if (species2ValueIdentify == "chimp") {
         if (luma < 40) {
             yimage = 'images/light/chimpanzee-light.png';
         }
         else {
-            yimage = 'images/color/chimpanzee-color.png';
+            yimage = 'images/dark/chimpanzee-dark.png';
         }
+        yTooltipimage = 'images/color/chimpanzee-color.png';
     }
 
     if (species1ValueIdentify == "gorilla") {
@@ -1709,32 +1718,36 @@ const simianVis = () => {
             ximage = 'images/light/gorilla-light.png';
         }
         else {
-            ximage = 'images/color/gorilla-color.png';
+            ximage = 'images/dark/gorilla-dark.png';
         }
+        xTooltipimage = 'images/color/gorilla-color.png';
     }
     else if (species1ValueIdentify == "chimp") {
         if (luma < 40) {
             ximage = 'images/light/chimpanzee-light.png';
         }
         else {
-            ximage = 'images/color/chimpanzee-color.png';
+            ximage = 'images/dark/chimpanzee-dark.png';
         }
+        xTooltipimage = 'images/color/chimpanzee-color.png';
     }
     else if (species1ValueIdentify == "rhesus") {
         if (luma < 40) {
             ximage = 'images/light/rhesus-light.png';
         }
         else {
-            ximage = 'images/color/rhesus-color.png';
+            ximage = 'images/dark/rhesus-dark.png';
         }
+        xTooltipimage = 'images/color/rhesus-color.png';
     }
     else if (species1ValueIdentify == "human") {
         if (luma < 40) {
             ximage = 'images/light/human-light.png';
         }
         else {
-            ximage = 'images/color/human-color.png';
+            ximage = 'images/dark/human-dark.png';
         }
+        xTooltipimage = 'images/color/human-color.png';
     }
     else if (species1ValueIdentify == "marmoset") {
         if (luma < 40) {
@@ -1743,6 +1756,7 @@ const simianVis = () => {
         else {
             ximage = 'images/color/marmoset-color.png';
         }
+        xTooltipimage = 'images/dark/human-dark.png';
     }
 
     if (yimage !== "") {
