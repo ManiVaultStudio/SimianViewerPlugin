@@ -108,9 +108,9 @@ const simianVis = () => {
     else {
         document.getElementById('my_dataviz').setAttribute("style", "width:75%");
         document.getElementById('my_container').setAttribute("style", "width:25%");
-        containerwidth = 21;
-        heatmapWidth = 73;
-        containerHeight = 30;
+        containerwidth = 18;
+        heatmapWidth = 70;
+        containerHeight = 25;
         heatmapHeight = 99;
     }
     var margin;
