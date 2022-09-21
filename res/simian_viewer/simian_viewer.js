@@ -21,6 +21,8 @@ var totalInspeciescluster2counts = 0;
 var svg;
 var heatmapWidth;
 var containerwidth;
+var heatmapHeight;
+var containerHeight;
 var angle1Sp1 = 0.0;
 var angle2Sp1 = 0.0;
 var angle3Sp1 = 0.0;
@@ -99,12 +101,17 @@ const simianVis = () => {
         document.getElementById('my_container').setAttribute("style", "width:1%");
         containerwidth = 12;
         heatmapWidth = 99;
+        heatmapHeight = 99;
+        containerHeight = 5;
+
     }
     else {
         document.getElementById('my_dataviz').setAttribute("style", "width:75%");
         document.getElementById('my_container').setAttribute("style", "width:25%");
         containerwidth = 21;
         heatmapWidth = 73;
+        containerHeight = 30;
+        heatmapHeight = 99;
     }
     var margin;
     if (barflag) {
@@ -978,7 +985,7 @@ const simianVis = () => {
 
                 }
                 var formatTooltipContents = "";
-                formatTooltipContents = "<div id=\"clearTooltip\"> <table  style=\"font-size: 10px; width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=50 width=50 /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=50 width=50 /></th></tr><tr><td  style=\"  \" ><b>In-species <b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</td><td  style=\"-webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</td></tr>";
+                formatTooltipContents = "<div id=\"clearTooltip\"> <table  style=\"font-size: 10px; width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=25 width=25 /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=50 width=50 /></th></tr><tr><td  style=\"  \" ><b>In-species <b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</td><td  style=\"-webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</td></tr>";
                 if (barflag) {
                     formatTooltipContents = formatTooltipContents + "<tr><td   style=\"  \"><b >Cell count<b/></td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: #1b9e77;\">" + inspecies1ClusterCounts[d.cluster_1] + "</td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: #d95f02;\">" + inspecies1ClusterCounts[d.cluster_2] + "</td></tr>";
                 }
@@ -1252,7 +1259,7 @@ const simianVis = () => {
         tip.show(d, d3.mouse(this), this);
 
         var wTooltip = ((containerwidth)/ 100 * window.innerWidth);
-        var hTooltip = window.innerHeight / 8;
+        var hTooltip = ((containerHeight) / 100 * window.innerHeight);
         var marginTooltip = { topTooltip: 20, rightTooltip: 20, bottomTooltip: 20, leftTooltip: 20, middleTooltip: 10 };
         var regionWidthTooltip = wTooltip / 2 - marginTooltip.middleTooltip;
         var pointATooltip = regionWidthTooltip, pointBTooltip = wTooltip - regionWidthTooltip;
@@ -1302,7 +1309,7 @@ const simianVis = () => {
 
 
         var wTooltip = ((containerwidth) / 100 * window.innerWidth);
-        var hTooltip = window.innerHeight / 8;
+        var hTooltip = ((containerHeight) / 100 * window.innerHeight);
         var marginTooltip = { topTooltip: 20, rightTooltip: 20, bottomTooltip: 20, leftTooltip: 20, middleTooltip: 10 };
         var regionWidthTooltip = wTooltip / 2 - marginTooltip.middleTooltip;
         var pointATooltip = regionWidthTooltip, pointBTooltip = wTooltip - regionWidthTooltip;
