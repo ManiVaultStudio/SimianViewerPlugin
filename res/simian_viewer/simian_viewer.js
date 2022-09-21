@@ -97,14 +97,14 @@ const simianVis = () => {
     if (showFullHeatmapflag) {
         document.getElementById('my_dataviz').setAttribute("style", "width:99%");
         document.getElementById('my_container').setAttribute("style", "width:1%");
-        containerwidth = 14;
+        containerwidth = 12;
         heatmapWidth = 99;
     }
     else {
-        document.getElementById('my_dataviz').setAttribute("style", "width:70%");
-        document.getElementById('my_container').setAttribute("style", "width:30%");
-        containerwidth = 22;
-        heatmapWidth = 68;
+        document.getElementById('my_dataviz').setAttribute("style", "width:75%");
+        document.getElementById('my_container').setAttribute("style", "width:25%");
+        containerwidth = 21;
+        heatmapWidth = 73;
     }
     var margin;
     if (barflag) {
