@@ -231,6 +231,7 @@ public: // Action getters
     IntegralAction& getDistanceAction() { return _distanceAction; };
     ToggleAction& getHistBarAction() { return _histBarAction; };
     ToggleAction& getFullHeatmapAction() { return _fullHeatMapAction; };
+    ToggleAction& getExplorationModeAction() { return _explorationModeAction; };
     DatasetPickerAction& getCrossSpecies1DatasetLinkerAction() { return _crossSpecies1DatasetLinkerAction; };
     DatasetPickerAction& getCrossSpecies2DatasetLinkerAction() { return _crossSpecies2DatasetLinkerAction; };
     DatasetPickerAction& getInSpecies1DatasetLinkerAction() { return _inSpecies1DatasetLinkerAction; };
@@ -264,6 +265,7 @@ protected:
     OptionsAction                 _multiSelectClusterFilterAction;
     ToggleAction _histBarAction;
     ToggleAction _fullHeatMapAction;
+    ToggleAction _explorationModeAction;
     OptionAction                 _inSpecies1HeatMapCellAction;
     OptionAction                 _inSpecies2HeatMapCellAction;
     OptionAction                 _crossSpecies1HeatMapCellAction;
