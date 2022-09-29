@@ -15,6 +15,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _distanceAction(this, "Filter distance :"),
     _crossSpecies1DatasetLinkerAction(this, "Cross-species cluster dataset1"),
     _crossSpecies2DatasetLinkerAction(this, "Cross-species  cluster dataset2"),
+
+    _speciesEmbedding1LinkerAction(this, "Embedding dataset1"),
+    _speciesEmbedding2LinkerAction(this, "Embedding dataset2"),
+
     _inSpecies1DatasetLinkerAction(this, "In-species  cluster dataset1"),
     _inSpecies2DatasetLinkerAction(this, "In-species  cluster dataset2"),
     _crossSpeciesFilterAction(this, "Filter clusters"),
@@ -58,6 +62,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _explorationModeAction.setEnabled(false);
     _crossSpecies1DatasetLinkerAction.setEnabled(false);
     _crossSpecies2DatasetLinkerAction.setEnabled(false);
+
+    _speciesEmbedding1LinkerAction.setEnabled(false);
+    _speciesEmbedding2LinkerAction.setEnabled(false);
+
     _inSpecies1DatasetLinkerAction.setEnabled(false);
     _inSpecies2DatasetLinkerAction.setEnabled(false);
     _crossSpeciesFilterAction.setEnabled(false);
@@ -90,7 +98,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _colorMapAction.initialize("Black to white","Black to white");
     _backgroundColoringAction.initialize(DEFAULT_CONSTANT_COLOR, DEFAULT_CONSTANT_COLOR);
     _neighborhoodAction.setDefaultWidgetFlags(OptionAction::ComboBox);
-    _neighborhoodAction.initialize(QStringList({ "glia","it_types","l5et_l56np_l6ct_l6b","lamp5_sncg_vip","sst_sst_chodl_pvalb" }), "it_types", "it_types");
+    _neighborhoodAction.initialize(QStringList({ "glia","it_types","l5et_l56np_l6ct_l6b","lamp5_sncg_vip","sst_sst_chodl_pvalb" }), "glia", "glia");
     _distanceAction.setDefaultWidgetFlags(IntegralAction::SpinBox | IntegralAction::Slider);
     _distanceAction.initialize(0, 105, 105, 105); 
     _histBarAction.setDefaultWidgetFlags(ToggleAction::CheckBox);
@@ -101,11 +109,31 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _explorationModeAction.initialize(false, false);
     _crossSpecies1DatasetLinkerAction.setDefaultWidgetFlags(OptionAction::ComboBox);
     _crossSpecies2DatasetLinkerAction.setDefaultWidgetFlags(OptionAction::ComboBox);
+    
+    _speciesEmbedding1LinkerAction.setDefaultWidgetFlags(OptionAction::ComboBox);
+    _speciesEmbedding2LinkerAction.setDefaultWidgetFlags(OptionAction::ComboBox);
+    
     _inSpecies1DatasetLinkerAction.setDefaultWidgetFlags(OptionAction::ComboBox);
     _inSpecies2DatasetLinkerAction.setDefaultWidgetFlags(OptionAction::ComboBox);
     _colorMapAction.getSettingsAction().getDiscreteAction().setVisible(false);
     _colorMapAction.getSettingsAction().getEditor1DAction().setVisible(false);
-
+    _inSpecies1DatasetLinkerAction.publish("InSpeciesDataset1");
+    _inSpecies2DatasetLinkerAction.publish("InSpeciesDataset2");
+    _crossSpecies1DatasetLinkerAction.publish("CrossSpeciesDataset1");
+    _crossSpecies2DatasetLinkerAction.publish("CrossSpeciesDataset2");
+    _speciesEmbedding1LinkerAction.publish("EmbeddingDataset1");
+    _speciesEmbedding2LinkerAction.publish("EmbeddingDataset2");
+    _inSpecies1DatasetLinkerAction.setVisible(false);
+    _inSpecies2DatasetLinkerAction.setVisible(false);
+    _crossSpecies1DatasetLinkerAction.setVisible(false);
+    _crossSpecies2DatasetLinkerAction.setVisible(false);
+    _speciesEmbedding1LinkerAction.setVisible(false);
+    _speciesEmbedding2LinkerAction.setVisible(false);
+    //_crossSpecies1HeatMapCellAction.publish("CrossSpeciesHeatMapCell1");
+    //_crossSpecies2HeatMapCellAction.publish("CrossSpeciesHeatMapCell2");
+    //_inSpecies1HeatMapCellAction.publish("inSpeciesHeatMapCell1");
+    //_inSpecies2HeatMapCellAction.publish("inSpeciesHeatMapCell2");
+   
     const auto updateCrossSpeciesFilter = [this]() -> void
     {
         updateDatasetPickerAction();
@@ -172,6 +200,45 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
         if (_species1Action.getCurrentText()!="" && _species1Action.getCurrentText().isValidUtf16())
         {
             _species2Action.setEnabled(true);
+            if (!_crossSpecies1DatasetLinkerAction.getOptions().isEmpty()) 
+            {
+                auto datasetOptions1 = _crossSpecies1DatasetLinkerAction.getOptions();
+                for (const auto& datasets1 : datasetOptions1)
+                {
+                    if (datasets1.toLower().contains(_species1Action.getCurrentText().toLower()))
+                    {
+                        
+                        _crossSpecies1DatasetLinkerAction.setCurrentText(datasets1);
+                    }
+                }
+            }
+
+            if (!_inSpecies1DatasetLinkerAction.getOptions().isEmpty())
+            {
+                auto datasetOptions1 = _inSpecies1DatasetLinkerAction.getOptions();
+                for (const auto& datasets1 : datasetOptions1)
+                {
+                    if (datasets1.toLower().contains( _species1Action.getCurrentText().toLower() ))
+                    {
+
+                        _inSpecies1DatasetLinkerAction.setCurrentText(datasets1);
+                    }
+                }
+            }
+
+            if (!_speciesEmbedding1LinkerAction.getOptions().isEmpty())
+            {
+                auto datasetOptions1 = _speciesEmbedding1LinkerAction.getOptions();
+                for (const auto& datasets1 : datasetOptions1)
+                {
+                    if (datasets1.toLower().contains(_species1Action.getCurrentText().toLower()))
+                    {
+
+                        _speciesEmbedding1LinkerAction.setCurrentText(datasets1);
+                    }
+                }
+            }
+
 
             if (_species2Action.getCurrentText().isValidUtf16() && _species2Action.getCurrentText() != "")
             {
@@ -184,6 +251,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
                         QStringList speciesNames = { "gorilla","marmoset","rhesus","chimp","human" };
                         speciesNames.removeAll(_species1Action.getCurrentText());
                         _species2Action.initialize(QStringList({ speciesNames }), _species2Action.getPlaceholderString(), _species2Action.getPlaceholderString());
+
+
+
+
                     }
                     else
                     {
@@ -223,6 +294,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             _explorationModeAction.setEnabled(false);
             _crossSpecies1DatasetLinkerAction.setEnabled(false);
             _crossSpecies2DatasetLinkerAction.setEnabled(false);
+            _speciesEmbedding1LinkerAction.setEnabled(false);
+            _speciesEmbedding2LinkerAction.setEnabled(false);
             _inSpecies1DatasetLinkerAction.setEnabled(false);
             _inSpecies2DatasetLinkerAction.setEnabled(false);
             _crossSpeciesFilterAction.setEnabled(false);
@@ -249,6 +322,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             _neighborhoodAction.setEnabled(true);
             _crossSpecies1DatasetLinkerAction.setEnabled(true);
             _crossSpecies2DatasetLinkerAction.setEnabled(true);
+            _speciesEmbedding1LinkerAction.setEnabled(true);
+            _speciesEmbedding2LinkerAction.setEnabled(true);
             _inSpecies1DatasetLinkerAction.setEnabled(true);
             _inSpecies2DatasetLinkerAction.setEnabled(true);
             _crossSpeciesFilterAction.setEnabled(true);
@@ -261,6 +336,44 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             _visSettingAction.setEnabled(true);
             _linkerSettingAction.setEnabled(true);
             _distanceNeighborhoodAction.setEnabled(true);
+            if (!_crossSpecies2DatasetLinkerAction.getOptions().isEmpty())
+            {
+                auto datasetOptions2 = _crossSpecies2DatasetLinkerAction.getOptions();
+                for (const auto& dataset2 : datasetOptions2)
+                {
+                    if (dataset2.toLower().contains( _species2Action.getCurrentText().toLower()))
+                    {
+
+                        _crossSpecies2DatasetLinkerAction.setCurrentText(dataset2);
+                    }
+                }
+            }
+
+            if (!_inSpecies2DatasetLinkerAction.getOptions().isEmpty())
+            {
+                auto datasetOptions2 = _inSpecies2DatasetLinkerAction.getOptions();
+                for (const auto& dataset2 : datasetOptions2)
+                {
+                    if (dataset2.toLower().contains( _species2Action.getCurrentText().toLower()))
+                    {
+
+                        _inSpecies2DatasetLinkerAction.setCurrentText(dataset2);
+                    }
+                }
+            }
+            if (!_speciesEmbedding2LinkerAction.getOptions().isEmpty())
+            {
+                auto datasetOptions2 = _speciesEmbedding2LinkerAction.getOptions();
+                for (const auto& datasets2 : datasetOptions2)
+                {
+                    if (datasets2.toLower().contains(_species2Action.getCurrentText().toLower()))
+                    {
+
+                        _speciesEmbedding2LinkerAction.setCurrentText(datasets2);
+                    }
+                }
+            }
+
         }
         else {
             _neighborhoodAction.setEnabled(false);
@@ -270,6 +383,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             _explorationModeAction.setEnabled(false);
             _crossSpecies1DatasetLinkerAction.setEnabled(false);
             _crossSpecies2DatasetLinkerAction.setEnabled(false);
+            _speciesEmbedding1LinkerAction.setEnabled(false);
+            _speciesEmbedding2LinkerAction.setEnabled(false);
             _inSpecies1DatasetLinkerAction.setEnabled(false);
             _inSpecies2DatasetLinkerAction.setEnabled(false);
             _crossSpeciesFilterAction.setEnabled(false);
@@ -376,6 +491,17 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     {
 
     };
+
+    const auto updateEmbedding1DatasetLinker = [this]() -> void
+    {
+
+    };
+
+    const auto updateEmbedding2DatasetLinker = [this]() -> void
+    {
+
+    };
+
     const auto updateInSpecies1DatasetLinker = [this]() -> void
     {
         if (_inSpecies1DatasetLinkerAction.getCurrentText()!= "" && _inSpecies2DatasetLinkerAction.getCurrentText() != "")
@@ -496,6 +622,12 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
         });
     connect(&_crossSpecies2DatasetLinkerAction, &OptionAction::currentIndexChanged, this, [this, updateCrossSpecies2DatasetLinker](const std::int32_t& value) {
         updateCrossSpecies2DatasetLinker();
+        });
+    connect(&_speciesEmbedding1LinkerAction, &OptionAction::currentIndexChanged, this, [this, updateEmbedding1DatasetLinker](const std::int32_t& value) {
+        updateEmbedding1DatasetLinker();
+        });
+    connect(&_speciesEmbedding2LinkerAction, &OptionAction::currentIndexChanged, this, [this, updateEmbedding2DatasetLinker](const std::int32_t& value) {
+        updateEmbedding2DatasetLinker();
         });
     connect(&_inSpecies1DatasetLinkerAction, &OptionAction::currentIndexChanged, this, [this, updateInSpecies1DatasetLinker](const std::int32_t& value) {
         updateInSpecies1DatasetLinker();
@@ -734,6 +866,44 @@ void SimianOptionsAction::updateDatasetPickerAction()
     _inSpecies2DatasetLinkerAction.setPlaceHolderString("Species2 in-species clusters");
 
 
+
+
+
+
+
+    auto embeddings = _core->requestAllDataSets(QVector<hdps::DataType> {PointType});
+    auto filteredEmbeddingDatasets = embeddings;
+    for (auto embedding : embeddings)
+    {
+        std::string str1 = embedding->getGuiName().toStdString();
+        std::string str2 = "Numerical MetaData";
+        if (strstr(str1.c_str(), str2.c_str()))
+        {
+        }
+        else {
+            filteredEmbeddingDatasets.removeOne(embedding);
+        }
+    }
+
+    _speciesEmbedding1LinkerAction.setDatasets(filteredEmbeddingDatasets);
+    _speciesEmbedding1LinkerAction.setPlaceHolderString("Embedding1 dataset");
+    _speciesEmbedding2LinkerAction.setDatasets(filteredEmbeddingDatasets);
+    _speciesEmbedding2LinkerAction.setPlaceHolderString("Embedding2 dataset");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 
@@ -925,6 +1095,20 @@ SimianOptionsAction::LinkerSettingAction::Widget::Widget(QWidget* parent, Linker
     selectionCrossSpecies2DatasetLinkerWidget->setFixedWidth(300);
     selectionCrossSpecies2DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
+
+
+    auto selectionEmbedding1DatasetLinkerWidget = simianOptionsAction._speciesEmbedding1LinkerAction.createWidget(this);
+    selectionEmbedding1DatasetLinkerWidget->setFixedWidth(300);
+    selectionEmbedding1DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+
+    auto selectionEmbedding2DatasetLinkerWidget = simianOptionsAction._speciesEmbedding2LinkerAction.createWidget(this);
+    selectionEmbedding2DatasetLinkerWidget->setFixedWidth(300);
+    selectionEmbedding2DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+
+
+
+
+
     auto selectionInSpecies1DatasetLinkerWidget = simianOptionsAction._inSpecies1DatasetLinkerAction.createWidget(this);
     selectionInSpecies1DatasetLinkerWidget->setFixedWidth(300);
     selectionInSpecies1DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
@@ -954,6 +1138,10 @@ SimianOptionsAction::LinkerSettingAction::Widget::Widget(QWidget* parent, Linker
     linkerSettingSelectionLayout->setVerticalSpacing(2);
     linkerSettingSelectionLayout->addRow(simianOptionsAction._crossSpecies1DatasetLinkerAction.createLabelWidget(this), selectionCrossSpecies1DatasetLinkerWidget);
     linkerSettingSelectionLayout->addRow(simianOptionsAction._crossSpecies2DatasetLinkerAction.createLabelWidget(this), selectionCrossSpecies2DatasetLinkerWidget);
+
+    linkerSettingSelectionLayout->addRow(simianOptionsAction._speciesEmbedding1LinkerAction.createLabelWidget(this), selectionEmbedding1DatasetLinkerWidget);
+    linkerSettingSelectionLayout->addRow(simianOptionsAction._speciesEmbedding2LinkerAction.createLabelWidget(this), selectionEmbedding2DatasetLinkerWidget);
+
     linkerSettingSelectionLayout->addRow(simianOptionsAction._inSpecies1DatasetLinkerAction.createLabelWidget(this), selectionInSpecies1DatasetLinkerWidget);
     linkerSettingSelectionLayout->addRow(simianOptionsAction._inSpecies2DatasetLinkerAction.createLabelWidget(this), selectionInSpecies2DatasetLinkerWidget);
 
