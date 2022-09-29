@@ -234,6 +234,10 @@ public: // Action getters
     ToggleAction& getExplorationModeAction() { return _explorationModeAction; };
     DatasetPickerAction& getCrossSpecies1DatasetLinkerAction() { return _crossSpecies1DatasetLinkerAction; };
     DatasetPickerAction& getCrossSpecies2DatasetLinkerAction() { return _crossSpecies2DatasetLinkerAction; };
+
+    DatasetPickerAction& getSpeciesEmbedding1LinkerAction() { return _speciesEmbedding1LinkerAction; };
+    DatasetPickerAction& getSpeciesEmbedding2LinkerAction() { return _speciesEmbedding2LinkerAction; };
+
     DatasetPickerAction& getInSpecies1DatasetLinkerAction() { return _inSpecies1DatasetLinkerAction; };
     DatasetPickerAction& getInSpecies2DatasetLinkerAction() { return _inSpecies2DatasetLinkerAction; };
     OptionAction& getCrossSpeciesFilterAction() { return _crossSpeciesFilterAction; }
@@ -256,6 +260,10 @@ protected:
     IntegralAction               _distanceAction;
     DatasetPickerAction           _crossSpecies1DatasetLinkerAction;
     DatasetPickerAction          _crossSpecies2DatasetLinkerAction;
+
+    DatasetPickerAction           _speciesEmbedding1LinkerAction;
+    DatasetPickerAction          _speciesEmbedding2LinkerAction;
+
     DatasetPickerAction           _inSpecies1DatasetLinkerAction;
     DatasetPickerAction          _inSpecies2DatasetLinkerAction;
     OptionAction                 _crossSpeciesFilterAction;
