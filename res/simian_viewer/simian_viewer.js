@@ -1782,13 +1782,13 @@ const simianVis = () => {
 
     var species2Click = function (d) {
 
-        log("clicked Species2");
+/*        log("clicked Species2");*/
 
 
     };
     var species1Click = function (d) {
 
-        log("clicked Species1");
+/*        log("clicked Species1");*/
 
 
     };

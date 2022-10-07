@@ -103,6 +103,8 @@ void SimianViewerPlugin::publishCluster(std::string clusterName)
 {
     if (clusterName != "")
     {
+        _simianOptionsAction->getCrossSpecies1HeatMapCellAction().setCurrentText(QString::fromStdString(clusterName));
+        _simianOptionsAction->getCrossSpecies2HeatMapCellAction().setCurrentText(QString::fromStdString(clusterName));
         if(_simianOptionsAction->getCrossSpeciesFilterAction().getCurrentText() == "cross-species clusters")
         {
         if (_simianOptionsAction->getCrossSpecies1DatasetLinkerAction().getCurrentText() != "")

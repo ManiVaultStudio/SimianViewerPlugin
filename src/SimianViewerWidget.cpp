@@ -192,3 +192,4 @@ void SimianViewerWidget::js_passClusterToQt(std::string clusterName)
 {
     emit passClusterToQt(clusterName);
 }
+
