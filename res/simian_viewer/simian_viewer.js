@@ -1780,6 +1780,18 @@ const simianVis = () => {
 
     var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
 
+    var species2Click = function (d) {
+
+        log("clicked Species2");
+
+
+    };
+    var species1Click = function (d) {
+
+        log("clicked Species1");
+
+
+    };
 
     ximage = "";
     yimage = "";
@@ -1884,7 +1896,8 @@ const simianVis = () => {
             .attr('width', 30)
             .attr('height', 40)
             .attr("x", 0 - 70)
-            .attr("y", height);//
+            .attr("y", height)
+            .on("click", species2Click);//
     }
 
     if (ximage !== "") {
@@ -1893,7 +1906,8 @@ const simianVis = () => {
             .attr('width', 30)
             .attr('height', 40)
             .attr("x", 0 - 39)
-            .attr("y", height + 10);
+            .attr("y", height + 10)
+            .on("click", species1Click);
     }
 
 };
