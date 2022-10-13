@@ -90,73 +90,6 @@ public:
         friend class SimianOptionsAction;
     };
 
-
-    class ColorMapOptionAction : public WidgetAction
-    {
-    protected:
-        class Widget : public hdps::gui::WidgetActionWidget {
-        public:
-            Widget(QWidget* parent, ColorMapOptionAction* speciesAction);
-
-            friend class ColorMapOptionAction;
-        };
-
-        QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
-            return new ColorMapOptionAction::Widget(parent, this);
-        };
-
-    public:
-        ColorMapOptionAction(SimianOptionsAction& simianOptionsAction);
-
-    protected:
-        SimianOptionsAction& _simianOptionsAction;
-
-        friend class SimianOptionsAction;
-    };
-    class BackgroundColorOptionAction : public WidgetAction
-    {
-    protected:
-        class Widget : public hdps::gui::WidgetActionWidget {
-        public:
-            Widget(QWidget* parent, BackgroundColorOptionAction* speciesAction);
-
-            friend class BackgroundColorOptionAction;
-        };
-
-        QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
-            return new BackgroundColorOptionAction::Widget(parent, this);
-        };
-
-    public:
-        BackgroundColorOptionAction(SimianOptionsAction& simianOptionsAction);
-
-    protected:
-        SimianOptionsAction& _simianOptionsAction;
-
-        friend class SimianOptionsAction;
-    };
-    class ClusterAction : public WidgetAction
-    {
-    protected:
-        class Widget : public hdps::gui::WidgetActionWidget {
-        public:
-            Widget(QWidget* parent, ClusterAction* clusterAction);
-
-            friend class ClusterAction;
-        };
-
-        QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
-            return new ClusterAction::Widget(parent, this);
-        };
-
-    public:
-        ClusterAction(SimianOptionsAction& simianOptionsAction);
-
-    protected:
-        SimianOptionsAction& _simianOptionsAction;
-
-        friend class SimianOptionsAction;
-    };
     class VisSettingAction : public WidgetAction
     {
     protected:
@@ -277,7 +210,6 @@ public: // Action getters
     OptionAction& getCrossSpecies2HeatMapCellAction() { return _crossSpecies2HeatMapCellAction; }
     Species1Action& getSpecies1Action() { return _species1Action; }
     Species2Action& getSpecies2Action() { return _species2Action; }
-    ClusterAction& getClusterAction() { return _clusterAction; }
     VisSettingAction& getVisSettingAction() { return _visSettingAction; }
     LinkerSettingAction& getLinkerSettingAction() { return _linkerSettingAction; }
     DistanceNeighborhoodAction& getDistanceNeighborhoodAction() { return _distanceNeighborhoodAction; }
@@ -316,7 +248,6 @@ protected:
     bool                        _isLoading;
     Species1Action               _species1Action;
     Species2Action               _species2Action;
-    ClusterAction               _clusterAction;
     VisSettingAction               _visSettingAction;
     LinkerSettingAction               _linkerSettingAction;
     DistanceNeighborhoodAction               _distanceNeighborhoodAction;
