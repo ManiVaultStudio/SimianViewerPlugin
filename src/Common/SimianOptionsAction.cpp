@@ -9,9 +9,9 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     WidgetAction(&simianViewerPlugin),
     _simianViewerPlugin(simianViewerPlugin),
     _core(core),
-    _species1SelectAction(this, "Select species1"),
-    _species2SelectAction(this, "Select species2"),
-    _neighborhoodAction(this, "Select neighborhood"),
+    _species1SelectAction(this),
+    _species2SelectAction(this),
+    _neighborhoodAction(this),
     _scatterplotColorControlAction(this, "Scatterplot color"),
     _distanceAction(this, "Filter distance :"),
     _crossSpecies1DatasetLinkerAction(this, "Cross-species cluster dataset1"),
@@ -107,7 +107,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _neighborhoodAction.setDefaultWidgetFlags(OptionAction::ComboBox);
     _neighborhoodAction.initialize(QStringList({ "glia","it_types","l5et_l56np_l6ct_l6b","lamp5_sncg_vip","sst_sst_chodl_pvalb" }), "glia", "glia");
     _scatterplotColorControlAction.setDefaultWidgetFlags(OptionAction::ComboBox);
-    _scatterplotColorControlAction.initialize(QStringList({ "in-species class","in-species cluster","cross-species class","cross-species cluster","cross-species sub-class","donor","neighborhood","sex","in-species subclass","constant"}), "constant", "constant");
+    _scatterplotColorControlAction.initialize(QStringList({ "in-species class","in-species cluster","cross-species class","cross-species cluster","cross-species sub-class","donor","neighborhood","sex","in-species subclass","constant"}), "cross-species cluster", "cross-species cluster");
     
     _distanceAction.setDefaultWidgetFlags(IntegralAction::SpinBox | IntegralAction::Slider);
     _distanceAction.initialize(0, 105, 105, 105); 
@@ -1184,6 +1184,12 @@ SimianOptionsAction::VisSettingAction::Widget::Widget(QWidget* parent, VisSettin
 
     auto selectScatterplotColorWidget = simianOptionsAction._scatterplotColorControlAction.createWidget(this);
     selectScatterplotColorWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+
+
+    auto backgroundColoringWidget = simianOptionsAction._backgroundColoringAction.createWidget(this);
+
+    auto colorMapWidget = simianOptionsAction._colorMapAction.createWidget(this);
+
     
     auto visSettingSelectionLayout = new QFormLayout();
     visSettingSelectionLayout->setContentsMargins(2, 2, 2, 2);
@@ -1195,6 +1201,8 @@ SimianOptionsAction::VisSettingAction::Widget::Widget(QWidget* parent, VisSettin
     visSettingSelectionLayout->addRow("Exploration mode:", explorationModeSelectionWidget);
     visSettingSelectionLayout->addRow("Cell counts:", selectionHistBarWidget);
     visSettingSelectionLayout->addRow("Scatterplot color:", selectScatterplotColorWidget);
+    visSettingSelectionLayout->addRow("Color map:", colorMapWidget);
+    visSettingSelectionLayout->addRow("Background color:", backgroundColoringWidget);
 
     setPopupLayout(visSettingSelectionLayout);
 
