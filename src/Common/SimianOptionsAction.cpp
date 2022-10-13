@@ -41,9 +41,9 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _linkerSettingAction(*this),
     _distanceNeighborhoodAction(*this),
     _isStarted(false),
-    _histBarAction(this,"Show cell counts"),
-    _fullHeatMapAction(this,"Show full heatmap"),
-    _explorationModeAction(this, "Exploration mode")
+    _histBarAction(this),
+    _fullHeatMapAction(this),
+    _explorationModeAction(this)
 {
     _eventListener.setEventCore(core);
     _eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataAdded));
@@ -1190,11 +1190,11 @@ SimianOptionsAction::VisSettingAction::Widget::Widget(QWidget* parent, VisSettin
     visSettingSelectionLayout->setObjectName("Vis Setting Options");
     visSettingSelectionLayout->setSpacing(2);
     visSettingSelectionLayout->setVerticalSpacing(2);
-    visSettingSelectionLayout->addRow(simianOptionsAction._crossSpeciesFilterAction.createLabelWidget(this), filterCrossSpeciesWidget);
-    visSettingSelectionLayout->addRow(simianOptionsAction._fullHeatMapAction.createLabelWidget(this), fullHeatMapSelectionWidget);
-    visSettingSelectionLayout->addRow(simianOptionsAction._explorationModeAction.createLabelWidget(this), explorationModeSelectionWidget);
-    visSettingSelectionLayout->addRow(simianOptionsAction._histBarAction.createLabelWidget(this), selectionHistBarWidget);
-    visSettingSelectionLayout->addRow(simianOptionsAction._scatterplotColorControlAction.createLabelWidget(this), selectScatterplotColorWidget);
+    visSettingSelectionLayout->addRow("Cluster filter:", filterCrossSpeciesWidget);
+    visSettingSelectionLayout->addRow("Full heatmap:", fullHeatMapSelectionWidget);
+    visSettingSelectionLayout->addRow("Exploration mode:", explorationModeSelectionWidget);
+    visSettingSelectionLayout->addRow("Cell counts:", selectionHistBarWidget);
+    visSettingSelectionLayout->addRow("Scatterplot color:", selectScatterplotColorWidget);
 
     setPopupLayout(visSettingSelectionLayout);
 
