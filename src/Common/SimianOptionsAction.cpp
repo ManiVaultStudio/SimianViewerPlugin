@@ -36,7 +36,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _isLoading(false),
     _species1Action(*this),
     _species2Action(*this),
-    _clusterAction(*this), 
     _visSettingAction(*this),
     _linkerSettingAction(*this),
     _distanceNeighborhoodAction(*this),
@@ -83,7 +82,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
     _multiSelectClusterFilterAction.setEnabled(false);
     _colorMapAction.setEnabled(false);
     _backgroundColoringAction.setEnabled(false);
-    _clusterAction.setEnabled(false);
     _visSettingAction.setEnabled(false);
     _linkerSettingAction.setEnabled(false);
     _distanceNeighborhoodAction.setEnabled(false);
@@ -354,7 +352,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             _multiSelectClusterFilterAction.setSelectedOptions(QStringList());
             _colorMapAction.setEnabled(false);
             _backgroundColoringAction.setEnabled(false);
-            _clusterAction.setEnabled(false);
             _visSettingAction.setEnabled(false);
             _linkerSettingAction.setEnabled(false);
             _distanceNeighborhoodAction.setEnabled(false);
@@ -380,7 +377,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             _multiSelectClusterFilterAction.setEnabled(true);
             _colorMapAction.setEnabled(true);
             _backgroundColoringAction.setEnabled(true);
-            _clusterAction.setEnabled(true);
             _visSettingAction.setEnabled(true);
             _linkerSettingAction.setEnabled(true);
             _distanceNeighborhoodAction.setEnabled(true);
@@ -445,7 +441,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
             _multiSelectClusterFilterAction.setSelectedOptions(QStringList());
             _colorMapAction.setEnabled(false);
             _backgroundColoringAction.setEnabled(false);
-            _clusterAction.setEnabled(false);
             _visSettingAction.setEnabled(false);
             _linkerSettingAction.setEnabled(false);
             _distanceNeighborhoodAction.setEnabled(false);
@@ -1059,59 +1054,6 @@ inline SimianOptionsAction::Species2Action::Species2Action(SimianOptionsAction& 
 }
 
 
-
-
-
-
-
-SimianOptionsAction::ColorMapOptionAction::Widget::Widget(QWidget* parent, ColorMapOptionAction* colorMapAction) :
-    WidgetActionWidget(parent, colorMapAction)
-{
-    auto& simianOptionsAction = colorMapAction->_simianOptionsAction;
-    auto colorMapWidget = simianOptionsAction._colorMapAction.createWidget(this);
-    auto colorSelectionLayout = new QFormLayout();
-    colorSelectionLayout->setContentsMargins(2, 2, 2, 2);
-    colorSelectionLayout->addRow(simianOptionsAction._colorMapAction.createLabelWidget(this), colorMapWidget);
-    colorSelectionLayout->setObjectName("Color Options");
-    colorSelectionLayout->setSpacing(2);
-    colorSelectionLayout->setVerticalSpacing(2);
-
-    setPopupLayout(colorSelectionLayout);
-}
-
-inline SimianOptionsAction::ColorMapOptionAction::ColorMapOptionAction(SimianOptionsAction& simianOptionsAction) :
-    _simianOptionsAction(simianOptionsAction)
-{
-    setText("Color Options");
-    setIcon(Application::getIconFont("FontAwesome").getIcon("palette"));
-}
-
-//
-SimianOptionsAction::BackgroundColorOptionAction::Widget::Widget(QWidget* parent, BackgroundColorOptionAction* colorAction) :
-    WidgetActionWidget(parent, colorAction)
-{
-    auto& simianOptionsAction = colorAction->_simianOptionsAction;
-    auto backgroundColoringWidget = simianOptionsAction._backgroundColoringAction.createWidget(this);
-    auto backgroundColorSelectionLayout = new QFormLayout();
-    backgroundColorSelectionLayout->setContentsMargins(2, 2, 2, 2);
-    backgroundColorSelectionLayout->addRow(simianOptionsAction._backgroundColoringAction.createLabelWidget(this), backgroundColoringWidget);
-    backgroundColorSelectionLayout->setObjectName("background Color Options");
-    backgroundColorSelectionLayout->setSpacing(2);
-    backgroundColorSelectionLayout->setVerticalSpacing(2);
-
-    setPopupLayout(backgroundColorSelectionLayout);
-}
-
-inline SimianOptionsAction::BackgroundColorOptionAction::BackgroundColorOptionAction(SimianOptionsAction& simianOptionsAction) :
-    _simianOptionsAction(simianOptionsAction)
-{
-    setText("Background color Options");
-    setIcon(Application::getIconFont("FontAwesome").getIcon("search"));
-}
-
-//
-
-
 void SimianOptionsAction::updateMultiSelectionDropdown(std::vector<std::vector<std::string>>&    filteredVisData)
 {
     std::vector<std::string> store;
@@ -1134,33 +1076,6 @@ void SimianOptionsAction::updateMultiSelectionDropdown(std::vector<std::vector<s
 
 
 }
-
-
-SimianOptionsAction::ClusterAction::Widget::Widget(QWidget* parent, ClusterAction* clusterAction) :
-    WidgetActionWidget(parent, clusterAction)
-{
-    auto& simianOptionsAction = clusterAction->_simianOptionsAction;
-
-    auto crossSpeciesClusterSelectionWidget = simianOptionsAction._multiSelectClusterFilterAction.createWidget(this);
-    crossSpeciesClusterSelectionWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-
-    auto crossSpeciesClusterSelectionLayout = new QFormLayout();
-    crossSpeciesClusterSelectionLayout->setContentsMargins(2, 2, 2, 2);
-    crossSpeciesClusterSelectionLayout->setObjectName("Cluster Options");
-    crossSpeciesClusterSelectionLayout->setSpacing(2);
-    crossSpeciesClusterSelectionLayout->setVerticalSpacing(2);
-    crossSpeciesClusterSelectionLayout->addRow(simianOptionsAction._multiSelectClusterFilterAction.createLabelWidget(this), crossSpeciesClusterSelectionWidget);
-
-    setPopupLayout(crossSpeciesClusterSelectionLayout);
-}
-
-inline SimianOptionsAction::ClusterAction::ClusterAction(SimianOptionsAction& simianOptionsAction) :
-    _simianOptionsAction(simianOptionsAction)
-{
-    setText("Cluster Options");
-    setIcon(Application::getIconFont("FontAwesome").getIcon("filter"));
-}
-
 
 SimianOptionsAction::VisSettingAction::Widget::Widget(QWidget* parent, VisSettingAction* visSettingAction) :
     WidgetActionWidget(parent, visSettingAction)
@@ -1190,19 +1105,25 @@ SimianOptionsAction::VisSettingAction::Widget::Widget(QWidget* parent, VisSettin
 
     auto colorMapWidget = simianOptionsAction._colorMapAction.createWidget(this);
 
+
+    //auto crossSpeciesClusterSelectionWidget = simianOptionsAction._multiSelectClusterFilterAction.createWidget(this);
+    //crossSpeciesClusterSelectionWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+
     
     auto visSettingSelectionLayout = new QFormLayout();
     visSettingSelectionLayout->setContentsMargins(2, 2, 2, 2);
     visSettingSelectionLayout->setObjectName("Vis Setting Options");
     visSettingSelectionLayout->setSpacing(2);
     visSettingSelectionLayout->setVerticalSpacing(2);
-    visSettingSelectionLayout->addRow("Cluster filter:", filterCrossSpeciesWidget);
+    visSettingSelectionLayout->addRow("Cell counts:", selectionHistBarWidget);
     visSettingSelectionLayout->addRow("Full heatmap:", fullHeatMapSelectionWidget);
     visSettingSelectionLayout->addRow("Exploration mode:", explorationModeSelectionWidget);
-    visSettingSelectionLayout->addRow("Cell counts:", selectionHistBarWidget);
+    visSettingSelectionLayout->addRow("Cluster filter:", filterCrossSpeciesWidget);
     visSettingSelectionLayout->addRow("Scatterplot color:", selectScatterplotColorWidget);
     visSettingSelectionLayout->addRow("Color map:", colorMapWidget);
     visSettingSelectionLayout->addRow("Background color:", backgroundColoringWidget);
+
+    //visSettingSelectionLayout->addRow(simianOptionsAction._multiSelectClusterFilterAction.createLabelWidget(this), crossSpeciesClusterSelectionWidget);
 
     setPopupLayout(visSettingSelectionLayout);
 
@@ -1211,7 +1132,7 @@ SimianOptionsAction::VisSettingAction::Widget::Widget(QWidget* parent, VisSettin
 inline SimianOptionsAction::VisSettingAction::VisSettingAction(SimianOptionsAction& simianOptionsAction) :
     _simianOptionsAction(simianOptionsAction)
 {
-    setText("Vis Setting Options");
+    setText("Setting Options");
     setIcon(Application::getIconFont("FontAwesome").getIcon("cog"));
 }
 
