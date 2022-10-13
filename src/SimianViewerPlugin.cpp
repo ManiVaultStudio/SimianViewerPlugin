@@ -63,7 +63,9 @@ void SimianViewerPlugin::init()
     auto distanceNeighborhoodActionwidget = _simianOptionsAction->getDistanceNeighborhoodAction().createWidget(&_widget);
     distanceNeighborhoodActionwidget->setMaximumWidth(230);
     topToolbarLayout->addWidget(distanceNeighborhoodActionwidget);
-    topToolbarLayout->addWidget(_simianOptionsAction->getVisSettingAction().createCollapsedWidget(&_widget));
+
+    auto visSettingsWidget = _simianOptionsAction->getVisSettingAction().createCollapsedWidget(&_widget);
+    topToolbarLayout->addWidget(visSettingsWidget);
     //topToolbarLayout->addWidget(_simianOptionsAction->getClusterAction().createCollapsedWidget(&_widget));
     topToolbarLayout->addWidget(_simianOptionsAction->getColorMapAction().createCollapsedWidget(&_widget));
     topToolbarLayout->addWidget(_simianOptionsAction->getBackgroundColoringAction().createCollapsedWidget(&_widget));

@@ -244,6 +244,7 @@ private:
     void updateData(std::string Species1, std::string Species2, std::string neighborhood, int distance, std::string CrossSpeciesFilter);
     void filterMultiSelect();
     bool QStringlistContainsQString(const QStringList& list, const QString& str);
+    QString selectFromQStringList(const QStringList& fileList, const QString& speciesType, const QString& fileType);
 protected:
     void updateDatasetPickerAction();
     void sendClusterCountInfoToJS();
@@ -252,6 +253,7 @@ public: // Action getters
 
     OptionAction& getSpecies1SelectAction() { return _species1SelectAction; }
     OptionAction& getSpecies2SelectAction() { return _species2SelectAction; }
+    OptionAction& getScatterplotColorControlAction() { return _scatterplotColorControlAction; }
     OptionAction& getNeighborhoodAction() { return _neighborhoodAction; }
     IntegralAction& getDistanceAction() { return _distanceAction; };
     ToggleAction& getHistBarAction() { return _histBarAction; };
@@ -285,6 +287,7 @@ protected:
     SimianViewerPlugin&          _simianViewerPlugin;
     OptionAction                 _species1SelectAction;
     OptionAction                 _species2SelectAction;
+    OptionAction                 _scatterplotColorControlAction;
     OptionAction                 _neighborhoodAction;
     IntegralAction               _distanceAction;
     DatasetPickerAction           _crossSpecies1DatasetLinkerAction;
