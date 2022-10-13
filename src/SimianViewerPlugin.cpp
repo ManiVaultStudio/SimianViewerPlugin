@@ -50,13 +50,26 @@ void SimianViewerPlugin::init()
     auto topToolbarLayout = new QHBoxLayout();
     topToolbarLayout->setContentsMargins(0, 0, 0, 0);
     topToolbarLayout->setSpacing(0);
-    topToolbarLayout->addWidget(_simianOptionsAction->getSpeciesAction().createCollapsedWidget(&_widget));
-    topToolbarLayout->addWidget(_simianOptionsAction->getLinkerSettingAction().createCollapsedWidget(&_widget));
+    //topToolbarLayout->addWidget(_simianOptionsAction->getSpeciesAction().createCollapsedWidget(&_widget));
+
+    auto species1ActionWidget = _simianOptionsAction->getSpecies1Action().createWidget(&_widget);
+    species1ActionWidget->setMaximumWidth(180);
+    topToolbarLayout->addWidget(species1ActionWidget);
+
+    auto species2ActionWidget = _simianOptionsAction->getSpecies2Action().createWidget(&_widget);
+    species2ActionWidget->setMaximumWidth(180);
+    topToolbarLayout->addWidget(species2ActionWidget);
+
+    auto distanceNeighborhoodActionwidget = _simianOptionsAction->getDistanceNeighborhoodAction().createWidget(&_widget);
+    distanceNeighborhoodActionwidget->setMaximumWidth(230);
+    topToolbarLayout->addWidget(distanceNeighborhoodActionwidget);
     topToolbarLayout->addWidget(_simianOptionsAction->getVisSettingAction().createCollapsedWidget(&_widget));
+    //topToolbarLayout->addWidget(_simianOptionsAction->getClusterAction().createCollapsedWidget(&_widget));
     topToolbarLayout->addWidget(_simianOptionsAction->getColorMapAction().createCollapsedWidget(&_widget));
     topToolbarLayout->addWidget(_simianOptionsAction->getBackgroundColoringAction().createCollapsedWidget(&_widget));
-    topToolbarLayout->addWidget(_simianOptionsAction->getClusterAction().createCollapsedWidget(&_widget));
-    topToolbarLayout->addWidget(_simianOptionsAction->getDistanceNeighborhoodAction().createWidget(&_widget));
+    topToolbarLayout->addWidget(_simianOptionsAction->getLinkerSettingAction().createCollapsedWidget(&_widget));
+
+
  
     topToolbarLayout->addStretch(0);
     topToolbarWidget->setAutoFillBackground(true);

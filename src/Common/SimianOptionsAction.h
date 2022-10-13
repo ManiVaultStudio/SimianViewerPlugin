@@ -44,28 +44,53 @@ namespace hdps
 class SimianOptionsAction : public WidgetAction
 {
 public:
-    class SpeciesAction : public WidgetAction
+    class Species1Action : public WidgetAction
     {
     protected:
         class Widget : public hdps::gui::WidgetActionWidget {
         public:
-            Widget(QWidget* parent, SpeciesAction* speciesAction);
+            Widget(QWidget* parent, Species1Action* species1Action);
 
-            friend class SpeciesAction;
+            friend class Species1Action;
         };
 
         QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
-            return new SpeciesAction::Widget(parent, this);
+            return new Species1Action::Widget(parent, this);
         };
 
     public:
-        SpeciesAction(SimianOptionsAction& simianOptionsAction);
+        Species1Action(SimianOptionsAction& simianOptionsAction);
 
     protected:
         SimianOptionsAction& _simianOptionsAction;
 
         friend class SimianOptionsAction;
     };
+
+    class Species2Action : public WidgetAction
+    {
+    protected:
+        class Widget : public hdps::gui::WidgetActionWidget {
+        public:
+            Widget(QWidget* parent, Species2Action* species2Action);
+
+            friend class Species2Action;
+        };
+
+        QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
+            return new Species2Action::Widget(parent, this);
+        };
+
+    public:
+        Species2Action(SimianOptionsAction& simianOptionsAction);
+
+    protected:
+        SimianOptionsAction& _simianOptionsAction;
+
+        friend class SimianOptionsAction;
+    };
+
+
     class ColorMapOptionAction : public WidgetAction
     {
     protected:
@@ -225,8 +250,8 @@ protected:
     void updateMultiSelectionDropdown(std::vector<std::vector<std::string>>& filteredVisData);
 public: // Action getters
 
-    OptionAction& getSpecies1Action() { return _species1Action; }
-    OptionAction& getSpecies2Action() { return _species2Action; }
+    OptionAction& getSpecies1SelectAction() { return _species1SelectAction; }
+    OptionAction& getSpecies2SelectAction() { return _species2SelectAction; }
     OptionAction& getNeighborhoodAction() { return _neighborhoodAction; }
     IntegralAction& getDistanceAction() { return _distanceAction; };
     ToggleAction& getHistBarAction() { return _histBarAction; };
@@ -234,6 +259,9 @@ public: // Action getters
     ToggleAction& getExplorationModeAction() { return _explorationModeAction; };
     DatasetPickerAction& getCrossSpecies1DatasetLinkerAction() { return _crossSpecies1DatasetLinkerAction; };
     DatasetPickerAction& getCrossSpecies2DatasetLinkerAction() { return _crossSpecies2DatasetLinkerAction; };
+
+    DatasetPickerAction& getSpecies1ScatterplotColorLinkerAction() { return _species1ScatterplotColorLinkerAction; };
+    DatasetPickerAction& getSpecies2ScatterplotColorLinkerAction() { return _species2ScatterplotColorLinkerAction; };
 
     DatasetPickerAction& getSpeciesEmbedding1LinkerAction() { return _speciesEmbedding1LinkerAction; };
     DatasetPickerAction& getSpeciesEmbedding2LinkerAction() { return _speciesEmbedding2LinkerAction; };
@@ -245,7 +273,8 @@ public: // Action getters
     OptionAction& getInSpecies2HeatMapCellAction() { return _inSpecies2HeatMapCellAction; }
     OptionAction& getCrossSpecies1HeatMapCellAction() { return _crossSpecies1HeatMapCellAction; }
     OptionAction& getCrossSpecies2HeatMapCellAction() { return _crossSpecies2HeatMapCellAction; }
-    SpeciesAction& getSpeciesAction() { return _speciesAction; }
+    Species1Action& getSpecies1Action() { return _species1Action; }
+    Species2Action& getSpecies2Action() { return _species2Action; }
     ClusterAction& getClusterAction() { return _clusterAction; }
     VisSettingAction& getVisSettingAction() { return _visSettingAction; }
     LinkerSettingAction& getLinkerSettingAction() { return _linkerSettingAction; }
@@ -254,12 +283,15 @@ public: // Action getters
     ColorAction& getBackgroundColoringAction() { return _backgroundColoringAction; }
 protected:
     SimianViewerPlugin&          _simianViewerPlugin;
-    OptionAction                 _species1Action;
-    OptionAction                 _species2Action;
+    OptionAction                 _species1SelectAction;
+    OptionAction                 _species2SelectAction;
     OptionAction                 _neighborhoodAction;
     IntegralAction               _distanceAction;
     DatasetPickerAction           _crossSpecies1DatasetLinkerAction;
     DatasetPickerAction          _crossSpecies2DatasetLinkerAction;
+
+    DatasetPickerAction           _species1ScatterplotColorLinkerAction;
+    DatasetPickerAction          _species2ScatterplotColorLinkerAction;
 
     DatasetPickerAction           _speciesEmbedding1LinkerAction;
     DatasetPickerAction          _speciesEmbedding2LinkerAction;
@@ -279,7 +311,8 @@ protected:
     OptionAction                 _crossSpecies1HeatMapCellAction;
     OptionAction                 _crossSpecies2HeatMapCellAction;
     bool                        _isLoading;
-    SpeciesAction               _speciesAction;
+    Species1Action               _species1Action;
+    Species2Action               _species2Action;
     ClusterAction               _clusterAction;
     VisSettingAction               _visSettingAction;
     LinkerSettingAction               _linkerSettingAction;
