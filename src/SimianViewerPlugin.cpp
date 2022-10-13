@@ -50,7 +50,6 @@ void SimianViewerPlugin::init()
     auto topToolbarLayout = new QHBoxLayout();
     topToolbarLayout->setContentsMargins(0, 0, 0, 0);
     topToolbarLayout->setSpacing(0);
-    //topToolbarLayout->addWidget(_simianOptionsAction->getSpeciesAction().createCollapsedWidget(&_widget));
 
     auto species1ActionWidget = _simianOptionsAction->getSpecies1Action().createWidget(&_widget);
     species1ActionWidget->setMaximumWidth(180);
@@ -66,9 +65,6 @@ void SimianViewerPlugin::init()
 
     auto visSettingsWidget = _simianOptionsAction->getVisSettingAction().createCollapsedWidget(&_widget);
     topToolbarLayout->addWidget(visSettingsWidget);
-    //topToolbarLayout->addWidget(_simianOptionsAction->getClusterAction().createCollapsedWidget(&_widget));
-    topToolbarLayout->addWidget(_simianOptionsAction->getColorMapAction().createCollapsedWidget(&_widget));
-    topToolbarLayout->addWidget(_simianOptionsAction->getBackgroundColoringAction().createCollapsedWidget(&_widget));
     topToolbarLayout->addWidget(_simianOptionsAction->getLinkerSettingAction().createCollapsedWidget(&_widget));
 
 
