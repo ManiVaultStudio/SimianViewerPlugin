@@ -63,6 +63,14 @@ void SimianViewerPlugin::init()
     distanceNeighborhoodActionwidget->setMaximumWidth(230);
     topToolbarLayout->addWidget(distanceNeighborhoodActionwidget);
 
+    auto cellCountActionwidget = _simianOptionsAction->getCellCountAction().createWidget(&_widget);
+    cellCountActionwidget->setMaximumWidth(91);
+    topToolbarLayout->addWidget(cellCountActionwidget);
+
+    auto explorationActionwidget = _simianOptionsAction->getExplorationAction().createWidget(&_widget);
+    explorationActionwidget->setMaximumWidth(97);
+    topToolbarLayout->addWidget(explorationActionwidget);
+
     auto visSettingsWidget = _simianOptionsAction->getVisSettingAction().createCollapsedWidget(&_widget);
     topToolbarLayout->addWidget(visSettingsWidget);
     topToolbarLayout->addWidget(_simianOptionsAction->getLinkerSettingAction().createCollapsedWidget(&_widget));

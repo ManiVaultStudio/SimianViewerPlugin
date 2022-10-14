@@ -66,7 +66,6 @@ public:
 
         friend class SimianOptionsAction;
     };
-
     class Species2Action : public WidgetAction
     {
     protected:
@@ -89,7 +88,6 @@ public:
 
         friend class SimianOptionsAction;
     };
-
     class VisSettingAction : public WidgetAction
     {
     protected:
@@ -156,7 +154,50 @@ public:
 
         friend class SimianOptionsAction;
     };
+    class CellCountAction : public WidgetAction
+    {
+    protected:
+        class Widget : public hdps::gui::WidgetActionWidget {
+        public:
+            Widget(QWidget* parent, CellCountAction* cellCountAction);
 
+            friend class CellCountAction;
+        };
+
+        QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
+            return new CellCountAction::Widget(parent, this);
+        };
+
+    public:
+        CellCountAction(SimianOptionsAction& simianOptionsAction);
+
+    protected:
+        SimianOptionsAction& _simianOptionsAction;
+
+        friend class SimianOptionsAction;
+    };
+    class ExplorationAction : public WidgetAction
+    {
+    protected:
+        class Widget : public hdps::gui::WidgetActionWidget {
+        public:
+            Widget(QWidget* parent, ExplorationAction* explorationAction);
+
+            friend class ExplorationAction;
+        };
+
+        QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
+            return new ExplorationAction::Widget(parent, this);
+        };
+
+    public:
+        ExplorationAction(SimianOptionsAction& simianOptionsAction);
+
+    protected:
+        SimianOptionsAction& _simianOptionsAction;
+
+        friend class SimianOptionsAction;
+    };
 public:
     void onDataEvent(hdps::DataEvent* dataEvent);
 protected:
@@ -215,6 +256,8 @@ public: // Action getters
     DistanceNeighborhoodAction& getDistanceNeighborhoodAction() { return _distanceNeighborhoodAction; }
     ColorMapAction& getColorMapAction() { return _colorMapAction; }
     ColorAction& getBackgroundColoringAction() { return _backgroundColoringAction; }
+    CellCountAction& getCellCountAction() { return _cellCountAction; }
+    ExplorationAction& getExplorationAction() { return _explorationAction; }
 protected:
     SimianViewerPlugin&          _simianViewerPlugin;
     OptionAction                 _species1SelectAction;
@@ -251,6 +294,8 @@ protected:
     VisSettingAction               _visSettingAction;
     LinkerSettingAction               _linkerSettingAction;
     DistanceNeighborhoodAction               _distanceNeighborhoodAction;
+    CellCountAction               _cellCountAction;
+    ExplorationAction               _explorationAction;
     bool _isStarted;
     ColorMapAction          _colorMapAction;
     ColorAction              _backgroundColoringAction;
