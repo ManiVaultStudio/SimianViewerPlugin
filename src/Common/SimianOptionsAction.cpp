@@ -36,6 +36,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_visSettingAction(*this),
 	_linkerSettingAction(*this),
 	_distanceNeighborhoodAction(*this),
+	_explorationAction(*this),
+	_cellCountAction(*this),
 	_isStarted(false),
 	_histBarAction(this),
 	_fullHeatMapAction(this),
@@ -450,10 +452,18 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				{
 					_species1ScatterplotColorLinkerAction.setCurrentText(species1SelectedOption);
 				}
+				else
+				{
+					_species1ScatterplotColorLinkerAction.setCurrentText("Constant");
+				}
 				auto species2SelectedOption = selectFromQStringList(_species2ScatterplotColorLinkerAction.getOptions(), _species2SelectAction.getCurrentText(), _scatterplotColorControlAction.getCurrentText());
 				if (species2SelectedOption != "constant")
 				{
 					_species2ScatterplotColorLinkerAction.setCurrentText(species2SelectedOption);
+				}
+				else
+				{
+					_species2ScatterplotColorLinkerAction.setCurrentText("Constant");
 				}
 			}
 		}
@@ -1027,6 +1037,54 @@ inline SimianOptionsAction::Species2Action::Species2Action(SimianOptionsAction& 
 
 }
 
+SimianOptionsAction::CellCountAction::Widget::Widget(QWidget* parent, CellCountAction* cellCountAction) :
+	WidgetActionWidget(parent, cellCountAction)
+{
+	auto& simianOptionsAction = cellCountAction->_simianOptionsAction;
+
+	auto selectionHistBarWidget = simianOptionsAction._histBarAction.createWidget(this);
+	selectionHistBarWidget->findChild<QCheckBox*>("Checkbox");
+	selectionHistBarWidget->setMaximumWidth(91);
+
+	auto cellCountActionLayout = new QFormLayout();
+
+	cellCountActionLayout->setContentsMargins(0, 0, 0, 0);
+	cellCountActionLayout->addRow("Cell count:", selectionHistBarWidget);
+
+
+	setPopupLayout(cellCountActionLayout);
+}
+
+inline SimianOptionsAction::CellCountAction::CellCountAction(SimianOptionsAction& simianOptionsAction) :
+	_simianOptionsAction(simianOptionsAction)
+{
+
+}
+
+SimianOptionsAction::ExplorationAction::Widget::Widget(QWidget* parent, ExplorationAction* explorationAction) :
+	WidgetActionWidget(parent, explorationAction)
+{
+	auto& simianOptionsAction = explorationAction->_simianOptionsAction;
+
+	auto explorationModeSelectionWidget = simianOptionsAction._explorationModeAction.createWidget(this);
+	explorationModeSelectionWidget->findChild<QCheckBox*>("Checkbox");
+	explorationModeSelectionWidget->setMaximumWidth(97);
+
+	auto explorationModeSelectionLayout = new QFormLayout();
+
+	explorationModeSelectionLayout->setContentsMargins(0, 0, 0, 0);
+	explorationModeSelectionLayout->addRow("Exploration:", explorationModeSelectionWidget);
+
+
+	setPopupLayout(explorationModeSelectionLayout);
+}
+
+inline SimianOptionsAction::ExplorationAction::ExplorationAction(SimianOptionsAction& simianOptionsAction) :
+	_simianOptionsAction(simianOptionsAction)
+{
+
+}
+
 
 void SimianOptionsAction::updateMultiSelectionDropdown(std::vector<std::vector<std::string>>& filteredVisData)
 {
@@ -1058,15 +1116,7 @@ SimianOptionsAction::VisSettingAction::Widget::Widget(QWidget* parent, VisSettin
 
 	auto fullHeatMapSelectionWidget = simianOptionsAction._fullHeatMapAction.createWidget(this);
 	fullHeatMapSelectionWidget->findChild<QCheckBox*>("Checkbox");
-	fullHeatMapSelectionWidget->setFixedWidth(100);
-
-	auto explorationModeSelectionWidget = simianOptionsAction._explorationModeAction.createWidget(this);
-	explorationModeSelectionWidget->findChild<QCheckBox*>("Checkbox");
-	explorationModeSelectionWidget->setFixedWidth(100);
-
-	auto selectionHistBarWidget = simianOptionsAction._histBarAction.createWidget(this);
-	selectionHistBarWidget->findChild<QCheckBox*>("Checkbox");
-	selectionHistBarWidget->setFixedWidth(100);
+	fullHeatMapSelectionWidget->setFixedWidth(200);
 
 	auto filterCrossSpeciesWidget = simianOptionsAction._crossSpeciesFilterAction.createWidget(this);
 	filterCrossSpeciesWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
@@ -1086,8 +1136,6 @@ SimianOptionsAction::VisSettingAction::Widget::Widget(QWidget* parent, VisSettin
 	visSettingSelectionLayout->setObjectName("Vis Setting Options");
 	visSettingSelectionLayout->setSpacing(2);
 	visSettingSelectionLayout->setVerticalSpacing(2);
-	visSettingSelectionLayout->addRow("Cell counts:", selectionHistBarWidget);
-	visSettingSelectionLayout->addRow("Exploration mode:", explorationModeSelectionWidget);
 	visSettingSelectionLayout->addRow("Full heatmap:", fullHeatMapSelectionWidget);
 	visSettingSelectionLayout->addRow("Cluster filter:", filterCrossSpeciesWidget);
 	visSettingSelectionLayout->addRow("Scatterplot color:", selectScatterplotColorWidget);
