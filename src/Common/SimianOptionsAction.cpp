@@ -1136,10 +1136,10 @@ SimianOptionsAction::VisSettingAction::Widget::Widget(QWidget* parent, VisSettin
 	visSettingSelectionLayout->setObjectName("Vis Setting Options");
 	visSettingSelectionLayout->setSpacing(2);
 	visSettingSelectionLayout->setVerticalSpacing(2);
-	visSettingSelectionLayout->addRow("Full heatmap:", fullHeatMapSelectionWidget);
 	visSettingSelectionLayout->addRow("Cluster filter:", filterCrossSpeciesWidget);
+	visSettingSelectionLayout->addRow("Distancemap full:", fullHeatMapSelectionWidget);
+	visSettingSelectionLayout->addRow("Distancemap color:", colorMapWidget);
 	visSettingSelectionLayout->addRow("Scatterplot color:", selectScatterplotColorWidget);
-	visSettingSelectionLayout->addRow("Color map:", colorMapWidget);
 	visSettingSelectionLayout->addRow("Background color:", backgroundColoringWidget);
 
 	setPopupLayout(visSettingSelectionLayout);
