@@ -40,6 +40,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_cellCountAction(*this),
 	_isStarted(false),
 	_histBarAction(this),
+	_removeLinkingOptionMenuFromUIAction(this),
 	_fullHeatMapAction(this),
 	_explorationModeAction(this)
 {
@@ -100,6 +101,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_distanceAction.initialize(0, 105, 105, 105);
 	_histBarAction.setDefaultWidgetFlags(ToggleAction::CheckBox);
 	_histBarAction.initialize(false, false);
+	_removeLinkingOptionMenuFromUIAction.setDefaultWidgetFlags(ToggleAction::CheckBox);
+	_removeLinkingOptionMenuFromUIAction.initialize(false, false);
 	_fullHeatMapAction.setDefaultWidgetFlags(ToggleAction::CheckBox);
 	_fullHeatMapAction.initialize(false, false);
 	_explorationModeAction.setDefaultWidgetFlags(ToggleAction::CheckBox);
@@ -512,6 +515,20 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 	};
 
+	const auto updateRemoveLinkingOptionMenuFromUIAction = [this]() -> void
+	{
+		if (_removeLinkingOptionMenuFromUIAction.isChecked())
+		{
+			_linkerSettingAction.setVisible(false);
+		}
+		else
+		{
+			_linkerSettingAction.setVisible(true);
+		}
+
+
+	};
+
 	const auto updateShowFullHeatmap = [this]() -> void
 	{
 		if (_fullHeatMapAction.isChecked())
@@ -695,7 +712,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		{
 			updateHistBar();
 		});
-
+	connect(&_removeLinkingOptionMenuFromUIAction, &ToggleAction::toggled, this, [this, updateRemoveLinkingOptionMenuFromUIAction](const bool& toggled)
+		{
+			updateRemoveLinkingOptionMenuFromUIAction();
+		});
 	connect(&_fullHeatMapAction, &ToggleAction::toggled, this, [this, updateShowFullHeatmap](const bool& toggled)
 		{
 			updateShowFullHeatmap();
@@ -1212,6 +1232,11 @@ SimianOptionsAction::LinkerSettingAction::Widget::Widget(QWidget* parent, Linker
 	selectionCrossSpecies2HeatMapCellWidget->setFixedWidth(300);
 	selectionCrossSpecies2HeatMapCellWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
+
+	auto removeLinkingOptionMenuFromUIActionWidget = simianOptionsAction._removeLinkingOptionMenuFromUIAction.createWidget(this);
+	removeLinkingOptionMenuFromUIActionWidget->findChild<QCheckBox*>("Checkbox");
+	removeLinkingOptionMenuFromUIActionWidget->setMaximumWidth(91);
+
 	auto linkerSettingSelectionLayout = new QFormLayout();
 	linkerSettingSelectionLayout->setContentsMargins(2, 2, 2, 2);
 	linkerSettingSelectionLayout->setObjectName("Linker Setting Options");
@@ -1233,7 +1258,7 @@ SimianOptionsAction::LinkerSettingAction::Widget::Widget(QWidget* parent, Linker
 	linkerSettingSelectionLayout->addRow(simianOptionsAction._inSpecies2HeatMapCellAction.createLabelWidget(this), selectionInSpecies2HeatMapCellWidget);
 	linkerSettingSelectionLayout->addRow(simianOptionsAction._crossSpecies1HeatMapCellAction.createLabelWidget(this), selectionCrossSpecies1HeatMapCellWidget);
 	linkerSettingSelectionLayout->addRow(simianOptionsAction._crossSpecies2HeatMapCellAction.createLabelWidget(this), selectionCrossSpecies2HeatMapCellWidget);
-
+	linkerSettingSelectionLayout->addRow("Hide menu:", removeLinkingOptionMenuFromUIActionWidget);
 	setPopupLayout(linkerSettingSelectionLayout);
 
 }
