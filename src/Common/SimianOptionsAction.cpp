@@ -96,7 +96,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_neighborhoodAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 	_neighborhoodAction.initialize(QStringList({ "glia","it_types","l5et_l56np_l6ct_l6b","lamp5_sncg_vip","sst_sst_chodl_pvalb" }), "glia", "glia");
 	_scatterplotColorControlAction.setDefaultWidgetFlags(OptionAction::ComboBox);
-	_scatterplotColorControlAction.initialize(QStringList({ "in-species class","in-species cluster","cross-species class","cross-species cluster","cross-species sub-class","donor","neighborhood","sex","in-species subclass","constant" }), "cross-species cluster", "cross-species cluster");
+	_scatterplotColorControlAction.initialize(QStringList({ "in-species class","in-species cluster","cross-species class","cross-species cluster","cross-species sub-class","donor","neighborhood","in-species subclass"}), "cross-species cluster", "cross-species cluster");
 	_distanceAction.setDefaultWidgetFlags(IntegralAction::SpinBox | IntegralAction::Slider);
 	_distanceAction.initialize(0, 105, 105, 105);
 	_histBarAction.setDefaultWidgetFlags(ToggleAction::CheckBox);
@@ -304,7 +304,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				QStringList speciesNames = { "gorilla","marmoset","rhesus","chimp","human" };
 				speciesNames.removeAll(_species1SelectAction.getCurrentText());
 				_species2SelectAction.initialize(QStringList({ speciesNames }), _species2SelectAction.getPlaceholderString(), _species2SelectAction.getPlaceholderString());
-				_scatterplotColorControlAction.setCurrentText("constant");
 
 			}
 
@@ -451,23 +450,17 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			if (_scatterplotColorControlAction.getCurrentText() != "" && _scatterplotColorControlAction.getCurrentText().isValidUtf16())
 			{
 				auto species1SelectedOption = selectFromQStringList(_species1ScatterplotColorLinkerAction.getOptions(), _species1SelectAction.getCurrentText(), _scatterplotColorControlAction.getCurrentText());
-				if (species1SelectedOption != "constant")
+
 				{
 					_species1ScatterplotColorLinkerAction.setCurrentText(species1SelectedOption);
 				}
-				else
-				{
-					_species1ScatterplotColorLinkerAction.setCurrentText("Constant");
-				}
+
 				auto species2SelectedOption = selectFromQStringList(_species2ScatterplotColorLinkerAction.getOptions(), _species2SelectAction.getCurrentText(), _scatterplotColorControlAction.getCurrentText());
-				if (species2SelectedOption != "constant")
+
 				{
 					_species2ScatterplotColorLinkerAction.setCurrentText(species2SelectedOption);
 				}
-				else
-				{
-					_species2ScatterplotColorLinkerAction.setCurrentText("Constant");
-				}
+
 			}
 		}
 
@@ -608,7 +601,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				_species1ScatterplotColorLinkerAction.setEnabled(false);
 				_species2ScatterplotColorLinkerAction.setEnabled(false);
 				_scatterplotColorControlAction.setEnabled(false);
-				_scatterplotColorControlAction.setCurrentText("constant");
 
 			}
 		}
@@ -619,7 +611,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			_species1ScatterplotColorLinkerAction.setEnabled(false);
 			_species2ScatterplotColorLinkerAction.setEnabled(false);
 			_scatterplotColorControlAction.setEnabled(false);
-			_scatterplotColorControlAction.setCurrentText("constant");
 
 		}
 	};
@@ -643,7 +634,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				_species1ScatterplotColorLinkerAction.setEnabled(false);
 				_species2ScatterplotColorLinkerAction.setEnabled(false);
 				_scatterplotColorControlAction.setEnabled(false);
-				_scatterplotColorControlAction.setCurrentText("constant");
 
 			}
 		}
@@ -654,7 +644,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			_species1ScatterplotColorLinkerAction.setEnabled(false);
 			_species2ScatterplotColorLinkerAction.setEnabled(false);
 			_scatterplotColorControlAction.setEnabled(false);
-			_scatterplotColorControlAction.setCurrentText("constant");
 
 		}
 	};
@@ -1402,7 +1391,7 @@ void SimianOptionsAction::filterMultiSelect()
 
 QString SimianOptionsAction::selectFromQStringList(const QStringList& fileList, const QString& speciesType, const QString& fileType)
 {
-	QString foundFile = "constant";
+	QString foundFile = "";
 
 	for (const auto& file : fileList)
 	{
