@@ -231,6 +231,7 @@ public: // Action getters
     OptionAction& getNeighborhoodAction() { return _neighborhoodAction; }
     IntegralAction& getDistanceAction() { return _distanceAction; };
     ToggleAction& getHistBarAction() { return _histBarAction; };
+    ToggleAction& getRemoveLinkingOptionMenuFromUIAction() { return _removeLinkingOptionMenuFromUIAction; };
     ToggleAction& getFullHeatmapAction() { return _fullHeatMapAction; };
     ToggleAction& getExplorationModeAction() { return _explorationModeAction; };
     DatasetPickerAction& getCrossSpecies1DatasetLinkerAction() { return _crossSpecies1DatasetLinkerAction; };
@@ -296,6 +297,7 @@ protected:
     DistanceNeighborhoodAction               _distanceNeighborhoodAction;
     CellCountAction               _cellCountAction;
     ExplorationAction               _explorationAction;
+    ToggleAction                _removeLinkingOptionMenuFromUIAction;
     bool _isStarted;
     ColorMapAction          _colorMapAction;
     ColorAction              _backgroundColoringAction;
