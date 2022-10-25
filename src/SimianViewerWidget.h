@@ -29,7 +29,7 @@ signals:
     void qt_setBackgroundColor(QString data);
     void qt_histChart(QString data);
     void qt_showFullHeatmap(QString data);
-    void qt_showExplorationMode(QString data);
+    //void qt_showExplorationMode(QString data);
     void qt_inspeciesClusterCounts(QString data);
     void qt_setRangeValue(QString data);
     void qt_addAvailableData(QString name);
@@ -57,7 +57,7 @@ public:
     void setBackgroundColor(QString visColorContent);
     void histChart(QString visColorContent);
     void showFullHeatmap(QString visColorContent); 
-    void showExplorationMode(QString visColorContent);
+    //void showExplorationMode(QString visColorContent);
     void inspeciesClusterCounts(QString visCountClusterContent);
     void setRangeValue(QString visRangeValueContent);
 protected:
