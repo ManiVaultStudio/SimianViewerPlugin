@@ -67,9 +67,9 @@ void SimianViewerPlugin::init()
     cellCountActionwidget->setMaximumWidth(91);
     topToolbarLayout->addWidget(cellCountActionwidget);
 
-    auto explorationActionwidget = _simianOptionsAction->getExplorationAction().createWidget(&_widget);
-    explorationActionwidget->setMaximumWidth(97);
-    topToolbarLayout->addWidget(explorationActionwidget);
+    //auto explorationActionwidget = _simianOptionsAction->getExplorationAction().createWidget(&_widget);
+    //explorationActionwidget->setMaximumWidth(97);
+    //topToolbarLayout->addWidget(explorationActionwidget);
 
     auto visSettingsWidget = _simianOptionsAction->getVisSettingAction().createCollapsedWidget(&_widget);
     topToolbarLayout->addWidget(visSettingsWidget);

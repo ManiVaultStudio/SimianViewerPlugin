@@ -176,28 +176,28 @@ public:
 
         friend class SimianOptionsAction;
     };
-    class ExplorationAction : public WidgetAction
-    {
-    protected:
-        class Widget : public hdps::gui::WidgetActionWidget {
-        public:
-            Widget(QWidget* parent, ExplorationAction* explorationAction);
+    //class ExplorationAction : public WidgetAction
+    //{
+    //protected:
+    //    class Widget : public hdps::gui::WidgetActionWidget {
+    //    public:
+    //        Widget(QWidget* parent, ExplorationAction* explorationAction);
 
-            friend class ExplorationAction;
-        };
+    //        friend class ExplorationAction;
+    //    };
 
-        QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
-            return new ExplorationAction::Widget(parent, this);
-        };
+    //    QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
+    //        return new ExplorationAction::Widget(parent, this);
+    //    };
 
-    public:
-        ExplorationAction(SimianOptionsAction& simianOptionsAction);
+    //public:
+    //    ExplorationAction(SimianOptionsAction& simianOptionsAction);
 
-    protected:
-        SimianOptionsAction& _simianOptionsAction;
+    //protected:
+    //    SimianOptionsAction& _simianOptionsAction;
 
-        friend class SimianOptionsAction;
-    };
+    //    friend class SimianOptionsAction;
+    //};
 public:
     void onDataEvent(hdps::DataEvent* dataEvent);
 protected:
@@ -233,7 +233,7 @@ public: // Action getters
     ToggleAction& getHistBarAction() { return _histBarAction; };
     ToggleAction& getRemoveLinkingOptionMenuFromUIAction() { return _removeLinkingOptionMenuFromUIAction; };
     ToggleAction& getFullHeatmapAction() { return _fullHeatMapAction; };
-    ToggleAction& getExplorationModeAction() { return _explorationModeAction; };
+    //ToggleAction& getExplorationModeAction() { return _explorationModeAction; };
     DatasetPickerAction& getCrossSpecies1DatasetLinkerAction() { return _crossSpecies1DatasetLinkerAction; };
     DatasetPickerAction& getCrossSpecies2DatasetLinkerAction() { return _crossSpecies2DatasetLinkerAction; };
 
@@ -258,7 +258,7 @@ public: // Action getters
     ColorMapAction& getColorMapAction() { return _colorMapAction; }
     ColorAction& getBackgroundColoringAction() { return _backgroundColoringAction; }
     CellCountAction& getCellCountAction() { return _cellCountAction; }
-    ExplorationAction& getExplorationAction() { return _explorationAction; }
+    //ExplorationAction& getExplorationAction() { return _explorationAction; }
 protected:
     SimianViewerPlugin&          _simianViewerPlugin;
     OptionAction                 _species1SelectAction;
@@ -284,7 +284,7 @@ protected:
     OptionsAction                 _multiSelectClusterFilterAction;
     ToggleAction _histBarAction;
     ToggleAction _fullHeatMapAction;
-    ToggleAction _explorationModeAction;
+    //ToggleAction _explorationModeAction;
     OptionAction                 _inSpecies1HeatMapCellAction;
     OptionAction                 _inSpecies2HeatMapCellAction;
     OptionAction                 _crossSpecies1HeatMapCellAction;
@@ -296,7 +296,7 @@ protected:
     LinkerSettingAction               _linkerSettingAction;
     DistanceNeighborhoodAction               _distanceNeighborhoodAction;
     CellCountAction               _cellCountAction;
-    ExplorationAction               _explorationAction;
+    //ExplorationAction               _explorationAction;
     ToggleAction                _removeLinkingOptionMenuFromUIAction;
     bool _isStarted;
     ColorMapAction          _colorMapAction;

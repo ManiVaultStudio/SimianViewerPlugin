@@ -85,7 +85,7 @@ try {
         QtBridge.qt_setBackgroundColor.connect(function () { setBackgroundColor(arguments[0]); });
         QtBridge.qt_histChart.connect(function () { histChart(arguments[0]); });
         QtBridge.qt_showFullHeatmap.connect(function () { showFullHeatmap(arguments[0]); });
-        QtBridge.qt_showExplorationMode.connect(function () { showExplorationMode(arguments[0]); });
+/*        QtBridge.qt_showExplorationMode.connect(function () { showExplorationMode(arguments[0]); });*/
         QtBridge.qt_setRangeValue.connect(function () { setRangeValue(arguments[0]); });
         QtBridge.qt_inspeciesClusterCounts.connect(function () { setInspeciesClusterCounts(arguments[0]); });
         notifyBridgeAvailable();
@@ -1327,7 +1327,8 @@ const simianVis = () => {
 /*        d3.select("#marker1").remove();
         d3.select("#marker2").remove();
         d3.select("#marker3").remove();*/
-
+        if (!showExplorationModeflag) { showExplorationModeflag = true; }
+        else { showExplorationModeflag = false; }
         tip.show(d, d3.mouse(this), this);
 
 
@@ -2055,7 +2056,7 @@ function queueshowFullHeatmap(valD) {
     simianVis();
 }
 
-function showExplorationMode(d) {
+/*function showExplorationMode(d) {
 
     queueshowExplorationMode(d);
 }
@@ -2069,7 +2070,7 @@ function queueshowExplorationMode(valD) {
 
     simianVis();
 }
-
+*/
 
 //Range Options
 function setRangeValue(d) {
