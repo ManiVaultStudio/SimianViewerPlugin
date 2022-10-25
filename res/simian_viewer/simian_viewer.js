@@ -98,6 +98,7 @@ const simianVis = () => {
     d3.select("svg").remove();
     svg = d3.select("#my_dataviz")
     svg.selectAll("*").remove();
+    showExplorationModeflag = false;
     if (showFullHeatmapflag) {
         document.getElementById('my_dataviz').setAttribute("style", "width:99%");
         document.getElementById('my_container').setAttribute("style", "width:1%");
