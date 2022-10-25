@@ -9,9 +9,9 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	WidgetAction(&simianViewerPlugin),
 	_simianViewerPlugin(simianViewerPlugin),
 	_core(core),
-	_species1SelectAction(this),
-	_species2SelectAction(this),
-	_neighborhoodAction(this),
+	_species1SelectAction(this,"Species1"),
+	_species2SelectAction(this,"Species2"),
+	_neighborhoodAction(this,"Neighborhood"),
 	_scatterplotColorControlAction(this, "Scatterplot color"),
 	_distanceAction(this, "Filter distance :"),
 	_crossSpecies1DatasetLinkerAction(this, "Cross-species cluster dataset1"),
@@ -39,9 +39,9 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	//_explorationAction(*this),
 	_cellCountAction(*this),
 	_isStarted(false),
-	_histBarAction(this),
+	_histBarAction(this,"Cell counts"),
 	_removeLinkingOptionMenuFromUIAction(this),
-	_fullHeatMapAction(this)/*,
+	_fullHeatMapAction(this,"Full distancemap")/*,
 	_explorationModeAction(this)*/
 {
 	_eventListener.setEventCore(core);
@@ -1009,7 +1009,7 @@ SimianOptionsAction::Species1Action::Widget::Widget(QWidget* parent, Species1Act
 	auto selectionSpecies1OptionLayout = new QFormLayout();
 
 	selectionSpecies1OptionLayout->setContentsMargins(0, 0, 0, 0);
-	selectionSpecies1OptionLayout->addRow("Species1:", selectionSpecies1Widget);
+	selectionSpecies1OptionLayout->addRow(simianOptionsAction._species1SelectAction.createLabelWidget(this), selectionSpecies1Widget);
 
 
 	setPopupLayout(selectionSpecies1OptionLayout);
@@ -1034,7 +1034,7 @@ SimianOptionsAction::Species2Action::Widget::Widget(QWidget* parent, Species2Act
 	auto selectionSpecies2OptionLayout = new QFormLayout();
 
 	selectionSpecies2OptionLayout->setContentsMargins(0, 0, 0, 0);
-	selectionSpecies2OptionLayout->addRow("Species2:", selectionSpecies2Widget);
+	selectionSpecies2OptionLayout->addRow(simianOptionsAction._species2SelectAction.createLabelWidget(this), selectionSpecies2Widget);
 
 
 	setPopupLayout(selectionSpecies2OptionLayout);
@@ -1053,12 +1053,12 @@ SimianOptionsAction::CellCountAction::Widget::Widget(QWidget* parent, CellCountA
 
 	auto selectionHistBarWidget = simianOptionsAction._histBarAction.createWidget(this);
 	selectionHistBarWidget->findChild<QCheckBox*>("Checkbox");
-	selectionHistBarWidget->setMaximumWidth(91);
+	selectionHistBarWidget->setMaximumWidth(100);
 
 	auto cellCountActionLayout = new QFormLayout();
 
 	cellCountActionLayout->setContentsMargins(0, 0, 0, 0);
-	cellCountActionLayout->addRow("Cell count:", selectionHistBarWidget);
+	cellCountActionLayout->addRow(simianOptionsAction._histBarAction.createLabelWidget(this), selectionHistBarWidget);
 
 
 	setPopupLayout(cellCountActionLayout);
@@ -1145,11 +1145,11 @@ SimianOptionsAction::VisSettingAction::Widget::Widget(QWidget* parent, VisSettin
 	visSettingSelectionLayout->setObjectName("Vis Setting Options");
 	visSettingSelectionLayout->setSpacing(2);
 	visSettingSelectionLayout->setVerticalSpacing(2);
-	visSettingSelectionLayout->addRow("Cluster filter:", filterCrossSpeciesWidget);
-	visSettingSelectionLayout->addRow("Distancemap full:", fullHeatMapSelectionWidget);
-	visSettingSelectionLayout->addRow("Distancemap color:", colorMapWidget);
-	visSettingSelectionLayout->addRow("Scatterplot color:", selectScatterplotColorWidget);
-	visSettingSelectionLayout->addRow("Background color:", backgroundColoringWidget);
+	visSettingSelectionLayout->addRow(simianOptionsAction._crossSpeciesFilterAction.createLabelWidget(this), filterCrossSpeciesWidget);
+	visSettingSelectionLayout->addRow(simianOptionsAction._fullHeatMapAction.createLabelWidget(this), fullHeatMapSelectionWidget);
+	visSettingSelectionLayout->addRow(simianOptionsAction._colorMapAction.createLabelWidget(this), colorMapWidget);
+	visSettingSelectionLayout->addRow(simianOptionsAction._scatterplotColorControlAction.createLabelWidget(this), selectScatterplotColorWidget);
+	visSettingSelectionLayout->addRow(simianOptionsAction._backgroundColoringAction.createLabelWidget(this), backgroundColoringWidget);
 
 	setPopupLayout(visSettingSelectionLayout);
 
@@ -1273,7 +1273,7 @@ SimianOptionsAction::DistanceNeighborhoodAction::Widget::Widget(QWidget* parent,
 	auto filterOptionLayout = new QFormLayout();
 
 	filterOptionLayout->setContentsMargins(0, 0, 0, 0);
-	filterOptionLayout->addRow("Neighborhood:", selectionNeighborhoodWidget);
+	filterOptionLayout->addRow(simianOptionsAction._neighborhoodAction.createLabelWidget(this), selectionNeighborhoodWidget);
 
 
 	setPopupLayout(filterOptionLayout);
