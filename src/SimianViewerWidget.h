@@ -1,6 +1,5 @@
 #pragma once
 
-#include "SelectionListener.h"
 #include "PointData.h"
 #include "widgets/WebWidget.h"
 #include <QMouseEvent>

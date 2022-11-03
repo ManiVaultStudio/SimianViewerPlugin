@@ -88,7 +88,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_inSpecies2HeatMapCellAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 	_crossSpecies1HeatMapCellAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 	_crossSpecies2HeatMapCellAction.setDefaultWidgetFlags(OptionAction::ComboBox);
-	_multiSelectClusterFilterAction.setDefaultWidgetFlags(OptionsAction::ComboBox | OptionsAction::ListView | OptionsAction::Selection | OptionsAction::File);
+	_multiSelectClusterFilterAction.setDefaultWidgetFlags(OptionsAction::ComboBox | OptionsAction::Selection | OptionsAction::File);
 	_multiSelectClusterFilterAction.initialize(QStringList{ "" });
 	_multiSelectClusterFilterAction.setSelectedOptions(QStringList());
 	_colorMapAction.initialize("Black to white", "Black to white");
@@ -198,13 +198,13 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			s3 = "F";
 		}
 		std::string full = s1 + s2 + s3;
-		_simianViewerPlugin.getWidget()->setColor(QString::fromStdString(full));
+		_simianViewerPlugin.getSimianViewerWidget()->setColor(QString::fromStdString(full));
 	};
 	const auto backgroundColoringFilter = [this]() -> void
 	{
 		const auto& color = _backgroundColoringAction.getColor();
 
-		_simianViewerPlugin.getWidget()->setBackgroundColor(color.name());
+		_simianViewerPlugin.getSimianViewerWidget()->setBackgroundColor(color.name());
 	};
 	const auto updateColorMapRange = [this]() -> void
 	{
@@ -213,7 +213,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		std::string s2 = " ";
 		std::string s3 = std::to_string(rangeAction.getMaximum());
 		std::string full = s1.substr(0, s1.find(".") + 3) + s2 + s3.substr(0, s3.find(".") + 3);
-		_simianViewerPlugin.getWidget()->setRangeValue(QString::fromStdString(full));
+		_simianViewerPlugin.getSimianViewerWidget()->setRangeValue(QString::fromStdString(full));
 	};
 
 	const auto updateSpecies1 = [this]() -> void
@@ -266,7 +266,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			{
 				if (_species2SelectAction.getCurrentText() == _species1SelectAction.getCurrentText())
 				{
-					_simianViewerPlugin.getWidget()->resetView("Reset");
+					_simianViewerPlugin.getSimianViewerWidget()->resetView("Reset");
 					_species2SelectAction.setCurrentIndex(0);
 					_species2SelectAction.setPlaceHolderString(QString("Choose Species2"));
 					_species2SelectAction.initialize(QStringList({ }), _species2SelectAction.getPlaceholderString(), _species2SelectAction.getPlaceholderString());
@@ -297,7 +297,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			}
 			else {
 
-				_simianViewerPlugin.getWidget()->resetView("Reset");
+				_simianViewerPlugin.getSimianViewerWidget()->resetView("Reset");
 				_species2SelectAction.setCurrentIndex(0);
 				_species2SelectAction.setPlaceHolderString(QString("Choose Species2"));
 				_species2SelectAction.initialize(QStringList({ }), _species2SelectAction.getPlaceholderString(), _species2SelectAction.getPlaceholderString());
@@ -498,11 +498,11 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	{
 		if (_histBarAction.isChecked())
 		{
-			_simianViewerPlugin.getWidget()->histChart(QString::fromStdString("T"));
+			_simianViewerPlugin.getSimianViewerWidget()->histChart(QString::fromStdString("T"));
 		}
 		else
 		{
-			_simianViewerPlugin.getWidget()->histChart(QString::fromStdString("F"));
+			_simianViewerPlugin.getSimianViewerWidget()->histChart(QString::fromStdString("F"));
 		}
 
 
@@ -526,11 +526,11 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	{
 		if (_fullHeatMapAction.isChecked())
 		{
-			_simianViewerPlugin.getWidget()->showFullHeatmap(QString::fromStdString("T"));
+			_simianViewerPlugin.getSimianViewerWidget()->showFullHeatmap(QString::fromStdString("T"));
 		}
 		else
 		{
-			_simianViewerPlugin.getWidget()->showFullHeatmap(QString::fromStdString("F"));
+			_simianViewerPlugin.getSimianViewerWidget()->showFullHeatmap(QString::fromStdString("F"));
 		}
 
 
@@ -777,7 +777,7 @@ void SimianOptionsAction::sendClusterCountInfoToJS()
 	}
 
 
-	_simianViewerPlugin.getWidget()->inspeciesClusterCounts(QString::fromStdString(jsonSend));
+	_simianViewerPlugin.getSimianViewerWidget()->inspeciesClusterCounts(QString::fromStdString(jsonSend));
 
 }
 
@@ -871,7 +871,7 @@ void SimianOptionsAction::updateData(std::string Species1, std::string Species2,
 	}
 	_jsonObject.chop(1);
 	_jsonObject += "]";
-	_simianViewerPlugin.getWidget()->setData(_jsonObject.toStdString());
+	_simianViewerPlugin.getSimianViewerWidget()->setData(_jsonObject.toStdString());
 
 	auto& colorMapRangeAction = _colorMapAction.getSettingsAction().getHorizontalAxisAction().getRangeAction();
 	float colorMapRangeMin = 1200.0;
@@ -1365,7 +1365,7 @@ void SimianOptionsAction::filterMultiSelect()
 	}
 	_jsonObject.chop(1);
 	_jsonObject += "]";
-	_simianViewerPlugin.getWidget()->setData(_jsonObject.toStdString());
+	_simianViewerPlugin.getSimianViewerWidget()->setData(_jsonObject.toStdString());
 	auto& colorMapRangeAction = _colorMapAction.getSettingsAction().getHorizontalAxisAction().getRangeAction();
 	float colorMapRangeMin = 1200.0;
 	float colorMapRangeMax = 0.0;

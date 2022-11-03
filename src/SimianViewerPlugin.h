@@ -39,7 +39,7 @@ public:
 
     hdps::CoreInterface* getCore() { return _core; }
 
-    SimianViewerWidget* getWidget() { return _simian_viewer; }
+    SimianViewerWidget* getSimianViewerWidget() { return _simian_viewer; }
     SimianOptionsAction& getSimianOptionsAction() { return *_simianOptionsAction; }
     
 protected slots:

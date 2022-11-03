@@ -51,19 +51,19 @@ void SimianViewerPlugin::init()
     topToolbarLayout->setContentsMargins(0, 0, 0, 0);
     topToolbarLayout->setSpacing(0);
 
-    auto species1ActionWidget = _simianOptionsAction->getSpecies1Action().createWidget(&_widget);
+    auto species1ActionWidget = _simianOptionsAction->getSpecies1Action().createWidget(&getWidget());
     species1ActionWidget->setMaximumWidth(180);
     topToolbarLayout->addWidget(species1ActionWidget);
 
-    auto species2ActionWidget = _simianOptionsAction->getSpecies2Action().createWidget(&_widget);
+    auto species2ActionWidget = _simianOptionsAction->getSpecies2Action().createWidget(&getWidget());
     species2ActionWidget->setMaximumWidth(180);
     topToolbarLayout->addWidget(species2ActionWidget);
 
-    auto distanceNeighborhoodActionwidget = _simianOptionsAction->getDistanceNeighborhoodAction().createWidget(&_widget);
+    auto distanceNeighborhoodActionwidget = _simianOptionsAction->getDistanceNeighborhoodAction().createWidget(&getWidget());
     distanceNeighborhoodActionwidget->setMaximumWidth(230);
     topToolbarLayout->addWidget(distanceNeighborhoodActionwidget);
 
-    auto cellCountActionwidget = _simianOptionsAction->getCellCountAction().createWidget(&_widget);
+    auto cellCountActionwidget = _simianOptionsAction->getCellCountAction().createWidget(&getWidget());
     cellCountActionwidget->setMaximumWidth(100);
     topToolbarLayout->addWidget(cellCountActionwidget);
 
@@ -71,9 +71,9 @@ void SimianViewerPlugin::init()
     //explorationActionwidget->setMaximumWidth(97);
     //topToolbarLayout->addWidget(explorationActionwidget);
 
-    auto visSettingsWidget = _simianOptionsAction->getVisSettingAction().createCollapsedWidget(&_widget);
+    auto visSettingsWidget = _simianOptionsAction->getVisSettingAction().createCollapsedWidget(&getWidget());
     topToolbarLayout->addWidget(visSettingsWidget);
-    topToolbarLayout->addWidget(_simianOptionsAction->getLinkerSettingAction().createCollapsedWidget(&_widget));
+    topToolbarLayout->addWidget(_simianOptionsAction->getLinkerSettingAction().createCollapsedWidget(&getWidget()));
 
 
  
@@ -85,7 +85,7 @@ void SimianViewerPlugin::init()
     layout->setSpacing(0);
     layout->addWidget(topToolbarWidget);
     layout->addWidget(_simian_viewer, 1);
-    _widget.setLayout(layout);
+    getWidget().setLayout(layout);
 
 
 }
