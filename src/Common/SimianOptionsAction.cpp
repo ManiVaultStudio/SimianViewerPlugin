@@ -40,10 +40,12 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_cellCountAction(*this),
 	_isStarted(false),
 	_histBarAction(this,"Cell counts"),
-	_removeLinkingOptionMenuFromUIAction(this),
+	_removeLinkingOptionMenuFromUIAction(this, "Remove linking option"),
 	_fullHeatMapAction(this,"Full distancemap")/*,
 	_explorationModeAction(this)*/
 {
+	setText("Settings");
+
 	_eventListener.setEventCore(core);
 	_eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataAdded));
 	_eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataRemoved));
