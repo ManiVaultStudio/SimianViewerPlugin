@@ -3,7 +3,7 @@
 #include "PointData.h"
 #include "event/Event.h"
 #include "ColorData.h"
-
+#include <QMessageBox>
 #include <actions/PluginTriggerAction.h>
 
 #include <QtCore>
@@ -223,7 +223,13 @@ void SimianViewerPlugin::publishCluster(std::string clusterName)
 
 
 }
-
+const auto showHelpbox = []() -> void
+{
+    qDebug() << "Simian viewer plugin help requested...";
+    QMessageBox msgBox;
+    msgBox.setText("Simian viewer plugin help requested...");
+    msgBox.exec();
+};
 
 
 
@@ -232,7 +238,8 @@ SimianViewerPluginFactory::SimianViewerPluginFactory() :
 {
     connect(&getTriggerHelpAction(), &TriggerAction::triggered, this, [this]() -> void {
         // Do your stuff here
-        qDebug() << "Simian viewer plugin help requested...";
+       
+        showHelpbox();
 
     });
 }
