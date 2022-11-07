@@ -5,7 +5,7 @@
 #include "ColorData.h"
 #include <QMessageBox>
 #include <actions/PluginTriggerAction.h>
-
+#include <QFileDialog>
 #include <QtCore>
 #include <QtDebug>
 #include <QWebEngineView>
@@ -41,6 +41,7 @@ void SimianViewerPlugin::init()
     _simianOptionsAction = new SimianOptionsAction(*this, _core);
     connect(_simian_viewer, &SimianViewerWidget::passSelectionToQt, this, &SimianViewerPlugin::publishSelection);
     connect(_simian_viewer, &SimianViewerWidget::passClusterToQt, this, &SimianViewerPlugin::publishCluster);
+    connect(_simian_viewer, &SimianViewerWidget::generatedScreenshotData, this, &SimianViewerPlugin::generatedScreenshotData);
     
     _eventListener.setEventCore(Application::core());
     _eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataSelectionChanged));
@@ -74,6 +75,7 @@ void SimianViewerPlugin::init()
     auto visSettingsWidget = _simianOptionsAction->getVisSettingAction().createCollapsedWidget(&getWidget());
     topToolbarLayout->addWidget(visSettingsWidget);
     topToolbarLayout->addWidget(_simianOptionsAction->getLinkerSettingAction().createCollapsedWidget(&getWidget()));
+    topToolbarLayout->addWidget(_simianOptionsAction->getScreenshotAction().createWidget(&getWidget()));
     topToolbarLayout->addWidget(_simianOptionsAction->getHelpAction().createWidget(&getWidget()));
 
  
@@ -113,6 +115,51 @@ void SimianViewerPlugin::publishSelection(std::vector<std::string> selectedIDs)
     //{
         selectIndividualSpeciesClusterPoints(selectedIDs);
     //}
+
+
+
+}
+
+
+void SimianViewerPlugin::generatedScreenshotData(std::string selectedIDs)
+{
+    QFileDialog saveFileDialog;
+    QString xml = QString::fromStdString(selectedIDs);
+    saveFileDialog.setAcceptMode(QFileDialog::AcceptSave);
+    saveFileDialog.setDirectory(QDir::home().absolutePath());
+    saveFileDialog.setDefaultSuffix("svg");
+    saveFileDialog.selectFile("SimianViewer.svg");
+    saveFileDialog.setNameFilter(tr("SVG Image Files (*.svg)"));
+
+    QString fileName;
+    if (saveFileDialog.exec())
+    {
+        fileName = saveFileDialog.selectedFiles().first();
+
+        QString typeInfo = " xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"";
+
+        int offset = xml.indexOf("<svg") + 4;
+        xml.insert(offset, typeInfo);
+
+        offset = xml.indexOf("</svg>");
+        //xml.insert(offset, _css);
+
+        /* Try and open a file for output */
+        QFile outputFile(fileName);
+        outputFile.open(QIODevice::ReadWrite | QIODevice::Truncate);
+
+        /* Check it opened OK */
+        if (!outputFile.isOpen()) { return; }
+
+        /* Point a QTextStream object at the file */
+        QTextStream outStream(&outputFile);
+
+        /* Write the line to the file */
+        outStream << xml;
+
+        /* Close the file */
+        outputFile.close();
+    }
 
 
 

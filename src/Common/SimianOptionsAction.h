@@ -259,6 +259,7 @@ public: // Action getters
     ColorAction& getBackgroundColoringAction() { return _backgroundColoringAction; }
     CellCountAction& getCellCountAction() { return _cellCountAction; }
     TriggerAction& getHelpAction() { return _helpAction; }
+    TriggerAction& getScreenshotAction() { return _screenshotAction; }
     //ExplorationAction& getExplorationAction() { return _explorationAction; }
 protected:
     SimianViewerPlugin&          _simianViewerPlugin;
@@ -300,6 +301,7 @@ protected:
     //ExplorationAction               _explorationAction;
     ToggleAction                _removeLinkingOptionMenuFromUIAction;
     TriggerAction                _helpAction;
+    TriggerAction                _screenshotAction;
     bool _isStarted;
     ColorMapAction          _colorMapAction;
     ColorAction              _backgroundColoringAction;

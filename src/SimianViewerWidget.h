@@ -28,6 +28,7 @@ signals:
     void qt_setBackgroundColor(QString data);
     void qt_histChart(QString data);
     void qt_showFullHeatmap(QString data);
+    void qt_generateScreenshot(QString data);
     //void qt_showExplorationMode(QString data);
     void qt_inspeciesClusterCounts(QString data);
     void qt_setRangeValue(QString data);
@@ -36,6 +37,7 @@ signals:
 public slots:
     void js_passSelectionToQt(QVariantList data);
     void js_passClusterToQt(QVariant data);
+    void js_generatedScreenshotData(QVariant data);
 
 private:
     SimianViewerWidget* _parent;
@@ -56,6 +58,7 @@ public:
     void setBackgroundColor(QString visColorContent);
     void histChart(QString visColorContent);
     void showFullHeatmap(QString visColorContent); 
+    void generateScreenshot(QString visColorContent);
     //void showExplorationMode(QString visColorContent);
     void inspeciesClusterCounts(QString visCountClusterContent);
     void setRangeValue(QString visRangeValueContent);
@@ -66,11 +69,13 @@ signals:
 
     void passSelectionToQt(std::vector<std::string> selectedIDs);
     void passClusterToQt(std::string clusterName);
+    void generatedScreenshotData(std::string clusterName);
 
 public:
 
     void js_passSelectionToQt(std::vector<std::string> selectedIDs);
     void js_passClusterToQt(std::string clusterName);
+    void js_generatedScreenshotData(std::string clusterName);
 
 private slots:
     void initWebPage() override;

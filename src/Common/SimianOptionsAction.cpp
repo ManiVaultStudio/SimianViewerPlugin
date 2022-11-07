@@ -43,15 +43,18 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_removeLinkingOptionMenuFromUIAction(this, "Remove linking option"),
 	_fullHeatMapAction(this,"Full distancemap")/*,
 	_explorationModeAction(this)*/,
-	_helpAction(this, "Help")
+	_helpAction(this, "Help"),
+	_screenshotAction(this, "Screenshot")
 {
 	setText("Settings");
 
 	_helpAction.setDefaultWidgetFlags(TriggerAction::Icon);
+	_screenshotAction.setDefaultWidgetFlags(TriggerAction::Icon);
 
 	connect(&_helpAction, &TriggerAction::triggered, this, [this]() -> void {
 		_simianViewerPlugin.getTriggerHelpAction().trigger();
 	});
+
 
 	_eventListener.setEventCore(core);
 	_eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataAdded));
@@ -165,7 +168,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_inSpecies2HeatMapCellAction.setVisible(false);
 
 	_helpAction.setIcon(Application::getIconFont("FontAwesome").getIcon("question"));
-
+	_screenshotAction.setIcon(Application::getIconFont("FontAwesome").getIcon("camera"));
 	const auto updateCrossSpeciesFilter = [this]() -> void
 	{
 		updateDatasetPickerAction();
@@ -659,10 +662,18 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		}
 	};
 
+
+
+	// Generate the cluster colors in the model
+	const auto generateScreenshot = [this]() -> void {
+		_simianViewerPlugin.getSimianViewerWidget()->generateScreenshot(QString::fromStdString("T"));
+	};
+
 	connect(&_crossSpeciesFilterAction, &OptionAction::currentIndexChanged, [this, updateCrossSpeciesFilter](const std::int32_t& currentIndex) {
 		updateCrossSpeciesFilter();
 		});
 
+	connect(&_screenshotAction, &TriggerAction::triggered, this, generateScreenshot);
 	connect(&_multiSelectClusterFilterAction, &OptionsAction::selectedOptionsChanged, [this, multiSelectClusterFilter](const QStringList& currentIndex) {
 		multiSelectClusterFilter();
 		});
