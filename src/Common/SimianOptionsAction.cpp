@@ -69,6 +69,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_species2SelectAction.setEnabled(false);
 	_neighborhoodAction.setEnabled(false);
 	_distanceAction.setEnabled(false);
+	_screenshotAction.setEnabled(false);
 	_distanceAction.setVisible(false);
 	_histBarAction.setEnabled(false);
 	_fullHeatMapAction.setEnabled(false);
@@ -326,7 +327,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		else {
 			_species2SelectAction.setEnabled(false);
 			_neighborhoodAction.setEnabled(false);
-
+			_screenshotAction.setEnabled(false);
 			_distanceAction.setEnabled(false);
 			_histBarAction.setEnabled(false);
 			_fullHeatMapAction.setEnabled(false);
@@ -357,7 +358,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		if (_species2SelectAction.getCurrentText().isValidUtf16())
 		{
 			_neighborhoodAction.setEnabled(true);
-
+			_screenshotAction.setEnabled(true);
 			_crossSpecies1DatasetLinkerAction.setEnabled(true);
 			_crossSpecies2DatasetLinkerAction.setEnabled(true);
 
@@ -415,6 +416,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		}
 		else {
 			_neighborhoodAction.setEnabled(false);
+			_screenshotAction.setEnabled(false);
 			_scatterplotColorControlAction.setEnabled(false);
 			_distanceAction.setEnabled(false);
 			_histBarAction.setEnabled(false);
