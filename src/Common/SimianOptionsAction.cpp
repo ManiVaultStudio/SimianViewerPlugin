@@ -42,9 +42,16 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_histBarAction(this,"Cell counts"),
 	_removeLinkingOptionMenuFromUIAction(this, "Remove linking option"),
 	_fullHeatMapAction(this,"Full distancemap")/*,
-	_explorationModeAction(this)*/
+	_explorationModeAction(this)*/,
+	_helpAction(this, "Help")
 {
 	setText("Settings");
+
+	_helpAction.setDefaultWidgetFlags(TriggerAction::Icon);
+
+	connect(&_helpAction, &TriggerAction::triggered, this, [this]() -> void {
+		_simianViewerPlugin.getTriggerHelpAction().trigger();
+	});
 
 	_eventListener.setEventCore(core);
 	_eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataAdded));
@@ -156,6 +163,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_speciesEmbedding2LinkerAction.setVisible(false);
 	_inSpecies1HeatMapCellAction.setVisible(false);
 	_inSpecies2HeatMapCellAction.setVisible(false);
+
+	_helpAction.setIcon(Application::getIconFont("FontAwesome").getIcon("question"));
 
 	const auto updateCrossSpeciesFilter = [this]() -> void
 	{
