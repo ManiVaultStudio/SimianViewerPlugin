@@ -74,7 +74,7 @@ void SimianViewerPlugin::init()
     auto visSettingsWidget = _simianOptionsAction->getVisSettingAction().createCollapsedWidget(&getWidget());
     topToolbarLayout->addWidget(visSettingsWidget);
     topToolbarLayout->addWidget(_simianOptionsAction->getLinkerSettingAction().createCollapsedWidget(&getWidget()));
-
+    topToolbarLayout->addWidget(_simianOptionsAction->getHelpAction().createWidget(&getWidget()));
 
  
     topToolbarLayout->addStretch(0);
@@ -227,6 +227,16 @@ void SimianViewerPlugin::publishCluster(std::string clusterName)
 
 
 
+SimianViewerPluginFactory::SimianViewerPluginFactory() :
+    ViewPluginFactory()
+{
+    connect(&getTriggerHelpAction(), &TriggerAction::triggered, this, [this]() -> void {
+        // Do your stuff here
+        qDebug() << "Simian viewer plugin help requested...";
+
+    });
+}
+
 // =============================================================================
 // Factory
 // =============================================================================
@@ -274,6 +284,11 @@ hdps::gui::PluginTriggerActions SimianViewerPluginFactory::getPluginTriggerActio
 	}
 
 	return pluginTriggerActions;
+}
+
+bool SimianViewerPluginFactory::hasHelp()
+{
+    return true;
 }
 
 void SimianViewerPlugin::selectCrossSpeciesClusterPoints(std::vector<std::string> selectedIDs)

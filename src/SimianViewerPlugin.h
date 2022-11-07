@@ -70,7 +70,7 @@ class SimianViewerPluginFactory : public ViewPluginFactory
                       FILE  "SimianViewerPlugin.json")
     
 public:
-    SimianViewerPluginFactory(void) {}
+    SimianViewerPluginFactory(void);
     ~SimianViewerPluginFactory(void) override {}
 
     /**
@@ -90,4 +90,12 @@ public:
      * @return Vector of plugin trigger actions
      */
     PluginTriggerActions getPluginTriggerActions(const hdps::Datasets& datasets) const override;
+
+public: // Help
+
+    /**
+     * Get whether the plugin has help information or not
+     * @return Boolean determining whether the plugin has help information or not
+     */
+    bool hasHelp() override;
 };
