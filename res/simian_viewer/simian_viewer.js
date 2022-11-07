@@ -85,6 +85,7 @@ try {
         QtBridge.qt_setBackgroundColor.connect(function () { setBackgroundColor(arguments[0]); });
         QtBridge.qt_histChart.connect(function () { histChart(arguments[0]); });
         QtBridge.qt_showFullHeatmap.connect(function () { showFullHeatmap(arguments[0]); });
+        QtBridge.qt_generateScreenshot.connect(function () { generateScreenshot(arguments[0]); });
 /*        QtBridge.qt_showExplorationMode.connect(function () { showExplorationMode(arguments[0]); });*/
         QtBridge.qt_setRangeValue.connect(function () { setRangeValue(arguments[0]); });
         QtBridge.qt_inspeciesClusterCounts.connect(function () { setInspeciesClusterCounts(arguments[0]); });
@@ -2055,6 +2056,21 @@ function queueshowFullHeatmap(valD) {
     }
 
     simianVis();
+}
+
+function generateScreenshot(d) {
+
+    queuegenerateScreenshot(d);
+}
+function queuegenerateScreenshot(valD) {
+    if (valD == "T") {
+        
+
+        if (isQtAvailable) {
+            QtBridge.js_generatedScreenshotData(document.getElementById("allVisDa").innerHTML.toString());
+        }
+    }
+
 }
 
 /*function showExplorationMode(d) {
