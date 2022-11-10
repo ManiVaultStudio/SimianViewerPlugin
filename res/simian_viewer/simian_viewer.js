@@ -1890,7 +1890,7 @@ const simianVis = () => {
         else {
             ximage = 'images/dark/marmoset-dark.png';
         }
-        xTooltipimage = 'images/color/human-color.png';
+        xTooltipimage = 'images/color/marmoset-color.png';
     }
 
     if (yimage !== "") {

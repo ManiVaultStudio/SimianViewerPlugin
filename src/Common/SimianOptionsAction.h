@@ -260,6 +260,8 @@ public: // Action getters
     CellCountAction& getCellCountAction() { return _cellCountAction; }
     TriggerAction& getHelpAction() { return _helpAction; }
     TriggerAction& getScreenshotAction() { return _screenshotAction; }
+    OptionAction& getBarLinkerSpecies1() { return _barLinkerAction1; }
+    OptionAction& getBarLinkerSpecies2() { return _barLinkerAction2; }
     //ExplorationAction& getExplorationAction() { return _explorationAction; }
 protected:
     SimianViewerPlugin&          _simianViewerPlugin;
@@ -302,6 +304,10 @@ protected:
     ToggleAction                _removeLinkingOptionMenuFromUIAction;
     TriggerAction                _helpAction;
     TriggerAction                _screenshotAction;
+
+    OptionAction                 _barLinkerAction1;
+    OptionAction                 _barLinkerAction2;
+
     bool _isStarted;
     ColorMapAction          _colorMapAction;
     ColorAction              _backgroundColoringAction;
