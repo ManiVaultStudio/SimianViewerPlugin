@@ -262,6 +262,7 @@ public: // Action getters
     TriggerAction& getScreenshotAction() { return _screenshotAction; }
     OptionAction& getBarLinkerSpecies1() { return _barLinkerAction1; }
     OptionAction& getBarLinkerSpecies2() { return _barLinkerAction2; }
+    OptionAction& getScatterplotColorControl() { return _scatterplotColorControlAction; }
     //ExplorationAction& getExplorationAction() { return _explorationAction; }
 protected:
     SimianViewerPlugin&          _simianViewerPlugin;

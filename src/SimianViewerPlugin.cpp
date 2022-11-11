@@ -171,8 +171,11 @@ void SimianViewerPlugin::publishCluster(std::string clusterName)
 {
     if (clusterName != "")
     {
-        _simianOptionsAction->getBarLinkerSpecies1().setCurrentText(QString::fromStdString(clusterName));
-        _simianOptionsAction->getBarLinkerSpecies2().setCurrentText(QString::fromStdString(clusterName));
+        if (_simianOptionsAction->getScatterplotColorControl().getCurrentText()=="cross-species cluster") {
+            _simianOptionsAction->getBarLinkerSpecies1().setCurrentText(QString::fromStdString(clusterName));
+            _simianOptionsAction->getBarLinkerSpecies2().setCurrentText(QString::fromStdString(clusterName));
+        }
+
         _simianOptionsAction->getCrossSpecies1HeatMapCellAction().setCurrentText(QString::fromStdString(clusterName));
         _simianOptionsAction->getCrossSpecies2HeatMapCellAction().setCurrentText(QString::fromStdString(clusterName));
         if(_simianOptionsAction->getCrossSpeciesFilterAction().getCurrentText() == "cross-species clusters")
@@ -428,9 +431,17 @@ void SimianViewerPlugin::selectCrossSpeciesClusterPoints(std::vector<std::string
 
 void SimianViewerPlugin::selectIndividualSpeciesClusterPoints(std::vector<std::string> selectedIDs)
 {
-    
-    _simianOptionsAction->getBarLinkerSpecies1().setCurrentText(QString::fromStdString(selectedIDs[2]));
-    _simianOptionsAction->getBarLinkerSpecies2().setCurrentText(QString::fromStdString(selectedIDs[3]));
+    if (_simianOptionsAction->getScatterplotColorControl().getCurrentText() == "cross-species cluster")
+    {
+        _simianOptionsAction->getBarLinkerSpecies1().setCurrentText(QString::fromStdString(selectedIDs[2]));
+        _simianOptionsAction->getBarLinkerSpecies2().setCurrentText(QString::fromStdString(selectedIDs[3]));
+    }
+    else if (_simianOptionsAction->getScatterplotColorControl().getCurrentText() == "in-species cluster")
+    {
+        _simianOptionsAction->getBarLinkerSpecies1().setCurrentText(QString::fromStdString(selectedIDs[0]));
+        _simianOptionsAction->getBarLinkerSpecies2().setCurrentText(QString::fromStdString(selectedIDs[1]));
+    }
+
     
     _simianOptionsAction->getInSpecies1HeatMapCellAction().setCurrentText(QString::fromStdString(selectedIDs[0]));
     _simianOptionsAction->getInSpecies2HeatMapCellAction().setCurrentText(QString::fromStdString(selectedIDs[1]));
