@@ -289,8 +289,8 @@ const simianVis = () => {
         svg.append('polygon')
             .attr("id", "axisSelectionpolygon")
             .attr('points', poly)
-            .attr('stroke', cross_speciesClustercolors[correspondingCrossspeciescluster])
-            .attr("stroke-width", 6)
+            .attr('stroke', "#de2d26")//cross_speciesClustercolors[correspondingCrossspeciescluster])
+            .attr("stroke-width", 3)//6)
             .attr('fill', 'none');
 
         svg.append("foreignObject")
@@ -449,8 +449,8 @@ const simianVis = () => {
         svg.append('polygon')
             .attr("id", "axisSelectionpolygon")
             .attr('points', poly)
-            .attr('stroke', cross_speciesClustercolors[correspondingCrossspeciescluster])
-            .attr("stroke-width", 6)
+            .attr('stroke', "#de2d26")//cross_speciesClustercolors[correspondingCrossspeciescluster])
+            .attr("stroke-width", 3)//6)
             .attr('fill', 'none');
 
         svg.append("foreignObject")
