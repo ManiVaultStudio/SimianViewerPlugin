@@ -126,41 +126,41 @@ void SimianViewerPlugin::publishSelection(std::vector<std::string> selectedIDs)
 void SimianViewerPlugin::generatedScreenshotData(std::string selectedIDs)
 {
     QFileDialog saveFileDialog;
-    QString xml = QString::fromStdString(selectedIDs);
+    //QString xml = QString::fromStdString(selectedIDs);
     saveFileDialog.setAcceptMode(QFileDialog::AcceptSave);
     saveFileDialog.setDirectory(QDir::home().absolutePath());
-    saveFileDialog.setDefaultSuffix("svg");
-    saveFileDialog.selectFile("SimianViewer.svg");
-    saveFileDialog.setNameFilter(tr("SVG Image Files (*.svg)"));
+    //saveFileDialog.setDefaultSuffix("svg");
+    saveFileDialog.selectFile("SimianViewerScreenshot.png");
+    saveFileDialog.setNameFilter(tr("PNG Image Files (*.png)"));
 
     QString fileName;
     if (saveFileDialog.exec())
     {
         fileName = saveFileDialog.selectedFiles().first();
 
-        QString typeInfo = " xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"";
+        //QString typeInfo = " xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"";
 
-        int offset = xml.indexOf("<svg") + 4;
-        xml.insert(offset, typeInfo);
+        //int offset = xml.indexOf("<svg") + 4;
+        //xml.insert(offset, typeInfo);
 
-        offset = xml.indexOf("</svg>");
+        //offset = xml.indexOf("</svg>");
         //xml.insert(offset, _css);
 
         /* Try and open a file for output */
-        QFile outputFile(fileName);
-        outputFile.open(QIODevice::ReadWrite | QIODevice::Truncate);
+        //QFile outputFile(fileName);
+        //outputFile.open(QIODevice::ReadWrite | QIODevice::Truncate);
 
         /* Check it opened OK */
-        if (!outputFile.isOpen()) { return; }
+        //if (!outputFile.isOpen()) { return; }
 
         /* Point a QTextStream object at the file */
-        QTextStream outStream(&outputFile);
+        //QTextStream outStream(&outputFile);
 
         /* Write the line to the file */
-        outStream << xml;
-
+        //outStream << xml;
+        _simian_viewer->grab().save(fileName, "PNG");
         /* Close the file */
-        outputFile.close();
+        //outputFile.close();
     }
 
 
