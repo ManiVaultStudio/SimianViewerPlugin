@@ -1,6 +1,8 @@
 #include "SimianOptionsAction.h"
 #include "SimianViewerPlugin.h"
-
+#include <QFileDialog>
+#include <QPageLayout>
+#include <QWebEngineView>
 using namespace hdps;
 using namespace hdps::gui;
 const QColor SimianOptionsAction::DEFAULT_CONSTANT_COLOR = qRgb(255, 255, 255);
@@ -695,7 +697,37 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 	// Generate the cluster colors in the model
 	const auto generateScreenshot = [this]() -> void {
-		_simianViewerPlugin.getSimianViewerWidget()->generateScreenshot(QString::fromStdString("T"));
+		
+			
+		QFileDialog saveFileDialog;
+
+		saveFileDialog.setAcceptMode(QFileDialog::AcceptSave);
+		saveFileDialog.setDirectory(QDir::home().absolutePath());
+
+		saveFileDialog.selectFile("SimianViewerScreenshot.pdf");
+		saveFileDialog.setNameFilter(tr("PDF Files (*.pdf)"));
+
+		QString fileName;
+		if (saveFileDialog.exec())
+		{
+			fileName = saveFileDialog.selectedFiles().first();
+
+
+
+			QPageLayout pl;
+			QPageSize ps;
+			//qDebug() << "height" << _simianViewerPlugin.getSimianViewerWidget()->height();
+			//qDebug() << "width" << _simianViewerPlugin.getSimianViewerWidget()->width();
+			ps = QPageSize(QSizeF(_simianViewerPlugin.getSimianViewerWidget()->width(), _simianViewerPlugin.getSimianViewerWidget()->height()), QPageSize::Point, QString(), QPageSize::ExactMatch);
+			pl.setPageSize(ps);
+			pl.setOrientation(QPageLayout::Portrait);
+
+
+			_simianViewerPlugin.getSimianViewerWidget()->getPage()->printToPdf(fileName, pl);
+
+		}
+			//..getSimianViewerWidget()->getPage()->printToPdf(fileName, pl);
+
 	};
 
 	connect(&_crossSpeciesFilterAction, &OptionAction::currentIndexChanged, [this, updateCrossSpeciesFilter](const std::int32_t& currentIndex) {
