@@ -73,11 +73,10 @@ void SimianViewerPlugin::init()
     //auto explorationActionwidget = _simianOptionsAction->getExplorationAction().createWidget(&_widget);
     //explorationActionwidget->setMaximumWidth(97);
     //topToolbarLayout->addWidget(explorationActionwidget);
-
+    topToolbarLayout->addWidget(_simianOptionsAction->getScreenshotAction().createWidget(&getWidget()));
     auto visSettingsWidget = _simianOptionsAction->getVisSettingAction().createCollapsedWidget(&getWidget());
     topToolbarLayout->addWidget(visSettingsWidget);
     topToolbarLayout->addWidget(_simianOptionsAction->getLinkerSettingAction().createCollapsedWidget(&getWidget()));
-    topToolbarLayout->addWidget(_simianOptionsAction->getScreenshotAction().createWidget(&getWidget()));
     topToolbarLayout->addWidget(_simianOptionsAction->getHelpAction().createWidget(&getWidget()));
 
  
