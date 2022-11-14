@@ -717,8 +717,16 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			QPageLayout pl;
 			QPageSize ps;
 			//qDebug() << "height" << _simianViewerPlugin.getSimianViewerWidget()->height();
-			//qDebug() << "width" << _simianViewerPlugin.getSimianViewerWidget()->width();
-			ps = QPageSize(QSizeF(_simianViewerPlugin.getSimianViewerWidget()->width(), _simianViewerPlugin.getSimianViewerWidget()->height()), QPageSize::Point, QString(), QPageSize::ExactMatch);
+			
+			int width = _simianViewerPlugin.getSimianViewerWidget()->width();
+			int height = _simianViewerPlugin.getSimianViewerWidget()->height();
+			int reducedWidth =  static_cast<double>(width) / 100 * 75;
+			int reducedHeight = static_cast<double>(height) / 100 * 78;
+			//qDebug() << "width" << width;
+			//qDebug() << "reduced width" << reducedWidth;
+			//qDebug() << "height" << height;
+			//qDebug() << "reduced height" << reducedHeight;
+			ps = QPageSize(QSizeF(reducedWidth, reducedHeight), QPageSize::Point, QString(), QPageSize::ExactMatch);
 			pl.setPageSize(ps);
 			pl.setOrientation(QPageLayout::Portrait);
 
