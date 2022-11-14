@@ -36,11 +36,11 @@ void SimianViewerCommunicationObject::js_passClusterToQt(QVariant data)
     _parent->js_passClusterToQt(data.toString().toStdString());
 }
 
-void SimianViewerCommunicationObject::js_generatedScreenshotData(QVariant data)
-{
-
-    _parent->js_generatedScreenshotData(data.toString().toStdString());
-}
+//void SimianViewerCommunicationObject::js_generatedScreenshotData(QVariant data)
+//{
+//
+//    _parent->js_generatedScreenshotData(data.toString().toStdString());
+//}
 
 SimianViewerWidget::SimianViewerWidget() :
     loaded(false)
@@ -161,10 +161,10 @@ void SimianViewerWidget::showFullHeatmap(QString visColorContent)
     emit _communicationObject->qt_showFullHeatmap(visColorContent);
 }
 
-void SimianViewerWidget::generateScreenshot(QString visColorContent)
-{
-    emit _communicationObject->qt_generateScreenshot(visColorContent);
-}
+//void SimianViewerWidget::generateScreenshot(QString visColorContent)
+//{
+//    emit _communicationObject->qt_generateScreenshot(visColorContent);
+//}
 
 //void SimianViewerWidget::showExplorationMode(QString visColorContent)
 //{
@@ -204,7 +204,7 @@ void SimianViewerWidget::js_passClusterToQt(std::string clusterName)
     emit passClusterToQt(clusterName);
 }
 
-void SimianViewerWidget::js_generatedScreenshotData(std::string clusterName)
-{
-    emit generatedScreenshotData(clusterName);
-}
+//void SimianViewerWidget::js_generatedScreenshotData(std::string clusterName)
+//{
+//    emit generatedScreenshotData(clusterName);
+//}
