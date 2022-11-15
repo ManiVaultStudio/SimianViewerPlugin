@@ -730,19 +730,19 @@ const simianVis = () => {
         }
 
         if (species1ValueIdentify == "human") {
-            colorNow1 = cross_speciesClustercolors[mapDataforBorderHuman[uniqueClusters1List[i]]];
+            colorNow1 = in_speciesClustercolors[mapDataforBorderHuman[uniqueClusters1List[i]]];
         }
         else if (species1ValueIdentify == "chimp") {
-            colorNow1 = cross_speciesClustercolors[mapDataforBorderChimp[uniqueClusters1List[i]]];
+            colorNow1 = in_speciesClustercolors[mapDataforBorderChimp[uniqueClusters1List[i]]];
         }
         else if (species1ValueIdentify == "gorilla") {
-            colorNow1 = cross_speciesClustercolors[mapDataforBorderGorilla[uniqueClusters1List[i]]];
+            colorNow1 = in_speciesClustercolors[mapDataforBorderGorilla[uniqueClusters1List[i]]];
         }
         else if (species1ValueIdentify == "rhesus") {
-            colorNow1 = cross_speciesClustercolors[mapDataforBorderRhesus[uniqueClusters1List[i]]];
+            colorNow1 = in_speciesClustercolors[mapDataforBorderRhesus[uniqueClusters1List[i]]];
         }
         else if (species1ValueIdentify == "marmoset") {
-            colorNow1 = cross_speciesClustercolors[mapDataforBorderMarmoset[uniqueClusters1List[i]]];
+            colorNow1 = in_speciesClustercolors[mapDataforBorderMarmoset[uniqueClusters1List[i]]];
         }
         svg.append("line")
             .attr("x1", valnow1)
@@ -771,19 +771,19 @@ const simianVis = () => {
         }
 
         if (species2ValueIdentify == "chimp") {
-            colorNow2 = cross_speciesClustercolors[mapDataforBorderChimp[uniqueClusters2List[i]]];
+            colorNow2 = in_speciesClustercolors[mapDataforBorderChimp[uniqueClusters2List[i]]];
         }
         else if (species2ValueIdentify == "gorilla") {
-            colorNow2 = cross_speciesClustercolors[mapDataforBorderGorilla[uniqueClusters2List[i]]];
+            colorNow2 = in_speciesClustercolors[mapDataforBorderGorilla[uniqueClusters2List[i]]];
         }
         else if (species2ValueIdentify == "marmoset") {
-            colorNow2 = cross_speciesClustercolors[mapDataforBorderMarmoset[uniqueClusters2List[i]]];
+            colorNow2 = in_speciesClustercolors[mapDataforBorderMarmoset[uniqueClusters2List[i]]];
         }
         else if (species2ValueIdentify == "rhesus") {
-            colorNow2 = cross_speciesClustercolors[mapDataforBorderRhesus[uniqueClusters2List[i]]];
+            colorNow2 = in_speciesClustercolors[mapDataforBorderRhesus[uniqueClusters2List[i]]];
         }
         else if (species2ValueIdentify == "human") {
-            colorNow2 = cross_speciesClustercolors[mapDataforBorderHuman[uniqueClusters2List[i]]];
+            colorNow2 = in_speciesClustercolors[mapDataforBorderHuman[uniqueClusters2List[i]]];
         }
         svg.append("line")
             .attr("x1", 0)
@@ -811,19 +811,19 @@ const simianVis = () => {
         }
 
         if (species1ValueIdentify == "human") {
-            colorNow1 = cross_speciesClustercolors[mapDataforBorderHuman[uniqueClusters1List[i]]];
+            colorNow1 = in_speciesClustercolors[mapDataforBorderHuman[uniqueClusters1List[i]]];
         }
         else if (species1ValueIdentify == "chimp") {
-            colorNow1 = cross_speciesClustercolors[mapDataforBorderChimp[uniqueClusters1List[i]]];
+            colorNow1 = in_speciesClustercolors[mapDataforBorderChimp[uniqueClusters1List[i]]];
         }
         else if (species1ValueIdentify == "gorilla") {
-            colorNow1 = cross_speciesClustercolors[mapDataforBorderGorilla[uniqueClusters1List[i]]];
+            colorNow1 = in_speciesClustercolors[mapDataforBorderGorilla[uniqueClusters1List[i]]];
         }
         else if (species1ValueIdentify == "rhesus") {
-            colorNow1 = cross_speciesClustercolors[mapDataforBorderRhesus[uniqueClusters1List[i]]];
+            colorNow1 = in_speciesClustercolors[mapDataforBorderRhesus[uniqueClusters1List[i]]];
         }
         else if (species1ValueIdentify == "marmoset") {
-            colorNow1 = cross_speciesClustercolors[mapDataforBorderMarmoset[uniqueClusters1List[i]]];
+            colorNow1 = in_speciesClustercolors[mapDataforBorderMarmoset[uniqueClusters1List[i]]];
         }
         svg.append("line")
             .attr("x1", valnow1)
@@ -858,19 +858,19 @@ const simianVis = () => {
         }
 
         if (species2ValueIdentify == "chimp") {
-            colorNow2 = cross_speciesClustercolors[mapDataforBorderChimp[uniqueClusters2List[i]]];
+            colorNow2 = in_speciesClustercolors[mapDataforBorderChimp[uniqueClusters2List[i]]];
         }
         else if (species2ValueIdentify == "gorilla") {
-            colorNow2 = cross_speciesClustercolors[mapDataforBorderGorilla[uniqueClusters2List[i]]];
+            colorNow2 = in_speciesClustercolors[mapDataforBorderGorilla[uniqueClusters2List[i]]];
         }
         else if (species2ValueIdentify == "marmoset") {
-            colorNow2 = cross_speciesClustercolors[mapDataforBorderMarmoset[uniqueClusters2List[i]]];
+            colorNow2 = in_speciesClustercolors[mapDataforBorderMarmoset[uniqueClusters2List[i]]];
         }
         else if (species2ValueIdentify == "rhesus") {
-            colorNow2 = cross_speciesClustercolors[mapDataforBorderRhesus[uniqueClusters2List[i]]];
+            colorNow2 = in_speciesClustercolors[mapDataforBorderRhesus[uniqueClusters2List[i]]];
         }
         else if (species2ValueIdentify == "human") {
-            colorNow2 = cross_speciesClustercolors[mapDataforBorderHuman[uniqueClusters2List[i]]];
+            colorNow2 = in_speciesClustercolors[mapDataforBorderHuman[uniqueClusters2List[i]]];
         }
         svg.append("line")
             .attr("x1", width)
