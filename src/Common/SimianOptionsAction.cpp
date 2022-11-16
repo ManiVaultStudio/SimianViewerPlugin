@@ -252,7 +252,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 	const auto updateSpecies1 = [this]() -> void
 	{
-		if (_species1SelectAction.getCurrentText() != "" && _species1SelectAction.getCurrentText().isValidUtf16())
+		if (_species1SelectAction.getCurrentText() != "")
 		{
 			_species2SelectAction.setEnabled(true);
 			if (!_crossSpecies1DatasetLinkerAction.getOptions().isEmpty())
@@ -296,8 +296,9 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			}
 
 
-			if (_species2SelectAction.getCurrentText().isValidUtf16() && _species2SelectAction.getCurrentText() != "")
+			if (_species2SelectAction.getCurrentText() != "")
 			{
+				_histBarAction.setEnabled(true);
 				if (_species2SelectAction.getCurrentText() == _species1SelectAction.getCurrentText())
 				{
 					_simianViewerPlugin.getSimianViewerWidget()->resetView("Reset");
@@ -374,7 +375,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	};
 	const auto updateSpecies2 = [this]() -> void
 	{
-		if (_species2SelectAction.getCurrentText().isValidUtf16())
+		if (_species2SelectAction.getCurrentText()!="")
 		{
 			_neighborhoodAction.setEnabled(true);
 			_screenshotAction.setEnabled(true);
@@ -482,7 +483,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 		if (_species1ScatterplotColorLinkerAction.getNumberOfOptions() > 0 && _species2ScatterplotColorLinkerAction.getNumberOfOptions() > 0)
 		{
-			if (_scatterplotColorControlAction.getCurrentText() != "" && _scatterplotColorControlAction.getCurrentText().isValidUtf16())
+			if (_scatterplotColorControlAction.getCurrentText() != "" )
 			{
 				auto species1SelectedOption = selectFromQStringList(_species1ScatterplotColorLinkerAction.getOptions(), _species1SelectAction.getCurrentText(), _scatterplotColorControlAction.getCurrentText());
 
