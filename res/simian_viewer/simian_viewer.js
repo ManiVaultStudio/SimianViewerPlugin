@@ -1251,6 +1251,10 @@ const simianVis = () => {
         }*/
     };
     var mouseout = function (d) {
+        if (d3.event.shiftKey) {
+            if (showExplorationModeflag) { showExplorationModeflag = false; tip.show(d, d3.mouse(this), this); }
+
+        }
         if (!showExplorationModeflag) {
             tip.hide();
             d3.select("#exploreViewMarker1").remove();
@@ -1267,11 +1271,15 @@ const simianVis = () => {
     };
     var mouseenter = function (d) {
         if (d3.event.shiftKey) {
-            if (!showExplorationModeflag) { showExplorationModeflag = true; }
-            else { showExplorationModeflag = false; }
-            //tip.show(d, d3.mouse(this), this);
+            if (showExplorationModeflag) { showExplorationModeflag = false; tip.show(d, d3.mouse(this), this);}
+            
         }
-
+        if (!showExplorationModeflag) {
+            tip.hide();
+            d3.select("#exploreViewMarker1").remove();
+            d3.select("#exploreViewMarker2").remove();
+            d3.select("#exploreViewMarker3").remove();
+        }
     };
 
 
@@ -1368,12 +1376,6 @@ const simianVis = () => {
                 return 0;
             });
 
-/*        if (d3.event.shiftKey) {
-            if (!showExplorationModeflag) { showExplorationModeflag = true; }
-            else { showExplorationModeflag = false; }
-            //tip.show(d, d3.mouse(this), this);
-        }*/
-
     };
     var mouseclick = function (d) {
 
@@ -1381,7 +1383,7 @@ const simianVis = () => {
         d3.select("#marker2").remove();
         d3.select("#marker3").remove();*/
         if (!showExplorationModeflag) { showExplorationModeflag = true; }
-        else { showExplorationModeflag = false; }
+        //else { showExplorationModeflag = false; } ////comment this line if it is okay to use keyboard only
         tip.show(d, d3.mouse(this), this);
 
 
