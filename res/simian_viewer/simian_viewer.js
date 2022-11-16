@@ -1266,7 +1266,11 @@ const simianVis = () => {
         d3.select("#exploreViewMarker3").remove();
     };
     var mouseenter = function (d) {
-        
+        if (d3.event.shiftKey) {
+            if (!showExplorationModeflag) { showExplorationModeflag = true; }
+            else { showExplorationModeflag = false; }
+            //tip.show(d, d3.mouse(this), this);
+        }
 
     };
 
@@ -1363,6 +1367,13 @@ const simianVis = () => {
             .style("opacity", 0.9).style("stroke-width", function (d) {
                 return 0;
             });
+
+/*        if (d3.event.shiftKey) {
+            if (!showExplorationModeflag) { showExplorationModeflag = true; }
+            else { showExplorationModeflag = false; }
+            //tip.show(d, d3.mouse(this), this);
+        }*/
+
     };
     var mouseclick = function (d) {
 
