@@ -1753,9 +1753,9 @@ const simianVis = () => {
     if (yimage !== "") {
         svg.append('image')
             .attr('xlink:href', yimage)
-            .attr('width', 30)
-            .attr('height', 40)
-            .attr("x", 0 - 70)
+            //.attr('width', 30)
+            .attr('height', 35)
+            .attr("x", 0 - 68)
             .attr("y", height)
             .on("click", species2Click);//
     }
@@ -1763,10 +1763,10 @@ const simianVis = () => {
     if (ximage !== "") {
         svg.append('image')
             .attr('xlink:href', ximage)
-            .attr('width', 30)
-            .attr('height', 40)
-            .attr("x", 0 - 39)
-            .attr("y", height + 10)
+            //.attr('width', 30)
+            .attr('height', 35)
+            .attr("x", 0 - 30)
+            .attr("y", height + 15)
             .on("click", species1Click);
     }
 
