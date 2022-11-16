@@ -473,8 +473,11 @@ const simianVis = () => {
         if (window.innerHeight < window.innerWidth) {
             foreignTextsize = parseInt(2 / 100 * window.innerHeight);
         }
-        else {
+        else if (window.innerHeight > window.innerWidth) {
             foreignTextsize = parseInt(1.5 / 100 * window.innerWidth);
+        }
+        else {
+            foreignTextsize = parseInt(1.5 / 100 * window.innerHeight);
         }
 
         svg.append("foreignObject")
@@ -1125,8 +1128,19 @@ const simianVis = () => {
 
 
             }
+            var tooltipTextsize;
+
+            if (window.innerHeight < 320) {
+                tooltipTextsize = parseInt(1 / 100 * window.innerHeight);
+            }
+            else {
+                tooltipTextsize = parseInt(0.7 / 100 * window.innerWidth);
+            }
+
+            var tooltipImageHeight = parseInt(5 * tooltipTextsize);
+
             var formatTooltipContents = "";
-            formatTooltipContents = "<div id=\"clearTooltip\"> <table style=\"font-size: 10px;  width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=50; /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=50;  /></th></tr><tr><td  style=\"  \" ><b>In-species <b/></td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</td></tr>";
+            formatTooltipContents = "<div id=\"clearTooltip\"> <table style=\"font-size: " + tooltipTextsize + "px;  width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=" + tooltipImageHeight+"; /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=" + tooltipImageHeight+";  /></th></tr><tr><td  style=\"  \" ><b>In-species <b/></td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</td></tr>";
             if (barflag) {
                 formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Cell count<b/></td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #1b9e77;\">" + inspecies1ClusterCounts[d.cluster_1] + "</td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #d95f02;\">" + inspecies2ClusterCounts[d.cluster_2] + "</td></tr>";
             }            
