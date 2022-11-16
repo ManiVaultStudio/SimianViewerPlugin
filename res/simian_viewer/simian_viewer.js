@@ -1765,8 +1765,8 @@ const simianVis = () => {
             .attr('xlink:href', ximage)
             //.attr('width', 30)
             .attr('height', 35)
-            .attr("x", 0 - 30)
-            .attr("y", height + 15)
+            .attr("x", 0 - 33)
+            .attr("y", height + 30)
             .on("click", species1Click);
     }
 
