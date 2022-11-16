@@ -11,8 +11,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	WidgetAction(&simianViewerPlugin),
 	_simianViewerPlugin(simianViewerPlugin),
 	_core(core),
-	_species1SelectAction(this,"Species1"),
-	_species2SelectAction(this,"Species2"),
+	_species1SelectAction(this,"Species1(X-axis)"),
+	_species2SelectAction(this,"Species2(Y-axis)"),
 	_neighborhoodAction(this,"Neighborhood"),
 	_scatterplotColorControlAction(this, "Scatterplot color"),
 	_distanceAction(this, "Filter distance :"),
@@ -1105,7 +1105,7 @@ SimianOptionsAction::Species1Action::Widget::Widget(QWidget* parent, Species1Act
 
 	auto selectionSpecies1Widget = simianOptionsAction._species1SelectAction.createWidget(this);
 	selectionSpecies1Widget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-	selectionSpecies1Widget->setMaximumWidth(170);
+	selectionSpecies1Widget->setMaximumWidth(190);
 
 	auto selectionSpecies1OptionLayout = new QFormLayout();
 
@@ -1130,7 +1130,7 @@ SimianOptionsAction::Species2Action::Widget::Widget(QWidget* parent, Species2Act
 
 	auto selectionSpecies2Widget = simianOptionsAction._species2SelectAction.createWidget(this);
 	selectionSpecies2Widget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-	selectionSpecies2Widget->setMaximumWidth(170);
+	selectionSpecies2Widget->setMaximumWidth(190);
 
 	auto selectionSpecies2OptionLayout = new QFormLayout();
 
