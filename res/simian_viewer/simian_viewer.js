@@ -292,6 +292,19 @@ const simianVis = () => {
             .attr('stroke', "#de2d26")//cross_speciesClustercolors[correspondingCrossspeciescluster])
             .attr("stroke-width", 3)//6)
             .attr('fill', 'none');
+        var foreignObjectHeight = parseInt(46 / 100 * window.innerHeight);
+        var foreignObjectWidth = parseInt(18 / 100 * window.innerWidth);
+
+        var foreignTextsize;// = parseInt(2 / 100 * window.innerHeight);
+        if (window.innerHeight < window.innerWidth) {
+            foreignTextsize = parseInt(2 / 100 * window.innerHeight);
+        }
+        else if (window.innerHeight > window.innerWidth) {
+            foreignTextsize = parseInt(1.5 / 100 * window.innerWidth);
+        }
+        else {
+            foreignTextsize = parseInt(1.5 / 100 * window.innerHeight);
+        }
 
         svg.append("foreignObject")
             .attr("id", "axisSelectionText")
@@ -300,14 +313,14 @@ const simianVis = () => {
             .attr("x", 0 + width / 15)
             //.attr("z-index", 9999)
             .attr("y", 0)
-            .attr("width", 250)
-            .attr("height", 200)
+            .attr("width", foreignObjectWidth)
+            .attr("height", foreignObjectHeight)
             .html(function (d) {
                 var average = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']) / parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']);
                 let minVal = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']).toFixed(2);
                 let maxVal = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']).toFixed(2);
                 let avgVal = parseFloat(average).toFixed(2);
-                var value = "<div><table style=\"font-size: 9px; width: 100%   border - spacing: 0; text - align: center; \"><tr><td  style=\" background-color:white; \" ><b>Block count<b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;background-color:white;\">" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells'] + "</td></tr><tr><td   style=\"  background-color:white;\"><b>Minimum distance<b/></td><td  style=\"  background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\">" + minVal + "</td></tr><tr><td   style=\" background-color:white;\"><b>Maximum distance<b/></td><td  style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C; \">" + maxVal + "</td></tr><tr><td   style=\" background-color:white;\"><b>Average distance<b/></td><td   style=\"  -webkit-text-fill-color: black;background-color:white; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\"> " + avgVal + "</td></tr><tr ><td style=\" background-color:white;\"><b>Cross-species <b/></td><td  style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:" + cross_speciesClustercolors[correspondingCrossspeciescluster] + ";\">" + correspondingCrossspeciescluster + "</td></tr><tr><td   style=\" background-color:white;\"><b>Class<b/></td><td   style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:" + classColors[crossSpecies_ClassMap[correspondingCrossspeciescluster]] + ";\">" + crossSpecies_ClassMap[correspondingCrossspeciescluster] + "</td></tr><tr><td   style=\"background-color:white;\"><b>Subclass<b/></td><td     style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[crossSpecies_SubClassMap[correspondingCrossspeciescluster]] + ";\">" + crossSpecies_SubClassMap[correspondingCrossspeciescluster] + "</td></tr></table></div>";
+                var value = "<div><table cellspacing:0; style=\"padding: 0; margin: 0; font-size: " + foreignTextsize +"px; width: 100%;border-collapse: collapse;   border - spacing: 0; text - align: center; \"><tr><td  style=\" background-color:white; \" ><b>Block count<b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;background-color:white;\">" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells'] + "</td></tr><tr><td   style=\"  background-color:white;\"><b>Minimum distance<b/></td><td  style=\"  background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\">" + minVal + "</td></tr><tr><td   style=\" background-color:white;\"><b>Maximum distance<b/></td><td  style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C; \">" + maxVal + "</td></tr><tr><td   style=\" background-color:white;\"><b>Average distance<b/></td><td   style=\"  -webkit-text-fill-color: black;background-color:white; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\"> " + avgVal + "</td></tr><tr ><td style=\" background-color:white;\"><b>Cross-species <b/></td><td  style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:" + cross_speciesClustercolors[correspondingCrossspeciescluster] + ";\">" + correspondingCrossspeciescluster + "</td></tr><tr><td   style=\" background-color:white;\"><b>Class<b/></td><td   style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:" + classColors[crossSpecies_ClassMap[correspondingCrossspeciescluster]] + ";\">" + crossSpecies_ClassMap[correspondingCrossspeciescluster] + "</td></tr><tr><td   style=\"background-color:white;\"><b>Subclass<b/></td><td     style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[crossSpecies_SubClassMap[correspondingCrossspeciescluster]] + ";\">" + crossSpecies_SubClassMap[correspondingCrossspeciescluster] + "</td></tr></table></div>";
 
 
 
@@ -453,21 +466,34 @@ const simianVis = () => {
             .attr("stroke-width", 3)//6)
             .attr('fill', 'none');
 
+        var foreignObjectHeight = parseInt(46 / 100 * window.innerHeight);
+        var foreignObjectWidth = parseInt(18 / 100 * window.innerWidth);
+
+        var foreignTextsize;// = parseInt(2 / 100 * window.innerHeight);
+        if (window.innerHeight < window.innerWidth) {
+            foreignTextsize = parseInt(2 / 100 * window.innerHeight);
+        }
+        else {
+            foreignTextsize = parseInt(1.5 / 100 * window.innerWidth);
+        }
+
         svg.append("foreignObject")
             .attr("id", "axisSelectionText")
             .style("background-color", "transparent")
             .style("position", "absolute")
-            .attr("x", 0+width/15)
+            .attr("x", 0 + width / 15)
             //.attr("z-index", 9999)
             .attr("y", 0)
-            .attr("width", 250)
-            .attr("height", 200)
+            .attr("width", foreignObjectWidth)
+            .attr("height", foreignObjectHeight)
             .html(function (d) {
                 var average = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']) / parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']);
-                let minVal = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']).toFixed(1);
-                let maxVal = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']).toFixed(1);
-                let avgVal = parseFloat(average).toFixed(1);
-                var value = "<div><table style=\"font-size: 9px; width: 100%  border - spacing: 0; text - align: center; \"><tr><td  style=\" background-color:white; \" ><b>Block count<b/></td><td   style=\" -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;background-color:white;\">" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells'] + "</td></tr><tr><td   style=\"  background-color:white;\"><b>Minimum distance<b/></td><td  style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\">" + minVal + "</td></tr><tr><td   style=\" background-color:white;\"><b>Maximum distance<b/></td><td  style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C; \">" + maxVal + "</td></tr><tr><td   style=\" background-color:white;\"><b>Average distance<b/></td><td   style=\"  -webkit-text-fill-color: black;background-color:white; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\"> " + avgVal + "</td></tr><tr ><td style=\" background-color:white;\"><b>Cross-species <b/></td><td  style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:" + cross_speciesClustercolors[correspondingCrossspeciescluster] + ";\">" + correspondingCrossspeciescluster + "</td></tr><tr><td   style=\" background-color:white;\"><b>Class<b/></td><td   style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:" + classColors[crossSpecies_ClassMap[correspondingCrossspeciescluster]] + ";\">" + crossSpecies_ClassMap[correspondingCrossspeciescluster] + "</td></tr><tr><td   style=\" background-color:white;\"><b>Subclass<b/></td><td     style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[crossSpecies_SubClassMap[correspondingCrossspeciescluster]] + ";\">" + crossSpecies_SubClassMap[correspondingCrossspeciescluster] + "</td></tr></table></div>";
+                let minVal = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']).toFixed(2);
+                let maxVal = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']).toFixed(2);
+                let avgVal = parseFloat(average).toFixed(2);
+                var value = "<div><table cellspacing:0; style=\"padding: 0; margin: 0; font-size: " + foreignTextsize + "px; width: 100%;border-collapse: collapse;   border - spacing: 0; text - align: center; \"><tr><td  style=\" background-color:white; \" ><b>Block count<b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;background-color:white;\">" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells'] + "</td></tr><tr><td   style=\"  background-color:white;\"><b>Minimum distance<b/></td><td  style=\"  background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\">" + minVal + "</td></tr><tr><td   style=\" background-color:white;\"><b>Maximum distance<b/></td><td  style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C; \">" + maxVal + "</td></tr><tr><td   style=\" background-color:white;\"><b>Average distance<b/></td><td   style=\"  -webkit-text-fill-color: black;background-color:white; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\"> " + avgVal + "</td></tr><tr ><td style=\" background-color:white;\"><b>Cross-species <b/></td><td  style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:" + cross_speciesClustercolors[correspondingCrossspeciescluster] + ";\">" + correspondingCrossspeciescluster + "</td></tr><tr><td   style=\" background-color:white;\"><b>Class<b/></td><td   style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:" + classColors[crossSpecies_ClassMap[correspondingCrossspeciescluster]] + ";\">" + crossSpecies_ClassMap[correspondingCrossspeciescluster] + "</td></tr><tr><td   style=\"background-color:white;\"><b>Subclass<b/></td><td     style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[crossSpecies_SubClassMap[correspondingCrossspeciescluster]] + ";\">" + crossSpecies_SubClassMap[correspondingCrossspeciescluster] + "</td></tr></table></div>";
+
+
 
                 return value;
             })
