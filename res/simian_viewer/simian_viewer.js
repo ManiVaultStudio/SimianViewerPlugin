@@ -1312,7 +1312,7 @@ const simianVis = () => {
             })
             .style("stroke-location", "inside")
             .style("opacity", 1)
-            .style("cursor", "pointer");
+            .style("cursor", "default");
     };
     var mousemove = function (d) {
         /*        document.getElementById("clearTooltip");
@@ -1355,8 +1355,8 @@ const simianVis = () => {
         svgTooltip.append('g').attr('class', 'axis x left').attr('transform', translation(0, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#3A3B3C').call(xAxisLeftTooltip).selectAll('text').attr('dy', '.71em');
         svgTooltip.append('g').attr('class', 'axis x right').attr('transform', translation(pointBTooltip, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#3A3B3C').call(xAxisRightTooltip).selectAll('text').attr('dy', '.71em');
         svgTooltip.selectAll(".tick").each(function (d) { if (d === 0.0 || d === 0 || d === 1.0) { this.remove(); } });
-        leftBarGroupTooltip.selectAll('.bar.left').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar left').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species1); }).attr('stroke', 'black').attr('fill', speciesColors[species1ValueIdentify]).attr('height', yScaleTooltip.bandwidth());
-        rightBarGroupTooltip.selectAll('.bar.right').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar right').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species2); }).attr('stroke', 'black').attr('fill', speciesColors[species2ValueIdentify]).attr('height', yScaleTooltip.bandwidth());
+        leftBarGroupTooltip.selectAll('.bar.left').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar left').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species1); }).attr('fill', speciesColors[species1ValueIdentify]).attr('height', yScaleTooltip.bandwidth());
+        rightBarGroupTooltip.selectAll('.bar.right').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar right').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species2); }).attr('fill', speciesColors[species2ValueIdentify]).attr('height', yScaleTooltip.bandwidth());
         function translation(x, y) { return 'translate(' + x + ',' + y + ')'; }
         }
 
@@ -1410,8 +1410,8 @@ const simianVis = () => {
         svgTooltip.append('g').attr('class', 'axis x left').attr('transform', translation(0, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#3A3B3C').call(xAxisLeftTooltip).selectAll('text').attr('dy', '.71em');
         svgTooltip.append('g').attr('class', 'axis x right').attr('transform', translation(pointBTooltip, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#3A3B3C').call(xAxisRightTooltip).selectAll('text').attr('dy', '.71em');
         svgTooltip.selectAll(".tick").each(function (d) { if (d === 0.0 || d === 0 || d === 1.0) { this.remove(); } });
-        leftBarGroupTooltip.selectAll('.bar.left').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar left').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species1); }).attr('stroke', 'black').attr('fill', speciesColors[species1ValueIdentify]).attr('height', yScaleTooltip.bandwidth());
-        rightBarGroupTooltip.selectAll('.bar.right').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar right').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species2); }).attr('stroke', 'black').attr('fill', speciesColors[species2ValueIdentify]).attr('height', yScaleTooltip.bandwidth());
+        leftBarGroupTooltip.selectAll('.bar.left').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar left').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species1); }).attr('fill', speciesColors[species1ValueIdentify]).attr('height', yScaleTooltip.bandwidth());
+        rightBarGroupTooltip.selectAll('.bar.right').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar right').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species2); }).attr('fill', speciesColors[species2ValueIdentify]).attr('height', yScaleTooltip.bandwidth());
         function translation(x, y) { return 'translate(' + x + ',' + y + ')'; }
 
         let selectionIDs = [];
@@ -1543,9 +1543,10 @@ const simianVis = () => {
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
         .on("mouseenter", mouseenter)
-        .on("contextmenu ", contextmenu)
-        .on("dblclick ", dblclick)
-        .on("click", mouseclick);
+        //.on("contextmenu ", contextmenu)
+        //.on("dblclick ", dblclick)
+        //.on("click", mouseclick)
+        ;
 
 
     //code for cross species border
