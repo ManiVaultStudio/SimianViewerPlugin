@@ -114,7 +114,7 @@ const simianVis = () => {
         document.getElementById('my_container').setAttribute("style", "width:25%");
         containerwidth = 15;
         heatmapWidth = 70;
-        containerHeight = 25;
+        containerHeight = 20;
         heatmapHeight = 99;
     }
     var margin;
@@ -1134,7 +1134,7 @@ const simianVis = () => {
                 tooltipTextsize = parseInt(1 / 100 * window.innerHeight);
             }
             else {
-                tooltipTextsize = parseInt(0.7 / 100 * window.innerWidth);
+                tooltipTextsize = parseInt(1.2 / 100 * window.innerWidth);
             }
 
             var tooltipImageHeight = parseInt(5 * tooltipTextsize);
