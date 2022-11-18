@@ -144,6 +144,11 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		_crossSpecies1DatasetLinkerAction.publish("CrossSpeciesDataset1");
 	}
 
+	if (!_neighborhoodAction.isPublished())
+	{
+		_neighborhoodAction.publish("Neighborhood");
+	}
+
 	if (!_barLinkerAction1.isPublished())
 	{
 		_barLinkerAction1.publish("Species1 BarLinker");
