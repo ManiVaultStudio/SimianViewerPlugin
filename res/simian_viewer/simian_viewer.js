@@ -35,6 +35,8 @@ var angle3Sp2 = 0.0;
 var angle4Sp2 = 0.0;
 var angle5Sp2 = 0.0;
 var angle6Sp2 = 0.0;
+var x;
+var y;
 var tooltipValue = "";
 var qtColor = "Black to white";
 var colorMirror = false;
@@ -43,6 +45,8 @@ var showFullHeatmapflag = false;
 var showExplorationModeflag = false;
 var layerFlag = false;
 var backgroundColor = "#ffffff";
+var axisLabelsClickFromExternalFlag = false;
+var axisLabelsClickFromExternalValue = "";
 //onresize adjust chart dimensions
 window.onresize = doALoadOfStuff;
 var ximage = "";
@@ -85,6 +89,8 @@ try {
         QtBridge.qt_setBackgroundColor.connect(function () { setBackgroundColor(arguments[0]); });
         QtBridge.qt_histChart.connect(function () { histChart(arguments[0]); });
         QtBridge.qt_showFullHeatmap.connect(function () { showFullHeatmap(arguments[0]); });
+        QtBridge.qt_axisClickHeatmapChange.connect(function () { axisClickHeatmapChange(arguments[0]); });
+
         //QtBridge.qt_generateScreenshot.connect(function () { generateScreenshot(arguments[0]); });
 /*        QtBridge.qt_showExplorationMode.connect(function () { showExplorationMode(arguments[0]); });*/
         QtBridge.qt_setRangeValue.connect(function () { setRangeValue(arguments[0]); });
@@ -92,6 +98,10 @@ try {
         notifyBridgeAvailable();
     });
 } catch (error) { isQtAvailable = false; }
+
+
+
+
 
 //Heatmap Visualization
 const simianVis = () => {
@@ -506,7 +516,7 @@ const simianVis = () => {
     }
 
     // Build X scales and axis:
-    var x = d3.scaleBand().range([0, width]).domain(cluster_1_Groups).padding(0.05);
+    x = d3.scaleBand().range([0, width]).domain(cluster_1_Groups).padding(0.05);
     svg
         .append("g")
         .style("font-size", "8px")
@@ -532,7 +542,7 @@ const simianVis = () => {
         .remove();
 
     // Build Y scales and axis:
-    var y = d3.scaleBand().range([height, 0]).domain(cluster_2_Groups).padding(0.05);
+    y = d3.scaleBand().range([height, 0]).domain(cluster_2_Groups).padding(0.05);
     svg
         .append("g")
         .style("font-size", "8px")
@@ -1824,6 +1834,13 @@ const simianVis = () => {
             .on("click", species1Click);
     }
 
+    ////
+    if (axisLabelsClickFromExternalFlag) {
+        clickXAxisLabels(axisLabelsClickFromExternalValue);
+        axisLabelsClickFromExternalFlag = false;
+        axisLabelsClickFromExternalValue = "";
+    }
+
 };
 
 
@@ -1958,6 +1975,7 @@ function showFullHeatmap(d) {
 
     queueshowFullHeatmap(d);
 }
+
 function queueshowFullHeatmap(valD) {
     if (valD == "F") {
         showFullHeatmapflag = false;
@@ -1967,6 +1985,16 @@ function queueshowFullHeatmap(valD) {
     }
 
     simianVis();
+}
+
+function axisClickHeatmapChange(d) {
+
+    if (d !== "" || d !== undefined || d != null) {
+        axisLabelsClickFromExternalFlag = true;
+        axisLabelsClickFromExternalValue = d;
+        simianVis();
+    }
+
 }
 
 /*function generateScreenshot(d) {
