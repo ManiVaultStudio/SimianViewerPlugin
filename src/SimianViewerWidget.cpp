@@ -160,7 +160,11 @@ void SimianViewerWidget::showFullHeatmap(QString visColorContent)
 {
     emit _communicationObject->qt_showFullHeatmap(visColorContent);
 }
-
+void SimianViewerWidget::axisClickHeatmapChange(QString clusterName)
+{
+    emit _communicationObject->qt_axisClickHeatmapChange(clusterName);
+}
+//
 //void SimianViewerWidget::generateScreenshot(QString visColorContent)
 //{
 //    emit _communicationObject->qt_generateScreenshot(visColorContent);

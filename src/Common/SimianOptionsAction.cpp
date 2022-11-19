@@ -527,15 +527,27 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 	};
 
-	const auto updateCrossSpecies1HeatMapCell = [this]() -> void
+	const auto updateCrossSpeciesHeatMapCell = [this]() -> void
 	{
+		if (_crossSpecies1HeatMapCellAction.getCurrentText() !="" && _crossSpecies2HeatMapCellAction.getCurrentText() != "")
+		{
+			if (_crossSpecies1HeatMapCellAction.getCurrentText() ==_crossSpecies2HeatMapCellAction.getCurrentText())
+			{
+				_simianViewerPlugin.getSimianViewerWidget()->axisClickHeatmapChange(_crossSpecies1HeatMapCellAction.getCurrentText());
+			}
+
+
+		}
+
+
+
 
 	};
 
-	const auto updateCrossSpecies2HeatMapCell = [this]() -> void
-	{
+	//const auto updateCrossSpecies2HeatMapCell = [this]() -> void
+	//{
 
-	};
+	//};
 
 	const auto updateDistance = [this]() -> void
 	{
@@ -792,13 +804,13 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		{
 			updateInSpecies2HeatMapCell();
 		});
-	connect(&_crossSpecies1HeatMapCellAction, &OptionAction::currentIndexChanged, this, [this, updateCrossSpecies1HeatMapCell](const std::int32_t& currentIndex)
+	connect(&_crossSpecies1HeatMapCellAction, &OptionAction::currentIndexChanged, this, [this, updateCrossSpeciesHeatMapCell](const std::int32_t& currentIndex)
 		{
-			updateCrossSpecies1HeatMapCell();
+			updateCrossSpeciesHeatMapCell();
 		});
-	connect(&_crossSpecies2HeatMapCellAction, &OptionAction::currentIndexChanged, this, [this, updateCrossSpecies2HeatMapCell](const std::int32_t& currentIndex)
+	connect(&_crossSpecies2HeatMapCellAction, &OptionAction::currentIndexChanged, this, [this, updateCrossSpeciesHeatMapCell](const std::int32_t& currentIndex)
 		{
-			updateCrossSpecies2HeatMapCell();
+			updateCrossSpeciesHeatMapCell();
 		});
 	connect(&_distanceAction, &IntegralAction::valueChanged, this, [this, updateDistance](const std::int32_t& value)
 		{
