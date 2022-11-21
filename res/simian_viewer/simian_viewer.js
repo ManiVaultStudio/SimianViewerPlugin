@@ -1272,11 +1272,11 @@ const simianVis = () => {
         d3.select("#exploreViewMarker2").remove();
         d3.select("#exploreViewMarker3").remove();
     };*/
-    var mouseenter = function (d) {
-/*        if (d3.event.shiftKey) {
+/*    var mouseenter = function (d) {
+*//*        if (d3.event.shiftKey) {
             if (showExplorationModeflag) { showExplorationModeflag = false; tip.show(d, d3.mouse(this), this);}
             
-        }*/
+        }*//*
         if (d3.event.shiftKey) { }
     else
         {
@@ -1285,7 +1285,7 @@ const simianVis = () => {
             d3.select("#exploreViewMarker2").remove();
             d3.select("#exploreViewMarker3").remove();
         }
-    };
+    };*/
 
 
 
@@ -1318,6 +1318,9 @@ const simianVis = () => {
             .style("stroke-location", "inside")
             .style("opacity", 1)
             .style("cursor", "default");
+
+
+
     };
     var mousemove = function (d) {
         /*        document.getElementById("clearTooltip");
@@ -1331,7 +1334,7 @@ const simianVis = () => {
         d3.select("#marker3").remove();*/
         //if (!showExplorationModeflag)
         {
-        tip.hide();
+        //tip.hide();
     
 
 
@@ -1370,25 +1373,36 @@ const simianVis = () => {
     };
     var mouseleave = function (d) {
 
-        d3.select(this).style("stroke", function (d) {
-            if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
-                return cross_speciesClustercolors[d.cross_species_cluster1_species_1];
-            }
-            else {
-                return "black";
-            }
-        })
-            .style("opacity", 0.9).style("stroke-width", function (d) {
-                return 0;
-            });
+
+
+        if (d3.event.shiftKey) { }
+        else {
+            d3.select(this).style("stroke", function (d) {
+                if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
+                    return cross_speciesClustercolors[d.cross_species_cluster1_species_1];
+                }
+                else {
+                    return "black";
+                }
+            })
+                .style("opacity", 0.9).style("stroke-width", function (d) {
+                    return 0;
+                });
+
+            tip.hide();
+            d3.select("#exploreViewMarker1").remove();
+            d3.select("#exploreViewMarker2").remove();
+            d3.select("#exploreViewMarker3").remove();
+        }
+
 
     };
-    var mouseclick = function (d) {
+/*    var mouseclick = function (d) {
 
-/*        d3.select("#marker1").remove();
+*//*        d3.select("#marker1").remove();
         d3.select("#marker2").remove();
-        d3.select("#marker3").remove();*/
-        /*if (!showExplorationModeflag) { showExplorationModeflag = true; }*/
+        d3.select("#marker3").remove();*//*
+        *//*if (!showExplorationModeflag) { showExplorationModeflag = true; }*//*
         //else { showExplorationModeflag = false; } ////comment this line if it is okay to use keyboard only
         tip.show(d, d3.mouse(this), this);
 
@@ -1429,7 +1443,7 @@ const simianVis = () => {
             QtBridge.js_passSelectionToQt(selectionIDs);
         }
 
-        /*if (showExplorationModeflag)*/
+        *//*if (showExplorationModeflag)*//*
         {
             d3.select("#exploreViewMarker1").remove();
             d3.select("#exploreViewMarker2").remove();
@@ -1510,7 +1524,7 @@ const simianVis = () => {
 
 
 
-    };
+    };*/
 
     // add the squares
     svg
@@ -1546,10 +1560,10 @@ const simianVis = () => {
         })
         .style("opacity", 0.9)
         .on("mouseover", mouseover)
-        .on("mouseout", mouseout)
+        //.on("mouseout", mouseout)
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
-        .on("mouseenter", mouseenter)
+        //.on("mouseenter", mouseenter)
         //.on("contextmenu ", contextmenu)
         //.on("dblclick ", dblclick)
         //.on("click", mouseclick)
