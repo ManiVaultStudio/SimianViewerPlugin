@@ -25,10 +25,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_inSpecies1DatasetLinkerAction(this, "In-species  cluster dataset1"),
 	_inSpecies2DatasetLinkerAction(this, "In-species  cluster dataset2"),
 	_crossSpeciesFilterAction(this, "Filter clusters"),
-	_inSpecies1HeatMapCellAction(this, "Link in-species1 heatmap cell"),
-	_inSpecies2HeatMapCellAction(this, "Link in-species2 heatmap cell"),
-	_crossSpecies1HeatMapCellAction(this, "Link cross-species1 heatmap cell"),
-	_crossSpecies2HeatMapCellAction(this, "Link cross-species2 heatmap cell"),
+	//_inSpecies1HeatMapCellAction(this, "Link in-species1 heatmap cell"),
+	//_inSpecies2HeatMapCellAction(this, "Link in-species2 heatmap cell"),
+	_crossSpeciesHeatMapCellAction(this, "Link cross-species heatmap cell"),
+	//_crossSpecies2HeatMapCellAction(this, "Link cross-species2 heatmap cell"),
 	_multiSelectClusterFilterAction(this, "Select cross-species clusters"),
 	_colorMapAction(this, "Select color map"),
 	_backgroundColoringAction(this, "Select background color", DEFAULT_CONSTANT_COLOR, DEFAULT_CONSTANT_COLOR),
@@ -47,8 +47,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_explorationModeAction(this)*/,
 	_helpAction(this, "Help"),
 	_screenshotAction(this, "Screenshot"),
-	_barLinkerAction1(this, "BarLinker Species1"),
-	_barLinkerAction2(this, "BarLinker Species2")
+	_barLinkerAction(this, "BarLinker Species")
+	//_barLinkerAction2(this, "BarLinker Species2")
 {
 	setText("Settings");
 
@@ -101,12 +101,12 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_species2SelectAction.setPlaceHolderString(QString("Choose Species2"));
 	_crossSpeciesFilterAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 	_crossSpeciesFilterAction.initialize(QStringList({ "all clusters","cross-species clusters" }), "cross-species clusters", "cross-species clusters");
-	_inSpecies1HeatMapCellAction.setDefaultWidgetFlags(OptionAction::ComboBox);
-	_barLinkerAction1.setDefaultWidgetFlags(OptionAction::ComboBox);
-	_barLinkerAction2.setDefaultWidgetFlags(OptionAction::ComboBox);
-	_inSpecies2HeatMapCellAction.setDefaultWidgetFlags(OptionAction::ComboBox);
-	_crossSpecies1HeatMapCellAction.setDefaultWidgetFlags(OptionAction::ComboBox);
-	_crossSpecies2HeatMapCellAction.setDefaultWidgetFlags(OptionAction::ComboBox);
+	//_inSpecies1HeatMapCellAction.setDefaultWidgetFlags(OptionAction::ComboBox);
+	_barLinkerAction.setDefaultWidgetFlags(OptionAction::ComboBox);
+	//_barLinkerAction2.setDefaultWidgetFlags(OptionAction::ComboBox);
+	//_inSpecies2HeatMapCellAction.setDefaultWidgetFlags(OptionAction::ComboBox);
+	_crossSpeciesHeatMapCellAction.setDefaultWidgetFlags(OptionAction::ComboBox);
+	//_crossSpecies2HeatMapCellAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 	_multiSelectClusterFilterAction.setDefaultWidgetFlags(OptionsAction::ComboBox | OptionsAction::Selection | OptionsAction::File);
 	_multiSelectClusterFilterAction.initialize(QStringList{ "" });
 	_multiSelectClusterFilterAction.setSelectedOptions(QStringList());
@@ -114,8 +114,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_backgroundColoringAction.initialize(DEFAULT_CONSTANT_COLOR, DEFAULT_CONSTANT_COLOR);
 	_neighborhoodAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 	_neighborhoodAction.initialize(QStringList({ "glia","it_types","l5et_l56np_l6ct_l6b","lamp5_sncg_vip","sst_sst_chodl_pvalb" }), "glia", "glia");
-	_barLinkerAction1.initialize(QStringList({ " ","exc","glia","inh","Astro_2","Astro_3","Astro_4","Chandelier_1","Chandelier_2","Endo_1","Endo_2","L2/3 IT_1","L2/3 IT_2","L2/3 IT_3","L2/3 IT_4","L4 IT_1","L4 IT_2","L4 IT_3","L4 IT_4","L4 IT_5","L5 ET_1","L5 ET_2","L5 ET_3","L5 ET_4","L5 IT_1","L5 IT_2","L5 IT_3","L5/6 NP_1","L5/6 NP_2","L5/6 NP_3","L5/6 NP_4","L6 CT_1","L6 CT_2","L6 IT Car3_1","L6 IT Car3_2","L6 IT Car3_3","L6 IT_1","L6 IT_2","L6 IT_3","L6b_1","L6b_2","L6b_3","L6b_4","L6b_5","L6b_6","Lamp5_1","Lamp5_2","Lamp5_Lhx6_1","Lamp5_Lhx6_2","Micro-PVM_1","Micro-PVM_2","Micro-PVM_3","OPC_1","OPC_2","OPC_3","Oligo_1","Pax6_1","Pax6_2","Pax6_3","Pax6_4","Pvalb_1","Pvalb_2","Pvalb_3","Pvalb_4","Pvalb_5","Pvalb_6","Pvalb_7","Pvalb_8","Sncg_1","Sncg_2","Sncg_3","Sncg_4","Sncg_5","Sncg_6","Sncg_7","Sst Chodl_1","Sst Chodl_2","Sst Chodl_3","Sst_1","Sst_10","Sst_11","Sst_12","Sst_13","Sst_14","Sst_15","Sst_16","Sst_17","Sst_18","Sst_2","Sst_3","Sst_4","Sst_5","Sst_6","Sst_7","Sst_8","Sst_9","VLMC_1","VLMC_2","VLMC_3","VLMC_4","Vip_1","Vip_10","Vip_11","Vip_12","Vip_13","Vip_14","Vip_15","Vip_16","Vip_17","Vip_2","Vip_3","Vip_4","Vip_5","Vip_6","Vip_7","Vip_8","Vip_9","Astro_5","L2/3 IT_10","L2/3 IT_11","L2/3 IT_12","L2/3 IT_13","L2/3 IT_5","L2/3 IT_6","L2/3 IT_7","L2/3 IT_8","L2/3 IT_9","L5 IT_4","L5 IT_5","L5 IT_6","L5 IT_7","L5/6 NP_5","L5/6 NP_6","L6 CT_3","L6 CT_4","Lamp5_3","Lamp5_4","Lamp5_5","Lamp5_6","Oligo_2","Oligo_3","Oligo_4","Pvalb_10","Pvalb_11","Pvalb_12","Pvalb_13","Pvalb_14","Pvalb_15","Pvalb_9","Sncg_8","Sst_19","Sst_20","Sst_21","Sst_22","Sst_23","Sst_24","Sst_25","Sst_26","Vip_18","Vip_19","Vip_20","Vip_21","Vip_22","Vip_23","Endo_3","L4 IT_6","Micro-PVM_4","OPC_4","Sncg_9","L2/3 IT_14","L2/3 IT_15","L5/6 NP_7","L5/6 NP_8","L6 IT_4","Sncg_10","Glutamatergic","Non-Neuronal","Chandelier","Endo","L2/3 IT","L4 IT","L5 ET","L5 IT","L5/6 NP","L6 CT","L6 IT","L6 IT Car3","L6b","Lamp5","Lamp5_Lhx6","Micro-PVM","OPC","Oligo","Pax6","Pvalb","Sncg","Sst","Sst Chodl","VLMC","Vip","G19.32.002","G20.32.001","G20.32.002","H18.30.002","H19.30.001","H19.30.002","H200.1023","bi006","bi007","Q19.26.011","Q19.26.015","C19.32.002","C19.32.003","C19.32.004","C19.32.005","C19.32.006","C19.32.007","H18.30.001","bi005","Q19.26.010","C19.32.001","it_types","l5et_l56np_l6ct_l6b","lamp5_sncg_vip","sst_sst_chodl_pvalb","Astro_1","GABAergic","Astro","G19.32.001" }), " ", " ");
-	_barLinkerAction2.initialize(QStringList({ " ","exc","glia","inh","Astro_2","Astro_3","Astro_4","Chandelier_1","Chandelier_2","Endo_1","Endo_2","L2/3 IT_1","L2/3 IT_2","L2/3 IT_3","L2/3 IT_4","L4 IT_1","L4 IT_2","L4 IT_3","L4 IT_4","L4 IT_5","L5 ET_1","L5 ET_2","L5 ET_3","L5 ET_4","L5 IT_1","L5 IT_2","L5 IT_3","L5/6 NP_1","L5/6 NP_2","L5/6 NP_3","L5/6 NP_4","L6 CT_1","L6 CT_2","L6 IT Car3_1","L6 IT Car3_2","L6 IT Car3_3","L6 IT_1","L6 IT_2","L6 IT_3","L6b_1","L6b_2","L6b_3","L6b_4","L6b_5","L6b_6","Lamp5_1","Lamp5_2","Lamp5_Lhx6_1","Lamp5_Lhx6_2","Micro-PVM_1","Micro-PVM_2","Micro-PVM_3","OPC_1","OPC_2","OPC_3","Oligo_1","Pax6_1","Pax6_2","Pax6_3","Pax6_4","Pvalb_1","Pvalb_2","Pvalb_3","Pvalb_4","Pvalb_5","Pvalb_6","Pvalb_7","Pvalb_8","Sncg_1","Sncg_2","Sncg_3","Sncg_4","Sncg_5","Sncg_6","Sncg_7","Sst Chodl_1","Sst Chodl_2","Sst Chodl_3","Sst_1","Sst_10","Sst_11","Sst_12","Sst_13","Sst_14","Sst_15","Sst_16","Sst_17","Sst_18","Sst_2","Sst_3","Sst_4","Sst_5","Sst_6","Sst_7","Sst_8","Sst_9","VLMC_1","VLMC_2","VLMC_3","VLMC_4","Vip_1","Vip_10","Vip_11","Vip_12","Vip_13","Vip_14","Vip_15","Vip_16","Vip_17","Vip_2","Vip_3","Vip_4","Vip_5","Vip_6","Vip_7","Vip_8","Vip_9","Astro_5","L2/3 IT_10","L2/3 IT_11","L2/3 IT_12","L2/3 IT_13","L2/3 IT_5","L2/3 IT_6","L2/3 IT_7","L2/3 IT_8","L2/3 IT_9","L5 IT_4","L5 IT_5","L5 IT_6","L5 IT_7","L5/6 NP_5","L5/6 NP_6","L6 CT_3","L6 CT_4","Lamp5_3","Lamp5_4","Lamp5_5","Lamp5_6","Oligo_2","Oligo_3","Oligo_4","Pvalb_10","Pvalb_11","Pvalb_12","Pvalb_13","Pvalb_14","Pvalb_15","Pvalb_9","Sncg_8","Sst_19","Sst_20","Sst_21","Sst_22","Sst_23","Sst_24","Sst_25","Sst_26","Vip_18","Vip_19","Vip_20","Vip_21","Vip_22","Vip_23","Endo_3","L4 IT_6","Micro-PVM_4","OPC_4","Sncg_9","L2/3 IT_14","L2/3 IT_15","L5/6 NP_7","L5/6 NP_8","L6 IT_4","Sncg_10","Glutamatergic","Non-Neuronal","Chandelier","Endo","L2/3 IT","L4 IT","L5 ET","L5 IT","L5/6 NP","L6 CT","L6 IT","L6 IT Car3","L6b","Lamp5","Lamp5_Lhx6","Micro-PVM","OPC","Oligo","Pax6","Pvalb","Sncg","Sst","Sst Chodl","VLMC","Vip","G19.32.002","G20.32.001","G20.32.002","H18.30.002","H19.30.001","H19.30.002","H200.1023","bi006","bi007","Q19.26.011","Q19.26.015","C19.32.002","C19.32.003","C19.32.004","C19.32.005","C19.32.006","C19.32.007","H18.30.001","bi005","Q19.26.010","C19.32.001","it_types","l5et_l56np_l6ct_l6b","lamp5_sncg_vip","sst_sst_chodl_pvalb","Astro_1","GABAergic","Astro","G19.32.001" }), " ", " ");
+	_barLinkerAction.initialize(QStringList({ " ","exc","glia","inh","Astro_2","Astro_3","Astro_4","Chandelier_1","Chandelier_2","Endo_1","Endo_2","L2/3 IT_1","L2/3 IT_2","L2/3 IT_3","L2/3 IT_4","L4 IT_1","L4 IT_2","L4 IT_3","L4 IT_4","L4 IT_5","L5 ET_1","L5 ET_2","L5 ET_3","L5 ET_4","L5 IT_1","L5 IT_2","L5 IT_3","L5/6 NP_1","L5/6 NP_2","L5/6 NP_3","L5/6 NP_4","L6 CT_1","L6 CT_2","L6 IT Car3_1","L6 IT Car3_2","L6 IT Car3_3","L6 IT_1","L6 IT_2","L6 IT_3","L6b_1","L6b_2","L6b_3","L6b_4","L6b_5","L6b_6","Lamp5_1","Lamp5_2","Lamp5_Lhx6_1","Lamp5_Lhx6_2","Micro-PVM_1","Micro-PVM_2","Micro-PVM_3","OPC_1","OPC_2","OPC_3","Oligo_1","Pax6_1","Pax6_2","Pax6_3","Pax6_4","Pvalb_1","Pvalb_2","Pvalb_3","Pvalb_4","Pvalb_5","Pvalb_6","Pvalb_7","Pvalb_8","Sncg_1","Sncg_2","Sncg_3","Sncg_4","Sncg_5","Sncg_6","Sncg_7","Sst Chodl_1","Sst Chodl_2","Sst Chodl_3","Sst_1","Sst_10","Sst_11","Sst_12","Sst_13","Sst_14","Sst_15","Sst_16","Sst_17","Sst_18","Sst_2","Sst_3","Sst_4","Sst_5","Sst_6","Sst_7","Sst_8","Sst_9","VLMC_1","VLMC_2","VLMC_3","VLMC_4","Vip_1","Vip_10","Vip_11","Vip_12","Vip_13","Vip_14","Vip_15","Vip_16","Vip_17","Vip_2","Vip_3","Vip_4","Vip_5","Vip_6","Vip_7","Vip_8","Vip_9","Astro_5","L2/3 IT_10","L2/3 IT_11","L2/3 IT_12","L2/3 IT_13","L2/3 IT_5","L2/3 IT_6","L2/3 IT_7","L2/3 IT_8","L2/3 IT_9","L5 IT_4","L5 IT_5","L5 IT_6","L5 IT_7","L5/6 NP_5","L5/6 NP_6","L6 CT_3","L6 CT_4","Lamp5_3","Lamp5_4","Lamp5_5","Lamp5_6","Oligo_2","Oligo_3","Oligo_4","Pvalb_10","Pvalb_11","Pvalb_12","Pvalb_13","Pvalb_14","Pvalb_15","Pvalb_9","Sncg_8","Sst_19","Sst_20","Sst_21","Sst_22","Sst_23","Sst_24","Sst_25","Sst_26","Vip_18","Vip_19","Vip_20","Vip_21","Vip_22","Vip_23","Endo_3","L4 IT_6","Micro-PVM_4","OPC_4","Sncg_9","L2/3 IT_14","L2/3 IT_15","L5/6 NP_7","L5/6 NP_8","L6 IT_4","Sncg_10","Glutamatergic","Non-Neuronal","Chandelier","Endo","L2/3 IT","L4 IT","L5 ET","L5 IT","L5/6 NP","L6 CT","L6 IT","L6 IT Car3","L6b","Lamp5","Lamp5_Lhx6","Micro-PVM","OPC","Oligo","Pax6","Pvalb","Sncg","Sst","Sst Chodl","VLMC","Vip","G19.32.002","G20.32.001","G20.32.002","H18.30.002","H19.30.001","H19.30.002","H200.1023","bi006","bi007","Q19.26.011","Q19.26.015","C19.32.002","C19.32.003","C19.32.004","C19.32.005","C19.32.006","C19.32.007","H18.30.001","bi005","Q19.26.010","C19.32.001","it_types","l5et_l56np_l6ct_l6b","lamp5_sncg_vip","sst_sst_chodl_pvalb","Astro_1","GABAergic","Astro","G19.32.001" }), " ", " ");
+	
 	_scatterplotColorControlAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 	_scatterplotColorControlAction.initialize(QStringList({ "cross-species cluster","in-species cluster","cross-species class","in-species class","cross-species sub-class","in-species subclass","donor","neighborhood"}), "cross-species cluster", "cross-species cluster");
 	_distanceAction.setDefaultWidgetFlags(IntegralAction::SpinBox | IntegralAction::Slider);
@@ -149,14 +149,14 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		_neighborhoodAction.publish("Neighborhood");
 	}
 
-	if (!_barLinkerAction1.isPublished())
+	if (!_barLinkerAction.isPublished())
 	{
-		_barLinkerAction1.publish("Species1 BarLinker");
+		_barLinkerAction.publish("Species1 BarLinker");
 	}
-	if (!_barLinkerAction2.isPublished())
-	{
-		_barLinkerAction2.publish("Species2 BarLinker");
-	}
+	//if (!_barLinkerAction2.isPublished())
+	//{
+	//	_barLinkerAction2.publish("Species2 BarLinker");
+	//}
 
 
 	if (!_crossSpecies2DatasetLinkerAction.isPublished())
@@ -189,8 +189,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_species2ScatterplotColorLinkerAction.setVisible(false);
 	_speciesEmbedding1LinkerAction.setVisible(false);
 	_speciesEmbedding2LinkerAction.setVisible(false);
-	_inSpecies1HeatMapCellAction.setVisible(false);
-	_inSpecies2HeatMapCellAction.setVisible(false);
+	//_inSpecies1HeatMapCellAction.setVisible(false);
+	//_inSpecies2HeatMapCellAction.setVisible(false);
 
 	_helpAction.setIcon(Application::getIconFont("FontAwesome").getIcon("question"));
 	_screenshotAction.setIcon(Application::getIconFont("FontAwesome").getIcon("camera"));
@@ -507,33 +507,33 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 	};
 
-	const auto updateInSpecies1HeatMapCell = [this]() -> void
+	//const auto updateInSpecies1HeatMapCell = [this]() -> void
+	//{
+
+	//};
+
+	const auto updateBarLinkerAction = [this]() -> void
 	{
 
 	};
 
-	const auto updateBarLinkerAction1 = [this]() -> void
-	{
+	//const auto updateBarLinkerAction2 = [this]() -> void
+	//{
 
-	};
+	//};
 
-	const auto updateBarLinkerAction2 = [this]() -> void
-	{
+	//const auto updateInSpecies2HeatMapCell = [this]() -> void
+	//{
 
-	};
-
-	const auto updateInSpecies2HeatMapCell = [this]() -> void
-	{
-
-	};
+	//};
 
 	const auto updateCrossSpeciesHeatMapCell = [this]() -> void
 	{
-		if (_crossSpecies1HeatMapCellAction.getCurrentText() !="" && _crossSpecies2HeatMapCellAction.getCurrentText() != "")
+		if (_crossSpeciesHeatMapCellAction.getCurrentText() !="" )
 		{
-			if (_crossSpecies1HeatMapCellAction.getCurrentText() ==_crossSpecies2HeatMapCellAction.getCurrentText())
+			//if (_crossSpecies1HeatMapCellAction.getCurrentText() ==_crossSpecies2HeatMapCellAction.getCurrentText())
 			{
-				_simianViewerPlugin.getSimianViewerWidget()->axisClickHeatmapChange(_crossSpecies1HeatMapCellAction.getCurrentText());
+				_simianViewerPlugin.getSimianViewerWidget()->axisClickHeatmapChange(_crossSpeciesHeatMapCellAction.getCurrentText());
 			}
 
 
@@ -786,32 +786,32 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		{
 			updateScatterplotColorControl();
 		});
-	connect(&_inSpecies1HeatMapCellAction, &OptionAction::currentIndexChanged, this, [this, updateInSpecies1HeatMapCell](const std::int32_t& currentIndex)
-		{
-			updateInSpecies1HeatMapCell();
-		});
+	//connect(&_inSpecies1HeatMapCellAction, &OptionAction::currentIndexChanged, this, [this, updateInSpecies1HeatMapCell](const std::int32_t& currentIndex)
+	//	{
+	//		updateInSpecies1HeatMapCell();
+	//	});
 
-	connect(&_barLinkerAction1, &OptionAction::currentIndexChanged, this, [this, updateBarLinkerAction1](const std::int32_t& currentIndex)
+	connect(&_barLinkerAction, &OptionAction::currentIndexChanged, this, [this, updateBarLinkerAction](const std::int32_t& currentIndex)
 		{
-			updateBarLinkerAction1();
+			updateBarLinkerAction();
 		});
-	connect(&_barLinkerAction2, &OptionAction::currentIndexChanged, this, [this, updateBarLinkerAction2](const std::int32_t& currentIndex)
-		{
-			updateBarLinkerAction2();
-		});
+	//connect(&_barLinkerAction2, &OptionAction::currentIndexChanged, this, [this, updateBarLinkerAction2](const std::int32_t& currentIndex)
+	//	{
+	//		updateBarLinkerAction2();
+	//	});
 
-	connect(&_inSpecies2HeatMapCellAction, &OptionAction::currentIndexChanged, this, [this, updateInSpecies2HeatMapCell](const std::int32_t& currentIndex)
-		{
-			updateInSpecies2HeatMapCell();
-		});
-	connect(&_crossSpecies1HeatMapCellAction, &OptionAction::currentIndexChanged, this, [this, updateCrossSpeciesHeatMapCell](const std::int32_t& currentIndex)
+	//connect(&_inSpecies2HeatMapCellAction, &OptionAction::currentIndexChanged, this, [this, updateInSpecies2HeatMapCell](const std::int32_t& currentIndex)
+	//	{
+	//		updateInSpecies2HeatMapCell();
+	//	});
+	connect(&_crossSpeciesHeatMapCellAction, &OptionAction::currentIndexChanged, this, [this, updateCrossSpeciesHeatMapCell](const std::int32_t& currentIndex)
 		{
 			updateCrossSpeciesHeatMapCell();
 		});
-	connect(&_crossSpecies2HeatMapCellAction, &OptionAction::currentIndexChanged, this, [this, updateCrossSpeciesHeatMapCell](const std::int32_t& currentIndex)
-		{
-			updateCrossSpeciesHeatMapCell();
-		});
+	//connect(&_crossSpecies2HeatMapCellAction, &OptionAction::currentIndexChanged, this, [this, updateCrossSpeciesHeatMapCell](const std::int32_t& currentIndex)
+	//	{
+	//		updateCrossSpeciesHeatMapCell();
+	//	});
 	connect(&_distanceAction, &IntegralAction::valueChanged, this, [this, updateDistance](const std::int32_t& value)
 		{
 			updateDistance();
@@ -1035,11 +1035,11 @@ void SimianOptionsAction::updateData(std::string Species1, std::string Species2,
 			crossSpecies2List.append(QString::fromStdString(filteredVisData[i][8]));
 		}
 	}
-	_crossSpecies2HeatMapCellAction.initialize(crossSpecies2List, "", "");
-	_crossSpecies1HeatMapCellAction.initialize(crossSpecies1List, "", "");
+	//_crossSpecies2HeatMapCellAction.initialize(crossSpecies2List, "", "");
+	_crossSpeciesHeatMapCellAction.initialize(crossSpecies1List, "", "");
 
-	_inSpecies2HeatMapCellAction.initialize(inSpecies2List, "", "");
-	_inSpecies1HeatMapCellAction.initialize(inSpecies1List, "", "");
+	//_inSpecies2HeatMapCellAction.initialize(inSpecies2List, "", "");
+	///_inSpecies1HeatMapCellAction.initialize(inSpecies1List, "", "");
 
 }
 
@@ -1327,18 +1327,18 @@ SimianOptionsAction::LinkerSettingAction::Widget::Widget(QWidget* parent, Linker
 	selectionInSpecies2DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
 
-	auto selectionInSpecies1HeatMapCellWidget = simianOptionsAction._inSpecies1HeatMapCellAction.createWidget(this);
-	selectionInSpecies1HeatMapCellWidget->setFixedWidth(300);
-	selectionInSpecies1HeatMapCellWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-	auto selectionInSpecies2HeatMapCellWidget = simianOptionsAction._inSpecies2HeatMapCellAction.createWidget(this);
-	selectionInSpecies2HeatMapCellWidget->setFixedWidth(300);
-	selectionInSpecies2HeatMapCellWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-	auto selectionCrossSpecies1HeatMapCellWidget = simianOptionsAction._crossSpecies1HeatMapCellAction.createWidget(this);
+	//auto selectionInSpecies1HeatMapCellWidget = simianOptionsAction._inSpecies1HeatMapCellAction.createWidget(this);
+	//selectionInSpecies1HeatMapCellWidget->setFixedWidth(300);
+	//selectionInSpecies1HeatMapCellWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+	//auto selectionInSpecies2HeatMapCellWidget = simianOptionsAction._inSpecies2HeatMapCellAction.createWidget(this);
+	//selectionInSpecies2HeatMapCellWidget->setFixedWidth(300);
+	//selectionInSpecies2HeatMapCellWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+	auto selectionCrossSpecies1HeatMapCellWidget = simianOptionsAction._crossSpeciesHeatMapCellAction.createWidget(this);
 	selectionCrossSpecies1HeatMapCellWidget->setFixedWidth(300);
 	selectionCrossSpecies1HeatMapCellWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-	auto selectionCrossSpecies2HeatMapCellWidget = simianOptionsAction._crossSpecies2HeatMapCellAction.createWidget(this);
-	selectionCrossSpecies2HeatMapCellWidget->setFixedWidth(300);
-	selectionCrossSpecies2HeatMapCellWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+	//auto selectionCrossSpecies2HeatMapCellWidget = simianOptionsAction._crossSpecies2HeatMapCellAction.createWidget(this);
+	//selectionCrossSpecies2HeatMapCellWidget->setFixedWidth(300);
+	//selectionCrossSpecies2HeatMapCellWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
 
 	auto removeLinkingOptionMenuFromUIActionWidget = simianOptionsAction._removeLinkingOptionMenuFromUIAction.createWidget(this);
@@ -1362,10 +1362,10 @@ SimianOptionsAction::LinkerSettingAction::Widget::Widget(QWidget* parent, Linker
 	linkerSettingSelectionLayout->addRow(simianOptionsAction._inSpecies1DatasetLinkerAction.createLabelWidget(this), selectionInSpecies1DatasetLinkerWidget);
 	linkerSettingSelectionLayout->addRow(simianOptionsAction._inSpecies2DatasetLinkerAction.createLabelWidget(this), selectionInSpecies2DatasetLinkerWidget);
 
-	linkerSettingSelectionLayout->addRow(simianOptionsAction._inSpecies1HeatMapCellAction.createLabelWidget(this), selectionInSpecies1HeatMapCellWidget);
-	linkerSettingSelectionLayout->addRow(simianOptionsAction._inSpecies2HeatMapCellAction.createLabelWidget(this), selectionInSpecies2HeatMapCellWidget);
-	linkerSettingSelectionLayout->addRow(simianOptionsAction._crossSpecies1HeatMapCellAction.createLabelWidget(this), selectionCrossSpecies1HeatMapCellWidget);
-	linkerSettingSelectionLayout->addRow(simianOptionsAction._crossSpecies2HeatMapCellAction.createLabelWidget(this), selectionCrossSpecies2HeatMapCellWidget);
+	//linkerSettingSelectionLayout->addRow(simianOptionsAction._inSpecies1HeatMapCellAction.createLabelWidget(this), selectionInSpecies1HeatMapCellWidget);
+	//linkerSettingSelectionLayout->addRow(simianOptionsAction._inSpecies2HeatMapCellAction.createLabelWidget(this), selectionInSpecies2HeatMapCellWidget);
+	linkerSettingSelectionLayout->addRow(simianOptionsAction._crossSpeciesHeatMapCellAction.createLabelWidget(this), selectionCrossSpecies1HeatMapCellWidget);
+	//linkerSettingSelectionLayout->addRow(simianOptionsAction._crossSpecies2HeatMapCellAction.createLabelWidget(this), selectionCrossSpecies2HeatMapCellWidget);
 	linkerSettingSelectionLayout->addRow("Hide menu:", removeLinkingOptionMenuFromUIActionWidget);
 	setPopupLayout(linkerSettingSelectionLayout);
 
