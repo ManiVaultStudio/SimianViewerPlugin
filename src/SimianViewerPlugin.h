@@ -51,7 +51,7 @@ private:
     void publishCluster(std::string clusterName);
     //void generatedScreenshotData(std::string clusterName);
     void selectCrossSpeciesClusterPoints(std::vector<std::string> selectedIDs);
-   // void selectIndividualSpeciesClusterPoints(std::vector<std::string> selectedIDs);
+    void selectIndividualSpeciesClusterPoints(std::vector<std::string> selectedIDs);
 
     SimianOptionsAction*        _simianOptionsAction;
     /** SimianViewer widget displaying cluster data */
