@@ -48,7 +48,7 @@ void SimianViewerPlugin::init()
     _eventListener.setEventCore(Application::core());
     _eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataSelectionChanged));
     _eventListener.registerDataEventByType(ClusterType, std::bind(&SimianViewerPlugin::onDataEvent, this, std::placeholders::_1));
-    _currentCluster = "";
+
     auto topToolbarWidget = new QWidget();
     auto topToolbarLayout = new QHBoxLayout();
     topToolbarLayout->setContentsMargins(0, 0, 0, 0);
@@ -178,11 +178,9 @@ void SimianViewerPlugin::onDataEvent(hdps::DataEvent* dataEvent)
 
 void SimianViewerPlugin::publishCluster(std::string clusterName)
 {
-    if (_currentCluster != clusterName && clusterName != "")
+    if (clusterName != "")
     {
-        //if (_simianOptionsAction->getScatterplotColorControl().getCurrentText()=="cross-species cluster") 
-        {
-            _currentCluster = clusterName;
+        if (_simianOptionsAction->getScatterplotColorControl().getCurrentText()=="cross-species cluster") {
             _simianOptionsAction->getBarLinkerSpecies().setCurrentText(QString::fromStdString(clusterName));
             //_simianOptionsAction->getBarLinkerSpecies2().setCurrentText(QString::fromStdString(clusterName));
         }
