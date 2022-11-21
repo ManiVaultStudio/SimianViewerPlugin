@@ -246,10 +246,10 @@ public: // Action getters
     DatasetPickerAction& getInSpecies1DatasetLinkerAction() { return _inSpecies1DatasetLinkerAction; };
     DatasetPickerAction& getInSpecies2DatasetLinkerAction() { return _inSpecies2DatasetLinkerAction; };
     OptionAction& getCrossSpeciesFilterAction() { return _crossSpeciesFilterAction; }
-    OptionAction& getInSpecies1HeatMapCellAction() { return _inSpecies1HeatMapCellAction; }
-    OptionAction& getInSpecies2HeatMapCellAction() { return _inSpecies2HeatMapCellAction; }
-    OptionAction& getCrossSpecies1HeatMapCellAction() { return _crossSpecies1HeatMapCellAction; }
-    OptionAction& getCrossSpecies2HeatMapCellAction() { return _crossSpecies2HeatMapCellAction; }
+    //OptionAction& getInSpecies1HeatMapCellAction() { return _inSpecies1HeatMapCellAction; }
+    //OptionAction& getInSpecies2HeatMapCellAction() { return _inSpecies2HeatMapCellAction; }
+    OptionAction& getCrossSpeciesHeatMapCellAction() { return _crossSpeciesHeatMapCellAction; }
+    //OptionAction& getCrossSpecies2HeatMapCellAction() { return _crossSpecies2HeatMapCellAction; }
     Species1Action& getSpecies1Action() { return _species1Action; }
     Species2Action& getSpecies2Action() { return _species2Action; }
     VisSettingAction& getVisSettingAction() { return _visSettingAction; }
@@ -260,8 +260,8 @@ public: // Action getters
     CellCountAction& getCellCountAction() { return _cellCountAction; }
     TriggerAction& getHelpAction() { return _helpAction; }
     TriggerAction& getScreenshotAction() { return _screenshotAction; }
-    OptionAction& getBarLinkerSpecies1() { return _barLinkerAction1; }
-    OptionAction& getBarLinkerSpecies2() { return _barLinkerAction2; }
+    OptionAction& getBarLinkerSpecies() { return _barLinkerAction; }
+    //OptionAction& getBarLinkerSpecies2() { return _barLinkerAction2; }
     OptionAction& getScatterplotColorControl() { return _scatterplotColorControlAction; }
     //ExplorationAction& getExplorationAction() { return _explorationAction; }
 protected:
@@ -290,10 +290,10 @@ protected:
     ToggleAction _histBarAction;
     ToggleAction _fullHeatMapAction;
     //ToggleAction _explorationModeAction;
-    OptionAction                 _inSpecies1HeatMapCellAction;
-    OptionAction                 _inSpecies2HeatMapCellAction;
-    OptionAction                 _crossSpecies1HeatMapCellAction;
-    OptionAction                 _crossSpecies2HeatMapCellAction;
+    //OptionAction                 _inSpecies1HeatMapCellAction;
+    //OptionAction                 _inSpecies2HeatMapCellAction;
+    OptionAction                 _crossSpeciesHeatMapCellAction;
+    //OptionAction                 _crossSpecies2HeatMapCellAction;
     bool                        _isLoading;
     Species1Action               _species1Action;
     Species2Action               _species2Action;
@@ -306,8 +306,8 @@ protected:
     TriggerAction                _helpAction;
     TriggerAction                _screenshotAction;
 
-    OptionAction                 _barLinkerAction1;
-    OptionAction                 _barLinkerAction2;
+    OptionAction                 _barLinkerAction;
+    //OptionAction                 _barLinkerAction2;
 
     bool _isStarted;
     ColorMapAction          _colorMapAction;
