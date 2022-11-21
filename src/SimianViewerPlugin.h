@@ -56,7 +56,6 @@ private:
     SimianOptionsAction*        _simianOptionsAction;
     /** SimianViewer widget displaying cluster data */
     SimianViewerWidget*             _simian_viewer;
-    std::string _currentCluster;
     hdps::EventListener     _eventListener;
 };
 
