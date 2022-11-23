@@ -29,7 +29,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_inSpecies2HeatMapCellAction(this, "Link in-species2 heatmap cell"),
 	_crossSpecies1HeatMapCellAction(this, "Link cross-species1 heatmap cell"),
 	_crossSpecies2HeatMapCellAction(this, "Link cross-species2 heatmap cell"),
-	_multiSelectClusterFilterAction(this, "Select cross-species clusters"),
+	//_multiSelectClusterFilterAction(this, "Select cross-species clusters"),
 	_colorMapAction(this, "Select color map"),
 	_backgroundColoringAction(this, "Select background color", DEFAULT_CONSTANT_COLOR, DEFAULT_CONSTANT_COLOR),
 	_isLoading(false),
@@ -88,7 +88,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_inSpecies1DatasetLinkerAction.setEnabled(false);
 	_inSpecies2DatasetLinkerAction.setEnabled(false);
 	_crossSpeciesFilterAction.setEnabled(false);
-	_multiSelectClusterFilterAction.setEnabled(false);
+	//_multiSelectClusterFilterAction.setEnabled(false);
 	_colorMapAction.setEnabled(false);
 	_backgroundColoringAction.setEnabled(false);
 	_visSettingAction.setEnabled(false);
@@ -107,9 +107,9 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_inSpecies2HeatMapCellAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 	_crossSpecies1HeatMapCellAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 	_crossSpecies2HeatMapCellAction.setDefaultWidgetFlags(OptionAction::ComboBox);
-	_multiSelectClusterFilterAction.setDefaultWidgetFlags(OptionsAction::ComboBox | OptionsAction::Selection | OptionsAction::File);
-	_multiSelectClusterFilterAction.initialize(QStringList{ "" });
-	_multiSelectClusterFilterAction.setSelectedOptions(QStringList());
+	//_multiSelectClusterFilterAction.setDefaultWidgetFlags(OptionsAction::ComboBox | OptionsAction::Selection | OptionsAction::File);
+	//_multiSelectClusterFilterAction.initialize(QStringList{ "" });
+	//_multiSelectClusterFilterAction.setSelectedOptions(QStringList());
 	_colorMapAction.initialize("Black to white", "Black to white");
 	_backgroundColoringAction.initialize(DEFAULT_CONSTANT_COLOR, DEFAULT_CONSTANT_COLOR);
 	_neighborhoodAction.setDefaultWidgetFlags(OptionAction::ComboBox);
@@ -192,30 +192,30 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	const auto updateCrossSpeciesFilter = [this]() -> void
 	{
 		updateDatasetPickerAction();
-		if ((_crossSpeciesFilterAction.getCurrentText()).toStdString() == "all clusters")
-		{
-			_multiSelectClusterFilterAction.setEnabled(false);
-			_multiSelectClusterFilterAction.setSelectedOptions(QStringList());
-		}
-		else {
-			_multiSelectClusterFilterAction.setEnabled(true);
-		}
+		//if ((_crossSpeciesFilterAction.getCurrentText()).toStdString() == "all clusters")
+		//{
+		//	_multiSelectClusterFilterAction.setEnabled(false);
+		//	_multiSelectClusterFilterAction.setSelectedOptions(QStringList());
+		//}
+		//else {
+		//	_multiSelectClusterFilterAction.setEnabled(true);
+		//}
 		updateData((_species1SelectAction.getCurrentText()).toStdString(), (_species2SelectAction.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString(), (_distanceAction.getValue()), (_crossSpeciesFilterAction.getCurrentText()).toStdString());
 
 
 
 	};
 
-	const auto multiSelectClusterFilter = [this]() -> void
-	{
-		if (_isStarted)
-		{
-			if ((_crossSpeciesFilterAction.getCurrentText()).toStdString() == "cross-species clusters")
-			{
-				filterMultiSelect();
-			}
-		}
-	};
+	//const auto multiSelectClusterFilter = [this]() -> void
+	//{
+	//	if (_isStarted)
+	//	{
+	//		if ((_crossSpeciesFilterAction.getCurrentText()).toStdString() == "cross-species clusters")
+	//		{
+	//			filterMultiSelect();
+	//		}
+	//	}
+	//};
 
 	const auto colormapFilter = [this]() -> void
 	{
@@ -262,8 +262,12 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				{
 					if (datasets1.toLower().contains(_species1SelectAction.getCurrentText().toLower()))
 					{
+						if (datasets1.toLower().contains(_neighborhoodAction.getCurrentText().toLower()))
+						{
 
-						_crossSpecies1DatasetLinkerAction.setCurrentText(datasets1);
+							_crossSpecies1DatasetLinkerAction.setCurrentText(datasets1);
+
+						}
 
 					}
 				}
@@ -276,8 +280,11 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				{
 					if (datasets1.toLower().contains(_species1SelectAction.getCurrentText().toLower()))
 					{
+						if (datasets1.toLower().contains(_neighborhoodAction.getCurrentText().toLower()))
+						{
 
-						_inSpecies1DatasetLinkerAction.setCurrentText(datasets1);
+							_inSpecies1DatasetLinkerAction.setCurrentText(datasets1);
+						}
 					}
 				}
 			}
@@ -289,8 +296,11 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				{
 					if (datasets1.toLower().contains(_species1SelectAction.getCurrentText().toLower()))
 					{
+						if (datasets1.toLower().contains(_neighborhoodAction.getCurrentText().toLower()))
+						{
 
-						_speciesEmbedding1LinkerAction.setCurrentText(datasets1);
+							_speciesEmbedding1LinkerAction.setCurrentText(datasets1);
+						}
 					}
 				}
 			}
@@ -363,8 +373,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			_inSpecies1DatasetLinkerAction.setEnabled(false);
 			_inSpecies2DatasetLinkerAction.setEnabled(false);
 			_crossSpeciesFilterAction.setEnabled(false);
-			_multiSelectClusterFilterAction.setEnabled(false);
-			_multiSelectClusterFilterAction.setSelectedOptions(QStringList());
+			//_multiSelectClusterFilterAction.setEnabled(false);
+			//_multiSelectClusterFilterAction.setSelectedOptions(QStringList());
 			_colorMapAction.setEnabled(false);
 			_backgroundColoringAction.setEnabled(false);
 			_visSettingAction.setEnabled(false);
@@ -389,7 +399,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			_crossSpeciesFilterAction.setEnabled(true);
 			_fullHeatMapAction.setEnabled(true);
 			//_explorationModeAction.setEnabled(true);
-			_multiSelectClusterFilterAction.setEnabled(true);
+			//_multiSelectClusterFilterAction.setEnabled(true);
 			_colorMapAction.setEnabled(true);
 			_backgroundColoringAction.setEnabled(true);
 			_visSettingAction.setEnabled(true);
@@ -403,7 +413,11 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 					if (dataset2.toLower().contains(_species2SelectAction.getCurrentText().toLower()))
 					{
 
-						_crossSpecies2DatasetLinkerAction.setCurrentText(dataset2);
+						if (dataset2.toLower().contains(_neighborhoodAction.getCurrentText().toLower()))
+						{
+
+							_crossSpecies2DatasetLinkerAction.setCurrentText(dataset2);
+						}
 					}
 				}
 			}
@@ -416,7 +430,11 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 					if (dataset2.toLower().contains(_species2SelectAction.getCurrentText().toLower()))
 					{
 
-						_inSpecies2DatasetLinkerAction.setCurrentText(dataset2);
+						if (dataset2.toLower().contains(_neighborhoodAction.getCurrentText().toLower()))
+						{
+
+							_inSpecies2DatasetLinkerAction.setCurrentText(dataset2);
+						}
 					}
 				}
 			}
@@ -428,7 +446,11 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 					if (datasets2.toLower().contains(_species2SelectAction.getCurrentText().toLower()))
 					{
 
-						_speciesEmbedding2LinkerAction.setCurrentText(datasets2);
+						if (datasets2.toLower().contains(_neighborhoodAction.getCurrentText().toLower()))
+						{
+
+							_speciesEmbedding2LinkerAction.setCurrentText(datasets2);
+						}
 					}
 				}
 			}
@@ -453,8 +475,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			_inSpecies1DatasetLinkerAction.setEnabled(false);
 			_inSpecies2DatasetLinkerAction.setEnabled(false);
 			_crossSpeciesFilterAction.setEnabled(false);
-			_multiSelectClusterFilterAction.setEnabled(false);
-			_multiSelectClusterFilterAction.setSelectedOptions(QStringList());
+			//_multiSelectClusterFilterAction.setEnabled(false);
+			//_multiSelectClusterFilterAction.setSelectedOptions(QStringList());
 			_colorMapAction.setEnabled(false);
 			_backgroundColoringAction.setEnabled(false);
 			_visSettingAction.setEnabled(false);
@@ -475,6 +497,131 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		if (_species1SelectAction.getCurrentText() != "" && _species2SelectAction.getCurrentText() != "")
 		{
 			updateData((_species1SelectAction.getCurrentText()).toStdString(), (_species2SelectAction.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString(), (_distanceAction.getValue()), (_crossSpeciesFilterAction.getCurrentText()).toStdString());
+			
+			if (!_crossSpecies1DatasetLinkerAction.getOptions().isEmpty())
+			{
+				auto datasetOptions1 = _crossSpecies1DatasetLinkerAction.getOptions();
+				for (const auto& datasets1 : datasetOptions1)
+				{
+					if (datasets1.toLower().contains(_species1SelectAction.getCurrentText().toLower()))
+					{
+						if (datasets1.toLower().contains(_neighborhoodAction.getCurrentText().toLower()))
+						{
+
+							_crossSpecies1DatasetLinkerAction.setCurrentText(datasets1);
+
+						}
+
+					}
+				}
+			}
+
+			if (!_inSpecies1DatasetLinkerAction.getOptions().isEmpty())
+			{
+				auto datasetOptions1 = _inSpecies1DatasetLinkerAction.getOptions();
+				for (const auto& datasets1 : datasetOptions1)
+				{
+					if (datasets1.toLower().contains(_species1SelectAction.getCurrentText().toLower()))
+					{
+						if (datasets1.toLower().contains(_neighborhoodAction.getCurrentText().toLower()))
+						{
+
+							_inSpecies1DatasetLinkerAction.setCurrentText(datasets1);
+						}
+					}
+				}
+			}
+
+			if (!_speciesEmbedding1LinkerAction.getOptions().isEmpty())
+			{
+				auto datasetOptions1 = _speciesEmbedding1LinkerAction.getOptions();
+				for (const auto& datasets1 : datasetOptions1)
+				{
+					if (datasets1.toLower().contains(_species1SelectAction.getCurrentText().toLower()))
+					{
+						if (datasets1.toLower().contains(_neighborhoodAction.getCurrentText().toLower()))
+						{
+
+							_speciesEmbedding1LinkerAction.setCurrentText(datasets1);
+						}
+					}
+				}
+			}
+			
+			if (!_crossSpecies2DatasetLinkerAction.getOptions().isEmpty())
+			{
+				auto datasetOptions2 = _crossSpecies2DatasetLinkerAction.getOptions();
+				for (const auto& dataset2 : datasetOptions2)
+				{
+					if (dataset2.toLower().contains(_species2SelectAction.getCurrentText().toLower()))
+					{
+
+						if (dataset2.toLower().contains(_neighborhoodAction.getCurrentText().toLower()))
+						{
+
+							_crossSpecies2DatasetLinkerAction.setCurrentText(dataset2);
+						}
+					}
+				}
+			}
+
+			if (!_inSpecies2DatasetLinkerAction.getOptions().isEmpty())
+			{
+				auto datasetOptions2 = _inSpecies2DatasetLinkerAction.getOptions();
+				for (const auto& dataset2 : datasetOptions2)
+				{
+					if (dataset2.toLower().contains(_species2SelectAction.getCurrentText().toLower()))
+					{
+
+						if (dataset2.toLower().contains(_neighborhoodAction.getCurrentText().toLower()))
+						{
+
+							_inSpecies2DatasetLinkerAction.setCurrentText(dataset2);
+						}
+					}
+				}
+			}
+			if (!_speciesEmbedding2LinkerAction.getOptions().isEmpty())
+			{
+				auto datasetOptions2 = _speciesEmbedding2LinkerAction.getOptions();
+				for (const auto& datasets2 : datasetOptions2)
+				{
+					if (datasets2.toLower().contains(_species2SelectAction.getCurrentText().toLower()))
+					{
+
+						if (datasets2.toLower().contains(_neighborhoodAction.getCurrentText().toLower()))
+						{
+
+							_speciesEmbedding2LinkerAction.setCurrentText(datasets2);
+						}
+					}
+				}
+			}
+			if (_species1ScatterplotColorLinkerAction.getNumberOfOptions() > 0 && _species2ScatterplotColorLinkerAction.getNumberOfOptions() > 0)
+			{
+				if (_scatterplotColorControlAction.getCurrentText() != "")
+				{
+					auto species1SelectedOption = selectFromQStringList(_species1ScatterplotColorLinkerAction.getOptions(), _species1SelectAction.getCurrentText(), _scatterplotColorControlAction.getCurrentText(), _neighborhoodAction.getCurrentText());
+
+					{
+						_species1ScatterplotColorLinkerAction.setCurrentText(species1SelectedOption);
+					}
+
+					auto species2SelectedOption = selectFromQStringList(_species2ScatterplotColorLinkerAction.getOptions(), _species2SelectAction.getCurrentText(), _scatterplotColorControlAction.getCurrentText(), _neighborhoodAction.getCurrentText());
+
+					{
+						_species2ScatterplotColorLinkerAction.setCurrentText(species2SelectedOption);
+					}
+
+				}
+			}
+
+			//updateData((_species1SelectAction.getCurrentText()).toStdString(), (_species2SelectAction.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString(), (_distanceAction.getValue()), (_crossSpeciesFilterAction.getCurrentText()).toStdString());
+
+
+
+
+
 		}
 	};
 	const auto updateScatterplotColorControl = [this]() -> void
@@ -485,13 +632,13 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		{
 			if (_scatterplotColorControlAction.getCurrentText() != "" )
 			{
-				auto species1SelectedOption = selectFromQStringList(_species1ScatterplotColorLinkerAction.getOptions(), _species1SelectAction.getCurrentText(), _scatterplotColorControlAction.getCurrentText());
+				auto species1SelectedOption = selectFromQStringList(_species1ScatterplotColorLinkerAction.getOptions(), _species1SelectAction.getCurrentText(), _scatterplotColorControlAction.getCurrentText(),_neighborhoodAction.getCurrentText());
 
 				{
 					_species1ScatterplotColorLinkerAction.setCurrentText(species1SelectedOption);
 				}
 
-				auto species2SelectedOption = selectFromQStringList(_species2ScatterplotColorLinkerAction.getOptions(), _species2SelectAction.getCurrentText(), _scatterplotColorControlAction.getCurrentText());
+				auto species2SelectedOption = selectFromQStringList(_species2ScatterplotColorLinkerAction.getOptions(), _species2SelectAction.getCurrentText(), _scatterplotColorControlAction.getCurrentText(),_neighborhoodAction.getCurrentText());
 
 				{
 					_species2ScatterplotColorLinkerAction.setCurrentText(species2SelectedOption);
@@ -744,9 +891,9 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		});
 
 	connect(&_screenshotAction, &TriggerAction::triggered, this, generateScreenshot);
-	connect(&_multiSelectClusterFilterAction, &OptionsAction::selectedOptionsChanged, [this, multiSelectClusterFilter](const QStringList& currentIndex) {
-		multiSelectClusterFilter();
-		});
+	//connect(&_multiSelectClusterFilterAction, &OptionsAction::selectedOptionsChanged, [this, multiSelectClusterFilter](const QStringList& currentIndex) {
+	//	multiSelectClusterFilter();
+	//	});
 
 	connect(&_colorMapAction, &ColorMapAction::imageChanged, this, colormapFilter);
 
@@ -950,7 +1097,7 @@ void SimianOptionsAction::updateData(std::string Species1, std::string Species2,
 		}
 	}
 
-	updateMultiSelectionDropdown(filteredVisData);
+	//updateMultiSelectionDropdown(filteredVisData);
 
 	QString _jsonObject;
 	_jsonObject += "[";
@@ -1197,28 +1344,28 @@ inline SimianOptionsAction::CellCountAction::CellCountAction(SimianOptionsAction
 //}
 
 
-void SimianOptionsAction::updateMultiSelectionDropdown(std::vector<std::vector<std::string>>& filteredVisData)
-{
-	std::vector<std::string> store;
-	for (int i = 0; i < filteredVisData.size(); i++)
-
-	{
-		store.push_back(filteredVisData[i][7]);
-		store.push_back(filteredVisData[i][8]);
-	}
-	sort(store.begin(), store.end());
-	store.erase(unique(store.begin(), store.end()), store.end());
-	QStringList finalClusters{};
-	for (int i = 0; i < store.size(); i++)
-	{
-		finalClusters.append(QString::fromUtf8((store.at(i)).c_str()));
-	}
-
-	_multiSelectClusterFilterAction.initialize(finalClusters);
-	_multiSelectClusterFilterAction.setSelectedOptions(finalClusters);
-
-
-}
+//void SimianOptionsAction::updateMultiSelectionDropdown(std::vector<std::vector<std::string>>& filteredVisData)
+//{
+//	std::vector<std::string> store;
+//	for (int i = 0; i < filteredVisData.size(); i++)
+//
+//	{
+//		store.push_back(filteredVisData[i][7]);
+//		store.push_back(filteredVisData[i][8]);
+//	}
+//	sort(store.begin(), store.end());
+//	store.erase(unique(store.begin(), store.end()), store.end());
+//	QStringList finalClusters{};
+//	for (int i = 0; i < store.size(); i++)
+//	{
+//		finalClusters.append(QString::fromUtf8((store.at(i)).c_str()));
+//	}
+//
+//	_multiSelectClusterFilterAction.initialize(finalClusters);
+//	_multiSelectClusterFilterAction.setSelectedOptions(finalClusters);
+//
+//
+//}
 
 SimianOptionsAction::VisSettingAction::Widget::Widget(QWidget* parent, VisSettingAction* visSettingAction) :
 	WidgetActionWidget(parent, visSettingAction)
@@ -1389,186 +1536,190 @@ inline SimianOptionsAction::DistanceNeighborhoodAction::DistanceNeighborhoodActi
 
 
 
-void SimianOptionsAction::filterMultiSelect()
-{
-	QStringList clusterValues = _multiSelectClusterFilterAction.getSelectedOptions();
+//void SimianOptionsAction::filterMultiSelect()
+//{
+//	QStringList clusterValues = _multiSelectClusterFilterAction.getSelectedOptions();
+//
+//	std::vector<std::vector<std::string>>    filteredVisData;
+//	std::vector<std::vector<std::string>>    clusterfilteredVisData;
+//
+//
+//
+//	if ((_crossSpeciesFilterAction.getCurrentText()).toStdString() == "cross-species clusters")
+//	{
+//		for (int i = 0; i < _simianData.size(); i++)
+//
+//		{
+//			if (_simianData[i][7] == _simianData[i][8] && _simianData[i][1] == (_species1SelectAction.getCurrentText()).toStdString() && _simianData[i][3] == (_species2SelectAction.getCurrentText()).toStdString() && _simianData[i][6] == (_neighborhoodAction.getCurrentText()).toStdString() && stoi(_simianData[i][5]) < (_distanceAction.getValue()))
+//			{
+//				std::vector<std::string> temp;
+//				for (int j = 0; j < _simianData[i].size(); j++)
+//				{
+//					temp.push_back(_simianData[i][j]);
+//				}
+//				filteredVisData.push_back(temp);
+//			}
+//		}
+//	}
+//	else
+//	{
+//		for (int i = 0; i < _simianData.size(); i++)
+//
+//		{
+//			if (_simianData[i][1] == (_species1SelectAction.getCurrentText()).toStdString() && _simianData[i][3] == (_species2SelectAction.getCurrentText()).toStdString() && _simianData[i][6] == (_neighborhoodAction.getCurrentText()).toStdString() && stoi(_simianData[i][5]) < (_distanceAction.getValue()))
+//			{
+//				std::vector<std::string> temp;
+//				for (int j = 0; j < _simianData[i].size(); j++)
+//				{
+//					temp.push_back(_simianData[i][j]);
+//				}
+//				filteredVisData.push_back(temp);
+//			}
+//		}
+//	}
+//
+//	for (int i = 0; i < filteredVisData.size(); i++)
+//	{
+//		for (int j = 0; j < clusterValues.size(); j++)
+//		{
+//			if (QString::fromStdString(filteredVisData[i][7]) == clusterValues[j])
+//			{
+//				clusterfilteredVisData.push_back(filteredVisData[i]);
+//				continue;
+//			}
+//
+//		}
+//	}
+//
+//
+//
+//	QString _jsonObject;
+//	_jsonObject += "[";
+//
+//	QStringList columnNames = { "RowNumber", "species_1", "cluster_1", "species_2", "cluster_2", "dist", "neighborhood", "cross_species_cluster1_species_1", "cross_species_cluster2_species_2", "sortColumn","subclass_1","class_1","subclass_2","class_2" };
+//
+//	for (int i = 0; i < clusterfilteredVisData.size(); i++)
+//	{
+//		_jsonObject += "{";
+//
+//		for (int j = 0; j < clusterfilteredVisData[i].size(); j++)
+//		{
+//			QString columnName = columnNames[j];
+//			_jsonObject += QString("\"%1\":\"%2\",").arg(columnName, clusterfilteredVisData[i][j].c_str());
+//		}
+//
+//		_jsonObject.chop(1);
+//
+//		_jsonObject += "},";
+//	}
+//	_jsonObject.chop(1);
+//	_jsonObject += "]";
+//	_simianViewerPlugin.getSimianViewerWidget()->setData(_jsonObject.toStdString());
+//	auto& colorMapRangeAction = _colorMapAction.getSettingsAction().getHorizontalAxisAction().getRangeAction();
+//	float colorMapRangeMin = 1200.0;
+//	float colorMapRangeMax = 0.0;
+//	for (int i = 0; i < clusterfilteredVisData.size(); i++)
+//	{
+//		const float temp = std::stof(clusterfilteredVisData[i][5]);
+//		if (temp < colorMapRangeMin)
+//		{
+//			colorMapRangeMin = temp;
+//		}
+//		if (temp > colorMapRangeMax)
+//		{
+//			colorMapRangeMax = temp;
+//		}
+//	}
+//	// Initialize the color map range action with the color map range from the scatter plot 
+//	colorMapRangeAction.initialize(colorMapRangeMin, colorMapRangeMax, colorMapRangeMin, colorMapRangeMax, colorMapRangeMin, colorMapRangeMax);
+//	if (!_isStarted)
+//	{
+//		_isStarted = true;
+//	}
+//}
 
-	std::vector<std::vector<std::string>>    filteredVisData;
-	std::vector<std::vector<std::string>>    clusterfilteredVisData;
-
-
-
-	if ((_crossSpeciesFilterAction.getCurrentText()).toStdString() == "cross-species clusters")
-	{
-		for (int i = 0; i < _simianData.size(); i++)
-
-		{
-			if (_simianData[i][7] == _simianData[i][8] && _simianData[i][1] == (_species1SelectAction.getCurrentText()).toStdString() && _simianData[i][3] == (_species2SelectAction.getCurrentText()).toStdString() && _simianData[i][6] == (_neighborhoodAction.getCurrentText()).toStdString() && stoi(_simianData[i][5]) < (_distanceAction.getValue()))
-			{
-				std::vector<std::string> temp;
-				for (int j = 0; j < _simianData[i].size(); j++)
-				{
-					temp.push_back(_simianData[i][j]);
-				}
-				filteredVisData.push_back(temp);
-			}
-		}
-	}
-	else
-	{
-		for (int i = 0; i < _simianData.size(); i++)
-
-		{
-			if (_simianData[i][1] == (_species1SelectAction.getCurrentText()).toStdString() && _simianData[i][3] == (_species2SelectAction.getCurrentText()).toStdString() && _simianData[i][6] == (_neighborhoodAction.getCurrentText()).toStdString() && stoi(_simianData[i][5]) < (_distanceAction.getValue()))
-			{
-				std::vector<std::string> temp;
-				for (int j = 0; j < _simianData[i].size(); j++)
-				{
-					temp.push_back(_simianData[i][j]);
-				}
-				filteredVisData.push_back(temp);
-			}
-		}
-	}
-
-	for (int i = 0; i < filteredVisData.size(); i++)
-	{
-		for (int j = 0; j < clusterValues.size(); j++)
-		{
-			if (QString::fromStdString(filteredVisData[i][7]) == clusterValues[j])
-			{
-				clusterfilteredVisData.push_back(filteredVisData[i]);
-				continue;
-			}
-
-		}
-	}
-
-
-
-	QString _jsonObject;
-	_jsonObject += "[";
-
-	QStringList columnNames = { "RowNumber", "species_1", "cluster_1", "species_2", "cluster_2", "dist", "neighborhood", "cross_species_cluster1_species_1", "cross_species_cluster2_species_2", "sortColumn","subclass_1","class_1","subclass_2","class_2" };
-
-	for (int i = 0; i < clusterfilteredVisData.size(); i++)
-	{
-		_jsonObject += "{";
-
-		for (int j = 0; j < clusterfilteredVisData[i].size(); j++)
-		{
-			QString columnName = columnNames[j];
-			_jsonObject += QString("\"%1\":\"%2\",").arg(columnName, clusterfilteredVisData[i][j].c_str());
-		}
-
-		_jsonObject.chop(1);
-
-		_jsonObject += "},";
-	}
-	_jsonObject.chop(1);
-	_jsonObject += "]";
-	_simianViewerPlugin.getSimianViewerWidget()->setData(_jsonObject.toStdString());
-	auto& colorMapRangeAction = _colorMapAction.getSettingsAction().getHorizontalAxisAction().getRangeAction();
-	float colorMapRangeMin = 1200.0;
-	float colorMapRangeMax = 0.0;
-	for (int i = 0; i < clusterfilteredVisData.size(); i++)
-	{
-		const float temp = std::stof(clusterfilteredVisData[i][5]);
-		if (temp < colorMapRangeMin)
-		{
-			colorMapRangeMin = temp;
-		}
-		if (temp > colorMapRangeMax)
-		{
-			colorMapRangeMax = temp;
-		}
-	}
-	// Initialize the color map range action with the color map range from the scatter plot 
-	colorMapRangeAction.initialize(colorMapRangeMin, colorMapRangeMax, colorMapRangeMin, colorMapRangeMax, colorMapRangeMin, colorMapRangeMax);
-	if (!_isStarted)
-	{
-		_isStarted = true;
-	}
-}
-
-QString SimianOptionsAction::selectFromQStringList(const QStringList& fileList, const QString& speciesType, const QString& fileType)
+QString SimianOptionsAction::selectFromQStringList(const QStringList& fileList, const QString& speciesType, const QString& fileType, const QString& neighborhoodType)
 {
 	QString foundFile = "";
 
 	for (const auto& file : fileList)
 	{
-		if (file.toLower().contains(speciesType.toLower()))
+		if (file.toLower().contains(speciesType.toLower())) 
 		{
-			if (fileType == "in-species class")
+			if (file.toLower().contains(neighborhoodType.toLower()))
 			{
-				if (file.toLower().endsWith("/class"))
+				if (fileType == "in-species class")
 				{
-					foundFile = file;
+					if (file.toLower().endsWith("/class"))
+					{
+						foundFile = file;
+					}
 				}
-			}
-			else if (fileType == "in-species cluster")
-			{
-				if (file.toLower().endsWith("/cluster"))
+				else if (fileType == "in-species cluster")
 				{
-					foundFile = file;
+					if (file.toLower().endsWith("/cluster"))
+					{
+						foundFile = file;
+					}
+
+				}
+				else if (fileType == "cross-species class")
+				{
+					if (file.toLower().endsWith("/cross_species_class"))
+					{
+						foundFile = file;
+					}
+				}
+				else if (fileType == "cross-species cluster")
+				{
+					if (file.toLower().endsWith("/cross_species_cluster"))
+					{
+						foundFile = file;
+					}
+				}
+				else if (fileType == "cross-species sub-class")
+				{
+					if (file.toLower().endsWith("/cross_species_subclass"))
+					{
+						foundFile = file;
+					}
 				}
 
-			}
-			else if (fileType == "cross-species class")
-			{
-				if (file.toLower().endsWith("/cross_species_class"))
+				else if (fileType == "donor")
 				{
-					foundFile = file;
-				}
-			}
-			else if (fileType == "cross-species cluster")
-			{
-				if (file.toLower().endsWith("/cross_species_cluster"))
-				{
-					foundFile = file;
-				}
-			}
-			else if (fileType == "cross-species sub-class")
-			{
-				if (file.toLower().endsWith("/cross_species_subclass"))
-				{
-					foundFile = file;
-				}
-			}
+					if (file.toLower().endsWith("/donor"))
+					{
+						foundFile = file;
+					}
 
-			else if (fileType == "donor")
-			{
-				if (file.toLower().endsWith("/donor"))
-				{
-					foundFile = file;
 				}
-
-			}
-			else if (fileType == "neighborhood")
-			{
-				if (file.toLower().endsWith("/neighborhood"))
+				else if (fileType == "neighborhood")
 				{
-					foundFile = file;
+					if (file.toLower().endsWith("/neighborhood"))
+					{
+						foundFile = file;
+					}
+
 				}
-
-			}
-			else if (fileType == "sex")
-			{
-				if (file.toLower().endsWith("/sex"))
+				else if (fileType == "sex")
 				{
-					foundFile = file;
+					if (file.toLower().endsWith("/sex"))
+					{
+						foundFile = file;
+					}
+
 				}
-
-			}
-			else if (fileType == "in-species subclass")
-			{
-				if (file.toLower().endsWith("/subclass"))
+				else if (fileType == "in-species subclass")
 				{
-					foundFile = file;
+					if (file.toLower().endsWith("/subclass"))
+					{
+						foundFile = file;
+					}
 				}
 			}
 		}
 	}
+
 	return foundFile;
 }
 
