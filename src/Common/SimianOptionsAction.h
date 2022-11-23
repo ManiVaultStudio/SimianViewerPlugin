@@ -216,13 +216,13 @@ public:
 
 private:
     void updateData(std::string Species1, std::string Species2, std::string neighborhood, int distance, std::string CrossSpeciesFilter);
-    void filterMultiSelect();
+    //void filterMultiSelect();
     bool QStringlistContainsQString(const QStringList& list, const QString& str);
-    QString selectFromQStringList(const QStringList& fileList, const QString& speciesType, const QString& fileType);
+    QString selectFromQStringList(const QStringList& fileList, const QString& speciesType, const QString& fileType, const QString& neighborhoodType);
 protected:
     void updateDatasetPickerAction();
     void sendClusterCountInfoToJS();
-    void updateMultiSelectionDropdown(std::vector<std::vector<std::string>>& filteredVisData);
+    //void updateMultiSelectionDropdown(std::vector<std::vector<std::string>>& filteredVisData);
 public: // Action getters
 
     OptionAction& getSpecies1SelectAction() { return _species1SelectAction; }
@@ -286,7 +286,7 @@ protected:
     hdps::CoreInterface*         _core;
     FetchMetaData*                _metaData;
     std::vector<std::vector<std::string>>                _simianData;
-    OptionsAction                 _multiSelectClusterFilterAction;
+    //OptionsAction                 _multiSelectClusterFilterAction;
     ToggleAction _histBarAction;
     ToggleAction _fullHeatMapAction;
     //ToggleAction _explorationModeAction;
