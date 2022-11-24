@@ -280,6 +280,9 @@ protected:
     DatasetPickerAction           _speciesEmbedding1LinkerAction;
     DatasetPickerAction          _speciesEmbedding2LinkerAction;
 
+    DatasetPickerAction           _species1DEStatsLinkerAction;
+    DatasetPickerAction           _species2DEStatsLinkerAction;
+
     DatasetPickerAction           _inSpecies1DatasetLinkerAction;
     DatasetPickerAction          _inSpecies2DatasetLinkerAction;
     OptionAction                 _crossSpeciesFilterAction;
