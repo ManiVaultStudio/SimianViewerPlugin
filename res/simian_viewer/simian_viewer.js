@@ -40,7 +40,7 @@ var qtColor = "Black to white";
 var colorMirror = false;
 var barflag = false;
 var showFullHeatmapflag = false;
-/*var showExplorationModeflag = false;*/
+var showExplorationModeflag = false;
 var layerFlag = false;
 var backgroundColor = "#ffffff";
 //onresize adjust chart dimensions
@@ -99,7 +99,7 @@ const simianVis = () => {
     d3.select("svg").remove();
     svg = d3.select("#my_dataviz")
     svg.selectAll("*").remove();
-/*    showExplorationModeflag = false;*/
+    showExplorationModeflag = false;
     if (showFullHeatmapflag) {
         document.getElementById('my_dataviz').setAttribute("style", "width:99%");
         document.getElementById('my_container').setAttribute("style", "width:1%");
@@ -1164,128 +1164,20 @@ const simianVis = () => {
         svg.call(tip);
 
 
-/*    var dblclick  = function (d) {
-*//*        d3.select("#marker1").remove();
-        d3.select("#marker2").remove();
-        d3.select("#marker3").remove();
-        d3.select("#exploreViewMarker").remove();*//*
-        d3.select("#exploreViewMarker1").remove();
-        d3.select("#exploreViewMarker2").remove();
-        d3.select("#exploreViewMarker3").remove();
-*//*        if (barflag) {
-            svg.append("line")
-                .attr("id", "marker1")
-                .attr("x1", 0)
-                .attr("y1", d3.mouse(this)[1])
-                .attr("x2", width)
-                .attr("y2", d3.mouse(this)[1])
-                .attr("stroke-width", 2)
-                .style("stroke-dasharray", ("3, 3"))
-                .style("stroke-opacity", 0.9)
-                .attr("stroke", in_speciesClustercolors[d.cluster_2])
-                .attr("marker-end", "url(#triangle)");
-
-            svg.append("line")
-                .attr("id", "marker2")
-                .attr("x1", d3.mouse(this)[0])
-                .attr("y1", 0)
-                .attr("x2", d3.mouse(this)[0])
-                .attr("y2", height)
-                .attr("stroke-width", 2)
-                .style("stroke-dasharray", ("3, 3"))
-                .style("stroke-opacity", 0.9)
-                .attr("stroke", in_speciesClustercolors[d.cluster_1])
-                .attr("marker-end", "url(#triangle)");
-
-            svg.append("circle")
-                .attr("id", "marker3")
-                .attr("cx", d3.mouse(this)[0])
-                .attr("cy", d3.mouse(this)[1])
-                .attr("r", 5)
-                .style("fill", myColor(d.dist))
-                .style("stroke", "black")
-                .attr("stroke-width", 1);
-
-        }
-        else {
-            svg.append("line")
-                .attr("id", "marker1")
-                .attr("x1", 0)
-                .attr("y1", d3.mouse(this)[1])
-                .attr("x2", d3.mouse(this)[0])
-                .attr("y2", d3.mouse(this)[1])
-                .attr("stroke-width", 2)
-                .style("stroke-dasharray", ("3, 3"))
-                .style("stroke-opacity", 0.9)
-                .attr("stroke", in_speciesClustercolors[d.cluster_2])
-                .attr("marker-end", "url(#triangle)");
-
-            svg.append("line")
-                .attr("id", "marker2")
-                .attr("x1", d3.mouse(this)[0])
-                .attr("y1", d3.mouse(this)[1])
-                .attr("x2", d3.mouse(this)[0])
-                .attr("y2", height)
-                .attr("stroke-width", 2)
-                .style("stroke-dasharray", ("3, 3"))
-                .style("stroke-opacity", 0.9)
-                .attr("stroke", in_speciesClustercolors[d.cluster_1])
-                .attr("marker-end", "url(#triangle)");
-
-            svg.append("circle")
-                .attr("id", "marker3")
-                .attr("cx", d3.mouse(this)[0])
-                .attr("cy", d3.mouse(this)[1])
-                .attr("r", 5)
-                .style("fill", myColor(d.dist))
-                .style("stroke", "black")
-                .attr("stroke-width", 1);
-        }
-        let selectionIDs = [];
-        selectionIDs.push(d.cluster_1);
-        selectionIDs.push(d.cluster_2);
-        selectionIDs.push(d.cross_species_cluster1_species_1);
-        selectionIDs.push(d.cross_species_cluster2_species_2);
-        if (isQtAvailable) {
-            QtBridge.js_passSelectionToQt(selectionIDs);
-        }*//*
-    };*/
-/*    var mouseout = function (d) {
-*//*        if (d3.event.shiftKey) {
-            if (showExplorationModeflag) { showExplorationModeflag = false; tip.show(d, d3.mouse(this), this); }
-
-        }
-        if (!showExplorationModeflag)*//*
-        if (d3.event.shiftKey) { }
-    else
-        {
+    var mouseout = function (d) {
+        if (!showExplorationModeflag) {
             tip.hide();
             d3.select("#exploreViewMarker1").remove();
             d3.select("#exploreViewMarker2").remove();
             d3.select("#exploreViewMarker3").remove();
         }
 
-    };*/
-/*    var contextmenu = function (d) {
-        tip.hide();
-        d3.select("#exploreViewMarker1").remove();
-        d3.select("#exploreViewMarker2").remove();
-        d3.select("#exploreViewMarker3").remove();
-    };*/
-/*    var mouseenter = function (d) {
-*//*        if (d3.event.shiftKey) {
-            if (showExplorationModeflag) { showExplorationModeflag = false; tip.show(d, d3.mouse(this), this);}
-            
-        }*//*
-        if (d3.event.shiftKey) { }
-    else
-        {
-            tip.hide();
-            d3.select("#exploreViewMarker1").remove();
-            d3.select("#exploreViewMarker2").remove();
-            d3.select("#exploreViewMarker3").remove();
-        }
-    };*/
+    };
+
+    var mouseenter = function (d) {
+
+
+    };
 
 
 
@@ -1317,9 +1209,7 @@ const simianVis = () => {
             })
             .style("stroke-location", "inside")
             .style("opacity", 1)
-            .style("cursor", "default");
-
-
+            .style("cursor", "pointer");
     };
     var mousemove = function (d) {
         /*        document.getElementById("clearTooltip");
@@ -1328,122 +1218,45 @@ const simianVis = () => {
                 svgTipdiv.text("");*/
         svg.select("#axisSelectionpolygon").remove();
         svg.select("#axisSelectionText").remove();
-/*        d3.select("#marker2").remove();
-        d3.select("#marker1").remove();
-        d3.select("#marker3").remove();*/
-        //if (!showExplorationModeflag)
-        {
-        //tip.hide();
-    
+        /*        d3.select("#marker2").remove();
+                d3.select("#marker1").remove();
+                d3.select("#marker3").remove();*/
+        if (!showExplorationModeflag) {
+            tip.hide();
 
 
 
-        tip.show(d, d3.mouse(this), this);
 
-        var wTooltip = ((containerwidth)/ 100 * window.innerWidth);
-        var hTooltip = ((containerHeight) / 100 * window.innerHeight);
-        var marginTooltip = { topTooltip: 20, rightTooltip: 20, bottomTooltip: 20, leftTooltip: 20, middleTooltip: 10 };
-        var regionWidthTooltip = wTooltip / 2 - marginTooltip.middleTooltip;
-        var pointATooltip = regionWidthTooltip, pointBTooltip = wTooltip - regionWidthTooltip;
-        var exampleDataTooltip = [{ group: '6', species1: angle1Sp1, species2: angle1Sp2 }, { group: '5', species1: angle2Sp1, species2: angle2Sp2 }, { group: '4', species1: angle3Sp1, species2: angle3Sp2 }, { group: '3', species1: angle4Sp1, species2: angle4Sp2 }, { group: '2', species1: angle5Sp1, species2: angle5Sp2 }, { group: '1', species1: angle6Sp1, species2: angle6Sp2 }];
-        var svgTooltip = d3.select('#tipDiv').append('svg').attr('width', marginTooltip.leftTooltip + wTooltip + marginTooltip.rightTooltip).attr('height', marginTooltip.topTooltip + hTooltip + marginTooltip.bottomTooltip).append('g').attr('transform', translation(marginTooltip.leftTooltip, marginTooltip.topTooltip));
-        var maxValueTooltip = Math.max(d3.max(exampleDataTooltip, function (d) { return d.species1; }), d3.max(exampleDataTooltip, function (d) { return d.species2; }));
-        var xScaleTooltip = d3.scaleLinear().domain([0, maxValueTooltip]).range([0, regionWidthTooltip]).nice();
-        var xScaleLeftTooltip = d3.scaleLinear().domain([0, maxValueTooltip]).range([regionWidthTooltip, 0]);
-        var xScaleRightTooltip = d3.scaleLinear().domain([0, maxValueTooltip]).range([0, regionWidthTooltip]);
-        var yScaleTooltip = d3.scaleBand().domain(exampleDataTooltip.map(function (d) { return d.group; })).rangeRound([hTooltip, 0]).padding(0.1);
-        var yAxisLeftTooltip = d3.axisRight().scale(yScaleTooltip).tickSize(4, 0).tickPadding(marginTooltip.middleTooltip - 4);
-        var yAxisRightTooltip = d3.axisLeft().scale(yScaleTooltip).tickSize(4, 0).tickFormat(''); 
-        var xAxisRightTooltip = d3.axisBottom().scale(xScaleTooltip).ticks(2);
-        var xAxisLeftTooltip = d3.axisBottom().scale(xScaleTooltip.copy().range([pointATooltip, 0])).ticks(2);
-        var leftBarGroupTooltip = svgTooltip.append('g').attr('transform', translation(pointATooltip, 0) + 'scale(-1,1)');
-        var rightBarGroupTooltip = svgTooltip.append('g').attr('transform', translation(pointBTooltip, 0));
-        svgTooltip.append('g').attr('class', 'axis y left').attr('transform', translation(pointATooltip, 0)).call(yAxisLeftTooltip).selectAll('text').attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '8').style('text-anchor', 'middle');
-        svgTooltip.append('g').attr('class', 'axis y right').attr('transform', translation(pointBTooltip, 0)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '8').call(yAxisRightTooltip);
-        svgTooltip.append('g').attr('class', 'axis x left').attr('transform', translation(0, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#3A3B3C').call(xAxisLeftTooltip).selectAll('text').attr('dy', '.71em');
-        svgTooltip.append('g').attr('class', 'axis x right').attr('transform', translation(pointBTooltip, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#3A3B3C').call(xAxisRightTooltip).selectAll('text').attr('dy', '.71em');
-        svgTooltip.selectAll(".tick").each(function (d) { if (d === 0.0 || d === 0 || d === 1.0) { this.remove(); } });
-        leftBarGroupTooltip.selectAll('.bar.left').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar left').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species1); }).attr('fill', speciesColors[species1ValueIdentify]).attr('height', yScaleTooltip.bandwidth());
-        rightBarGroupTooltip.selectAll('.bar.right').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar right').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species2); }).attr('fill', speciesColors[species2ValueIdentify]).attr('height', yScaleTooltip.bandwidth());
-        function translation(x, y) { return 'translate(' + x + ',' + y + ')'; }
+            tip.show(d, d3.mouse(this), this);
+
+            var wTooltip = ((containerwidth) / 100 * window.innerWidth);
+            var hTooltip = ((containerHeight) / 100 * window.innerHeight);
+            var marginTooltip = { topTooltip: 20, rightTooltip: 20, bottomTooltip: 20, leftTooltip: 20, middleTooltip: 10 };
+            var regionWidthTooltip = wTooltip / 2 - marginTooltip.middleTooltip;
+            var pointATooltip = regionWidthTooltip, pointBTooltip = wTooltip - regionWidthTooltip;
+            var exampleDataTooltip = [{ group: '6', species1: angle1Sp1, species2: angle1Sp2 }, { group: '5', species1: angle2Sp1, species2: angle2Sp2 }, { group: '4', species1: angle3Sp1, species2: angle3Sp2 }, { group: '3', species1: angle4Sp1, species2: angle4Sp2 }, { group: '2', species1: angle5Sp1, species2: angle5Sp2 }, { group: '1', species1: angle6Sp1, species2: angle6Sp2 }];
+            var svgTooltip = d3.select('#tipDiv').append('svg').attr('width', marginTooltip.leftTooltip + wTooltip + marginTooltip.rightTooltip).attr('height', marginTooltip.topTooltip + hTooltip + marginTooltip.bottomTooltip).append('g').attr('transform', translation(marginTooltip.leftTooltip, marginTooltip.topTooltip));
+            var maxValueTooltip = Math.max(d3.max(exampleDataTooltip, function (d) { return d.species1; }), d3.max(exampleDataTooltip, function (d) { return d.species2; }));
+            var xScaleTooltip = d3.scaleLinear().domain([0, maxValueTooltip]).range([0, regionWidthTooltip]).nice();
+            var xScaleLeftTooltip = d3.scaleLinear().domain([0, maxValueTooltip]).range([regionWidthTooltip, 0]);
+            var xScaleRightTooltip = d3.scaleLinear().domain([0, maxValueTooltip]).range([0, regionWidthTooltip]);
+            var yScaleTooltip = d3.scaleBand().domain(exampleDataTooltip.map(function (d) { return d.group; })).rangeRound([hTooltip, 0]).padding(0.1);
+            var yAxisLeftTooltip = d3.axisRight().scale(yScaleTooltip).tickSize(4, 0).tickPadding(marginTooltip.middleTooltip - 4);
+            var yAxisRightTooltip = d3.axisLeft().scale(yScaleTooltip).tickSize(4, 0).tickFormat('');
+            var xAxisRightTooltip = d3.axisBottom().scale(xScaleTooltip).ticks(2);
+            var xAxisLeftTooltip = d3.axisBottom().scale(xScaleTooltip.copy().range([pointATooltip, 0])).ticks(2);
+            var leftBarGroupTooltip = svgTooltip.append('g').attr('transform', translation(pointATooltip, 0) + 'scale(-1,1)');
+            var rightBarGroupTooltip = svgTooltip.append('g').attr('transform', translation(pointBTooltip, 0));
+            svgTooltip.append('g').attr('class', 'axis y left').attr('transform', translation(pointATooltip, 0)).call(yAxisLeftTooltip).selectAll('text').attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '8').style('text-anchor', 'middle');
+            svgTooltip.append('g').attr('class', 'axis y right').attr('transform', translation(pointBTooltip, 0)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '8').call(yAxisRightTooltip);
+            svgTooltip.append('g').attr('class', 'axis x left').attr('transform', translation(0, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#3A3B3C').call(xAxisLeftTooltip).selectAll('text').attr('dy', '.71em');
+            svgTooltip.append('g').attr('class', 'axis x right').attr('transform', translation(pointBTooltip, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#3A3B3C').call(xAxisRightTooltip).selectAll('text').attr('dy', '.71em');
+            svgTooltip.selectAll(".tick").each(function (d) { if (d === 0.0 || d === 0 || d === 1.0) { this.remove(); } });
+            leftBarGroupTooltip.selectAll('.bar.left').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar left').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species1); }).attr('stroke', 'black').attr('fill', speciesColors[species1ValueIdentify]).attr('height', yScaleTooltip.bandwidth());
+            rightBarGroupTooltip.selectAll('.bar.right').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar right').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species2); }).attr('stroke', 'black').attr('fill', speciesColors[species2ValueIdentify]).attr('height', yScaleTooltip.bandwidth());
+            function translation(x, y) { return 'translate(' + x + ',' + y + ')'; }
         }
-        if (d3.event.shiftKey) {
-            d3.select("#exploreViewMarker1").remove();
-            d3.select("#exploreViewMarker2").remove();
-            d3.select("#exploreViewMarker3").remove();
 
-
-            if (barflag) {
-                svg.append("line")
-                    .attr("id", "exploreViewMarker1")
-                    .attr("x1", 0)
-                    .attr("y1", d3.mouse(this)[1])
-                    .attr("x2", width)
-                    .attr("y2", d3.mouse(this)[1])
-                    .attr("stroke-width", 2)
-                    .style("stroke-dasharray", ("3, 3"))
-                    .style("stroke-opacity", 0.9)
-                    .attr("stroke", in_speciesClustercolors[d.cluster_2])
-                    .attr("marker-end", "url(#triangle)");
-
-                svg.append("line")
-                    .attr("id", "exploreViewMarker2")
-                    .attr("x1", d3.mouse(this)[0])
-                    .attr("y1", 0)
-                    .attr("x2", d3.mouse(this)[0])
-                    .attr("y2", height)
-                    .attr("stroke-width", 2)
-                    .style("stroke-dasharray", ("3, 3"))
-                    .style("stroke-opacity", 0.9)
-                    .attr("stroke", in_speciesClustercolors[d.cluster_1])
-                    .attr("marker-end", "url(#triangle)");
-
-                svg.append("circle")
-                    .attr("id", "exploreViewMarker3")
-                    .attr("cx", d3.mouse(this)[0])
-                    .attr("cy", d3.mouse(this)[1])
-                    .attr("r", 5)
-                    .style("fill", myColor(d.dist))
-                    .style("stroke", "black")
-                    .attr("stroke-width", 1);
-
-            }
-            else {
-
-                svg.append("line")
-                    .attr("id", "exploreViewMarker1")
-                    .attr("x1", 0)
-                    .attr("y1", d3.mouse(this)[1])
-                    .attr("x2", d3.mouse(this)[0])
-                    .attr("y2", d3.mouse(this)[1])
-                    .attr("stroke-width", 2)
-                    .style("stroke-dasharray", ("3, 3"))
-                    .style("stroke-opacity", 0.9)
-                    .attr("stroke", in_speciesClustercolors[d.cluster_2])
-                    .attr("marker-end", "url(#triangle)");
-
-                svg.append("line")
-                    .attr("id", "exploreViewMarker2")
-                    .attr("x1", d3.mouse(this)[0])
-                    .attr("y1", d3.mouse(this)[1])
-                    .attr("x2", d3.mouse(this)[0])
-                    .attr("y2", height)
-                    .attr("stroke-width", 2)
-                    .style("stroke-dasharray", ("3, 3"))
-                    .style("stroke-opacity", 0.9)
-                    .attr("stroke", in_speciesClustercolors[d.cluster_1])
-                    .attr("marker-end", "url(#triangle)");
-
-                svg.append("circle")
-                    .attr("id", "exploreViewMarker3")
-                    .attr("cx", d3.mouse(this)[0])
-                    .attr("cy", d3.mouse(this)[1])
-                    .attr("r", 5)
-                    .style("fill", myColor(d.dist))
-                    .style("stroke", "black")
-                    .attr("stroke-width", 1);
-            }
-        }
 
     };
     var mouseleave = function (d) {
@@ -1459,26 +1272,20 @@ const simianVis = () => {
             .style("opacity", 0.9).style("stroke-width", function (d) {
                 return 0;
             });
-
-        if (d3.event.shiftKey) { }
-        else {
-
-
-            tip.hide();
-            d3.select("#exploreViewMarker1").remove();
-            d3.select("#exploreViewMarker2").remove();
-            d3.select("#exploreViewMarker3").remove();
-        }
-
-
     };
-/*    var mouseclick = function (d) {
+    var mouseclick = function (d) {
 
-*//*        d3.select("#marker1").remove();
-        d3.select("#marker2").remove();
-        d3.select("#marker3").remove();*//*
-        *//*if (!showExplorationModeflag) { showExplorationModeflag = true; }*//*
-        //else { showExplorationModeflag = false; } ////comment this line if it is okay to use keyboard only
+        /*        d3.select("#marker1").remove();
+                d3.select("#marker2").remove();
+                d3.select("#marker3").remove();*/
+        if (!showExplorationModeflag)
+        {
+            //if (d3.event.shiftKey)
+            {
+                showExplorationModeflag = true;
+            }
+        }
+        else { showExplorationModeflag = false; }
         tip.show(d, d3.mouse(this), this);
 
 
@@ -1509,17 +1316,8 @@ const simianVis = () => {
         rightBarGroupTooltip.selectAll('.bar.right').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar right').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species2); }).attr('fill', speciesColors[species2ValueIdentify]).attr('height', yScaleTooltip.bandwidth());
         function translation(x, y) { return 'translate(' + x + ',' + y + ')'; }
 
-        let selectionIDs = [];
-        selectionIDs.push(d.cluster_1);
-        selectionIDs.push(d.cluster_2);
-        selectionIDs.push(d.cross_species_cluster1_species_1);
-        selectionIDs.push(d.cross_species_cluster2_species_2);
-        if (isQtAvailable) {
-            QtBridge.js_passSelectionToQt(selectionIDs);
-        }
 
-        *//*if (showExplorationModeflag)*//*
-        {
+        if (showExplorationModeflag) {
             d3.select("#exploreViewMarker1").remove();
             d3.select("#exploreViewMarker2").remove();
             d3.select("#exploreViewMarker3").remove();
@@ -1562,45 +1360,44 @@ const simianVis = () => {
             }
             else {
 
-            svg.append("line")
-                .attr("id", "exploreViewMarker1")
-                .attr("x1", 0)
-                .attr("y1", d3.mouse(this)[1])
-                .attr("x2", d3.mouse(this)[0])
-                .attr("y2", d3.mouse(this)[1])
-                .attr("stroke-width", 2)
-                .style("stroke-dasharray", ("3, 3"))
-                .style("stroke-opacity", 0.9)
-                .attr("stroke", in_speciesClustercolors[d.cluster_2])
-                .attr("marker-end", "url(#triangle)");
+                svg.append("line")
+                    .attr("id", "exploreViewMarker1")
+                    .attr("x1", 0)
+                    .attr("y1", d3.mouse(this)[1])
+                    .attr("x2", d3.mouse(this)[0])
+                    .attr("y2", d3.mouse(this)[1])
+                    .attr("stroke-width", 2)
+                    .style("stroke-dasharray", ("3, 3"))
+                    .style("stroke-opacity", 0.9)
+                    .attr("stroke", in_speciesClustercolors[d.cluster_2])
+                    .attr("marker-end", "url(#triangle)");
 
-            svg.append("line")
-                .attr("id", "exploreViewMarker2")
-                .attr("x1", d3.mouse(this)[0])
-                .attr("y1", d3.mouse(this)[1])
-                .attr("x2", d3.mouse(this)[0])
-                .attr("y2", height)
-                .attr("stroke-width", 2)
-                .style("stroke-dasharray", ("3, 3"))
-                .style("stroke-opacity", 0.9)
-                .attr("stroke", in_speciesClustercolors[d.cluster_1])
-                .attr("marker-end", "url(#triangle)");
+                svg.append("line")
+                    .attr("id", "exploreViewMarker2")
+                    .attr("x1", d3.mouse(this)[0])
+                    .attr("y1", d3.mouse(this)[1])
+                    .attr("x2", d3.mouse(this)[0])
+                    .attr("y2", height)
+                    .attr("stroke-width", 2)
+                    .style("stroke-dasharray", ("3, 3"))
+                    .style("stroke-opacity", 0.9)
+                    .attr("stroke", in_speciesClustercolors[d.cluster_1])
+                    .attr("marker-end", "url(#triangle)");
 
-            svg.append("circle")
-                .attr("id", "exploreViewMarker3")
-                .attr("cx", d3.mouse(this)[0])
-                .attr("cy", d3.mouse(this)[1])
-                .attr("r", 5)
-                .style("fill", myColor(d.dist))
-                .style("stroke", "black")
-                .attr("stroke-width", 1);
+                svg.append("circle")
+                    .attr("id", "exploreViewMarker3")
+                    .attr("cx", d3.mouse(this)[0])
+                    .attr("cy", d3.mouse(this)[1])
+                    .attr("r", 5)
+                    .style("fill", myColor(d.dist))
+                    .style("stroke", "black")
+                    .attr("stroke-width", 1);
+            }
         }
-        }
 
 
 
-    };*/
-
+    };
     // add the squares
     svg
         .selectAll()
@@ -1634,15 +1431,12 @@ const simianVis = () => {
 
         })
         .style("opacity", 0.9)
-        .on("mouseenter", mouseover)
-        //.on("mouseout", mouseout)
+        .on("mouseover", mouseover)
+        .on("mouseout", mouseout)
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
-        //.on("mouseenter", mouseenter)
-        //.on("contextmenu ", contextmenu)
-        //.on("dblclick ", dblclick)
-        //.on("click", mouseclick)
-        ;
+        .on("mouseenter", mouseenter)
+        .on("click", mouseclick);
 
 
     //code for cross species border
