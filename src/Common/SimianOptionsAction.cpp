@@ -117,7 +117,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_barLinkerAction1.initialize(QStringList({ " ","exc","glia","inh","Astro_2","Astro_3","Astro_4","Chandelier_1","Chandelier_2","Endo_1","Endo_2","L2/3 IT_1","L2/3 IT_2","L2/3 IT_3","L2/3 IT_4","L4 IT_1","L4 IT_2","L4 IT_3","L4 IT_4","L4 IT_5","L5 ET_1","L5 ET_2","L5 ET_3","L5 ET_4","L5 IT_1","L5 IT_2","L5 IT_3","L5/6 NP_1","L5/6 NP_2","L5/6 NP_3","L5/6 NP_4","L6 CT_1","L6 CT_2","L6 IT Car3_1","L6 IT Car3_2","L6 IT Car3_3","L6 IT_1","L6 IT_2","L6 IT_3","L6b_1","L6b_2","L6b_3","L6b_4","L6b_5","L6b_6","Lamp5_1","Lamp5_2","Lamp5_Lhx6_1","Lamp5_Lhx6_2","Micro-PVM_1","Micro-PVM_2","Micro-PVM_3","OPC_1","OPC_2","OPC_3","Oligo_1","Pax6_1","Pax6_2","Pax6_3","Pax6_4","Pvalb_1","Pvalb_2","Pvalb_3","Pvalb_4","Pvalb_5","Pvalb_6","Pvalb_7","Pvalb_8","Sncg_1","Sncg_2","Sncg_3","Sncg_4","Sncg_5","Sncg_6","Sncg_7","Sst Chodl_1","Sst Chodl_2","Sst Chodl_3","Sst_1","Sst_10","Sst_11","Sst_12","Sst_13","Sst_14","Sst_15","Sst_16","Sst_17","Sst_18","Sst_2","Sst_3","Sst_4","Sst_5","Sst_6","Sst_7","Sst_8","Sst_9","VLMC_1","VLMC_2","VLMC_3","VLMC_4","Vip_1","Vip_10","Vip_11","Vip_12","Vip_13","Vip_14","Vip_15","Vip_16","Vip_17","Vip_2","Vip_3","Vip_4","Vip_5","Vip_6","Vip_7","Vip_8","Vip_9","Astro_5","L2/3 IT_10","L2/3 IT_11","L2/3 IT_12","L2/3 IT_13","L2/3 IT_5","L2/3 IT_6","L2/3 IT_7","L2/3 IT_8","L2/3 IT_9","L5 IT_4","L5 IT_5","L5 IT_6","L5 IT_7","L5/6 NP_5","L5/6 NP_6","L6 CT_3","L6 CT_4","Lamp5_3","Lamp5_4","Lamp5_5","Lamp5_6","Oligo_2","Oligo_3","Oligo_4","Pvalb_10","Pvalb_11","Pvalb_12","Pvalb_13","Pvalb_14","Pvalb_15","Pvalb_9","Sncg_8","Sst_19","Sst_20","Sst_21","Sst_22","Sst_23","Sst_24","Sst_25","Sst_26","Vip_18","Vip_19","Vip_20","Vip_21","Vip_22","Vip_23","Endo_3","L4 IT_6","Micro-PVM_4","OPC_4","Sncg_9","L2/3 IT_14","L2/3 IT_15","L5/6 NP_7","L5/6 NP_8","L6 IT_4","Sncg_10","Glutamatergic","Non-Neuronal","Chandelier","Endo","L2/3 IT","L4 IT","L5 ET","L5 IT","L5/6 NP","L6 CT","L6 IT","L6 IT Car3","L6b","Lamp5","Lamp5_Lhx6","Micro-PVM","OPC","Oligo","Pax6","Pvalb","Sncg","Sst","Sst Chodl","VLMC","Vip","G19.32.002","G20.32.001","G20.32.002","H18.30.002","H19.30.001","H19.30.002","H200.1023","bi006","bi007","Q19.26.011","Q19.26.015","C19.32.002","C19.32.003","C19.32.004","C19.32.005","C19.32.006","C19.32.007","H18.30.001","bi005","Q19.26.010","C19.32.001","it_types","l5et_l56np_l6ct_l6b","lamp5_sncg_vip","sst_sst_chodl_pvalb","Astro_1","GABAergic","Astro","G19.32.001" }), " ", " ");
 	_barLinkerAction2.initialize(QStringList({ " ","exc","glia","inh","Astro_2","Astro_3","Astro_4","Chandelier_1","Chandelier_2","Endo_1","Endo_2","L2/3 IT_1","L2/3 IT_2","L2/3 IT_3","L2/3 IT_4","L4 IT_1","L4 IT_2","L4 IT_3","L4 IT_4","L4 IT_5","L5 ET_1","L5 ET_2","L5 ET_3","L5 ET_4","L5 IT_1","L5 IT_2","L5 IT_3","L5/6 NP_1","L5/6 NP_2","L5/6 NP_3","L5/6 NP_4","L6 CT_1","L6 CT_2","L6 IT Car3_1","L6 IT Car3_2","L6 IT Car3_3","L6 IT_1","L6 IT_2","L6 IT_3","L6b_1","L6b_2","L6b_3","L6b_4","L6b_5","L6b_6","Lamp5_1","Lamp5_2","Lamp5_Lhx6_1","Lamp5_Lhx6_2","Micro-PVM_1","Micro-PVM_2","Micro-PVM_3","OPC_1","OPC_2","OPC_3","Oligo_1","Pax6_1","Pax6_2","Pax6_3","Pax6_4","Pvalb_1","Pvalb_2","Pvalb_3","Pvalb_4","Pvalb_5","Pvalb_6","Pvalb_7","Pvalb_8","Sncg_1","Sncg_2","Sncg_3","Sncg_4","Sncg_5","Sncg_6","Sncg_7","Sst Chodl_1","Sst Chodl_2","Sst Chodl_3","Sst_1","Sst_10","Sst_11","Sst_12","Sst_13","Sst_14","Sst_15","Sst_16","Sst_17","Sst_18","Sst_2","Sst_3","Sst_4","Sst_5","Sst_6","Sst_7","Sst_8","Sst_9","VLMC_1","VLMC_2","VLMC_3","VLMC_4","Vip_1","Vip_10","Vip_11","Vip_12","Vip_13","Vip_14","Vip_15","Vip_16","Vip_17","Vip_2","Vip_3","Vip_4","Vip_5","Vip_6","Vip_7","Vip_8","Vip_9","Astro_5","L2/3 IT_10","L2/3 IT_11","L2/3 IT_12","L2/3 IT_13","L2/3 IT_5","L2/3 IT_6","L2/3 IT_7","L2/3 IT_8","L2/3 IT_9","L5 IT_4","L5 IT_5","L5 IT_6","L5 IT_7","L5/6 NP_5","L5/6 NP_6","L6 CT_3","L6 CT_4","Lamp5_3","Lamp5_4","Lamp5_5","Lamp5_6","Oligo_2","Oligo_3","Oligo_4","Pvalb_10","Pvalb_11","Pvalb_12","Pvalb_13","Pvalb_14","Pvalb_15","Pvalb_9","Sncg_8","Sst_19","Sst_20","Sst_21","Sst_22","Sst_23","Sst_24","Sst_25","Sst_26","Vip_18","Vip_19","Vip_20","Vip_21","Vip_22","Vip_23","Endo_3","L4 IT_6","Micro-PVM_4","OPC_4","Sncg_9","L2/3 IT_14","L2/3 IT_15","L5/6 NP_7","L5/6 NP_8","L6 IT_4","Sncg_10","Glutamatergic","Non-Neuronal","Chandelier","Endo","L2/3 IT","L4 IT","L5 ET","L5 IT","L5/6 NP","L6 CT","L6 IT","L6 IT Car3","L6b","Lamp5","Lamp5_Lhx6","Micro-PVM","OPC","Oligo","Pax6","Pvalb","Sncg","Sst","Sst Chodl","VLMC","Vip","G19.32.002","G20.32.001","G20.32.002","H18.30.002","H19.30.001","H19.30.002","H200.1023","bi006","bi007","Q19.26.011","Q19.26.015","C19.32.002","C19.32.003","C19.32.004","C19.32.005","C19.32.006","C19.32.007","H18.30.001","bi005","Q19.26.010","C19.32.001","it_types","l5et_l56np_l6ct_l6b","lamp5_sncg_vip","sst_sst_chodl_pvalb","Astro_1","GABAergic","Astro","G19.32.001" }), " ", " ");
 	_scatterplotColorControlAction.setDefaultWidgetFlags(OptionAction::ComboBox);
-	_scatterplotColorControlAction.initialize(QStringList({ "cross-species cluster","in-species cluster","cross-species class","in-species class","cross-species sub-class","in-species subclass","donor","neighborhood"}), "cross-species cluster", "cross-species cluster");
+	_scatterplotColorControlAction.initialize(QStringList({ "cross-species cluster","in-species cluster","cross-species sub-class","in-species subclass","donor"}), "cross-species cluster", "cross-species cluster");
 	_distanceAction.setDefaultWidgetFlags(IntegralAction::SpinBox | IntegralAction::Slider);
 	_distanceAction.initialize(0, 105, 105, 105);
 	_histBarAction.setDefaultWidgetFlags(ToggleAction::CheckBox);
@@ -255,54 +255,24 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		if (_species1SelectAction.getCurrentText() != "")
 		{
 			_species2SelectAction.setEnabled(true);
-			if (!_crossSpecies1DatasetLinkerAction.getOptions().isEmpty())
+			if (_crossSpecies1DatasetLinkerAction.getNumberOfOptions() > 0)
 			{
-				auto datasetOptions1 = _crossSpecies1DatasetLinkerAction.getOptions();
-				for (const auto& datasets1 : datasetOptions1)
-				{
-					if (datasets1.toLower().contains(_species1SelectAction.getCurrentText().toLower()))
-					{
-						if (datasets1.toLower().contains(_neighborhoodAction.getCurrentText().toLower()))
-						{
+				QString species1CrossSpeciesClusterDatasetName = _species1SelectAction.getCurrentText() +"-10x-" + _neighborhoodAction.getCurrentText() + "/cross_species_cluster";
 
-							_crossSpecies1DatasetLinkerAction.setCurrentText(datasets1);
-
-						}
-
-					}
-				}
+				_crossSpecies1DatasetLinkerAction.setCurrentText(species1CrossSpeciesClusterDatasetName);
 			}
 
-			if (!_inSpecies1DatasetLinkerAction.getOptions().isEmpty())
+			if (_inSpecies1DatasetLinkerAction.getNumberOfOptions() > 0)
 			{
-				auto datasetOptions1 = _inSpecies1DatasetLinkerAction.getOptions();
-				for (const auto& datasets1 : datasetOptions1)
-				{
-					if (datasets1.toLower().contains(_species1SelectAction.getCurrentText().toLower()))
-					{
-						if (datasets1.toLower().contains(_neighborhoodAction.getCurrentText().toLower()))
-						{
-
-							_inSpecies1DatasetLinkerAction.setCurrentText(datasets1);
-						}
-					}
-				}
+				QString species1InSpeciesClusterDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cluster";
+				_inSpecies1DatasetLinkerAction.setCurrentText(species1InSpeciesClusterDatasetName);
 			}
 
-			if (!_speciesEmbedding1LinkerAction.getOptions().isEmpty())
+			if (_speciesEmbedding1LinkerAction.getNumberOfOptions() > 0)
 			{
-				auto datasetOptions1 = _speciesEmbedding1LinkerAction.getOptions();
-				for (const auto& datasets1 : datasetOptions1)
-				{
-					if (datasets1.toLower().contains(_species1SelectAction.getCurrentText().toLower()))
-					{
-						if (datasets1.toLower().contains(_neighborhoodAction.getCurrentText().toLower()))
-						{
+				QString species1EmbeddingDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText()+ "/Numerical MetaData";
 
-							_speciesEmbedding1LinkerAction.setCurrentText(datasets1);
-						}
-					}
-				}
+				_speciesEmbedding1LinkerAction.setCurrentText(species1EmbeddingDatasetName);
 			}
 
 
@@ -405,54 +375,21 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			_visSettingAction.setEnabled(true);
 			_linkerSettingAction.setEnabled(true);
 			_distanceNeighborhoodAction.setEnabled(true);
-			if (!_crossSpecies2DatasetLinkerAction.getOptions().isEmpty())
+			if (_crossSpecies2DatasetLinkerAction.getNumberOfOptions() > 0)
 			{
-				auto datasetOptions2 = _crossSpecies2DatasetLinkerAction.getOptions();
-				for (const auto& dataset2 : datasetOptions2)
-				{
-					if (dataset2.toLower().contains(_species2SelectAction.getCurrentText().toLower()))
-					{
-
-						if (dataset2.toLower().contains(_neighborhoodAction.getCurrentText().toLower()))
-						{
-
-							_crossSpecies2DatasetLinkerAction.setCurrentText(dataset2);
-						}
-					}
-				}
+				QString species2CrossSpeciesClusterDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cross_species_cluster";
+				_crossSpecies2DatasetLinkerAction.setCurrentText(species2CrossSpeciesClusterDatasetName);
 			}
 
-			if (!_inSpecies2DatasetLinkerAction.getOptions().isEmpty())
+			if (_inSpecies2DatasetLinkerAction.getNumberOfOptions() > 0)
 			{
-				auto datasetOptions2 = _inSpecies2DatasetLinkerAction.getOptions();
-				for (const auto& dataset2 : datasetOptions2)
-				{
-					if (dataset2.toLower().contains(_species2SelectAction.getCurrentText().toLower()))
-					{
-
-						if (dataset2.toLower().contains(_neighborhoodAction.getCurrentText().toLower()))
-						{
-
-							_inSpecies2DatasetLinkerAction.setCurrentText(dataset2);
-						}
-					}
-				}
+				QString species2InSpeciesClusterDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cluster";
+				_inSpecies2DatasetLinkerAction.setCurrentText(species2InSpeciesClusterDatasetName);
 			}
-			if (!_speciesEmbedding2LinkerAction.getOptions().isEmpty())
+			if (_speciesEmbedding2LinkerAction.getNumberOfOptions() > 0)
 			{
-				auto datasetOptions2 = _speciesEmbedding2LinkerAction.getOptions();
-				for (const auto& datasets2 : datasetOptions2)
-				{
-					if (datasets2.toLower().contains(_species2SelectAction.getCurrentText().toLower()))
-					{
-
-						if (datasets2.toLower().contains(_neighborhoodAction.getCurrentText().toLower()))
-						{
-
-							_speciesEmbedding2LinkerAction.setCurrentText(datasets2);
-						}
-					}
-				}
+				QString species2EmbeddingDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/Numerical MetaData";
+				_speciesEmbedding2LinkerAction.setCurrentText(species2EmbeddingDatasetName);
 			}
 
 		}
@@ -497,154 +434,155 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		if (_species1SelectAction.getCurrentText() != "" && _species2SelectAction.getCurrentText() != "")
 		{
 			updateData((_species1SelectAction.getCurrentText()).toStdString(), (_species2SelectAction.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString(), (_distanceAction.getValue()), (_crossSpeciesFilterAction.getCurrentText()).toStdString());
-			
-			if (!_crossSpecies1DatasetLinkerAction.getOptions().isEmpty())
+		
+			if (_crossSpecies1DatasetLinkerAction.getNumberOfOptions() > 0)
+			{	
+				QString species1CrossSpeciesClusterDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cross_species_cluster" ;
+
+				_crossSpecies1DatasetLinkerAction.setCurrentText(species1CrossSpeciesClusterDatasetName);
+			}
+			if (_crossSpecies2DatasetLinkerAction.getNumberOfOptions() > 0)
 			{
-				auto datasetOptions1 = _crossSpecies1DatasetLinkerAction.getOptions();
-				for (const auto& datasets1 : datasetOptions1)
-				{
-					if (datasets1.toLower().contains(_species1SelectAction.getCurrentText().toLower()))
-					{
-						if (datasets1.toLower().contains(_neighborhoodAction.getCurrentText().toLower()))
-						{
-
-							_crossSpecies1DatasetLinkerAction.setCurrentText(datasets1);
-
-						}
-
-					}
-				}
+				QString species2CrossSpeciesClusterDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cross_species_cluster";
+				_crossSpecies2DatasetLinkerAction.setCurrentText(species2CrossSpeciesClusterDatasetName);
 			}
 
-			if (!_inSpecies1DatasetLinkerAction.getOptions().isEmpty())
+			if (_inSpecies1DatasetLinkerAction.getNumberOfOptions() > 0)
 			{
-				auto datasetOptions1 = _inSpecies1DatasetLinkerAction.getOptions();
-				for (const auto& datasets1 : datasetOptions1)
-				{
-					if (datasets1.toLower().contains(_species1SelectAction.getCurrentText().toLower()))
-					{
-						if (datasets1.toLower().contains(_neighborhoodAction.getCurrentText().toLower()))
-						{
-
-							_inSpecies1DatasetLinkerAction.setCurrentText(datasets1);
-						}
-					}
-				}
+				QString species1InSpeciesClusterDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cluster";
+				_inSpecies1DatasetLinkerAction.setCurrentText(species1InSpeciesClusterDatasetName);
+			}
+			if (_inSpecies2DatasetLinkerAction.getNumberOfOptions() > 0)
+			{
+				QString species2InSpeciesClusterDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cluster";
+				_inSpecies2DatasetLinkerAction.setCurrentText(species2InSpeciesClusterDatasetName);
 			}
 
-			if (!_speciesEmbedding1LinkerAction.getOptions().isEmpty())
+			if (_speciesEmbedding1LinkerAction.getNumberOfOptions() > 0)
 			{
-				auto datasetOptions1 = _speciesEmbedding1LinkerAction.getOptions();
-				for (const auto& datasets1 : datasetOptions1)
-				{
-					if (datasets1.toLower().contains(_species1SelectAction.getCurrentText().toLower()))
-					{
-						if (datasets1.toLower().contains(_neighborhoodAction.getCurrentText().toLower()))
-						{
+				QString species1EmbeddingDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/Numerical MetaData";
 
-							_speciesEmbedding1LinkerAction.setCurrentText(datasets1);
-						}
-					}
-				}
+				_speciesEmbedding1LinkerAction.setCurrentText(species1EmbeddingDatasetName);
 			}
-			
-			if (!_crossSpecies2DatasetLinkerAction.getOptions().isEmpty())
+			if (_speciesEmbedding2LinkerAction.getNumberOfOptions() > 0)
 			{
-				auto datasetOptions2 = _crossSpecies2DatasetLinkerAction.getOptions();
-				for (const auto& dataset2 : datasetOptions2)
-				{
-					if (dataset2.toLower().contains(_species2SelectAction.getCurrentText().toLower()))
-					{
-
-						if (dataset2.toLower().contains(_neighborhoodAction.getCurrentText().toLower()))
-						{
-
-							_crossSpecies2DatasetLinkerAction.setCurrentText(dataset2);
-						}
-					}
-				}
+				QString species2EmbeddingDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/Numerical MetaData";
+				_speciesEmbedding2LinkerAction.setCurrentText(species2EmbeddingDatasetName);
 			}
-
-			if (!_inSpecies2DatasetLinkerAction.getOptions().isEmpty())
+			if (_species1ScatterplotColorLinkerAction.getNumberOfOptions() > 0)
 			{
-				auto datasetOptions2 = _inSpecies2DatasetLinkerAction.getOptions();
-				for (const auto& dataset2 : datasetOptions2)
+				QString species1EmbeddingColorDatasetName = "";
+				if (_scatterplotColorControlAction.getCurrentText() == "cross-species cluster")
 				{
-					if (dataset2.toLower().contains(_species2SelectAction.getCurrentText().toLower()))
-					{
-
-						if (dataset2.toLower().contains(_neighborhoodAction.getCurrentText().toLower()))
-						{
-
-							_inSpecies2DatasetLinkerAction.setCurrentText(dataset2);
-						}
-					}
+					species1EmbeddingColorDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cross_species_cluster";
 				}
+				else if (_scatterplotColorControlAction.getCurrentText() == "in-species cluster")
+				{
+					species1EmbeddingColorDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cluster" ;
+				}
+
+				else if (_scatterplotColorControlAction.getCurrentText() == "cross-species sub-class")
+				{
+					species1EmbeddingColorDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cross_species_subclass";
+				}
+				else if (_scatterplotColorControlAction.getCurrentText() == "in-species subclass")
+				{
+					species1EmbeddingColorDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/subclass";
+				}
+				else if (_scatterplotColorControlAction.getCurrentText() == "donor")
+				{
+					species1EmbeddingColorDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/donor";
+				}
+				
+				
+				_species1ScatterplotColorLinkerAction.setCurrentText(species1EmbeddingColorDatasetName);
 			}
-			if (!_speciesEmbedding2LinkerAction.getOptions().isEmpty())
+			if (_species2ScatterplotColorLinkerAction.getNumberOfOptions() > 0)
 			{
-				auto datasetOptions2 = _speciesEmbedding2LinkerAction.getOptions();
-				for (const auto& datasets2 : datasetOptions2)
+				QString species2EmbeddingColorDatasetName = "";
+				if (_scatterplotColorControlAction.getCurrentText() == "cross-species cluster")
 				{
-					if (datasets2.toLower().contains(_species2SelectAction.getCurrentText().toLower()))
-					{
-
-						if (datasets2.toLower().contains(_neighborhoodAction.getCurrentText().toLower()))
-						{
-
-							_speciesEmbedding2LinkerAction.setCurrentText(datasets2);
-						}
-					}
+					species2EmbeddingColorDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cross_species_cluster";
 				}
-			}
-			if (_species1ScatterplotColorLinkerAction.getNumberOfOptions() > 0 && _species2ScatterplotColorLinkerAction.getNumberOfOptions() > 0)
-			{
-				if (_scatterplotColorControlAction.getCurrentText() != "")
+				else if (_scatterplotColorControlAction.getCurrentText() == "in-species cluster")
 				{
-					auto species1SelectedOption = selectFromQStringList(_species1ScatterplotColorLinkerAction.getOptions(), _species1SelectAction.getCurrentText(), _scatterplotColorControlAction.getCurrentText(), _neighborhoodAction.getCurrentText());
-
-					{
-						_species1ScatterplotColorLinkerAction.setCurrentText(species1SelectedOption);
-					}
-
-					auto species2SelectedOption = selectFromQStringList(_species2ScatterplotColorLinkerAction.getOptions(), _species2SelectAction.getCurrentText(), _scatterplotColorControlAction.getCurrentText(), _neighborhoodAction.getCurrentText());
-
-					{
-						_species2ScatterplotColorLinkerAction.setCurrentText(species2SelectedOption);
-					}
-
+					species2EmbeddingColorDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cluster";
 				}
+
+				else if (_scatterplotColorControlAction.getCurrentText() == "cross-species sub-class")
+				{
+					species2EmbeddingColorDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cross_species_subclass" ;
+				}
+				else if (_scatterplotColorControlAction.getCurrentText() == "in-species subclass")
+				{
+					species2EmbeddingColorDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/subclass";
+				}
+				else if (_scatterplotColorControlAction.getCurrentText() == "donor")
+				{
+					species2EmbeddingColorDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/donor";
+				}
+				
+				_species2ScatterplotColorLinkerAction.setCurrentText(species2EmbeddingColorDatasetName);
 			}
-
-			//updateData((_species1SelectAction.getCurrentText()).toStdString(), (_species2SelectAction.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString(), (_distanceAction.getValue()), (_crossSpeciesFilterAction.getCurrentText()).toStdString());
-
-
-
-
-
 		}
 	};
 	const auto updateScatterplotColorControl = [this]() -> void
 	{
 
-
-		if (_species1ScatterplotColorLinkerAction.getNumberOfOptions() > 0 && _species2ScatterplotColorLinkerAction.getNumberOfOptions() > 0)
+		if (_species1ScatterplotColorLinkerAction.getNumberOfOptions() > 0)
 		{
-			if (_scatterplotColorControlAction.getCurrentText() != "" )
+			QString species1EmbeddingColorDatasetName = "";
+			if (_scatterplotColorControlAction.getCurrentText() == "cross-species cluster")
 			{
-				auto species1SelectedOption = selectFromQStringList(_species1ScatterplotColorLinkerAction.getOptions(), _species1SelectAction.getCurrentText(), _scatterplotColorControlAction.getCurrentText(),_neighborhoodAction.getCurrentText());
-
-				{
-					_species1ScatterplotColorLinkerAction.setCurrentText(species1SelectedOption);
-				}
-
-				auto species2SelectedOption = selectFromQStringList(_species2ScatterplotColorLinkerAction.getOptions(), _species2SelectAction.getCurrentText(), _scatterplotColorControlAction.getCurrentText(),_neighborhoodAction.getCurrentText());
-
-				{
-					_species2ScatterplotColorLinkerAction.setCurrentText(species2SelectedOption);
-				}
-
+				species1EmbeddingColorDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cross_species_cluster" ;
 			}
+			else if (_scatterplotColorControlAction.getCurrentText() == "in-species cluster")
+			{
+				species1EmbeddingColorDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cluster";
+			}
+
+			else if (_scatterplotColorControlAction.getCurrentText() == "cross-species sub-class")
+			{
+				species1EmbeddingColorDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cross_species_subclass";
+			}
+			else if (_scatterplotColorControlAction.getCurrentText() == "in-species subclass")
+			{
+				species1EmbeddingColorDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/subclass" ;
+			}
+			else if (_scatterplotColorControlAction.getCurrentText() == "donor")
+			{
+				species1EmbeddingColorDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/donor" ;
+			}
+
+
+			_species1ScatterplotColorLinkerAction.setCurrentText(species1EmbeddingColorDatasetName);
+		}
+		if (_species2ScatterplotColorLinkerAction.getNumberOfOptions() > 0)
+		{
+			QString species2EmbeddingColorDatasetName = "";
+			if (_scatterplotColorControlAction.getCurrentText() == "cross-species cluster")
+			{
+				species2EmbeddingColorDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cross_species_cluster" ;
+			}
+			else if (_scatterplotColorControlAction.getCurrentText() == "in-species cluster")
+			{
+				species2EmbeddingColorDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cluster";
+			}
+
+			else if (_scatterplotColorControlAction.getCurrentText() == "cross-species sub-class")
+			{
+				species2EmbeddingColorDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cross_species_subclass" ;
+			}
+			else if (_scatterplotColorControlAction.getCurrentText() == "in-species subclass")
+			{
+				species2EmbeddingColorDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/subclass" ;
+			}
+			else if (_scatterplotColorControlAction.getCurrentText() == "donor")
+			{
+				species2EmbeddingColorDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + + "/donor" ;
+			}
+
+			_species2ScatterplotColorLinkerAction.setCurrentText(species2EmbeddingColorDatasetName);
 		}
 
 	};
@@ -1638,90 +1576,90 @@ inline SimianOptionsAction::DistanceNeighborhoodAction::DistanceNeighborhoodActi
 //	}
 //}
 
-QString SimianOptionsAction::selectFromQStringList(const QStringList& fileList, const QString& speciesType, const QString& fileType, const QString& neighborhoodType)
-{
-	QString foundFile = "";
-
-	for (const auto& file : fileList)
-	{
-		if (file.toLower().contains(speciesType.toLower())) 
-		{
-			if (file.toLower().contains(neighborhoodType.toLower()))
-			{
-				if (fileType == "in-species class")
-				{
-					if (file.toLower().endsWith("/class"))
-					{
-						foundFile = file;
-					}
-				}
-				else if (fileType == "in-species cluster")
-				{
-					if (file.toLower().endsWith("/cluster"))
-					{
-						foundFile = file;
-					}
-
-				}
-				else if (fileType == "cross-species class")
-				{
-					if (file.toLower().endsWith("/cross_species_class"))
-					{
-						foundFile = file;
-					}
-				}
-				else if (fileType == "cross-species cluster")
-				{
-					if (file.toLower().endsWith("/cross_species_cluster"))
-					{
-						foundFile = file;
-					}
-				}
-				else if (fileType == "cross-species sub-class")
-				{
-					if (file.toLower().endsWith("/cross_species_subclass"))
-					{
-						foundFile = file;
-					}
-				}
-
-				else if (fileType == "donor")
-				{
-					if (file.toLower().endsWith("/donor"))
-					{
-						foundFile = file;
-					}
-
-				}
-				else if (fileType == "neighborhood")
-				{
-					if (file.toLower().endsWith("/neighborhood"))
-					{
-						foundFile = file;
-					}
-
-				}
-				else if (fileType == "sex")
-				{
-					if (file.toLower().endsWith("/sex"))
-					{
-						foundFile = file;
-					}
-
-				}
-				else if (fileType == "in-species subclass")
-				{
-					if (file.toLower().endsWith("/subclass"))
-					{
-						foundFile = file;
-					}
-				}
-			}
-		}
-	}
-
-	return foundFile;
-}
+//QString SimianOptionsAction::selectFromQStringList(const QStringList& fileList, const QString& speciesType, const QString& fileType, const QString& neighborhoodType)
+//{
+//	QString foundFile = "";
+//
+//	for (const auto& file : fileList)
+//	{
+//		if (file.toLower().contains(speciesType.toLower())) 
+//		{
+//			if (file.toLower().contains(neighborhoodType.toLower()))
+//			{
+//				if (fileType == "in-species class")
+//				{
+//					if (file.toLower().endsWith("/class"))
+//					{
+//						foundFile = file;
+//					}
+//				}
+//				else if (fileType == "in-species cluster")
+//				{
+//					if (file.toLower().endsWith("/cluster"))
+//					{
+//						foundFile = file;
+//					}
+//
+//				}
+//				else if (fileType == "cross-species class")
+//				{
+//					if (file.toLower().endsWith("/cross_species_class"))
+//					{
+//						foundFile = file;
+//					}
+//				}
+//				else if (fileType == "cross-species cluster")
+//				{
+//					if (file.toLower().endsWith("/cross_species_cluster"))
+//					{
+//						foundFile = file;
+//					}
+//				}
+//				else if (fileType == "cross-species sub-class")
+//				{
+//					if (file.toLower().endsWith("/cross_species_subclass"))
+//					{
+//						foundFile = file;
+//					}
+//				}
+//
+//				else if (fileType == "donor")
+//				{
+//					if (file.toLower().endsWith("/donor"))
+//					{
+//						foundFile = file;
+//					}
+//
+//				}
+//				else if (fileType == "neighborhood")
+//				{
+//					if (file.toLower().endsWith("/neighborhood"))
+//					{
+//						foundFile = file;
+//					}
+//
+//				}
+//				else if (fileType == "sex")
+//				{
+//					if (file.toLower().endsWith("/sex"))
+//					{
+//						foundFile = file;
+//					}
+//
+//				}
+//				else if (fileType == "in-species subclass")
+//				{
+//					if (file.toLower().endsWith("/subclass"))
+//					{
+//						foundFile = file;
+//					}
+//				}
+//			}
+//		}
+//	}
+//
+//	return foundFile;
+//}
 
 
 
