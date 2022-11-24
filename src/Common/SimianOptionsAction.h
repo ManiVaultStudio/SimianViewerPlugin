@@ -218,7 +218,7 @@ private:
     void updateData(std::string Species1, std::string Species2, std::string neighborhood, int distance, std::string CrossSpeciesFilter);
     //void filterMultiSelect();
     bool QStringlistContainsQString(const QStringList& list, const QString& str);
-    QString selectFromQStringList(const QStringList& fileList, const QString& speciesType, const QString& fileType, const QString& neighborhoodType);
+    //QString selectFromQStringList(const QStringList& fileList, const QString& speciesType, const QString& fileType, const QString& neighborhoodType);
 protected:
     void updateDatasetPickerAction();
     void sendClusterCountInfoToJS();
@@ -305,7 +305,6 @@ protected:
     ToggleAction                _removeLinkingOptionMenuFromUIAction;
     TriggerAction                _helpAction;
     TriggerAction                _screenshotAction;
-
     OptionAction                 _barLinkerAction1;
     OptionAction                 _barLinkerAction2;
 
