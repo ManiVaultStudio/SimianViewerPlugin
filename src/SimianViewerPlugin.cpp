@@ -76,7 +76,7 @@ void SimianViewerPlugin::init()
     topToolbarLayout->addWidget(_simianOptionsAction->getScreenshotAction().createWidget(&getWidget()));
     auto visSettingsWidget = _simianOptionsAction->getVisSettingAction().createCollapsedWidget(&getWidget());
     topToolbarLayout->addWidget(visSettingsWidget);
-    topToolbarLayout->addWidget(_simianOptionsAction->getLinkerSettingAction().createCollapsedWidget(&getWidget()));
+    //topToolbarLayout->addWidget(_simianOptionsAction->getLinkerSettingAction().createCollapsedWidget(&getWidget()));
     topToolbarLayout->addWidget(_simianOptionsAction->getHelpAction().createWidget(&getWidget()));
 
  
@@ -452,8 +452,8 @@ void SimianViewerPlugin::selectIndividualSpeciesClusterPoints(std::vector<std::s
     }
 
     
-    _simianOptionsAction->getInSpecies1HeatMapCellAction().setCurrentText(QString::fromStdString(selectedIDs[0]));
-    _simianOptionsAction->getInSpecies2HeatMapCellAction().setCurrentText(QString::fromStdString(selectedIDs[1]));
+   // _simianOptionsAction->getInSpecies1HeatMapCellAction().setCurrentText(QString::fromStdString(selectedIDs[0]));
+    //_simianOptionsAction->getInSpecies2HeatMapCellAction().setCurrentText(QString::fromStdString(selectedIDs[1]));
     _simianOptionsAction->getCrossSpecies1HeatMapCellAction().setCurrentText(QString::fromStdString(selectedIDs[2]));
     _simianOptionsAction->getCrossSpecies2HeatMapCellAction().setCurrentText(QString::fromStdString(selectedIDs[3]));
     if (_simianOptionsAction->getInSpecies1DatasetLinkerAction().getCurrentText() != "")
