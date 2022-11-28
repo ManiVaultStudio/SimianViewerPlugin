@@ -315,7 +315,7 @@ SimianViewerPluginFactory::SimianViewerPluginFactory() :
 
 QIcon SimianViewerPluginFactory::getIcon(const QColor& color /*= Qt::black*/) const
 {
-    return Application::getIconFont("FontAwesome").getIcon("braille", color);
+    return Application::getIconFont("FontAwesome").getIcon("chart-area", color);
 }
 
 ViewPlugin* SimianViewerPluginFactory::produce()
