@@ -304,7 +304,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 			if (_speciesEmbedding1LinkerAction.getNumberOfOptions() > 0)
 			{
-				QString species1EmbeddingDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText()+ "/Numerical MetaData";
+				QString species1EmbeddingDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText();
 
 				_speciesEmbedding1LinkerAction.setCurrentText(species1EmbeddingDatasetName);
 			}
@@ -433,7 +433,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			}
 			if (_speciesEmbedding2LinkerAction.getNumberOfOptions() > 0)
 			{
-				QString species2EmbeddingDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/Numerical MetaData";
+				QString species2EmbeddingDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText();
 				_speciesEmbedding2LinkerAction.setCurrentText(species2EmbeddingDatasetName);
 			}
 
@@ -514,13 +514,13 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 			if (_speciesEmbedding1LinkerAction.getNumberOfOptions() > 0)
 			{
-				QString species1EmbeddingDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/Numerical MetaData";
+				QString species1EmbeddingDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText();
 
 				_speciesEmbedding1LinkerAction.setCurrentText(species1EmbeddingDatasetName);
 			}
 			if (_speciesEmbedding2LinkerAction.getNumberOfOptions() > 0)
 			{
-				QString species2EmbeddingDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/Numerical MetaData";
+				QString species2EmbeddingDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText();
 				_speciesEmbedding2LinkerAction.setCurrentText(species2EmbeddingDatasetName);
 			}
 			if (_species1DEStatsLinkerAction.getNumberOfOptions() > 0)
@@ -1245,7 +1245,7 @@ void SimianOptionsAction::updateDatasetPickerAction()
 	for (auto embedding : embeddings)
 	{
 		std::string str1 = embedding->getGuiName().toStdString();
-		std::string str2 = "Numerical MetaData";
+		std::string str2 = "-10x-";
 		if (strstr(str1.c_str(), str2.c_str()))
 		{
 		}
