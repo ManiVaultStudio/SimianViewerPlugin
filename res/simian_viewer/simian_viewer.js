@@ -101,8 +101,8 @@ const simianVis = () => {
     svg.selectAll("*").remove();
     showExplorationModeflag = false;
     if (showFullHeatmapflag) {
-        document.getElementById('my_dataviz').setAttribute("style", "width:99%");
-        document.getElementById('my_container').setAttribute("style", "width:1%");
+        document.getElementById('my_dataviz').setAttribute("style", "width:100%");
+        document.getElementById('my_container').setAttribute("style", "width:99%");
         containerwidth = 12;
         heatmapWidth = 99;
         heatmapHeight = 99;
