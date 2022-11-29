@@ -300,6 +300,9 @@ const simianVis = () => {
             leftClickSelectedSpecies = "";
             svg.select("#axisSelectionpolygon").remove();
             svg.select("#axisSelectionText").remove();
+            if (isQtAvailable) {
+                QtBridge.js_removeSelectionFromScatterplot("true");
+            }
 }
 
 
@@ -435,6 +438,9 @@ const simianVis = () => {
             leftClickSelectedSpecies = "";
             svg.select("#axisSelectionpolygon").remove();
             svg.select("#axisSelectionText").remove();
+            if (isQtAvailable) {
+                QtBridge.js_removeSelectionFromScatterplot("true");
+            }
         }
     }
 
@@ -1374,12 +1380,18 @@ const simianVis = () => {
                 leftClickSelectedSpecies = "";
                 svg.select("#axisSelectionpolygon").remove();
                 svg.select("#axisSelectionText").remove();
+                if (isQtAvailable) {
+                    QtBridge.js_removeSelectionFromScatterplot("true");
+                }
             }
         }
         else {
             svg.select("#axisSelectionpolygon").remove();
             svg.select("#axisSelectionText").remove();
             leftClickSelectedSpecies = "";
+            if (isQtAvailable) {
+                QtBridge.js_removeSelectionFromScatterplot("true");
+            }
         }
     };
     var mouseRightclick = function (d) {

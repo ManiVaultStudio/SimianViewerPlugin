@@ -43,6 +43,7 @@ void SimianViewerPlugin::init()
     _simianOptionsAction = new SimianOptionsAction(*this, _core);
     connect(_simian_viewer, &SimianViewerWidget::passSelectionToQt, this, &SimianViewerPlugin::publishSelection);
     connect(_simian_viewer, &SimianViewerWidget::passClusterToQt, this, &SimianViewerPlugin::publishCluster);
+    connect(_simian_viewer, &SimianViewerWidget::removeSelectionFromScatterplot, this, &SimianViewerPlugin::removeSelectionFromScatterplot);
     //connect(_simian_viewer, &SimianViewerWidget::generatedScreenshotData, this, &SimianViewerPlugin::generatedScreenshotData);
     
     _eventListener.setEventCore(Application::core());
@@ -286,6 +287,73 @@ void SimianViewerPlugin::publishCluster(std::string clusterName)
 
 
 }
+
+
+void SimianViewerPlugin::removeSelectionFromScatterplot(std::string clusterName)
+{
+    if (clusterName == "true")
+    {
+
+        if (_simianOptionsAction->getCrossSpeciesFilterAction().getCurrentText() == "cross-species clusters")
+        {
+            if (_simianOptionsAction->getCrossSpecies1DatasetLinkerAction().getCurrentText() != "")
+            {
+                auto dataset1 = _simianOptionsAction->getCrossSpecies1DatasetLinkerAction().getCurrentDataset();
+                const auto candidateDataset1 = _core->requestDataset<Clusters>(dataset1.getDatasetGuid());
+                std::vector<std::uint32_t> selectedIndices1;
+
+
+
+                candidateDataset1->getParent()->setSelectionIndices(selectedIndices1);
+
+
+                _core->notifyDatasetSelectionChanged(candidateDataset1->getParent());
+
+            }
+            if (_simianOptionsAction->getCrossSpecies2DatasetLinkerAction().getCurrentText() != "")
+            {
+                auto dataset2 = _simianOptionsAction->getCrossSpecies2DatasetLinkerAction().getCurrentDataset();
+                const auto candidateDataset2 = _core->requestDataset<Clusters>(dataset2.getDatasetGuid());
+                std::vector<std::uint32_t> selectedIndices2;
+
+
+                candidateDataset2->getParent()->setSelectionIndices(selectedIndices2);
+                _core->notifyDatasetSelectionChanged(candidateDataset2->getParent());
+            }
+        }
+        else
+        {
+            if (_simianOptionsAction->getInSpecies1DatasetLinkerAction().getCurrentText() != "")
+            {
+                auto dataset1 = _simianOptionsAction->getInSpecies1DatasetLinkerAction().getCurrentDataset();
+                const auto candidateDataset1 = _core->requestDataset<Clusters>(dataset1.getDatasetGuid());
+                std::vector<std::uint32_t> selectedIndices1;
+
+
+
+                candidateDataset1->getParent()->setSelectionIndices(selectedIndices1);
+
+
+                _core->notifyDatasetSelectionChanged(candidateDataset1->getParent());
+
+            }
+            if (_simianOptionsAction->getInSpecies2DatasetLinkerAction().getCurrentText() != "")
+            {
+                auto dataset2 = _simianOptionsAction->getInSpecies2DatasetLinkerAction().getCurrentDataset();
+                const auto candidateDataset2 = _core->requestDataset<Clusters>(dataset2.getDatasetGuid());
+                std::vector<std::uint32_t> selectedIndices2;
+
+
+                candidateDataset2->getParent()->setSelectionIndices(selectedIndices2);
+                _core->notifyDatasetSelectionChanged(candidateDataset2->getParent());
+            }
+        }
+    }
+
+
+
+}
+
 const auto showHelpbox = []() -> void
 {
     qDebug() << "Simian viewer plugin help requested...";
