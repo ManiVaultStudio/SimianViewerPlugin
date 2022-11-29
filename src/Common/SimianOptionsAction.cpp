@@ -488,30 +488,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		if (_species1SelectAction.getCurrentText() != "" && _species2SelectAction.getCurrentText() != "")
 		{
 			updateData((_species1SelectAction.getCurrentText()).toStdString(), (_species2SelectAction.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString(), (_distanceAction.getValue()), (_crossSpeciesFilterAction.getCurrentText()).toStdString());
-		
-			if (_crossSpecies1DatasetLinkerAction.getNumberOfOptions() > 0)
-			{	
-				QString species1CrossSpeciesClusterDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cross_species_cluster" ;
-
-				_crossSpecies1DatasetLinkerAction.setCurrentText(species1CrossSpeciesClusterDatasetName);
-			}
-			if (_crossSpecies2DatasetLinkerAction.getNumberOfOptions() > 0)
-			{
-				QString species2CrossSpeciesClusterDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cross_species_cluster";
-				_crossSpecies2DatasetLinkerAction.setCurrentText(species2CrossSpeciesClusterDatasetName);
-			}
-
-			if (_inSpecies1DatasetLinkerAction.getNumberOfOptions() > 0)
-			{
-				QString species1InSpeciesClusterDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cluster";
-				_inSpecies1DatasetLinkerAction.setCurrentText(species1InSpeciesClusterDatasetName);
-			}
-			if (_inSpecies2DatasetLinkerAction.getNumberOfOptions() > 0)
-			{
-				QString species2InSpeciesClusterDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cluster";
-				_inSpecies2DatasetLinkerAction.setCurrentText(species2InSpeciesClusterDatasetName);
-			}
-
 			if (_speciesEmbedding1LinkerAction.getNumberOfOptions() > 0)
 			{
 				QString species1EmbeddingDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText();
@@ -523,18 +499,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				QString species2EmbeddingDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText();
 				_speciesEmbedding2LinkerAction.setCurrentText(species2EmbeddingDatasetName);
 			}
-			if (_species1DEStatsLinkerAction.getNumberOfOptions() > 0)
-			{
-				QString species1DEStatsDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cross_species_cluster/DE_Statistics";
-
-				_species1DEStatsLinkerAction.setCurrentText(species1DEStatsDatasetName);
-			}
-			if (_species2DEStatsLinkerAction.getNumberOfOptions() > 0)
-			{
-				QString species2DEStatsDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cross_species_cluster/DE_Statistics";
-
-				_species2DEStatsLinkerAction.setCurrentText(species2DEStatsDatasetName);
-			}
 			if (_species1ScatterplotColorLinkerAction.getNumberOfOptions() > 0)
 			{
 				QString species1EmbeddingColorDatasetName = "";
@@ -544,7 +508,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				}
 				else if (_scatterplotColorControlAction.getCurrentText() == "in-species cluster")
 				{
-					species1EmbeddingColorDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cluster" ;
+					species1EmbeddingColorDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cluster";
 				}
 
 				else if (_scatterplotColorControlAction.getCurrentText() == "cross-species sub-class")
@@ -559,8 +523,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				{
 					species1EmbeddingColorDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/donor";
 				}
-				
-				
+
+
 				_species1ScatterplotColorLinkerAction.setCurrentText(species1EmbeddingColorDatasetName);
 			}
 			if (_species2ScatterplotColorLinkerAction.getNumberOfOptions() > 0)
@@ -577,7 +541,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 				else if (_scatterplotColorControlAction.getCurrentText() == "cross-species sub-class")
 				{
-					species2EmbeddingColorDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cross_species_subclass" ;
+					species2EmbeddingColorDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cross_species_subclass";
 				}
 				else if (_scatterplotColorControlAction.getCurrentText() == "in-species subclass")
 				{
@@ -587,8 +551,41 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				{
 					species2EmbeddingColorDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/donor";
 				}
-				
+
 				_species2ScatterplotColorLinkerAction.setCurrentText(species2EmbeddingColorDatasetName);
+			}
+			if (_species1DEStatsLinkerAction.getNumberOfOptions() > 0)
+			{
+				QString species1DEStatsDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cross_species_cluster/DE_Statistics";
+
+				_species1DEStatsLinkerAction.setCurrentText(species1DEStatsDatasetName);
+			}
+			if (_species2DEStatsLinkerAction.getNumberOfOptions() > 0)
+			{
+				QString species2DEStatsDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cross_species_cluster/DE_Statistics";
+
+				_species2DEStatsLinkerAction.setCurrentText(species2DEStatsDatasetName);
+			}
+			if (_inSpecies1DatasetLinkerAction.getNumberOfOptions() > 0)
+			{
+				QString species1InSpeciesClusterDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cluster";
+				_inSpecies1DatasetLinkerAction.setCurrentText(species1InSpeciesClusterDatasetName);
+			}
+			if (_inSpecies2DatasetLinkerAction.getNumberOfOptions() > 0)
+			{
+				QString species2InSpeciesClusterDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cluster";
+				_inSpecies2DatasetLinkerAction.setCurrentText(species2InSpeciesClusterDatasetName);
+			}
+			if (_crossSpecies1DatasetLinkerAction.getNumberOfOptions() > 0)
+			{
+				QString species1CrossSpeciesClusterDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cross_species_cluster";
+
+				_crossSpecies1DatasetLinkerAction.setCurrentText(species1CrossSpeciesClusterDatasetName);
+			}
+			if (_crossSpecies2DatasetLinkerAction.getNumberOfOptions() > 0)
+			{
+				QString species2CrossSpeciesClusterDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cross_species_cluster";
+				_crossSpecies2DatasetLinkerAction.setCurrentText(species2CrossSpeciesClusterDatasetName);
 			}
 		}
 	};
