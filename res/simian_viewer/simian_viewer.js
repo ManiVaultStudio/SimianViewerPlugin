@@ -176,166 +176,132 @@ const simianVis = () => {
         var XLastElement = "";
         var YFirstElement = "";
         var YLastElement = "";
+        var mapDataBorderSpecies1;
+        var mapDataBorderSpecies2;
         var indexOfElement = uniqueClusters1List.indexOf(d);
+        //species1
         if (species1ValueIdentify == "human") {
-            correspondingCrossspeciescluster = [mapDataforBorderHuman[uniqueClusters1List[indexOfElement]]];
-            for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
-                if (mapDataforBorderHuman[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
-                    XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
-                    if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i + 1]); }
-                    else { XLastElement = width; }
-                    break;
-                }
-            }
+            correspondingCrossspeciescluster = mapDataforBorderHuman[uniqueClusters1List[indexOfElement]];
+            mapDataBorderSpecies1 = mapDataforBorderHuman;
         }
         else if (species1ValueIdentify == "chimp") {
-            correspondingCrossspeciescluster = [mapDataforBorderChimp[uniqueClusters1List[indexOfElement]]];
-            for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
-                if (mapDataforBorderChimp[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
-                    XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
-                    if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i + 1]); }
-                    else { XLastElement = width; }
-                    break;
-                }
-            }
+            correspondingCrossspeciescluster = mapDataforBorderChimp[uniqueClusters1List[indexOfElement]];
+            mapDataBorderSpecies1 = mapDataforBorderChimp;
         }
         else if (species1ValueIdentify == "gorilla") {
-            correspondingCrossspeciescluster = [mapDataforBorderGorilla[uniqueClusters1List[indexOfElement]]];
-            for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
-                if (mapDataforBorderGorilla[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
-                    XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
-                    if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i + 1]); }
-                    else { XLastElement = width; }
-                    break;
-                }
-            }
+            correspondingCrossspeciescluster = mapDataforBorderGorilla[uniqueClusters1List[indexOfElement]];
+            mapDataBorderSpecies1 = mapDataforBorderGorilla;
         }
         else if (species1ValueIdentify == "rhesus") {
-            correspondingCrossspeciescluster = [mapDataforBorderRhesus[uniqueClusters1List[indexOfElement]]];
-            for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
-                if (mapDataforBorderRhesus[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
-                    XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
-                    if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i + 1]); }
-                    else { XLastElement = width; }
-                    break;
-                }
-            }
+            correspondingCrossspeciescluster = mapDataforBorderRhesus[uniqueClusters1List[indexOfElement]];
+            mapDataBorderSpecies1 = mapDataforBorderRhesus;
         }
         else if (species1ValueIdentify == "marmoset") {
-            correspondingCrossspeciescluster = [mapDataforBorderMarmoset[uniqueClusters1List[indexOfElement]]];
+            correspondingCrossspeciescluster = mapDataforBorderMarmoset[uniqueClusters1List[indexOfElement]];
+            mapDataBorderSpecies1 = mapDataforBorderMarmoset;
+        }
+        //species2
+        if (species2ValueIdentify == "chimp") {
+            mapDataBorderSpecies2 = mapDataforBorderChimp;
+        }
+        else if (species2ValueIdentify == "gorilla") {
+            mapDataBorderSpecies2 = mapDataforBorderGorilla;
+        }
+        else if (species2ValueIdentify == "marmoset") {
+            mapDataBorderSpecies2 = mapDataforBorderMarmoset;
+        }
+        else if (species2ValueIdentify == "rhesus") {
+            mapDataBorderSpecies2 = mapDataforBorderRhesus;
+        }
+        else if (species2ValueIdentify == "human") {
+            mapDataBorderSpecies2 = mapDataforBorderHuman;
+        }
+
+
+        if (leftClickSelectedSpecies!==correspondingCrossspeciescluster) {
+
+            leftClickSelectedSpecies = correspondingCrossspeciescluster;
+            //species1
             for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
-                if (mapDataforBorderMarmoset[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
+                if (mapDataBorderSpecies1[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
                     XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
                     if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i + 1]); }
                     else { XLastElement = width; }
                     break;
                 }
             }
-        }
-        ////y
-        if (species2ValueIdentify == "chimp") {
+
+            //species2
             for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
-                if (mapDataforBorderChimp[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
+                if (mapDataBorderSpecies2[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
                     YFirstElement = y(crossSpeciesFilterspecies2Cluster[i]);
                     if (i > 0) { YLastElement = y(crossSpeciesFilterspecies2Cluster[i - 1]); }
                     else { YLastElement = height; }
                     break;
                 }
             }
-        }
-        else if (species2ValueIdentify == "gorilla") {
-            for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
-                if (mapDataforBorderGorilla[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
-                    YFirstElement = y(crossSpeciesFilterspecies2Cluster[i]);
-                    if (i > 0) { YLastElement = y(crossSpeciesFilterspecies2Cluster[i - 1]); }
-                    else { YLastElement = height; }
-                    break;
-                }
+
+
+            if (YLastElement == "") {
+                YLastElement = "0.00";
             }
-        }
-        else if (species2ValueIdentify == "marmoset") {
-            for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
-                if (mapDataforBorderMarmoset[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
-                    YFirstElement = y(crossSpeciesFilterspecies2Cluster[i]);
-                    if (i > 0) { YLastElement = y(crossSpeciesFilterspecies2Cluster[i - 1]); }
-                    else { YLastElement = height; }
-                    break;
-                }
+            if (YFirstElement == "") {
+                YFirstElement = y(crossSpeciesFilterspecies2Cluster[crossSpeciesFilterspecies2Cluster.length - 1]);
             }
-        }
-        else if (species2ValueIdentify == "rhesus") {
-            for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
-                if (mapDataforBorderRhesus[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
-                    YFirstElement = y(crossSpeciesFilterspecies2Cluster[i]);
-                    if (i > 0) { YLastElement = y(crossSpeciesFilterspecies2Cluster[i - 1]); }
-                    else { YLastElement = height; }
-                    break;
-                }
+
+            var poly = XFirstElement + ',' + YFirstElement + ' ' + XLastElement + ',' + YFirstElement + ' ' + XLastElement + ',' + YLastElement + ' ' + XFirstElement + ',' + YLastElement + ' ' + XFirstElement + ',' + YFirstElement;
+            svg.append('polygon')
+                .attr("id", "axisSelectionpolygon")
+                .attr('points', poly)
+                .attr('stroke', "#de2d26")//cross_speciesClustercolors[correspondingCrossspeciescluster])
+                .attr("stroke-width", 3)//6)
+                .attr('fill', 'none');
+            var foreignObjectHeight = parseInt(46 / 100 * window.innerHeight);
+            var foreignObjectWidth = parseInt(18 / 100 * window.innerWidth);
+
+            var foreignTextsize;// = parseInt(2 / 100 * window.innerHeight);
+            if (window.innerHeight < window.innerWidth) {
+                foreignTextsize = parseInt(2 / 100 * window.innerHeight);
             }
-        }
-        else if (species2ValueIdentify == "human") {
-            for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
-                if (mapDataforBorderHuman[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
-                    YFirstElement = y(crossSpeciesFilterspecies2Cluster[i]);
-                    if (i > 0) { YLastElement = y(crossSpeciesFilterspecies2Cluster[i - 1]); }
-                    else { YLastElement = height; }
-                    break;
-                }
+            else if (window.innerHeight > window.innerWidth) {
+                foreignTextsize = parseInt(1.5 / 100 * window.innerWidth);
             }
-        }
+            else {
+                foreignTextsize = parseInt(1.5 / 100 * window.innerHeight);
+            }
 
-        if (YLastElement == "") {
-            YLastElement = "0.00";
-        }
-        if (YFirstElement == "") {
-            YFirstElement = y(crossSpeciesFilterspecies2Cluster[crossSpeciesFilterspecies2Cluster.length - 1]);
-        }
-
-        var poly = XFirstElement + ',' + YFirstElement + ' ' + XLastElement + ',' + YFirstElement + ' ' + XLastElement + ',' + YLastElement + ' ' + XFirstElement + ',' + YLastElement + ' ' + XFirstElement + ',' + YFirstElement;
-        svg.append('polygon')
-            .attr("id", "axisSelectionpolygon")
-            .attr('points', poly)
-            .attr('stroke', "#de2d26")//cross_speciesClustercolors[correspondingCrossspeciescluster])
-            .attr("stroke-width", 3)//6)
-            .attr('fill', 'none');
-        var foreignObjectHeight = parseInt(46 / 100 * window.innerHeight);
-        var foreignObjectWidth = parseInt(18 / 100 * window.innerWidth);
-
-        var foreignTextsize;// = parseInt(2 / 100 * window.innerHeight);
-        if (window.innerHeight < window.innerWidth) {
-            foreignTextsize = parseInt(2 / 100 * window.innerHeight);
-        }
-        else if (window.innerHeight > window.innerWidth) {
-            foreignTextsize = parseInt(1.5 / 100 * window.innerWidth);
-        }
-        else {
-            foreignTextsize = parseInt(1.5 / 100 * window.innerHeight);
-        }
-
-        svg.append("foreignObject")
-            .attr("id", "axisSelectionText")
-            .style("background-color", "transparent")
-            .style("position", "absolute")
-            .attr("x", 0 + width / 15)
-            //.attr("z-index", 9999)
-            .attr("y", 0)
-            .attr("width", foreignObjectWidth)
-            .attr("height", foreignObjectHeight)
-            .html(function (d) {
-                var average = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']) / parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']);
-                let minVal = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']).toFixed(2);
-                let maxVal = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']).toFixed(2);
-                let avgVal = parseFloat(average).toFixed(2);
-                var value = "<div><table cellspacing:0; style=\"padding: 0; margin: 0; font-size: " + foreignTextsize +"px; width: 100%;border-collapse: collapse;   border - spacing: 0; text - align: center; \"><tr><td  style=\" background-color:white; \" ><b>Block count<b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;background-color:white;\">" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells'] + "</td></tr><tr><td   style=\"  background-color:white;\"><b>Minimum distance<b/></td><td  style=\"  background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\">" + minVal + "</td></tr><tr><td   style=\" background-color:white;\"><b>Maximum distance<b/></td><td  style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C; \">" + maxVal + "</td></tr><tr><td   style=\" background-color:white;\"><b>Average distance<b/></td><td   style=\"  -webkit-text-fill-color: black;background-color:white; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\"> " + avgVal + "</td></tr><tr ><td style=\" background-color:white;\"><b>Cross-species <b/></td><td  style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:" + cross_speciesClustercolors[correspondingCrossspeciescluster] + ";\">" + correspondingCrossspeciescluster + "</td></tr><tr><td   style=\" background-color:white;\"><b>Class<b/></td><td   style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:" + classColors[crossSpecies_ClassMap[correspondingCrossspeciescluster]] + ";\">" + crossSpecies_ClassMap[correspondingCrossspeciescluster] + "</td></tr><tr><td   style=\"background-color:white;\"><b>Subclass<b/></td><td     style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[crossSpecies_SubClassMap[correspondingCrossspeciescluster]] + ";\">" + crossSpecies_SubClassMap[correspondingCrossspeciescluster] + "</td></tr></table></div>";
+            svg.append("foreignObject")
+                .attr("id", "axisSelectionText")
+                .style("background-color", "transparent")
+                .style("position", "absolute")
+                .attr("x", 0 + width / 15)
+                //.attr("z-index", 9999)
+                .attr("y", 0)
+                .attr("width", foreignObjectWidth)
+                .attr("height", foreignObjectHeight)
+                .html(function (d) {
+                    var average = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']) / parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']);
+                    let minVal = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']).toFixed(2);
+                    let maxVal = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']).toFixed(2);
+                    let avgVal = parseFloat(average).toFixed(2);
+                    var value = "<div><table cellspacing:0; style=\"padding: 0; margin: 0; font-size: " + foreignTextsize + "px; width: 100%;border-collapse: collapse;   border - spacing: 0; text - align: center; \"><tr><td  style=\" background-color:white; \" ><b>Block count<b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;background-color:white;\">" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells'] + "</td></tr><tr><td   style=\"  background-color:white;\"><b>Minimum distance<b/></td><td  style=\"  background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\">" + minVal + "</td></tr><tr><td   style=\" background-color:white;\"><b>Maximum distance<b/></td><td  style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C; \">" + maxVal + "</td></tr><tr><td   style=\" background-color:white;\"><b>Average distance<b/></td><td   style=\"  -webkit-text-fill-color: black;background-color:white; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\"> " + avgVal + "</td></tr><tr ><td style=\" background-color:white;\"><b>Cross-species <b/></td><td  style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:" + cross_speciesClustercolors[correspondingCrossspeciescluster] + ";\">" + correspondingCrossspeciescluster + "</td></tr><tr><td   style=\" background-color:white;\"><b>Class<b/></td><td   style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:" + classColors[crossSpecies_ClassMap[correspondingCrossspeciescluster]] + ";\">" + crossSpecies_ClassMap[correspondingCrossspeciescluster] + "</td></tr><tr><td   style=\"background-color:white;\"><b>Subclass<b/></td><td     style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[crossSpecies_SubClassMap[correspondingCrossspeciescluster]] + ";\">" + crossSpecies_SubClassMap[correspondingCrossspeciescluster] + "</td></tr></table></div>";
 
 
 
-                return value;
-            })
+                    return value;
+                })
 
-        if (isQtAvailable) {
-            QtBridge.js_passClusterToQt(correspondingCrossspeciescluster.toString());
-        }
+            if (isQtAvailable) {
+                QtBridge.js_passClusterToQt(correspondingCrossspeciescluster.toString());
+            }
+
+            }
+    else {
+            leftClickSelectedSpecies = "";
+            svg.select("#axisSelectionpolygon").remove();
+            svg.select("#axisSelectionText").remove();
+}
+
 
     }
     function clickYAxisLabels(d) {
@@ -347,167 +313,128 @@ const simianVis = () => {
         var YFirstElement = "";
         var YLastElement = "";
         var indexOfElement = uniqueClusters2List.indexOf(d);
-
-        ////y
+        var mapDataBorderSpecies1;
+        var mapDataBorderSpecies2;
+        //cluster2
         if (species2ValueIdentify == "chimp") {
-            correspondingCrossspeciescluster = [mapDataforBorderChimp[uniqueClusters2List[indexOfElement]]];
-            for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
-                if (mapDataforBorderChimp[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
-                    YFirstElement = y(crossSpeciesFilterspecies2Cluster[i]);
-                    if (i > 0) { YLastElement = y(crossSpeciesFilterspecies2Cluster[i - 1]); }
-                    else { YLastElement = height; }
-                    break;
-                }
-            }
+            correspondingCrossspeciescluster = mapDataforBorderChimp[uniqueClusters2List[indexOfElement]];
+            mapDataBorderSpecies2 = mapDataforBorderChimp;
         }
         else if (species2ValueIdentify == "gorilla") {
-            correspondingCrossspeciescluster = [mapDataforBorderGorilla[uniqueClusters2List[indexOfElement]]];
-            for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
-                if (mapDataforBorderGorilla[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
-                    YFirstElement = y(crossSpeciesFilterspecies2Cluster[i]);
-                    if (i > 0) { YLastElement = y(crossSpeciesFilterspecies2Cluster[i - 1]); }
-                    else { YLastElement = height; }
-                    break;
-                }
-            }
+            correspondingCrossspeciescluster = mapDataforBorderGorilla[uniqueClusters2List[indexOfElement]];
+            mapDataBorderSpecies2 = mapDataforBorderGorilla;
         }
         else if (species2ValueIdentify == "marmoset") {
-            correspondingCrossspeciescluster = [mapDataforBorderMarmoset[uniqueClusters2List[indexOfElement]]];
-            for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
-                if (mapDataforBorderMarmoset[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
-                    YFirstElement = y(crossSpeciesFilterspecies2Cluster[i]);
-                    if (i > 0) { YLastElement = y(crossSpeciesFilterspecies2Cluster[i - 1]); }
-                    else { YLastElement = height; }
-                    break;
-                }
-            }
+            correspondingCrossspeciescluster = mapDataforBorderMarmoset[uniqueClusters2List[indexOfElement]];
+            mapDataBorderSpecies2 = mapDataforBorderMarmoset;
         }
         else if (species2ValueIdentify == "rhesus") {
-            correspondingCrossspeciescluster = [mapDataforBorderRhesus[uniqueClusters2List[indexOfElement]]];
-            for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
-                if (mapDataforBorderRhesus[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
-                    YFirstElement = y(crossSpeciesFilterspecies2Cluster[i]);
-                    if (i > 0) { YLastElement = y(crossSpeciesFilterspecies2Cluster[i - 1]); }
-                    else { YLastElement = height; }
-                    break;
-                }
-            }
+            correspondingCrossspeciescluster = mapDataforBorderRhesus[uniqueClusters2List[indexOfElement]];
+            mapDataBorderSpecies2 = mapDataforBorderRhesus;
         }
         else if (species2ValueIdentify == "human") {
-            correspondingCrossspeciescluster = [mapDataforBorderHuman[uniqueClusters2List[indexOfElement]]];
+            correspondingCrossspeciescluster = mapDataforBorderHuman[uniqueClusters2List[indexOfElement]];
+            mapDataBorderSpecies2 = mapDataforBorderHuman;
+        }
+        //cluster1
+        if (species1ValueIdentify == "human") {
+            mapDataBorderSpecies1 = mapDataforBorderHuman;
+        }
+        else if (species1ValueIdentify == "chimp") {
+            mapDataBorderSpecies1 = mapDataforBorderChimp;
+        }
+        else if (species1ValueIdentify == "gorilla") {
+            mapDataBorderSpecies1 = mapDataforBorderGorilla;
+        }
+        else if (species1ValueIdentify == "rhesus") {
+            mapDataBorderSpecies1 = mapDataforBorderRhesus;
+        }
+        else if (species1ValueIdentify == "marmoset") {
+            mapDataBorderSpecies1 = mapDataforBorderMarmoset;
+        }
+
+
+        if (leftClickSelectedSpecies!==correspondingCrossspeciescluster) {
+
+            leftClickSelectedSpecies = correspondingCrossspeciescluster;
+            //cluster2
             for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
-                if (mapDataforBorderHuman[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
+                if (mapDataBorderSpecies2[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
                     YFirstElement = y(crossSpeciesFilterspecies2Cluster[i]);
                     if (i > 0) { YLastElement = y(crossSpeciesFilterspecies2Cluster[i - 1]); }
                     else { YLastElement = height; }
                     break;
                 }
             }
-        }
-        ////x
-
-        if (species1ValueIdentify == "human") {
+            //cluster1
             for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
-                if (mapDataforBorderHuman[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
+                if (mapDataBorderSpecies1[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
                     XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
                     if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i + 1]); }
                     else { XLastElement = width; }
                     break;
                 }
             }
-        }
-        else if (species1ValueIdentify == "chimp") {
-            for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
-                if (mapDataforBorderChimp[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
-                    XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
-                    if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i + 1]); }
-                    else { XLastElement = width; }
-                    break;
-                }
-            }
-        }
-        else if (species1ValueIdentify == "gorilla") {
-            for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
-                if (mapDataforBorderGorilla[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
-                    XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
-                    if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i + 1]); }
-                    else { XLastElement = width; }
-                    break;
-                }
-            }
-        }
-        else if (species1ValueIdentify == "rhesus") {
-            for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
-                if (mapDataforBorderRhesus[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
-                    XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
-                    if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i + 1]); }
-                    else { XLastElement = width; }
-                    break;
-                }
-            }
-        }
-        else if (species1ValueIdentify == "marmoset") {
-            for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
-                if (mapDataforBorderMarmoset[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
-                    XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
-                    if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i + 1]); }
-                    else { XLastElement = width; }
-                    break;
-                }
-            }
-        }
 
-        if (YLastElement == "") {
-            YLastElement = "0.00";
-        }
-        if (YFirstElement == "") {
-            YFirstElement = y(crossSpeciesFilterspecies2Cluster[crossSpeciesFilterspecies2Cluster.length - 1]);
-        }
 
-        var poly = XFirstElement + ',' + YFirstElement + ' ' + XLastElement + ',' + YFirstElement + ' ' + XLastElement + ',' + YLastElement + ' ' + XFirstElement + ',' + YLastElement + ' ' + XFirstElement + ',' + YFirstElement;
-        svg.append('polygon')
-            .attr("id", "axisSelectionpolygon")
-            .attr('points', poly)
-            .attr('stroke', "#de2d26")//cross_speciesClustercolors[correspondingCrossspeciescluster])
-            .attr("stroke-width", 3)//6)
-            .attr('fill', 'none');
+            if (YLastElement == "") {
+                YLastElement = "0.00";
+            }
+            if (YFirstElement == "") {
+                YFirstElement = y(crossSpeciesFilterspecies2Cluster[crossSpeciesFilterspecies2Cluster.length - 1]);
+            }
 
-        var foreignObjectHeight = parseInt(46 / 100 * window.innerHeight);
-        var foreignObjectWidth = parseInt(18 / 100 * window.innerWidth);
+            var poly = XFirstElement + ',' + YFirstElement + ' ' + XLastElement + ',' + YFirstElement + ' ' + XLastElement + ',' + YLastElement + ' ' + XFirstElement + ',' + YLastElement + ' ' + XFirstElement + ',' + YFirstElement;
+            svg.append('polygon')
+                .attr("id", "axisSelectionpolygon")
+                .attr('points', poly)
+                .attr('stroke', "#de2d26")//cross_speciesClustercolors[correspondingCrossspeciescluster])
+                .attr("stroke-width", 3)//6)
+                .attr('fill', 'none');
 
-        var foreignTextsize;// = parseInt(2 / 100 * window.innerHeight);
-        if (window.innerHeight < window.innerWidth) {
-            foreignTextsize = parseInt(2 / 100 * window.innerHeight);
-        }
-        else if (window.innerHeight > window.innerWidth) {
-            foreignTextsize = parseInt(1.5 / 100 * window.innerWidth);
+            var foreignObjectHeight = parseInt(46 / 100 * window.innerHeight);
+            var foreignObjectWidth = parseInt(18 / 100 * window.innerWidth);
+
+            var foreignTextsize;// = parseInt(2 / 100 * window.innerHeight);
+            if (window.innerHeight < window.innerWidth) {
+                foreignTextsize = parseInt(2 / 100 * window.innerHeight);
+            }
+            else if (window.innerHeight > window.innerWidth) {
+                foreignTextsize = parseInt(1.5 / 100 * window.innerWidth);
+            }
+            else {
+                foreignTextsize = parseInt(1.5 / 100 * window.innerHeight);
+            }
+
+            svg.append("foreignObject")
+                .attr("id", "axisSelectionText")
+                .style("background-color", "transparent")
+                .style("position", "absolute")
+                .attr("x", 0 + width / 15)
+                //.attr("z-index", 9999)
+                .attr("y", 0)
+                .attr("width", foreignObjectWidth)
+                .attr("height", foreignObjectHeight)
+                .html(function (d) {
+                    var average = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']) / parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']);
+                    let minVal = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']).toFixed(2);
+                    let maxVal = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']).toFixed(2);
+                    let avgVal = parseFloat(average).toFixed(2);
+                    var value = "<div><table cellspacing:0; style=\"padding: 0; margin: 0; font-size: " + foreignTextsize + "px; width: 100%;border-collapse: collapse;   border - spacing: 0; text - align: center; \"><tr><td  style=\" background-color:white; \" ><b>Block count<b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;background-color:white;\">" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells'] + "</td></tr><tr><td   style=\"  background-color:white;\"><b>Minimum distance<b/></td><td  style=\"  background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\">" + minVal + "</td></tr><tr><td   style=\" background-color:white;\"><b>Maximum distance<b/></td><td  style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C; \">" + maxVal + "</td></tr><tr><td   style=\" background-color:white;\"><b>Average distance<b/></td><td   style=\"  -webkit-text-fill-color: black;background-color:white; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\"> " + avgVal + "</td></tr><tr ><td style=\" background-color:white;\"><b>Cross-species <b/></td><td  style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:" + cross_speciesClustercolors[correspondingCrossspeciescluster] + ";\">" + correspondingCrossspeciescluster + "</td></tr><tr><td   style=\" background-color:white;\"><b>Class<b/></td><td   style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:" + classColors[crossSpecies_ClassMap[correspondingCrossspeciescluster]] + ";\">" + crossSpecies_ClassMap[correspondingCrossspeciescluster] + "</td></tr><tr><td   style=\"background-color:white;\"><b>Subclass<b/></td><td     style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[crossSpecies_SubClassMap[correspondingCrossspeciescluster]] + ";\">" + crossSpecies_SubClassMap[correspondingCrossspeciescluster] + "</td></tr></table></div>";
+
+
+
+                    return value;
+                })
+            if (isQtAvailable) {
+                QtBridge.js_passClusterToQt(correspondingCrossspeciescluster.toString());
+            }
+
         }
         else {
-            foreignTextsize = parseInt(1.5 / 100 * window.innerHeight);
-        }
-
-        svg.append("foreignObject")
-            .attr("id", "axisSelectionText")
-            .style("background-color", "transparent")
-            .style("position", "absolute")
-            .attr("x", 0 + width / 15)
-            //.attr("z-index", 9999)
-            .attr("y", 0)
-            .attr("width", foreignObjectWidth)
-            .attr("height", foreignObjectHeight)
-            .html(function (d) {
-                var average = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']) / parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']);
-                let minVal = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']).toFixed(2);
-                let maxVal = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']).toFixed(2);
-                let avgVal = parseFloat(average).toFixed(2);
-                var value = "<div><table cellspacing:0; style=\"padding: 0; margin: 0; font-size: " + foreignTextsize + "px; width: 100%;border-collapse: collapse;   border - spacing: 0; text - align: center; \"><tr><td  style=\" background-color:white; \" ><b>Block count<b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;background-color:white;\">" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells'] + "</td></tr><tr><td   style=\"  background-color:white;\"><b>Minimum distance<b/></td><td  style=\"  background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\">" + minVal + "</td></tr><tr><td   style=\" background-color:white;\"><b>Maximum distance<b/></td><td  style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C; \">" + maxVal + "</td></tr><tr><td   style=\" background-color:white;\"><b>Average distance<b/></td><td   style=\"  -webkit-text-fill-color: black;background-color:white; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\"> " + avgVal + "</td></tr><tr ><td style=\" background-color:white;\"><b>Cross-species <b/></td><td  style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:" + cross_speciesClustercolors[correspondingCrossspeciescluster] + ";\">" + correspondingCrossspeciescluster + "</td></tr><tr><td   style=\" background-color:white;\"><b>Class<b/></td><td   style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:" + classColors[crossSpecies_ClassMap[correspondingCrossspeciescluster]] + ";\">" + crossSpecies_ClassMap[correspondingCrossspeciescluster] + "</td></tr><tr><td   style=\"background-color:white;\"><b>Subclass<b/></td><td     style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[crossSpecies_SubClassMap[correspondingCrossspeciescluster]] + ";\">" + crossSpecies_SubClassMap[correspondingCrossspeciescluster] + "</td></tr></table></div>";
-
-
-
-                return value;
-            })
-        if (isQtAvailable) {
-            QtBridge.js_passClusterToQt(correspondingCrossspeciescluster.toString());
+            leftClickSelectedSpecies = "";
+            svg.select("#axisSelectionpolygon").remove();
+            svg.select("#axisSelectionText").remove();
         }
     }
 
@@ -1275,175 +1202,179 @@ const simianVis = () => {
         if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
             svg.select("#axisSelectionpolygon").remove();
             svg.select("#axisSelectionText").remove();
-            if (leftClickSelectedSpecies !== d.cross_species_cluster1_species_1)
-            {
-            leftClickSelectedSpecies = d.cross_species_cluster1_species_1;
-            var correspondingCrossspeciescluster = d.cross_species_cluster1_species_1;
-            var XFirstElement = "";
-            var XLastElement = "";
-            var YFirstElement = "";
-            var YLastElement = "";
-            //var indexOfElement = uniqueClusters1List.indexOf(d);
-            if (species1ValueIdentify == "human") {
-                //correspondingCrossspeciescluster = //[mapDataforBorderHuman[uniqueClusters1List[indexOfElement]]];
-                for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
-                    if (mapDataforBorderHuman[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
-                        XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
-                        if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i + 1]); }
-                        else { XLastElement = width; }
-                        break;
+            if (leftClickSelectedSpecies !== d.cross_species_cluster1_species_1) {
+                leftClickSelectedSpecies = d.cross_species_cluster1_species_1;
+                var correspondingCrossspeciescluster = d.cross_species_cluster1_species_1;
+                var XFirstElement = "";
+                var XLastElement = "";
+                var YFirstElement = "";
+                var YLastElement = "";
+                //var indexOfElement = uniqueClusters1List.indexOf(d);
+                if (species1ValueIdentify == "human") {
+                    //correspondingCrossspeciescluster = //[mapDataforBorderHuman[uniqueClusters1List[indexOfElement]]];
+                    for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
+                        if (mapDataforBorderHuman[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
+                            XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
+                            if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i + 1]); }
+                            else { XLastElement = width; }
+                            break;
+                        }
                     }
                 }
-            }
-            else if (species1ValueIdentify == "chimp") {
-                // correspondingCrossspeciescluster = [mapDataforBorderChimp[uniqueClusters1List[indexOfElement]]];
-                for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
-                    if (mapDataforBorderChimp[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
-                        XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
-                        if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i + 1]); }
-                        else { XLastElement = width; }
-                        break;
+                else if (species1ValueIdentify == "chimp") {
+                    // correspondingCrossspeciescluster = [mapDataforBorderChimp[uniqueClusters1List[indexOfElement]]];
+                    for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
+                        if (mapDataforBorderChimp[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
+                            XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
+                            if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i + 1]); }
+                            else { XLastElement = width; }
+                            break;
+                        }
                     }
                 }
-            }
-            else if (species1ValueIdentify == "gorilla") {
-                // correspondingCrossspeciescluster = [mapDataforBorderGorilla[uniqueClusters1List[indexOfElement]]];
-                for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
-                    if (mapDataforBorderGorilla[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
-                        XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
-                        if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i + 1]); }
-                        else { XLastElement = width; }
-                        break;
+                else if (species1ValueIdentify == "gorilla") {
+                    // correspondingCrossspeciescluster = [mapDataforBorderGorilla[uniqueClusters1List[indexOfElement]]];
+                    for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
+                        if (mapDataforBorderGorilla[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
+                            XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
+                            if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i + 1]); }
+                            else { XLastElement = width; }
+                            break;
+                        }
                     }
                 }
-            }
-            else if (species1ValueIdentify == "rhesus") {
-                // correspondingCrossspeciescluster = [mapDataforBorderRhesus[uniqueClusters1List[indexOfElement]]];
-                for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
-                    if (mapDataforBorderRhesus[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
-                        XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
-                        if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i + 1]); }
-                        else { XLastElement = width; }
-                        break;
+                else if (species1ValueIdentify == "rhesus") {
+                    // correspondingCrossspeciescluster = [mapDataforBorderRhesus[uniqueClusters1List[indexOfElement]]];
+                    for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
+                        if (mapDataforBorderRhesus[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
+                            XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
+                            if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i + 1]); }
+                            else { XLastElement = width; }
+                            break;
+                        }
                     }
                 }
-            }
-            else if (species1ValueIdentify == "marmoset") {
-                // correspondingCrossspeciescluster = [mapDataforBorderMarmoset[uniqueClusters1List[indexOfElement]]];
-                for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
-                    if (mapDataforBorderMarmoset[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
-                        XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
-                        if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i + 1]); }
-                        else { XLastElement = width; }
-                        break;
+                else if (species1ValueIdentify == "marmoset") {
+                    // correspondingCrossspeciescluster = [mapDataforBorderMarmoset[uniqueClusters1List[indexOfElement]]];
+                    for (var i = 0; i < crossSpeciesFilterspecies1Cluster.length; i++) {
+                        if (mapDataforBorderMarmoset[crossSpeciesFilterspecies1Cluster[i]] == correspondingCrossspeciescluster) {
+                            XFirstElement = x(crossSpeciesFilterspecies1Cluster[i]);
+                            if (i + 1 < crossSpeciesFilterspecies1Cluster.length) { XLastElement = x(crossSpeciesFilterspecies1Cluster[i + 1]); }
+                            else { XLastElement = width; }
+                            break;
+                        }
                     }
                 }
-            }
-            ////y
-            if (species2ValueIdentify == "chimp") {
-                for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
-                    if (mapDataforBorderChimp[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
-                        YFirstElement = y(crossSpeciesFilterspecies2Cluster[i]);
-                        if (i > 0) { YLastElement = y(crossSpeciesFilterspecies2Cluster[i - 1]); }
-                        else { YLastElement = height; }
-                        break;
+                ////y
+                if (species2ValueIdentify == "chimp") {
+                    for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
+                        if (mapDataforBorderChimp[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
+                            YFirstElement = y(crossSpeciesFilterspecies2Cluster[i]);
+                            if (i > 0) { YLastElement = y(crossSpeciesFilterspecies2Cluster[i - 1]); }
+                            else { YLastElement = height; }
+                            break;
+                        }
                     }
                 }
-            }
-            else if (species2ValueIdentify == "gorilla") {
-                for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
-                    if (mapDataforBorderGorilla[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
-                        YFirstElement = y(crossSpeciesFilterspecies2Cluster[i]);
-                        if (i > 0) { YLastElement = y(crossSpeciesFilterspecies2Cluster[i - 1]); }
-                        else { YLastElement = height; }
-                        break;
+                else if (species2ValueIdentify == "gorilla") {
+                    for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
+                        if (mapDataforBorderGorilla[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
+                            YFirstElement = y(crossSpeciesFilterspecies2Cluster[i]);
+                            if (i > 0) { YLastElement = y(crossSpeciesFilterspecies2Cluster[i - 1]); }
+                            else { YLastElement = height; }
+                            break;
+                        }
                     }
                 }
-            }
-            else if (species2ValueIdentify == "marmoset") {
-                for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
-                    if (mapDataforBorderMarmoset[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
-                        YFirstElement = y(crossSpeciesFilterspecies2Cluster[i]);
-                        if (i > 0) { YLastElement = y(crossSpeciesFilterspecies2Cluster[i - 1]); }
-                        else { YLastElement = height; }
-                        break;
+                else if (species2ValueIdentify == "marmoset") {
+                    for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
+                        if (mapDataforBorderMarmoset[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
+                            YFirstElement = y(crossSpeciesFilterspecies2Cluster[i]);
+                            if (i > 0) { YLastElement = y(crossSpeciesFilterspecies2Cluster[i - 1]); }
+                            else { YLastElement = height; }
+                            break;
+                        }
                     }
                 }
-            }
-            else if (species2ValueIdentify == "rhesus") {
-                for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
-                    if (mapDataforBorderRhesus[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
-                        YFirstElement = y(crossSpeciesFilterspecies2Cluster[i]);
-                        if (i > 0) { YLastElement = y(crossSpeciesFilterspecies2Cluster[i - 1]); }
-                        else { YLastElement = height; }
-                        break;
+                else if (species2ValueIdentify == "rhesus") {
+                    for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
+                        if (mapDataforBorderRhesus[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
+                            YFirstElement = y(crossSpeciesFilterspecies2Cluster[i]);
+                            if (i > 0) { YLastElement = y(crossSpeciesFilterspecies2Cluster[i - 1]); }
+                            else { YLastElement = height; }
+                            break;
+                        }
                     }
                 }
-            }
-            else if (species2ValueIdentify == "human") {
-                for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
-                    if (mapDataforBorderHuman[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
-                        YFirstElement = y(crossSpeciesFilterspecies2Cluster[i]);
-                        if (i > 0) { YLastElement = y(crossSpeciesFilterspecies2Cluster[i - 1]); }
-                        else { YLastElement = height; }
-                        break;
+                else if (species2ValueIdentify == "human") {
+                    for (var i = crossSpeciesFilterspecies2Cluster.length - 1; i >= 0; i--) {
+                        if (mapDataforBorderHuman[crossSpeciesFilterspecies2Cluster[i]] == correspondingCrossspeciescluster) {
+                            YFirstElement = y(crossSpeciesFilterspecies2Cluster[i]);
+                            if (i > 0) { YLastElement = y(crossSpeciesFilterspecies2Cluster[i - 1]); }
+                            else { YLastElement = height; }
+                            break;
+                        }
                     }
                 }
-            }
 
-            if (YLastElement == "") {
-                YLastElement = "0.00";
-            }
-            if (YFirstElement == "") {
-                YFirstElement = y(crossSpeciesFilterspecies2Cluster[crossSpeciesFilterspecies2Cluster.length - 1]);
-            }
+                if (YLastElement == "") {
+                    YLastElement = "0.00";
+                }
+                if (YFirstElement == "") {
+                    YFirstElement = y(crossSpeciesFilterspecies2Cluster[crossSpeciesFilterspecies2Cluster.length - 1]);
+                }
 
-            var poly = XFirstElement + ',' + YFirstElement + ' ' + XLastElement + ',' + YFirstElement + ' ' + XLastElement + ',' + YLastElement + ' ' + XFirstElement + ',' + YLastElement + ' ' + XFirstElement + ',' + YFirstElement;
-            svg.append('polygon')
-                .attr("id", "axisSelectionpolygon")
-                .attr('points', poly)
-                .attr('stroke', "#de2d26")//cross_speciesClustercolors[correspondingCrossspeciescluster])
-                .attr("stroke-width", 3)//6)
-                .attr('fill', 'none');
-            var foreignObjectHeight = parseInt(46 / 100 * window.innerHeight);
-            var foreignObjectWidth = parseInt(18 / 100 * window.innerWidth);
+                var poly = XFirstElement + ',' + YFirstElement + ' ' + XLastElement + ',' + YFirstElement + ' ' + XLastElement + ',' + YLastElement + ' ' + XFirstElement + ',' + YLastElement + ' ' + XFirstElement + ',' + YFirstElement;
+                svg.append('polygon')
+                    .attr("id", "axisSelectionpolygon")
+                    .attr('points', poly)
+                    .attr('stroke', "#de2d26")//cross_speciesClustercolors[correspondingCrossspeciescluster])
+                    .attr("stroke-width", 3)//6)
+                    .attr('fill', 'none');
+                var foreignObjectHeight = parseInt(46 / 100 * window.innerHeight);
+                var foreignObjectWidth = parseInt(18 / 100 * window.innerWidth);
 
-            var foreignTextsize;// = parseInt(2 / 100 * window.innerHeight);
-            if (window.innerHeight < window.innerWidth) {
-                foreignTextsize = parseInt(2 / 100 * window.innerHeight);
-            }
-            else if (window.innerHeight > window.innerWidth) {
-                foreignTextsize = parseInt(1.5 / 100 * window.innerWidth);
+                var foreignTextsize;// = parseInt(2 / 100 * window.innerHeight);
+                if (window.innerHeight < window.innerWidth) {
+                    foreignTextsize = parseInt(2 / 100 * window.innerHeight);
+                }
+                else if (window.innerHeight > window.innerWidth) {
+                    foreignTextsize = parseInt(1.5 / 100 * window.innerWidth);
+                }
+                else {
+                    foreignTextsize = parseInt(1.5 / 100 * window.innerHeight);
+                }
+
+                svg.append("foreignObject")
+                    .attr("id", "axisSelectionText")
+                    .style("background-color", "transparent")
+                    .style("position", "absolute")
+                    .attr("x", 0 + width / 15)
+                    //.attr("z-index", 9999)
+                    .attr("y", 0)
+                    .attr("width", foreignObjectWidth)
+                    .attr("height", foreignObjectHeight)
+                    .html(function (d) {
+                        var average = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']) / parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']);
+                        let minVal = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']).toFixed(2);
+                        let maxVal = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']).toFixed(2);
+                        let avgVal = parseFloat(average).toFixed(2);
+                        var value = "<div><table cellspacing:0; style=\"padding: 0; margin: 0; font-size: " + foreignTextsize + "px; width: 100%;border-collapse: collapse;   border - spacing: 0; text - align: center; \"><tr><td  style=\" background-color:white; \" ><b>Block count<b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;background-color:white;\">" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells'] + "</td></tr><tr><td   style=\"  background-color:white;\"><b>Minimum distance<b/></td><td  style=\"  background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\">" + minVal + "</td></tr><tr><td   style=\" background-color:white;\"><b>Maximum distance<b/></td><td  style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C; \">" + maxVal + "</td></tr><tr><td   style=\" background-color:white;\"><b>Average distance<b/></td><td   style=\"  -webkit-text-fill-color: black;background-color:white; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\"> " + avgVal + "</td></tr><tr ><td style=\" background-color:white;\"><b>Cross-species <b/></td><td  style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:" + cross_speciesClustercolors[correspondingCrossspeciescluster] + ";\">" + correspondingCrossspeciescluster + "</td></tr><tr><td   style=\" background-color:white;\"><b>Class<b/></td><td   style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:" + classColors[crossSpecies_ClassMap[correspondingCrossspeciescluster]] + ";\">" + crossSpecies_ClassMap[correspondingCrossspeciescluster] + "</td></tr><tr><td   style=\"background-color:white;\"><b>Subclass<b/></td><td     style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[crossSpecies_SubClassMap[correspondingCrossspeciescluster]] + ";\">" + crossSpecies_SubClassMap[correspondingCrossspeciescluster] + "</td></tr></table></div>";
+
+
+
+                        return value;
+                    })
+
+                if (isQtAvailable) {
+                    QtBridge.js_passClusterToQt(correspondingCrossspeciescluster.toString());
+                }
             }
             else {
-                foreignTextsize = parseInt(1.5 / 100 * window.innerHeight);
+                leftClickSelectedSpecies = "";
+                svg.select("#axisSelectionpolygon").remove();
+                svg.select("#axisSelectionText").remove();
             }
-
-            svg.append("foreignObject")
-                .attr("id", "axisSelectionText")
-                .style("background-color", "transparent")
-                .style("position", "absolute")
-                .attr("x", 0 + width / 15)
-                //.attr("z-index", 9999)
-                .attr("y", 0)
-                .attr("width", foreignObjectWidth)
-                .attr("height", foreignObjectHeight)
-                .html(function (d) {
-                    var average = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']) / parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']);
-                    let minVal = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']).toFixed(2);
-                    let maxVal = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']).toFixed(2);
-                    let avgVal = parseFloat(average).toFixed(2);
-                    var value = "<div><table cellspacing:0; style=\"padding: 0; margin: 0; font-size: " + foreignTextsize + "px; width: 100%;border-collapse: collapse;   border - spacing: 0; text - align: center; \"><tr><td  style=\" background-color:white; \" ><b>Block count<b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;background-color:white;\">" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells'] + "</td></tr><tr><td   style=\"  background-color:white;\"><b>Minimum distance<b/></td><td  style=\"  background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\">" + minVal + "</td></tr><tr><td   style=\" background-color:white;\"><b>Maximum distance<b/></td><td  style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C; \">" + maxVal + "</td></tr><tr><td   style=\" background-color:white;\"><b>Average distance<b/></td><td   style=\"  -webkit-text-fill-color: black;background-color:white; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\"> " + avgVal + "</td></tr><tr ><td style=\" background-color:white;\"><b>Cross-species <b/></td><td  style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:" + cross_speciesClustercolors[correspondingCrossspeciescluster] + ";\">" + correspondingCrossspeciescluster + "</td></tr><tr><td   style=\" background-color:white;\"><b>Class<b/></td><td   style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:" + classColors[crossSpecies_ClassMap[correspondingCrossspeciescluster]] + ";\">" + crossSpecies_ClassMap[correspondingCrossspeciescluster] + "</td></tr><tr><td   style=\"background-color:white;\"><b>Subclass<b/></td><td     style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[crossSpecies_SubClassMap[correspondingCrossspeciescluster]] + ";\">" + crossSpecies_SubClassMap[correspondingCrossspeciescluster] + "</td></tr></table></div>";
-
-
-
-                    return value;
-                })
-
-            if (isQtAvailable) {
-                QtBridge.js_passClusterToQt(correspondingCrossspeciescluster.toString());
-            }
-        }
         }
         else {
             svg.select("#axisSelectionpolygon").remove();
