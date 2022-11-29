@@ -36,6 +36,12 @@ void SimianViewerCommunicationObject::js_passClusterToQt(QVariant data)
     _parent->js_passClusterToQt(data.toString().toStdString());
 }
 
+void SimianViewerCommunicationObject::js_removeSelectionFromScatterplot(QVariant data)
+{
+
+    _parent->js_removeSelectionFromScatterplot(data.toString().toStdString());
+}
+
 //void SimianViewerCommunicationObject::js_generatedScreenshotData(QVariant data)
 //{
 //
@@ -202,6 +208,10 @@ void SimianViewerWidget::js_passSelectionToQt(std::vector<std::string> selectedI
 void SimianViewerWidget::js_passClusterToQt(std::string clusterName)
 {
     emit passClusterToQt(clusterName);
+}
+void SimianViewerWidget::js_removeSelectionFromScatterplot(std::string clusterName)
+{
+    emit removeSelectionFromScatterplot(clusterName);
 }
 
 //void SimianViewerWidget::js_generatedScreenshotData(std::string clusterName)
