@@ -263,6 +263,8 @@ public: // Action getters
     TriggerAction& getScreenshotAction() { return _screenshotAction; }
     OptionAction& getBarLinkerSpecies1() { return _barLinkerAction1; }
     OptionAction& getBarLinkerSpecies2() { return _barLinkerAction2; }
+    StringAction& getSpecies1Name() { return _species1Name; }
+    StringAction& getSpecies2Name() { return _species2Name; }
     OptionAction& getScatterplotColorControl() { return _scatterplotColorControlAction; }
     //ExplorationAction& getExplorationAction() { return _explorationAction; }
 protected:
@@ -312,6 +314,8 @@ protected:
     OptionAction                 _barLinkerAction1;
     OptionAction                 _barLinkerAction2;
     ToggleAction                 _modifyDifferentialExpressionAutoUpdate;
+    StringAction                  _species1Name;
+    StringAction                  _species2Name;
     bool _isStarted;
     ColorMapAction          _colorMapAction;
     ColorAction              _backgroundColoringAction;
