@@ -106,12 +106,12 @@ const simianVis = () => {
     if (isQtAvailable) {
         QtBridge.js_removeSelectionFromScatterplot("true");
     }
-    svg = d3.select("#my_dataviz")
+    svg = d3.select("#distanceMapVis")
     svg.selectAll("*").remove();
     showExplorationModeflag = false;
     if (showFullHeatmapflag) {
-        document.getElementById('my_dataviz').setAttribute("style", "width:100%");
-        document.getElementById('my_container').setAttribute("style", "width:99%");
+        document.getElementById('distanceMapContainer').setAttribute("style", "width:100%;height:100%");
+        document.getElementById('tooltipContainer').setAttribute("style", "width:0%;height:0%");
         containerwidth = 12;
         heatmapWidth = 99;
         heatmapHeight = 99;
@@ -119,8 +119,10 @@ const simianVis = () => {
 
     }
     else {
-        document.getElementById('my_dataviz').setAttribute("style", "width:75%");
-        document.getElementById('my_container').setAttribute("style", "width:25%");
+        document.getElementById('distanceMapContainer').setAttribute("style", "width:75%;height:100%");
+        document.getElementById('tooltipContainer').setAttribute("style", "width:25%;height:100%");
+        document.getElementById('axisClickContainer').setAttribute("style", "height:25%;width:100%");
+        document.getElementById('cellClickContainer').setAttribute("style", "height:75%;width:100%");
         containerwidth = 15;
         heatmapWidth = 70;
         containerHeight = 20;
@@ -142,7 +144,7 @@ const simianVis = () => {
 
     // append the svg object to the body of the page
     svg = d3
-        .select("#my_dataviz")
+        .select("#distanceMapVis")
         .append("svg")
         .style("background", backgroundColor)
         .attr("width", width + margin.left + margin.right)
@@ -862,7 +864,7 @@ const simianVis = () => {
 
     }
     var tip;
-    document.getElementById('my_container').innerHTML = "";
+    document.getElementById('cellClickContainer').innerHTML = "";
     const elements = document.getElementsByClassName("d3-tip");
     while (elements.length > 0) {
         elements[0].parentNode.removeChild(elements[0]);
@@ -989,7 +991,7 @@ const simianVis = () => {
 
     // create a tooltip
       tip = d3.tip()
-        .attr("class", "d3-tip").rootElement(document.getElementById('my_container'))
+          .attr("class", "d3-tip").rootElement(document.getElementById('cellClickContainer'))
          .style("background-color", "white")
         .html(function (d,mouse) {
             tooltipValue = "";
@@ -1996,7 +1998,7 @@ function queueshowFullHeatmap(valD) {
 function queuegenerateScreenshot(valD) {
     if (valD == "T") {
         if (isQtAvailable) {
-            QtBridge.js_generatedScreenshotData(document.getElementById("allVisDa").innerHTML.toString());
+            QtBridge.js_generatedScreenshotData(document.getElementById("fullVisContainer").innerHTML.toString());
         }
     }
 
