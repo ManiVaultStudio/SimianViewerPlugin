@@ -103,6 +103,9 @@ const simianVis = () => {
     leftClickSelectedSpecies = "";
     rightClickSelectedSpecies1 = "";
     rightClickSelectedSpecies2 = "";
+    if (isQtAvailable) {
+        QtBridge.js_removeSelectionFromScatterplot("true");
+    }
     svg = d3.select("#my_dataviz")
     svg.selectAll("*").remove();
     showExplorationModeflag = false;
