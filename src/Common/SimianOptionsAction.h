@@ -231,6 +231,7 @@ public: // Action getters
     OptionAction& getNeighborhoodAction() { return _neighborhoodAction; }
     IntegralAction& getDistanceAction() { return _distanceAction; };
     ToggleAction& getHistBarAction() { return _histBarAction; };
+    ToggleAction& getmodifyDifferentialExpressionAutoUpdateAction() { return _modifyDifferentialExpressionAutoUpdate; };
     ToggleAction& getRemoveLinkingOptionMenuFromUIAction() { return _removeLinkingOptionMenuFromUIAction; };
     ToggleAction& getFullHeatmapAction() { return _fullHeatMapAction; };
     //ToggleAction& getExplorationModeAction() { return _explorationModeAction; };
@@ -310,7 +311,7 @@ protected:
     TriggerAction                _screenshotAction;
     OptionAction                 _barLinkerAction1;
     OptionAction                 _barLinkerAction2;
-
+    ToggleAction                 _modifyDifferentialExpressionAutoUpdate;
     bool _isStarted;
     ColorMapAction          _colorMapAction;
     ColorAction              _backgroundColoringAction;

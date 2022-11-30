@@ -185,8 +185,9 @@ void SimianViewerPlugin::publishCluster(std::string clusterName)
             _simianOptionsAction->getBarLinkerSpecies1().setCurrentText(QString::fromStdString(clusterName));
             _simianOptionsAction->getBarLinkerSpecies2().setCurrentText(QString::fromStdString(clusterName));
         }
-
+        _simianOptionsAction->getmodifyDifferentialExpressionAutoUpdateAction().setChecked(false);
         _simianOptionsAction->getCrossSpecies1HeatMapCellAction().setCurrentText(QString::fromStdString(clusterName));
+        _simianOptionsAction->getmodifyDifferentialExpressionAutoUpdateAction().setChecked(true);
         _simianOptionsAction->getCrossSpecies2HeatMapCellAction().setCurrentText(QString::fromStdString(clusterName));
         if(_simianOptionsAction->getCrossSpeciesFilterAction().getCurrentText() == "cross-species clusters")
         {
@@ -522,7 +523,9 @@ void SimianViewerPlugin::selectIndividualSpeciesClusterPoints(std::vector<std::s
     
    // _simianOptionsAction->getInSpecies1HeatMapCellAction().setCurrentText(QString::fromStdString(selectedIDs[0]));
     //_simianOptionsAction->getInSpecies2HeatMapCellAction().setCurrentText(QString::fromStdString(selectedIDs[1]));
+    _simianOptionsAction->getmodifyDifferentialExpressionAutoUpdateAction().setChecked(false);
     _simianOptionsAction->getCrossSpecies1HeatMapCellAction().setCurrentText(QString::fromStdString(selectedIDs[2]));
+    _simianOptionsAction->getmodifyDifferentialExpressionAutoUpdateAction().setChecked(true);
     _simianOptionsAction->getCrossSpecies2HeatMapCellAction().setCurrentText(QString::fromStdString(selectedIDs[3]));
     if (_simianOptionsAction->getInSpecies1DatasetLinkerAction().getCurrentText() != "")
     {

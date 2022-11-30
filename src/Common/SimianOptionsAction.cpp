@@ -44,6 +44,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_cellCountAction(*this),
 	_isStarted(false),
 	_histBarAction(this,"Cell counts"),
+	_modifyDifferentialExpressionAutoUpdate(this, "Automatic Update Switch"),
 	_removeLinkingOptionMenuFromUIAction(this, "Remove linking option"),
 	_fullHeatMapAction(this,"Full distancemap")/*,
 	_explorationModeAction(this)*/,
@@ -134,6 +135,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_distanceAction.initialize(0, 105, 105, 105);
 	_histBarAction.setDefaultWidgetFlags(ToggleAction::CheckBox);
 	_histBarAction.initialize(false, false);
+	_modifyDifferentialExpressionAutoUpdate.setDefaultWidgetFlags(ToggleAction::CheckBox);
+	_modifyDifferentialExpressionAutoUpdate.initialize(true, true);
 	_removeLinkingOptionMenuFromUIAction.setDefaultWidgetFlags(ToggleAction::CheckBox);
 	_removeLinkingOptionMenuFromUIAction.initialize(false, false);
 	_fullHeatMapAction.setDefaultWidgetFlags(ToggleAction::CheckBox);
@@ -157,6 +160,15 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	{
 		_crossSpecies1DatasetLinkerAction.publish("CrossSpeciesDataset1");
 	}
+	if (!_crossSpecies2DatasetLinkerAction.isPublished())
+	{
+		_crossSpecies2DatasetLinkerAction.publish("CrossSpeciesDataset2");
+	}
+
+	if (!_modifyDifferentialExpressionAutoUpdate.isPublished())
+	{
+		_modifyDifferentialExpressionAutoUpdate.publish("Auto Update Switch");
+	}
 
 	if (!_crossSpecies1HeatMapCellAction.isPublished())
 	{
@@ -167,20 +179,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		_crossSpecies2HeatMapCellAction.publish("C2");
 	}
 
-	if (!_barLinkerAction1.isPublished())
-	{
-		_barLinkerAction1.publish("Species1 BarLinker");
-	}
-	if (!_barLinkerAction2.isPublished())
-	{
-		_barLinkerAction2.publish("Species2 BarLinker");
-	}
-
-
-	if (!_crossSpecies2DatasetLinkerAction.isPublished())
-	{
-		_crossSpecies2DatasetLinkerAction.publish("CrossSpeciesDataset2");
-	}
 
 	if (!_species1ScatterplotColorLinkerAction.isPublished())
 	{
@@ -488,6 +486,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		if (_species1SelectAction.getCurrentText() != "" && _species2SelectAction.getCurrentText() != "")
 		{
 			updateData((_species1SelectAction.getCurrentText()).toStdString(), (_species2SelectAction.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString(), (_distanceAction.getValue()), (_crossSpeciesFilterAction.getCurrentText()).toStdString());
+			_modifyDifferentialExpressionAutoUpdate.setChecked(false);
 			if (_speciesEmbedding1LinkerAction.getNumberOfOptions() > 0)
 			{
 				QString species1EmbeddingDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText();
@@ -582,6 +581,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 				_crossSpecies1DatasetLinkerAction.setCurrentText(species1CrossSpeciesClusterDatasetName);
 			}
+			_modifyDifferentialExpressionAutoUpdate.setChecked(true);
 			if (_crossSpecies2DatasetLinkerAction.getNumberOfOptions() > 0)
 			{
 				QString species2CrossSpeciesClusterDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cross_species_cluster";
@@ -699,6 +699,11 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			_simianViewerPlugin.getSimianViewerWidget()->histChart(QString::fromStdString("F"));
 		}
 
+
+	};
+
+	const auto updateModifyDifferentialExpressionAutoUpdate = [this]() -> void
+	{
 
 	};
 
@@ -957,6 +962,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	connect(&_histBarAction, &ToggleAction::toggled, this, [this, updateHistBar](const bool& toggled)
 		{
 			updateHistBar();
+		});
+	connect(&_modifyDifferentialExpressionAutoUpdate, &ToggleAction::toggled, this, [this, updateModifyDifferentialExpressionAutoUpdate](const bool& toggled)
+		{
+			updateModifyDifferentialExpressionAutoUpdate();
 		});
 	connect(&_removeLinkingOptionMenuFromUIAction, &ToggleAction::toggled, this, [this, updateRemoveLinkingOptionMenuFromUIAction](const bool& toggled)
 		{
