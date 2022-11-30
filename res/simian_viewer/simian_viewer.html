@@ -50,9 +50,17 @@
     });
 </script>
 <body oncontextmenu="return false;" style="overflow: hidden;">
-    <div id="allVisDa" style="display: flex; justify-content: space-around; flex-wrap: wrap; overflow: hidden; " oncontextmenu="return false;">
-        <div id="my_dataviz" style="overflow: hidden; width: 75%; height: 100%"></div>
+    <div id="fullVisContainer" style="display: flex; justify-content: space-around; flex-wrap: wrap; overflow: hidden; " oncontextmenu="return false;">
+        
+        <div id="distanceMapContainer"  style="overflow: hidden; width: 75%; height: 100%">
+            <div id="distanceMapVis"></div>
+        </div >
+        
 
-        <div id="my_container" style="width: 25%; height: 100%; overflow: hidden; "></div>
+        <div id="tooltipContainer" style="width: 25%; height: 100%; overflow: hidden; ">
+            <div id="axisClickContainer" style="width: 100%; height: 25%; "> </div>
+            <div id="cellClickContainer" style="width: 100%; height: 75%; "> </div>
+        </div>
+
     </div>
     </body>
