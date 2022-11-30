@@ -103,6 +103,7 @@ const simianVis = () => {
     leftClickSelectedSpecies = "";
     rightClickSelectedSpecies1 = "";
     rightClickSelectedSpecies2 = "";
+    document.getElementById('axisClickContainer').innerHTML = "";
     if (isQtAvailable) {
         QtBridge.js_removeSelectionFromScatterplot("true");
     }
