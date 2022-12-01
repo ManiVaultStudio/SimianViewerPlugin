@@ -113,10 +113,10 @@ const simianVis = () => {
     if (showFullHeatmapflag) {
         document.getElementById('distanceMapContainer').setAttribute("style", "width:100%;height:100%");
         document.getElementById('tooltipContainer').setAttribute("style", "width:0%;height:0%");
-        containerwidth = 12;
+        containerwidth = 10;
         heatmapWidth = 99;
         heatmapHeight = 99;
-        containerHeight = 5;
+        containerHeight = 10;
 
     }
     else {
@@ -124,9 +124,9 @@ const simianVis = () => {
         document.getElementById('tooltipContainer').setAttribute("style", "width:25%;height:100%");
         document.getElementById('axisClickContainer').setAttribute("style", "height:25%;width:100%");
         document.getElementById('cellClickContainer').setAttribute("style", "height:75%;width:100%");
-        containerwidth = 15;
+        containerwidth = 10;
         heatmapWidth = 70;
-        containerHeight = 20;
+        containerHeight = 12;
         heatmapHeight = 99;
     }
     var margin;
@@ -267,14 +267,15 @@ const simianVis = () => {
             var foreignObjectWidth = parseInt(18 / 100 * window.innerWidth);
 
             var foreignTextsize;// = parseInt(2 / 100 * window.innerHeight);
-            if (window.innerHeight < window.innerWidth) {
-                foreignTextsize = parseInt(2 / 100 * window.innerHeight);
-            }
-            else if (window.innerHeight > window.innerWidth) {
-                foreignTextsize = parseInt(1.5 / 100 * window.innerWidth);
+            if (window.innerWidth < window.innerHeight) {
+
+                foreignTextsize = parseInt(2.2 / 100 * window.innerWidth);
+
             }
             else {
-                foreignTextsize = parseInt(1.5 / 100 * window.innerHeight);
+
+                foreignTextsize = parseInt(2.2 / 100 * window.innerHeight);
+
             }
             if (showFullHeatmapflag) {
                 svg.append("foreignObject")
@@ -418,14 +419,15 @@ const simianVis = () => {
             var foreignObjectWidth = parseInt(18 / 100 * window.innerWidth);
 
             var foreignTextsize;// = parseInt(2 / 100 * window.innerHeight);
-            if (window.innerHeight < window.innerWidth) {
-                foreignTextsize = parseInt(2 / 100 * window.innerHeight);
-            }
-            else if (window.innerHeight > window.innerWidth) {
-                foreignTextsize = parseInt(1.5 / 100 * window.innerWidth);
+            if (window.innerWidth < window.innerHeight) {
+
+                foreignTextsize = parseInt(2.2 / 100 * window.innerWidth);
+
             }
             else {
-                foreignTextsize = parseInt(1.5 / 100 * window.innerHeight);
+
+                foreignTextsize = parseInt(2.2 / 100 * window.innerHeight);
+
             }
             if (showFullHeatmapflag) {
                 svg.append("foreignObject")
@@ -1284,14 +1286,22 @@ const simianVis = () => {
                 }
                 var tooltipTextsize;
 
-                if (window.innerHeight < 320) {
-                    tooltipTextsize = parseInt(1 / 100 * window.innerHeight);
+                if (window.innerWidth < window.innerHeight) {
+
+                    tooltipTextsize = parseInt(2.2 / 100 * window.innerWidth);
+
+
+
                 }
                 else {
-                    tooltipTextsize = parseInt(1.2 / 100 * window.innerWidth);
+
+                    tooltipTextsize = parseInt(2.2 / 100 * window.innerHeight);
+
+
                 }
 
-                var tooltipImageHeight = parseInt(5 * tooltipTextsize);
+
+                var tooltipImageHeight = parseInt(2.5 * tooltipTextsize);
 
                 var formatTooltipContents = "";
                 formatTooltipContents = "<div id=\"clearTooltip\"> <table style=\"font-size: " + tooltipTextsize + "px;  width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=" + tooltipImageHeight + "; /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=" + tooltipImageHeight + ";  /></th></tr><tr><td  style=\"  \" ><b>In-species <b/></td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</td></tr>";
@@ -1494,14 +1504,15 @@ const simianVis = () => {
                 var foreignObjectWidth = parseInt(18 / 100 * window.innerWidth);
 
                 var foreignTextsize;// = parseInt(2 / 100 * window.innerHeight);
-                if (window.innerHeight < window.innerWidth) {
-                    foreignTextsize = parseInt(2 / 100 * window.innerHeight);
-                }
-                else if (window.innerHeight > window.innerWidth) {
-                    foreignTextsize = parseInt(1.5 / 100 * window.innerWidth);
+                if (window.innerWidth < window.innerHeight) {
+
+                    foreignTextsize = parseInt(2.2 / 100 * window.innerWidth);
+
                 }
                 else {
-                    foreignTextsize = parseInt(1.5 / 100 * window.innerHeight);
+
+                    foreignTextsize = parseInt(2.2 / 100 * window.innerHeight);
+
                 }
                 if (showFullHeatmapflag) {
                     svg.append("foreignObject")
@@ -1662,14 +1673,22 @@ const simianVis = () => {
             }
             var tooltipTextsize;
 
-            if (window.innerHeight < 320) {
-                tooltipTextsize = parseInt(1 / 100 * window.innerHeight);
+            if (window.innerWidth < window.innerHeight) {
+
+                tooltipTextsize = parseInt(2.2 / 100 * window.innerWidth);
+
+
+
             }
             else {
-                tooltipTextsize = parseInt(1.2 / 100 * window.innerWidth);
+
+                tooltipTextsize = parseInt(2.2 / 100 * window.innerHeight);
+
+
             }
 
-            var tooltipImageHeight = parseInt(5 * tooltipTextsize);
+
+            var tooltipImageHeight = parseInt(2.5 * tooltipTextsize);
 
             var formatTooltipContents = "";
             formatTooltipContents = "<div id=\"clearTooltip\"> <table style=\"font-size: " + tooltipTextsize + "px;  width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=" + tooltipImageHeight + "; /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=" + tooltipImageHeight + ";  /></th></tr><tr><td  style=\"  \" ><b>In-species <b/></td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</td></tr>";
