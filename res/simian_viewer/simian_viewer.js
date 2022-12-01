@@ -125,8 +125,8 @@ const simianVis = () => {
         document.getElementById('axisClickContainer').setAttribute("style", "height:25%;width:100%");
         document.getElementById('cellClickContainer').setAttribute("style", "height:75%;width:100%");
         containerwidth = 10;
-        heatmapWidth = 78;
-        containerHeight = 14;
+        heatmapWidth = 80;
+        containerHeight = 16;
         heatmapHeight = 99;
     }
     var margin;
@@ -269,12 +269,12 @@ const simianVis = () => {
             var foreignTextsize;// = parseInt(2 / 100 * window.innerHeight);
             if (window.innerWidth < window.innerHeight) {
 
-                foreignTextsize = parseInt(2.3 / 100 * window.innerWidth);
+                foreignTextsize = parseInt(2.4 / 100 * window.innerWidth);
 
             }
             else {
 
-                foreignTextsize = parseInt(2.3 / 100 * window.innerHeight);
+                foreignTextsize = parseInt(2.4 / 100 * window.innerHeight);
 
             }
             if (foreignTextsize > 9) {
@@ -424,12 +424,12 @@ const simianVis = () => {
             var foreignTextsize;// = parseInt(2 / 100 * window.innerHeight);
             if (window.innerWidth < window.innerHeight) {
 
-                foreignTextsize = parseInt(2.3 / 100 * window.innerWidth);
+                foreignTextsize = parseInt(2.4 / 100 * window.innerWidth);
 
             }
             else {
 
-                foreignTextsize = parseInt(2.3 / 100 * window.innerHeight);
+                foreignTextsize = parseInt(2.4 / 100 * window.innerHeight);
 
             }
             if (foreignTextsize > 9) {
@@ -1294,14 +1294,14 @@ const simianVis = () => {
 
                 if (window.innerWidth < window.innerHeight) {
 
-                    tooltipTextsize = parseInt(2.3 / 100 * window.innerWidth);
+                    tooltipTextsize = parseInt(2.4 / 100 * window.innerWidth);
 
 
 
                 }
                 else {
 
-                    tooltipTextsize = parseInt(2.3 / 100 * window.innerHeight);
+                    tooltipTextsize = parseInt(2.4 / 100 * window.innerHeight);
 
 
                 }
@@ -1309,7 +1309,7 @@ const simianVis = () => {
                     tooltipTextsize = 9;
                 }
 
-                var tooltipImageHeight = parseInt(4 * tooltipTextsize);
+                var tooltipImageHeight = parseInt(5 * tooltipTextsize);
 
                 var formatTooltipContents = "";
                 formatTooltipContents = "<div id=\"clearTooltip\" style=\"bottom: 0;right:0;position: absolute;\"> <table style=\"font-size: " + tooltipTextsize + "px;  width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=" + tooltipImageHeight + "; /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=" + tooltipImageHeight + ";  /></th></tr><tr><td  style=\"  \" ><b>In-species <b/></td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</td></tr>";
@@ -1514,12 +1514,12 @@ const simianVis = () => {
                 var foreignTextsize;// = parseInt(2 / 100 * window.innerHeight);
                 if (window.innerWidth < window.innerHeight) {
 
-                    foreignTextsize = parseInt(2.3 / 100 * window.innerWidth);
+                    foreignTextsize = parseInt(2.4 / 100 * window.innerWidth);
 
                 }
                 else {
 
-                    foreignTextsize = parseInt(2.3 / 100 * window.innerHeight);
+                    foreignTextsize = parseInt(2.4 / 100 * window.innerHeight);
 
                 }
                 if (foreignTextsize > 9) {
@@ -1686,14 +1686,14 @@ const simianVis = () => {
 
             if (window.innerWidth < window.innerHeight) {
 
-                tooltipTextsize = parseInt(2.3 / 100 * window.innerWidth);
+                tooltipTextsize = parseInt(2.4 / 100 * window.innerWidth);
 
 
 
             }
             else {
 
-                tooltipTextsize = parseInt(2.3 / 100 * window.innerHeight);
+                tooltipTextsize = parseInt(2.4 / 100 * window.innerHeight);
 
 
             }
@@ -1701,7 +1701,7 @@ const simianVis = () => {
                 tooltipTextsize = 9;
             }
 
-            var tooltipImageHeight = parseInt(4 * tooltipTextsize);
+            var tooltipImageHeight = parseInt(5 * tooltipTextsize);
 
             var formatTooltipContents = "";
             formatTooltipContents = "<div id=\"clearTooltip\" style=\"bottom: 0;right:0;position: absolute;\"> <table style=\"font-size: " + tooltipTextsize + "px;  width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=" + tooltipImageHeight + "; /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=" + tooltipImageHeight + ";  /></th></tr><tr><td  style=\"  \" ><b>In-species <b/></td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</td></tr>";
