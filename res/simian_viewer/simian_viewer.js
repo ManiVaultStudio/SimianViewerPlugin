@@ -18,6 +18,10 @@ var inspecies2ClusterCounts = {};
 var inspecies1ClusterCounts = {};
 var totalInspeciescluster1counts = 0;
 var totalInspeciescluster2counts = 0;
+/*var maxInspeciescluster1counts = 0;
+var minInspeciescluster1counts = 999999;
+var maxInspeciescluster2counts = 0;
+var minInspeciescluster2counts = 999999;*/
 var svg;
 var leftClickSelectedSpecies = "";
 var rightClickSelectedSpecies1 = "";
@@ -127,19 +131,19 @@ const simianVis = () => {
         containerwidth = 10;
         heatmapWidth = 80;
         containerHeight = 16;
-        heatmapHeight = 99;
+        heatmapHeight = 100;
     }
     var margin;
     if (barflag) {
-        margin = { top: 55, right: 50, bottom: 80, left: 75 },
+        margin = { top: 15, right: 12, bottom: 80, left: 75 },
             width = (heatmapWidth/100*window.innerWidth) * 0.99 - margin.left - margin.right,
             height = window.innerHeight * 0.99 - margin.top - margin.bottom;
 
     }
     else {
-        margin = { top: 5, right: 35, bottom: 80, left: 75 },
+        margin = { top: 1, right: 1, bottom: 80, left: 75 },
             width = (heatmapWidth / 100 * window.innerWidth) * 0.99 - margin.left - margin.right,
-            height = window.innerHeight * 0.97 - margin.top - margin.bottom;
+            height = window.innerHeight * 0.99 - margin.top - margin.bottom;
     }
 
 
@@ -840,12 +844,17 @@ const simianVis = () => {
             .attr("stroke-width", 2)
             .attr("stroke", colorNow1)
             .style("stroke-location", "inside");
+        
         if (barflag) {
+            //var widthValue = Math.min(maxInspeciescluster1counts / minInspeciescluster1counts, maxInspeciescluster2counts / minInspeciescluster2counts) / totalInspeciescluster1counts * inspecies1ClusterCounts[uniqueClusters1List[i]];
+            var widthValue = inspecies1ClusterCounts[uniqueClusters1List[i]] / totalInspeciescluster1counts;
+            widthValue = widthValue * 90;
+            log(widthValue);
             svg.append("rect")
                 .attr("x", valnow1 + ((valuenext1 - valnow1) / 4))
-                .attr("y", -((inspecies1ClusterCounts[uniqueClusters1List[i]])) / 100)
+                .attr("y", -(widthValue))
                 .attr("width", (valuenext1 - valnow1) / 2)
-                .attr("height", ((inspecies1ClusterCounts[uniqueClusters1List[i]]) / 100))
+                .attr("height", widthValue)
                 .attr("fill", in_speciesClustercolors[uniqueClusters1List[i]]);
         }
     }
@@ -887,11 +896,17 @@ const simianVis = () => {
             .attr("stroke-width", 2)
             .attr("stroke", colorNow2)
             .style("stroke-location", "inside");
+        
         if (barflag) {
+
+            //var widthValue = Math.min(maxInspeciescluster1counts / minInspeciescluster1counts, maxInspeciescluster2counts / minInspeciescluster2counts) / totalInspeciescluster2counts * inspecies2ClusterCounts[uniqueClusters2List[i]];
+            var widthValue = inspecies2ClusterCounts[uniqueClusters2List[i]] / totalInspeciescluster2counts;
+            widthValue = widthValue*90;
+            log(widthValue);
             svg.append("rect")
                 .attr("x", width)
                 .attr("y", valuenext2 + ((valnow2 - valuenext2) / 4))
-                .attr("width", ((inspecies2ClusterCounts[uniqueClusters2List[i]]) / 100))
+                .attr("width", widthValue)
                 .attr("height", (valnow2 - valuenext2) / 2)
                 .attr("fill", in_speciesClustercolors[uniqueClusters2List[i]]);
         }
@@ -2373,12 +2388,18 @@ function setInspeciesClusterCounts(d) {
 function queueInspeciesClusterCounts(clusterspecies1, clusterspecies2) {
     const valRa1 = clusterspecies1.split("*||*");
     const valRa2 = clusterspecies2.split("*||*");
-
+    totalInspeciescluster1counts = 0;
+    totalInspeciescluster2counts = 0;
     for (var i = 0; i < valRa1.length; i++) {
         var temp = valRa1[i].split("*|*");
         if (temp[0] !== "" && parseInt(temp[1]) !== undefined) {
             inspecies1ClusterCounts[temp[0]] = parseInt(temp[1]);
-
+/*            if (minInspeciescluster1counts > parseInt(temp[1])) {
+                minInspeciescluster1counts = parseInt(temp[1]);
+            }
+            if (maxInspeciescluster1counts < parseInt(temp[1])) {
+                maxInspeciescluster1counts = parseInt(temp[1])
+            }*/
             totalInspeciescluster1counts = totalInspeciescluster1counts + parseInt(temp[1]);
         }
     }
@@ -2387,7 +2408,12 @@ function queueInspeciesClusterCounts(clusterspecies1, clusterspecies2) {
         var temp = valRa2[i].split("*|*");
         if (temp[0] !== "" && parseInt(temp[1]) !== undefined) {
             inspecies2ClusterCounts[temp[0]] = parseInt(temp[1]);
-
+/*            if (minInspeciescluster2counts > parseInt(temp[1])) {
+                minInspeciescluster2counts = parseInt(temp[1]);
+            }
+            if (maxInspeciescluster2counts < parseInt(temp[1])) {
+                maxInspeciescluster2counts = parseInt(temp[1])
+            }*/
             totalInspeciescluster2counts = totalInspeciescluster2counts + parseInt(temp[1]);
         }
     }
