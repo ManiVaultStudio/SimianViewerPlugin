@@ -889,7 +889,7 @@ const simianVis = () => {
         }
 
     }
-    var tip;
+    //var tip;
     document.getElementById('cellClickContainer').innerHTML = "";
     const elements = document.getElementsByClassName("d3-tip");
     while (elements.length > 0) {
@@ -897,7 +897,7 @@ const simianVis = () => {
     }
     if (showFullHeatmapflag) {
         // create a tooltip
-         tip = d3.tipFull()
+         var tip = d3.tipFull()
              .attr("class", "d3-tip")
              .style("background-color", "white")
              .direction(function (d, mouse) {
@@ -1011,9 +1011,9 @@ const simianVis = () => {
                 formatTooltipContents = formatTooltipContents + "</table></div>";
                 return formatTooltipContents;
             });
-
+        svg.call(tip);
     }
-    else {
+/*    else {
 
     // create a tooltip
       tip = d3.tip()
@@ -1129,14 +1129,20 @@ const simianVis = () => {
             return formatTooltipContents;
         });
         
-    }
+    }*/
 
-        svg.call(tip);
+/*        svg.call(tip);*/
 
 
     var mouseout = function (d) {
         if (!showExplorationModeflag) {
-            tip.hide();
+            if (showFullHeatmapflag) {
+                tip.hide();
+            }
+            else {
+
+            }
+
             d3.select("#exploreViewMarker1").remove();
             d3.select("#exploreViewMarker2").remove();
             d3.select("#exploreViewMarker3").remove();
@@ -1192,8 +1198,15 @@ const simianVis = () => {
                 d3.select("#marker1").remove();
                 d3.select("#marker3").remove();*/
         if (!showExplorationModeflag) {
-            tip.hide();
-            tip.show(d, d3.mouse(this), this);
+            if (showFullHeatmapflag) {
+                tip.hide();
+                tip.show(d, d3.mouse(this), this);
+            }
+            else {
+
+            }
+
+
             var wTooltip = ((containerwidth) / 100 * window.innerWidth);
             var hTooltip = ((containerHeight) / 100 * window.innerHeight);
             var marginTooltip = { topTooltip: 20, rightTooltip: 20, bottomTooltip: 20, leftTooltip: 20, middleTooltip: 10 };
@@ -1457,7 +1470,13 @@ const simianVis = () => {
         {
             showExplorationModeflag = false;
         }*/
-        tip.show(d, d3.mouse(this), this);
+        if (showFullHeatmapflag) {
+            tip.show(d, d3.mouse(this), this);
+        }
+        else {
+
+        }
+
         var wTooltip = ((containerwidth) / 100 * window.innerWidth);
         var hTooltip = ((containerHeight) / 100 * window.innerHeight);
         var marginTooltip = { topTooltip: 20, rightTooltip: 20, bottomTooltip: 20, leftTooltip: 20, middleTooltip: 10 };
