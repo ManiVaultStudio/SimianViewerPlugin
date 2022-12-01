@@ -126,7 +126,7 @@ const simianVis = () => {
         document.getElementById('cellClickContainer').setAttribute("style", "height:75%;width:100%");
         containerwidth = 10;
         heatmapWidth = 70;
-        containerHeight = 12;
+        containerHeight = 14;
         heatmapHeight = 99;
     }
     var margin;
@@ -269,12 +269,12 @@ const simianVis = () => {
             var foreignTextsize;// = parseInt(2 / 100 * window.innerHeight);
             if (window.innerWidth < window.innerHeight) {
 
-                foreignTextsize = parseInt(2.2 / 100 * window.innerWidth);
+                foreignTextsize = parseInt(2.3 / 100 * window.innerWidth);
 
             }
             else {
 
-                foreignTextsize = parseInt(2.2 / 100 * window.innerHeight);
+                foreignTextsize = parseInt(2.3 / 100 * window.innerHeight);
 
             }
             if (showFullHeatmapflag) {
@@ -421,12 +421,12 @@ const simianVis = () => {
             var foreignTextsize;// = parseInt(2 / 100 * window.innerHeight);
             if (window.innerWidth < window.innerHeight) {
 
-                foreignTextsize = parseInt(2.2 / 100 * window.innerWidth);
+                foreignTextsize = parseInt(2.3 / 100 * window.innerWidth);
 
             }
             else {
 
-                foreignTextsize = parseInt(2.2 / 100 * window.innerHeight);
+                foreignTextsize = parseInt(2.3 / 100 * window.innerHeight);
 
             }
             if (showFullHeatmapflag) {
@@ -1288,14 +1288,14 @@ const simianVis = () => {
 
                 if (window.innerWidth < window.innerHeight) {
 
-                    tooltipTextsize = parseInt(2.2 / 100 * window.innerWidth);
+                    tooltipTextsize = parseInt(2.3 / 100 * window.innerWidth);
 
 
 
                 }
                 else {
 
-                    tooltipTextsize = parseInt(2.2 / 100 * window.innerHeight);
+                    tooltipTextsize = parseInt(2.3 / 100 * window.innerHeight);
 
 
                 }
@@ -1506,12 +1506,12 @@ const simianVis = () => {
                 var foreignTextsize;// = parseInt(2 / 100 * window.innerHeight);
                 if (window.innerWidth < window.innerHeight) {
 
-                    foreignTextsize = parseInt(2.2 / 100 * window.innerWidth);
+                    foreignTextsize = parseInt(2.3 / 100 * window.innerWidth);
 
                 }
                 else {
 
-                    foreignTextsize = parseInt(2.2 / 100 * window.innerHeight);
+                    foreignTextsize = parseInt(2.3 / 100 * window.innerHeight);
 
                 }
                 if (showFullHeatmapflag) {
@@ -1675,14 +1675,14 @@ const simianVis = () => {
 
             if (window.innerWidth < window.innerHeight) {
 
-                tooltipTextsize = parseInt(2.2 / 100 * window.innerWidth);
+                tooltipTextsize = parseInt(2.3 / 100 * window.innerWidth);
 
 
 
             }
             else {
 
-                tooltipTextsize = parseInt(2.2 / 100 * window.innerHeight);
+                tooltipTextsize = parseInt(2.3 / 100 * window.innerHeight);
 
 
             }
