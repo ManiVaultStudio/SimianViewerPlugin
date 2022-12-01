@@ -849,7 +849,7 @@ const simianVis = () => {
             //var widthValue = Math.min(maxInspeciescluster1counts / minInspeciescluster1counts, maxInspeciescluster2counts / minInspeciescluster2counts) / totalInspeciescluster1counts * inspecies1ClusterCounts[uniqueClusters1List[i]];
             var widthValue = inspecies1ClusterCounts[uniqueClusters1List[i]] / totalInspeciescluster1counts;
             widthValue = widthValue * 90;
-            log(widthValue);
+            //log(widthValue);
             svg.append("rect")
                 .attr("x", valnow1 + ((valuenext1 - valnow1) / 4))
                 .attr("y", -(widthValue))
@@ -902,7 +902,7 @@ const simianVis = () => {
             //var widthValue = Math.min(maxInspeciescluster1counts / minInspeciescluster1counts, maxInspeciescluster2counts / minInspeciescluster2counts) / totalInspeciescluster2counts * inspecies2ClusterCounts[uniqueClusters2List[i]];
             var widthValue = inspecies2ClusterCounts[uniqueClusters2List[i]] / totalInspeciescluster2counts;
             widthValue = widthValue*90;
-            log(widthValue);
+            //log(widthValue);
             svg.append("rect")
                 .attr("x", width)
                 .attr("y", valuenext2 + ((valnow2 - valuenext2) / 4))
