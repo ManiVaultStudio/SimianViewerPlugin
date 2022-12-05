@@ -1587,6 +1587,11 @@ const simianVis = () => {
     var mouseRightclick = function (d) {
 
         if (rightClickSelectedSpecies1 == d.cluster_1 && rightClickSelectedSpecies2 == d.cluster_2 && showExplorationModeflag) {
+            if (showExplorationModeflag) {
+                d3.select("#exploreViewMarker1").remove();
+                d3.select("#exploreViewMarker2").remove();
+                d3.select("#exploreViewMarker3").remove();
+            }
             showExplorationModeflag = false;
             rightClickSelectedSpecies1 = "";
             rightClickSelectedSpecies2 = "";
