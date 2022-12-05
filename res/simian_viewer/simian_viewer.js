@@ -107,7 +107,7 @@ const simianVis = () => {
     leftClickSelectedSpecies = "";
     rightClickSelectedSpecies1 = "";
     rightClickSelectedSpecies2 = "";
-    document.getElementById('axisClickContainer').innerHTML = "";
+    //document.getElementById('axisClickContainer').innerHTML = "";
     if (isQtAvailable) {
         QtBridge.js_removeSelectionFromScatterplot("true");
     }
@@ -126,10 +126,10 @@ const simianVis = () => {
     else {
         document.getElementById('distanceMapContainer').setAttribute("style", "width:80%;height:100%");
         document.getElementById('tooltipContainer').setAttribute("style", "width:20%;height:100%");
-        document.getElementById('axisClickContainer').setAttribute("style", "height:25%;width:100%");
-        document.getElementById('cellClickContainer').setAttribute("style", "height:75%;width:100%");
+        //document.getElementById('axisClickContainer').setAttribute("style", "height:25%;width:100%");
+        document.getElementById('cellClickContainer').setAttribute("style", "height:100%;width:100%");
         containerwidth = 10;
-        heatmapWidth = 80;
+        heatmapWidth = 75;
         containerHeight = 16;
         heatmapHeight = 100;
     }
@@ -181,7 +181,7 @@ const simianVis = () => {
     function clickXAxisLabels(d) {
         svg.select("#axisSelectionpolygon").remove();
         svg.select("#axisSelectionText").remove();
-        document.getElementById('axisClickContainer').innerHTML = "";
+        //document.getElementById('axisClickContainer').innerHTML = "";
         var correspondingCrossspeciescluster;
         var XFirstElement = "";
         var XLastElement = "";
@@ -289,7 +289,7 @@ const simianVis = () => {
             let maxVal = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']).toFixed(2);
             let avgVal = parseFloat(average).toFixed(2);
 
-            if (showFullHeatmapflag) {
+/*            if (showFullHeatmapflag) {
                 svg.append("foreignObject")
                     .attr("id", "axisSelectionText")
                     .style("background-color", "transparent")
@@ -312,7 +312,7 @@ const simianVis = () => {
                 var value = "<div style=\"top: 0;right:0;position: absolute;\"><table cellspacing:0; style=\"padding: 0; margin: 0; font-size: " + foreignTextsize + "px; width: 100%;border-collapse: collapse;   border - spacing: 0; text - align: center; \"><tr><td  style=\" background-color:white; \" ><b>Block count<b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;background-color:white;\">" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells'] + "</td></tr><tr><td   style=\"  background-color:white;\"><b>Minimum distance<b/></td><td  style=\"  background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\">" + minVal + "</td></tr><tr><td   style=\" background-color:white;\"><b>Maximum distance<b/></td><td  style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C; \">" + maxVal + "</td></tr><tr><td   style=\" background-color:white;\"><b>Average distance<b/></td><td   style=\"  -webkit-text-fill-color: black;background-color:white; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\"> " + avgVal + "</td></tr><tr ><td style=\" background-color:white;\"><b>Cross-species <b/></td><td  style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:" + cross_speciesClustercolors[correspondingCrossspeciescluster] + ";\">" + correspondingCrossspeciescluster + "</td></tr><tr><td   style=\" background-color:white;\"><b>Class<b/></td><td   style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:" + classColors[crossSpecies_ClassMap[correspondingCrossspeciescluster]] + ";\">" + crossSpecies_ClassMap[correspondingCrossspeciescluster] + "</td></tr><tr><td   style=\"background-color:white;\"><b>Subclass<b/></td><td     style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[crossSpecies_SubClassMap[correspondingCrossspeciescluster]] + ";\">" + crossSpecies_SubClassMap[correspondingCrossspeciescluster] + "</td></tr></table></div>";
 
                 document.getElementById('axisClickContainer').innerHTML = value;
-            }
+            }*/
             if (isQtAvailable) {
                 QtBridge.js_passClusterToQt(correspondingCrossspeciescluster.toString());
             }
@@ -322,7 +322,7 @@ const simianVis = () => {
             leftClickSelectedSpecies = "";
             svg.select("#axisSelectionpolygon").remove();
             svg.select("#axisSelectionText").remove();
-            document.getElementById('axisClickContainer').innerHTML = "";
+            //document.getElementById('axisClickContainer').innerHTML = "";
             if (isQtAvailable) {
                 QtBridge.js_removeSelectionFromScatterplot("true");
             }
@@ -333,7 +333,7 @@ const simianVis = () => {
     function clickYAxisLabels(d) {
         svg.select("#axisSelectionpolygon").remove();
         svg.select("#axisSelectionText").remove();
-        document.getElementById('axisClickContainer').innerHTML = "";
+        //document.getElementById('axisClickContainer').innerHTML = "";
         var correspondingCrossspeciescluster;
         var XFirstElement = "";
         var XLastElement = "";
@@ -440,7 +440,7 @@ const simianVis = () => {
             let minVal = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']).toFixed(2);
             let maxVal = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']).toFixed(2);
             let avgVal = parseFloat(average).toFixed(2);
-            if (showFullHeatmapflag) {
+/*            if (showFullHeatmapflag) {
                 svg.append("foreignObject")
                     .attr("id", "axisSelectionText")
                     .style("background-color", "transparent")
@@ -463,7 +463,7 @@ const simianVis = () => {
                 var value = "<div style=\"top: 0;right:0;position: absolute;\"><table cellspacing:0; style=\"padding: 0; margin: 0; font-size: " + foreignTextsize + "px; width: 100%;border-collapse: collapse;   border - spacing: 0; text - align: center; \"><tr><td  style=\" background-color:white; \" ><b>Block count<b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;background-color:white;\">" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells'] + "</td></tr><tr><td   style=\"  background-color:white;\"><b>Minimum distance<b/></td><td  style=\"  background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\">" + minVal + "</td></tr><tr><td   style=\" background-color:white;\"><b>Maximum distance<b/></td><td  style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C; \">" + maxVal + "</td></tr><tr><td   style=\" background-color:white;\"><b>Average distance<b/></td><td   style=\"  -webkit-text-fill-color: black;background-color:white; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\"> " + avgVal + "</td></tr><tr ><td style=\" background-color:white;\"><b>Cross-species <b/></td><td  style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:" + cross_speciesClustercolors[correspondingCrossspeciescluster] + ";\">" + correspondingCrossspeciescluster + "</td></tr><tr><td   style=\" background-color:white;\"><b>Class<b/></td><td   style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:" + classColors[crossSpecies_ClassMap[correspondingCrossspeciescluster]] + ";\">" + crossSpecies_ClassMap[correspondingCrossspeciescluster] + "</td></tr><tr><td   style=\"background-color:white;\"><b>Subclass<b/></td><td     style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[crossSpecies_SubClassMap[correspondingCrossspeciescluster]] + ";\">" + crossSpecies_SubClassMap[correspondingCrossspeciescluster] + "</td></tr></table></div>";
 
                 document.getElementById('axisClickContainer').innerHTML = value;
-            }
+            }*/
             if (isQtAvailable) {
                 QtBridge.js_passClusterToQt(correspondingCrossspeciescluster.toString());
             }
@@ -473,7 +473,7 @@ const simianVis = () => {
             leftClickSelectedSpecies = "";
             svg.select("#axisSelectionpolygon").remove();
             svg.select("#axisSelectionText").remove();
-            document.getElementById('axisClickContainer').innerHTML = "";
+           // document.getElementById('axisClickContainer').innerHTML = "";
             if (isQtAvailable) {
                 QtBridge.js_removeSelectionFromScatterplot("true");
             }
@@ -1020,7 +1020,16 @@ const simianVis = () => {
                 else {
                     formatTooltipContents = formatTooltipContents + "<tr ><td style=\" \"><b>Cross-species <b/></td><td  style=\" -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster1_species_1] + ";\">" + d.cross_species_cluster1_species_1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster2_species_2] + ";\">" + d.cross_species_cluster2_species_2 + "</td></tr>"
                 }
-                formatTooltipContents = formatTooltipContents + "<tr><td   style=\"\"><b>Distance<b/></td><td colspan=\"2\"    style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\">" + clustDistVal + "</td></tr>";
+
+                if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
+                    formatTooltipContents = formatTooltipContents + "<tr><td   style=\"\"><b>Distance<b/></td><td colspan=\"2\"    \"><div id=\"my_min_max_viz\"></div></td></tr>";
+//changehere
+                }
+                else {
+                    formatTooltipContents = formatTooltipContents + "<tr><td   style=\"\"><b>Distance<b/></td><td colspan=\"2\"    style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\">" + clustDistVal + "</td></tr>";
+
+                }
+               
                 if (layercheck.includes(species1ValueIdentify) || layercheck.includes(species2ValueIdentify)) {
                     formatTooltipContents = formatTooltipContents + "<tr><td  style=\" \"><b>Layer distribution<b/></td><td colspan=\"2\"  style=\" \"><div style=\"width:100%\"><div id=\"tipDiv\"></div></div></td></tr>";
                 }
@@ -1320,7 +1329,7 @@ const simianVis = () => {
                 var tooltipImageHeight = parseInt(5 * tooltipTextsize);
 
                 var formatTooltipContents = "";
-                formatTooltipContents = "<div id=\"clearTooltip\" style=\"bottom: 0;right:0;position: absolute;\"> <table style=\"font-size: " + tooltipTextsize + "px;  width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=" + tooltipImageHeight + "; /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=" + tooltipImageHeight + ";  /></th></tr><tr><td  style=\"  \" ><b>In-species <b/></td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</td></tr>";
+                formatTooltipContents = "<div id=\"clearTooltip\" style=\"top: 0;right:0;position: absolute;\"> <table style=\"font-size: " + tooltipTextsize + "px;  width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=" + tooltipImageHeight + "; /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=" + tooltipImageHeight + ";  /></th></tr><tr><td  style=\"  \" ><b>In-species <b/></td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</td></tr>";
                 if (barflag) {
                     formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Cell count<b/></td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #1b9e77;\">" + inspecies1ClusterCounts[d.cluster_1] + "</td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #d95f02;\">" + inspecies2ClusterCounts[d.cluster_2] + "</td></tr>";
                 }
@@ -1331,7 +1340,14 @@ const simianVis = () => {
                 else {
                     formatTooltipContents = formatTooltipContents + "<tr ><td style=\"\"><b>Cross-species <b/></td><td  style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster1_species_1] + ";\">" + d.cross_species_cluster1_species_1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster2_species_2] + ";\">" + d.cross_species_cluster2_species_2 + "</td></tr>"
                 }
-                formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Distance<b/></td><td colspan=\"2\"    style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\">" + clustDistVal + "</td></tr>";
+                if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
+                    formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Distance<b/></td><td colspan=\"2\"    \"><div id=\"my_min_max_viz\"></div></td></tr>";
+
+                }
+                else {
+                    formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Distance<b/></td><td colspan=\"2\"    style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\">" + clustDistVal + "</td></tr>";
+
+                }
                 if (layercheck.includes(species1ValueIdentify) || layercheck.includes(species2ValueIdentify)) {
                     formatTooltipContents = formatTooltipContents + "<tr><td  style=\"\"><b \">Layer distribution<b/></td><td colspan=\"2\"  style=\" \"><div style=\"width:100%\"><div id=\"tipDiv\"></div></div></td></tr>";
                 }
@@ -1367,6 +1383,116 @@ const simianVis = () => {
             leftBarGroupTooltip.selectAll('.bar.left').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar left').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species1); }).attr('fill', speciesColors[species1ValueIdentify]).attr('height', yScaleTooltip.bandwidth());
             rightBarGroupTooltip.selectAll('.bar.right').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar right').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species2); }).attr('fill', speciesColors[species2ValueIdentify]).attr('height', yScaleTooltip.bandwidth());
             function translation(x, y) { return 'translate(' + x + ',' + y + ')'; }
+
+            var max_MinMax = 100;
+            var min_MinMax = 0;
+            var avg_MinMax = 25;
+            var current_MinMax = 75;
+            var Val_Min = 20.9;
+            var Val_Max = 1000.7;
+            var Val_Avg = 77.8;
+            var Val_Current = 160.8;
+
+            var widthMinMax = 145;
+            var heightMinMax = 40;
+
+            // append the svg object to the body of the page
+            var svgMinMax = d3.select("#my_min_max_viz")
+                .append("svg")
+                .attr("width", widthMinMax)
+                .attr("height", heightMinMax)
+                .append("g")
+                .attr("transform",
+                    "translate(" + 15 + "," + 20 + ")");
+
+            // Line
+            svgMinMax
+                .append("line")
+                .attr("x1", min_MinMax)
+                .attr("x2", max_MinMax)
+                .attr("stroke", "#000000")
+                .attr("stroke-width", "1px");
+
+            // Line for min
+            svgMinMax
+                .append("line")
+                .attr("x1", min_MinMax)
+                .attr("y1", 2)
+                .attr("x2", min_MinMax)
+                .attr("y2", -2)
+                .style("stroke", "black");
+
+            // Line for max
+            svgMinMax
+                .append("line")
+                .attr("x1", max_MinMax)
+                .attr("y1", 2)
+                .attr("x2", max_MinMax)
+                .attr("y2", -2)
+                .style("stroke", "black");
+
+            // Line for avg
+            svgMinMax
+                .append("line")
+                .attr('stroke-dasharray', '0.5,0.5')
+                .attr("x1", avg_MinMax)
+                .attr("y1", 3)
+                .attr("x2", avg_MinMax)
+                .attr("y2", -3)
+                .style("stroke", "black");
+
+            // Circle for current
+            svgMinMax
+                .append("circle")
+                .attr("cx", current_MinMax)
+                .attr("r", "2")
+                .style("fill", "black");
+
+            // Text for min
+            svgMinMax
+                .append("text")
+                .attr("x", min_MinMax)
+                .attr('y', 15)
+                .style("font-size", 8)
+                //.style("stroke", "#1b9e77")
+                //.style("stroke-width", 0.2)
+                .style("text-anchor", "middle")
+                .text("Min: " + Val_Min);
+
+            // Text for min
+            svgMinMax
+                .append("text")
+                .attr("x", max_MinMax)
+                .attr('y', 15)
+                .style("font-size", 8)
+                //.style("stroke", "#d95f02")
+                //.style("stroke-width", 0.2)
+                .style("text-anchor", "middle")
+                .text("Max: " + Val_Max);
+
+            // Text for avg
+            svgMinMax
+                .append("text")
+                .attr("x", avg_MinMax)
+                .attr('y', -10)
+                .style("font-size", 8)
+                //.style("stroke", "#7570b3")
+                //.style("stroke-width", 0.2)
+                .style("text-anchor", "middle")
+                .text("Avg: " + Val_Avg);
+
+            // Text for current
+            svgMinMax
+                .append("text")
+                .attr("x", current_MinMax)
+                .attr('y', -10)
+                .style("font-size", 8)
+                //.style("stroke", "#7570b3")
+                //.style("stroke-width", 0.2)
+                .style("text-anchor", "middle")
+                .text("Curr: " + Val_Current);
+
+
         }
     };
     var mouseleave = function (d) {
@@ -1386,7 +1512,7 @@ const simianVis = () => {
         if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
             svg.select("#axisSelectionpolygon").remove();
             svg.select("#axisSelectionText").remove();
-            document.getElementById('axisClickContainer').innerHTML = "";
+            //document.getElementById('axisClickContainer').innerHTML = "";
             if (leftClickSelectedSpecies !== d.cross_species_cluster1_species_1) {
                 leftClickSelectedSpecies = d.cross_species_cluster1_species_1;
                 var correspondingCrossspeciescluster = d.cross_species_cluster1_species_1;
@@ -1537,7 +1663,7 @@ const simianVis = () => {
                 let minVal = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']).toFixed(2);
                 let maxVal = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']).toFixed(2);
                 let avgVal = parseFloat(average).toFixed(2);
-                if (showFullHeatmapflag) {
+/*                if (showFullHeatmapflag) {
                     svg.append("foreignObject")
                         .attr("id", "axisSelectionText")
                         .style("background-color", "transparent")
@@ -1559,7 +1685,7 @@ const simianVis = () => {
 
                     var value = "<div style=\"top: 0;right:0;position: absolute;\"><table cellspacing:0; style=\"padding: 0; margin: 0; font-size: " + foreignTextsize + "px; width: 100%;border-collapse: collapse;   border - spacing: 0; text - align: center; \"><tr><td  style=\" background-color:white; \" ><b>Block count<b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;background-color:white;\">" + cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells'] + "</td></tr><tr><td   style=\"  background-color:white;\"><b>Minimum distance<b/></td><td  style=\"  background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\">" + minVal + "</td></tr><tr><td   style=\" background-color:white;\"><b>Maximum distance<b/></td><td  style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C; \">" + maxVal + "</td></tr><tr><td   style=\" background-color:white;\"><b>Average distance<b/></td><td   style=\"  -webkit-text-fill-color: black;background-color:white; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\"> " + avgVal + "</td></tr><tr ><td style=\" background-color:white;\"><b>Cross-species <b/></td><td  style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:" + cross_speciesClustercolors[correspondingCrossspeciescluster] + ";\">" + correspondingCrossspeciescluster + "</td></tr><tr><td   style=\" background-color:white;\"><b>Class<b/></td><td   style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:" + classColors[crossSpecies_ClassMap[correspondingCrossspeciescluster]] + ";\">" + crossSpecies_ClassMap[correspondingCrossspeciescluster] + "</td></tr><tr><td   style=\"background-color:white;\"><b>Subclass<b/></td><td     style=\" background-color:white; -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[crossSpecies_SubClassMap[correspondingCrossspeciescluster]] + ";\">" + crossSpecies_SubClassMap[correspondingCrossspeciescluster] + "</td></tr></table></div>";document.getElementById('axisClickContainer').innerHTML = value;
                     document.getElementById('axisClickContainer').innerHTML = value;
-                }
+                }*/
                 if (isQtAvailable) {
                     QtBridge.js_passClusterToQt(correspondingCrossspeciescluster.toString());
                 }
@@ -1568,7 +1694,7 @@ const simianVis = () => {
                 leftClickSelectedSpecies = "";
                 svg.select("#axisSelectionpolygon").remove();
                 svg.select("#axisSelectionText").remove();
-                document.getElementById('axisClickContainer').innerHTML = "";
+                //document.getElementById('axisClickContainer').innerHTML = "";
                 if (isQtAvailable) {
                     QtBridge.js_removeSelectionFromScatterplot("true");
                 }
@@ -1577,7 +1703,7 @@ const simianVis = () => {
         else {
             svg.select("#axisSelectionpolygon").remove();
             svg.select("#axisSelectionText").remove();
-            document.getElementById('axisClickContainer').innerHTML = "";
+            //document.getElementById('axisClickContainer').innerHTML = "";
             leftClickSelectedSpecies = "";
             if (isQtAvailable) {
                 QtBridge.js_removeSelectionFromScatterplot("true");
@@ -1713,7 +1839,7 @@ const simianVis = () => {
             var tooltipImageHeight = parseInt(5 * tooltipTextsize);
 
             var formatTooltipContents = "";
-            formatTooltipContents = "<div id=\"clearTooltip\" style=\"bottom: 0;right:0;position: absolute;\"> <table style=\"font-size: " + tooltipTextsize + "px;  width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=" + tooltipImageHeight + "; /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=" + tooltipImageHeight + ";  /></th></tr><tr><td  style=\"  \" ><b>In-species <b/></td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</td></tr>";
+            formatTooltipContents = "<div id=\"clearTooltip\" style=\"top: 0;right:0;position: absolute;\"> <table style=\"font-size: " + tooltipTextsize + "px;  width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=" + tooltipImageHeight + "; /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=" + tooltipImageHeight + ";  /></th></tr><tr><td  style=\"  \" ><b>In-species <b/></td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</td></tr>";
             if (barflag) {
                 formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Cell count<b/></td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #1b9e77;\">" + inspecies1ClusterCounts[d.cluster_1] + "</td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #d95f02;\">" + inspecies2ClusterCounts[d.cluster_2] + "</td></tr>";
             }
@@ -1724,7 +1850,15 @@ const simianVis = () => {
             else {
                 formatTooltipContents = formatTooltipContents + "<tr ><td style=\"\"><b>Cross-species <b/></td><td  style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster1_species_1] + ";\">" + d.cross_species_cluster1_species_1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster2_species_2] + ";\">" + d.cross_species_cluster2_species_2 + "</td></tr>"
             }
-            formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Distance<b/></td><td colspan=\"2\"    style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\">" + clustDistVal + "</td></tr>";
+            if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
+                formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Distance<b/></td><td colspan=\"2\"    \"><div id=\"my_min_max_viz\"></div></td></tr>";
+//chanmgehere
+            }
+
+            else {
+                formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Distance<b/></td><td colspan=\"2\"    style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\">" + clustDistVal + "</td></tr>";
+            }
+
             if (layercheck.includes(species1ValueIdentify) || layercheck.includes(species2ValueIdentify)) {
                 formatTooltipContents = formatTooltipContents + "<tr><td  style=\"\"><b \">Layer distribution<b/></td><td colspan=\"2\"  style=\" \"><div style=\"width:100%\"><div id=\"tipDiv\"></div></div></td></tr>";
             }
@@ -1759,6 +1893,113 @@ const simianVis = () => {
         rightBarGroupTooltip.selectAll('.bar.right').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar right').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species2); }).attr('fill', speciesColors[species2ValueIdentify]).attr('height', yScaleTooltip.bandwidth());
         function translation(x, y) { return 'translate(' + x + ',' + y + ')'; }
 
+        var max_MinMax = 100;
+        var min_MinMax = 0;
+        var avg_MinMax = 25;
+        var current_MinMax = 75;
+        var Val_Min = 20.9;
+        var Val_Max = 1000.7;
+        var Val_Avg = 77.8;
+        var Val_Current = 160.8;
+
+        var widthMinMax = 145;
+        var heightMinMax = 40;
+
+        // append the svg object to the body of the page
+        var svgMinMax = d3.select("#my_min_max_viz")
+            .append("svg")
+            .attr("width", widthMinMax)
+            .attr("height", heightMinMax)
+            .append("g")
+            .attr("transform",
+                "translate(" + 15 + "," + 20 + ")");
+
+        // Line
+        svgMinMax
+            .append("line")
+            .attr("x1", min_MinMax)
+            .attr("x2", max_MinMax)
+            .attr("stroke", "#000000")
+            .attr("stroke-width", "1px");
+
+        // Line for min
+        svgMinMax
+            .append("line")
+            .attr("x1", min_MinMax)
+            .attr("y1", 2)
+            .attr("x2", min_MinMax)
+            .attr("y2", -2)
+            .style("stroke", "black");
+
+        // Line for max
+        svgMinMax
+            .append("line")
+            .attr("x1", max_MinMax)
+            .attr("y1", 2)
+            .attr("x2", max_MinMax)
+            .attr("y2", -2)
+            .style("stroke", "black");
+
+        // Line for avg
+        svgMinMax
+            .append("line")
+            .attr('stroke-dasharray', '0.5,0.5')
+            .attr("x1", avg_MinMax)
+            .attr("y1", 3)
+            .attr("x2", avg_MinMax)
+            .attr("y2", -3)
+            .style("stroke", "black");
+
+        // Circle for current
+        svgMinMax
+            .append("circle")
+            .attr("cx", current_MinMax)
+            .attr("r", "2")
+            .style("fill", "black");
+
+        // Text for min
+        svgMinMax
+            .append("text")
+            .attr("x", min_MinMax)
+            .attr('y', 15)
+            .style("font-size", 8)
+            //.style("stroke", "#1b9e77")
+            //.style("stroke-width", 0.2)
+            .style("text-anchor", "middle")
+            .text("Min: " + Val_Min);
+
+        // Text for min
+        svgMinMax
+            .append("text")
+            .attr("x", max_MinMax)
+            .attr('y', 15)
+            .style("font-size", 8)
+            //.style("stroke", "#d95f02")
+            //.style("stroke-width", 0.2)
+            .style("text-anchor", "middle")
+            .text("Max: " + Val_Max);
+
+        // Text for avg
+        svgMinMax
+            .append("text")
+            .attr("x", avg_MinMax)
+            .attr('y', -10)
+            .style("font-size", 8)
+            //.style("stroke", "#7570b3")
+            //.style("stroke-width", 0.2)
+            .style("text-anchor", "middle")
+            .text("Avg: " + Val_Avg);
+
+        // Text for current
+        svgMinMax
+            .append("text")
+            .attr("x", current_MinMax)
+            .attr('y', -10)
+            .style("font-size", 8)
+            //.style("stroke", "#7570b3")
+            //.style("stroke-width", 0.2)
+            .style("text-anchor", "middle")
+            .text("Curr: " + Val_Current);
 
         if (showExplorationModeflag) {
             d3.select("#exploreViewMarker1").remove();
