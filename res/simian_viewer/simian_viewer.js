@@ -1021,7 +1021,7 @@ const simianVis = () => {
                     formatTooltipContents = formatTooltipContents + "<tr ><td style=\" \"><b>Cross-species <b/></td><td  style=\" -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster1_species_1] + ";\">" + d.cross_species_cluster1_species_1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster2_species_2] + ";\">" + d.cross_species_cluster2_species_2 + "</td></tr>"
                 }
 
-                if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
+                if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2 && (cross_speciesClusterInfo[d.cross_species_cluster2_species_2]['numberOfCells']) > 1) {
                     formatTooltipContents = formatTooltipContents + "<tr><td   style=\"\"><b>Distance<b/></td><td colspan=\"2\"    \"><div id=\"my_min_max_viz\"></div></td></tr>";
 //changehere
                 }
@@ -1340,7 +1340,7 @@ const simianVis = () => {
                 else {
                     formatTooltipContents = formatTooltipContents + "<tr ><td style=\"\"><b>Cross-species <b/></td><td  style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster1_species_1] + ";\">" + d.cross_species_cluster1_species_1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster2_species_2] + ";\">" + d.cross_species_cluster2_species_2 + "</td></tr>"
                 }
-                if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
+                if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2 && (cross_speciesClusterInfo[d.cross_species_cluster2_species_2]['numberOfCells']) > 1) {
                     formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Distance<b/></td><td colspan=\"2\"    \"><div id=\"my_min_max_viz\"></div></td></tr>";
 
                 }
@@ -1384,16 +1384,27 @@ const simianVis = () => {
             rightBarGroupTooltip.selectAll('.bar.right').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar right').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species2); }).attr('fill', speciesColors[species2ValueIdentify]).attr('height', yScaleTooltip.bandwidth());
             function translation(x, y) { return 'translate(' + x + ',' + y + ')'; }
 
+            if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2 && (cross_speciesClusterInfo[d.cross_species_cluster2_species_2]['numberOfCells']) > 1) {
+                var correspondingCrossspeciescluster = d.cross_species_cluster2_species_2;
+                var total = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']);
+                var average = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']) / parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']);
+                let Val_Min = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']).toFixed(2);
+                let Val_Max = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']).toFixed(2);
+                let Val_Avg = parseFloat(average).toFixed(2);
+                var Val_Current = parseFloat(d.dist).toFixed(1);
+
+
+
             var max_MinMax = 100;
             var min_MinMax = 0;
-            var avg_MinMax = 25;
-            var current_MinMax = 75;
-            var Val_Min = 20.9;
-            var Val_Max = 1000.7;
-            var Val_Avg = 77.8;
-            var Val_Current = 160.8;
+            //Need to calculate
+                var avg_MinMax = Val_Avg/total*100;
+                var current_MinMax = Val_Current / total * 100;
 
-            var widthMinMax = 145;
+                log("current_MinMax:" + current_MinMax);
+                log("avg_MinMax:" + avg_MinMax);
+
+            var widthMinMax = 160;
             var heightMinMax = 40;
 
             // append the svg object to the body of the page
@@ -1403,7 +1414,7 @@ const simianVis = () => {
                 .attr("height", heightMinMax)
                 .append("g")
                 .attr("transform",
-                    "translate(" + 15 + "," + 20 + ")");
+                    "translate(" + 18 + "," + 20 + ")");
 
             // Line
             svgMinMax
@@ -1459,7 +1470,7 @@ const simianVis = () => {
                 .style("text-anchor", "middle")
                 .text("Min: " + Val_Min);
 
-            // Text for min
+            // Text for max
             svgMinMax
                 .append("text")
                 .attr("x", max_MinMax)
@@ -1470,7 +1481,7 @@ const simianVis = () => {
                 .style("text-anchor", "middle")
                 .text("Max: " + Val_Max);
 
-            // Text for avg
+/*            // Text for avg
             svgMinMax
                 .append("text")
                 .attr("x", avg_MinMax)
@@ -1479,7 +1490,7 @@ const simianVis = () => {
                 //.style("stroke", "#7570b3")
                 //.style("stroke-width", 0.2)
                 .style("text-anchor", "middle")
-                .text("Avg: " + Val_Avg);
+                .text("Avg: " + Val_Avg);*/
 
             // Text for current
             svgMinMax
@@ -1491,7 +1502,7 @@ const simianVis = () => {
                 //.style("stroke-width", 0.2)
                 .style("text-anchor", "middle")
                 .text("Curr: " + Val_Current);
-
+            }
 
         }
     };
@@ -1850,7 +1861,7 @@ const simianVis = () => {
             else {
                 formatTooltipContents = formatTooltipContents + "<tr ><td style=\"\"><b>Cross-species <b/></td><td  style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster1_species_1] + ";\">" + d.cross_species_cluster1_species_1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster2_species_2] + ";\">" + d.cross_species_cluster2_species_2 + "</td></tr>"
             }
-            if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
+            if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2 && (cross_speciesClusterInfo[d.cross_species_cluster2_species_2]['numberOfCells']) > 1) {
                 formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Distance<b/></td><td colspan=\"2\"    \"><div id=\"my_min_max_viz\"></div></td></tr>";
 //chanmgehere
             }
@@ -1893,113 +1904,125 @@ const simianVis = () => {
         rightBarGroupTooltip.selectAll('.bar.right').data(exampleDataTooltip).enter().append('rect').attr('class', 'bar right').attr('x', 0).attr('y', function (d) { return yScaleTooltip(d.group); }).attr('width', function (d) { return xScaleTooltip(d.species2); }).attr('fill', speciesColors[species2ValueIdentify]).attr('height', yScaleTooltip.bandwidth());
         function translation(x, y) { return 'translate(' + x + ',' + y + ')'; }
 
-        var max_MinMax = 100;
-        var min_MinMax = 0;
-        var avg_MinMax = 25;
-        var current_MinMax = 75;
-        var Val_Min = 20.9;
-        var Val_Max = 1000.7;
-        var Val_Avg = 77.8;
-        var Val_Current = 160.8;
+        
+        if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2 && (cross_speciesClusterInfo[d.cross_species_cluster2_species_2]['numberOfCells']) > 1) {
+            var correspondingCrossspeciescluster = d.cross_species_cluster2_species_2;
+            var total = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']);
+            var average = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']) / parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']);
+            let Val_Min = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']).toFixed(2);
+            let Val_Max = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']).toFixed(2);
+            let Val_Avg = parseFloat(average).toFixed(2);
+            var Val_Current = parseFloat(d.dist).toFixed(1);
 
-        var widthMinMax = 145;
-        var heightMinMax = 40;
 
-        // append the svg object to the body of the page
-        var svgMinMax = d3.select("#my_min_max_viz")
-            .append("svg")
-            .attr("width", widthMinMax)
-            .attr("height", heightMinMax)
-            .append("g")
-            .attr("transform",
-                "translate(" + 15 + "," + 20 + ")");
 
-        // Line
-        svgMinMax
-            .append("line")
-            .attr("x1", min_MinMax)
-            .attr("x2", max_MinMax)
-            .attr("stroke", "#000000")
-            .attr("stroke-width", "1px");
+            var max_MinMax = 100;
+            var min_MinMax = 0;
+            //Need to calculate
+            var avg_MinMax = Val_Avg / total * 100;
+            var current_MinMax = Val_Current / total * 100;
+            log("current_MinMax:" + current_MinMax);
+            log("avg_MinMax:" + avg_MinMax);
 
-        // Line for min
-        svgMinMax
-            .append("line")
-            .attr("x1", min_MinMax)
-            .attr("y1", 2)
-            .attr("x2", min_MinMax)
-            .attr("y2", -2)
-            .style("stroke", "black");
+            var widthMinMax = 160;
+            var heightMinMax = 40;
 
-        // Line for max
-        svgMinMax
-            .append("line")
-            .attr("x1", max_MinMax)
-            .attr("y1", 2)
-            .attr("x2", max_MinMax)
-            .attr("y2", -2)
-            .style("stroke", "black");
+            // append the svg object to the body of the page
+            var svgMinMax = d3.select("#my_min_max_viz")
+                .append("svg")
+                .attr("width", widthMinMax)
+                .attr("height", heightMinMax)
+                .append("g")
+                .attr("transform",
+                    "translate(" + 18 + "," + 20 + ")");
 
-        // Line for avg
-        svgMinMax
-            .append("line")
-            .attr('stroke-dasharray', '0.5,0.5')
-            .attr("x1", avg_MinMax)
-            .attr("y1", 3)
-            .attr("x2", avg_MinMax)
-            .attr("y2", -3)
-            .style("stroke", "black");
+            // Line
+            svgMinMax
+                .append("line")
+                .attr("x1", min_MinMax)
+                .attr("x2", max_MinMax)
+                .attr("stroke", "#000000")
+                .attr("stroke-width", "1px");
 
-        // Circle for current
-        svgMinMax
-            .append("circle")
-            .attr("cx", current_MinMax)
-            .attr("r", "2")
-            .style("fill", "black");
+            // Line for min
+            svgMinMax
+                .append("line")
+                .attr("x1", min_MinMax)
+                .attr("y1", 2)
+                .attr("x2", min_MinMax)
+                .attr("y2", -2)
+                .style("stroke", "black");
 
-        // Text for min
-        svgMinMax
-            .append("text")
-            .attr("x", min_MinMax)
-            .attr('y', 15)
-            .style("font-size", 8)
-            //.style("stroke", "#1b9e77")
-            //.style("stroke-width", 0.2)
-            .style("text-anchor", "middle")
-            .text("Min: " + Val_Min);
+            // Line for max
+            svgMinMax
+                .append("line")
+                .attr("x1", max_MinMax)
+                .attr("y1", 2)
+                .attr("x2", max_MinMax)
+                .attr("y2", -2)
+                .style("stroke", "black");
 
-        // Text for min
-        svgMinMax
-            .append("text")
-            .attr("x", max_MinMax)
-            .attr('y', 15)
-            .style("font-size", 8)
-            //.style("stroke", "#d95f02")
-            //.style("stroke-width", 0.2)
-            .style("text-anchor", "middle")
-            .text("Max: " + Val_Max);
+            // Line for avg
+            svgMinMax
+                .append("line")
+                .attr('stroke-dasharray', '0.5,0.5')
+                .attr("x1", avg_MinMax)
+                .attr("y1", 3)
+                .attr("x2", avg_MinMax)
+                .attr("y2", -3)
+                .style("stroke", "black");
 
-        // Text for avg
-        svgMinMax
-            .append("text")
-            .attr("x", avg_MinMax)
-            .attr('y', -10)
-            .style("font-size", 8)
-            //.style("stroke", "#7570b3")
-            //.style("stroke-width", 0.2)
-            .style("text-anchor", "middle")
-            .text("Avg: " + Val_Avg);
+            // Circle for current
+            svgMinMax
+                .append("circle")
+                .attr("cx", current_MinMax)
+                .attr("r", "2")
+                .style("fill", "black");
 
-        // Text for current
-        svgMinMax
-            .append("text")
-            .attr("x", current_MinMax)
-            .attr('y', -10)
-            .style("font-size", 8)
-            //.style("stroke", "#7570b3")
-            //.style("stroke-width", 0.2)
-            .style("text-anchor", "middle")
-            .text("Curr: " + Val_Current);
+            // Text for min
+            svgMinMax
+                .append("text")
+                .attr("x", min_MinMax)
+                .attr('y', 15)
+                .style("font-size", 8)
+                //.style("stroke", "#1b9e77")
+                //.style("stroke-width", 0.2)
+                .style("text-anchor", "middle")
+                .text("Min: " + Val_Min);
+
+            // Text for max
+            svgMinMax
+                .append("text")
+                .attr("x", max_MinMax)
+                .attr('y', 15)
+                .style("font-size", 8)
+                //.style("stroke", "#d95f02")
+                //.style("stroke-width", 0.2)
+                .style("text-anchor", "middle")
+                .text("Max: " + Val_Max);
+
+/*            // Text for avg
+            svgMinMax
+                .append("text")
+                .attr("x", avg_MinMax)
+                .attr('y', -10)
+                .style("font-size", 8)
+                //.style("stroke", "#7570b3")
+                //.style("stroke-width", 0.2)
+                .style("text-anchor", "middle")
+                .text("Avg: " + Val_Avg);*/
+
+            // Text for current
+            svgMinMax
+                .append("text")
+                .attr("x", current_MinMax)
+                .attr('y', -10)
+                .style("font-size", 8)
+                //.style("stroke", "#7570b3")
+                //.style("stroke-width", 0.2)
+                .style("text-anchor", "middle")
+                .text("Curr: " + Val_Current);
+        }
 
         if (showExplorationModeflag) {
             d3.select("#exploreViewMarker1").remove();
