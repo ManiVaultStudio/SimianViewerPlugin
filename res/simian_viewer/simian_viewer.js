@@ -1389,13 +1389,13 @@ const simianVis = () => {
                 var total = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']);
                 var coloring = cross_speciesClustercolors[d.cross_species_cluster1_species_1];
                 var average = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']) / parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']);
-                let Val_Min = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']).toFixed(2);
-                let Val_Max = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']).toFixed(2);
-                let Val_Avg = parseFloat(average).toFixed(2);
+                let Val_Min = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']).toFixed(1);
+                let Val_Max = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']).toFixed(1);
+                let Val_Avg = parseFloat(average).toFixed(1);
                 var Val_Current = parseFloat(d.dist).toFixed(1);
 
                 var widthMinMax = 150;
-                var heightMinMax = 40;
+                var heightMinMax = 30;
 
 
                 // append the svg object to the body of the page
@@ -1405,7 +1405,7 @@ const simianVis = () => {
                     .attr("height", heightMinMax)
                     .append("g")
                     .attr("transform",
-                        "translate(" + 10 + "," + 25 + ")");
+                        "translate(" + 10 + "," + 15 + ")");
 
 
                 var xMinMax = d3.scaleLinear()
@@ -1419,7 +1419,7 @@ const simianVis = () => {
                         .ticks(0).tickSize(0)
                     );
 
-                //-webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:
+/*                //-webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:
                 // Line for avg
                 svgMinMax
                     .append("line")
@@ -1439,18 +1439,18 @@ const simianVis = () => {
                     .style("font-size", 7)
                     .style("text-anchor", "middle")
                     .text("Avg: " + Val_Avg).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
-                // Circle for current
+               */ // Circle for current
                 svgMinMax
                     .append("circle")
                     .attr("cx", function () { return xMinMax(Val_Current) })
-                    .attr("r", "5")
+                    .attr("r", "4")
                     .style("fill", coloring);
 
                 // Text for current
                 svgMinMax
                     .append("text")
                     .attr("x", function () { return xMinMax(Val_Current) })
-                    .attr('y', -12)
+                    .attr('y', -5)
                     .style("font-size", 8)
                     .style("text-anchor", "middle")
                     .text("Curr: " + Val_Current).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
@@ -1895,13 +1895,13 @@ const simianVis = () => {
             var total = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']);
             var coloring = cross_speciesClustercolors[d.cross_species_cluster1_species_1];
             var average = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']) / parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']);
-            let Val_Min = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']).toFixed(2);
-            let Val_Max = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']).toFixed(2);
-            let Val_Avg = parseFloat(average).toFixed(2);
+            let Val_Min = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']).toFixed(1);
+            let Val_Max = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']).toFixed(1);
+            let Val_Avg = parseFloat(average).toFixed(1);
             var Val_Current = parseFloat(d.dist).toFixed(1);
 
             var widthMinMax = 150;
-            var heightMinMax = 40;
+            var heightMinMax = 30;
 
 
             // append the svg object to the body of the page
@@ -1911,7 +1911,7 @@ const simianVis = () => {
                 .attr("height", heightMinMax)
                 .append("g")
                 .attr("transform",
-                    "translate(" + 10 + "," + 25 + ")");
+                    "translate(" + 10 + "," + 15 + ")");
 
 
             var xMinMax = d3.scaleLinear()
@@ -1926,7 +1926,7 @@ const simianVis = () => {
                 );
 
 
-            // Line for avg
+/*            // Line for avg
             svgMinMax
                 .append("line")
                 .attr('stroke-dasharray', '1,1')
@@ -1945,18 +1945,18 @@ const simianVis = () => {
                 .style("font-size", 7)
                 .style("text-anchor", "middle")
                 .text("Avg: " + Val_Avg).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
-            // Circle for current
+           */ // Circle for current
             svgMinMax
                 .append("circle")
                 .attr("cx", function () { return xMinMax(Val_Current) })
-                .attr("r", "5")
+                .attr("r", "4")
                 .style("fill", coloring);
 
             // Text for current
             svgMinMax
                 .append("text")
                 .attr("x", function () { return xMinMax(Val_Current) })
-                .attr('y', -12)
+                .attr('y', -5)
                 .style("font-size", 8)
                 .style("text-anchor", "middle")
                 .text("Curr: " + Val_Current).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
