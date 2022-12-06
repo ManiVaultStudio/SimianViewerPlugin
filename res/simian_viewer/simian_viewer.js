@@ -1387,6 +1387,7 @@ const simianVis = () => {
             if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2 && (cross_speciesClusterInfo[d.cross_species_cluster2_species_2]['numberOfCells']) > 1) {
                 var correspondingCrossspeciescluster = d.cross_species_cluster2_species_2;
                 var total = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']);
+                var coloring = cross_speciesClustercolors[d.cross_species_cluster1_species_1];
                 var average = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']) / parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']);
                 let Val_Min = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']).toFixed(2);
                 let Val_Max = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']).toFixed(2);
@@ -1418,7 +1419,7 @@ const simianVis = () => {
                         .ticks(0).tickSize(0)
                     );
 
-
+                //-webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:
                 // Line for avg
                 svgMinMax
                     .append("line")
@@ -1427,7 +1428,7 @@ const simianVis = () => {
                     .attr("y1", 6)
                     .attr("x2", function () { return xMinMax(Val_Avg) })
                     .attr("y2", 0)
-                    .style("stroke", "black");
+                    .style("stroke", coloring);
 
 
                 // Text for avg    
@@ -1435,24 +1436,24 @@ const simianVis = () => {
                     .append("text")
                     .attr("x", function () { return xMinMax(Val_Avg) })
                     .attr('y', -1)
-                    .style("font-size", 8)
+                    .style("font-size", 7)
                     .style("text-anchor", "middle")
-                    .text("Avg: " + Val_Avg);
+                    .text("Avg: " + Val_Avg).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
                 // Circle for current
                 svgMinMax
                     .append("circle")
                     .attr("cx", function () { return xMinMax(Val_Current) })
                     .attr("r", "5")
-                    .style("fill", "black");
+                    .style("fill", coloring);
 
                 // Text for current
                 svgMinMax
                     .append("text")
                     .attr("x", function () { return xMinMax(Val_Current) })
                     .attr('y', -12)
-                    .style("font-size", 10)
+                    .style("font-size", 8)
                     .style("text-anchor", "middle")
-                    .text("Curr: " + Val_Current);
+                    .text("Curr: " + Val_Current).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
                 // Line for min
                 svgMinMax
                     .append("line")
@@ -1460,7 +1461,7 @@ const simianVis = () => {
                     .attr("y1", 6)
                     .attr("x2", function () { return xMinMax(Val_Min) })
                     .attr("y2", 0)
-                    .style("stroke", "black");
+                    .style("stroke", coloring);
                 // Text for min
                 svgMinMax
                     .append("text")
@@ -1468,7 +1469,7 @@ const simianVis = () => {
                     .attr('y', 12)
                     .style("font-size", 8)
                     .style("text-anchor", "middle")
-                    .text("Min: " + Val_Min);
+                    .text("Min: " + Val_Min).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
                 // Line for max
                 svgMinMax
                     .append("line")
@@ -1476,7 +1477,7 @@ const simianVis = () => {
                     .attr("y1", 6)
                     .attr("x2", function () { return xMinMax(Val_Max) })
                     .attr("y2", 0)
-                    .style("stroke", "black");
+                    .style("stroke", coloring);
                 // Text for max
                 svgMinMax
                     .append("text")
@@ -1484,7 +1485,7 @@ const simianVis = () => {
                     .attr('y', 12)
                     .style("font-size", 8)
                     .style("text-anchor", "middle")
-                    .text("Max: " + Val_Max);
+                    .text("Max: " + Val_Max).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
             }
 
         }
@@ -1892,6 +1893,7 @@ const simianVis = () => {
 
             var correspondingCrossspeciescluster = d.cross_species_cluster2_species_2;
             var total = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']);
+            var coloring = cross_speciesClustercolors[d.cross_species_cluster1_species_1];
             var average = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']) / parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']);
             let Val_Min = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['minDistance']).toFixed(2);
             let Val_Max = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['maxDistance']).toFixed(2);
@@ -1932,7 +1934,7 @@ const simianVis = () => {
                 .attr("y1", 6)
                 .attr("x2", function () { return xMinMax(Val_Avg) })
                 .attr("y2", 0)
-                .style("stroke", "black");
+                .style("stroke", coloring);
 
 
             // Text for avg    
@@ -1940,24 +1942,24 @@ const simianVis = () => {
                 .append("text")
                 .attr("x", function () { return xMinMax(Val_Avg) })
                 .attr('y', -1)
-                .style("font-size", 8)
+                .style("font-size", 7)
                 .style("text-anchor", "middle")
-                .text("Avg: " + Val_Avg);
+                .text("Avg: " + Val_Avg).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
             // Circle for current
             svgMinMax
                 .append("circle")
                 .attr("cx", function () { return xMinMax(Val_Current) })
                 .attr("r", "5")
-                .style("fill", "black");
+                .style("fill", coloring);
 
             // Text for current
             svgMinMax
                 .append("text")
                 .attr("x", function () { return xMinMax(Val_Current) })
                 .attr('y', -12)
-                .style("font-size", 10)
+                .style("font-size", 8)
                 .style("text-anchor", "middle")
-                .text("Curr: " + Val_Current);
+                .text("Curr: " + Val_Current).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
             // Line for min
             svgMinMax
                 .append("line")
@@ -1965,7 +1967,7 @@ const simianVis = () => {
                 .attr("y1", 6)
                 .attr("x2", function () { return xMinMax(Val_Min) })
                 .attr("y2", 0)
-                .style("stroke", "black");
+                .style("stroke", coloring).style("stroke", "black");
             // Text for min
             svgMinMax
                 .append("text")
@@ -1973,7 +1975,7 @@ const simianVis = () => {
                 .attr('y', 12)
                 .style("font-size", 8)
                 .style("text-anchor", "middle")
-                .text("Min: " + Val_Min);
+                .text("Min: " + Val_Min).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
             // Line for max
             svgMinMax
                 .append("line")
@@ -1981,7 +1983,7 @@ const simianVis = () => {
                 .attr("y1", 6)
                 .attr("x2", function () { return xMinMax(Val_Max) })
                 .attr("y2", 0)
-                .style("stroke", "black");
+                .style("stroke", coloring);
             // Text for max
             svgMinMax
                 .append("text")
@@ -1989,7 +1991,7 @@ const simianVis = () => {
                 .attr('y', 12)
                 .style("font-size", 8)
                 .style("text-anchor", "middle")
-                .text("Max: " + Val_Max);
+                .text("Max: " + Val_Max).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
         }
 
         if (showExplorationModeflag) {
