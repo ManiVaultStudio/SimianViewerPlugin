@@ -1393,115 +1393,98 @@ const simianVis = () => {
                 let Val_Avg = parseFloat(average).toFixed(2);
                 var Val_Current = parseFloat(d.dist).toFixed(1);
 
+                var widthMinMax = 150;
+                var heightMinMax = 40;
 
 
-            var max_MinMax = 100;
-            var min_MinMax = 0;
-            //Need to calculate
-                var avg_MinMax = Val_Avg/total*100;
-                var current_MinMax = Val_Current / total * 100;
+                // append the svg object to the body of the page
+                var svgMinMax = d3.select("#my_min_max_viz")
+                    .append("svg")
+                    .attr("width", widthMinMax)
+                    .attr("height", heightMinMax)
+                    .append("g")
+                    .attr("transform",
+                        "translate(" + 10 + "," + 25 + ")");
 
-                log("current_MinMax:" + current_MinMax);
-                log("avg_MinMax:" + avg_MinMax);
 
-            var widthMinMax = 160;
-            var heightMinMax = 40;
+                var xMinMax = d3.scaleLinear()
+                    .domain([Val_Min, Val_Max])
+                    .range([15, 115]);
 
-            // append the svg object to the body of the page
-            var svgMinMax = d3.select("#my_min_max_viz")
-                .append("svg")
-                .attr("width", widthMinMax)
-                .attr("height", heightMinMax)
-                .append("g")
-                .attr("transform",
-                    "translate(" + 18 + "," + 20 + ")");
+                svgMinMax
+                    .append("g")
+                    .attr("transform", "translate(0,0)")
+                    .call(d3.axisBottom(xMinMax)
+                        .ticks(0).tickSize(0)
+                    );
 
-            // Line
-            svgMinMax
-                .append("line")
-                .attr("x1", min_MinMax)
-                .attr("x2", max_MinMax)
-                .attr("stroke", "#000000")
-                .attr("stroke-width", "1px");
 
-            // Line for min
-            svgMinMax
-                .append("line")
-                .attr("x1", min_MinMax)
-                .attr("y1", 2)
-                .attr("x2", min_MinMax)
-                .attr("y2", -2)
-                .style("stroke", "black");
+                // Line for avg
+                svgMinMax
+                    .append("line")
+                    .attr('stroke-dasharray', '1,1')
+                    .attr("x1", function () { return xMinMax(Val_Avg) })
+                    .attr("y1", 6)
+                    .attr("x2", function () { return xMinMax(Val_Avg) })
+                    .attr("y2", 0)
+                    .style("stroke", "black");
 
-            // Line for max
-            svgMinMax
-                .append("line")
-                .attr("x1", max_MinMax)
-                .attr("y1", 2)
-                .attr("x2", max_MinMax)
-                .attr("y2", -2)
-                .style("stroke", "black");
 
-            // Line for avg
-            svgMinMax
-                .append("line")
-                .attr('stroke-dasharray', '0.5,0.5')
-                .attr("x1", avg_MinMax)
-                .attr("y1", 3)
-                .attr("x2", avg_MinMax)
-                .attr("y2", -3)
-                .style("stroke", "black");
+                // Text for avg    
+                svgMinMax
+                    .append("text")
+                    .attr("x", function () { return xMinMax(Val_Avg) })
+                    .attr('y', -1)
+                    .style("font-size", 8)
+                    .style("text-anchor", "middle")
+                    .text("Avg: " + Val_Avg);
+                // Circle for current
+                svgMinMax
+                    .append("circle")
+                    .attr("cx", function () { return xMinMax(Val_Current) })
+                    .attr("r", "5")
+                    .style("fill", "black");
 
-            // Circle for current
-            svgMinMax
-                .append("circle")
-                .attr("cx", current_MinMax)
-                .attr("r", "2")
-                .style("fill", "black");
-
-            // Text for min
-            svgMinMax
-                .append("text")
-                .attr("x", min_MinMax)
-                .attr('y', 15)
-                .style("font-size", 8)
-                //.style("stroke", "#1b9e77")
-                //.style("stroke-width", 0.2)
-                .style("text-anchor", "middle")
-                .text("Min: " + Val_Min);
-
-            // Text for max
-            svgMinMax
-                .append("text")
-                .attr("x", max_MinMax)
-                .attr('y', 15)
-                .style("font-size", 8)
-                //.style("stroke", "#d95f02")
-                //.style("stroke-width", 0.2)
-                .style("text-anchor", "middle")
-                .text("Max: " + Val_Max);
-
-/*            // Text for avg
-            svgMinMax
-                .append("text")
-                .attr("x", avg_MinMax)
-                .attr('y', -10)
-                .style("font-size", 8)
-                //.style("stroke", "#7570b3")
-                //.style("stroke-width", 0.2)
-                .style("text-anchor", "middle")
-                .text("Avg: " + Val_Avg);*/
-
-            // Text for current
-            svgMinMax
-                .append("text")
-                .attr("x", current_MinMax)
-                .attr('y', -10)
-                .style("font-size", 8)
-                //.style("stroke", "#7570b3")
-                //.style("stroke-width", 0.2)
-                .style("text-anchor", "middle")
-                .text("Curr: " + Val_Current);
+                // Text for current
+                svgMinMax
+                    .append("text")
+                    .attr("x", function () { return xMinMax(Val_Current) })
+                    .attr('y', -12)
+                    .style("font-size", 10)
+                    .style("text-anchor", "middle")
+                    .text("Curr: " + Val_Current);
+                // Line for min
+                svgMinMax
+                    .append("line")
+                    .attr("x1", function () { return xMinMax(Val_Min) })
+                    .attr("y1", 6)
+                    .attr("x2", function () { return xMinMax(Val_Min) })
+                    .attr("y2", 0)
+                    .style("stroke", "black");
+                // Text for min
+                svgMinMax
+                    .append("text")
+                    .attr("x", function () { return xMinMax(Val_Min) })
+                    .attr('y', 12)
+                    .style("font-size", 8)
+                    .style("text-anchor", "middle")
+                    .text("Min: " + Val_Min);
+                // Line for max
+                svgMinMax
+                    .append("line")
+                    .attr("x1", function () { return xMinMax(Val_Max) })
+                    .attr("y1", 6)
+                    .attr("x2", function () { return xMinMax(Val_Max) })
+                    .attr("y2", 0)
+                    .style("stroke", "black");
+                // Text for max
+                svgMinMax
+                    .append("text")
+                    .attr("x", function () { return xMinMax(Val_Max) })
+                    .attr('y', 12)
+                    .style("font-size", 8)
+                    .style("text-anchor", "middle")
+                    .text("Max: " + Val_Max);
             }
 
         }
@@ -1906,6 +1889,7 @@ const simianVis = () => {
 
         
         if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2 && (cross_speciesClusterInfo[d.cross_species_cluster2_species_2]['numberOfCells']) > 1) {
+
             var correspondingCrossspeciescluster = d.cross_species_cluster2_species_2;
             var total = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']);
             var average = parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['averageDistance']) / parseFloat(cross_speciesClusterInfo[correspondingCrossspeciescluster]['numberOfCells']);
@@ -1914,18 +1898,9 @@ const simianVis = () => {
             let Val_Avg = parseFloat(average).toFixed(2);
             var Val_Current = parseFloat(d.dist).toFixed(1);
 
-
-
-            var max_MinMax = 100;
-            var min_MinMax = 0;
-            //Need to calculate
-            var avg_MinMax = Val_Avg / total * 100;
-            var current_MinMax = Val_Current / total * 100;
-            log("current_MinMax:" + current_MinMax);
-            log("avg_MinMax:" + avg_MinMax);
-
-            var widthMinMax = 160;
+            var widthMinMax = 150;
             var heightMinMax = 40;
+
 
             // append the svg object to the body of the page
             var svgMinMax = d3.select("#my_min_max_viz")
@@ -1934,94 +1909,87 @@ const simianVis = () => {
                 .attr("height", heightMinMax)
                 .append("g")
                 .attr("transform",
-                    "translate(" + 18 + "," + 20 + ")");
+                    "translate(" + 10 + "," + 25 + ")");
 
-            // Line
-            svgMinMax
-                .append("line")
-                .attr("x1", min_MinMax)
-                .attr("x2", max_MinMax)
-                .attr("stroke", "#000000")
-                .attr("stroke-width", "1px");
 
-            // Line for min
-            svgMinMax
-                .append("line")
-                .attr("x1", min_MinMax)
-                .attr("y1", 2)
-                .attr("x2", min_MinMax)
-                .attr("y2", -2)
-                .style("stroke", "black");
+            var xMinMax = d3.scaleLinear()
+                .domain([Val_Min, Val_Max])
+                .range([15, 115]);
 
-            // Line for max
             svgMinMax
-                .append("line")
-                .attr("x1", max_MinMax)
-                .attr("y1", 2)
-                .attr("x2", max_MinMax)
-                .attr("y2", -2)
-                .style("stroke", "black");
+                .append("g")
+                .attr("transform", "translate(0,0)")
+                .call(d3.axisBottom(xMinMax)
+                    .ticks(0).tickSize(0)
+                );
+
 
             // Line for avg
             svgMinMax
                 .append("line")
-                .attr('stroke-dasharray', '0.5,0.5')
-                .attr("x1", avg_MinMax)
-                .attr("y1", 3)
-                .attr("x2", avg_MinMax)
-                .attr("y2", -3)
+                .attr('stroke-dasharray', '1,1')
+                .attr("x1", function () { return xMinMax(Val_Avg) })
+                .attr("y1", 6)
+                .attr("x2", function () { return xMinMax(Val_Avg) })
+                .attr("y2", 0)
                 .style("stroke", "black");
 
+
+            // Text for avg    
+            svgMinMax
+                .append("text")
+                .attr("x", function () { return xMinMax(Val_Avg) })
+                .attr('y', -1)
+                .style("font-size", 8)
+                .style("text-anchor", "middle")
+                .text("Avg: " + Val_Avg);
             // Circle for current
             svgMinMax
                 .append("circle")
-                .attr("cx", current_MinMax)
-                .attr("r", "2")
+                .attr("cx", function () { return xMinMax(Val_Current) })
+                .attr("r", "5")
                 .style("fill", "black");
-
-            // Text for min
-            svgMinMax
-                .append("text")
-                .attr("x", min_MinMax)
-                .attr('y', 15)
-                .style("font-size", 8)
-                //.style("stroke", "#1b9e77")
-                //.style("stroke-width", 0.2)
-                .style("text-anchor", "middle")
-                .text("Min: " + Val_Min);
-
-            // Text for max
-            svgMinMax
-                .append("text")
-                .attr("x", max_MinMax)
-                .attr('y', 15)
-                .style("font-size", 8)
-                //.style("stroke", "#d95f02")
-                //.style("stroke-width", 0.2)
-                .style("text-anchor", "middle")
-                .text("Max: " + Val_Max);
-
-/*            // Text for avg
-            svgMinMax
-                .append("text")
-                .attr("x", avg_MinMax)
-                .attr('y', -10)
-                .style("font-size", 8)
-                //.style("stroke", "#7570b3")
-                //.style("stroke-width", 0.2)
-                .style("text-anchor", "middle")
-                .text("Avg: " + Val_Avg);*/
 
             // Text for current
             svgMinMax
                 .append("text")
-                .attr("x", current_MinMax)
-                .attr('y', -10)
-                .style("font-size", 8)
-                //.style("stroke", "#7570b3")
-                //.style("stroke-width", 0.2)
+                .attr("x", function () { return xMinMax(Val_Current) })
+                .attr('y', -12)
+                .style("font-size", 10)
                 .style("text-anchor", "middle")
                 .text("Curr: " + Val_Current);
+            // Line for min
+            svgMinMax
+                .append("line")
+                .attr("x1", function () { return xMinMax(Val_Min) })
+                .attr("y1", 6)
+                .attr("x2", function () { return xMinMax(Val_Min) })
+                .attr("y2", 0)
+                .style("stroke", "black");
+            // Text for min
+            svgMinMax
+                .append("text")
+                .attr("x", function () { return xMinMax(Val_Min) })
+                .attr('y', 12)
+                .style("font-size", 8)
+                .style("text-anchor", "middle")
+                .text("Min: " + Val_Min);
+            // Line for max
+            svgMinMax
+                .append("line")
+                .attr("x1", function () { return xMinMax(Val_Max) })
+                .attr("y1", 6)
+                .attr("x2", function () { return xMinMax(Val_Max) })
+                .attr("y2", 0)
+                .style("stroke", "black");
+            // Text for max
+            svgMinMax
+                .append("text")
+                .attr("x", function () { return xMinMax(Val_Max) })
+                .attr('y', 12)
+                .style("font-size", 8)
+                .style("text-anchor", "middle")
+                .text("Max: " + Val_Max);
         }
 
         if (showExplorationModeflag) {
