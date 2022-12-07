@@ -124,13 +124,13 @@ const simianVis = () => {
 
     }
     else {
-        document.getElementById('distanceMapContainer').setAttribute("style", "width:80%;height:100%");
-        document.getElementById('tooltipContainer').setAttribute("style", "width:20%;height:100%");
+        document.getElementById('distanceMapContainer').setAttribute("style", "width:78%;height:100%");
+        document.getElementById('tooltipContainer').setAttribute("style", "width:22%;height:100%");
         //document.getElementById('axisClickContainer').setAttribute("style", "height:25%;width:100%");
         document.getElementById('cellClickContainer').setAttribute("style", "height:100%;width:100%");
         containerwidth = 10;
         heatmapWidth = 75;
-        containerHeight = 16;
+        containerHeight = 20;
         heatmapHeight = 100;
     }
     var margin;
