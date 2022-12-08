@@ -1967,7 +1967,7 @@ const simianVis = () => {
                 .attr("y1", 6)
                 .attr("x2", function () { return xMinMax(Val_Min) })
                 .attr("y2", 0)
-                .style("stroke", coloring).style("stroke", "black");
+                .style("stroke", coloring).style("stroke", coloring);
             // Text for min
             svgMinMax
                 .append("text")
