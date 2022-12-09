@@ -1943,31 +1943,33 @@ const simianVis = () => {
                     .ticks(0).tickSize(0)
                 );
 
-
-/*            // Line for avg
-            svgMinMax
-                .append("line")
-                .attr('stroke-dasharray', '1,1')
-                .attr("x1", function () { return xMinMax(Val_Avg) })
-                .attr("y1", 6)
-                .attr("x2", function () { return xMinMax(Val_Avg) })
-                .attr("y2", 0)
-                .style("stroke", coloring);
-
-
-            // Text for avg    
-            svgMinMax
-                .append("text")
-                .attr("x", function () { return xMinMax(Val_Avg) })
-                .attr('y', -1)
-                .style("font-size", 7)
-                .style("text-anchor", "middle")
-                .text("Avg: " + Val_Avg).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
-           */ // Circle for current
+            /*                //-webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color:
+                            // Line for avg
+                            svgMinMax
+                                .append("line")
+                                .attr('stroke-dasharray', '1,1')
+                                .attr("x1", function () { return xMinMax(Val_Avg) })
+                                .attr("y1", 6)
+                                .attr("x2", function () { return xMinMax(Val_Avg) })
+                                .attr("y2", 0)
+                                .style("stroke", coloring);
+            
+            
+                            // Text for avg    
+                            svgMinMax
+                                .append("text")
+                                .attr("x", function () { return xMinMax(Val_Avg) })
+                                .attr('y', -1)
+                                .style("font-size", 7)
+                                .style("text-anchor", "middle")
+                                .text("Avg: " + Val_Avg).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
+                           */ // Circle for current
             svgMinMax
                 .append("circle")
                 .attr("cx", function () { return xMinMax(Val_Current) })
-                .attr("r", "4")
+                .attr("r", "3")
+                .attr("stroke", "black")
+                .attr("stroke-width", "0.1")
                 .style("fill", coloring);
 
             // Text for current
@@ -1978,14 +1980,22 @@ const simianVis = () => {
                 .style("font-size", 8)
                 .style("text-anchor", "middle")
                 .text("Curr: " + Val_Current).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
-            // Line for min
+            /*                // Line for min
+                            svgMinMax
+                                .append("line")
+                                .attr("x1", function () { return xMinMax(Val_Min) })
+                                .attr("y1", 6)
+                                .attr("x2", function () { return xMinMax(Val_Min) })
+                                .attr("y2", 0)
+                                .style("stroke", coloring);*/
+            // Circle for min
             svgMinMax
-                .append("line")
-                .attr("x1", function () { return xMinMax(Val_Min) })
-                .attr("y1", 6)
-                .attr("x2", function () { return xMinMax(Val_Min) })
-                .attr("y2", 0)
-                .style("stroke", coloring).style("stroke", coloring);
+                .append("circle")
+                .attr("cx", function () { return xMinMax(Val_Min) })
+                .attr("r", "2")
+                .attr("stroke", "black")
+                .attr("stroke-width", "0.1")
+                .style("fill", coloring);
             // Text for min
             svgMinMax
                 .append("text")
@@ -1994,14 +2004,22 @@ const simianVis = () => {
                 .style("font-size", 8)
                 .style("text-anchor", "middle")
                 .text("Min: " + Val_Min).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
-            // Line for max
+            /*                // Line for max
+                            svgMinMax
+                                .append("line")
+                                .attr("x1", function () { return xMinMax(Val_Max) })
+                                .attr("y1", 6)
+                                .attr("x2", function () { return xMinMax(Val_Max) })
+                                .attr("y2", 0)
+                                .style("stroke", coloring);*/
+            // Circle for max
             svgMinMax
-                .append("line")
-                .attr("x1", function () { return xMinMax(Val_Max) })
-                .attr("y1", 6)
-                .attr("x2", function () { return xMinMax(Val_Max) })
-                .attr("y2", 0)
-                .style("stroke", coloring);
+                .append("circle")
+                .attr("cx", function () { return xMinMax(Val_Max) })
+                .attr("r", "2")
+                .attr("stroke", "black")
+                .attr("stroke-width", "0.1")
+                .style("fill", coloring);
             // Text for max
             svgMinMax
                 .append("text")
@@ -2010,7 +2028,7 @@ const simianVis = () => {
                 .style("font-size", 8)
                 .style("text-anchor", "middle")
                 .text("Max: " + Val_Max).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
-        }
+            }
 
         if (showExplorationModeflag) {
             d3.select("#exploreViewMarker1").remove();
