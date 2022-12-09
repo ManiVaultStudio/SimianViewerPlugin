@@ -1443,7 +1443,9 @@ const simianVis = () => {
                 svgMinMax
                     .append("circle")
                     .attr("cx", function () { return xMinMax(Val_Current) })
-                    .attr("r", "4")
+                    .attr("r", "3")
+                    .attr("stroke", "black")
+                    .attr("stroke-width", "0.1")
                     .style("fill", coloring);
 
                 // Text for current
@@ -1454,14 +1456,22 @@ const simianVis = () => {
                     .style("font-size", 8)
                     .style("text-anchor", "middle")
                     .text("Curr: " + Val_Current).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
-                // Line for min
+/*                // Line for min
                 svgMinMax
                     .append("line")
                     .attr("x1", function () { return xMinMax(Val_Min) })
                     .attr("y1", 6)
                     .attr("x2", function () { return xMinMax(Val_Min) })
                     .attr("y2", 0)
-                    .style("stroke", coloring);
+                    .style("stroke", coloring);*/
+                // Circle for min
+                svgMinMax
+                    .append("circle")
+                    .attr("cx", function () { return xMinMax(Val_Min) })
+                    .attr("r", "2")
+                    .attr("stroke", "black")
+                    .attr("stroke-width", "0.1")
+                    .style("fill", coloring);
                 // Text for min
                 svgMinMax
                     .append("text")
@@ -1470,14 +1480,22 @@ const simianVis = () => {
                     .style("font-size", 8)
                     .style("text-anchor", "middle")
                     .text("Min: " + Val_Min).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
-                // Line for max
+/*                // Line for max
                 svgMinMax
                     .append("line")
                     .attr("x1", function () { return xMinMax(Val_Max) })
                     .attr("y1", 6)
                     .attr("x2", function () { return xMinMax(Val_Max) })
                     .attr("y2", 0)
-                    .style("stroke", coloring);
+                    .style("stroke", coloring);*/
+                // Circle for max
+                svgMinMax
+                    .append("circle")
+                    .attr("cx", function () { return xMinMax(Val_Max) })
+                    .attr("r", "2")
+                    .attr("stroke", "black")
+                    .attr("stroke-width", "0.1")
+                    .style("fill", coloring);
                 // Text for max
                 svgMinMax
                     .append("text")
