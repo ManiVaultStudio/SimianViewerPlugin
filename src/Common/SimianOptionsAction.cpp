@@ -133,7 +133,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_barLinkerAction1.initialize(defaultTotalValues, " ", " ");
 	_barLinkerAction2.initialize(defaultTotalValues, " ", " ");
 	_scatterplotColorControlAction.setDefaultWidgetFlags(OptionAction::ComboBox);
-	_scatterplotColorControlAction.initialize(QStringList({ "cross-species cluster","in-species cluster","cross-species sub-class","in-species subclass","donor"}), "cross-species cluster", "cross-species cluster");
+	_scatterplotColorControlAction.initialize(QStringList({ "cross-species cluster","in-species cluster","differential expression","cross-species sub-class","in-species subclass","donor"}), "cross-species cluster", "cross-species cluster");
 	_distanceAction.setDefaultWidgetFlags(IntegralAction::SpinBox | IntegralAction::Slider);
 	_distanceAction.initialize(0, 105, 105, 105);
 	_histBarAction.setDefaultWidgetFlags(ToggleAction::CheckBox);
@@ -533,9 +533,13 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				{
 					species1EmbeddingColorDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/donor";
 				}
-
+				else if (_scatterplotColorControlAction.getCurrentText() == "differential expression")
+				{
+					species1EmbeddingColorDatasetName = "ClusterDifferentialExpression1";
+				}
 
 				_species1ScatterplotColorLinkerAction.setCurrentText(species1EmbeddingColorDatasetName);
+				qDebug() << _species1ScatterplotColorLinkerAction.getCurrentText();
 			}
 			if (_species2ScatterplotColorLinkerAction.getNumberOfOptions() > 0)
 			{
@@ -561,8 +565,13 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				{
 					species2EmbeddingColorDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/donor";
 				}
+				else if (_scatterplotColorControlAction.getCurrentText() == "differential expression")
+				{
+					species2EmbeddingColorDatasetName = "ClusterDifferentialExpression2";
+				}
 
 				_species2ScatterplotColorLinkerAction.setCurrentText(species2EmbeddingColorDatasetName);
+				qDebug() << _species2ScatterplotColorLinkerAction.getCurrentText();
 			}
 			if (_species1DEStatsLinkerAction.getNumberOfOptions() > 0)
 			{
@@ -627,9 +636,13 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			{
 				species1EmbeddingColorDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/donor" ;
 			}
-
+			else if (_scatterplotColorControlAction.getCurrentText() == "differential expression")
+			{
+				species1EmbeddingColorDatasetName = "ClusterDifferentialExpression1";
+			}
 
 			_species1ScatterplotColorLinkerAction.setCurrentText(species1EmbeddingColorDatasetName);
+			qDebug() << _species1ScatterplotColorLinkerAction.getCurrentText();
 		}
 		if (_species2ScatterplotColorLinkerAction.getNumberOfOptions() > 0)
 		{
@@ -655,8 +668,12 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			{
 				species2EmbeddingColorDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + + "/donor" ;
 			}
-
+			else if (_scatterplotColorControlAction.getCurrentText() == "differential expression")
+			{
+				species2EmbeddingColorDatasetName = "ClusterDifferentialExpression2";
+			}
 			_species2ScatterplotColorLinkerAction.setCurrentText(species2EmbeddingColorDatasetName);
+			qDebug() << _species2ScatterplotColorLinkerAction.getCurrentText();
 		}
 
 	};
@@ -1211,12 +1228,14 @@ void SimianOptionsAction::updateData(std::string Species1, std::string Species2,
 
 void SimianOptionsAction::updateDatasetPickerAction()
 {
-	auto datasets = _core->requestAllDataSets(QVector<hdps::DataType> {ClusterType});
-	_species1ScatterplotColorLinkerAction.setDatasets(datasets);
+	auto colorDatasets = _core->requestAllDataSets();
+	_species1ScatterplotColorLinkerAction.setDatasets(colorDatasets);
 	_species1ScatterplotColorLinkerAction.setPlaceHolderString("Species1 scatterplot color linker");
-	_species2ScatterplotColorLinkerAction.setDatasets(datasets);
+	_species2ScatterplotColorLinkerAction.setDatasets(colorDatasets);
 	_species2ScatterplotColorLinkerAction.setPlaceHolderString("Species2 scatterplot color linker");
 
+
+	auto datasets = _core->requestAllDataSets(QVector<hdps::DataType> {ClusterType});
 	auto filteredCrossSpeciesDatasets = datasets;
 	auto filteredInSpeciesDatasets = datasets;
 	for (auto dataset : datasets)
