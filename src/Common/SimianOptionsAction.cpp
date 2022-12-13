@@ -352,7 +352,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 					_scatterplotColorControlAction.setCurrentText("");
 					_scatterplotColorControlAction.setCurrentText(tempVal);
 					updateData((_species1SelectAction.getCurrentText()).toStdString(), (_species2SelectAction.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString(), (_distanceAction.getValue()), (_crossSpeciesFilterAction.getCurrentText()).toStdString());
-
+					_modifyDifferentialExpressionAutoUpdate.trigger();
 
 				}
 			}
@@ -486,6 +486,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			QString tempVal = _scatterplotColorControlAction.getCurrentText();
 			_scatterplotColorControlAction.setCurrentText("");
 			_scatterplotColorControlAction.setCurrentText(tempVal);
+			_modifyDifferentialExpressionAutoUpdate.trigger();
 		}
 	};
 	const auto updateNeighborhood = [this]() -> void
