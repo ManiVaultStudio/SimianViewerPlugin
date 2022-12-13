@@ -138,8 +138,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_distanceAction.initialize(0, 105, 105, 105);
 	_histBarAction.setDefaultWidgetFlags(ToggleAction::CheckBox);
 	_histBarAction.initialize(false, false);
-	_modifyDifferentialExpressionAutoUpdate.setDefaultWidgetFlags(ToggleAction::CheckBox);
-	_modifyDifferentialExpressionAutoUpdate.initialize(true, true);
+
 	_removeLinkingOptionMenuFromUIAction.setDefaultWidgetFlags(ToggleAction::CheckBox);
 	_removeLinkingOptionMenuFromUIAction.initialize(false, false);
 	_fullHeatMapAction.setDefaultWidgetFlags(ToggleAction::CheckBox);
@@ -175,10 +174,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	{
 		_species2Name.publish("Species2Name");
 	}
-	if (!_modifyDifferentialExpressionAutoUpdate.isPublished())
-	{
-		_modifyDifferentialExpressionAutoUpdate.publish("Auto Update Switch");
-	}
+
 
 	if (!_crossSpecies1HeatMapCellAction.isPublished())
 	{
@@ -497,7 +493,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		if (_species1SelectAction.getCurrentText() != "" && _species2SelectAction.getCurrentText() != "")
 		{
 			updateData((_species1SelectAction.getCurrentText()).toStdString(), (_species2SelectAction.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString(), (_distanceAction.getValue()), (_crossSpeciesFilterAction.getCurrentText()).toStdString());
-			_modifyDifferentialExpressionAutoUpdate.setChecked(false);
+
 			if (_speciesEmbedding1LinkerAction.getNumberOfOptions() > 0)
 			{
 				QString species1EmbeddingDatasetName = _species1SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText();
@@ -606,7 +602,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				QString species2CrossSpeciesClusterDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cross_species_cluster";
 				_crossSpecies2DatasetLinkerAction.setCurrentText(species2CrossSpeciesClusterDatasetName);
 			}
-			_modifyDifferentialExpressionAutoUpdate.setChecked(true);
+			_modifyDifferentialExpressionAutoUpdate.trigger();
 		}
 	};
 	const auto updateScatterplotColorControl = [this]() -> void
@@ -1489,68 +1485,72 @@ SimianOptionsAction::LinkerSettingAction::Widget::Widget(QWidget* parent, Linker
 {
 	auto& simianOptionsAction = linkerSettingAction->_simianOptionsAction;
 
-	auto selectionCrossSpecies1DatasetLinkerWidget = simianOptionsAction._crossSpecies1DatasetLinkerAction.createWidget(this);
-	selectionCrossSpecies1DatasetLinkerWidget->setFixedWidth(300);
-	selectionCrossSpecies1DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+	//auto selectionCrossSpecies1DatasetLinkerWidget = simianOptionsAction._crossSpecies1DatasetLinkerAction.createWidget(this);
+	//selectionCrossSpecies1DatasetLinkerWidget->setFixedWidth(300);
+	//selectionCrossSpecies1DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
-	auto selectionCrossSpecies2DatasetLinkerWidget = simianOptionsAction._crossSpecies2DatasetLinkerAction.createWidget(this);
-	selectionCrossSpecies2DatasetLinkerWidget->setFixedWidth(300);
-	selectionCrossSpecies2DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-
-
-	auto selectionSpecies1ScatterplotColorLinkerWidget = simianOptionsAction._species1ScatterplotColorLinkerAction.createWidget(this);
-	selectionSpecies1ScatterplotColorLinkerWidget->setFixedWidth(300);
-	selectionSpecies1ScatterplotColorLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-
-	auto selectionSpecies2ScatterplotColorLinkerWidget = simianOptionsAction._species2ScatterplotColorLinkerAction.createWidget(this);
-	selectionSpecies2ScatterplotColorLinkerWidget->setFixedWidth(300);
-	selectionSpecies2ScatterplotColorLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+	//auto selectionCrossSpecies2DatasetLinkerWidget = simianOptionsAction._crossSpecies2DatasetLinkerAction.createWidget(this);
+	//selectionCrossSpecies2DatasetLinkerWidget->setFixedWidth(300);
+	//selectionCrossSpecies2DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
 
+	//auto selectionSpecies1ScatterplotColorLinkerWidget = simianOptionsAction._species1ScatterplotColorLinkerAction.createWidget(this);
+	//selectionSpecies1ScatterplotColorLinkerWidget->setFixedWidth(300);
+	//selectionSpecies1ScatterplotColorLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
-	auto selectionEmbedding1DatasetLinkerWidget = simianOptionsAction._speciesEmbedding1LinkerAction.createWidget(this);
-	selectionEmbedding1DatasetLinkerWidget->setFixedWidth(300);
-	selectionEmbedding1DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-
-	auto selectionEmbedding2DatasetLinkerWidget = simianOptionsAction._speciesEmbedding2LinkerAction.createWidget(this);
-	selectionEmbedding2DatasetLinkerWidget->setFixedWidth(300);
-	selectionEmbedding2DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-
-
-	auto selectionDEStat2DatasetLinkerWidget = simianOptionsAction._species2DEStatsLinkerAction.createWidget(this);
-	selectionDEStat2DatasetLinkerWidget->setFixedWidth(300);
-	selectionDEStat2DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-
-	auto selectionDEStat1DatasetLinkerWidget = simianOptionsAction._species1DEStatsLinkerAction.createWidget(this);
-	selectionDEStat1DatasetLinkerWidget->setFixedWidth(300);
-	selectionDEStat1DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-
-	auto selectionInSpecies1DatasetLinkerWidget = simianOptionsAction._inSpecies1DatasetLinkerAction.createWidget(this);
-	selectionInSpecies1DatasetLinkerWidget->setFixedWidth(300);
-	selectionInSpecies1DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-
-	auto selectionInSpecies2DatasetLinkerWidget = simianOptionsAction._inSpecies2DatasetLinkerAction.createWidget(this);
-	selectionInSpecies2DatasetLinkerWidget->setFixedWidth(300);
-	selectionInSpecies2DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+	//auto selectionSpecies2ScatterplotColorLinkerWidget = simianOptionsAction._species2ScatterplotColorLinkerAction.createWidget(this);
+	//selectionSpecies2ScatterplotColorLinkerWidget->setFixedWidth(300);
+	//selectionSpecies2ScatterplotColorLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
 
-	auto selectionInSpecies1HeatMapCellWidget = simianOptionsAction._inSpecies1HeatMapCellAction.createWidget(this);
-	selectionInSpecies1HeatMapCellWidget->setFixedWidth(300);
-	selectionInSpecies1HeatMapCellWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-	auto selectionInSpecies2HeatMapCellWidget = simianOptionsAction._inSpecies2HeatMapCellAction.createWidget(this);
-	selectionInSpecies2HeatMapCellWidget->setFixedWidth(300);
-	selectionInSpecies2HeatMapCellWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-	auto selectionCrossSpecies1HeatMapCellWidget = simianOptionsAction._crossSpecies1HeatMapCellAction.createWidget(this);
-	selectionCrossSpecies1HeatMapCellWidget->setFixedWidth(300);
-	selectionCrossSpecies1HeatMapCellWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-	auto selectionCrossSpecies2HeatMapCellWidget = simianOptionsAction._crossSpecies2HeatMapCellAction.createWidget(this);
-	selectionCrossSpecies2HeatMapCellWidget->setFixedWidth(300);
-	selectionCrossSpecies2HeatMapCellWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+
+	//auto selectionEmbedding1DatasetLinkerWidget = simianOptionsAction._speciesEmbedding1LinkerAction.createWidget(this);
+	//selectionEmbedding1DatasetLinkerWidget->setFixedWidth(300);
+	//selectionEmbedding1DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+
+	//auto selectionEmbedding2DatasetLinkerWidget = simianOptionsAction._speciesEmbedding2LinkerAction.createWidget(this);
+	//selectionEmbedding2DatasetLinkerWidget->setFixedWidth(300);
+	//selectionEmbedding2DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
 
-	auto removeLinkingOptionMenuFromUIActionWidget = simianOptionsAction._removeLinkingOptionMenuFromUIAction.createWidget(this);
-	removeLinkingOptionMenuFromUIActionWidget->findChild<QCheckBox*>("Checkbox");
-	removeLinkingOptionMenuFromUIActionWidget->setMaximumWidth(91);
+	//auto selectionDEStat2DatasetLinkerWidget = simianOptionsAction._species2DEStatsLinkerAction.createWidget(this);
+	//selectionDEStat2DatasetLinkerWidget->setFixedWidth(300);
+	//selectionDEStat2DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+
+	//auto selectionDEStat1DatasetLinkerWidget = simianOptionsAction._species1DEStatsLinkerAction.createWidget(this);
+	//selectionDEStat1DatasetLinkerWidget->setFixedWidth(300);
+	//selectionDEStat1DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+
+	//auto selectionInSpecies1DatasetLinkerWidget = simianOptionsAction._inSpecies1DatasetLinkerAction.createWidget(this);
+	//selectionInSpecies1DatasetLinkerWidget->setFixedWidth(300);
+	//selectionInSpecies1DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+
+	//auto selectionInSpecies2DatasetLinkerWidget = simianOptionsAction._inSpecies2DatasetLinkerAction.createWidget(this);
+	//selectionInSpecies2DatasetLinkerWidget->setFixedWidth(300);
+	//selectionInSpecies2DatasetLinkerWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+
+
+	//auto selectionInSpecies1HeatMapCellWidget = simianOptionsAction._inSpecies1HeatMapCellAction.createWidget(this);
+	//selectionInSpecies1HeatMapCellWidget->setFixedWidth(300);
+	//selectionInSpecies1HeatMapCellWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+	//auto selectionInSpecies2HeatMapCellWidget = simianOptionsAction._inSpecies2HeatMapCellAction.createWidget(this);
+	//selectionInSpecies2HeatMapCellWidget->setFixedWidth(300);
+	//selectionInSpecies2HeatMapCellWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+	//auto selectionCrossSpecies1HeatMapCellWidget = simianOptionsAction._crossSpecies1HeatMapCellAction.createWidget(this);
+	//selectionCrossSpecies1HeatMapCellWidget->setFixedWidth(300);
+	//selectionCrossSpecies1HeatMapCellWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+	//auto selectionCrossSpecies2HeatMapCellWidget = simianOptionsAction._crossSpecies2HeatMapCellAction.createWidget(this);
+	//selectionCrossSpecies2HeatMapCellWidget->setFixedWidth(300);
+	//selectionCrossSpecies2HeatMapCellWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+
+		auto autoUpdateWidget = simianOptionsAction._removeLinkingOptionMenuFromUIAction.createWidget(this);
+		autoUpdateWidget->findChild<QPushButton*>("PushButton");
+		autoUpdateWidget->setMaximumWidth(91);
+
+
+	//auto removeLinkingOptionMenuFromUIActionWidget = simianOptionsAction._removeLinkingOptionMenuFromUIAction.createWidget(this);
+	//removeLinkingOptionMenuFromUIActionWidget->findChild<QCheckBox*>("Checkbox");
+	//removeLinkingOptionMenuFromUIActionWidget->setMaximumWidth(91);
 
 	auto linkerSettingSelectionLayout = new QFormLayout();
 	linkerSettingSelectionLayout->setContentsMargins(2, 2, 2, 2);
@@ -1579,6 +1579,9 @@ SimianOptionsAction::LinkerSettingAction::Widget::Widget(QWidget* parent, Linker
 	linkerSettingSelectionLayout->addRow(simianOptionsAction._crossSpecies1HeatMapCellAction.createLabelWidget(this), selectionCrossSpecies1HeatMapCellWidget);
 	linkerSettingSelectionLayout->addRow(simianOptionsAction._crossSpecies2HeatMapCellAction.createLabelWidget(this), selectionCrossSpecies2HeatMapCellWidget);
 	linkerSettingSelectionLayout->addRow("Hide menu:", removeLinkingOptionMenuFromUIActionWidget);*/
+
+
+	linkerSettingSelectionLayout->addRow(simianOptionsAction._modifyDifferentialExpressionAutoUpdate.createLabelWidget(this), autoUpdateWidget);
 	setPopupLayout(linkerSettingSelectionLayout);
 
 }
