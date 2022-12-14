@@ -217,6 +217,7 @@ public:
 
 private:
     void updateData(std::string Species1, std::string Species2, std::string neighborhood, int distance, std::string CrossSpeciesFilter);
+    QVariant CalculateGeneExpressionValues(QString crossSpeciesCluster);
     //void filterMultiSelect();
     bool QStringlistContainsQString(const QStringList& list, const QString& str);
     //QString selectFromQStringList(const QStringList& fileList, const QString& speciesType, const QString& fileType, const QString& neighborhoodType);
