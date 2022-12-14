@@ -77,12 +77,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_metaData = new FetchMetaData();
 	_metaData->getData(&_simianData);
 	_metaData->getGeneExpressionData(&_geneExpressionData);
-	qDebug() << "+_+_+_";
-	for (auto e : _geneExpressionData.keys())
-	{
-		qDebug() << e;// << "," << _geneExpressionData.value(e) << '\n';
-	}
-	qDebug() << "+_+_+_";
 	_species2SelectAction.setEnabled(false);
 	_neighborhoodAction.setEnabled(false);
 	_distanceAction.setEnabled(false);
@@ -1841,3 +1835,20 @@ bool SimianOptionsAction::QStringlistContainsQString(const QStringList& list, co
 	return false;
 }
 
+QVariant SimianOptionsAction::CalculateGeneExpressionValues(QString crossSpeciesCluster)
+{
+	QVariant QVariantMapValue;
+	qDebug() << "+_+_+_";
+	for (auto e : _geneExpressionData.keys())
+	{
+		if (e == crossSpeciesCluster)
+		{
+			qDebug() << e;// << "," << _geneExpressionData.value(e) << '\n';
+			QVariantMapValue = _geneExpressionData.value(e);
+		}
+	}
+	qDebug() << "+_+_+_";
+
+
+	return QVariantMapValue;
+}
