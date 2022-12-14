@@ -16,5 +16,5 @@ public:
 	FetchMetaData();
 
 	void  getData(std::vector<std::vector<std::string>>* simianData);
-
+	void  getGeneExpressionData(QVariantMap* geneExpressionFinalData);
 };

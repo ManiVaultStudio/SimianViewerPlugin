@@ -53,7 +53,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_barLinkerAction1(this, "BarLinker Species1"),
 	_barLinkerAction2(this, "BarLinker Species2"),
 	_species1Name(this,"Species1Name"),
-	_species2Name(this, "Species2Name")
+	_species2Name(this, "Species2Name"),
+	_geneExpressionDatasetVariant(this,"Gene Expression Variant")
 {
 	setText("Settings");
 
@@ -75,6 +76,13 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_eventListener.registerDataEventByType(PointType, std::bind(&SimianOptionsAction::onDataEvent, this, std::placeholders::_1));
 	_metaData = new FetchMetaData();
 	_metaData->getData(&_simianData);
+	_metaData->getGeneExpressionData(&_geneExpressionData);
+	qDebug() << "+_+_+_";
+	for (auto e : _geneExpressionData.keys())
+	{
+		qDebug() << e;// << "," << _geneExpressionData.value(e) << '\n';
+	}
+	qDebug() << "+_+_+_";
 	_species2SelectAction.setEnabled(false);
 	_neighborhoodAction.setEnabled(false);
 	_distanceAction.setEnabled(false);
@@ -804,6 +812,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	{
 
 	};
+	const auto updateGeneExpressionDatasetVariant = [this]() -> void
+	{
+
+	};
 	const auto updateDEStats1DatasetLinker = [this]() -> void
 	{
 
@@ -950,6 +962,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		{
 			updateNeighborhood();
 		});
+	connect(&_geneExpressionDatasetVariant, &VariantAction::variantChanged, this, updateGeneExpressionDatasetVariant);
+
 	connect(&_scatterplotColorControlAction, &OptionAction::currentIndexChanged, this, [this, updateScatterplotColorControl](const std::int32_t& currentIndex)
 		{
 			updateScatterplotColorControl();
@@ -1544,14 +1558,17 @@ SimianOptionsAction::LinkerSettingAction::Widget::Widget(QWidget* parent, Linker
 	//selectionCrossSpecies2HeatMapCellWidget->setFixedWidth(300);
 	//selectionCrossSpecies2HeatMapCellWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
-		auto autoUpdateWidget = simianOptionsAction._removeLinkingOptionMenuFromUIAction.createWidget(this);
-		autoUpdateWidget->findChild<QPushButton*>("PushButton");
-		autoUpdateWidget->setMaximumWidth(91);
+		auto autoUpdateWidget = simianOptionsAction._modifyDifferentialExpressionAutoUpdate.createWidget(this);
+		//autoUpdateWidget->findChild<QPushButton*>("");
+		//autoUpdateWidget->setMaximumWidth(91);
 
+		auto geneExpressionDatasetVariantWidget = simianOptionsAction._geneExpressionDatasetVariant.createWidget(this);
+		//geneExpressionDatasetVariantWidget->findChild<QPushButton*>("");
+		//geneExpressionDatasetVariantWidget->setMaximumWidth(91);
 
-	//auto removeLinkingOptionMenuFromUIActionWidget = simianOptionsAction._removeLinkingOptionMenuFromUIAction.createWidget(this);
-	//removeLinkingOptionMenuFromUIActionWidget->findChild<QCheckBox*>("Checkbox");
-	//removeLinkingOptionMenuFromUIActionWidget->setMaximumWidth(91);
+	auto removeLinkingOptionMenuFromUIActionWidget = simianOptionsAction._removeLinkingOptionMenuFromUIAction.createWidget(this);
+	removeLinkingOptionMenuFromUIActionWidget->findChild<QCheckBox*>("Checkbox");
+	removeLinkingOptionMenuFromUIActionWidget->setMaximumWidth(91);
 
 	auto linkerSettingSelectionLayout = new QFormLayout();
 	linkerSettingSelectionLayout->setContentsMargins(2, 2, 2, 2);
@@ -1579,10 +1596,14 @@ SimianOptionsAction::LinkerSettingAction::Widget::Widget(QWidget* parent, Linker
 	linkerSettingSelectionLayout->addRow(simianOptionsAction._inSpecies2HeatMapCellAction.createLabelWidget(this), selectionInSpecies2HeatMapCellWidget);
 	linkerSettingSelectionLayout->addRow(simianOptionsAction._crossSpecies1HeatMapCellAction.createLabelWidget(this), selectionCrossSpecies1HeatMapCellWidget);
 	linkerSettingSelectionLayout->addRow(simianOptionsAction._crossSpecies2HeatMapCellAction.createLabelWidget(this), selectionCrossSpecies2HeatMapCellWidget);
-	linkerSettingSelectionLayout->addRow("Hide menu:", removeLinkingOptionMenuFromUIActionWidget);*/
-
-
+*/
 	linkerSettingSelectionLayout->addRow(simianOptionsAction._modifyDifferentialExpressionAutoUpdate.createLabelWidget(this), autoUpdateWidget);
+
+	linkerSettingSelectionLayout->addRow(simianOptionsAction._geneExpressionDatasetVariant.createLabelWidget(this), geneExpressionDatasetVariantWidget);
+
+	linkerSettingSelectionLayout->addRow("Hide menu:", removeLinkingOptionMenuFromUIActionWidget);
+
+
 	setPopupLayout(linkerSettingSelectionLayout);
 
 }
