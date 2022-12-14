@@ -2,6 +2,7 @@
 
 #include <actions/WidgetAction.h>
 #include <actions/IntegralAction.h>
+#include <actions/VariantAction.h>
 #include <actions/OptionAction.h>
 #include <actions/OptionsAction.h>
 #include <actions/ToggleAction.h>
@@ -266,6 +267,8 @@ public: // Action getters
     StringAction& getSpecies1Name() { return _species1Name; }
     StringAction& getSpecies2Name() { return _species2Name; }
     OptionAction& getScatterplotColorControl() { return _scatterplotColorControlAction; }
+
+    VariantAction& getGeneExpressionDatasetVariant() { return _geneExpressionDatasetVariant; }
     //ExplorationAction& getExplorationAction() { return _explorationAction; }
 protected:
     SimianViewerPlugin&          _simianViewerPlugin;
@@ -292,6 +295,7 @@ protected:
     hdps::CoreInterface*         _core;
     FetchMetaData*                _metaData;
     std::vector<std::vector<std::string>>                _simianData;
+    QVariantMap _geneExpressionData;
     //OptionsAction                 _multiSelectClusterFilterAction;
     ToggleAction _histBarAction;
     ToggleAction _fullHeatMapAction;
@@ -316,6 +320,7 @@ protected:
     TriggerAction                 _modifyDifferentialExpressionAutoUpdate;
     StringAction                  _species1Name;
     StringAction                  _species2Name;
+    VariantAction                  _geneExpressionDatasetVariant;
     bool _isStarted;
     ColorMapAction          _colorMapAction;
     ColorAction              _backgroundColoringAction;
