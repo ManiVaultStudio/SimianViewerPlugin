@@ -266,9 +266,9 @@ public: // Action getters
     OptionAction& getBarLinkerSpecies1() { return _barLinkerAction1; }
     OptionAction& getBarLinkerSpecies2() { return _barLinkerAction2; }
     StringAction& getSpecies1Name() { return _species1Name; }
-    StringAction& getSpecies2Name() { return _species2Name; }
+    StringAction& getSelectedCrossSpeciesNameList() { return _selectedCrossSpeciesNameList; }
     OptionAction& getScatterplotColorControl() { return _scatterplotColorControlAction; }
-
+    StringAction& getSpecies2Name() { return _species2Name; }
     VariantAction& getGeneExpressionDatasetVariant() { return _geneExpressionDatasetVariant; }
     //ExplorationAction& getExplorationAction() { return _explorationAction; }
 protected:
@@ -322,6 +322,7 @@ protected:
     StringAction                  _species1Name;
     StringAction                  _species2Name;
     VariantAction                  _geneExpressionDatasetVariant;
+    StringAction                _selectedCrossSpeciesNameList;
     bool _isStarted;
     ColorMapAction          _colorMapAction;
     ColorAction              _backgroundColoringAction;
