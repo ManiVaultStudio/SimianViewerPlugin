@@ -570,10 +570,9 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			QVariantMap geneEXp;
 			QVariantMap HARs;
 			QVariantMap CONDELs;
-			QVariantMap tempVariantMap;
-			tempVariantMap[QString::number(Qt::BackgroundRole)] = QBrush(QColor::fromRgb(128, 128, 128));
-			tempVariantMap[QString::number(Qt::SizeHintRole)] = QSize(12,1);
-			tempVariantMap[QString::number(Qt::DisplayRole)] = QString(" ");
+
+
+
 			//tempVariantMap[QString::number(Qt::ForegroundRole)] = QBrush(QColor::fromRgb(128, 128, 128));
 
 			for (auto gene : geneExpValue.toMap().keys())
@@ -581,16 +580,29 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				//qDebug() << geneExpValue.toMap().value(gene).toMap().value("HARs").toString() << '\n';
 				//qDebug() << geneExpValue.toMap().value(gene).toMap().value("hCONDELs").toString() << '\n';
 				// 
+
 				//HAR Process
-			  if (geneExpValue.toMap().value(gene).toMap().value("HARs").toString() == "1")
+			  if (geneExpValue.toMap().value(gene).toMap().value("HARs").toString() != "0")
 				{
-					HARs.insert(gene, tempVariantMap);
+				  QVariantMap tempHARVariantMap;
+				  tempHARVariantMap[QString::number(Qt::BackgroundRole)] = QBrush(QColor::fromRgb(128, 128, 128));
+				  tempHARVariantMap[QString::number(Qt::SizeHintRole)] = QSize(12, 1);
+				  tempHARVariantMap[QString::number(Qt::DisplayRole)] = QString(" ");
+				  tempHARVariantMap[QString::number(Qt::ToolTipRole)] = QString(geneExpValue.toMap().value(gene).toMap().value("HARs").toString());
+				  
+				  HARs.insert(gene, tempHARVariantMap);
 				}
 				
 				//HCONDEL Process
-				if (geneExpValue.toMap().value(gene).toMap().value("hCONDELs").toString() == "1")
+				if (geneExpValue.toMap().value(gene).toMap().value("hCONDELs").toString() != "0")
 				{
-					CONDELs.insert(gene, tempVariantMap);
+					QVariantMap tempHCONDELVariantMap;
+					tempHCONDELVariantMap[QString::number(Qt::BackgroundRole)] = QBrush(QColor::fromRgb(128, 128, 128));
+					tempHCONDELVariantMap[QString::number(Qt::SizeHintRole)] = QSize(12, 1);
+					tempHCONDELVariantMap[QString::number(Qt::DisplayRole)] = QString(" ");
+					tempHCONDELVariantMap[QString::number(Qt::ToolTipRole)] = QString(geneExpValue.toMap().value(gene).toMap().value("hCONDELs").toString());
+					
+					CONDELs.insert(gene, tempHCONDELVariantMap);
 				}	
 			}
 			geneEXp.insert("HARs", HARs);
