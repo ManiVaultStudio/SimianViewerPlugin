@@ -569,31 +569,27 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				//qDebug() << geneExpValue.toMap().value(gene).toMap().value("HARs").toString() << '\n';
 				//qDebug() << geneExpValue.toMap().value(gene).toMap().value("hCONDELs").toString() << '\n';
 				//HAR Process
-				QVariantList tempListHar;
-				if (geneExpValue.toMap().value(gene).toMap().value("HARs").toString()=="0")
+				
+
+			  if (geneExpValue.toMap().value(gene).toMap().value("HARs").toString() == "1")
 				{
-					tempListHar << QBrush(QColor::fromRgb(255, 255, 255));
+				  QVariantList tempListHar;
+				  tempListHar <<" " << QBrush(QColor::fromRgb(0, 0, 0)) << QBrush(QColor::fromRgb(0, 0, 0));
+					HARs.insert(gene, tempListHar);
 				}
-				else
-				{
-					tempListHar << QBrush(QColor::fromRgb(0, 0, 0));
-				}
-				HARs.insert(gene, tempListHar);
+				
 				//HCONDEL Process
-				QVariantList tempListCondel;
-				if (geneExpValue.toMap().value(gene).toMap().value("hCONDELs").toString() == "0")
+				
+				if (geneExpValue.toMap().value(gene).toMap().value("hCONDELs").toString() == "1")
 				{
-					tempListCondel << QBrush(QColor::fromRgb(255, 255, 255));
-				}
-				else
-				{
-					tempListCondel << QBrush(QColor::fromRgb(0, 0, 0));
-				}
-				CONDELs.insert(gene, tempListCondel);	
+					QVariantList tempListCondel;
+					tempListCondel << " " << QBrush(QColor::fromRgb(0, 0, 0)) << QBrush(QColor::fromRgb(0, 0, 0));
+					CONDELs.insert(gene, tempListCondel);
+				}	
 			}
 			geneEXp.insert("HARS", HARs);
 			geneEXp.insert("HCONDELS", CONDELs);
-			qDebug() << geneEXp;
+			//qDebug() << geneEXp;
 			_geneExpressionDatasetVariant.setVariant(geneEXp);
 		}
 		
