@@ -566,7 +566,9 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			QVariantMap CONDELs;
 			QVariantMap tempVariantMap;
 			tempVariantMap[QString::number(Qt::BackgroundRole)] = QBrush(QColor::fromRgb(128, 128, 128));
-			tempVariantMap[QString::number(Qt::SizeHintRole)] = QSize(200,1);
+			tempVariantMap[QString::number(Qt::SizeHintRole)] = QSize(50,1);
+			tempVariantMap[QString::number(Qt::DisplayRole)] = QString(" ");
+			//tempVariantMap[QString::number(Qt::ForegroundRole)] = QBrush(QColor::fromRgb(128, 128, 128));
 
 			for (auto gene : geneExpValue.toMap().keys())
 			{
@@ -597,10 +599,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		if (_species1SelectAction.getCurrentText() != "" && _species2SelectAction.getCurrentText() != "")
 		{
 			updateData((_species1SelectAction.getCurrentText()).toStdString(), (_species2SelectAction.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString(), (_distanceAction.getValue()), (_crossSpeciesFilterAction.getCurrentText()).toStdString());
-			if (_scatterplotColorControlAction.getCurrentText() == "differential expression")
-			{
-				_scatterplotColorControlAction.setCurrentText("cross-species cluster");
-			}
 			
 			
 			if (_speciesEmbedding1LinkerAction.getNumberOfOptions() > 0)
@@ -613,6 +611,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			{
 				QString species2EmbeddingDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText();
 				_speciesEmbedding2LinkerAction.setCurrentText(species2EmbeddingDatasetName);
+			}
+			if (_scatterplotColorControlAction.getCurrentText() == "differential expression")
+			{
+				_scatterplotColorControlAction.setCurrentText("cross-species cluster");
 			}
 			if (_species1ScatterplotColorLinkerAction.getNumberOfOptions() > 0)
 			{
