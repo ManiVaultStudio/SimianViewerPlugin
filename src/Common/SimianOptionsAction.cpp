@@ -561,7 +561,40 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		if (_selectedCrossSpeciesNameList.text()!="")
 		{
 			QVariant geneExpValue = CalculateGeneExpressionValues(_selectedCrossSpeciesNameList.text());
-			_geneExpressionDatasetVariant.setVariant(geneExpValue);
+			QVariantMap geneEXp;
+			QVariantMap HARs;
+			QVariantMap CONDELs;
+			for (auto gene : geneExpValue.toMap().keys())
+			{
+				//qDebug() << geneExpValue.toMap().value(gene).toMap().value("HARs").toString() << '\n';
+				//qDebug() << geneExpValue.toMap().value(gene).toMap().value("hCONDELs").toString() << '\n';
+				//HAR Process
+				QVariantList tempListHar;
+				if (geneExpValue.toMap().value(gene).toMap().value("HARs").toString()=="0")
+				{
+					tempListHar << QBrush(QColor::fromRgb(255, 255, 255));
+				}
+				else
+				{
+					tempListHar << QBrush(QColor::fromRgb(0, 0, 0));
+				}
+				HARs.insert(gene, tempListHar);
+				//HCONDEL Process
+				QVariantList tempListCondel;
+				if (geneExpValue.toMap().value(gene).toMap().value("hCONDELs").toString() == "0")
+				{
+					tempListCondel << QBrush(QColor::fromRgb(255, 255, 255));
+				}
+				else
+				{
+					tempListCondel << QBrush(QColor::fromRgb(0, 0, 0));
+				}
+				CONDELs.insert(gene, tempListCondel);	
+			}
+			geneEXp.insert("HARS", HARs);
+			geneEXp.insert("HCONDELS", CONDELs);
+			qDebug() << geneEXp;
+			_geneExpressionDatasetVariant.setVariant(geneEXp);
 		}
 		
 	};
@@ -1956,16 +1989,16 @@ bool SimianOptionsAction::QStringlistContainsQString(const QStringList& list, co
 QVariant SimianOptionsAction::CalculateGeneExpressionValues(QString crossSpeciesCluster)
 {
 	QVariant QVariantMapValue;
-	qDebug() << "+_+_+_";
+	//qDebug() << "+_+_+_";
 	for (auto e : _geneExpressionData.keys())
 	{
 		if (e == crossSpeciesCluster)
 		{
-			qDebug() << e;// << "," << _geneExpressionData.value(e) << '\n';
+			//qDebug() << e;// << "," << _geneExpressionData.value(e) << '\n';
 			QVariantMapValue = _geneExpressionData.value(e);
 		}
 	}
-	qDebug() << "+_+_+_";
+	//qDebug() << "+_+_+_";
 
 
 	return QVariantMapValue;
