@@ -386,7 +386,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 						_crossSpecies2HeatMapCellAction.setCurrentText("Sst Chodl_1");
 						_selectedCrossSpeciesNameList.setText("Sst Chodl_1");
 					}
-
+					if (_scatterplotColorControlAction.getCurrentText() == "differential expression")
+					{
+						_scatterplotColorControlAction.setCurrentText("cross-species cluster");
+					}
 					_modifyDifferentialExpressionAutoUpdate.trigger();
 
 				}
@@ -551,7 +554,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				_crossSpecies2HeatMapCellAction.setCurrentText("Sst Chodl_1");
 				_selectedCrossSpeciesNameList.setText("Sst Chodl_1");
 			}
-
+			if (_scatterplotColorControlAction.getCurrentText() == "differential expression")
+			{
+				_scatterplotColorControlAction.setCurrentText("cross-species cluster");
+			}
 			_modifyDifferentialExpressionAutoUpdate.trigger();
 		}
 	};
@@ -566,7 +572,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			QVariantMap CONDELs;
 			QVariantMap tempVariantMap;
 			tempVariantMap[QString::number(Qt::BackgroundRole)] = QBrush(QColor::fromRgb(128, 128, 128));
-			tempVariantMap[QString::number(Qt::SizeHintRole)] = QSize(50,1);
+			tempVariantMap[QString::number(Qt::SizeHintRole)] = QSize(12,1);
 			tempVariantMap[QString::number(Qt::DisplayRole)] = QString(" ");
 			//tempVariantMap[QString::number(Qt::ForegroundRole)] = QBrush(QColor::fromRgb(128, 128, 128));
 
@@ -587,8 +593,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 					CONDELs.insert(gene, tempVariantMap);
 				}	
 			}
-			geneEXp.insert("HARS", HARs);
-			geneEXp.insert("HCONDELS", CONDELs);
+			geneEXp.insert("HARs", HARs);
+			geneEXp.insert("hCON-DELs", CONDELs);
 			//qDebug() << geneEXp;
 			_geneExpressionDatasetVariant.setVariant(geneEXp);
 		}
