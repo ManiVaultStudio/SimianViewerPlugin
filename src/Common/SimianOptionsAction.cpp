@@ -568,22 +568,20 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			{
 				//qDebug() << geneExpValue.toMap().value(gene).toMap().value("HARs").toString() << '\n';
 				//qDebug() << geneExpValue.toMap().value(gene).toMap().value("hCONDELs").toString() << '\n';
+				// 
 				//HAR Process
-				
-
 			  if (geneExpValue.toMap().value(gene).toMap().value("HARs").toString() == "1")
 				{
 				  QVariantList tempListHar;
-				  tempListHar <<" " << QBrush(QColor::fromRgb(0, 0, 0)) << QBrush(QColor::fromRgb(0, 0, 0));
+				  tempListHar <<" " << QBrush(QColor::fromRgb(128, 128, 128)) << QBrush(QColor::fromRgb(128, 128, 128));
 					HARs.insert(gene, tempListHar);
 				}
 				
 				//HCONDEL Process
-				
 				if (geneExpValue.toMap().value(gene).toMap().value("hCONDELs").toString() == "1")
 				{
 					QVariantList tempListCondel;
-					tempListCondel << " " << QBrush(QColor::fromRgb(0, 0, 0)) << QBrush(QColor::fromRgb(0, 0, 0));
+					tempListCondel << " " << QBrush(QColor::fromRgb(128, 128, 128)) << QBrush(QColor::fromRgb(128, 128, 128));
 					CONDELs.insert(gene, tempListCondel);
 				}	
 			}
