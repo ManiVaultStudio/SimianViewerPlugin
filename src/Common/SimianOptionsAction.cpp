@@ -390,6 +390,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 					{
 						_scatterplotColorControlAction.setCurrentText("cross-species cluster");
 					}
+					_histBarAction.setEnabled(true);
+					_scatterplotColorControlAction.setEnabled(true);
 					_modifyDifferentialExpressionAutoUpdate.trigger();
 
 				}
