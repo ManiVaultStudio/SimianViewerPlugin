@@ -35,13 +35,14 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_colorMapAction(this, "Select color map"),
 	_backgroundColoringAction(this, "Select background color", DEFAULT_CONSTANT_COLOR, DEFAULT_CONSTANT_COLOR),
 	_isLoading(false),
-	_species1Action(*this),
-	_species2Action(*this),
-	_visSettingAction(*this),
-	_linkerSettingAction(*this),
-	_distanceNeighborhoodAction(*this),
+	_species1Holder(*this),
+	_species2Holder(*this),
+	_visSettingHolder(*this),
+	_linkerSettingHolder(*this),
+	_distanceNeighborhoodHolder(*this),
+	_scatterplotColorHolder(*this),
 	//_explorationAction(*this),
-	_cellCountAction(*this),
+	_cellCountHolder(*this),
 	_isStarted(false),
 	_histBarAction(this,"Cell counts"),
 	_modifyDifferentialExpressionAutoUpdate(this, "Automatic Update Switch"),
@@ -102,9 +103,9 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	//_multiSelectClusterFilterAction.setEnabled(false);
 	_colorMapAction.setEnabled(false);
 	_backgroundColoringAction.setEnabled(false);
-	_visSettingAction.setEnabled(false);
-	_linkerSettingAction.setEnabled(false);
-	_distanceNeighborhoodAction.setEnabled(false);
+	_visSettingHolder.setEnabled(false);
+	_linkerSettingHolder.setEnabled(false);
+	_distanceNeighborhoodHolder.setEnabled(false);
 	_species1SelectAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 	_species1SelectAction.setPlaceHolderString(QString("Choose Species1"));
 	_species1SelectAction.initialize(QStringList({ "chimp","gorilla","human","rhesus","marmoset" }), _species1SelectAction.getPlaceholderString(), _species1SelectAction.getPlaceholderString());
@@ -435,9 +436,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			//_multiSelectClusterFilterAction.setSelectedOptions(QStringList());
 			_colorMapAction.setEnabled(false);
 			_backgroundColoringAction.setEnabled(false);
-			_visSettingAction.setEnabled(false);
-			_linkerSettingAction.setEnabled(false);
-			_distanceNeighborhoodAction.setEnabled(false);
+			_visSettingHolder.setEnabled(false);
+			_linkerSettingHolder.setEnabled(false);
+			_distanceNeighborhoodHolder.setEnabled(false);
+			//_scatterplotColorWidget.setEnabled(false);
 		}
 
 	};
@@ -462,9 +464,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			//_multiSelectClusterFilterAction.setEnabled(true);
 			_colorMapAction.setEnabled(true);
 			_backgroundColoringAction.setEnabled(true);
-			_visSettingAction.setEnabled(true);
-			_linkerSettingAction.setEnabled(true);
-			_distanceNeighborhoodAction.setEnabled(true);
+			_visSettingHolder.setEnabled(true);
+			_linkerSettingHolder.setEnabled(true);
+			_distanceNeighborhoodHolder.setEnabled(true);
+			//_scatterplotColorWidget.setEnabled(true);
 			if (_crossSpecies2DatasetLinkerAction.getNumberOfOptions() > 0)
 			{
 				QString species2CrossSpeciesClusterDatasetName = _species2SelectAction.getCurrentText() + "-10x-" + _neighborhoodAction.getCurrentText() + "/cross_species_cluster";
@@ -515,9 +518,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			//_multiSelectClusterFilterAction.setSelectedOptions(QStringList());
 			_colorMapAction.setEnabled(false);
 			_backgroundColoringAction.setEnabled(false);
-			_visSettingAction.setEnabled(false);
-			_linkerSettingAction.setEnabled(false);
-			_distanceNeighborhoodAction.setEnabled(false);
+			_visSettingHolder.setEnabled(false);
+			_linkerSettingHolder.setEnabled(false);
+			_distanceNeighborhoodHolder.setEnabled(false);
+			//_scatterplotColorWidget.setEnabled(false);
 		}
 
 		if (_species2SelectAction.getCurrentText() != "" && _species2SelectAction.getCurrentText() != "")
@@ -666,7 +670,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				}
 
 				_species1ScatterplotColorLinkerAction.setCurrentText(species1EmbeddingColorDatasetName);
-				qDebug() << _species1ScatterplotColorLinkerAction.getCurrentText();
+				//qDebug() << _species1ScatterplotColorLinkerAction.getCurrentText();
 			}
 			if (_species2ScatterplotColorLinkerAction.getNumberOfOptions() > 0)
 			{
@@ -698,7 +702,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				}
 
 				_species2ScatterplotColorLinkerAction.setCurrentText(species2EmbeddingColorDatasetName);
-				qDebug() << _species2ScatterplotColorLinkerAction.getCurrentText();
+				//qDebug() << _species2ScatterplotColorLinkerAction.getCurrentText();
 			}
 			if (_species1DEStatsLinkerAction.getNumberOfOptions() > 0)
 			{
@@ -811,7 +815,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			}
 
 			_species1ScatterplotColorLinkerAction.setCurrentText(species1EmbeddingColorDatasetName);
-			qDebug() << _species1ScatterplotColorLinkerAction.getCurrentText();
+			//qDebug() << _species1ScatterplotColorLinkerAction.getCurrentText();
 		}
 		if (_species2ScatterplotColorLinkerAction.getNumberOfOptions() > 0)
 		{
@@ -842,7 +846,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				species2EmbeddingColorDatasetName = "Cluster Differential Expression 1: SelectedIDMeanExpressions2";
 			}
 			_species2ScatterplotColorLinkerAction.setCurrentText(species2EmbeddingColorDatasetName);
-			qDebug() << _species2ScatterplotColorLinkerAction.getCurrentText();
+			//qDebug() << _species2ScatterplotColorLinkerAction.getCurrentText();
 		}
 
 	};
@@ -908,11 +912,12 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	{
 		if (_removeLinkingOptionMenuFromUIAction.isChecked())
 		{
-			_linkerSettingAction.setVisible(false);
+			_linkerSettingHolder.setVisible(false);
+
 		}
 		else
 		{
-			_linkerSettingAction.setVisible(true);
+			_linkerSettingHolder.setVisible(true);
 		}
 
 
@@ -1495,10 +1500,10 @@ void SimianOptionsAction::updateDatasetPickerAction()
 
 
 
-SimianOptionsAction::Species1Action::Widget::Widget(QWidget* parent, Species1Action* species1SelectAction) :
-	WidgetActionWidget(parent, species1SelectAction)
+SimianOptionsAction::Species1Holder::Widget::Widget(QWidget* parent, Species1Holder* species1SelectHolder) :
+	WidgetActionWidget(parent, species1SelectHolder)
 {
-	auto& simianOptionsAction = species1SelectAction->_simianOptionsAction;
+	auto& simianOptionsAction = species1SelectHolder->_simianOptionsAction;
 
 	auto selectionSpecies1Widget = simianOptionsAction._species1SelectAction.createWidget(this);
 	selectionSpecies1Widget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
@@ -1513,17 +1518,17 @@ SimianOptionsAction::Species1Action::Widget::Widget(QWidget* parent, Species1Act
 	setPopupLayout(selectionSpecies1OptionLayout);
 }
 
-inline SimianOptionsAction::Species1Action::Species1Action(SimianOptionsAction& simianOptionsAction) :
+inline SimianOptionsAction::Species1Holder::Species1Holder(SimianOptionsAction& simianOptionsAction) :
 	_simianOptionsAction(simianOptionsAction)
 {
 
 }
 
 
-SimianOptionsAction::Species2Action::Widget::Widget(QWidget* parent, Species2Action* species2SelectAction) :
-	WidgetActionWidget(parent, species2SelectAction)
+SimianOptionsAction::Species2Holder::Widget::Widget(QWidget* parent, Species2Holder* species2SelectHolder) :
+	WidgetActionWidget(parent, species2SelectHolder)
 {
-	auto& simianOptionsAction = species2SelectAction->_simianOptionsAction;
+	auto& simianOptionsAction = species2SelectHolder->_simianOptionsAction;
 
 	auto selectionSpecies2Widget = simianOptionsAction._species2SelectAction.createWidget(this);
 	selectionSpecies2Widget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
@@ -1538,16 +1543,16 @@ SimianOptionsAction::Species2Action::Widget::Widget(QWidget* parent, Species2Act
 	setPopupLayout(selectionSpecies2OptionLayout);
 }
 
-inline SimianOptionsAction::Species2Action::Species2Action(SimianOptionsAction& simianOptionsAction) :
+inline SimianOptionsAction::Species2Holder::Species2Holder(SimianOptionsAction& simianOptionsAction) :
 	_simianOptionsAction(simianOptionsAction)
 {
 
 }
 
-SimianOptionsAction::CellCountAction::Widget::Widget(QWidget* parent, CellCountAction* cellCountAction) :
-	WidgetActionWidget(parent, cellCountAction)
+SimianOptionsAction::CellCountHolder::Widget::Widget(QWidget* parent, CellCountHolder* cellCountHolder) :
+	WidgetActionWidget(parent, cellCountHolder)
 {
-	auto& simianOptionsAction = cellCountAction->_simianOptionsAction;
+	auto& simianOptionsAction = cellCountHolder->_simianOptionsAction;
 
 	auto selectionHistBarWidget = simianOptionsAction._histBarAction.createWidget(this);
 	selectionHistBarWidget->findChild<QCheckBox*>("Checkbox");
@@ -1562,7 +1567,7 @@ SimianOptionsAction::CellCountAction::Widget::Widget(QWidget* parent, CellCountA
 	setPopupLayout(cellCountActionLayout);
 }
 
-inline SimianOptionsAction::CellCountAction::CellCountAction(SimianOptionsAction& simianOptionsAction) :
+inline SimianOptionsAction::CellCountHolder::CellCountHolder(SimianOptionsAction& simianOptionsAction) :
 	_simianOptionsAction(simianOptionsAction)
 {
 
@@ -1616,10 +1621,10 @@ inline SimianOptionsAction::CellCountAction::CellCountAction(SimianOptionsAction
 //
 //}
 
-SimianOptionsAction::VisSettingAction::Widget::Widget(QWidget* parent, VisSettingAction* visSettingAction) :
-	WidgetActionWidget(parent, visSettingAction)
+SimianOptionsAction::VisSettingHolder::Widget::Widget(QWidget* parent, VisSettingHolder* visSettingHolder) :
+	WidgetActionWidget(parent, visSettingHolder)
 {
-	auto& simianOptionsAction = visSettingAction->_simianOptionsAction;
+	auto& simianOptionsAction = visSettingHolder->_simianOptionsAction;
 
 	auto fullHeatMapSelectionWidget = simianOptionsAction._fullHeatMapAction.createWidget(this);
 	fullHeatMapSelectionWidget->findChild<QCheckBox*>("Checkbox");
@@ -1628,8 +1633,8 @@ SimianOptionsAction::VisSettingAction::Widget::Widget(QWidget* parent, VisSettin
 	auto filterCrossSpeciesWidget = simianOptionsAction._crossSpeciesFilterAction.createWidget(this);
 	filterCrossSpeciesWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
-	auto selectScatterplotColorWidget = simianOptionsAction._scatterplotColorControlAction.createWidget(this);
-	selectScatterplotColorWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+	//auto selectScatterplotColorWidget = simianOptionsAction._scatterplotColorControlAction.createWidget(this);
+	//selectScatterplotColorWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
 
 	auto backgroundColoringWidget = simianOptionsAction._backgroundColoringAction.createWidget(this);
@@ -1646,14 +1651,14 @@ SimianOptionsAction::VisSettingAction::Widget::Widget(QWidget* parent, VisSettin
 	visSettingSelectionLayout->addRow(simianOptionsAction._crossSpeciesFilterAction.createLabelWidget(this), filterCrossSpeciesWidget);
 	visSettingSelectionLayout->addRow(simianOptionsAction._fullHeatMapAction.createLabelWidget(this), fullHeatMapSelectionWidget);
 	visSettingSelectionLayout->addRow(simianOptionsAction._colorMapAction.createLabelWidget(this), colorMapWidget);
-	visSettingSelectionLayout->addRow(simianOptionsAction._scatterplotColorControlAction.createLabelWidget(this), selectScatterplotColorWidget);
+	//visSettingSelectionLayout->addRow(simianOptionsAction._scatterplotColorControlAction.createLabelWidget(this), selectScatterplotColorWidget);
 	visSettingSelectionLayout->addRow(simianOptionsAction._backgroundColoringAction.createLabelWidget(this), backgroundColoringWidget);
 
 	setPopupLayout(visSettingSelectionLayout);
 
 }
 
-inline SimianOptionsAction::VisSettingAction::VisSettingAction(SimianOptionsAction& simianOptionsAction) :
+inline SimianOptionsAction::VisSettingHolder::VisSettingHolder(SimianOptionsAction& simianOptionsAction) :
 	_simianOptionsAction(simianOptionsAction)
 {
 	setText("Setting Options");
@@ -1661,10 +1666,10 @@ inline SimianOptionsAction::VisSettingAction::VisSettingAction(SimianOptionsActi
 }
 
 
-SimianOptionsAction::LinkerSettingAction::Widget::Widget(QWidget* parent, LinkerSettingAction* linkerSettingAction) :
-	WidgetActionWidget(parent, linkerSettingAction)
+SimianOptionsAction::LinkerSettingHolder::Widget::Widget(QWidget* parent, LinkerSettingHolder* linkerSettingHolder) :
+	WidgetActionWidget(parent, linkerSettingHolder)
 {
-	auto& simianOptionsAction = linkerSettingAction->_simianOptionsAction;
+	auto& simianOptionsAction = linkerSettingHolder->_simianOptionsAction;
 
 	//auto selectionCrossSpecies1DatasetLinkerWidget = simianOptionsAction._crossSpecies1DatasetLinkerAction.createWidget(this);
 	//selectionCrossSpecies1DatasetLinkerWidget->setFixedWidth(300);
@@ -1774,7 +1779,7 @@ SimianOptionsAction::LinkerSettingAction::Widget::Widget(QWidget* parent, Linker
 
 }
 
-inline SimianOptionsAction::LinkerSettingAction::LinkerSettingAction(SimianOptionsAction& simianOptionsAction) :
+inline SimianOptionsAction::LinkerSettingHolder::LinkerSettingHolder(SimianOptionsAction& simianOptionsAction) :
 	_simianOptionsAction(simianOptionsAction)
 {
 	setText("Linker Setting Options");
@@ -1783,10 +1788,10 @@ inline SimianOptionsAction::LinkerSettingAction::LinkerSettingAction(SimianOptio
 
 
 
-SimianOptionsAction::DistanceNeighborhoodAction::Widget::Widget(QWidget* parent, DistanceNeighborhoodAction* distanceNeighborhoodAction) :
-	WidgetActionWidget(parent, distanceNeighborhoodAction)
+SimianOptionsAction::DistanceNeighborhoodHolder::Widget::Widget(QWidget* parent, DistanceNeighborhoodHolder* distanceNeighborhoodHolder) :
+	WidgetActionWidget(parent, distanceNeighborhoodHolder)
 {
-	auto& simianOptionsAction = distanceNeighborhoodAction->_simianOptionsAction;
+	auto& simianOptionsAction = distanceNeighborhoodHolder->_simianOptionsAction;
 
 	auto selectionNeighborhoodWidget = simianOptionsAction._neighborhoodAction.createWidget(this);
 	selectionNeighborhoodWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
@@ -1801,12 +1806,36 @@ SimianOptionsAction::DistanceNeighborhoodAction::Widget::Widget(QWidget* parent,
 	setPopupLayout(filterOptionLayout);
 }
 
-inline SimianOptionsAction::DistanceNeighborhoodAction::DistanceNeighborhoodAction(SimianOptionsAction& simianOptionsAction) :
+inline SimianOptionsAction::DistanceNeighborhoodHolder::DistanceNeighborhoodHolder(SimianOptionsAction& simianOptionsAction) :
 	_simianOptionsAction(simianOptionsAction)
 {
 
 }
 
+
+SimianOptionsAction::ScatterplotColorHolder::Widget::Widget(QWidget* parent, ScatterplotColorHolder* scatterplotColorHolder) :
+	WidgetActionWidget(parent, scatterplotColorHolder)
+{
+	auto& simianOptionsAction = scatterplotColorHolder->_simianOptionsAction;
+
+	auto scatterplotColorChooseWidget = simianOptionsAction._scatterplotColorControlAction.createWidget(this);
+	scatterplotColorChooseWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+	scatterplotColorChooseWidget->setMaximumWidth(150);
+
+	auto fsscatterplotColorOptionLayout = new QFormLayout();
+
+	fsscatterplotColorOptionLayout->setContentsMargins(0, 0, 0, 0);
+	fsscatterplotColorOptionLayout->addRow(simianOptionsAction._scatterplotColorControlAction.createLabelWidget(this), scatterplotColorChooseWidget);
+
+
+	setPopupLayout(fsscatterplotColorOptionLayout);
+}
+
+inline SimianOptionsAction::ScatterplotColorHolder::ScatterplotColorHolder(SimianOptionsAction& simianOptionsAction) :
+	_simianOptionsAction(simianOptionsAction)
+{
+
+}
 
 
 //void SimianOptionsAction::filterMultiSelect()
