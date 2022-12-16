@@ -45,132 +45,154 @@ namespace hdps
 class SimianOptionsAction : public WidgetAction
 {
 public:
-    class Species1Action : public WidgetAction
+    class Species1Holder : public WidgetAction
     {
     protected:
         class Widget : public hdps::gui::WidgetActionWidget {
         public:
-            Widget(QWidget* parent, Species1Action* species1Action);
+            Widget(QWidget* parent, Species1Holder* species1Holder);
 
-            friend class Species1Action;
+            friend class Species1Holder;
         };
 
         QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
-            return new Species1Action::Widget(parent, this);
+            return new Species1Holder::Widget(parent, this);
         };
 
     public:
-        Species1Action(SimianOptionsAction& simianOptionsAction);
+        Species1Holder(SimianOptionsAction& simianOptionsAction);
 
     protected:
         SimianOptionsAction& _simianOptionsAction;
 
         friend class SimianOptionsAction;
     };
-    class Species2Action : public WidgetAction
+    class Species2Holder : public WidgetAction
     {
     protected:
         class Widget : public hdps::gui::WidgetActionWidget {
         public:
-            Widget(QWidget* parent, Species2Action* species2Action);
+            Widget(QWidget* parent, Species2Holder* species2Holder);
 
-            friend class Species2Action;
+            friend class Species2Holder;
         };
 
         QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
-            return new Species2Action::Widget(parent, this);
+            return new Species2Holder::Widget(parent, this);
         };
 
     public:
-        Species2Action(SimianOptionsAction& simianOptionsAction);
+        Species2Holder(SimianOptionsAction& simianOptionsAction);
 
     protected:
         SimianOptionsAction& _simianOptionsAction;
 
         friend class SimianOptionsAction;
     };
-    class VisSettingAction : public WidgetAction
+    class VisSettingHolder : public WidgetAction
     {
     protected:
         class Widget : public hdps::gui::WidgetActionWidget {
         public:
-            Widget(QWidget* parent, VisSettingAction* visSettingAction);
+            Widget(QWidget* parent, VisSettingHolder* visSettingHolder);
 
-            friend class VisSettingAction;
+            friend class VisSettingHolder;
         };
 
         QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
-            return new VisSettingAction::Widget(parent, this);
+            return new VisSettingHolder::Widget(parent, this);
         };
 
     public:
-        VisSettingAction(SimianOptionsAction& simianOptionsAction);
+        VisSettingHolder(SimianOptionsAction& simianOptionsAction);
 
     protected:
         SimianOptionsAction& _simianOptionsAction;
 
         friend class SimianOptionsAction;
     };
-    class LinkerSettingAction : public WidgetAction
+    class LinkerSettingHolder : public WidgetAction
     {
     protected:
         class Widget : public hdps::gui::WidgetActionWidget {
         public:
-            Widget(QWidget* parent, LinkerSettingAction* linkerSettingAction);
+            Widget(QWidget* parent, LinkerSettingHolder* linkerSettingHolder);
 
-            friend class LinkerSettingAction;
+            friend class LinkerSettingWidget;
         };
 
         QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
-            return new LinkerSettingAction::Widget(parent, this);
+            return new LinkerSettingHolder::Widget(parent, this);
         };
 
     public:
-        LinkerSettingAction(SimianOptionsAction& simianOptionsAction);
+        LinkerSettingHolder(SimianOptionsAction& simianOptionsAction);
 
     protected:
         SimianOptionsAction& _simianOptionsAction;
 
         friend class SimianOptionsAction;
     };
-    class DistanceNeighborhoodAction : public WidgetAction
+    class ScatterplotColorHolder : public WidgetAction
     {
     protected:
         class Widget : public hdps::gui::WidgetActionWidget {
         public:
-            Widget(QWidget* parent, DistanceNeighborhoodAction* distanceNeighborhoodAction);
+            Widget(QWidget* parent, ScatterplotColorHolder* scatterplotColorHolder);
 
-            friend class DistanceNeighborhoodAction;
+            friend class ScatterplotColorHolder;
         };
 
         QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
-            return new DistanceNeighborhoodAction::Widget(parent, this);
+            return new ScatterplotColorHolder::Widget(parent, this);
         };
 
     public:
-        DistanceNeighborhoodAction(SimianOptionsAction& simianOptionsAction);
+        ScatterplotColorHolder(SimianOptionsAction& simianOptionsAction);
 
     protected:
         SimianOptionsAction& _simianOptionsAction;
 
         friend class SimianOptionsAction;
     };
-    class CellCountAction : public WidgetAction
+    class DistanceNeighborhoodHolder : public WidgetAction
     {
     protected:
         class Widget : public hdps::gui::WidgetActionWidget {
         public:
-            Widget(QWidget* parent, CellCountAction* cellCountAction);
+            Widget(QWidget* parent, DistanceNeighborhoodHolder* distanceNeighborhoodHolder);
 
-            friend class CellCountAction;
+            friend class DistanceNeighborhoodHolder;
         };
 
         QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
-            return new CellCountAction::Widget(parent, this);
+            return new DistanceNeighborhoodHolder::Widget(parent, this);
         };
 
     public:
-        CellCountAction(SimianOptionsAction& simianOptionsAction);
+        DistanceNeighborhoodHolder(SimianOptionsAction& simianOptionsAction);
+
+    protected:
+        SimianOptionsAction& _simianOptionsAction;
+
+        friend class SimianOptionsAction;
+    };
+    class CellCountHolder : public WidgetAction
+    {
+    protected:
+        class Widget : public hdps::gui::WidgetActionWidget {
+        public:
+            Widget(QWidget* parent, CellCountHolder* cellCountHolder);
+
+            friend class CellCountHolder;
+        };
+
+        QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
+            return new CellCountHolder::Widget(parent, this);
+        };
+
+    public:
+        CellCountHolder(SimianOptionsAction& simianOptionsAction);
 
     protected:
         SimianOptionsAction& _simianOptionsAction;
@@ -253,21 +275,22 @@ public: // Action getters
     OptionAction& getInSpecies2HeatMapCellAction() { return _inSpecies2HeatMapCellAction; }
     OptionAction& getCrossSpecies1HeatMapCellAction() { return _crossSpecies1HeatMapCellAction; }
     OptionAction& getCrossSpecies2HeatMapCellAction() { return _crossSpecies2HeatMapCellAction; }
-    Species1Action& getSpecies1Action() { return _species1Action; }
-    Species2Action& getSpecies2Action() { return _species2Action; }
-    VisSettingAction& getVisSettingAction() { return _visSettingAction; }
-    LinkerSettingAction& getLinkerSettingAction() { return _linkerSettingAction; }
-    DistanceNeighborhoodAction& getDistanceNeighborhoodAction() { return _distanceNeighborhoodAction; }
+    Species1Holder& getSpecies1Holder() { return _species1Holder; }
+    Species2Holder& getSpecies2Holder() { return _species2Holder; }
+    VisSettingHolder& getVisSettingHolder() { return _visSettingHolder; }
+    LinkerSettingHolder& getLinkerSettingHolder() { return _linkerSettingHolder; }
+    DistanceNeighborhoodHolder& getDistanceNeighborhoodHolder() { return _distanceNeighborhoodHolder; }
+    ScatterplotColorHolder& getScatterplotColorHolder() { return _scatterplotColorHolder; }
     ColorMapAction& getColorMapAction() { return _colorMapAction; }
     ColorAction& getBackgroundColoringAction() { return _backgroundColoringAction; }
-    CellCountAction& getCellCountAction() { return _cellCountAction; }
+    CellCountHolder& getCellCountHolder() { return _cellCountHolder; }
     TriggerAction& getHelpAction() { return _helpAction; }
     TriggerAction& getScreenshotAction() { return _screenshotAction; }
     OptionAction& getBarLinkerSpecies1() { return _barLinkerAction1; }
     OptionAction& getBarLinkerSpecies2() { return _barLinkerAction2; }
     StringAction& getSpecies1Name() { return _species1Name; }
     StringAction& getSelectedCrossSpeciesNameList() { return _selectedCrossSpeciesNameList; }
-    OptionAction& getScatterplotColorControl() { return _scatterplotColorControlAction; }
+    //OptionAction& getScatterplotColorControl() { return _scatterplotColorControlAction; }
     StringAction& getSpecies2Name() { return _species2Name; }
     VariantAction& getGeneExpressionDatasetVariant() { return _geneExpressionDatasetVariant; }
     //ExplorationAction& getExplorationAction() { return _explorationAction; }
@@ -306,12 +329,13 @@ protected:
     OptionAction                 _crossSpecies1HeatMapCellAction;
     OptionAction                 _crossSpecies2HeatMapCellAction;
     bool                        _isLoading;
-    Species1Action               _species1Action;
-    Species2Action               _species2Action;
-    VisSettingAction               _visSettingAction;
-    LinkerSettingAction               _linkerSettingAction;
-    DistanceNeighborhoodAction               _distanceNeighborhoodAction;
-    CellCountAction               _cellCountAction;
+    Species1Holder               _species1Holder;
+    Species2Holder             _species2Holder;
+    VisSettingHolder              _visSettingHolder;
+    LinkerSettingHolder               _linkerSettingHolder;
+    DistanceNeighborhoodHolder                _distanceNeighborhoodHolder;
+    ScatterplotColorHolder         _scatterplotColorHolder;
+    CellCountHolder              _cellCountHolder;
     //ExplorationAction               _explorationAction;
     ToggleAction                _removeLinkingOptionMenuFromUIAction;
     TriggerAction                _helpAction;
