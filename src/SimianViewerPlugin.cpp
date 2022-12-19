@@ -187,7 +187,6 @@ void SimianViewerPlugin::publishCluster(std::string clusterName)
     {
         _simianOptionsAction->getSelectedCrossspeciescluster().setString(QString::fromStdString(clusterName));
     }
-    _simianOptionsAction->getmodifyDifferentialExpressionAutoUpdateAction().trigger();
 }
 
 
