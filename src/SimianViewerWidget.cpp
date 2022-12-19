@@ -18,17 +18,17 @@ SimianViewerCommunicationObject::SimianViewerCommunicationObject(SimianViewerWid
 
 
 
-void SimianViewerCommunicationObject::js_passSelectionToQt(QVariantList data)
-{
-    // convert data structure
-    std::vector<std::string> selectedIDs;
-    
-    for (QVariantList::iterator j = data.begin(); j != data.end(); j++)
-    {
-        selectedIDs.push_back(((*j).toString()).toStdString()); // Print QVariant
-    }
-    _parent->js_passSelectionToQt(selectedIDs);
-}
+//void SimianViewerCommunicationObject::js_passSelectionToQt(QVariantList data)
+//{
+//    // convert data structure
+//    std::vector<std::string> selectedIDs;
+//    
+//    for (QVariantList::iterator j = data.begin(); j != data.end(); j++)
+//    {
+//        selectedIDs.push_back(((*j).toString()).toStdString()); // Print QVariant
+//    }
+//    _parent->js_passSelectionToQt(selectedIDs);
+//}
 
 void SimianViewerCommunicationObject::js_passClusterToQt(QVariant data)
 {
@@ -200,10 +200,10 @@ void SimianViewerWidget::initWebPage()
 }
 
 
-void SimianViewerWidget::js_passSelectionToQt(std::vector<std::string> selectedIDs)
-{   
-    emit passSelectionToQt(selectedIDs);
-}
+//void SimianViewerWidget::js_passSelectionToQt(std::vector<std::string> selectedIDs)
+//{   
+//    emit passSelectionToQt(selectedIDs);
+//}
 
 void SimianViewerWidget::js_passClusterToQt(std::string clusterName)
 {
