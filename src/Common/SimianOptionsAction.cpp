@@ -1097,6 +1097,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 	const auto updateSelectedCrossspeciescluster = [this]() -> void
 	{
+		_simianViewerPlugin.getSimianViewerWidget()->borderSelectedCrossspeciesCluster(_selectedCrossspeciescluster.getString());
+
 		if (_selectedCrossspeciescluster.getString() == "")
 			
 		{

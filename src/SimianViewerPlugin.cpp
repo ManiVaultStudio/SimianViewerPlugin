@@ -192,7 +192,7 @@ void SimianViewerPlugin::publishCluster(std::string clusterName)
 
 void SimianViewerPlugin::removeSelectionFromScatterplot(std::string clusterName)
 {
-    if (clusterName == "true")
+    if (clusterName == "")
     {
         _simianOptionsAction->getSelectedCrossspeciescluster().setString("");
     }
