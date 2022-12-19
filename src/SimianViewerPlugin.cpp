@@ -194,6 +194,7 @@ void SimianViewerPlugin::publishCluster(std::string clusterName)
 
         _simianOptionsAction->getCrossSpecies2HeatMapCellAction().setCurrentText(QString::fromStdString(clusterName));
         _simianOptionsAction->getSelectedCrossSpeciesNameList().setText(QString::fromStdString(clusterName));
+        _simianOptionsAction->getSelectedCrossspeciescluster().setString(QString::fromStdString(clusterName));
 
         if(_simianOptionsAction->getCrossSpeciesFilterAction().getCurrentText() == "cross-species clusters")
         {
@@ -300,7 +301,7 @@ void SimianViewerPlugin::removeSelectionFromScatterplot(std::string clusterName)
 {
     if (clusterName == "true")
     {
-
+        _simianOptionsAction->getSelectedCrossspeciescluster().setString("");
         if (_simianOptionsAction->getCrossSpeciesFilterAction().getCurrentText() == "cross-species clusters")
         {
             if (_simianOptionsAction->getCrossSpecies1DatasetLinkerAction().getCurrentText() != "")
@@ -522,6 +523,7 @@ void SimianViewerPlugin::selectIndividualSpeciesClusterPoints(std::vector<std::s
         if (selectedIDs[2]== selectedIDs[3])
         {
             _simianOptionsAction->getSelectedCrossSpeciesNameList().setText(QString::fromStdString(selectedIDs[2]));
+            _simianOptionsAction->getSelectedCrossspeciescluster().setString(QString::fromStdString(selectedIDs[2]));
         }
     }
     else if (_simianOptionsAction->getScatterplotColorControlAction().getCurrentText() == "in-species cluster")

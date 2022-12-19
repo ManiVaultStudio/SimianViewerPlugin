@@ -292,6 +292,7 @@ public: // Action getters
     StringAction& getSelectedCrossSpeciesNameList() { return _selectedCrossSpeciesNameList; }
     //OptionAction& getScatterplotColorControl() { return _scatterplotColorControlAction; }
     StringAction& getSpecies2Name() { return _species2Name; }
+    StringAction& getSelectedCrossspeciescluster() { return _selectedCrossspeciescluster; }
     VariantAction& getGeneExpressionDatasetVariant() { return _geneExpressionDatasetVariant; }
     //ExplorationAction& getExplorationAction() { return _explorationAction; }
 protected:
@@ -345,6 +346,7 @@ protected:
     TriggerAction                 _modifyDifferentialExpressionAutoUpdate;
     StringAction                  _species1Name;
     StringAction                  _species2Name;
+    StringAction                    _selectedCrossspeciescluster;
     VariantAction                  _geneExpressionDatasetVariant;
     StringAction                _selectedCrossSpeciesNameList;
     bool _isStarted;
