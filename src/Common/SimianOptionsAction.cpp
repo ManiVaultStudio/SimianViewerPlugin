@@ -55,7 +55,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_species2Name(this, "Species2Name"),
 	_selectedCrossspeciescluster(this, "Selected CrossSpecies Cluster"),
 	_geneExpressionDatasetVariant(this,"Gene Expression Variant"),
-	_selectedCrossSpeciesNameList(this,"Selected Cross Species Name List")
+	_selectedCrossSpeciesNameList(this,"Selected Cross Species Name List"),
+	_scatterplotColorMapAction(this,"Scatterplot color map connection")
 {
 	setText("Settings");
 
@@ -121,6 +122,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	//_multiSelectClusterFilterAction.initialize(QStringList{ "" });
 	//_multiSelectClusterFilterAction.setSelectedOptions(QStringList());
 	_colorMapAction.initialize("Black to white", "Black to white");
+	_scatterplotColorMapAction.initialize("Viridis", "Viridis");
 	_backgroundColoringAction.initialize(DEFAULT_CONSTANT_COLOR, DEFAULT_CONSTANT_COLOR);
 	_neighborhoodAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 	_neighborhoodAction.initialize(QStringList({ "glia","it_types","l5et_l56np_l6ct_l6b","lamp5_sncg_vip","sst_sst_chodl_pvalb" }), "it_types", "it_types");
@@ -160,6 +162,13 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_colorMapAction.getSettingsAction().getDiscreteAction().setVisible(false);
 	_colorMapAction.getSettingsAction().getEditor1DAction().setVisible(false);
 
+	_scatterplotColorMapAction.getSettingsAction().getDiscreteAction().setVisible(false);
+	_scatterplotColorMapAction.getSettingsAction().getEditor1DAction().setVisible(false);
+	
+	if (!_scatterplotColorMapAction.isPublished())
+	{
+		_scatterplotColorMapAction.publish("Scatterplot color map connect");
+	}
 	if (!_crossSpecies1DatasetLinkerAction.isPublished())
 	{
 		_crossSpecies1DatasetLinkerAction.publish("CrossSpeciesDataset1");
