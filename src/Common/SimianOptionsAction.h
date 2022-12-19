@@ -292,6 +292,8 @@ public: // Action getters
     StringAction& getSpecies2Name() { return _species2Name; }
     StringAction& getSelectedCrossspeciescluster() { return _selectedCrossspeciescluster; }
     VariantAction& getGeneExpressionDatasetVariant() { return _geneExpressionDatasetVariant; }
+
+    ColorMapAction& getScatterplotColorMapAction() { return _scatterplotColorMapAction; }
     //ExplorationAction& getExplorationAction() { return _explorationAction; }
 protected:
     SimianViewerPlugin&          _simianViewerPlugin;
@@ -347,6 +349,7 @@ protected:
     StringAction                _selectedCrossSpeciesNameList;
     bool _isStarted;
     ColorMapAction          _colorMapAction;
+    ColorMapAction _scatterplotColorMapAction;
     ColorAction              _backgroundColoringAction;
     hdps::EventListener     _eventListener;
     /** Default constant color */
