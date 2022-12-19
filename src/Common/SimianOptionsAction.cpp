@@ -1098,7 +1098,67 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	const auto updateSelectedCrossspeciescluster = [this]() -> void
 	{
 
+		if (_selectedCrossspeciescluster.getString() == "")
+		{
+			if (_crossSpeciesFilterAction.getCurrentText() == "cross-species clusters")
+			{
+				if (_crossSpecies1DatasetLinkerAction.getCurrentText() != "")
+				{
+					auto dataset1 = _crossSpecies1DatasetLinkerAction.getCurrentDataset();
+					const auto candidateDataset1 = _core->requestDataset<Clusters>(dataset1.getDatasetGuid());
+					std::vector<std::uint32_t> selectedIndices1;
 
+
+
+					candidateDataset1->getParent()->setSelectionIndices(selectedIndices1);
+
+
+					_core->notifyDatasetSelectionChanged(candidateDataset1->getParent());
+
+				}
+				if (_crossSpecies2DatasetLinkerAction.getCurrentText() != "")
+				{
+					auto dataset2 = _crossSpecies2DatasetLinkerAction.getCurrentDataset();
+					const auto candidateDataset2 = _core->requestDataset<Clusters>(dataset2.getDatasetGuid());
+					std::vector<std::uint32_t> selectedIndices2;
+
+
+					candidateDataset2->getParent()->setSelectionIndices(selectedIndices2);
+					_core->notifyDatasetSelectionChanged(candidateDataset2->getParent());
+				}
+			}
+			else
+			{
+				if (_inSpecies1DatasetLinkerAction.getCurrentText() != "")
+				{
+					auto dataset1 = _inSpecies1DatasetLinkerAction.getCurrentDataset();
+					const auto candidateDataset1 = _core->requestDataset<Clusters>(dataset1.getDatasetGuid());
+					std::vector<std::uint32_t> selectedIndices1;
+
+
+
+					candidateDataset1->getParent()->setSelectionIndices(selectedIndices1);
+
+
+					_core->notifyDatasetSelectionChanged(candidateDataset1->getParent());
+
+				}
+				if (_inSpecies2DatasetLinkerAction.getCurrentText() != "")
+				{
+					auto dataset2 = _inSpecies2DatasetLinkerAction.getCurrentDataset();
+					const auto candidateDataset2 = _core->requestDataset<Clusters>(dataset2.getDatasetGuid());
+					std::vector<std::uint32_t> selectedIndices2;
+
+
+					candidateDataset2->getParent()->setSelectionIndices(selectedIndices2);
+					_core->notifyDatasetSelectionChanged(candidateDataset2->getParent());
+				}
+			}
+		}
+		else
+		{
+
+		}
 
 
 
@@ -1623,8 +1683,8 @@ SimianOptionsAction::VisSettingHolder::Widget::Widget(QWidget* parent, VisSettin
 	fullHeatMapSelectionWidget->findChild<QCheckBox*>("Checkbox");
 	fullHeatMapSelectionWidget->setFixedWidth(200);
 
-	auto filterCrossSpeciesWidget = simianOptionsAction._crossSpeciesFilterAction.createWidget(this);
-	filterCrossSpeciesWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+	//auto filterCrossSpeciesWidget = simianOptionsAction._crossSpeciesFilterAction.createWidget(this);
+	//filterCrossSpeciesWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
 	//auto selectScatterplotColorWidget = simianOptionsAction._scatterplotColorControlAction.createWidget(this);
 	//selectScatterplotColorWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
@@ -1641,7 +1701,7 @@ SimianOptionsAction::VisSettingHolder::Widget::Widget(QWidget* parent, VisSettin
 	visSettingSelectionLayout->setObjectName("Vis Setting Options");
 	visSettingSelectionLayout->setSpacing(2);
 	visSettingSelectionLayout->setVerticalSpacing(2);
-	visSettingSelectionLayout->addRow(simianOptionsAction._crossSpeciesFilterAction.createLabelWidget(this), filterCrossSpeciesWidget);
+	//visSettingSelectionLayout->addRow(simianOptionsAction._crossSpeciesFilterAction.createLabelWidget(this), filterCrossSpeciesWidget);
 	visSettingSelectionLayout->addRow(simianOptionsAction._fullHeatMapAction.createLabelWidget(this), fullHeatMapSelectionWidget);
 	visSettingSelectionLayout->addRow(simianOptionsAction._colorMapAction.createLabelWidget(this), colorMapWidget);
 	//visSettingSelectionLayout->addRow(simianOptionsAction._scatterplotColorControlAction.createLabelWidget(this), selectScatterplotColorWidget);
