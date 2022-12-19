@@ -1097,8 +1097,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 	const auto updateSelectedCrossspeciescluster = [this]() -> void
 	{
-
 		if (_selectedCrossspeciescluster.getString() == "")
+			
 		{
 			if (_crossSpeciesFilterAction.getCurrentText() == "cross-species clusters")
 			{
@@ -1157,7 +1157,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		}
 		else
 		{
-
 			_crossSpecies1HeatMapCellAction.setCurrentText(_selectedCrossspeciescluster.getString());
 
 			_crossSpecies2HeatMapCellAction.setCurrentText(_selectedCrossspeciescluster.getString());
@@ -1259,6 +1258,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				}
 			}
 		}
+		_modifyDifferentialExpressionAutoUpdate.trigger();
 	};
 
 	connect(&_selectedCrossspeciescluster, &StringAction::stringChanged, this, updateSelectedCrossspeciescluster);
