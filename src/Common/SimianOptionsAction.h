@@ -286,8 +286,6 @@ public: // Action getters
     CellCountHolder& getCellCountHolder() { return _cellCountHolder; }
     TriggerAction& getHelpAction() { return _helpAction; }
     TriggerAction& getScreenshotAction() { return _screenshotAction; }
-    OptionAction& getBarLinkerSpecies1() { return _barLinkerAction1; }
-    OptionAction& getBarLinkerSpecies2() { return _barLinkerAction2; }
     StringAction& getSpecies1Name() { return _species1Name; }
     StringAction& getSelectedCrossSpeciesNameList() { return _selectedCrossSpeciesNameList; }
     //OptionAction& getScatterplotColorControl() { return _scatterplotColorControlAction; }
@@ -341,8 +339,6 @@ protected:
     ToggleAction                _removeLinkingOptionMenuFromUIAction;
     TriggerAction                _helpAction;
     TriggerAction                _screenshotAction;
-    OptionAction                 _barLinkerAction1;
-    OptionAction                 _barLinkerAction2;
     TriggerAction                 _modifyDifferentialExpressionAutoUpdate;
     StringAction                  _species1Name;
     StringAction                  _species2Name;

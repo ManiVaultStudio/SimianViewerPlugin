@@ -185,15 +185,10 @@ void SimianViewerPlugin::publishCluster(std::string clusterName)
 {
     if (clusterName != "")
     {
-        if (_simianOptionsAction->getScatterplotColorControlAction().getCurrentText()=="cross-species cluster") {
-            _simianOptionsAction->getBarLinkerSpecies1().setCurrentText(QString::fromStdString(clusterName));
-            _simianOptionsAction->getBarLinkerSpecies2().setCurrentText(QString::fromStdString(clusterName));
-        }
-
         _simianOptionsAction->getCrossSpecies1HeatMapCellAction().setCurrentText(QString::fromStdString(clusterName));
 
         _simianOptionsAction->getCrossSpecies2HeatMapCellAction().setCurrentText(QString::fromStdString(clusterName));
-        _simianOptionsAction->getSelectedCrossSpeciesNameList().setText(QString::fromStdString(clusterName));
+        _simianOptionsAction->getSelectedCrossSpeciesNameList().setString(QString::fromStdString(clusterName));
         _simianOptionsAction->getSelectedCrossspeciescluster().setString(QString::fromStdString(clusterName));
 
         if(_simianOptionsAction->getCrossSpeciesFilterAction().getCurrentText() == "cross-species clusters")
@@ -518,19 +513,14 @@ void SimianViewerPlugin::selectIndividualSpeciesClusterPoints(std::vector<std::s
 {
     if (_simianOptionsAction->getScatterplotColorControlAction().getCurrentText() == "cross-species cluster")
     {
-        _simianOptionsAction->getBarLinkerSpecies1().setCurrentText(QString::fromStdString(selectedIDs[2]));
-        _simianOptionsAction->getBarLinkerSpecies2().setCurrentText(QString::fromStdString(selectedIDs[3]));
+
         if (selectedIDs[2]== selectedIDs[3])
         {
-            _simianOptionsAction->getSelectedCrossSpeciesNameList().setText(QString::fromStdString(selectedIDs[2]));
+            _simianOptionsAction->getSelectedCrossSpeciesNameList().setString(QString::fromStdString(selectedIDs[2]));
             _simianOptionsAction->getSelectedCrossspeciescluster().setString(QString::fromStdString(selectedIDs[2]));
         }
     }
-    else if (_simianOptionsAction->getScatterplotColorControlAction().getCurrentText() == "in-species cluster")
-    {
-        _simianOptionsAction->getBarLinkerSpecies1().setCurrentText(QString::fromStdString(selectedIDs[0]));
-        _simianOptionsAction->getBarLinkerSpecies2().setCurrentText(QString::fromStdString(selectedIDs[1]));
-    }
+
 
     
    // _simianOptionsAction->getInSpecies1HeatMapCellAction().setCurrentText(QString::fromStdString(selectedIDs[0]));
