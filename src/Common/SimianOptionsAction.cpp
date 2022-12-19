@@ -1157,6 +1157,13 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		}
 		else
 		{
+
+			_crossSpecies1HeatMapCellAction.setCurrentText(_selectedCrossspeciescluster.getString());
+
+			_crossSpecies2HeatMapCellAction.setCurrentText(_selectedCrossspeciescluster.getString());
+
+			_selectedCrossSpeciesNameList.setString(_selectedCrossspeciescluster.getString());
+
 			if (_crossSpeciesFilterAction.getCurrentText() == "cross-species clusters")
 			{
 				if (_crossSpecies1DatasetLinkerAction.getCurrentText() != "")
