@@ -55,6 +55,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_barLinkerAction2(this, "BarLinker Species2"),
 	_species1Name(this,"Species1Name"),
 	_species2Name(this, "Species2Name"),
+	_selectedCrossspeciescluster(this, "Selected CrossSpecies Cluster"),
 	_geneExpressionDatasetVariant(this,"Gene Expression Variant"),
 	_selectedCrossSpeciesNameList(this,"Selected Cross Species Name List")
 {
@@ -131,6 +132,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_crossSpecies1HeatMapCellAction.initialize(defaultTotalValues, "", "");
 	_species1Name.initialize("");
 	_species2Name.initialize("");
+	_selectedCrossspeciescluster.initialize("");
 	_selectedCrossSpeciesNameList.initialize("");
 	_inSpecies2HeatMapCellAction.initialize(defaultTotalValues, "", "");
 	_inSpecies1HeatMapCellAction.initialize(defaultTotalValues, "", "");
@@ -179,7 +181,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	{
 		_species2Name.publish("Species2Name");
 	}
-
+	if (!_selectedCrossspeciescluster.isPublished())
+	{
+		_selectedCrossspeciescluster.publish("Selected Cross-species cluster");
+	}
 
 	if (!_crossSpecies1HeatMapCellAction.isPublished())
 	{
