@@ -609,15 +609,15 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				{
 					QVariantMap tempHCONDELVariantMap;
 					tempHCONDELVariantMap[QString::number(Qt::BackgroundRole)] = QBrush(QColor::fromRgb(128, 128, 128));
-					tempHCONDELVariantMap[QString::number(Qt::SizeHintRole)] = QSize(12, 1);
+					tempHCONDELVariantMap[QString::number(Qt::SizeHintRole)] = QSize(6, 1);
 					tempHCONDELVariantMap[QString::number(Qt::DisplayRole)] = QString(" ");
 					tempHCONDELVariantMap[QString::number(Qt::ToolTipRole)] = QString(geneExpValue.toMap().value(gene).toMap().value("hCONDELs").toString());
 					
 					CONDELs.insert(gene, tempHCONDELVariantMap);
 				}	
 			}
-			geneEXp.insert("HARs", HARs);
-			geneEXp.insert("hCON-DELs", CONDELs);
+			geneEXp.insert("H A R s", HARs);
+			geneEXp.insert("h C O N D E L s", CONDELs);
 			//qDebug() << geneEXp;
 			_geneExpressionDatasetVariant.setVariant(geneEXp);
 		}
