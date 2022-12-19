@@ -1157,12 +1157,101 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		}
 		else
 		{
+			if (_crossSpeciesFilterAction.getCurrentText() == "cross-species clusters")
+			{
+				if (_crossSpecies1DatasetLinkerAction.getCurrentText() != "")
+				{
+					auto dataset1 = _crossSpecies1DatasetLinkerAction.getCurrentDataset();
+					const auto candidateDataset1 = _core->requestDataset<Clusters>(dataset1.getDatasetGuid());
+					std::vector<std::uint32_t> selectedIndices1;
 
+					for (const auto& cluster : candidateDataset1->getClusters())
+					{
+						if (cluster.getName() == _selectedCrossspeciescluster.getString())
+						{
+							for (const auto& index : cluster.getIndices())
+							{
+								selectedIndices1.push_back(index);
+							}
+						}
+
+					}
+
+					candidateDataset1->getParent()->setSelectionIndices(selectedIndices1);
+
+
+					_core->notifyDatasetSelectionChanged(candidateDataset1->getParent());
+
+				}
+				if (_crossSpecies2DatasetLinkerAction.getCurrentText() != "")
+				{
+					auto dataset2 = _crossSpecies2DatasetLinkerAction.getCurrentDataset();
+					const auto candidateDataset2 = _core->requestDataset<Clusters>(dataset2.getDatasetGuid());
+					std::vector<std::uint32_t> selectedIndices2;
+					for (const auto& cluster : candidateDataset2->getClusters())
+					{
+						if (cluster.getName() == _selectedCrossspeciescluster.getString())
+						{
+							for (const auto& index : cluster.getIndices())
+							{
+								selectedIndices2.push_back(index);
+							}
+						}
+
+					}
+
+					candidateDataset2->getParent()->setSelectionIndices(selectedIndices2);
+					_core->notifyDatasetSelectionChanged(candidateDataset2->getParent());
+				}
+			}
+			else
+			{
+				if (_inSpecies1DatasetLinkerAction.getCurrentText() != "")
+				{
+					auto dataset1 = _inSpecies1DatasetLinkerAction.getCurrentDataset();
+					const auto candidateDataset1 = _core->requestDataset<Clusters>(dataset1.getDatasetGuid());
+					std::vector<std::uint32_t> selectedIndices1;
+
+					for (const auto& cluster : candidateDataset1->getClusters())
+					{
+						if (cluster.getName() == _selectedCrossspeciescluster.getString())
+						{
+							for (const auto& index : cluster.getIndices())
+							{
+								selectedIndices1.push_back(index);
+							}
+						}
+
+					}
+
+					candidateDataset1->getParent()->setSelectionIndices(selectedIndices1);
+
+
+					_core->notifyDatasetSelectionChanged(candidateDataset1->getParent());
+
+				}
+				if (_inSpecies2DatasetLinkerAction.getCurrentText() != "")
+				{
+					auto dataset2 = _inSpecies2DatasetLinkerAction.getCurrentDataset();
+					const auto candidateDataset2 = _core->requestDataset<Clusters>(dataset2.getDatasetGuid());
+					std::vector<std::uint32_t> selectedIndices2;
+					for (const auto& cluster : candidateDataset2->getClusters())
+					{
+						if (cluster.getName() == _selectedCrossspeciescluster.getString())
+						{
+							for (const auto& index : cluster.getIndices())
+							{
+								selectedIndices2.push_back(index);
+							}
+						}
+
+					}
+
+					candidateDataset2->getParent()->setSelectionIndices(selectedIndices2);
+					_core->notifyDatasetSelectionChanged(candidateDataset2->getParent());
+				}
+			}
 		}
-
-
-
-
 	};
 
 	connect(&_selectedCrossspeciescluster, &StringAction::stringChanged, this, updateSelectedCrossspeciescluster);
