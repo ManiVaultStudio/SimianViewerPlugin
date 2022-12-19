@@ -28,6 +28,7 @@ signals:
     void qt_setBackgroundColor(QString data);
     void qt_histChart(QString data);
     void qt_showFullHeatmap(QString data);
+    void qt_borderSelectedCrossspeciesCluster(QString data);
     //void qt_generateScreenshot(QString data);
     //void qt_showExplorationMode(QString data);
     void qt_inspeciesClusterCounts(QString data);
@@ -59,6 +60,7 @@ public:
     void setBackgroundColor(QString visColorContent);
     void histChart(QString visColorContent);
     void showFullHeatmap(QString visColorContent); 
+    void borderSelectedCrossspeciesCluster(QString visColorContent);
     //void generateScreenshot(QString visColorContent);
     //void showExplorationMode(QString visColorContent);
     void inspeciesClusterCounts(QString visCountClusterContent);
