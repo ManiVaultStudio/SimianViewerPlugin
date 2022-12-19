@@ -51,8 +51,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_explorationModeAction(this)*/,
 	_helpAction(this, "Help"),
 	_screenshotAction(this, "Screenshot"),
-	_barLinkerAction1(this, "BarLinker Species1"),
-	_barLinkerAction2(this, "BarLinker Species2"),
 	_species1Name(this,"Species1Name"),
 	_species2Name(this, "Species2Name"),
 	_selectedCrossspeciescluster(this, "Selected CrossSpecies Cluster"),
@@ -115,8 +113,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_crossSpeciesFilterAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 	_crossSpeciesFilterAction.initialize(QStringList({ "all clusters","cross-species clusters" }), "cross-species clusters", "cross-species clusters");
 	_inSpecies1HeatMapCellAction.setDefaultWidgetFlags(OptionAction::ComboBox);
-	_barLinkerAction1.setDefaultWidgetFlags(OptionAction::ComboBox);
-	_barLinkerAction2.setDefaultWidgetFlags(OptionAction::ComboBox);
+
 	_inSpecies2HeatMapCellAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 	_crossSpecies1HeatMapCellAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 	_crossSpecies2HeatMapCellAction.setDefaultWidgetFlags(OptionAction::ComboBox);
@@ -137,8 +134,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_inSpecies2HeatMapCellAction.initialize(defaultTotalValues, "", "");
 	_inSpecies1HeatMapCellAction.initialize(defaultTotalValues, "", "");
 
-	_barLinkerAction1.initialize(defaultTotalValues, " ", " ");
-	_barLinkerAction2.initialize(defaultTotalValues, " ", " ");
 	_scatterplotColorControlAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 	_scatterplotColorControlAction.initialize(QStringList({ "cross-species cluster","in-species cluster","differential expression","cross-species sub-class","in-species subclass","donor"}), "cross-species cluster", "cross-species cluster");
 	_distanceAction.setDefaultWidgetFlags(IntegralAction::SpinBox | IntegralAction::Slider);
@@ -366,31 +361,31 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 					{
 						_crossSpecies1HeatMapCellAction.setCurrentText("Astro_1");
 						_crossSpecies2HeatMapCellAction.setCurrentText("Astro_1");
-						_selectedCrossSpeciesNameList.setText("Astro_1");
+						_selectedCrossSpeciesNameList.setString("Astro_1");
 					}
 					else if (_neighborhoodAction.getCurrentText() == "it_types")
 					{
 						_crossSpecies1HeatMapCellAction.setCurrentText("L2/3 IT_1");
 						_crossSpecies2HeatMapCellAction.setCurrentText("L2/3 IT_1");
-						_selectedCrossSpeciesNameList.setText("L2/3 IT_1");
+						_selectedCrossSpeciesNameList.setString("L2/3 IT_1");
 					}
 					else if (_neighborhoodAction.getCurrentText() == "l5et_l56np_l6ct_l6b")
 					{
 						_crossSpecies1HeatMapCellAction.setCurrentText("L6 CT_1");
 						_crossSpecies2HeatMapCellAction.setCurrentText("L6 CT_1");
-						_selectedCrossSpeciesNameList.setText("L6 CT_1");
+						_selectedCrossSpeciesNameList.setString("L6 CT_1");
 					}
 					else if (_neighborhoodAction.getCurrentText() == "lamp5_sncg_vip")
 					{
 						_crossSpecies1HeatMapCellAction.setCurrentText("Lamp5_1");
 						_crossSpecies2HeatMapCellAction.setCurrentText("Lamp5_1");
-						_selectedCrossSpeciesNameList.setText("Lamp5_1");
+						_selectedCrossSpeciesNameList.setString("Lamp5_1");
 					}
 					else if (_neighborhoodAction.getCurrentText() == "sst_sst_chodl_pvalb")
 					{
 						_crossSpecies1HeatMapCellAction.setCurrentText("Sst Chodl_1");
 						_crossSpecies2HeatMapCellAction.setCurrentText("Sst Chodl_1");
-						_selectedCrossSpeciesNameList.setText("Sst Chodl_1");
+						_selectedCrossSpeciesNameList.setString("Sst Chodl_1");
 					}
 					if (_scatterplotColorControlAction.getCurrentText() == "differential expression")
 					{
@@ -539,31 +534,31 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			{
 				_crossSpecies1HeatMapCellAction.setCurrentText("Astro_1");
 				_crossSpecies2HeatMapCellAction.setCurrentText("Astro_1");
-				_selectedCrossSpeciesNameList.setText("Astro_1");
+				_selectedCrossSpeciesNameList.setString("Astro_1");
 			}
 			else if (_neighborhoodAction.getCurrentText() == "it_types")
 			{
 				_crossSpecies1HeatMapCellAction.setCurrentText("L2/3 IT_1");
 				_crossSpecies2HeatMapCellAction.setCurrentText("L2/3 IT_1");
-				_selectedCrossSpeciesNameList.setText("L2/3 IT_1");
+				_selectedCrossSpeciesNameList.setString("L2/3 IT_1");
 			}
 			else if (_neighborhoodAction.getCurrentText() == "l5et_l56np_l6ct_l6b")
 			{
 				_crossSpecies1HeatMapCellAction.setCurrentText("L6 CT_1");
 				_crossSpecies2HeatMapCellAction.setCurrentText("L6 CT_1");
-				_selectedCrossSpeciesNameList.setText("L6 CT_1");
+				_selectedCrossSpeciesNameList.setString("L6 CT_1");
 			}
 			else if (_neighborhoodAction.getCurrentText() == "lamp5_sncg_vip")
 			{
 				_crossSpecies1HeatMapCellAction.setCurrentText("Lamp5_1");
 				_crossSpecies2HeatMapCellAction.setCurrentText("Lamp5_1");
-				_selectedCrossSpeciesNameList.setText("Lamp5_1");
+				_selectedCrossSpeciesNameList.setString("Lamp5_1");
 			}
 			else if (_neighborhoodAction.getCurrentText() == "sst_sst_chodl_pvalb")
 			{
 				_crossSpecies1HeatMapCellAction.setCurrentText("Sst Chodl_1");
 				_crossSpecies2HeatMapCellAction.setCurrentText("Sst Chodl_1");
-				_selectedCrossSpeciesNameList.setText("Sst Chodl_1");
+				_selectedCrossSpeciesNameList.setString("Sst Chodl_1");
 			}
 			if (_scatterplotColorControlAction.getCurrentText() == "differential expression")
 			{
@@ -575,9 +570,9 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	const auto updateSelectedCrossSpeciesNameList = [this]() -> void
 	{
 
-		if (_selectedCrossSpeciesNameList.text()!="")
+		if (_selectedCrossSpeciesNameList.getString()!="")
 		{
-			QVariant geneExpValue = CalculateGeneExpressionValues(_selectedCrossSpeciesNameList.text());
+			QVariant geneExpValue = CalculateGeneExpressionValues(_selectedCrossSpeciesNameList.getString());
 			QVariantMap geneEXp;
 			QVariantMap HARs;
 			QVariantMap CONDELs;
@@ -609,7 +604,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				{
 					QVariantMap tempHCONDELVariantMap;
 					tempHCONDELVariantMap[QString::number(Qt::BackgroundRole)] = QBrush(QColor::fromRgb(128, 128, 128));
-					tempHCONDELVariantMap[QString::number(Qt::SizeHintRole)] = QSize(6, 1);
+					tempHCONDELVariantMap[QString::number(Qt::SizeHintRole)] = QSize(2, 1);
 					tempHCONDELVariantMap[QString::number(Qt::DisplayRole)] = QString(" ");
 					tempHCONDELVariantMap[QString::number(Qt::ToolTipRole)] = QString(geneExpValue.toMap().value(gene).toMap().value("hCONDELs").toString());
 					
@@ -757,31 +752,31 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			{
 				_crossSpecies1HeatMapCellAction.setCurrentText("Astro_1");
 				_crossSpecies2HeatMapCellAction.setCurrentText("Astro_1");
-				_selectedCrossSpeciesNameList.setText("Astro_1");
+				_selectedCrossSpeciesNameList.setString("Astro_1");
 			}
 			else if (_neighborhoodAction.getCurrentText() == "it_types")
 			{
 				_crossSpecies1HeatMapCellAction.setCurrentText("L2/3 IT_1");
 				_crossSpecies2HeatMapCellAction.setCurrentText("L2/3 IT_1");
-				_selectedCrossSpeciesNameList.setText("L2/3 IT_1");
+				_selectedCrossSpeciesNameList.setString("L2/3 IT_1");
 			}
 			else if (_neighborhoodAction.getCurrentText() == "l5et_l56np_l6ct_l6b")
 			{
 				_crossSpecies1HeatMapCellAction.setCurrentText("L6 CT_1");
 				_crossSpecies2HeatMapCellAction.setCurrentText("L6 CT_1");
-				_selectedCrossSpeciesNameList.setText("L6 CT_1");
+				_selectedCrossSpeciesNameList.setString("L6 CT_1");
 			}
 			else if (_neighborhoodAction.getCurrentText() == "lamp5_sncg_vip")
 			{
 				_crossSpecies1HeatMapCellAction.setCurrentText("Lamp5_1");
 				_crossSpecies2HeatMapCellAction.setCurrentText("Lamp5_1");
-				_selectedCrossSpeciesNameList.setText("Lamp5_1");
+				_selectedCrossSpeciesNameList.setString("Lamp5_1");
 			}
 			else if (_neighborhoodAction.getCurrentText() == "sst_sst_chodl_pvalb")
 			{
 				_crossSpecies1HeatMapCellAction.setCurrentText("Sst Chodl_1");
 				_crossSpecies2HeatMapCellAction.setCurrentText("Sst Chodl_1");
-				_selectedCrossSpeciesNameList.setText("Sst Chodl_1");
+				_selectedCrossSpeciesNameList.setString("Sst Chodl_1");
 			}
 
 			_modifyDifferentialExpressionAutoUpdate.trigger();
@@ -857,16 +852,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	};
 
 	const auto updateInSpecies1HeatMapCell = [this]() -> void
-	{
-
-	};
-
-	const auto updateBarLinkerAction1 = [this]() -> void
-	{
-
-	};
-
-	const auto updateBarLinkerAction2 = [this]() -> void
 	{
 
 	};
@@ -1110,6 +1095,18 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 	};
 
+	const auto updateSelectedCrossspeciescluster = [this]() -> void
+	{
+
+
+
+
+
+
+	};
+
+	connect(&_selectedCrossspeciescluster, &StringAction::stringChanged, this, updateSelectedCrossspeciescluster);
+
 	connect(&_crossSpeciesFilterAction, &OptionAction::currentIndexChanged, [this, updateCrossSpeciesFilter](const std::int32_t& currentIndex) {
 		updateCrossSpeciesFilter();
 		});
@@ -1120,7 +1117,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	//	});
 
 	//
-	connect(&_selectedCrossSpeciesNameList, &StringAction::changed, this, updateSelectedCrossSpeciesNameList);
+	connect(&_selectedCrossSpeciesNameList, &StringAction::stringChanged, this, updateSelectedCrossSpeciesNameList);
 	connect(&_colorMapAction, &ColorMapAction::imageChanged, this, colormapFilter);
 
 	connect(&_backgroundColoringAction, &ColorAction::colorChanged, this, backgroundColoringFilter);
@@ -1147,15 +1144,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	connect(&_inSpecies1HeatMapCellAction, &OptionAction::currentIndexChanged, this, [this, updateInSpecies1HeatMapCell](const std::int32_t& currentIndex)
 		{
 			updateInSpecies1HeatMapCell();
-		});
-
-	connect(&_barLinkerAction1, &OptionAction::currentIndexChanged, this, [this, updateBarLinkerAction1](const std::int32_t& currentIndex)
-		{
-			updateBarLinkerAction1();
-		});
-	connect(&_barLinkerAction2, &OptionAction::currentIndexChanged, this, [this, updateBarLinkerAction2](const std::int32_t& currentIndex)
-		{
-			updateBarLinkerAction2();
 		});
 
 	connect(&_inSpecies2HeatMapCellAction, &OptionAction::currentIndexChanged, this, [this, updateInSpecies2HeatMapCell](const std::int32_t& currentIndex)
