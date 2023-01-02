@@ -2168,9 +2168,11 @@ const simianVis = () => {
         svg.append('image')
             .attr('xlink:href', yimage)
             //.attr('width', 30)
-            .attr('height', 35)
-            .attr("x", 0 - 68)
-            .attr("y", height)
+            .attr('height', 75)
+            //.attr("x", 0 - 68)
+            //.attr("y", height)
+            .attr("x", 0+5)
+            .attr("y", 0)
             .on("click", species2Click);//
     }
 
@@ -2178,9 +2180,28 @@ const simianVis = () => {
         svg.append('image')
             .attr('xlink:href', ximage)
             //.attr('width', 30)
-            .attr('height', 35)
-            .attr("x", 0 - 33)
-            .attr("y", height + 30)
+            .attr('height', 75)
+            //.attr("x", 0 - 33)
+            //.attr("y", height + 30)
+            .attr("x", function () {
+                if (species1ValueIdentify == "gorilla") {
+                    return width - 85;
+                }
+                else if (species1ValueIdentify == "human") {
+                    return width - 30;
+                }
+                else if (species1ValueIdentify == "rhesus") {
+                    return width - 80;
+                }
+                else if (species1ValueIdentify == "marmoset") {
+                    return width - 65;
+                }
+                else {
+                    return width - 60;
+                }
+               
+            })
+            .attr("y", height - 80)
             .on("click", species1Click);
     }
 
