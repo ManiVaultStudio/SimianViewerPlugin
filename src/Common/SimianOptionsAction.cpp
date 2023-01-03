@@ -1956,7 +1956,7 @@ SimianOptionsAction::DistanceNeighborhoodHolder::Widget::Widget(QWidget* parent,
 	auto selectionNeighborhoodWidget = simianOptionsAction._neighborhoodAction.createWidget(this);
 	selectionNeighborhoodWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
-	selectionNeighborhoodWidget->setMaximumWidth(160);
+	selectionNeighborhoodWidget->setMaximumWidth(180);
 
 
 	auto filterOptionLayout = new QFormLayout();
