@@ -2172,7 +2172,7 @@ const simianVis = () => {
             //.attr("x", 0 - 68)
             //.attr("y", height)
             .attr("x", 0+5)
-            .attr("y", 0)
+            .attr("y", 15)
             .on("click", species2Click);//
     }
 
@@ -2185,19 +2185,19 @@ const simianVis = () => {
             //.attr("y", height + 30)
             .attr("x", function () {
                 if (species1ValueIdentify == "gorilla") {
-                    return width - 85;
+                    return width - 85-15;
                 }
                 else if (species1ValueIdentify == "human") {
-                    return width - 30;
+                    return width - 30 - 15;
                 }
                 else if (species1ValueIdentify == "rhesus") {
-                    return width - 80;
+                    return width - 80 - 15;
                 }
                 else if (species1ValueIdentify == "marmoset") {
-                    return width - 65;
+                    return width - 65 - 15;
                 }
                 else {
-                    return width - 60;
+                    return width - 60 - 15;
                 }
                
             })
