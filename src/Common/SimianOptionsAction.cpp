@@ -252,7 +252,11 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		//else {
 		//	_multiSelectClusterFilterAction.setEnabled(true);
 		//}
-		updateData((_species1SelectAction.getCurrentText()).toStdString(), (_species2SelectAction.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString(), (_distanceAction.getValue()), (_crossSpeciesFilterAction.getCurrentText()).toStdString());
+		if (_species1SelectAction.getCurrentText() != "" && _species2SelectAction.getCurrentText() != "")
+		{
+			updateData((_species1SelectAction.getCurrentText()).toStdString(), (_species2SelectAction.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString(), (_distanceAction.getValue()), (_crossSpeciesFilterAction.getCurrentText()).toStdString());
+		}
+
 
 
 
@@ -1496,71 +1500,81 @@ void SimianOptionsAction::updateData(std::string Species1, std::string Species2,
 
 	//updateMultiSelectionDropdown(filteredVisData);
 
-	QString _jsonObject;
-	_jsonObject += "[";
-
-	QStringList columnNames = { "RowNumber", "species_1", "cluster_1", "species_2", "cluster_2", "dist", "neighborhood", "cross_species_cluster1_species_1", "cross_species_cluster2_species_2", "sortColumn","subclass_1","class_1","subclass_2","class_2" };
-
-	for (int i = 0; i < filteredVisData.size(); i++)
+	if(filteredVisData.size()>0)
 	{
-		_jsonObject += "{";
 
-		for (int j = 0; j < filteredVisData[i].size(); j++)
+		QString _jsonObject;
+		_jsonObject += "[";
+
+		QStringList columnNames = { "RowNumber", "species_1", "cluster_1", "species_2", "cluster_2", "dist", "neighborhood", "cross_species_cluster1_species_1", "cross_species_cluster2_species_2", "sortColumn","subclass_1","class_1","subclass_2","class_2" };
+
+		for (int i = 0; i < filteredVisData.size(); i++)
 		{
-			QString columnName = columnNames[j];
-			_jsonObject += QString("\"%1\":\"%2\",").arg(columnName, filteredVisData[i][j].c_str());
-		}
+			_jsonObject += "{";
 
+			for (int j = 0; j < filteredVisData[i].size(); j++)
+			{
+				QString columnName = columnNames[j];
+				_jsonObject += QString("\"%1\":\"%2\",").arg(columnName, filteredVisData[i][j].c_str());
+			}
+
+			_jsonObject.chop(1);
+
+			_jsonObject += "},";
+		}
 		_jsonObject.chop(1);
+		_jsonObject += "]";
+		_simianViewerPlugin.getSimianViewerWidget()->setData(_jsonObject.toStdString());
 
-		_jsonObject += "},";
+		auto& colorMapRangeAction = _colorMapAction.getSettingsAction().getHorizontalAxisAction().getRangeAction();
+		float colorMapRangeMin = 1200.0;
+		float colorMapRangeMax = 0.0;
+		for (int i = 0; i < filteredVisData.size(); i++)
+		{
+			const float temp = std::stof(filteredVisData[i][5]);
+			if (temp < colorMapRangeMin)
+			{
+				colorMapRangeMin = temp;
+			}
+			if (temp > colorMapRangeMax)
+			{
+				colorMapRangeMax = temp;
+			}
+		}
+		// Initialize the color map range action with the color map range from the scatter plot 
+		colorMapRangeAction.initialize(colorMapRangeMin, colorMapRangeMax, colorMapRangeMin, colorMapRangeMax, colorMapRangeMin, colorMapRangeMax);
+
+		if (!_isStarted)
+		{
+			_isStarted = true;
+		}
+
+		QStringList inSpecies1List; QStringList inSpecies2List; QStringList crossSpecies1List; QStringList crossSpecies2List;
+		for (int i = 0; i < filteredVisData.size(); i++)
+		{
+			if (!QStringlistContainsQString(inSpecies1List, QString::fromStdString(filteredVisData[i][2])))
+			{
+				inSpecies1List.append(QString::fromStdString(filteredVisData[i][2]));
+			}
+			if (!QStringlistContainsQString(inSpecies2List, QString::fromStdString(filteredVisData[i][4])))
+			{
+				inSpecies2List.append(QString::fromStdString(filteredVisData[i][4]));
+			}
+			if (!QStringlistContainsQString(crossSpecies1List, QString::fromStdString(filteredVisData[i][7])))
+			{
+				crossSpecies1List.append(QString::fromStdString(filteredVisData[i][7]));
+			}
+			if (!QStringlistContainsQString(crossSpecies2List, QString::fromStdString(filteredVisData[i][8])))
+			{
+				crossSpecies2List.append(QString::fromStdString(filteredVisData[i][8]));
+			}
+		}
+
 	}
-	_jsonObject.chop(1);
-	_jsonObject += "]";
-	_simianViewerPlugin.getSimianViewerWidget()->setData(_jsonObject.toStdString());
 
-	auto& colorMapRangeAction = _colorMapAction.getSettingsAction().getHorizontalAxisAction().getRangeAction();
-	float colorMapRangeMin = 1200.0;
-	float colorMapRangeMax = 0.0;
-	for (int i = 0; i < filteredVisData.size(); i++)
+	else
 	{
-		const float temp = std::stof(filteredVisData[i][5]);
-		if (temp < colorMapRangeMin)
-		{
-			colorMapRangeMin = temp;
-		}
-		if (temp > colorMapRangeMax)
-		{
-			colorMapRangeMax = temp;
-		}
-	}
-	// Initialize the color map range action with the color map range from the scatter plot 
-	colorMapRangeAction.initialize(colorMapRangeMin, colorMapRangeMax, colorMapRangeMin, colorMapRangeMax, colorMapRangeMin, colorMapRangeMax);
-
-	if (!_isStarted)
-	{
-		_isStarted = true;
-	}
-
-	QStringList inSpecies1List; QStringList inSpecies2List; QStringList crossSpecies1List; QStringList crossSpecies2List;
-	for (int i = 0; i < filteredVisData.size(); i++)
-	{
-		if (!QStringlistContainsQString(inSpecies1List, QString::fromStdString(filteredVisData[i][2])))
-		{
-			inSpecies1List.append(QString::fromStdString(filteredVisData[i][2]));
-		}
-		if (!QStringlistContainsQString(inSpecies2List, QString::fromStdString(filteredVisData[i][4])))
-		{
-			inSpecies2List.append(QString::fromStdString(filteredVisData[i][4]));
-		}
-		if (!QStringlistContainsQString(crossSpecies1List, QString::fromStdString(filteredVisData[i][7])))
-		{
-			crossSpecies1List.append(QString::fromStdString(filteredVisData[i][7]));
-		}
-		if (!QStringlistContainsQString(crossSpecies2List, QString::fromStdString(filteredVisData[i][8])))
-		{
-			crossSpecies2List.append(QString::fromStdString(filteredVisData[i][8]));
-		}
+		_simianViewerPlugin.getSimianViewerWidget()->resetView("Reset");
 	}
 	//_crossSpecies2HeatMapCellAction.initialize(crossSpecies2List, "", "");
 	//_crossSpecies1HeatMapCellAction.initialize(crossSpecies1List, "", "");
