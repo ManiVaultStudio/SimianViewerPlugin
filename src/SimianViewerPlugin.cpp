@@ -64,11 +64,8 @@ void SimianViewerPlugin::init()
     topToolbarLayout->addWidget(species2ActionWidget);
 
     auto distanceNeighborhoodActionwidget = _simianOptionsAction->getDistanceNeighborhoodHolder().createWidget(&getWidget());
-<<<<<<< HEAD
     distanceNeighborhoodActionwidget->setMaximumWidth(280);
-=======
-    distanceNeighborhoodActionwidget->setMaximumWidth(230);
->>>>>>> aaf2feac1f5c0aae6027cddb41dad53708cd59f9
+
     topToolbarLayout->addWidget(distanceNeighborhoodActionwidget);
 
     auto cellCountActionwidget = _simianOptionsAction->getCellCountHolder().createWidget(&getWidget());
