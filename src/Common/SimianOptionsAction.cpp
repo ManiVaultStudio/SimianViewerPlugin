@@ -586,53 +586,63 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 	const auto updateSelectedCrossSpeciesNameList = [this]() -> void
 	{
-
-		if (_selectedCrossSpeciesNameList.getString()!="")
+		if(_species1SelectAction.getCurrentText()=="human"|| _species2SelectAction.getCurrentText() == "human")
 		{
-			QVariant geneExpValue = CalculateGeneExpressionValues(_selectedCrossSpeciesNameList.getString());
-			QVariantMap geneEXp;
-			QVariantMap HARs;
-			QVariantMap CONDELs;
-
-
-
-			//tempVariantMap[QString::number(Qt::ForegroundRole)] = QBrush(QColor::fromRgb(128, 128, 128));
-
-			for (auto gene : geneExpValue.toMap().keys())
+			if (_selectedCrossSpeciesNameList.getString() != "")
 			{
-				//qDebug() << geneExpValue.toMap().value(gene).toMap().value("HARs").toString() << '\n';
-				//qDebug() << geneExpValue.toMap().value(gene).toMap().value("hCONDELs").toString() << '\n';
-				// 
+				QVariant geneExpValue = CalculateGeneExpressionValues(_selectedCrossSpeciesNameList.getString());
+				QVariantMap geneEXp;
+				QVariantMap HARs;
+				QVariantMap CONDELs;
 
-				//HAR Process
-			  if (geneExpValue.toMap().value(gene).toMap().value("HARs").toString() != "0")
+
+
+				//tempVariantMap[QString::number(Qt::ForegroundRole)] = QBrush(QColor::fromRgb(128, 128, 128));
+
+				for (auto gene : geneExpValue.toMap().keys())
 				{
-				  QVariantMap tempHARVariantMap;
-				  tempHARVariantMap[QString::number(Qt::BackgroundRole)] = QBrush(QColor::fromRgb(128, 128, 128));
-				  tempHARVariantMap[QString::number(Qt::SizeHintRole)] = QSize(12, 1);
-				  tempHARVariantMap[QString::number(Qt::DisplayRole)] = QString(" ");
-				  tempHARVariantMap[QString::number(Qt::ToolTipRole)] = QString(geneExpValue.toMap().value(gene).toMap().value("HARs").toString());
-				  
-				  HARs.insert(gene, tempHARVariantMap);
+					//qDebug() << geneExpValue.toMap().value(gene).toMap().value("HARs").toString() << '\n';
+					//qDebug() << geneExpValue.toMap().value(gene).toMap().value("hCONDELs").toString() << '\n';
+					// 
+
+					//HAR Process
+					if (geneExpValue.toMap().value(gene).toMap().value("HARs").toString() != "0")
+					{
+						QVariantMap tempHARVariantMap;
+						tempHARVariantMap[QString::number(Qt::BackgroundRole)] = QBrush(QColor::fromRgb(128, 128, 128));
+						tempHARVariantMap[QString::number(Qt::SizeHintRole)] = QSize(12, 1);
+						tempHARVariantMap[QString::number(Qt::DisplayRole)] = QString(" ");
+						tempHARVariantMap[QString::number(Qt::ToolTipRole)] = QString(geneExpValue.toMap().value(gene).toMap().value("HARs").toString());
+
+						HARs.insert(gene, tempHARVariantMap);
+					}
+
+					//HCONDEL Process
+					if (geneExpValue.toMap().value(gene).toMap().value("hCONDELs").toString() != "0")
+					{
+						QVariantMap tempHCONDELVariantMap;
+						tempHCONDELVariantMap[QString::number(Qt::BackgroundRole)] = QBrush(QColor::fromRgb(128, 128, 128));
+						tempHCONDELVariantMap[QString::number(Qt::SizeHintRole)] = QSize(2, 1);
+						tempHCONDELVariantMap[QString::number(Qt::DisplayRole)] = QString(" ");
+						tempHCONDELVariantMap[QString::number(Qt::ToolTipRole)] = QString(geneExpValue.toMap().value(gene).toMap().value("hCONDELs").toString());
+
+						CONDELs.insert(gene, tempHCONDELVariantMap);
+					}
 				}
-				
-				//HCONDEL Process
-				if (geneExpValue.toMap().value(gene).toMap().value("hCONDELs").toString() != "0")
-				{
-					QVariantMap tempHCONDELVariantMap;
-					tempHCONDELVariantMap[QString::number(Qt::BackgroundRole)] = QBrush(QColor::fromRgb(128, 128, 128));
-					tempHCONDELVariantMap[QString::number(Qt::SizeHintRole)] = QSize(2, 1);
-					tempHCONDELVariantMap[QString::number(Qt::DisplayRole)] = QString(" ");
-					tempHCONDELVariantMap[QString::number(Qt::ToolTipRole)] = QString(geneExpValue.toMap().value(gene).toMap().value("hCONDELs").toString());
-					
-					CONDELs.insert(gene, tempHCONDELVariantMap);
-				}	
+				geneEXp.insert("H A R s", HARs);
+				geneEXp.insert("h C O N D E L s", CONDELs);
+				//qDebug() << geneEXp;
+				_geneExpressionDatasetVariant.setVariant(geneEXp);
 			}
-			geneEXp.insert("H A R s", HARs);
-			geneEXp.insert("h C O N D E L s", CONDELs);
-			//qDebug() << geneEXp;
+		}
+		
+
+		else
+		{
+			QVariantMap geneEXp;
 			_geneExpressionDatasetVariant.setVariant(geneEXp);
 		}
+
 		
 	};
 	const auto updateNeighborhood = [this]() -> void
