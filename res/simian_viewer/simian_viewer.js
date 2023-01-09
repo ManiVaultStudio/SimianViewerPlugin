@@ -1292,7 +1292,7 @@ const simianVis = () => {
             var marginTooltip = { topTooltip: 20, rightTooltip: 20, bottomTooltip: 20, leftTooltip: 20, middleTooltip: 10 };
             var regionWidthTooltip = wTooltip / 2 - marginTooltip.middleTooltip;
             var pointATooltip = regionWidthTooltip, pointBTooltip = wTooltip - regionWidthTooltip;
-            var exampleDataTooltip = [{ group: '6', species1: angle1Sp1, species2: angle1Sp2 }, { group: '5', species1: angle2Sp1, species2: angle2Sp2 }, { group: '4', species1: angle3Sp1, species2: angle3Sp2 }, { group: '3', species1: angle4Sp1, species2: angle4Sp2 }, { group: '2', species1: angle5Sp1, species2: angle5Sp2 }, { group: '1', species1: angle6Sp1, species2: angle6Sp2 }];
+            var exampleDataTooltip = [{ group: '6', species1: angle6Sp1, species2: angle6Sp2 }, { group: '5', species1: angle5Sp1, species2: angle5Sp2 }, { group: '4', species1: angle4Sp1, species2: angle4Sp2 }, { group: '3', species1: angle3Sp1, species2: angle3Sp2 }, { group: '2', species1: angle2Sp1, species2: angle2Sp2 }, { group: '1', species1: angle1Sp1, species2: angle1Sp2 }];
             var svgTooltip = d3.select('#tipDiv').append('svg').attr('width', marginTooltip.leftTooltip + wTooltip + marginTooltip.rightTooltip).attr('height', marginTooltip.topTooltip + hTooltip + marginTooltip.bottomTooltip).append('g').attr('transform', translation(marginTooltip.leftTooltip, marginTooltip.topTooltip));
             var maxValueTooltip = Math.max(d3.max(exampleDataTooltip, function (d) { return d.species1; }), d3.max(exampleDataTooltip, function (d) { return d.species2; }));
             var xScaleTooltip = d3.scaleLinear().domain([0, maxValueTooltip]).range([0, regionWidthTooltip]).nice();
@@ -1640,7 +1640,7 @@ const simianVis = () => {
         var marginTooltip = { topTooltip: 20, rightTooltip: 20, bottomTooltip: 20, leftTooltip: 20, middleTooltip: 10 };
         var regionWidthTooltip = wTooltip / 2 - marginTooltip.middleTooltip;
         var pointATooltip = regionWidthTooltip, pointBTooltip = wTooltip - regionWidthTooltip;
-        var exampleDataTooltip = [{ group: '6', species1: angle1Sp1, species2: angle1Sp2 }, { group: '5', species1: angle2Sp1, species2: angle2Sp2 }, { group: '4', species1: angle3Sp1, species2: angle3Sp2 }, { group: '3', species1: angle4Sp1, species2: angle4Sp2 }, { group: '2', species1: angle5Sp1, species2: angle5Sp2 }, { group: '1', species1: angle6Sp1, species2: angle6Sp2 }];
+        var exampleDataTooltip = [{ group: '6', species1: angle6Sp1, species2: angle6Sp2 }, { group: '5', species1: angle5Sp1, species2: angle5Sp2 }, { group: '4', species1: angle4Sp1, species2: angle4Sp2 }, { group: '3', species1: angle3Sp1, species2: angle3Sp2 }, { group: '2', species1: angle2Sp1, species2: angle2Sp2 }, { group: '1', species1: angle1Sp1, species2: angle1Sp2 }];
         var svgTooltip = d3.select('#tipDiv').append('svg').attr('width', marginTooltip.leftTooltip + wTooltip + marginTooltip.rightTooltip).attr('height', marginTooltip.topTooltip + hTooltip + marginTooltip.bottomTooltip).append('g').attr('transform', translation(marginTooltip.leftTooltip, marginTooltip.topTooltip));
         var maxValueTooltip = Math.max(d3.max(exampleDataTooltip, function (d) { return d.species1; }), d3.max(exampleDataTooltip, function (d) { return d.species2; }));
         var xScaleTooltip = d3.scaleLinear().domain([0, maxValueTooltip]).range([0, regionWidthTooltip]).nice();
