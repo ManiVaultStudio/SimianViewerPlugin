@@ -2171,7 +2171,7 @@ const simianVis = () => {
             .attr('height', 75)
             //.attr("x", 0 - 68)
             //.attr("y", height)
-            .attr("x", 0+5)
+            .attr("x", 10)
             .attr("y", 25)
             .on("click", species2Click);//
     }
@@ -2201,7 +2201,7 @@ const simianVis = () => {
                 }
                
             })
-            .attr("y", height - 80)
+            .attr("y", height - 85)
             .on("click", species1Click);
     }
 
