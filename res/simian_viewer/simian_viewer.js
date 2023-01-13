@@ -1123,7 +1123,7 @@ const simianVis = () => {
                 if (m == cy2) {
                     log("Y");
                     log(m);
-                    return "red";
+                    return "#de2d26";
                 }
                 else {
                     return "black";
@@ -1136,7 +1136,7 @@ const simianVis = () => {
                 if (m == cx1) {
                     log("X");
                     log(m);
-                    return "red";
+                    return "#de2d26";
                 }
                 else {
                     return "black";
