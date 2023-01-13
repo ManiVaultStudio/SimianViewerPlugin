@@ -1121,8 +1121,6 @@ const simianVis = () => {
             .selectAll("text")
             .style("fill", function (m) {
                 if (m == cy2) {
-                    log("Y");
-                    log(m);
                     return "#de2d26";
                 }
                 else {
@@ -1134,8 +1132,6 @@ const simianVis = () => {
             .selectAll("text")
             .style("fill", function (m) {
                 if (m == cx1) {
-                    log("X");
-                    log(m);
                     return "#de2d26";
                 }
                 else {
