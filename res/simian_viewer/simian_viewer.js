@@ -414,6 +414,7 @@ const simianVis = () => {
     x = d3.scaleBand().range([0, width]).domain(cluster_1_Groups).padding(0.05);
     svg
         .append("g")
+        .attr("class", "xLabel")
         .style("font-size", "8px")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x).tickSize(0))
@@ -440,6 +441,7 @@ const simianVis = () => {
     y = d3.scaleBand().range([height, 0]).domain(cluster_2_Groups).padding(0.05);
     svg
         .append("g")
+        .attr("class", "yLabel")
         .style("font-size", "8px")
         .call(d3.axisLeft(y).tickSize(0))
         .selectAll("text")
@@ -1097,17 +1099,49 @@ const simianVis = () => {
             else {
                 document.getElementById('cellClickContainer').innerHTML = "";
             }
-
             d3.select("#exploreViewMarker1").remove();
             d3.select("#exploreViewMarker2").remove();
             d3.select("#exploreViewMarker3").remove();
         }
+        svg
+            .select(".xLabel")
+            .selectAll("text")
+            .style("fill", "black");
+        svg
+            .select(".yLabel")
+            .selectAll("text")
 
+            .style("fill", "black");
     };
-
     var mouseenter = function (d) {
-
-
+        var cx1 = d.cluster_1;
+        var cy2 = d.cluster_2;
+        svg
+            .select(".yLabel")
+            .selectAll("text")
+            .style("fill", function (m) {
+                if (m == cy2) {
+                    log("Y");
+                    log(m);
+                    return "red";
+                }
+                else {
+                    return "black";
+                }
+            });
+        svg
+            .select(".xLabel")
+            .selectAll("text")
+            .style("fill", function (m) {
+                if (m == cx1) {
+                    log("X");
+                    log(m);
+                    return "red";
+                }
+                else {
+                    return "black";
+                }
+            });
     };
 
 
