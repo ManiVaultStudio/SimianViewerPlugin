@@ -1103,6 +1103,10 @@ const simianVis = () => {
             d3.select("#exploreViewMarker2").remove();
             d3.select("#exploreViewMarker3").remove();
         }
+
+        svg.select("#hoverTopAxisMarker").remove();
+        svg.select("#hoverRightAxisMarker").remove();
+
         svg
             .select(".xLabel")
             .selectAll("text")
@@ -1138,6 +1142,36 @@ const simianVis = () => {
                     return "black";
                 }
             });
+
+        if (barflag) {//top axis
+            var widthValue = inspecies1ClusterCounts[cx1] / totalInspeciescluster1counts;
+            widthValue = widthValue * 90;
+            log(widthValue);
+            svg.append("rect")
+                .attr("id", "hoverTopAxisMarker")
+                .attr("x", x(cx1) + x.bandwidth()/4)//((x(cx1)+)))
+                .attr("y", -(widthValue))
+                .attr("width", (valuenext1 - valnow1) / 2)
+                .attr("height", widthValue)
+                .attr("stroke", "#de2d26").attr("fill", "None");
+        }
+
+
+        if (barflag) {//right axis
+
+            var widthValue = inspecies2ClusterCounts[cy2] / totalInspeciescluster2counts;
+            widthValue = widthValue * 90;
+            log(widthValue);
+            svg.append("rect")
+                .attr("id", "hoverRightAxisMarker")
+                .attr("x", width)
+                .attr("y", + y(cy2) + y.bandwidth() / 4)//((y(cy2) + y.bandwidth()) / 2))//(y.step() - ( (valnow2 - valuenext2) / 2) / 2))
+                .attr("width", widthValue)
+                .attr("height", (valnow2 - valuenext2) / 2)
+                .attr("stroke", "#de2d26").attr("fill", "None");
+        }
+
+
     };
 
 
