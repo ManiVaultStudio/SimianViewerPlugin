@@ -609,8 +609,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 					if (geneExpValue.toMap().value(gene).toMap().value("HARs").toString() != "0")
 					{
 						QVariantMap tempHARVariantMap;
-						tempHARVariantMap[QString::number(Qt::BackgroundRole)] = QBrush(QColor::fromRgb(128, 128, 128));
-						tempHARVariantMap[QString::number(Qt::SizeHintRole)] = QSize(12, 1);
+						tempHARVariantMap[QString::number(Qt::DecorationRole)] = QColor::fromRgb(128, 128, 128);
+						tempHARVariantMap[QString::number(Qt::SizeHintRole)] = QSize(2, 1);
 						tempHARVariantMap[QString::number(Qt::DisplayRole)] = QString(" ");
 						tempHARVariantMap[QString::number(Qt::ToolTipRole)] = QString(geneExpValue.toMap().value(gene).toMap().value("HARs").toString());
 
@@ -622,7 +622,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 					if (geneExpValue.toMap().value(gene).toMap().value("hCONDELs").toString() != "0")
 					{
 						QVariantMap tempHCONDELVariantMap;
-						tempHCONDELVariantMap[QString::number(Qt::BackgroundRole)] = QBrush(QColor::fromRgb(128, 128, 128));
+						tempHCONDELVariantMap[QString::number(Qt::DecorationRole)] = QColor::fromRgb(128, 128, 128);
 						tempHCONDELVariantMap[QString::number(Qt::SizeHintRole)] = QSize(2, 1);
 						tempHCONDELVariantMap[QString::number(Qt::DisplayRole)] = QString(" ");
 						tempHCONDELVariantMap[QString::number(Qt::ToolTipRole)] = QString(geneExpValue.toMap().value(gene).toMap().value("hCONDELs").toString());
