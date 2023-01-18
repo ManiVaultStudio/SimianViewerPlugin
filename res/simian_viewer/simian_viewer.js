@@ -1146,7 +1146,7 @@ const simianVis = () => {
         if (barflag) {//top axis
             var widthValue = inspecies1ClusterCounts[cx1] / totalInspeciescluster1counts;
             widthValue = widthValue * 90;
-            log(widthValue);
+            //log(widthValue);
             svg.append("rect")
                 .attr("id", "hoverTopAxisMarker")
                 .attr("x", x(cx1) + x.bandwidth()/4)//((x(cx1)+)))
@@ -1161,7 +1161,7 @@ const simianVis = () => {
 
             var widthValue = inspecies2ClusterCounts[cy2] / totalInspeciescluster2counts;
             widthValue = widthValue * 90;
-            log(widthValue);
+            //log(widthValue);
             svg.append("rect")
                 .attr("id", "hoverRightAxisMarker")
                 .attr("x", width)

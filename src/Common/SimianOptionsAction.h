@@ -292,7 +292,7 @@ public: // Action getters
     StringAction& getSpecies2Name() { return _species2Name; }
     StringAction& getSelectedCrossspeciescluster() { return _selectedCrossspeciescluster; }
     VariantAction& getGeneExpressionDatasetVariant() { return _geneExpressionDatasetVariant; }
-
+    StringAction& getHarHcondelCountString() { return _harHcondelCountString; }
     ColorMapAction& getScatterplotColorMapAction() { return _scatterplotColorMapAction; }
     //ExplorationAction& getExplorationAction() { return _explorationAction; }
 protected:
@@ -345,6 +345,7 @@ protected:
     StringAction                  _species1Name;
     StringAction                  _species2Name;
     StringAction                    _selectedCrossspeciescluster;
+    StringAction                    _harHcondelCountString;
     VariantAction                  _geneExpressionDatasetVariant;
     StringAction                _selectedCrossSpeciesNameList;
     bool _isStarted;

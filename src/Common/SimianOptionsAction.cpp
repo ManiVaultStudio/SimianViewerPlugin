@@ -56,7 +56,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_selectedCrossspeciescluster(this, "Selected CrossSpecies Cluster"),
 	_geneExpressionDatasetVariant(this,"Gene Expression Variant"),
 	_selectedCrossSpeciesNameList(this,"Selected Cross Species Name List"),
-	_scatterplotColorMapAction(this,"Scatterplot color map connection")
+	_scatterplotColorMapAction(this,"Scatterplot color map connection"),
+	_harHcondelCountString(this,"Har-Hcondel Count String")
 {
 	setText("Settings");
 
@@ -594,9 +595,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				QVariantMap geneEXp;
 				QVariantMap HARs;
 				QVariantMap CONDELs;
-
-
-
+				int HARCount = 0;
+				int HCONDELCount = 0;
 				//tempVariantMap[QString::number(Qt::ForegroundRole)] = QBrush(QColor::fromRgb(128, 128, 128));
 
 				for (auto gene : geneExpValue.toMap().keys())
@@ -615,6 +615,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 						tempHARVariantMap[QString::number(Qt::ToolTipRole)] = QString(geneExpValue.toMap().value(gene).toMap().value("HARs").toString());
 
 						HARs.insert(gene, tempHARVariantMap);
+						HARCount = HARCount+1;
 					}
 
 					//HCONDEL Process
@@ -627,11 +628,19 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 						tempHCONDELVariantMap[QString::number(Qt::ToolTipRole)] = QString(geneExpValue.toMap().value(gene).toMap().value("hCONDELs").toString());
 
 						CONDELs.insert(gene, tempHCONDELVariantMap);
+						HCONDELCount = HCONDELCount+1;
 					}
 				}
 				geneEXp.insert("H A R s", HARs);
 				geneEXp.insert("h C O N D E L s", CONDELs);
+				_harHcondelCountString.setString( "HARS:"+ QString::number(HARCount)+"\nHCONDELS:"+ QString::number(HCONDELCount));
+
+				//countValues += "HARS:";
+				//countValues += QString::number(HARCount);
+				//countValues += "\nHCONDELS:";
+				//countValues += QString::number(HCONDELCount);
 				//qDebug() << geneEXp;
+				/*qDebug() << "Count"<< countValues;*/
 				_geneExpressionDatasetVariant.setVariant(geneEXp);
 			}
 		}
@@ -1002,6 +1011,12 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	{
 
 	};
+
+	const auto updateHarHcondelCountString = [this]() -> void
+	{
+
+	};
+
 	const auto updateDEStats1DatasetLinker = [this]() -> void
 	{
 
@@ -1321,6 +1336,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			updateNeighborhood();
 		});
 	connect(&_geneExpressionDatasetVariant, &VariantAction::variantChanged, this, updateGeneExpressionDatasetVariant);
+
+	connect(&_harHcondelCountString, &StringAction::stringChanged, this, updateHarHcondelCountString);
 
 	connect(&_scatterplotColorControlAction, &OptionAction::currentIndexChanged, this, [this, updateScatterplotColorControl](const std::int32_t& currentIndex)
 		{
@@ -1921,9 +1938,11 @@ SimianOptionsAction::LinkerSettingHolder::Widget::Widget(QWidget* parent, Linker
 		//autoUpdateWidget->findChild<QPushButton*>("");
 		//autoUpdateWidget->setMaximumWidth(91);
 
-		auto geneExpressionDatasetVariantWidget = simianOptionsAction._geneExpressionDatasetVariant.createWidget(this);
+		auto harHcondelCountStringWidget = simianOptionsAction._harHcondelCountString.createWidget(this);
 		//geneExpressionDatasetVariantWidget->findChild<QPushButton*>("");
 		//geneExpressionDatasetVariantWidget->setMaximumWidth(91);
+
+		auto geneExpressionDatasetVariantWidget = simianOptionsAction._geneExpressionDatasetVariant.createWidget(this);
 
 	auto removeLinkingOptionMenuFromUIActionWidget = simianOptionsAction._removeLinkingOptionMenuFromUIAction.createWidget(this);
 	removeLinkingOptionMenuFromUIActionWidget->findChild<QCheckBox*>("Checkbox");
@@ -1959,6 +1978,8 @@ SimianOptionsAction::LinkerSettingHolder::Widget::Widget(QWidget* parent, Linker
 	linkerSettingSelectionLayout->addRow(simianOptionsAction._modifyDifferentialExpressionAutoUpdate.createLabelWidget(this), autoUpdateWidget);
 
 	linkerSettingSelectionLayout->addRow(simianOptionsAction._geneExpressionDatasetVariant.createLabelWidget(this), geneExpressionDatasetVariantWidget);
+
+	linkerSettingSelectionLayout->addRow(simianOptionsAction._harHcondelCountString.createLabelWidget(this), harHcondelCountStringWidget);
 
 	linkerSettingSelectionLayout->addRow("Hide menu:", removeLinkingOptionMenuFromUIActionWidget);
 
