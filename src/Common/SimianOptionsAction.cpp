@@ -69,7 +69,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	});
 
 
-	_eventListener.setEventCore(core);
 	_eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataAdded));
 	_eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataRemoved));
 	_eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataChildAdded));
@@ -1159,7 +1158,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 					candidateDataset1->getParent()->setSelectionIndices(selectedIndices1);
 
 
-					_core->notifyDatasetSelectionChanged(candidateDataset1->getParent());
+					events().notifyDatasetSelectionChanged(candidateDataset1->getParent());
 
 				}
 				if (_crossSpecies2DatasetLinkerAction.getCurrentText() != "")
@@ -1170,7 +1169,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 
 					candidateDataset2->getParent()->setSelectionIndices(selectedIndices2);
-					_core->notifyDatasetSelectionChanged(candidateDataset2->getParent());
+					events().notifyDatasetSelectionChanged(candidateDataset2->getParent());
 				}
 			}
 			else
@@ -1186,7 +1185,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 					candidateDataset1->getParent()->setSelectionIndices(selectedIndices1);
 
 
-					_core->notifyDatasetSelectionChanged(candidateDataset1->getParent());
+					events().notifyDatasetSelectionChanged(candidateDataset1->getParent());
 
 				}
 				if (_inSpecies2DatasetLinkerAction.getCurrentText() != "")
@@ -1197,7 +1196,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 
 					candidateDataset2->getParent()->setSelectionIndices(selectedIndices2);
-					_core->notifyDatasetSelectionChanged(candidateDataset2->getParent());
+					events().notifyDatasetSelectionChanged(candidateDataset2->getParent());
 				}
 			}
 		}
@@ -1232,7 +1231,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 					candidateDataset1->getParent()->setSelectionIndices(selectedIndices1);
 
 
-					_core->notifyDatasetSelectionChanged(candidateDataset1->getParent());
+					events().notifyDatasetSelectionChanged(candidateDataset1->getParent());
 
 				}
 				if (_crossSpecies2DatasetLinkerAction.getCurrentText() != "")
@@ -1253,7 +1252,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 					}
 
 					candidateDataset2->getParent()->setSelectionIndices(selectedIndices2);
-					_core->notifyDatasetSelectionChanged(candidateDataset2->getParent());
+					events().notifyDatasetSelectionChanged(candidateDataset2->getParent());
 				}
 			}
 			else
@@ -1279,7 +1278,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 					candidateDataset1->getParent()->setSelectionIndices(selectedIndices1);
 
 
-					_core->notifyDatasetSelectionChanged(candidateDataset1->getParent());
+					events().notifyDatasetSelectionChanged(candidateDataset1->getParent());
 
 				}
 				if (_inSpecies2DatasetLinkerAction.getCurrentText() != "")
@@ -1300,7 +1299,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 					}
 
 					candidateDataset2->getParent()->setSelectionIndices(selectedIndices2);
-					_core->notifyDatasetSelectionChanged(candidateDataset2->getParent());
+					events().notifyDatasetSelectionChanged(candidateDataset2->getParent());
 				}
 			}
 		}
