@@ -88,8 +88,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		_modifyDifferentialExpressionAutoUpdate.setSerializationName( "Automatic Update Switch");
 		_removeLinkingOptionMenuFromUIAction.setSerializationName( "Remove linking option");
 		_fullHeatMapAction.setSerializationName( "Full distancemap");
-		_helpAction.setSerializationName( "Help");
-		_screenshotAction.setSerializationName( "Screenshot");
 		_species1Name.setSerializationName( "Species1Name");
 		_species2Name.setSerializationName( "Species2Name");
 		_selectedCrossspeciescluster.setSerializationName( "Selected CrossSpecies Cluster");
@@ -2292,7 +2290,7 @@ void SimianOptionsAction::fromVariantMap(const QVariantMap& variantMap)
 	WidgetAction::fromVariantMap(variantMap);
 
 	_species1SelectAction.fromParentVariantMap(variantMap);
-	_species2SelectAction.fromParentVariantMap(variantMap);
+	//_species2SelectAction.fromParentVariantMap(variantMap);
 	_neighborhoodAction.fromParentVariantMap(variantMap);
 	_scatterplotColorControlAction.fromParentVariantMap(variantMap);
 	_distanceAction.fromParentVariantMap(variantMap);
@@ -2318,8 +2316,6 @@ void SimianOptionsAction::fromVariantMap(const QVariantMap& variantMap)
 	_modifyDifferentialExpressionAutoUpdate.fromParentVariantMap(variantMap);
 	_removeLinkingOptionMenuFromUIAction.fromParentVariantMap(variantMap);
 	_fullHeatMapAction.fromParentVariantMap(variantMap);
-	_helpAction.fromParentVariantMap(variantMap);
-	_screenshotAction.fromParentVariantMap(variantMap);
 	_species1Name.fromParentVariantMap(variantMap);
 	_species2Name.fromParentVariantMap(variantMap);
 	_selectedCrossspeciescluster.fromParentVariantMap(variantMap);
@@ -2327,7 +2323,7 @@ void SimianOptionsAction::fromVariantMap(const QVariantMap& variantMap)
 	_selectedCrossSpeciesNameList.fromParentVariantMap(variantMap);
 	_scatterplotColorMapAction.fromParentVariantMap(variantMap);
 	_harHcondelCountString.fromParentVariantMap(variantMap);
-
+	_species2SelectAction.fromParentVariantMap(variantMap);
 
 }
 
@@ -2362,8 +2358,6 @@ QVariantMap SimianOptionsAction::toVariantMap() const
 	_modifyDifferentialExpressionAutoUpdate.insertIntoVariantMap(variantMap);
 	_removeLinkingOptionMenuFromUIAction.insertIntoVariantMap(variantMap);
 	_fullHeatMapAction.insertIntoVariantMap(variantMap);
-	_helpAction.insertIntoVariantMap(variantMap);
-	_screenshotAction.insertIntoVariantMap(variantMap);
 	_species1Name.insertIntoVariantMap(variantMap);
 	_species2Name.insertIntoVariantMap(variantMap);
 	_selectedCrossspeciescluster.insertIntoVariantMap(variantMap);
