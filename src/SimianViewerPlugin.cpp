@@ -26,8 +26,10 @@ using namespace hdps;
 
 SimianViewerPlugin::SimianViewerPlugin(const PluginFactory* factory) :
     ViewPlugin(factory),
-    _simianOptionsAction(nullptr)
+    _simianOptionsAction(*this, _core)
 {
+    setSerializationName("SimianViewer");
+
     _simian_viewer = new SimianViewerWidget();
 }
 
@@ -40,7 +42,7 @@ void SimianViewerPlugin::init()
     _simian_viewer->setPage(":/simian_viewer/simian_viewer.html", "qrc:/simian_viewer/");
     _simian_viewer->setContentsMargins(0, 0, 0, 0);
     _simian_viewer->layout()->setContentsMargins(0, 0, 0, 0);
-    _simianOptionsAction = new SimianOptionsAction(*this, _core);
+    
     //connect(_simian_viewer, &SimianViewerWidget::passSelectionToQt, this, &SimianViewerPlugin::publishSelection);
     connect(_simian_viewer, &SimianViewerWidget::passClusterToQt, this, &SimianViewerPlugin::publishCluster);
     connect(_simian_viewer, &SimianViewerWidget::removeSelectionFromScatterplot, this, &SimianViewerPlugin::removeSelectionFromScatterplot);
@@ -54,35 +56,35 @@ void SimianViewerPlugin::init()
     topToolbarLayout->setContentsMargins(0, 0, 0, 0);
     topToolbarLayout->setSpacing(0);
 
-    auto species1ActionWidget = _simianOptionsAction->getSpecies1Holder().createWidget(&getWidget());
+    auto species1ActionWidget = _simianOptionsAction.getSpecies1Holder().createWidget(&getWidget());
     species1ActionWidget->setMaximumWidth(200);
     topToolbarLayout->addWidget(species1ActionWidget);
 
-    auto species2ActionWidget = _simianOptionsAction->getSpecies2Holder().createWidget(&getWidget());
+    auto species2ActionWidget = _simianOptionsAction.getSpecies2Holder().createWidget(&getWidget());
     species2ActionWidget->setMaximumWidth(200);
     topToolbarLayout->addWidget(species2ActionWidget);
 
-    auto distanceNeighborhoodActionwidget = _simianOptionsAction->getDistanceNeighborhoodHolder().createWidget(&getWidget());
+    auto distanceNeighborhoodActionwidget = _simianOptionsAction.getDistanceNeighborhoodHolder().createWidget(&getWidget());
     distanceNeighborhoodActionwidget->setMaximumWidth(280);
 
     topToolbarLayout->addWidget(distanceNeighborhoodActionwidget);
 
-    auto cellCountActionwidget = _simianOptionsAction->getCellCountHolder().createWidget(&getWidget());
+    auto cellCountActionwidget = _simianOptionsAction.getCellCountHolder().createWidget(&getWidget());
     cellCountActionwidget->setMaximumWidth(100);
     topToolbarLayout->addWidget(cellCountActionwidget);
 
-    auto scatterplotColorwidget = _simianOptionsAction->getScatterplotColorHolder().createWidget(&getWidget());
+    auto scatterplotColorwidget = _simianOptionsAction.getScatterplotColorHolder().createWidget(&getWidget());
     scatterplotColorwidget->setMaximumWidth(255);
     topToolbarLayout->addWidget(scatterplotColorwidget);
 
-    //auto explorationActionwidget = _simianOptionsAction->getExplorationAction().createWidget(&_widget);
+    //auto explorationActionwidget = _simianOptionsAction.getExplorationAction().createWidget(&_widget);
     //explorationActionwidget->setMaximumWidth(97);
     //topToolbarLayout->addWidget(explorationActionwidget);
-    topToolbarLayout->addWidget(_simianOptionsAction->getScreenshotAction().createWidget(&getWidget()));
-    auto visSettingsWidget = _simianOptionsAction->getVisSettingHolder().createCollapsedWidget(&getWidget());
+    topToolbarLayout->addWidget(_simianOptionsAction.getScreenshotAction().createWidget(&getWidget()));
+    auto visSettingsWidget = _simianOptionsAction.getVisSettingHolder().createCollapsedWidget(&getWidget());
     topToolbarLayout->addWidget(visSettingsWidget);
-    topToolbarLayout->addWidget(_simianOptionsAction->getLinkerSettingHolder().createCollapsedWidget(&getWidget()));
-    topToolbarLayout->addWidget(_simianOptionsAction->getHelpAction().createWidget(&getWidget()));
+    topToolbarLayout->addWidget(_simianOptionsAction.getLinkerSettingHolder().createCollapsedWidget(&getWidget()));
+    topToolbarLayout->addWidget(_simianOptionsAction.getHelpAction().createWidget(&getWidget()));
 
  
     topToolbarLayout->addStretch(0);
@@ -110,10 +112,26 @@ void SimianViewerPlugin::onDataEvent(hdps::DataEvent* dataEvent)
     }
 }
 
+void SimianViewerPlugin::fromVariantMap(const QVariantMap& variantMap)
+{
+    WidgetAction::fromVariantMap(variantMap);
+
+    _simianOptionsAction.fromParentVariantMap(variantMap);
+}
+
+QVariantMap SimianViewerPlugin::toVariantMap() const
+{
+    QVariantMap variantMap = WidgetAction::toVariantMap();
+
+    _simianOptionsAction.insertIntoVariantMap(variantMap);
+
+    return variantMap;
+}
+
 //void SimianViewerPlugin::publishSelection(std::vector<std::string> selectedIDs)
 //{
 //    
-//   // if (_simianOptionsAction->getCrossSpeciesFilterAction().getCurrentText() == "cross species clusters")
+//   // if (_simianOptionsAction.getCrossSpeciesFilterAction().getCurrentText() == "cross species clusters")
 //   // {
 //    //    selectCrossSpeciesClusterPoints(selectedIDs);
 //   // }
@@ -185,7 +203,7 @@ void SimianViewerPlugin::publishCluster(std::string clusterName)
 {
     if (clusterName != "")
     {
-        _simianOptionsAction->getSelectedCrossspeciescluster().setString(QString::fromStdString(clusterName));
+        _simianOptionsAction.getSelectedCrossspeciescluster().setString(QString::fromStdString(clusterName));
     }
 }
 
@@ -194,7 +212,7 @@ void SimianViewerPlugin::removeSelectionFromScatterplot(std::string clusterName)
 {
     if (clusterName == "")
     {
-        _simianOptionsAction->getSelectedCrossspeciescluster().setString("");
+        _simianOptionsAction.getSelectedCrossspeciescluster().setString("");
     }
 }
 
@@ -279,9 +297,9 @@ void SimianViewerPlugin::selectCrossSpeciesClusterPoints(std::vector<std::string
     {
 
 
-        if (_simianOptionsAction->getCrossSpecies1DatasetLinkerAction().getCurrentText() != "")
+        if (_simianOptionsAction.getCrossSpecies1DatasetLinkerAction().getCurrentText() != "")
         {
-            auto dataset1 = _simianOptionsAction->getCrossSpecies1DatasetLinkerAction().getCurrentDataset();
+            auto dataset1 = _simianOptionsAction.getCrossSpecies1DatasetLinkerAction().getCurrentDataset();
             const auto candidateDataset1 = _core->requestDataset<Clusters>(dataset1.getDatasetGuid());
             std::vector<std::uint32_t> selectedIndices1;
 
@@ -303,9 +321,9 @@ void SimianViewerPlugin::selectCrossSpeciesClusterPoints(std::vector<std::string
             events().notifyDatasetSelectionChanged(candidateDataset1->getParent());
 
         }
-        if (_simianOptionsAction->getCrossSpecies2DatasetLinkerAction().getCurrentText() != "")
+        if (_simianOptionsAction.getCrossSpecies2DatasetLinkerAction().getCurrentText() != "")
         {
-            auto dataset2 = _simianOptionsAction->getCrossSpecies2DatasetLinkerAction().getCurrentDataset();
+            auto dataset2 = _simianOptionsAction.getCrossSpecies2DatasetLinkerAction().getCurrentDataset();
             const auto candidateDataset2 = _core->requestDataset<Clusters>(dataset2.getDatasetGuid());
             std::vector<std::uint32_t> selectedIndices2;
             for (const auto& cluster : candidateDataset2->getClusters())
@@ -328,17 +346,17 @@ void SimianViewerPlugin::selectCrossSpeciesClusterPoints(std::vector<std::string
 
     else {
 
-        if (_simianOptionsAction->getCrossSpecies1DatasetLinkerAction().getCurrentText() != "")
+        if (_simianOptionsAction.getCrossSpecies1DatasetLinkerAction().getCurrentText() != "")
         {
-            auto dataset1 = _simianOptionsAction->getCrossSpecies1DatasetLinkerAction().getCurrentDataset();
+            auto dataset1 = _simianOptionsAction.getCrossSpecies1DatasetLinkerAction().getCurrentDataset();
             const auto candidateDataset1 = _core->requestDataset<Clusters>(dataset1.getDatasetGuid());
             std::vector<std::uint32_t> selectedIndices1;
             candidateDataset1->getParent()->setSelectionIndices(selectedIndices1);
             events().notifyDatasetSelectionChanged(candidateDataset1->getParent());
         }
-        if (_simianOptionsAction->getCrossSpecies2DatasetLinkerAction().getCurrentText() != "")
+        if (_simianOptionsAction.getCrossSpecies2DatasetLinkerAction().getCurrentText() != "")
         {
-            auto dataset2 = _simianOptionsAction->getCrossSpecies2DatasetLinkerAction().getCurrentDataset();
+            auto dataset2 = _simianOptionsAction.getCrossSpecies2DatasetLinkerAction().getCurrentDataset();
             const auto candidateDataset2 = _core->requestDataset<Clusters>(dataset2.getDatasetGuid());
             std::vector<std::uint32_t> selectedIndices2;
             candidateDataset2->getParent()->setSelectionIndices(selectedIndices2);
@@ -350,25 +368,25 @@ void SimianViewerPlugin::selectCrossSpeciesClusterPoints(std::vector<std::string
 
 //void SimianViewerPlugin::selectIndividualSpeciesClusterPoints(std::vector<std::string> selectedIDs)
 //{
-//    if (_simianOptionsAction->getScatterplotColorControlAction().getCurrentText() == "cross-species cluster")
+//    if (_simianOptionsAction.getScatterplotColorControlAction().getCurrentText() == "cross-species cluster")
 //    {
 //        if (selectedIDs[2]== selectedIDs[3])
 //        {
-//            _simianOptionsAction->getSelectedCrossSpeciesNameList().setString(QString::fromStdString(selectedIDs[2]));
-//            _simianOptionsAction->getSelectedCrossspeciescluster().setString(QString::fromStdString(selectedIDs[2]));
+//            _simianOptionsAction.getSelectedCrossSpeciesNameList().setString(QString::fromStdString(selectedIDs[2]));
+//            _simianOptionsAction.getSelectedCrossspeciescluster().setString(QString::fromStdString(selectedIDs[2]));
 //        }
 //    }
 //
 //
 //    
-//   // _simianOptionsAction->getInSpecies1HeatMapCellAction().setCurrentText(QString::fromStdString(selectedIDs[0]));
-//    //_simianOptionsAction->getInSpecies2HeatMapCellAction().setCurrentText(QString::fromStdString(selectedIDs[1]));
-//    _simianOptionsAction->getCrossSpecies1HeatMapCellAction().setCurrentText(QString::fromStdString(selectedIDs[2]));
+//   // _simianOptionsAction.getInSpecies1HeatMapCellAction().setCurrentText(QString::fromStdString(selectedIDs[0]));
+//    //_simianOptionsAction.getInSpecies2HeatMapCellAction().setCurrentText(QString::fromStdString(selectedIDs[1]));
+//    _simianOptionsAction.getCrossSpecies1HeatMapCellAction().setCurrentText(QString::fromStdString(selectedIDs[2]));
 //
-//    _simianOptionsAction->getCrossSpecies2HeatMapCellAction().setCurrentText(QString::fromStdString(selectedIDs[3]));
-//    if (_simianOptionsAction->getInSpecies1DatasetLinkerAction().getCurrentText() != "")
+//    _simianOptionsAction.getCrossSpecies2HeatMapCellAction().setCurrentText(QString::fromStdString(selectedIDs[3]));
+//    if (_simianOptionsAction.getInSpecies1DatasetLinkerAction().getCurrentText() != "")
 //    {
-//        auto dataset1 = _simianOptionsAction->getInSpecies1DatasetLinkerAction().getCurrentDataset();
+//        auto dataset1 = _simianOptionsAction.getInSpecies1DatasetLinkerAction().getCurrentDataset();
 //        const auto candidateDataset1 = _core->requestDataset<Clusters>(dataset1.getDatasetGuid());
 //        std::vector<std::uint32_t> selectedIndices1;
 //
@@ -389,9 +407,9 @@ void SimianViewerPlugin::selectCrossSpeciesClusterPoints(std::vector<std::string
 //        events().notifyDatasetSelectionChanged(candidateDataset1->getParent());
 //
 //    }
-//    if (_simianOptionsAction->getInSpecies2DatasetLinkerAction().getCurrentText() != "")
+//    if (_simianOptionsAction.getInSpecies2DatasetLinkerAction().getCurrentText() != "")
 //    {
-//        auto dataset2 = _simianOptionsAction->getInSpecies2DatasetLinkerAction().getCurrentDataset();
+//        auto dataset2 = _simianOptionsAction.getInSpecies2DatasetLinkerAction().getCurrentDataset();
 //        const auto candidateDataset2 = _core->requestDataset<Clusters>(dataset2.getDatasetGuid());
 //        std::vector<std::uint32_t> selectedIndices2;
 //        for (const auto& cluster : candidateDataset2->getClusters())
@@ -412,6 +430,6 @@ void SimianViewerPlugin::selectCrossSpeciesClusterPoints(std::vector<std::string
 //
 //
 //
-//    _simianOptionsAction->getmodifyDifferentialExpressionAutoUpdateAction().trigger();
+//    _simianOptionsAction.getmodifyDifferentialExpressionAutoUpdateAction().trigger();
 //}
 

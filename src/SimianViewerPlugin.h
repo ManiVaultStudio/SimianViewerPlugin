@@ -16,7 +16,6 @@ using namespace hdps::util;
 
 class Points;
 class SimianViewerWidget;
-class SimianOptionsAction;
 
 // =============================================================================
 // View
@@ -40,8 +39,22 @@ public:
     hdps::CoreInterface* getCore() { return _core; }
 
     SimianViewerWidget* getSimianViewerWidget() { return _simian_viewer; }
-    SimianOptionsAction& getSimianOptionsAction() { return *_simianOptionsAction; }
+    SimianOptionsAction& getSimianOptionsAction() { return _simianOptionsAction; }
     
+public: // Serialization
+
+    /**
+     * Load widget action from variant map
+     * @param Variant map representation of the widget action
+     */
+    void fromVariantMap(const QVariantMap& variantMap) override;
+
+    /**
+     * Save widget action to variant map
+     * @return Variant map representation of the widget action
+     */
+    QVariantMap toVariantMap() const override;
+
 protected slots:
 
 
@@ -54,7 +67,7 @@ private:
     void selectCrossSpeciesClusterPoints(std::vector<std::string> selectedIDs);
     //void selectIndividualSpeciesClusterPoints(std::vector<std::string> selectedIDs);
 
-    SimianOptionsAction*        _simianOptionsAction;
+    SimianOptionsAction        _simianOptionsAction;
     /** SimianViewer widget displaying cluster data */
     SimianViewerWidget*             _simian_viewer;
     hdps::EventListener     _eventListener;

@@ -34,7 +34,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	//_multiSelectClusterFilterAction(this, "Select cross-species clusters"),
 	_colorMapAction(this, "Select color map"),
 	_backgroundColoringAction(this, "Select background color", DEFAULT_CONSTANT_COLOR, DEFAULT_CONSTANT_COLOR),
-	_isLoading(false),
 	_species1Holder(*this),
 	_species2Holder(*this),
 	_visSettingHolder(*this),
@@ -60,6 +59,46 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_harHcondelCountString(this,"Har-Hcondel Count String")
 {
 	setText("Settings");
+	//_species1SelectAction.setConnectionPermissions(ConnectionPermissionFlag::All);
+	setSerializationName("SimianSettings");
+	_species1SelectAction.setSerializationName( "Species1(X-axis)");
+		_species2SelectAction.setSerializationName( "Species2(Y-axis)");
+		_neighborhoodAction.setSerializationName( "Neighborhood");
+		_scatterplotColorControlAction.setSerializationName( "Scatterplot color");
+		_distanceAction.setSerializationName( "Filter distance :");
+		_crossSpecies1DatasetLinkerAction.setSerializationName( "Cross-species cluster dataset1");
+		_crossSpecies2DatasetLinkerAction.setSerializationName( "Cross-species  cluster dataset2");
+		_species1ScatterplotColorLinkerAction.setSerializationName( "Scatterplot color linker species1");
+		_species2ScatterplotColorLinkerAction.setSerializationName( "Scatterplot color linker species2");
+		_speciesEmbedding1LinkerAction.setSerializationName( "Embedding dataset1");
+		_speciesEmbedding2LinkerAction.setSerializationName( "Embedding dataset2");
+		_species1DEStatsLinkerAction.setSerializationName( "DEStats dataset1");
+		_species2DEStatsLinkerAction.setSerializationName( "DEStats dataset2");
+		_inSpecies1DatasetLinkerAction.setSerializationName( "In-species  cluster dataset1");
+		_inSpecies2DatasetLinkerAction.setSerializationName( "In-species  cluster dataset2");
+		_crossSpeciesFilterAction.setSerializationName( "Filter clusters");
+		_inSpecies1HeatMapCellAction.setSerializationName( "Link in-species1 heatmap cell");
+		_inSpecies2HeatMapCellAction.setSerializationName( "Link in-species2 heatmap cell");
+		_crossSpecies1HeatMapCellAction.setSerializationName( "Link cross-species1 heatmap cell");
+		_crossSpecies2HeatMapCellAction.setSerializationName( "Link cross-species2 heatmap cell");
+
+		_colorMapAction.setSerializationName( "Select color map");
+		_backgroundColoringAction.setSerializationName( "Select background color");
+		_histBarAction.setSerializationName( "Cell counts");
+		_modifyDifferentialExpressionAutoUpdate.setSerializationName( "Automatic Update Switch");
+		_removeLinkingOptionMenuFromUIAction.setSerializationName( "Remove linking option");
+		_fullHeatMapAction.setSerializationName( "Full distancemap");
+		_helpAction.setSerializationName( "Help");
+		_screenshotAction.setSerializationName( "Screenshot");
+		_species1Name.setSerializationName( "Species1Name");
+		_species2Name.setSerializationName( "Species2Name");
+		_selectedCrossspeciescluster.setSerializationName( "Selected CrossSpecies Cluster");
+		_geneExpressionDatasetVariant.setSerializationName( "Gene Expression Variant");
+		_selectedCrossSpeciesNameList.setSerializationName( "Selected Cross Species Name List");
+		_scatterplotColorMapAction.setSerializationName( "Scatterplot color map connection");
+		_harHcondelCountString.setSerializationName( "Har-Hcondel Count String");
+
+
 
 	_helpAction.setDefaultWidgetFlags(TriggerAction::Icon);
 	_screenshotAction.setDefaultWidgetFlags(TriggerAction::Icon);
@@ -2246,6 +2285,94 @@ bool SimianOptionsAction::QStringlistContainsQString(const QStringList& list, co
 		if (matcher.indexIn(listitem) != -1) return true;
 	}
 	return false;
+}
+
+void SimianOptionsAction::fromVariantMap(const QVariantMap& variantMap)
+{
+	WidgetAction::fromVariantMap(variantMap);
+
+	_species1SelectAction.fromParentVariantMap(variantMap);
+	_species2SelectAction.fromParentVariantMap(variantMap);
+	_neighborhoodAction.fromParentVariantMap(variantMap);
+	_scatterplotColorControlAction.fromParentVariantMap(variantMap);
+	_distanceAction.fromParentVariantMap(variantMap);
+	_crossSpecies1DatasetLinkerAction.fromParentVariantMap(variantMap);
+	_crossSpecies2DatasetLinkerAction.fromParentVariantMap(variantMap);
+	_species1ScatterplotColorLinkerAction.fromParentVariantMap(variantMap);
+	_species2ScatterplotColorLinkerAction.fromParentVariantMap(variantMap);
+	_speciesEmbedding1LinkerAction.fromParentVariantMap(variantMap);
+	_speciesEmbedding2LinkerAction.fromParentVariantMap(variantMap);
+	_species1DEStatsLinkerAction.fromParentVariantMap(variantMap);
+	_species2DEStatsLinkerAction.fromParentVariantMap(variantMap);
+	_inSpecies1DatasetLinkerAction.fromParentVariantMap(variantMap);
+	_inSpecies2DatasetLinkerAction.fromParentVariantMap(variantMap);
+	_crossSpeciesFilterAction.fromParentVariantMap(variantMap);
+	_inSpecies1HeatMapCellAction.fromParentVariantMap(variantMap);
+	_inSpecies2HeatMapCellAction.fromParentVariantMap(variantMap);
+	_crossSpecies1HeatMapCellAction.fromParentVariantMap(variantMap);
+	_crossSpecies2HeatMapCellAction.fromParentVariantMap(variantMap);
+
+	_colorMapAction.fromParentVariantMap(variantMap);
+	_backgroundColoringAction.fromParentVariantMap(variantMap);
+	_histBarAction.fromParentVariantMap(variantMap);
+	_modifyDifferentialExpressionAutoUpdate.fromParentVariantMap(variantMap);
+	_removeLinkingOptionMenuFromUIAction.fromParentVariantMap(variantMap);
+	_fullHeatMapAction.fromParentVariantMap(variantMap);
+	_helpAction.fromParentVariantMap(variantMap);
+	_screenshotAction.fromParentVariantMap(variantMap);
+	_species1Name.fromParentVariantMap(variantMap);
+	_species2Name.fromParentVariantMap(variantMap);
+	_selectedCrossspeciescluster.fromParentVariantMap(variantMap);
+	_geneExpressionDatasetVariant.fromParentVariantMap(variantMap);
+	_selectedCrossSpeciesNameList.fromParentVariantMap(variantMap);
+	_scatterplotColorMapAction.fromParentVariantMap(variantMap);
+	_harHcondelCountString.fromParentVariantMap(variantMap);
+
+
+}
+
+QVariantMap SimianOptionsAction::toVariantMap() const
+{
+	QVariantMap variantMap = WidgetAction::toVariantMap();
+
+	_species1SelectAction.insertIntoVariantMap(variantMap);
+	_species2SelectAction.insertIntoVariantMap(variantMap);
+	_neighborhoodAction.insertIntoVariantMap(variantMap);
+	_scatterplotColorControlAction.insertIntoVariantMap(variantMap);
+	_distanceAction.insertIntoVariantMap(variantMap);
+	_crossSpecies1DatasetLinkerAction.insertIntoVariantMap(variantMap);
+	_crossSpecies2DatasetLinkerAction.insertIntoVariantMap(variantMap);
+	_species1ScatterplotColorLinkerAction.insertIntoVariantMap(variantMap);
+	_species2ScatterplotColorLinkerAction.insertIntoVariantMap(variantMap);
+	_speciesEmbedding1LinkerAction.insertIntoVariantMap(variantMap);
+	_speciesEmbedding2LinkerAction.insertIntoVariantMap(variantMap);
+	_species1DEStatsLinkerAction.insertIntoVariantMap(variantMap);
+	_species2DEStatsLinkerAction.insertIntoVariantMap(variantMap);
+	_inSpecies1DatasetLinkerAction.insertIntoVariantMap(variantMap);
+	_inSpecies2DatasetLinkerAction.insertIntoVariantMap(variantMap);
+	_crossSpeciesFilterAction.insertIntoVariantMap(variantMap);
+	_inSpecies1HeatMapCellAction.insertIntoVariantMap(variantMap);
+	_inSpecies2HeatMapCellAction.insertIntoVariantMap(variantMap);
+	_crossSpecies1HeatMapCellAction.insertIntoVariantMap(variantMap);
+	_crossSpecies2HeatMapCellAction.insertIntoVariantMap(variantMap);
+
+	_colorMapAction.insertIntoVariantMap(variantMap);
+	_backgroundColoringAction.insertIntoVariantMap(variantMap);
+	_histBarAction.insertIntoVariantMap(variantMap);
+	_modifyDifferentialExpressionAutoUpdate.insertIntoVariantMap(variantMap);
+	_removeLinkingOptionMenuFromUIAction.insertIntoVariantMap(variantMap);
+	_fullHeatMapAction.insertIntoVariantMap(variantMap);
+	_helpAction.insertIntoVariantMap(variantMap);
+	_screenshotAction.insertIntoVariantMap(variantMap);
+	_species1Name.insertIntoVariantMap(variantMap);
+	_species2Name.insertIntoVariantMap(variantMap);
+	_selectedCrossspeciescluster.insertIntoVariantMap(variantMap);
+	_geneExpressionDatasetVariant.insertIntoVariantMap(variantMap);
+	_selectedCrossSpeciesNameList.insertIntoVariantMap(variantMap);
+	_scatterplotColorMapAction.insertIntoVariantMap(variantMap);
+	_harHcondelCountString.insertIntoVariantMap(variantMap);
+
+	return variantMap;
 }
 
 QVariant SimianOptionsAction::CalculateGeneExpressionValues(QString crossSpeciesCluster)

@@ -28,7 +28,6 @@
 #include <QFormLayout>
 #include <QString>
 #include <string>
-#include "../simianViewerPlugin.h"
 #include <event/Event.h>
 #include <QDebug>
 #include <QLabel>
@@ -295,6 +294,21 @@ public: // Action getters
     StringAction& getHarHcondelCountString() { return _harHcondelCountString; }
     ColorMapAction& getScatterplotColorMapAction() { return _scatterplotColorMapAction; }
     //ExplorationAction& getExplorationAction() { return _explorationAction; }
+
+public: // Serialization
+
+    /**
+     * Load widget action from variant map
+     * @param Variant map representation of the widget action
+     */
+    void fromVariantMap(const QVariantMap& variantMap) override;
+
+    /**
+     * Save widget action to variant map
+     * @return Variant map representation of the widget action
+     */
+    QVariantMap toVariantMap() const override;
+
 protected:
     SimianViewerPlugin&          _simianViewerPlugin;
     OptionAction                 _species1SelectAction;
@@ -329,7 +343,6 @@ protected:
     OptionAction                 _inSpecies2HeatMapCellAction;
     OptionAction                 _crossSpecies1HeatMapCellAction;
     OptionAction                 _crossSpecies2HeatMapCellAction;
-    bool                        _isLoading;
     Species1Holder               _species1Holder;
     Species2Holder             _species2Holder;
     VisSettingHolder              _visSettingHolder;
