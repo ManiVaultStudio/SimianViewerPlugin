@@ -3,8 +3,6 @@
 #include <actions/WidgetAction.h>
 #include <actions/IntegralAction.h>
 #include <actions/VariantAction.h>
-#include <actions/OptionAction.h>
-#include <actions/OptionsAction.h>
 #include <actions/ToggleAction.h>
 #include "actions/DatasetPickerAction.h"
 #include "PointData.h"
@@ -35,7 +33,7 @@
 using namespace hdps::gui;
 class QMenu;
 class SimianViewerPlugin;
-class SimianViewerWidget;
+//class SimianViewerWidget;
 class FetchMetaData;
 namespace hdps
 {
@@ -108,7 +106,7 @@ public:
     protected:
         SimianOptionsAction& _simianOptionsAction;
 
-        friend class SimianOptionsAction;
+       // friend class SimianOptionsAction;
     };
     class LinkerSettingHolder : public WidgetAction
     {

@@ -15,7 +15,7 @@ using namespace hdps::plugin;
 using namespace hdps::util;
 
 class Points;
-class SimianViewerWidget;
+//class SimianViewerWidget;
 
 // =============================================================================
 // View
