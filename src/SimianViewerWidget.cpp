@@ -115,10 +115,10 @@ void SimianViewerWidget::setData(std::string visDataContent)
     emit _communicationObject->qt_setData(QString((visDataContent).c_str()));
 }
 
-void SimianViewerWidget::resetView(std::string visDataContent)
-{
-    emit _communicationObject->qt_resetView(QString((visDataContent).c_str()));
-}
+//void SimianViewerWidget::resetView(std::string visDataContent)
+//{
+//    emit _communicationObject->qt_resetView(QString((visDataContent).c_str()));
+//}
 void SimianViewerWidget::setClusters(QStringList visClusterContent)
 {
    // qDebug() << "Sending clusters";

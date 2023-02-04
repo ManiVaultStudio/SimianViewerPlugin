@@ -237,7 +237,7 @@ public:
     SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin, hdps::CoreInterface* core);
 
 private:
-    void updateData(std::string Species1, std::string Species2, std::string neighborhood, int distance, std::string CrossSpeciesFilter);
+    void updateData(std::string Species1, std::string Species2, std::string neighborhood/*, int distance, std::string CrossSpeciesFilter*/);
     QVariant CalculateGeneExpressionValues(QString crossSpeciesCluster);
     //void filterMultiSelect();
     bool QStringlistContainsQString(const QStringList& list, const QString& str);
@@ -252,7 +252,7 @@ public: // Action getters
     OptionAction& getSpecies2SelectAction() { return _species2SelectAction; }
     OptionAction& getScatterplotColorControlAction() { return _scatterplotColorControlAction; }
     OptionAction& getNeighborhoodAction() { return _neighborhoodAction; }
-    IntegralAction& getDistanceAction() { return _distanceAction; };
+    //IntegralAction& getDistanceAction() { return _distanceAction; };
     ToggleAction& getHistBarAction() { return _histBarAction; };
     TriggerAction& getmodifyDifferentialExpressionAutoUpdateAction() { return _modifyDifferentialExpressionAutoUpdate; };
     ToggleAction& getRemoveLinkingOptionMenuFromUIAction() { return _removeLinkingOptionMenuFromUIAction; };
@@ -269,7 +269,7 @@ public: // Action getters
 
     DatasetPickerAction& getInSpecies1DatasetLinkerAction() { return _inSpecies1DatasetLinkerAction; };
     DatasetPickerAction& getInSpecies2DatasetLinkerAction() { return _inSpecies2DatasetLinkerAction; };
-    OptionAction& getCrossSpeciesFilterAction() { return _crossSpeciesFilterAction; }
+    //OptionAction& getCrossSpeciesFilterAction() { return _crossSpeciesFilterAction; }
     OptionAction& getInSpecies1HeatMapCellAction() { return _inSpecies1HeatMapCellAction; }
     OptionAction& getInSpecies2HeatMapCellAction() { return _inSpecies2HeatMapCellAction; }
     OptionAction& getCrossSpecies1HeatMapCellAction() { return _crossSpecies1HeatMapCellAction; }
@@ -283,8 +283,8 @@ public: // Action getters
     ColorMapAction& getColorMapAction() { return _colorMapAction; }
     ColorAction& getBackgroundColoringAction() { return _backgroundColoringAction; }
     CellCountHolder& getCellCountHolder() { return _cellCountHolder; }
-    TriggerAction& getHelpAction() { return _helpAction; }
-    TriggerAction& getScreenshotAction() { return _screenshotAction; }
+    //TriggerAction& getHelpAction() { return _helpAction; }
+    //TriggerAction& getScreenshotAction() { return _screenshotAction; }
     StringAction& getSpecies1Name() { return _species1Name; }
     StringAction& getSelectedCrossSpeciesNameList() { return _selectedCrossSpeciesNameList; }
     //OptionAction& getScatterplotColorControl() { return _scatterplotColorControlAction; }
@@ -315,7 +315,7 @@ protected:
     OptionAction                 _species2SelectAction;
     OptionAction                 _scatterplotColorControlAction;
     OptionAction                 _neighborhoodAction;
-    IntegralAction               _distanceAction;
+    //IntegralAction               _distanceAction;
     DatasetPickerAction           _crossSpecies1DatasetLinkerAction;
     DatasetPickerAction          _crossSpecies2DatasetLinkerAction;
 
@@ -330,7 +330,7 @@ protected:
 
     DatasetPickerAction           _inSpecies1DatasetLinkerAction;
     DatasetPickerAction          _inSpecies2DatasetLinkerAction;
-    OptionAction                 _crossSpeciesFilterAction;
+    //OptionAction                 _crossSpeciesFilterAction;
     hdps::CoreInterface*         _core;
     FetchMetaData*                _metaData;
     std::vector<std::vector<std::string>>                _simianData;
@@ -352,8 +352,8 @@ protected:
     CellCountHolder              _cellCountHolder;
     //ExplorationAction               _explorationAction;
     ToggleAction                _removeLinkingOptionMenuFromUIAction;
-    TriggerAction                _helpAction;
-    TriggerAction                _screenshotAction;
+    //TriggerAction                _helpAction;
+    //TriggerAction                _screenshotAction;
     TriggerAction                 _modifyDifferentialExpressionAutoUpdate;
     StringAction                  _species1Name;
     StringAction                  _species2Name;

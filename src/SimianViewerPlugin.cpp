@@ -80,11 +80,11 @@ void SimianViewerPlugin::init()
     //auto explorationActionwidget = _simianOptionsAction.getExplorationAction().createWidget(&_widget);
     //explorationActionwidget->setMaximumWidth(97);
     //topToolbarLayout->addWidget(explorationActionwidget);
-    topToolbarLayout->addWidget(_simianOptionsAction.getScreenshotAction().createWidget(&getWidget()));
+    //topToolbarLayout->addWidget(_simianOptionsAction.getScreenshotAction().createWidget(&getWidget()));
     auto visSettingsWidget = _simianOptionsAction.getVisSettingHolder().createCollapsedWidget(&getWidget());
     topToolbarLayout->addWidget(visSettingsWidget);
     topToolbarLayout->addWidget(_simianOptionsAction.getLinkerSettingHolder().createCollapsedWidget(&getWidget()));
-    topToolbarLayout->addWidget(_simianOptionsAction.getHelpAction().createWidget(&getWidget()));
+    //topToolbarLayout->addWidget(_simianOptionsAction.getHelpAction().createWidget(&getWidget()));
 
  
     topToolbarLayout->addStretch(0);
@@ -96,8 +96,6 @@ void SimianViewerPlugin::init()
     layout->addWidget(topToolbarWidget);
     layout->addWidget(_simian_viewer, 1);
     getWidget().setLayout(layout);
-
-
 }
 
 void SimianViewerPlugin::onDataEvent(hdps::DataEvent* dataEvent)
@@ -216,27 +214,27 @@ void SimianViewerPlugin::removeSelectionFromScatterplot(std::string clusterName)
     }
 }
 
-const auto showHelpbox = []() -> void
-{
-    //qDebug() << "Simian viewer plugin help requested...";
-    QMessageBox msgBox;
-    msgBox.setTextFormat(Qt::RichText); // this does the magic trick and allows you to click the link
-    msgBox.setText("<div><article class=\"post - body\"><img src=\"https://www.cytosplore.org/assets/images/cytosplore.png\" class=\"post-featured\"><small>December 2022</small><br><h3 class=\"post-title\"><a href=\"https://www.biorxiv.org/content/10.1101/2022.09.19.508480v1\">Comparative transcriptomics reveals human-specific cortical features</a></h3><div class=\"post-meta\">Humans have unique cognitive abilities among primates, including language, but their molecular, cellular, and circuit substrates are poorly understood. We used comparative single nucleus transcriptomics in adult humans, chimpanzees, gorillas, rhesus macaques, and common marmosets from the middle temporal gyrus (MTG) to understand human-specific features of cellular and molecular organization. Human, chimpanzee, and gorilla MTG showed highly similar cell type composition and laminar organization, and a large shift in proportions of deep layer intratelencephalic-projecting neurons compared to macaque and marmoset. Species differences in gene expression generally mirrored evolutionary distance and were seen in all cell types, although chimpanzees were more similar to gorillas than humans, consistent with faster divergence along the human lineage. Microglia, astrocytes, and oligodendrocytes showed accelerated gene expression changes compared to neurons or oligodendrocyte precursor cells, indicating either relaxed evolutionary constraints or positive selection in these cell types. Only a few hundred genes showed human-specific patterning in all or specific cell types, and were significantly enriched near human accelerated regions (HARs) and conserved deletions (hCONDELS) and in cell adhesion and intercellular signaling pathways. These results suggest that relatively few cellular and molecular changes uniquely define adult human cortical structure, particularly by affecting circuit connectivity and glial cell function.</div></article></div>");
-    //msgBox.setIcon(yourIcon);
-    msgBox.exec();
-};
+//const auto showHelpbox = []() -> void
+//{
+//    //qDebug() << "Simian viewer plugin help requested...";
+//    QMessageBox msgBox;
+//    msgBox.setTextFormat(Qt::RichText); // this does the magic trick and allows you to click the link
+//    msgBox.setText("<div><article class=\"post - body\"><img src=\"https://www.cytosplore.org/assets/images/cytosplore.png\" class=\"post-featured\"><small>December 2022</small><br><h3 class=\"post-title\"><a href=\"https://www.biorxiv.org/content/10.1101/2022.09.19.508480v1\">Comparative transcriptomics reveals human-specific cortical features</a></h3><div class=\"post-meta\">Humans have unique cognitive abilities among primates, including language, but their molecular, cellular, and circuit substrates are poorly understood. We used comparative single nucleus transcriptomics in adult humans, chimpanzees, gorillas, rhesus macaques, and common marmosets from the middle temporal gyrus (MTG) to understand human-specific features of cellular and molecular organization. Human, chimpanzee, and gorilla MTG showed highly similar cell type composition and laminar organization, and a large shift in proportions of deep layer intratelencephalic-projecting neurons compared to macaque and marmoset. Species differences in gene expression generally mirrored evolutionary distance and were seen in all cell types, although chimpanzees were more similar to gorillas than humans, consistent with faster divergence along the human lineage. Microglia, astrocytes, and oligodendrocytes showed accelerated gene expression changes compared to neurons or oligodendrocyte precursor cells, indicating either relaxed evolutionary constraints or positive selection in these cell types. Only a few hundred genes showed human-specific patterning in all or specific cell types, and were significantly enriched near human accelerated regions (HARs) and conserved deletions (hCONDELS) and in cell adhesion and intercellular signaling pathways. These results suggest that relatively few cellular and molecular changes uniquely define adult human cortical structure, particularly by affecting circuit connectivity and glial cell function.</div></article></div>");
+//    //msgBox.setIcon(yourIcon);
+//    msgBox.exec();
+//};
 
 
 
 SimianViewerPluginFactory::SimianViewerPluginFactory() :
     ViewPluginFactory()
 {
-    connect(&getTriggerHelpAction(), &TriggerAction::triggered, this, [this]() -> void {
-        // Do your stuff here
-       
-        showHelpbox();
+    //connect(&getTriggerHelpAction(), &TriggerAction::triggered, this, [this]() -> void {
+    //    // Do your stuff here
+    //   
+    //    showHelpbox();
 
-    });
+    //});
 }
 
 // =============================================================================
@@ -286,10 +284,10 @@ hdps::gui::PluginTriggerActions SimianViewerPluginFactory::getPluginTriggerActio
 	return pluginTriggerActions;
 }
 
-bool SimianViewerPluginFactory::hasHelp()
-{
-    return true;
-}
+//bool SimianViewerPluginFactory::hasHelp()
+//{
+//    return true;
+//}
 
 void SimianViewerPlugin::selectCrossSpeciesClusterPoints(std::vector<std::string> selectedIDs)
 {
