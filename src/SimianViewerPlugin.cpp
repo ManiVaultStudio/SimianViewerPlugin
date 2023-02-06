@@ -98,7 +98,7 @@ void SimianViewerPlugin::init()
     layout->addWidget(&_simian_viewer, 1);
     getWidget().setLayout(layout);
 
-    _simianOptionsAction.initLoader();
+    //_simianOptionsAction.initLoader();
 }
 
 void SimianViewerPlugin::onDataEvent(hdps::DataEvent* dataEvent)

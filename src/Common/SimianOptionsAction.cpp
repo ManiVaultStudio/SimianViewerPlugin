@@ -1459,6 +1459,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		});
 	updateDatasetPickerAction();
 
+	//	updateData((_species1SelectAction.getCurrentText()).toStdString(), (_species2SelectAction.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString());
+
 }
 
 SimianOptionsAction::Widget::Widget(QWidget* parent, SimianOptionsAction* SimianOptionsAction) :
@@ -2291,7 +2293,7 @@ bool SimianOptionsAction::QStringlistContainsQString(const QStringList& list, co
 
 void SimianOptionsAction::initLoader()
 {
-	updateData((_species1SelectAction.getCurrentText()).toStdString(), (_species2SelectAction.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString()/*, (_distanceAction.getValue()), (_crossSpeciesFilterAction.getCurrentText()).toStdString()*/);
+	updateData((_species1SelectAction.getCurrentText()).toStdString(), (_species2SelectAction.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString());
 }
 
 void SimianOptionsAction::fromVariantMap(const QVariantMap& variantMap)
