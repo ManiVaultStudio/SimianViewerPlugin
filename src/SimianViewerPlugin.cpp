@@ -30,7 +30,6 @@ SimianViewerPlugin::SimianViewerPlugin(const PluginFactory* factory) :
     _simianOptionsAction(*this, _core)
 {
     setSerializationName("SimianViewer");
-
     //_simian_viewer = new SimianViewerWidget();
 }
 
@@ -40,11 +39,12 @@ SimianViewerPlugin::~SimianViewerPlugin()
 
 void SimianViewerPlugin::init()
 {
+    connect(&_simian_viewer, &SimianViewerWidget::widgetInitialized, &_simianOptionsAction, &SimianOptionsAction::initLoader);
+
     _simian_viewer.setPage(":/simian_viewer/simian_viewer.html", "qrc:/simian_viewer/");
     _simian_viewer.setContentsMargins(0, 0, 0, 0);
     _simian_viewer.layout()->setContentsMargins(0, 0, 0, 0);
     
-    //connect(_simian_viewer, &SimianViewerWidget::passSelectionToQt, this, &SimianViewerPlugin::publishSelection);
     connect(&_simian_viewer, &SimianViewerWidget::passClusterToQt, this, &SimianViewerPlugin::publishCluster);
     connect(&_simian_viewer, &SimianViewerWidget::removeSelectionFromScatterplot, this, &SimianViewerPlugin::removeSelectionFromScatterplot);
     //connect(_simian_viewer, &SimianViewerWidget::generatedScreenshotData, this, &SimianViewerPlugin::generatedScreenshotData);
@@ -98,7 +98,7 @@ void SimianViewerPlugin::init()
     layout->addWidget(&_simian_viewer, 1);
     getWidget().setLayout(layout);
 
-    //_simianOptionsAction.initLoader();
+    _simianOptionsAction.initLoader();
 }
 
 void SimianViewerPlugin::onDataEvent(hdps::DataEvent* dataEvent)

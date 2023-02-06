@@ -69,7 +69,7 @@ protected:
 
 
 signals:
-
+    void widgetInitialized();
     //void passSelectionToQt(std::vector<std::string> selectedIDs);
     void passClusterToQt(std::string clusterName);
     void removeSelectionFromScatterplot(std::string clusterName);

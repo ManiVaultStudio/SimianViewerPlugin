@@ -64,7 +64,9 @@ SimianViewerWidget::~SimianViewerWidget()
 void SimianViewerWidget::addDataOption(const QString option)
 {
     if (loaded)
+    {
         emit _communicationObject->qt_addAvailableData(option);
+    }
     else
         dataOptionBuffer.append(option);
 }
@@ -202,6 +204,8 @@ void SimianViewerWidget::initWebPage()
         emit _communicationObject->qt_addAvailableData(option);
     }
     dataOptionBuffer.clear();
+
+    emit widgetInitialized();
 }
 
 

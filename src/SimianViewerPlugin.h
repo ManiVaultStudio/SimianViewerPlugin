@@ -67,9 +67,11 @@ private:
     void selectCrossSpeciesClusterPoints(std::vector<std::string> selectedIDs);
     //void selectIndividualSpeciesClusterPoints(std::vector<std::string> selectedIDs);
 
-    SimianOptionsAction        _simianOptionsAction;
     /** SimianViewer widget displaying cluster data */
-    SimianViewerWidget             _simian_viewer;
+    SimianViewerWidget         _simian_viewer;
+
+    SimianOptionsAction        _simianOptionsAction;
+
     hdps::EventListener     _eventListener;
 };
 
