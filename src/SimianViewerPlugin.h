@@ -38,7 +38,7 @@ public:
 
     hdps::CoreInterface* getCore() { return _core; }
 
-    SimianViewerWidget* getSimianViewerWidget() { return _simian_viewer; }
+    SimianViewerWidget& getSimianViewerWidget() { return _simian_viewer; }
     SimianOptionsAction& getSimianOptionsAction() { return _simianOptionsAction; }
     
 public: // Serialization
@@ -69,7 +69,7 @@ private:
 
     SimianOptionsAction        _simianOptionsAction;
     /** SimianViewer widget displaying cluster data */
-    SimianViewerWidget*             _simian_viewer;
+    SimianViewerWidget             _simian_viewer;
     hdps::EventListener     _eventListener;
 };
 

@@ -292,6 +292,8 @@ public: // Action getters
     StringAction& getHarHcondelCountString() { return _harHcondelCountString; }
     ColorMapAction& getScatterplotColorMapAction() { return _scatterplotColorMapAction; }
     //ExplorationAction& getExplorationAction() { return _explorationAction; }
+public:
+    void initLoader();
 
 public: // Serialization
 

@@ -26,11 +26,12 @@ using namespace hdps;
 
 SimianViewerPlugin::SimianViewerPlugin(const PluginFactory* factory) :
     ViewPlugin(factory),
+    _simian_viewer(),
     _simianOptionsAction(*this, _core)
 {
     setSerializationName("SimianViewer");
 
-    _simian_viewer = new SimianViewerWidget();
+    //_simian_viewer = new SimianViewerWidget();
 }
 
 SimianViewerPlugin::~SimianViewerPlugin()
@@ -39,13 +40,13 @@ SimianViewerPlugin::~SimianViewerPlugin()
 
 void SimianViewerPlugin::init()
 {
-    _simian_viewer->setPage(":/simian_viewer/simian_viewer.html", "qrc:/simian_viewer/");
-    _simian_viewer->setContentsMargins(0, 0, 0, 0);
-    _simian_viewer->layout()->setContentsMargins(0, 0, 0, 0);
+    _simian_viewer.setPage(":/simian_viewer/simian_viewer.html", "qrc:/simian_viewer/");
+    _simian_viewer.setContentsMargins(0, 0, 0, 0);
+    _simian_viewer.layout()->setContentsMargins(0, 0, 0, 0);
     
     //connect(_simian_viewer, &SimianViewerWidget::passSelectionToQt, this, &SimianViewerPlugin::publishSelection);
-    connect(_simian_viewer, &SimianViewerWidget::passClusterToQt, this, &SimianViewerPlugin::publishCluster);
-    connect(_simian_viewer, &SimianViewerWidget::removeSelectionFromScatterplot, this, &SimianViewerPlugin::removeSelectionFromScatterplot);
+    connect(&_simian_viewer, &SimianViewerWidget::passClusterToQt, this, &SimianViewerPlugin::publishCluster);
+    connect(&_simian_viewer, &SimianViewerWidget::removeSelectionFromScatterplot, this, &SimianViewerPlugin::removeSelectionFromScatterplot);
     //connect(_simian_viewer, &SimianViewerWidget::generatedScreenshotData, this, &SimianViewerPlugin::generatedScreenshotData);
     
     _eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataSelectionChanged));
@@ -94,8 +95,10 @@ void SimianViewerPlugin::init()
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
     layout->addWidget(topToolbarWidget);
-    layout->addWidget(_simian_viewer, 1);
+    layout->addWidget(&_simian_viewer, 1);
     getWidget().setLayout(layout);
+
+    _simianOptionsAction.initLoader();
 }
 
 void SimianViewerPlugin::onDataEvent(hdps::DataEvent* dataEvent)
@@ -106,7 +109,7 @@ void SimianViewerPlugin::onDataEvent(hdps::DataEvent* dataEvent)
         const auto& changedDataSet = _core->requestDataset<Clusters>(selectionChangedEvent->getDataset()->getGuid());
         const auto& selectionSet = changedDataSet->getSelectionNames(); 
         //qDebug() << selectionSet;
-        _simian_viewer->setClusters(selectionSet);
+        _simian_viewer.setClusters(selectionSet);
     }
 }
 
@@ -181,14 +184,14 @@ QVariantMap SimianViewerPlugin::toVariantMap() const
 //        
 //        QPageLayout pl;
 //        QPageSize ps;
-//        qDebug() << "height" << _simian_viewer->height();
-//        qDebug() << "width" << _simian_viewer->width();
-//        ps = QPageSize(QSizeF(_simian_viewer->width(), _simian_viewer->height()), QPageSize::Point, QString(), QPageSize::ExactMatch);
+//        qDebug() << "height" << _simian_viewer.height();
+//        qDebug() << "width" << _simian_viewer.width();
+//        ps = QPageSize(QSizeF(_simian_viewer.width(), _simian_viewer.height()), QPageSize::Point, QString(), QPageSize::ExactMatch);
 //        pl.setPageSize(ps);
 //        pl.setOrientation(QPageLayout::Portrait);
 //
 //
-//        _simian_viewer->getPage()->printToPdf(fileName, pl);//grab().save(fileName, "PNG");
+//        _simian_viewer.getPage()->printToPdf(fileName, pl);//grab().save(fileName, "PNG");
 //        /* Close the file */
 //        //outputFile.close();
 //    }

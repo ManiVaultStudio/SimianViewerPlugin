@@ -326,13 +326,13 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			s3 = "F";
 		}
 		std::string full = s1 + s2 + s3;
-		_simianViewerPlugin.getSimianViewerWidget()->setColor(QString::fromStdString(full));
+		_simianViewerPlugin.getSimianViewerWidget().setColor(QString::fromStdString(full));
 	};
 	const auto backgroundColoringFilter = [this]() -> void
 	{
 		const auto& color = _backgroundColoringAction.getColor();
 
-		_simianViewerPlugin.getSimianViewerWidget()->setBackgroundColor(color.name());
+		_simianViewerPlugin.getSimianViewerWidget().setBackgroundColor(color.name());
 	};
 	const auto updateColorMapRange = [this]() -> void
 	{
@@ -341,7 +341,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		std::string s2 = " ";
 		std::string s3 = std::to_string(rangeAction.getMaximum());
 		std::string full = s1.substr(0, s1.find(".") + 3) + s2 + s3.substr(0, s3.find(".") + 3);
-		_simianViewerPlugin.getSimianViewerWidget()->setRangeValue(QString::fromStdString(full));
+		_simianViewerPlugin.getSimianViewerWidget().setRangeValue(QString::fromStdString(full));
 	};
 
 	const auto updateSpecies1 = [this]() -> void
@@ -389,7 +389,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				//_scatterplotColorControlAction.setCurrentText("");
 				//_scatterplotColorControlAction.setCurrentText(tempVal);
 				_species2SelectAction.setCurrentIndex(0);
-				//_simianViewerPlugin.getSimianViewerWidget()->resetView("Reset");
+				//_simianViewerPlugin.getSimianViewerWidget().resetView("Reset");
 			}
 
 			else
@@ -457,7 +457,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		//else
 		//{
 			//_species2SelectAction.setCurrentText("");
-			//_simianViewerPlugin.getSimianViewerWidget()->resetView("Reset");
+			//_simianViewerPlugin.getSimianViewerWidget().resetView("Reset");
 			//_species2SelectAction.setEnabled(false);
 			//_neighborhoodAction.setEnabled(false);
 			//_screenshotAction.setEnabled(false);
@@ -594,7 +594,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		//}
 		//else
 		//{
-			//_simianViewerPlugin.getSimianViewerWidget()->resetView("Reset");
+			//_simianViewerPlugin.getSimianViewerWidget().resetView("Reset");
 			//_neighborhoodAction.setEnabled(false);
 			//_screenshotAction.setEnabled(false);
 			//_scatterplotColorControlAction.setEnabled(false);
@@ -958,11 +958,11 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	{
 		if (_histBarAction.isChecked())
 		{
-			_simianViewerPlugin.getSimianViewerWidget()->histChart(QString::fromStdString("T"));
+			_simianViewerPlugin.getSimianViewerWidget().histChart(QString::fromStdString("T"));
 		}
 		else
 		{
-			_simianViewerPlugin.getSimianViewerWidget()->histChart(QString::fromStdString("F"));
+			_simianViewerPlugin.getSimianViewerWidget().histChart(QString::fromStdString("F"));
 		}
 
 
@@ -992,11 +992,11 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	{
 		if (_fullHeatMapAction.isChecked())
 		{
-			_simianViewerPlugin.getSimianViewerWidget()->showFullHeatmap(QString::fromStdString("T"));
+			_simianViewerPlugin.getSimianViewerWidget().showFullHeatmap(QString::fromStdString("T"));
 		}
 		else
 		{
-			_simianViewerPlugin.getSimianViewerWidget()->showFullHeatmap(QString::fromStdString("F"));
+			_simianViewerPlugin.getSimianViewerWidget().showFullHeatmap(QString::fromStdString("F"));
 		}
 
 
@@ -1154,10 +1154,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 	//		QPageLayout pl;
 	//		QPageSize ps;
-	//		//qDebug() << "height" << _simianViewerPlugin.getSimianViewerWidget()->height();
+	//		//qDebug() << "height" << _simianViewerPlugin.getSimianViewerWidget().height();
 	//		
-	//		int width = _simianViewerPlugin.getSimianViewerWidget()->width();
-	//		int height = _simianViewerPlugin.getSimianViewerWidget()->height();
+	//		int width = _simianViewerPlugin.getSimianViewerWidget().width();
+	//		int height = _simianViewerPlugin.getSimianViewerWidget().height();
 	//		int reducedWidth =  static_cast<double>(width) / 100 * 75;
 	//		int reducedHeight = static_cast<double>(height) / 100 * 78;
 	//		//qDebug() << "width" << width;
@@ -1169,16 +1169,16 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	//		pl.setOrientation(QPageLayout::Portrait);
 
 
-	//		_simianViewerPlugin.getSimianViewerWidget()->getPage()->printToPdf(fileName, pl);
+	//		_simianViewerPlugin.getSimianViewerWidget().getPage()->printToPdf(fileName, pl);
 
 	//	}
-	//		//..getSimianViewerWidget()->getPage()->printToPdf(fileName, pl);
+	//		//..getSimianViewerWidget().getPage()->printToPdf(fileName, pl);
 
 	//};
 
 	const auto updateSelectedCrossspeciescluster = [this]() -> void
 	{
-		_simianViewerPlugin.getSimianViewerWidget()->borderSelectedCrossspeciesCluster(_selectedCrossspeciescluster.getString());
+		_simianViewerPlugin.getSimianViewerWidget().borderSelectedCrossspeciesCluster(_selectedCrossspeciescluster.getString());
 
 		if (_selectedCrossspeciescluster.getString() == "")
 			
@@ -1493,7 +1493,7 @@ void SimianOptionsAction::sendClusterCountInfoToJS()
 	}
 
 
-	_simianViewerPlugin.getSimianViewerWidget()->inspeciesClusterCounts(QString::fromStdString(jsonSend));
+	_simianViewerPlugin.getSimianViewerWidget().inspeciesClusterCounts(QString::fromStdString(jsonSend));
 
 }
 
@@ -1590,7 +1590,7 @@ void SimianOptionsAction::updateData(std::string Species1, std::string Species2,
 		}
 		_jsonObject.chop(1);
 		_jsonObject += "]";
-		_simianViewerPlugin.getSimianViewerWidget()->setData(_jsonObject.toStdString());
+		_simianViewerPlugin.getSimianViewerWidget().setData(_jsonObject.toStdString());
 
 		auto& colorMapRangeAction = _colorMapAction.getSettingsAction().getHorizontalAxisAction().getRangeAction();
 		float colorMapRangeMin = 1200.0;
@@ -1640,7 +1640,7 @@ void SimianOptionsAction::updateData(std::string Species1, std::string Species2,
 
 	//else
 	//{
-//		_simianViewerPlugin.getSimianViewerWidget()->resetView("Reset");
+//		_simianViewerPlugin.getSimianViewerWidget().resetView("Reset");
 //	}
 	//_crossSpecies2HeatMapCellAction.initialize(crossSpecies2List, "", "");
 	//_crossSpecies1HeatMapCellAction.initialize(crossSpecies1List, "", "");
@@ -2169,7 +2169,7 @@ inline SimianOptionsAction::ScatterplotColorHolder::ScatterplotColorHolder(Simia
 //	}
 //	_jsonObject.chop(1);
 //	_jsonObject += "]";
-//	_simianViewerPlugin.getSimianViewerWidget()->setData(_jsonObject.toStdString());
+//	_simianViewerPlugin.getSimianViewerWidget().setData(_jsonObject.toStdString());
 //	auto& colorMapRangeAction = _colorMapAction.getSettingsAction().getHorizontalAxisAction().getRangeAction();
 //	float colorMapRangeMin = 1200.0;
 //	float colorMapRangeMax = 0.0;
@@ -2287,6 +2287,11 @@ bool SimianOptionsAction::QStringlistContainsQString(const QStringList& list, co
 		if (matcher.indexIn(listitem) != -1) return true;
 	}
 	return false;
+}
+
+void SimianOptionsAction::initLoader()
+{
+	updateData((_species1SelectAction.getCurrentText()).toStdString(), (_species2SelectAction.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString()/*, (_distanceAction.getValue()), (_crossSpeciesFilterAction.getCurrentText()).toStdString()*/);
 }
 
 void SimianOptionsAction::fromVariantMap(const QVariantMap& variantMap)
