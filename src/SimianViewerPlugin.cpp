@@ -117,32 +117,6 @@ void SimianViewerPlugin::init()
         }
     }
 
-    //for (auto filtereddataset : filteredDatasets)
-    //{
-    //    QString parentName = filtereddataset->getGuiName();
-    //    auto childDataset =filtereddataset.findChild(filtereddataset->getGuiName().toStdString() + "/Numerical MetaData",Qt::FindDirectChildrenOnly);
-    //    QString childName = _core->requestDataset(filtereddataset->getGuiName().toStdString()+ "/Numerical MetaData");
-    //    
-    //    
-    //    filtereddataset.findChild("Numerical MetaData");
-    //    std::string str2 = "Numerical MetaData";
-    //    if (strstr(str1.c_str(), str2.c_str()))
-    //    {
-    //        filteredCrossSpeciesDatasets.removeOne(dataset);
-    //        filteredInSpeciesDatasets.removeOne(dataset);
-    //    }
-    //    else {
-
-    //    }
-    //}
-
-
-
-
-
-
-
-
 }
 
 void SimianViewerPlugin::onDataEvent(hdps::DataEvent* dataEvent)
