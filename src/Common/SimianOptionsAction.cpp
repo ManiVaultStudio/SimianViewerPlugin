@@ -2291,7 +2291,11 @@ bool SimianOptionsAction::QStringlistContainsQString(const QStringList& list, co
 
 void SimianOptionsAction::initLoader()
 {
-	updateData((_species1SelectAction.getCurrentText()).toStdString(), (_species2SelectAction.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString());
+	if (_species1SelectAction.getCurrentText() != "" && _species2SelectAction.getCurrentText() != "")
+	{
+		updateData((_species1SelectAction.getCurrentText()).toStdString(), (_species2SelectAction.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString());
+	}
+
 }
 
 void SimianOptionsAction::fromVariantMap(const QVariantMap& variantMap)
