@@ -45,7 +45,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_isStarted(false),
 	_histBarAction(this,"Cell counts"),
 	_modifyDifferentialExpressionAutoUpdate(this, "Automatic Update Switch"),
-	_removeLinkingOptionMenuFromUIAction(this, "Remove linking option"),
+	_removeLinkingOptionMenuFromUIAction(this, " "),
 	_fullHeatMapAction(this,"Full distancemap")/*,
 	_explorationModeAction(this)*/,
 	//_helpAction(this, "Help"),
@@ -59,7 +59,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_harHcondelCountString(this,"Har-Hcondel Count String")
 {
 	setText("Settings");
-	//_species1SelectAction.setConnectionPermissions(ConnectionPermissionFlag::All);
 	setSerializationName("SimianSettings");
 	_species1SelectAction.setSerializationName( "Species1(X-axis)");
 		_species2SelectAction.setSerializationName( "Species2(Y-axis)");
@@ -202,7 +201,26 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 	_scatterplotColorMapAction.getSettingsAction().getDiscreteAction().setVisible(false);
 	_scatterplotColorMapAction.getSettingsAction().getEditor1DAction().setVisible(false);
+
+
+	_modifyDifferentialExpressionAutoUpdate.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_geneExpressionDatasetVariant.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
 	
+	_scatterplotColorMapAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_crossSpecies1DatasetLinkerAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_crossSpecies2DatasetLinkerAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_species1Name.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_species2Name.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_selectedCrossspeciescluster.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_crossSpecies1HeatMapCellAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_crossSpecies2HeatMapCellAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_species1ScatterplotColorLinkerAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_species2ScatterplotColorLinkerAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_speciesEmbedding1LinkerAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_speciesEmbedding2LinkerAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_species1DEStatsLinkerAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_species2DEStatsLinkerAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+
 	if (!_scatterplotColorMapAction.isPublished())
 	{
 		_scatterplotColorMapAction.publish("Scatterplot color map connect");
