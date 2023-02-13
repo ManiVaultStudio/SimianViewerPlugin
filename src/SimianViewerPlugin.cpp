@@ -133,14 +133,14 @@ void SimianViewerPlugin::onDataEvent(hdps::DataEvent* dataEvent)
 
 void SimianViewerPlugin::fromVariantMap(const QVariantMap& variantMap)
 {
-    WidgetAction::fromVariantMap(variantMap);
+    ViewPlugin::fromVariantMap(variantMap);
 
     _simianOptionsAction.fromParentVariantMap(variantMap);
 }
 
 QVariantMap SimianViewerPlugin::toVariantMap() const
 {
-    QVariantMap variantMap = WidgetAction::toVariantMap();
+    QVariantMap variantMap = ViewPlugin::toVariantMap();
 
     _simianOptionsAction.insertIntoVariantMap(variantMap);
 
