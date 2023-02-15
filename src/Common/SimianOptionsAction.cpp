@@ -101,7 +101,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	//_screenshotAction.setDefaultWidgetFlags(TriggerAction::Icon);
 
 	//connect(&_helpAction, &TriggerAction::triggered, this, [this]() -> void {
-	//	_simianViewerPlugin.getTriggerHelpAction().trigger();
+	//	_simianViewerPlugin.getTriggerHelpAction().toggle();
 	//});
 
 
@@ -431,7 +431,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 					{
 						_scatterplotColorControlAction.setCurrentText("cross-species cluster");
 					}
-					_modifyDifferentialExpressionAutoUpdate.trigger();
+					_modifyDifferentialExpressionAutoUpdate.toggle();
 				//}
 			}
 
@@ -570,7 +570,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				{
 					_scatterplotColorControlAction.setCurrentText("cross-species cluster");
 				}
-				_modifyDifferentialExpressionAutoUpdate.trigger();
+				_modifyDifferentialExpressionAutoUpdate.toggle();
 			//}
 
 		//}
@@ -836,7 +836,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				_selectedCrossSpeciesNameList.setString("Sst Chodl_1");
 			}
 
-			_modifyDifferentialExpressionAutoUpdate.trigger();
+			_modifyDifferentialExpressionAutoUpdate.toggle();
 		}
 	};
 	const auto updateScatterplotColorControl = [this]() -> void
@@ -1299,7 +1299,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			//	}
 			//}
 		}
-		_modifyDifferentialExpressionAutoUpdate.trigger();
+		_modifyDifferentialExpressionAutoUpdate.toggle();
 	};
 
 	connect(&_selectedCrossspeciescluster, &StringAction::stringChanged, this, updateSelectedCrossspeciescluster);
