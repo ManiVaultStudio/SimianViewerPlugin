@@ -2438,7 +2438,9 @@ function queuehistChart(valD) {
     else {
         barflag = true;
     }
-
+    log("*******************")
+    log(valD);
+    log("*******************")
     simianVis();
 }
 
