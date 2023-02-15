@@ -290,7 +290,8 @@ public: // Action getters
     StringAction& getSelectedCrossspeciescluster() { return _selectedCrossspeciescluster; }
     VariantAction& getGeneExpressionDatasetVariant() { return _geneExpressionDatasetVariant; }
     StringAction& getHarHcondelCountString() { return _harHcondelCountString; }
-    ColorMapAction& getScatterplotColorMapAction() { return _scatterplotColorMapAction; }
+    ColorMapAction& getScatterplot1ColorMapAction() { return _scatterplot1ColorMapAction; }
+    ColorMapAction& getScatterplot2ColorMapAction() { return _scatterplot2ColorMapAction; }
     //ExplorationAction& getExplorationAction() { return _explorationAction; }
 public:
     void initLoader();
@@ -363,7 +364,8 @@ protected:
     StringAction                _selectedCrossSpeciesNameList;
     bool _isStarted;
     ColorMapAction          _colorMapAction;
-    ColorMapAction _scatterplotColorMapAction;
+    ColorMapAction _scatterplot1ColorMapAction;
+    ColorMapAction _scatterplot2ColorMapAction;
     //ColorAction              _backgroundColoringAction;
     hdps::EventListener     _eventListener;
     /** Default constant color */

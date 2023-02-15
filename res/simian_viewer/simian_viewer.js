@@ -257,13 +257,13 @@ const simianVis = () => {
     svg = d3.select("#distanceMapVis")
     svg.selectAll("*").remove();
 
-    log("*******************************************************")
+/*    log("*******************************************************")
     log(showFullHeatmapflag);
     log(barflag);
     log(colorMirror);
     log(qtColor);
     log("*******************************************************")
-
+*/
 
     showExplorationModeflag = false;
     if (showFullHeatmapflag) {

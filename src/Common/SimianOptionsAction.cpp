@@ -55,7 +55,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_selectedCrossspeciescluster(this, "Selected CrossSpecies Cluster"),
 	_geneExpressionDatasetVariant(this,"Gene Expression Variant"),
 	_selectedCrossSpeciesNameList(this,"Selected Cross Species Name List"),
-	_scatterplotColorMapAction(this,"Scatterplot color map connection"),
+	_scatterplot1ColorMapAction(this,"Scatterplot1 color map connection"),
+	_scatterplot2ColorMapAction(this, "Scatterplot2 color map connection"),
 	_harHcondelCountString(this,"Har-Hcondel Count String")
 {
 	setText("Settings");
@@ -90,7 +91,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		_harHcondelCountString.setSerializationName("Har-Hcondel Count String");
 		_colorMapAction.setSerializationName("Select color map");
 		//_backgroundColoringAction.setSerializationName("Select background color");
-		_scatterplotColorMapAction.setSerializationName( "Scatterplot color map connection");
+		_scatterplot1ColorMapAction.setSerializationName( "Scatterplot1 color map connection");
+		_scatterplot2ColorMapAction.setSerializationName("Scatterplot2 color map connection");
 		_fullHeatMapAction.setSerializationName("Full distancemap");
 		_histBarAction.setSerializationName("Cell counts");
 
@@ -157,7 +159,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	//_multiSelectClusterFilterAction.initialize(QStringList{ "" });
 	//_multiSelectClusterFilterAction.setSelectedOptions(QStringList());
 	_colorMapAction.initialize("Black to white", "Black to white");
-	_scatterplotColorMapAction.initialize("Viridis", "Viridis");
+	_scatterplot1ColorMapAction.initialize("Viridis", "Viridis");
+	_scatterplot2ColorMapAction.initialize("Viridis", "Viridis");
 	//_backgroundColoringAction.initialize(DEFAULT_CONSTANT_COLOR, DEFAULT_CONSTANT_COLOR);
 	_neighborhoodAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 	_neighborhoodAction.initialize(QStringList({ "Non-neuronal cells","IT-projecting excitatory","Non-IT-projecting excitatory","CGE-derived inhibitory","MGE-derived inhibitory" }), "CGE-derived inhibitory", "CGE-derived inhibitory");
@@ -197,89 +200,52 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_colorMapAction.getSettingsAction().getDiscreteAction().setVisible(false);
 	_colorMapAction.getSettingsAction().getEditor1DAction().setVisible(false);
 
-	_scatterplotColorMapAction.getSettingsAction().getDiscreteAction().setVisible(false);
-	_scatterplotColorMapAction.getSettingsAction().getEditor1DAction().setVisible(false);
+	_scatterplot1ColorMapAction.getSettingsAction().getDiscreteAction().setVisible(false);
+	_scatterplot1ColorMapAction.getSettingsAction().getEditor1DAction().setVisible(false);
 
+	_scatterplot2ColorMapAction.getSettingsAction().getDiscreteAction().setVisible(false);
+	_scatterplot2ColorMapAction.getSettingsAction().getEditor1DAction().setVisible(false);
 
 	_modifyDifferentialExpressionAutoUpdate.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_modifyDifferentialExpressionAutoUpdate.connectToPublicActionByName("Cluster Differential Expression 1::autoUpdate");
 	_geneExpressionDatasetVariant.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_neighborhoodAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_scatterplotColorMapAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_geneExpressionDatasetVariant.connectToPublicActionByName("Cluster Differential Expression 1::TableViewLeftSideInfo");
 	_crossSpecies1DatasetLinkerAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_crossSpecies1DatasetLinkerAction.connectToPublicActionByName("Cluster Differential Expression 1::Dataset1");
 	_crossSpecies2DatasetLinkerAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_crossSpecies2DatasetLinkerAction.connectToPublicActionByName("Cluster Differential Expression 1::Dataset2");
 	_species1Name.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_species1Name.connectToPublicActionByName("Cluster Differential Expression 1::DatasetName1");
 	_species2Name.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_selectedCrossspeciescluster.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_species2Name.connectToPublicActionByName("Cluster Differential Expression 1::DatasetName2");
 	_crossSpecies1HeatMapCellAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_crossSpecies1HeatMapCellAction.connectToPublicActionByName("Cluster Differential Expression 1::SelectClusters1");
 	_crossSpecies2HeatMapCellAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_species1ScatterplotColorLinkerAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_species2ScatterplotColorLinkerAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_speciesEmbedding1LinkerAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_speciesEmbedding2LinkerAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_crossSpecies2HeatMapCellAction.connectToPublicActionByName("Cluster Differential Expression 1::SelectClusters2");
+	_harHcondelCountString.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_harHcondelCountString.connectToPublicActionByName("Cluster Differential Expression l::IntoText");
+
+	_selectedCrossspeciescluster.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_selectedCrossspeciescluster.connectToPublicActionByName("Pop Pyramid:: Selected CrossSpecies Cluster");
 	_species1DEStatsLinkerAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_species1DEStatsLinkerAction.connectToPublicActionByName("Pop Pyramid:: DE Dataset1");
 	_species2DEStatsLinkerAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_species2DEStatsLinkerAction.connectToPublicActionByName("Pop Pyramid:: DE Dataset2");
 
-	if (!_scatterplotColorMapAction.isPublished())
-	{
-		_scatterplotColorMapAction.publish("Scatterplot color map connect");
-	}
-	if (!_crossSpecies1DatasetLinkerAction.isPublished())
-	{
-		_crossSpecies1DatasetLinkerAction.publish("CrossSpeciesDataset1");
-	}
-	if (!_crossSpecies2DatasetLinkerAction.isPublished())
-	{
-		_crossSpecies2DatasetLinkerAction.publish("CrossSpeciesDataset2");
-	}
-	if (!_species1Name.isPublished())
-	{
-		_species1Name.publish("Species1Name");
-	}
-	if (!_species2Name.isPublished())
-	{
-		_species2Name.publish("Species2Name");
-	}
-	if (!_selectedCrossspeciescluster.isPublished())
-	{
-		_selectedCrossspeciescluster.publish("Selected Cross-species cluster");
-	}
-
-	if (!_crossSpecies1HeatMapCellAction.isPublished())
-	{
-		_crossSpecies1HeatMapCellAction.publish("C1");
-	}
-	if (!_crossSpecies2HeatMapCellAction.isPublished())
-	{
-		_crossSpecies2HeatMapCellAction.publish("C2");
-	}
+	_species1ScatterplotColorLinkerAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_species1ScatterplotColorLinkerAction.connectToPublicActionByName("Scatterplot 1::Color");
+	_species2ScatterplotColorLinkerAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_species2ScatterplotColorLinkerAction.connectToPublicActionByName("Scatterplot 2::Color");
+	_speciesEmbedding1LinkerAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_speciesEmbedding1LinkerAction.connectToPublicActionByName("Scatterplot 1::Embedding");
+	_speciesEmbedding2LinkerAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_speciesEmbedding2LinkerAction.connectToPublicActionByName("Scatterplot 2::Embedding");
+	_scatterplot1ColorMapAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_scatterplot1ColorMapAction.connectToPublicActionByName("Scatterplot 1::Color map");
+	_scatterplot2ColorMapAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_scatterplot2ColorMapAction.connectToPublicActionByName("Scatterplot 2::Color map");
 
 
-	if (!_species1ScatterplotColorLinkerAction.isPublished())
-	{
-		_species1ScatterplotColorLinkerAction.publish("Scatterplot color species1");
-	}
-	if (!_species2ScatterplotColorLinkerAction.isPublished())
-	{
-		_species2ScatterplotColorLinkerAction.publish("Scatterplot color species2");
-	}
-
-	if (!_speciesEmbedding1LinkerAction.isPublished())
-	{
-		_speciesEmbedding1LinkerAction.publish("EmbeddingDataset1");
-	}
-	if (!_speciesEmbedding2LinkerAction.isPublished())
-	{
-		_speciesEmbedding2LinkerAction.publish("EmbeddingDataset2");
-	}
-
-	if (!_species1DEStatsLinkerAction.isPublished())
-	{
-		_species1DEStatsLinkerAction.publish("DEStatsDataset1");
-	}
-	if (!_species2DEStatsLinkerAction.isPublished())
-	{
-		_species2DEStatsLinkerAction.publish("DEStatsDataset2");
-	}
 	//_inSpecies1DatasetLinkerAction.setVisible(false);
 	//_inSpecies2DatasetLinkerAction.setVisible(false);
 	//_crossSpecies1DatasetLinkerAction.setVisible(false);
@@ -2322,7 +2288,8 @@ void SimianOptionsAction::fromVariantMap(const QVariantMap& variantMap)
 	_harHcondelCountString.fromParentVariantMap(variantMap);
 	_colorMapAction.fromParentVariantMap(variantMap);
 	//_backgroundColoringAction.fromParentVariantMap(variantMap);
-	_scatterplotColorMapAction.fromParentVariantMap(variantMap);
+	_scatterplot1ColorMapAction.fromParentVariantMap(variantMap);
+	_scatterplot2ColorMapAction.fromParentVariantMap(variantMap);
 	_fullHeatMapAction.fromParentVariantMap(variantMap);
 	_histBarAction.fromParentVariantMap(variantMap);
 }
@@ -2360,7 +2327,8 @@ QVariantMap SimianOptionsAction::toVariantMap() const
 	_selectedCrossSpeciesNameList.insertIntoVariantMap(variantMap);
 	_harHcondelCountString.insertIntoVariantMap(variantMap);
 	_fullHeatMapAction.insertIntoVariantMap(variantMap);
-	_scatterplotColorMapAction.insertIntoVariantMap(variantMap);
+	_scatterplot1ColorMapAction.insertIntoVariantMap(variantMap);
+	_scatterplot2ColorMapAction.insertIntoVariantMap(variantMap);
 	//_backgroundColoringAction.insertIntoVariantMap(variantMap);
 	_colorMapAction.insertIntoVariantMap(variantMap);
 	_histBarAction.insertIntoVariantMap(variantMap);
