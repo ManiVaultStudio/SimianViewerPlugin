@@ -270,8 +270,8 @@ public: // Action getters
     //OptionAction& getCrossSpeciesFilterAction() { return _crossSpeciesFilterAction; }
     OptionAction& getInSpecies1HeatMapCellAction() { return _inSpecies1HeatMapCellAction; }
     OptionAction& getInSpecies2HeatMapCellAction() { return _inSpecies2HeatMapCellAction; }
-    OptionAction& getCrossSpecies1HeatMapCellAction() { return _crossSpecies1HeatMapCellAction; }
-    OptionAction& getCrossSpecies2HeatMapCellAction() { return _crossSpecies2HeatMapCellAction; }
+    OptionsAction& getCrossSpecies1HeatMapCellAction() { return _crossSpecies1HeatMapCellAction; }
+    OptionsAction& getCrossSpecies2HeatMapCellAction() { return _crossSpecies2HeatMapCellAction; }
     Species1Holder& getSpecies1Holder() { return _species1Holder; }
     Species2Holder& getSpecies2Holder() { return _species2Holder; }
     VisSettingHolder& getVisSettingHolder() { return _visSettingHolder; }
@@ -341,8 +341,8 @@ protected:
     //ToggleAction _explorationModeAction;
     OptionAction                 _inSpecies1HeatMapCellAction;
     OptionAction                 _inSpecies2HeatMapCellAction;
-    OptionAction                 _crossSpecies1HeatMapCellAction;
-    OptionAction                 _crossSpecies2HeatMapCellAction;
+    OptionsAction                 _crossSpecies1HeatMapCellAction;
+    OptionsAction                 _crossSpecies2HeatMapCellAction;
     Species1Holder               _species1Holder;
     Species2Holder             _species2Holder;
     VisSettingHolder              _visSettingHolder;
