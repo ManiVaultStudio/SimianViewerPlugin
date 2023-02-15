@@ -449,6 +449,6 @@ void SimianViewerPlugin::selectCrossSpeciesClusterPoints(std::vector<std::string
 //
 //
 //
-//    _simianOptionsAction.getmodifyDifferentialExpressionAutoUpdateAction().toggle();
+//    _simianOptionsAction.getmodifyDifferentialExpressionAutoUpdateAction().trigger();
 //}
 

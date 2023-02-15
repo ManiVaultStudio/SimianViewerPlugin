@@ -252,7 +252,7 @@ public: // Action getters
     OptionAction& getNeighborhoodAction() { return _neighborhoodAction; }
     //IntegralAction& getDistanceAction() { return _distanceAction; };
     ToggleAction& getHistBarAction() { return _histBarAction; };
-    ToggleAction& getmodifyDifferentialExpressionAutoUpdateAction() { return _modifyDifferentialExpressionAutoUpdate; };
+    TriggerAction& getmodifyDifferentialExpressionAutoUpdateAction() { return _modifyDifferentialExpressionAutoUpdate; };
     ToggleAction& getRemoveLinkingOptionMenuFromUIAction() { return _removeLinkingOptionMenuFromUIAction; };
     ToggleAction& getFullHeatmapAction() { return _fullHeatMapAction; };
     //ToggleAction& getExplorationModeAction() { return _explorationModeAction; };
@@ -355,7 +355,7 @@ protected:
     ToggleAction                _removeLinkingOptionMenuFromUIAction;
     //TriggerAction                _helpAction;
     //TriggerAction                _screenshotAction;
-    ToggleAction                 _modifyDifferentialExpressionAutoUpdate;
+    TriggerAction                 _modifyDifferentialExpressionAutoUpdate;
     StringAction                  _species1Name;
     StringAction                  _species2Name;
     StringAction                    _selectedCrossspeciescluster;
