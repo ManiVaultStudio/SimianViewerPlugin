@@ -25,7 +25,7 @@ signals:
     void qt_setClusters(QString data);
     //void qt_resetView(QString data);
     void qt_setColor(QString data);
-    void qt_setBackgroundColor(QString data);
+    //void qt_setBackgroundColor(QString data);
     void qt_histChart(QString data);
     void qt_showFullHeatmap(QString data);
     void qt_borderSelectedCrossspeciesCluster(QString data);
@@ -57,7 +57,7 @@ public:
     //void resetView(std::string visDataContent);
     void setClusters(QStringList visClusterContent);
     void setColor(QString visColorContent);
-    void setBackgroundColor(QString visColorContent);
+    //void setBackgroundColor(QString visColorContent);
     void histChart(QString visColorContent);
     void showFullHeatmap(QString visColorContent); 
     void borderSelectedCrossspeciesCluster(QString visColorContent);

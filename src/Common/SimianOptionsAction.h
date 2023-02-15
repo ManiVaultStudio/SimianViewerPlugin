@@ -279,7 +279,7 @@ public: // Action getters
     DistanceNeighborhoodHolder& getDistanceNeighborhoodHolder() { return _distanceNeighborhoodHolder; }
     ScatterplotColorHolder& getScatterplotColorHolder() { return _scatterplotColorHolder; }
     ColorMapAction& getColorMapAction() { return _colorMapAction; }
-    ColorAction& getBackgroundColoringAction() { return _backgroundColoringAction; }
+    //ColorAction& getBackgroundColoringAction() { return _backgroundColoringAction; }
     CellCountHolder& getCellCountHolder() { return _cellCountHolder; }
     //TriggerAction& getHelpAction() { return _helpAction; }
     //TriggerAction& getScreenshotAction() { return _screenshotAction; }
@@ -364,7 +364,7 @@ protected:
     bool _isStarted;
     ColorMapAction          _colorMapAction;
     ColorMapAction _scatterplotColorMapAction;
-    ColorAction              _backgroundColoringAction;
+    //ColorAction              _backgroundColoringAction;
     hdps::EventListener     _eventListener;
     /** Default constant color */
     static const QColor DEFAULT_CONSTANT_COLOR;

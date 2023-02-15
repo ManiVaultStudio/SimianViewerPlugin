@@ -87,7 +87,7 @@ try {
        // QtBridge.qt_resetView.connect(function () { resetView(arguments[0]); });
         QtBridge.qt_setClusters.connect(function () { setClusters(arguments[0]); });
         QtBridge.qt_setColor.connect(function () { setColor(arguments[0]); });
-        QtBridge.qt_setBackgroundColor.connect(function () { setBackgroundColor(arguments[0]); });
+        //QtBridge.qt_setBackgroundColor.connect(function () { setBackgroundColor(arguments[0]); });
         QtBridge.qt_histChart.connect(function () { histChart(arguments[0]); });
         QtBridge.qt_showFullHeatmap.connect(function () { showFullHeatmap(arguments[0]); });
         QtBridge.qt_borderSelectedCrossspeciesCluster.connect(function () { borderSelectedCrossspeciesCluster(arguments[0]); });
@@ -256,6 +256,15 @@ const simianVis = () => {
     }
     svg = d3.select("#distanceMapVis")
     svg.selectAll("*").remove();
+
+    log("*******************************************************")
+    log(showFullHeatmapflag);
+    log(barflag);
+    log(colorMirror);
+    log(qtColor);
+    log("*******************************************************")
+
+
     showExplorationModeflag = false;
     if (showFullHeatmapflag) {
         document.getElementById('distanceMapContainer').setAttribute("style", "width:100%;height:100%");
@@ -2414,18 +2423,17 @@ function queueColor(colorName, mirrorValue) {
     else {
         colorMirror = true;
     }
-
     simianVis();
 }
 
 //BackgroundColor Options
-function setBackgroundColor(d) {
+/*function setBackgroundColor(d) {
     queueBackgroundColor(d);
 }
 function queueBackgroundColor(colorName) {
     backgroundColor = colorName;
     simianVis();
-}
+}*/
 
 function histChart(d) {
 
@@ -2438,9 +2446,6 @@ function queuehistChart(valD) {
     else {
         barflag = true;
     }
-    log("*******************")
-    log(valD);
-    log("*******************")
     simianVis();
 }
 
