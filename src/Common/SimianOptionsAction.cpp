@@ -55,8 +55,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_selectedCrossspeciescluster(this, "Selected CrossSpecies Cluster"),
 	_geneExpressionDatasetVariant(this,"Gene Expression Variant"),
 	_selectedCrossSpeciesNameList(this,"Selected Cross Species Name List"),
-	_scatterplot1ColorMapAction(this,"Scatterplot1 color map connection"),
-	_scatterplot2ColorMapAction(this, "Scatterplot2 color map connection"),
+	//_scatterplotColorMapAction(this,"Scatterplot1 color map connection"),
 	_harHcondelCountString(this,"Har-Hcondel Count String")
 {
 	setText("Settings");
@@ -91,8 +90,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		_harHcondelCountString.setSerializationName("Har-Hcondel Count String");
 		_colorMapAction.setSerializationName("Select color map");
 		//_backgroundColoringAction.setSerializationName("Select background color");
-		_scatterplot1ColorMapAction.setSerializationName( "Scatterplot1 color map connection");
-		_scatterplot2ColorMapAction.setSerializationName("Scatterplot2 color map connection");
+		//_scatterplot1ColorMapAction.setSerializationName( "Scatterplot1 color map connection");
+		//_scatterplot2ColorMapAction.setSerializationName("Scatterplot2 color map connection");
 		_fullHeatMapAction.setSerializationName("Full distancemap");
 		_histBarAction.setSerializationName("Cell counts");
 
@@ -159,8 +158,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	//_multiSelectClusterFilterAction.initialize(QStringList{ "" });
 	//_multiSelectClusterFilterAction.setSelectedOptions(QStringList());
 	_colorMapAction.initialize("Black to white", "Black to white");
-	_scatterplot1ColorMapAction.initialize("Viridis", "Viridis");
-	_scatterplot2ColorMapAction.initialize("Viridis", "Viridis");
+	//_scatterplot1ColorMapAction.initialize("Viridis", "Viridis");
+	//_scatterplot2ColorMapAction.initialize("Viridis", "Viridis");
 	//_backgroundColoringAction.initialize(DEFAULT_CONSTANT_COLOR, DEFAULT_CONSTANT_COLOR);
 	_neighborhoodAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 	_neighborhoodAction.initialize(QStringList({ "Non-neuronal cells","IT-projecting excitatory","Non-IT-projecting excitatory","CGE-derived inhibitory","MGE-derived inhibitory" }), "CGE-derived inhibitory", "CGE-derived inhibitory");
@@ -200,11 +199,11 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_colorMapAction.getSettingsAction().getDiscreteAction().setVisible(false);
 	_colorMapAction.getSettingsAction().getEditor1DAction().setVisible(false);
 
-	_scatterplot1ColorMapAction.getSettingsAction().getDiscreteAction().setVisible(false);
-	_scatterplot1ColorMapAction.getSettingsAction().getEditor1DAction().setVisible(false);
+	//_scatterplot1ColorMapAction.getSettingsAction().getDiscreteAction().setVisible(false);
+	//_scatterplot1ColorMapAction.getSettingsAction().getEditor1DAction().setVisible(false);
 
-	_scatterplot2ColorMapAction.getSettingsAction().getDiscreteAction().setVisible(false);
-	_scatterplot2ColorMapAction.getSettingsAction().getEditor1DAction().setVisible(false);
+	//_scatterplot2ColorMapAction.getSettingsAction().getDiscreteAction().setVisible(false);
+	//_scatterplot2ColorMapAction.getSettingsAction().getEditor1DAction().setVisible(false);
 
 	_modifyDifferentialExpressionAutoUpdate.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
 	_modifyDifferentialExpressionAutoUpdate.connectToPublicActionByName("Cluster Differential Expression 1::CalculateDifferentialExpression");
@@ -233,17 +232,20 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_species2DEStatsLinkerAction.connectToPublicActionByName("Pop Pyramid:: DE Dataset2");
 
 	_species1ScatterplotColorLinkerAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_species1ScatterplotColorLinkerAction.connectToPublicActionByName("Scatterplot 1::Color");
+	_species1ScatterplotColorLinkerAction.connectToPublicActionByName("Scatterplot View 1::Color");
 	_species2ScatterplotColorLinkerAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_species2ScatterplotColorLinkerAction.connectToPublicActionByName("Scatterplot 2::Color");
+	_species2ScatterplotColorLinkerAction.connectToPublicActionByName("Scatterplot View 2::Color");
 	_speciesEmbedding1LinkerAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_speciesEmbedding1LinkerAction.connectToPublicActionByName("Scatterplot 1::Embedding");
+	_speciesEmbedding1LinkerAction.connectToPublicActionByName("Scatterplot View 1::Embedding");
 	_speciesEmbedding2LinkerAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_speciesEmbedding2LinkerAction.connectToPublicActionByName("Scatterplot 2::Embedding");
-	_scatterplot1ColorMapAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_scatterplot1ColorMapAction.connectToPublicActionByName("Scatterplot 1::Color map");
-	_scatterplot2ColorMapAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_scatterplot2ColorMapAction.connectToPublicActionByName("Scatterplot 2::Color map");
+	_speciesEmbedding2LinkerAction.connectToPublicActionByName("Scatterplot View 2::Embedding");
+	//const auto globalColorMapName = "GlobalColorMap";
+	//_scatterplotColorMapAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	//_scatterplotColorMapAction.connectToPublicActionByName(globalColorMapName);
+	//_scatterplot1ColorMapAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	//_scatterplot1ColorMapAction.connectToPublicActionByName("Scatterplot View 1::Color map");
+	//_scatterplot2ColorMapAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	//_scatterplot2ColorMapAction.connectToPublicActionByName("Scatterplot View 2::Color map");
 
 
 	//_inSpecies1DatasetLinkerAction.setVisible(false);
@@ -2335,8 +2337,6 @@ void SimianOptionsAction::fromVariantMap(const QVariantMap& variantMap)
 	_harHcondelCountString.fromParentVariantMap(variantMap);
 	_colorMapAction.fromParentVariantMap(variantMap);
 	//_backgroundColoringAction.fromParentVariantMap(variantMap);
-	_scatterplot1ColorMapAction.fromParentVariantMap(variantMap);
-	_scatterplot2ColorMapAction.fromParentVariantMap(variantMap);
 	_fullHeatMapAction.fromParentVariantMap(variantMap);
 	_histBarAction.fromParentVariantMap(variantMap);
 }
@@ -2374,8 +2374,6 @@ QVariantMap SimianOptionsAction::toVariantMap() const
 	_selectedCrossSpeciesNameList.insertIntoVariantMap(variantMap);
 	_harHcondelCountString.insertIntoVariantMap(variantMap);
 	_fullHeatMapAction.insertIntoVariantMap(variantMap);
-	_scatterplot1ColorMapAction.insertIntoVariantMap(variantMap);
-	_scatterplot2ColorMapAction.insertIntoVariantMap(variantMap);
 	//_backgroundColoringAction.insertIntoVariantMap(variantMap);
 	_colorMapAction.insertIntoVariantMap(variantMap);
 	_histBarAction.insertIntoVariantMap(variantMap);
