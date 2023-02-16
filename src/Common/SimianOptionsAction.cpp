@@ -2248,7 +2248,56 @@ void SimianOptionsAction::initLoader()
 	if (_species1SelectAction.getCurrentText() != "" && _species2SelectAction.getCurrentText() != "")
 	{
 		updateData((_species1SelectAction.getCurrentText()).toStdString(), (_species2SelectAction.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString());
+
+
+
+
+
+
+
+
+		if (_inSpecies1DatasetLinkerAction.getCurrentText() != "" && _inSpecies2DatasetLinkerAction.getCurrentText() != "")
+		{
+			sendClusterCountInfoToJS();
+		}
+
+
+		if (_histBarAction.isChecked())
+		{
+			_simianViewerPlugin.getSimianViewerWidget().histChart(QString::fromStdString("T"));
+		}
+		else
+		{
+			_simianViewerPlugin.getSimianViewerWidget().histChart(QString::fromStdString("F"));
+		}
+
+		const auto& mirrorAction = _colorMapAction.getSettingsAction().getHorizontalAxisAction().getMirrorAction();
+		std::string s1 = _colorMapAction.getColorMap().toStdString();
+		std::string s2 = "*%*";
+		std::string s3;
+		if (mirrorAction.isChecked())
+		{
+			s3 = "T";
+		}
+		else
+		{
+			s3 = "F";
+		}
+		std::string full = s1 + s2 + s3;
+		_simianViewerPlugin.getSimianViewerWidget().setColor(QString::fromStdString(full));
+
+		if (_fullHeatMapAction.isChecked())
+		{
+			_simianViewerPlugin.getSimianViewerWidget().showFullHeatmap(QString::fromStdString("T"));
+		}
+		else
+		{
+			_simianViewerPlugin.getSimianViewerWidget().showFullHeatmap(QString::fromStdString("F"));
+		}
 	}
+
+
+
 
 }
 
