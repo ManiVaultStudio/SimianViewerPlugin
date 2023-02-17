@@ -42,182 +42,236 @@ namespace hdps
 class SimianOptionsAction : public WidgetAction
 {
 public:
-    class Species1Holder : public WidgetAction
+    class OptionsHolder : public WidgetAction
     {
     protected:
         class Widget : public hdps::gui::WidgetActionWidget {
         public:
-            Widget(QWidget* parent, Species1Holder* species1Holder);
+            Widget(QWidget* parent, OptionsHolder* species1Holder);
 
             friend class Species1Holder;
         };
 
         QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
-            return new Species1Holder::Widget(parent, this);
+            return new OptionsHolder::Widget(parent, this);
         };
 
     public:
-        Species1Holder(SimianOptionsAction& simianOptionsAction);
+        OptionsHolder(SimianOptionsAction& simianOptionsAction);
 
     protected:
         SimianOptionsAction& _simianOptionsAction;
 
         friend class SimianOptionsAction;
     };
-    class Species2Holder : public WidgetAction
-    {
-    protected:
-        class Widget : public hdps::gui::WidgetActionWidget {
-        public:
-            Widget(QWidget* parent, Species2Holder* species2Holder);
-
-            friend class Species2Holder;
-        };
-
-        QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
-            return new Species2Holder::Widget(parent, this);
-        };
-
-    public:
-        Species2Holder(SimianOptionsAction& simianOptionsAction);
-
-    protected:
-        SimianOptionsAction& _simianOptionsAction;
-
-        friend class SimianOptionsAction;
-    };
-    class VisSettingHolder : public WidgetAction
-    {
-    protected:
-        class Widget : public hdps::gui::WidgetActionWidget {
-        public:
-            Widget(QWidget* parent, VisSettingHolder* visSettingHolder);
-
-            friend class VisSettingHolder;
-        };
-
-        QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
-            return new VisSettingHolder::Widget(parent, this);
-        };
-
-    public:
-        VisSettingHolder(SimianOptionsAction& simianOptionsAction);
-
-    protected:
-        SimianOptionsAction& _simianOptionsAction;
-
-       // friend class SimianOptionsAction;
-    };
-    class LinkerSettingHolder : public WidgetAction
-    {
-    protected:
-        class Widget : public hdps::gui::WidgetActionWidget {
-        public:
-            Widget(QWidget* parent, LinkerSettingHolder* linkerSettingHolder);
-
-            friend class LinkerSettingWidget;
-        };
-
-        QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
-            return new LinkerSettingHolder::Widget(parent, this);
-        };
-
-    public:
-        LinkerSettingHolder(SimianOptionsAction& simianOptionsAction);
-
-    protected:
-        SimianOptionsAction& _simianOptionsAction;
-
-        friend class SimianOptionsAction;
-    };
-    class ScatterplotColorHolder : public WidgetAction
-    {
-    protected:
-        class Widget : public hdps::gui::WidgetActionWidget {
-        public:
-            Widget(QWidget* parent, ScatterplotColorHolder* scatterplotColorHolder);
-
-            friend class ScatterplotColorHolder;
-        };
-
-        QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
-            return new ScatterplotColorHolder::Widget(parent, this);
-        };
-
-    public:
-        ScatterplotColorHolder(SimianOptionsAction& simianOptionsAction);
-
-    protected:
-        SimianOptionsAction& _simianOptionsAction;
-
-        friend class SimianOptionsAction;
-    };
-    class DistanceNeighborhoodHolder : public WidgetAction
-    {
-    protected:
-        class Widget : public hdps::gui::WidgetActionWidget {
-        public:
-            Widget(QWidget* parent, DistanceNeighborhoodHolder* distanceNeighborhoodHolder);
-
-            friend class DistanceNeighborhoodHolder;
-        };
-
-        QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
-            return new DistanceNeighborhoodHolder::Widget(parent, this);
-        };
-
-    public:
-        DistanceNeighborhoodHolder(SimianOptionsAction& simianOptionsAction);
-
-    protected:
-        SimianOptionsAction& _simianOptionsAction;
-
-        friend class SimianOptionsAction;
-    };
-    class CellCountHolder : public WidgetAction
-    {
-    protected:
-        class Widget : public hdps::gui::WidgetActionWidget {
-        public:
-            Widget(QWidget* parent, CellCountHolder* cellCountHolder);
-
-            friend class CellCountHolder;
-        };
-
-        QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
-            return new CellCountHolder::Widget(parent, this);
-        };
-
-    public:
-        CellCountHolder(SimianOptionsAction& simianOptionsAction);
-
-    protected:
-        SimianOptionsAction& _simianOptionsAction;
-
-        friend class SimianOptionsAction;
-    };
-    //class ExplorationAction : public WidgetAction
+    //class Species2Holder : public WidgetAction
     //{
     //protected:
     //    class Widget : public hdps::gui::WidgetActionWidget {
     //    public:
-    //        Widget(QWidget* parent, ExplorationAction* explorationAction);
+    //        Widget(QWidget* parent, Species2Holder* species2Holder);
 
-    //        friend class ExplorationAction;
+    //        friend class Species2Holder;
     //    };
 
     //    QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
-    //        return new ExplorationAction::Widget(parent, this);
+    //        return new Species2Holder::Widget(parent, this);
     //    };
 
     //public:
-    //    ExplorationAction(SimianOptionsAction& simianOptionsAction);
+    //    Species2Holder(SimianOptionsAction& simianOptionsAction);
 
     //protected:
     //    SimianOptionsAction& _simianOptionsAction;
 
     //    friend class SimianOptionsAction;
     //};
+    class VisSettingHolder : public GroupAction
+    {
+    public:
+        VisSettingHolder(SimianOptionsAction& simianOptionsAction);
+
+        const ToggleAction& getFullHeatmapAction() const { return _fullHeatMapAction; };
+        const ColorMapAction& getColorMapAction() const { return _colorMapAction; }
+
+        ToggleAction& getFullHeatmapAction() { return _fullHeatMapAction; };
+        ColorMapAction& getColorMapAction() { return _colorMapAction; }
+
+    protected:
+        SimianOptionsAction&    _simianOptionsAction;
+        ToggleAction            _fullHeatMapAction;
+        ColorMapAction          _colorMapAction;
+
+       // friend class SimianOptionsAction;
+    };
+    class LinkerSettingHolder : public GroupAction
+    {
+    public:
+        LinkerSettingHolder(SimianOptionsAction& simianOptionsAction);
+
+
+       const DatasetPickerAction& getCrossSpecies1DatasetLinkerAction() const { return _crossSpecies1DatasetLinkerAction; };
+       const DatasetPickerAction& getCrossSpecies2DatasetLinkerAction() const { return _crossSpecies2DatasetLinkerAction; };
+       const DatasetPickerAction& getSpecies1ScatterplotColorLinkerAction() const { return _species1ScatterplotColorLinkerAction; };
+       const DatasetPickerAction& getSpecies2ScatterplotColorLinkerAction()const { return _species2ScatterplotColorLinkerAction; };
+
+       const DatasetPickerAction& getSpeciesEmbedding1LinkerAction() const { return _speciesEmbedding1LinkerAction; };
+       const DatasetPickerAction& getSpeciesEmbedding2LinkerAction() const { return _speciesEmbedding2LinkerAction; };
+
+       const DatasetPickerAction& getSpecies1DEStatsLinkerAction()const { return _species1DEStatsLinkerAction; };
+       const DatasetPickerAction& getSpecies2DEStatsLinkerAction()const { return _species2DEStatsLinkerAction; };
+
+       const DatasetPickerAction& getInSpecies1DatasetLinkerAction()const { return _inSpecies1DatasetLinkerAction; };
+       const  DatasetPickerAction& getInSpecies2DatasetLinkerAction() const { return _inSpecies2DatasetLinkerAction; };
+       const VariantAction& getGeneExpressionDatasetVariant() const { return _geneExpressionDatasetVariant; }
+       const StringAction& getHarHcondelCountString() const  { return _harHcondelCountString; }
+
+
+       const OptionAction& getInSpecies1HeatMapCellAction() const { return _inSpecies1HeatMapCellAction; }
+       const OptionAction& getInSpecies2HeatMapCellAction() const { return _inSpecies2HeatMapCellAction; }
+       const OptionsAction& getCrossSpecies1HeatMapCellAction() const  { return _crossSpecies1HeatMapCellAction; }
+       const OptionsAction& getCrossSpecies2HeatMapCellAction() const  { return _crossSpecies2HeatMapCellAction; }
+
+       const TriggerAction& getmodifyDifferentialExpressionAutoUpdateAction()const { return _modifyDifferentialExpressionAutoUpdate; };
+       const ToggleAction& getRemoveLinkingOptionMenuFromUIAction()const { return _removeLinkingOptionMenuFromUIAction; };
+
+       const StringAction& getSpecies1Name() const { return _species1Name; }
+       const StringAction& getSelectedCrossSpeciesNameList() const { return _selectedCrossSpeciesNameList; }
+       const StringAction& getSpecies2Name() const { return _species2Name; }
+       const  StringAction& getSelectedCrossspeciescluster() const { return _selectedCrossspeciescluster; }
+
+
+
+        DatasetPickerAction& getCrossSpecies1DatasetLinkerAction() { return _crossSpecies1DatasetLinkerAction; };
+        DatasetPickerAction& getCrossSpecies2DatasetLinkerAction() { return _crossSpecies2DatasetLinkerAction; };
+        DatasetPickerAction& getSpecies1ScatterplotColorLinkerAction() { return _species1ScatterplotColorLinkerAction; };
+        DatasetPickerAction& getSpecies2ScatterplotColorLinkerAction() { return _species2ScatterplotColorLinkerAction; };
+
+        DatasetPickerAction& getSpeciesEmbedding1LinkerAction() { return _speciesEmbedding1LinkerAction; };
+        DatasetPickerAction& getSpeciesEmbedding2LinkerAction() { return _speciesEmbedding2LinkerAction; };
+
+        DatasetPickerAction& getSpecies1DEStatsLinkerAction() { return _species1DEStatsLinkerAction; };
+        DatasetPickerAction& getSpecies2DEStatsLinkerAction() { return _species2DEStatsLinkerAction; };
+
+        DatasetPickerAction& getInSpecies1DatasetLinkerAction() { return _inSpecies1DatasetLinkerAction; };
+        DatasetPickerAction& getInSpecies2DatasetLinkerAction() { return _inSpecies2DatasetLinkerAction; };
+        VariantAction& getGeneExpressionDatasetVariant() { return _geneExpressionDatasetVariant; }
+        StringAction& getHarHcondelCountString() { return _harHcondelCountString; }
+
+        OptionAction& getInSpecies1HeatMapCellAction() { return _inSpecies1HeatMapCellAction; }
+        OptionAction& getInSpecies2HeatMapCellAction() { return _inSpecies2HeatMapCellAction; }
+        OptionsAction& getCrossSpecies1HeatMapCellAction() { return _crossSpecies1HeatMapCellAction; }
+        OptionsAction& getCrossSpecies2HeatMapCellAction() { return _crossSpecies2HeatMapCellAction; }
+
+        TriggerAction& getmodifyDifferentialExpressionAutoUpdateAction() { return _modifyDifferentialExpressionAutoUpdate; };
+        ToggleAction& getRemoveLinkingOptionMenuFromUIAction() { return _removeLinkingOptionMenuFromUIAction; };
+
+        StringAction& getSpecies1Name() { return _species1Name; }
+        StringAction& getSelectedCrossSpeciesNameList() { return _selectedCrossSpeciesNameList; }
+        StringAction& getSpecies2Name() { return _species2Name; }
+        StringAction& getSelectedCrossspeciescluster() { return _selectedCrossspeciescluster; }
+
+    protected:
+        DatasetPickerAction           _crossSpecies1DatasetLinkerAction;
+        DatasetPickerAction          _crossSpecies2DatasetLinkerAction;
+
+        DatasetPickerAction           _species1ScatterplotColorLinkerAction;
+        DatasetPickerAction          _species2ScatterplotColorLinkerAction;
+
+        DatasetPickerAction           _speciesEmbedding1LinkerAction;
+        DatasetPickerAction          _speciesEmbedding2LinkerAction;
+
+        DatasetPickerAction           _species1DEStatsLinkerAction;
+        DatasetPickerAction           _species2DEStatsLinkerAction;
+
+        DatasetPickerAction           _inSpecies1DatasetLinkerAction;
+        DatasetPickerAction          _inSpecies2DatasetLinkerAction;
+        ToggleAction                _removeLinkingOptionMenuFromUIAction;
+        VariantAction                  _geneExpressionDatasetVariant;
+        StringAction                    _harHcondelCountString;
+        TriggerAction                 _modifyDifferentialExpressionAutoUpdate;
+        OptionAction                 _inSpecies1HeatMapCellAction;
+        OptionAction                 _inSpecies2HeatMapCellAction;
+        OptionsAction                 _crossSpecies1HeatMapCellAction;
+        OptionsAction                 _crossSpecies2HeatMapCellAction;
+
+        StringAction                  _species1Name;
+        StringAction                  _species2Name;
+        StringAction                    _selectedCrossspeciescluster;
+
+
+        StringAction                _selectedCrossSpeciesNameList;
+
+        // friend class SimianOptionsAction;
+    };
+
+    //class ScatterplotColorHolder : public WidgetAction
+    //{
+    //protected:
+    //    class Widget : public hdps::gui::WidgetActionWidget {
+    //    public:
+    //        Widget(QWidget* parent, ScatterplotColorHolder* scatterplotColorHolder);
+
+    //        friend class ScatterplotColorHolder;
+    //    };
+
+    //    QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
+    //        return new ScatterplotColorHolder::Widget(parent, this);
+    //    };
+
+    //public:
+    //    ScatterplotColorHolder(SimianOptionsAction& simianOptionsAction);
+
+    //protected:
+    //    SimianOptionsAction& _simianOptionsAction;
+
+    //    friend class SimianOptionsAction;
+    //};
+    //class DistanceNeighborhoodHolder : public WidgetAction
+    //{
+    //protected:
+    //    class Widget : public hdps::gui::WidgetActionWidget {
+    //    public:
+    //        Widget(QWidget* parent, DistanceNeighborhoodHolder* distanceNeighborhoodHolder);
+
+    //        friend class DistanceNeighborhoodHolder;
+    //    };
+
+    //    QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
+    //        return new DistanceNeighborhoodHolder::Widget(parent, this);
+    //    };
+
+    //public:
+    //    DistanceNeighborhoodHolder(SimianOptionsAction& simianOptionsAction);
+
+    //protected:
+    //    SimianOptionsAction& _simianOptionsAction;
+
+    //    friend class SimianOptionsAction;
+    //};
+    //class CellCountHolder : public WidgetAction
+    //{
+    //protected:
+    //    class Widget : public hdps::gui::WidgetActionWidget {
+    //    public:
+    //        Widget(QWidget* parent, CellCountHolder* cellCountHolder);
+
+    //        friend class CellCountHolder;
+    //    };
+
+    //    QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
+    //        return new CellCountHolder::Widget(parent, this);
+    //    };
+
+    //public:
+    //    CellCountHolder(SimianOptionsAction& simianOptionsAction);
+
+    //protected:
+    //    SimianOptionsAction& _simianOptionsAction;
+
+    //    friend class SimianOptionsAction;
+    //};
+
 public:
     void onDataEvent(hdps::DataEvent* dataEvent);
 protected:
@@ -248,48 +302,33 @@ public: // Action getters
 
     OptionAction& getSpecies1SelectAction() { return _species1SelectAction; }
     OptionAction& getSpecies2SelectAction() { return _species2SelectAction; }
-    OptionAction& getScatterplotColorControlAction() { return _scatterplotColorControlAction; }
+
     OptionAction& getNeighborhoodAction() { return _neighborhoodAction; }
     //IntegralAction& getDistanceAction() { return _distanceAction; };
     ToggleAction& getHistBarAction() { return _histBarAction; };
-    TriggerAction& getmodifyDifferentialExpressionAutoUpdateAction() { return _modifyDifferentialExpressionAutoUpdate; };
-    ToggleAction& getRemoveLinkingOptionMenuFromUIAction() { return _removeLinkingOptionMenuFromUIAction; };
-    ToggleAction& getFullHeatmapAction() { return _fullHeatMapAction; };
+
+    
     //ToggleAction& getExplorationModeAction() { return _explorationModeAction; };
-    DatasetPickerAction& getCrossSpecies1DatasetLinkerAction() { return _crossSpecies1DatasetLinkerAction; };
-    DatasetPickerAction& getCrossSpecies2DatasetLinkerAction() { return _crossSpecies2DatasetLinkerAction; };
 
-    DatasetPickerAction& getSpecies1ScatterplotColorLinkerAction() { return _species1ScatterplotColorLinkerAction; };
-    DatasetPickerAction& getSpecies2ScatterplotColorLinkerAction() { return _species2ScatterplotColorLinkerAction; };
 
-    DatasetPickerAction& getSpeciesEmbedding1LinkerAction() { return _speciesEmbedding1LinkerAction; };
-    DatasetPickerAction& getSpeciesEmbedding2LinkerAction() { return _speciesEmbedding2LinkerAction; };
 
-    DatasetPickerAction& getInSpecies1DatasetLinkerAction() { return _inSpecies1DatasetLinkerAction; };
-    DatasetPickerAction& getInSpecies2DatasetLinkerAction() { return _inSpecies2DatasetLinkerAction; };
     //OptionAction& getCrossSpeciesFilterAction() { return _crossSpeciesFilterAction; }
-    OptionAction& getInSpecies1HeatMapCellAction() { return _inSpecies1HeatMapCellAction; }
-    OptionAction& getInSpecies2HeatMapCellAction() { return _inSpecies2HeatMapCellAction; }
-    OptionsAction& getCrossSpecies1HeatMapCellAction() { return _crossSpecies1HeatMapCellAction; }
-    OptionsAction& getCrossSpecies2HeatMapCellAction() { return _crossSpecies2HeatMapCellAction; }
-    Species1Holder& getSpecies1Holder() { return _species1Holder; }
-    Species2Holder& getSpecies2Holder() { return _species2Holder; }
+
+    OptionsHolder& getOptionsHolder() { return _optionsHolder; }
+    //Species2Holder& getSpecies2Holder() { return _species2Holder; }
     VisSettingHolder& getVisSettingHolder() { return _visSettingHolder; }
     LinkerSettingHolder& getLinkerSettingHolder() { return _linkerSettingHolder; }
-    DistanceNeighborhoodHolder& getDistanceNeighborhoodHolder() { return _distanceNeighborhoodHolder; }
-    ScatterplotColorHolder& getScatterplotColorHolder() { return _scatterplotColorHolder; }
-    ColorMapAction& getColorMapAction() { return _colorMapAction; }
+    //DistanceNeighborhoodHolder& getDistanceNeighborhoodHolder() { return _distanceNeighborhoodHolder; }
+    //ScatterplotColorHolder& getScatterplotColorHolder() { return _scatterplotColorHolder; }
+    OptionAction& getScatterplotColorControlAction() { return _scatterplotColorControlAction; }
     //ColorAction& getBackgroundColoringAction() { return _backgroundColoringAction; }
-    CellCountHolder& getCellCountHolder() { return _cellCountHolder; }
+    //CellCountHolder& getCellCountHolder() { return _cellCountHolder; }
     //TriggerAction& getHelpAction() { return _helpAction; }
     //TriggerAction& getScreenshotAction() { return _screenshotAction; }
-    StringAction& getSpecies1Name() { return _species1Name; }
-    StringAction& getSelectedCrossSpeciesNameList() { return _selectedCrossSpeciesNameList; }
+
     //OptionAction& getScatterplotColorControl() { return _scatterplotColorControlAction; }
-    StringAction& getSpecies2Name() { return _species2Name; }
-    StringAction& getSelectedCrossspeciescluster() { return _selectedCrossspeciescluster; }
-    VariantAction& getGeneExpressionDatasetVariant() { return _geneExpressionDatasetVariant; }
-    StringAction& getHarHcondelCountString() { return _harHcondelCountString; }
+
+
     //ColorMapAction& getScatterplotColorMapAction() { return _scatterplotColorMapAction; }
     //ExplorationAction& getExplorationAction() { return _explorationAction; }
 public:
@@ -316,20 +355,7 @@ protected:
     OptionAction                 _scatterplotColorControlAction;
     OptionAction                 _neighborhoodAction;
     //IntegralAction               _distanceAction;
-    DatasetPickerAction           _crossSpecies1DatasetLinkerAction;
-    DatasetPickerAction          _crossSpecies2DatasetLinkerAction;
 
-    DatasetPickerAction           _species1ScatterplotColorLinkerAction;
-    DatasetPickerAction          _species2ScatterplotColorLinkerAction;
-
-    DatasetPickerAction           _speciesEmbedding1LinkerAction;
-    DatasetPickerAction          _speciesEmbedding2LinkerAction;
-
-    DatasetPickerAction           _species1DEStatsLinkerAction;
-    DatasetPickerAction           _species2DEStatsLinkerAction;
-
-    DatasetPickerAction           _inSpecies1DatasetLinkerAction;
-    DatasetPickerAction          _inSpecies2DatasetLinkerAction;
     //OptionAction                 _crossSpeciesFilterAction;
     hdps::CoreInterface*         _core;
     FetchMetaData*                _metaData;
@@ -337,32 +363,23 @@ protected:
     QVariantMap _geneExpressionData;
     //OptionsAction                 _multiSelectClusterFilterAction;
     ToggleAction _histBarAction;
-    ToggleAction _fullHeatMapAction;
+    
     //ToggleAction _explorationModeAction;
-    OptionAction                 _inSpecies1HeatMapCellAction;
-    OptionAction                 _inSpecies2HeatMapCellAction;
-    OptionsAction                 _crossSpecies1HeatMapCellAction;
-    OptionsAction                 _crossSpecies2HeatMapCellAction;
-    Species1Holder               _species1Holder;
-    Species2Holder             _species2Holder;
+    OptionsHolder               _optionsHolder;
+    //Species2Holder             _species2Holder;
     VisSettingHolder              _visSettingHolder;
     LinkerSettingHolder               _linkerSettingHolder;
-    DistanceNeighborhoodHolder                _distanceNeighborhoodHolder;
-    ScatterplotColorHolder         _scatterplotColorHolder;
-    CellCountHolder              _cellCountHolder;
+    //DistanceNeighborhoodHolder                _distanceNeighborhoodHolder;
+    //ScatterplotColorHolder         _scatterplotColorHolder;
+    //CellCountHolder              _cellCountHolder;
     //ExplorationAction               _explorationAction;
-    ToggleAction                _removeLinkingOptionMenuFromUIAction;
+
     //TriggerAction                _helpAction;
     //TriggerAction                _screenshotAction;
-    TriggerAction                 _modifyDifferentialExpressionAutoUpdate;
-    StringAction                  _species1Name;
-    StringAction                  _species2Name;
-    StringAction                    _selectedCrossspeciescluster;
-    StringAction                    _harHcondelCountString;
-    VariantAction                  _geneExpressionDatasetVariant;
-    StringAction                _selectedCrossSpeciesNameList;
+
+
     bool _isStarted;
-    ColorMapAction          _colorMapAction;
+    
     //ColorMapAction _scatterplotColorMapAction;
     //ColorAction              _backgroundColoringAction;
     hdps::EventListener     _eventListener;

@@ -57,26 +57,26 @@ void SimianViewerPlugin::init()
     topToolbarLayout->setContentsMargins(0, 0, 0, 0);
     topToolbarLayout->setSpacing(0);
 
-    auto species1ActionWidget = _simianOptionsAction.getSpecies1Holder().createWidget(&getWidget());
+    auto species1ActionWidget = _simianOptionsAction.getOptionsHolder().createWidget(&getWidget());
     species1ActionWidget->setMaximumWidth(200);
     topToolbarLayout->addWidget(species1ActionWidget);
 
-    auto species2ActionWidget = _simianOptionsAction.getSpecies2Holder().createWidget(&getWidget());
-    species2ActionWidget->setMaximumWidth(200);
-    topToolbarLayout->addWidget(species2ActionWidget);
+    //auto species2ActionWidget = _simianOptionsAction.getSpecies2Holder().createWidget(&getWidget());
+    //species2ActionWidget->setMaximumWidth(200);
+    //topToolbarLayout->addWidget(species2ActionWidget);
 
-    auto distanceNeighborhoodActionwidget = _simianOptionsAction.getDistanceNeighborhoodHolder().createWidget(&getWidget());
-    distanceNeighborhoodActionwidget->setMaximumWidth(280);
+    //auto distanceNeighborhoodActionwidget = _simianOptionsAction.getDistanceNeighborhoodHolder().createWidget(&getWidget());
+    //distanceNeighborhoodActionwidget->setMaximumWidth(280);
 
-    topToolbarLayout->addWidget(distanceNeighborhoodActionwidget);
+    //topToolbarLayout->addWidget(distanceNeighborhoodActionwidget);
 
-    auto cellCountActionwidget = _simianOptionsAction.getCellCountHolder().createWidget(&getWidget());
-    cellCountActionwidget->setMaximumWidth(100);
-    topToolbarLayout->addWidget(cellCountActionwidget);
+    //auto cellCountActionwidget = _simianOptionsAction.getCellCountHolder().createWidget(&getWidget());
+    //cellCountActionwidget->setMaximumWidth(100);
+    //topToolbarLayout->addWidget(cellCountActionwidget);
 
-    auto scatterplotColorwidget = _simianOptionsAction.getScatterplotColorHolder().createWidget(&getWidget());
-    scatterplotColorwidget->setMaximumWidth(255);
-    topToolbarLayout->addWidget(scatterplotColorwidget);
+    //auto scatterplotColorwidget = _simianOptionsAction.getScatterplotColorHolder().createWidget(&getWidget());
+    //scatterplotColorwidget->setMaximumWidth(255);
+    //topToolbarLayout->addWidget(scatterplotColorwidget);
 
     //auto explorationActionwidget = _simianOptionsAction.getExplorationAction().createWidget(&_widget);
     //explorationActionwidget->setMaximumWidth(97);
@@ -84,7 +84,7 @@ void SimianViewerPlugin::init()
     //topToolbarLayout->addWidget(_simianOptionsAction.getScreenshotAction().createWidget(&getWidget()));
     auto visSettingsWidget = _simianOptionsAction.getVisSettingHolder().createCollapsedWidget(&getWidget());
     topToolbarLayout->addWidget(visSettingsWidget);
-    //topToolbarLayout->addWidget(_simianOptionsAction.getLinkerSettingHolder().createCollapsedWidget(&getWidget()));
+    topToolbarLayout->addWidget(_simianOptionsAction.getLinkerSettingHolder().createCollapsedWidget(&getWidget()));
     //topToolbarLayout->addWidget(_simianOptionsAction.getHelpAction().createWidget(&getWidget()));
 
  
@@ -222,7 +222,7 @@ void SimianViewerPlugin::publishCluster(std::string clusterName)
 {
     if (clusterName != "")
     {
-        _simianOptionsAction.getSelectedCrossspeciescluster().setString(QString::fromStdString(clusterName));
+        _simianOptionsAction.getLinkerSettingHolder().getSelectedCrossspeciescluster().setString(QString::fromStdString(clusterName));
     }
 }
 
@@ -231,7 +231,7 @@ void SimianViewerPlugin::removeSelectionFromScatterplot(std::string clusterName)
 {
     if (clusterName == "")
     {
-        _simianOptionsAction.getSelectedCrossspeciescluster().setString("");
+        _simianOptionsAction.getLinkerSettingHolder().getSelectedCrossspeciescluster().setString("");
     }
 }
 
@@ -316,9 +316,9 @@ void SimianViewerPlugin::selectCrossSpeciesClusterPoints(std::vector<std::string
     {
 
 
-        if (_simianOptionsAction.getCrossSpecies1DatasetLinkerAction().getCurrentText() != "")
+        if (_simianOptionsAction.getLinkerSettingHolder().getCrossSpecies1DatasetLinkerAction().getCurrentText() != "")
         {
-            auto dataset1 = _simianOptionsAction.getCrossSpecies1DatasetLinkerAction().getCurrentDataset();
+            auto dataset1 = _simianOptionsAction.getLinkerSettingHolder().getCrossSpecies1DatasetLinkerAction().getCurrentDataset();
             const auto candidateDataset1 = _core->requestDataset<Clusters>(dataset1.getDatasetGuid());
             std::vector<std::uint32_t> selectedIndices1;
 
@@ -340,9 +340,9 @@ void SimianViewerPlugin::selectCrossSpeciesClusterPoints(std::vector<std::string
             events().notifyDatasetSelectionChanged(candidateDataset1->getParent());
 
         }
-        if (_simianOptionsAction.getCrossSpecies2DatasetLinkerAction().getCurrentText() != "")
+        if (_simianOptionsAction.getLinkerSettingHolder().getCrossSpecies2DatasetLinkerAction().getCurrentText() != "")
         {
-            auto dataset2 = _simianOptionsAction.getCrossSpecies2DatasetLinkerAction().getCurrentDataset();
+            auto dataset2 = _simianOptionsAction.getLinkerSettingHolder().getCrossSpecies2DatasetLinkerAction().getCurrentDataset();
             const auto candidateDataset2 = _core->requestDataset<Clusters>(dataset2.getDatasetGuid());
             std::vector<std::uint32_t> selectedIndices2;
             for (const auto& cluster : candidateDataset2->getClusters())
@@ -365,17 +365,17 @@ void SimianViewerPlugin::selectCrossSpeciesClusterPoints(std::vector<std::string
 
     else {
 
-        if (_simianOptionsAction.getCrossSpecies1DatasetLinkerAction().getCurrentText() != "")
+        if (_simianOptionsAction.getLinkerSettingHolder().getCrossSpecies1DatasetLinkerAction().getCurrentText() != "")
         {
-            auto dataset1 = _simianOptionsAction.getCrossSpecies1DatasetLinkerAction().getCurrentDataset();
+            auto dataset1 = _simianOptionsAction.getLinkerSettingHolder().getCrossSpecies1DatasetLinkerAction().getCurrentDataset();
             const auto candidateDataset1 = _core->requestDataset<Clusters>(dataset1.getDatasetGuid());
             std::vector<std::uint32_t> selectedIndices1;
             candidateDataset1->getParent()->setSelectionIndices(selectedIndices1);
             events().notifyDatasetSelectionChanged(candidateDataset1->getParent());
         }
-        if (_simianOptionsAction.getCrossSpecies2DatasetLinkerAction().getCurrentText() != "")
+        if (_simianOptionsAction.getLinkerSettingHolder().getCrossSpecies2DatasetLinkerAction().getCurrentText() != "")
         {
-            auto dataset2 = _simianOptionsAction.getCrossSpecies2DatasetLinkerAction().getCurrentDataset();
+            auto dataset2 = _simianOptionsAction.getLinkerSettingHolder().getCrossSpecies2DatasetLinkerAction().getCurrentDataset();
             const auto candidateDataset2 = _core->requestDataset<Clusters>(dataset2.getDatasetGuid());
             std::vector<std::uint32_t> selectedIndices2;
             candidateDataset2->getParent()->setSelectionIndices(selectedIndices2);
