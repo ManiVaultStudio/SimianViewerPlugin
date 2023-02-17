@@ -1696,31 +1696,26 @@ SimianOptionsAction::OptionsHolder::Widget::Widget(QWidget* parent, OptionsHolde
 	
 	auto selectionSpecies1Widget = simianOptionsAction._species1SelectAction.createWidget(this);
 	selectionSpecies1Widget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-	selectionSpecies1Widget->setMaximumWidth(190);
 	selectionOptionLayout->addWidget(simianOptionsAction._species1SelectAction.createLabelWidget(this));
 	selectionOptionLayout->addWidget(selectionSpecies1Widget);
 
 	auto selectionSpecies2Widget = simianOptionsAction._species2SelectAction.createWidget(this);
 	selectionSpecies2Widget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-	selectionSpecies2Widget->setMaximumWidth(190);
 	selectionOptionLayout->addWidget(simianOptionsAction._species2SelectAction.createLabelWidget(this));
 	selectionOptionLayout->addWidget(selectionSpecies2Widget);
 
 	auto selectionHistBarWidget = simianOptionsAction._histBarAction.createWidget(this);
 	selectionHistBarWidget->findChild<QCheckBox*>("Checkbox");
-	selectionHistBarWidget->setMaximumWidth(100);
 	selectionOptionLayout->addWidget(simianOptionsAction._histBarAction.createLabelWidget(this));
 	selectionOptionLayout->addWidget(selectionHistBarWidget);
 
 	auto selectionNeighborhoodWidget = simianOptionsAction._neighborhoodAction.createWidget(this);
 	selectionNeighborhoodWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-	selectionNeighborhoodWidget->setMaximumWidth(180);
 	selectionOptionLayout->addWidget(simianOptionsAction._neighborhoodAction.createLabelWidget(this));
 	selectionOptionLayout->addWidget(selectionNeighborhoodWidget);
 
 	auto scatterplotColorChooseWidget = simianOptionsAction._scatterplotColorControlAction.createWidget(this);
 	scatterplotColorChooseWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-	scatterplotColorChooseWidget->setMaximumWidth(150);
 	selectionOptionLayout->addWidget(simianOptionsAction._scatterplotColorControlAction.createLabelWidget(this));
 	selectionOptionLayout->addWidget(scatterplotColorChooseWidget);
 
@@ -1789,7 +1784,7 @@ inline SimianOptionsAction::VisSettingHolder::VisSettingHolder(SimianOptionsActi
 	GroupAction(&simianOptionsAction, "Setting Options"),
 	_simianOptionsAction(simianOptionsAction),
 	_fullHeatMapAction(this, "Full distancemap"),
-	_colorMapAction(this, "Select color map")
+	_colorMapAction(this, "Color map")
 {
 	setText("Setting Options");
 	setIcon(Application::getIconFont("FontAwesome").getIcon("cog"));
