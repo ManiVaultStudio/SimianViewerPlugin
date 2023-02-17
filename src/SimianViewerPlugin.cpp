@@ -84,7 +84,7 @@ void SimianViewerPlugin::init()
     //topToolbarLayout->addWidget(_simianOptionsAction.getScreenshotAction().createWidget(&getWidget()));
     auto visSettingsWidget = _simianOptionsAction.getVisSettingHolder().createCollapsedWidget(&getWidget());
     topToolbarLayout->addWidget(visSettingsWidget);
-    topToolbarLayout->addWidget(_simianOptionsAction.getLinkerSettingHolder().createCollapsedWidget(&getWidget()));
+    //topToolbarLayout->addWidget(_simianOptionsAction.getLinkerSettingHolder().createCollapsedWidget(&getWidget()));
     //topToolbarLayout->addWidget(_simianOptionsAction.getHelpAction().createWidget(&getWidget()));
 
  
