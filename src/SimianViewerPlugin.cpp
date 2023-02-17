@@ -99,20 +99,20 @@ void SimianViewerPlugin::init()
 
 
 
-    auto datasets = _core->requestAllDataSets(QVector<hdps::DataType> {PointType});
-    auto filteredDatasets = datasets;
-    for (auto dataset : datasets)
-    {
-        std::string str1 = dataset->getGuiName().toStdString();
-        std::string str2 = "Numerical MetaData";
-        if (strstr(str1.c_str(), str2.c_str()))
-        {
-            filteredDatasets.removeOne(dataset);
-        }
-        else {
+    //auto datasets = _core->requestAllDataSets(QVector<hdps::DataType> {PointType});
+    //auto filteredDatasets = datasets;
+    //for (auto dataset : datasets)
+    //{
+    //    std::string str1 = dataset->getGuiName().toStdString();
+    //    std::string str2 = "Numerical MetaData";
+    //    if (strstr(str1.c_str(), str2.c_str()))
+    //    {
+    //        filteredDatasets.removeOne(dataset);
+    //    }
+    //    else {
 
-        }
-    }
+    //    }
+    //}
 
 }
 
