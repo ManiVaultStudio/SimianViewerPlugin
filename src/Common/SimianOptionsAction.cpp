@@ -1495,30 +1495,30 @@ void SimianOptionsAction::sendClusterCountInfoToJS()
 
 void SimianOptionsAction::onDataEvent(hdps::DataEvent* dataEvent)
 {
-	if (dataEvent->getType() == hdps::EventType::DataAdded)
-	{
-		updateDatasetPickerAction();
-	}
-	if (dataEvent->getType() == hdps::EventType::DataRemoved)
-	{
-		updateDatasetPickerAction();
-	}
-	if (dataEvent->getType() == hdps::EventType::DataChildAdded)
-	{
-		updateDatasetPickerAction();
-	}
-	if (dataEvent->getType() == hdps::EventType::DataChildRemoved)
-	{
-		updateDatasetPickerAction();
-	}
-	if (dataEvent->getType() == hdps::EventType::DataChanged)
-	{
-		updateDatasetPickerAction();
-	}
-	if (dataEvent->getType() == hdps::EventType::DataGuiNameChanged)
-	{
-		updateDatasetPickerAction();
-	}
+	//if (dataEvent->getType() == hdps::EventType::DataAdded)
+	//{
+	//	updateDatasetPickerAction();
+	//}
+	//if (dataEvent->getType() == hdps::EventType::DataRemoved)
+	//{
+	//	updateDatasetPickerAction();
+	//}
+	//if (dataEvent->getType() == hdps::EventType::DataChildAdded)
+	//{
+	//	updateDatasetPickerAction();
+	//}
+	//if (dataEvent->getType() == hdps::EventType::DataChildRemoved)
+	//{
+	//	updateDatasetPickerAction();
+	//}
+	//if (dataEvent->getType() == hdps::EventType::DataChanged)
+	//{
+	//	updateDatasetPickerAction();
+	//}
+	//if (dataEvent->getType() == hdps::EventType::DataGuiNameChanged)
+	//{
+	//	updateDatasetPickerAction();
+	//}
 }
 
 void SimianOptionsAction::updateData(std::string Species1, std::string Species2, std::string neighborhood/*, int distance, std::string CrossSpeciesFilter*/)
