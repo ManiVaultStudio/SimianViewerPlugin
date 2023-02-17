@@ -108,7 +108,8 @@ public:
        const StringAction& getSpecies2Name() const { return _species2Name; }
        const  StringAction& getSelectedCrossspeciescluster() const { return _selectedCrossspeciescluster; }
 
-
+       const  StringAction& getDEDataset1GUID()const { return _dEDataset1GUID; }
+       const StringAction& getDEDataset2GUID() const { return _dEDataset2GUID; }
 
         DatasetPickerAction& getCrossSpecies1DatasetLinkerAction() { return _crossSpecies1DatasetLinkerAction; };
         DatasetPickerAction& getCrossSpecies2DatasetLinkerAction() { return _crossSpecies2DatasetLinkerAction; };
@@ -138,6 +139,10 @@ public:
         StringAction& getSelectedCrossSpeciesNameList() { return _selectedCrossSpeciesNameList; }
         StringAction& getSpecies2Name() { return _species2Name; }
         StringAction& getSelectedCrossspeciescluster() { return _selectedCrossspeciescluster; }
+        StringAction& getDEDataset1GUID() { return _dEDataset1GUID; }
+        StringAction& getDEDataset2GUID() { return _dEDataset2GUID; }
+
+
 
     protected:
         DatasetPickerAction           _crossSpecies1DatasetLinkerAction;
@@ -169,7 +174,8 @@ public:
 
         SimianOptionsAction& _simianOptionsAction;
         StringAction                _selectedCrossSpeciesNameList;
-
+        StringAction                _dEDataset1GUID;
+        StringAction                _dEDataset2GUID;
         // friend class SimianOptionsAction;
     };
 
