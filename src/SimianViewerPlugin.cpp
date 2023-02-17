@@ -58,7 +58,7 @@ void SimianViewerPlugin::init()
     topToolbarLayout->setSpacing(0);
 
     auto species1ActionWidget = _simianOptionsAction.getOptionsHolder().createWidget(&getWidget());
-    species1ActionWidget->setMaximumWidth(200);
+    //species1ActionWidget->adjustSize();
     topToolbarLayout->addWidget(species1ActionWidget);
 
     //auto species2ActionWidget = _simianOptionsAction.getSpecies2Holder().createWidget(&getWidget());

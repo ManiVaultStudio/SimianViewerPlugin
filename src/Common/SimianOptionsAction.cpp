@@ -1696,27 +1696,42 @@ SimianOptionsAction::OptionsHolder::Widget::Widget(QWidget* parent, OptionsHolde
 	
 	auto selectionSpecies1Widget = simianOptionsAction._species1SelectAction.createWidget(this);
 	selectionSpecies1Widget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-	selectionOptionLayout->addWidget(simianOptionsAction._species1SelectAction.createLabelWidget(this));
+	auto selectionSpecies1Label = simianOptionsAction._species1SelectAction.createLabelWidget(this);
+	//selectionSpecies1Label->adjustSize();
+	//selectionSpecies1Widget->adjustSize();
+	selectionOptionLayout->addWidget(selectionSpecies1Label);
 	selectionOptionLayout->addWidget(selectionSpecies1Widget);
 
 	auto selectionSpecies2Widget = simianOptionsAction._species2SelectAction.createWidget(this);
 	selectionSpecies2Widget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-	selectionOptionLayout->addWidget(simianOptionsAction._species2SelectAction.createLabelWidget(this));
+	auto selectionSpecies2Label = simianOptionsAction._species2SelectAction.createLabelWidget(this);
+	//selectionSpecies2Label->adjustSize();
+	//selectionSpecies2Widget->adjustSize();
+	selectionOptionLayout->addWidget(selectionSpecies2Label);
 	selectionOptionLayout->addWidget(selectionSpecies2Widget);
 
 	auto selectionHistBarWidget = simianOptionsAction._histBarAction.createWidget(this);
 	selectionHistBarWidget->findChild<QCheckBox*>("Checkbox");
-	selectionOptionLayout->addWidget(simianOptionsAction._histBarAction.createLabelWidget(this));
+	auto selectionHistBarLabel = simianOptionsAction._histBarAction.createLabelWidget(this);
+	//selectionHistBarLabel->adjustSize();
+	//selectionHistBarWidget->adjustSize();
+	selectionOptionLayout->addWidget(selectionHistBarLabel);
 	selectionOptionLayout->addWidget(selectionHistBarWidget);
 
 	auto selectionNeighborhoodWidget = simianOptionsAction._neighborhoodAction.createWidget(this);
 	selectionNeighborhoodWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-	selectionOptionLayout->addWidget(simianOptionsAction._neighborhoodAction.createLabelWidget(this));
+	auto selectionNeighborhoodLabel = simianOptionsAction._neighborhoodAction.createLabelWidget(this);
+	//selectionNeighborhoodLabel->adjustSize();
+	//selectionNeighborhoodWidget->adjustSize();
+	selectionOptionLayout->addWidget(selectionNeighborhoodLabel);
 	selectionOptionLayout->addWidget(selectionNeighborhoodWidget);
 
 	auto scatterplotColorChooseWidget = simianOptionsAction._scatterplotColorControlAction.createWidget(this);
 	scatterplotColorChooseWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-	selectionOptionLayout->addWidget(simianOptionsAction._scatterplotColorControlAction.createLabelWidget(this));
+	auto scatterplotColorChooseLebel = simianOptionsAction._scatterplotColorControlAction.createLabelWidget(this);
+	//scatterplotColorChooseLebel->adjustSize();
+	//scatterplotColorChooseWidget->adjustSize();
+	selectionOptionLayout->addWidget(scatterplotColorChooseLebel);
 	selectionOptionLayout->addWidget(scatterplotColorChooseWidget);
 
 	setLayout(selectionOptionLayout);
