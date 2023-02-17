@@ -5,6 +5,7 @@
 #include <actions/VariantAction.h>
 #include <actions/ToggleAction.h>
 #include "actions/DatasetPickerAction.h"
+#include "actions/HorizontalGroupAction.h"
 #include "PointData.h"
 #include "ClusterData.h"
 #include "event/EventListener.h"
@@ -42,20 +43,8 @@ namespace hdps
 class SimianOptionsAction : public WidgetAction
 {
 public:
-    class OptionsHolder : public WidgetAction
+    class OptionsHolder : public HorizontalGroupAction
     {
-    protected:
-        class Widget : public hdps::gui::WidgetActionWidget {
-        public:
-            Widget(QWidget* parent, OptionsHolder* optionsHolder);
-
-            friend class OptionsHolder;
-        };
-
-        QWidget* getWidget(QWidget* parent, const std::int32_t& widgetFlags) override {
-            return new OptionsHolder::Widget(parent, this);
-        };
-
     public:
         OptionsHolder(SimianOptionsAction& simianOptionsAction);
 
@@ -279,9 +268,10 @@ protected:
     ToggleAction _histBarAction;
     
     //ToggleAction _explorationModeAction;
+    VisSettingHolder              _visSettingHolder;
     OptionsHolder               _optionsHolder;
     //Species2Holder             _species2Holder;
-    VisSettingHolder              _visSettingHolder;
+    
     LinkerSettingHolder               _linkerSettingHolder;
     //DistanceNeighborhoodHolder                _distanceNeighborhoodHolder;
     //ScatterplotColorHolder         _scatterplotColorHolder;

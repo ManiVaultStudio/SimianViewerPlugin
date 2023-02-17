@@ -141,6 +141,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	//_multiSelectClusterFilterAction.initialize(QStringList{ "" });
 	//_multiSelectClusterFilterAction.setSelectedOptions(QStringList());
 	_visSettingHolder.getColorMapAction().initialize("Black to white", "Black to white");
+	_visSettingHolder.setConfigurationFlag(WidgetAction::ConfigurationFlag::AlwaysCollapsed);
+	_visSettingHolder.setConfigurationFlag(WidgetAction::ConfigurationFlag::NoLabelInGroup);
 	//_scatterplot1ColorMapAction.initialize("Viridis", "Viridis");
 	//_scatterplot2ColorMapAction.initialize("Viridis", "Viridis");
 	//_backgroundColoringAction.initialize(DEFAULT_CONSTANT_COLOR, DEFAULT_CONSTANT_COLOR);
@@ -162,6 +164,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	//_distanceAction.initialize(0, 105, 105, 105);
 	_histBarAction.setDefaultWidgetFlags(ToggleAction::CheckBox);
 	_histBarAction.initialize(false, false);
+	_histBarAction.setDefaultWidgetFlags(ToggleAction::PushButton);
 
 	_linkerSettingHolder.getRemoveLinkingOptionMenuFromUIAction().setDefaultWidgetFlags(ToggleAction::CheckBox);
 	_linkerSettingHolder.getRemoveLinkingOptionMenuFromUIAction().initialize(false, false);
@@ -189,39 +192,39 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	//_scatterplot2ColorMapAction.getSettingsAction().getEditor1DAction().setVisible(false);
 
 	_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().connectToPublicActionByName("Cluster Differential Expression 1::CalculateDifferentialExpression");
+	//_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().connectToPublicActionByName("Cluster Differential Expression 1::CalculateDifferentialExpression");
 	_linkerSettingHolder.getGeneExpressionDatasetVariant().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_linkerSettingHolder.getGeneExpressionDatasetVariant().connectToPublicActionByName("Cluster Differential Expression 1::TableViewLeftSideInfo");
+	//_linkerSettingHolder.getGeneExpressionDatasetVariant().connectToPublicActionByName("Cluster Differential Expression 1::TableViewLeftSideInfo");
 	_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().connectToPublicActionByName("Cluster Differential Expression 1::Dataset1");
+	//_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().connectToPublicActionByName("Cluster Differential Expression 1::Dataset1");
 	_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().connectToPublicActionByName("Cluster Differential Expression 1::Dataset2");
+	//_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().connectToPublicActionByName("Cluster Differential Expression 1::Dataset2");
 	_linkerSettingHolder.getSpecies1Name().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_linkerSettingHolder.getSpecies1Name().connectToPublicActionByName("Cluster Differential Expression 1::DatasetName1");
+	//_linkerSettingHolder.getSpecies1Name().connectToPublicActionByName("Cluster Differential Expression 1::DatasetName1");
 	_linkerSettingHolder.getSpecies2Name().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_linkerSettingHolder.getSpecies2Name().connectToPublicActionByName("Cluster Differential Expression 1::DatasetName2");
+	//_linkerSettingHolder.getSpecies2Name().connectToPublicActionByName("Cluster Differential Expression 1::DatasetName2");
 	_linkerSettingHolder.getCrossSpecies1HeatMapCellAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_linkerSettingHolder.getCrossSpecies1HeatMapCellAction().connectToPublicActionByName("Cluster Differential Expression 1::SelectClusters1");
+	//_linkerSettingHolder.getCrossSpecies1HeatMapCellAction().connectToPublicActionByName("Cluster Differential Expression 1::SelectClusters1");
 	_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().connectToPublicActionByName("Cluster Differential Expression 1::SelectClusters2");
+	//_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().connectToPublicActionByName("Cluster Differential Expression 1::SelectClusters2");
 	_linkerSettingHolder.getHarHcondelCountString().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_linkerSettingHolder.getHarHcondelCountString().connectToPublicActionByName("Cluster Differential Expression l::IntoText");
+	//_linkerSettingHolder.getHarHcondelCountString().connectToPublicActionByName("Cluster Differential Expression l::IntoText");
 
 	_linkerSettingHolder.getSelectedCrossspeciescluster().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_linkerSettingHolder.getSelectedCrossspeciescluster().connectToPublicActionByName("Pop Pyramid:: Selected CrossSpecies Cluster");
+	//_linkerSettingHolder.getSelectedCrossspeciescluster().connectToPublicActionByName("Pop Pyramid:: Selected CrossSpecies Cluster");
 	_linkerSettingHolder.getSpecies1DEStatsLinkerAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_linkerSettingHolder.getSpecies1DEStatsLinkerAction().connectToPublicActionByName("Pop Pyramid:: DE Dataset1");
+	//_linkerSettingHolder.getSpecies1DEStatsLinkerAction().connectToPublicActionByName("Pop Pyramid:: DE Dataset1");
 	_linkerSettingHolder.getSpecies2DEStatsLinkerAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_linkerSettingHolder.getSpecies2DEStatsLinkerAction().connectToPublicActionByName("Pop Pyramid:: DE Dataset2");
+	//_linkerSettingHolder.getSpecies2DEStatsLinkerAction().connectToPublicActionByName("Pop Pyramid:: DE Dataset2");
 
 	_linkerSettingHolder.getSpecies1ScatterplotColorLinkerAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_linkerSettingHolder.getSpecies1ScatterplotColorLinkerAction().connectToPublicActionByName("Scatterplot View 1::Color");
+	//_linkerSettingHolder.getSpecies1ScatterplotColorLinkerAction().connectToPublicActionByName("Scatterplot View 1::Color");
 	_linkerSettingHolder.getSpecies2ScatterplotColorLinkerAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_linkerSettingHolder.getSpecies2ScatterplotColorLinkerAction().connectToPublicActionByName("Scatterplot View 2::Color");
+	//_linkerSettingHolder.getSpecies2ScatterplotColorLinkerAction().connectToPublicActionByName("Scatterplot View 2::Color");
 	_linkerSettingHolder.getSpeciesEmbedding1LinkerAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_linkerSettingHolder.getSpeciesEmbedding1LinkerAction().connectToPublicActionByName("Scatterplot View 1::Embedding");
+	//_linkerSettingHolder.getSpeciesEmbedding1LinkerAction().connectToPublicActionByName("Scatterplot View 1::Embedding");
 	_linkerSettingHolder.getSpeciesEmbedding2LinkerAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_linkerSettingHolder.getSpeciesEmbedding2LinkerAction().connectToPublicActionByName("Scatterplot View 2::Embedding");
+	//_linkerSettingHolder.getSpeciesEmbedding2LinkerAction().connectToPublicActionByName("Scatterplot View 2::Embedding");
 	//const auto globalColorMapName = "GlobalColorMap";
 	//_scatterplotColorMapAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
 	//_scatterplotColorMapAction.connectToPublicActionByName(globalColorMapName);
@@ -1686,64 +1689,17 @@ void SimianOptionsAction::updateDatasetPickerAction()
 
 
 
-SimianOptionsAction::OptionsHolder::Widget::Widget(QWidget* parent, OptionsHolder* optionsHolder) :
-	WidgetActionWidget(parent, optionsHolder)
-{
-	auto& simianOptionsAction = optionsHolder->_simianOptionsAction;
-
-	auto selectionOptionLayout = new QHBoxLayout();
-	selectionOptionLayout->setContentsMargins(0, 0, 0, 0);
-	
-	auto selectionSpecies1Widget = simianOptionsAction._species1SelectAction.createWidget(this);
-	selectionSpecies1Widget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-	auto selectionSpecies1Label = simianOptionsAction._species1SelectAction.createLabelWidget(this);
-	//selectionSpecies1Label->adjustSize();
-	//selectionSpecies1Widget->adjustSize();
-	selectionOptionLayout->addWidget(selectionSpecies1Label);
-	selectionOptionLayout->addWidget(selectionSpecies1Widget);
-
-	auto selectionSpecies2Widget = simianOptionsAction._species2SelectAction.createWidget(this);
-	selectionSpecies2Widget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-	auto selectionSpecies2Label = simianOptionsAction._species2SelectAction.createLabelWidget(this);
-	//selectionSpecies2Label->adjustSize();
-	//selectionSpecies2Widget->adjustSize();
-	selectionOptionLayout->addWidget(selectionSpecies2Label);
-	selectionOptionLayout->addWidget(selectionSpecies2Widget);
-
-	auto selectionHistBarWidget = simianOptionsAction._histBarAction.createWidget(this);
-	selectionHistBarWidget->findChild<QCheckBox*>("Checkbox");
-	auto selectionHistBarLabel = simianOptionsAction._histBarAction.createLabelWidget(this);
-	//selectionHistBarLabel->adjustSize();
-	//selectionHistBarWidget->adjustSize();
-	selectionOptionLayout->addWidget(selectionHistBarLabel);
-	selectionOptionLayout->addWidget(selectionHistBarWidget);
-
-	auto selectionNeighborhoodWidget = simianOptionsAction._neighborhoodAction.createWidget(this);
-	selectionNeighborhoodWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-	auto selectionNeighborhoodLabel = simianOptionsAction._neighborhoodAction.createLabelWidget(this);
-	//selectionNeighborhoodLabel->adjustSize();
-	//selectionNeighborhoodWidget->adjustSize();
-	selectionOptionLayout->addWidget(selectionNeighborhoodLabel);
-	selectionOptionLayout->addWidget(selectionNeighborhoodWidget);
-
-	auto scatterplotColorChooseWidget = simianOptionsAction._scatterplotColorControlAction.createWidget(this);
-	scatterplotColorChooseWidget->findChild<QComboBox*>("ComboBox")->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-	auto scatterplotColorChooseLebel = simianOptionsAction._scatterplotColorControlAction.createLabelWidget(this);
-	//scatterplotColorChooseLebel->adjustSize();
-	//scatterplotColorChooseWidget->adjustSize();
-	selectionOptionLayout->addWidget(scatterplotColorChooseLebel);
-	selectionOptionLayout->addWidget(scatterplotColorChooseWidget);
-
-	setLayout(selectionOptionLayout);
-}
-
 inline SimianOptionsAction::OptionsHolder::OptionsHolder(SimianOptionsAction& simianOptionsAction) :
+	HorizontalGroupAction(&simianOptionsAction, "Toolbar"),
 	_simianOptionsAction(simianOptionsAction)
 {
-
+	addAction(simianOptionsAction._species1SelectAction);
+	addAction(simianOptionsAction._species2SelectAction);
+	addAction(simianOptionsAction._histBarAction);
+	addAction(simianOptionsAction._neighborhoodAction);
+	addAction(simianOptionsAction._scatterplotColorControlAction);
+	addAction(simianOptionsAction._visSettingHolder);
 }
-
-
 
 //void SimianOptionsAction::updateMultiSelectionDropdown(std::vector<std::vector<std::string>>& filteredVisData)
 //{

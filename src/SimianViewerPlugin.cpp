@@ -52,14 +52,12 @@ void SimianViewerPlugin::init()
     _eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataSelectionChanged));
     _eventListener.registerDataEventByType(ClusterType, std::bind(&SimianViewerPlugin::onDataEvent, this, std::placeholders::_1));
 
-    auto topToolbarWidget = new QWidget();
     auto topToolbarLayout = new QHBoxLayout();
-    topToolbarLayout->setContentsMargins(0, 0, 0, 0);
-    topToolbarLayout->setSpacing(0);
 
-    auto species1ActionWidget = _simianOptionsAction.getOptionsHolder().createWidget(&getWidget());
-    //species1ActionWidget->adjustSize();
-    topToolbarLayout->addWidget(species1ActionWidget);
+    topToolbarLayout->setContentsMargins(4, 4, 4, 4);
+    topToolbarLayout->setSpacing(0);
+    topToolbarLayout->addWidget(_simianOptionsAction.getOptionsHolder().createWidget(&getWidget()));
+    topToolbarLayout->addStretch(1);
 
     //auto species2ActionWidget = _simianOptionsAction.getSpecies2Holder().createWidget(&getWidget());
     //species2ActionWidget->setMaximumWidth(200);
@@ -82,20 +80,19 @@ void SimianViewerPlugin::init()
     //explorationActionwidget->setMaximumWidth(97);
     //topToolbarLayout->addWidget(explorationActionwidget);
     //topToolbarLayout->addWidget(_simianOptionsAction.getScreenshotAction().createWidget(&getWidget()));
-    auto visSettingsWidget = _simianOptionsAction.getVisSettingHolder().createCollapsedWidget(&getWidget());
-    topToolbarLayout->addWidget(visSettingsWidget);
     //topToolbarLayout->addWidget(_simianOptionsAction.getLinkerSettingHolder().createCollapsedWidget(&getWidget()));
     //topToolbarLayout->addWidget(_simianOptionsAction.getHelpAction().createWidget(&getWidget()));
 
  
-    topToolbarLayout->addStretch(0);
-    topToolbarWidget->setAutoFillBackground(true);
-    topToolbarWidget->setLayout(topToolbarLayout);
+    
+    
     auto layout = new QVBoxLayout();
+    
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
-    layout->addWidget(topToolbarWidget);
+    layout->addLayout(topToolbarLayout);
     layout->addWidget(&_simian_viewer, 1);
+    
     getWidget().setLayout(layout);
 
     //_simianOptionsAction.initLoader();
