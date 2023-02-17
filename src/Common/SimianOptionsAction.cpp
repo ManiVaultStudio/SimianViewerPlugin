@@ -1730,31 +1730,6 @@ inline SimianOptionsAction::OptionsHolder::OptionsHolder(SimianOptionsAction& si
 
 
 
-//SimianOptionsAction::ExplorationAction::Widget::Widget(QWidget* parent, ExplorationAction* explorationAction) :
-//	WidgetActionWidget(parent, explorationAction)
-//{
-//	auto& simianOptionsAction = explorationAction->_simianOptionsAction;
-//
-//	auto explorationModeSelectionWidget = simianOptionsAction._explorationModeAction.createWidget(this);
-//	explorationModeSelectionWidget->findChild<QCheckBox*>("Checkbox");
-//	explorationModeSelectionWidget->setMaximumWidth(97);
-//
-//	auto explorationModeSelectionLayout = new QFormLayout();
-//
-//	explorationModeSelectionLayout->setContentsMargins(0, 0, 0, 0);
-//	explorationModeSelectionLayout->addRow("Exploration:", explorationModeSelectionWidget);
-//
-//
-//	setPopupLayout(explorationModeSelectionLayout);
-//}
-//
-//inline SimianOptionsAction::ExplorationAction::ExplorationAction(SimianOptionsAction& simianOptionsAction) :
-//	_simianOptionsAction(simianOptionsAction)
-//{
-//
-//}
-
-
 //void SimianOptionsAction::updateMultiSelectionDropdown(std::vector<std::vector<std::string>>& filteredVisData)
 //{
 //	std::vector<std::string> store;
@@ -1788,12 +1763,12 @@ inline SimianOptionsAction::VisSettingHolder::VisSettingHolder(SimianOptionsActi
 {
 	setText("Setting Options");
 	setIcon(Application::getIconFont("FontAwesome").getIcon("cog"));
-	setPopupSizeHint(QSize(350, 0));
+	setPopupSizeHint(QSize(250, 0));
 }
 
 inline SimianOptionsAction::LinkerSettingHolder::LinkerSettingHolder(SimianOptionsAction& simianOptionsAction) :
 	GroupAction(&simianOptionsAction, "Linking Options"),
-	//_simianOptionsAction(simianOptionsAction),
+	_simianOptionsAction(simianOptionsAction),
 	_crossSpecies1DatasetLinkerAction(this, "Cross-species cluster dataset1"),
 	_crossSpecies2DatasetLinkerAction(this, "Cross-species  cluster dataset2"),
 	_species1ScatterplotColorLinkerAction(this, "Scatterplot color linker species1"),
