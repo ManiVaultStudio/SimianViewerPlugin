@@ -351,6 +351,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 						{
 							DatasetGUID = childDatasets[i].getDatasetGuid();
 							_linkerSettingHolder.getSpecies1DEStatsLinkerAction().setCurrentDataset(DatasetGUID);
+							break;
 						} 
 					}
 				
@@ -522,6 +523,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 					{
 						DatasetGUID = childDatasets[i].getDatasetGuid();
 						_linkerSettingHolder.getSpecies2DEStatsLinkerAction().setCurrentDataset(DatasetGUID);
+						break;
 					}
 				}
 					
@@ -694,10 +696,11 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	};
 	const auto updateNeighborhood = [this]() -> void
 	{
+		
 		if (_species1SelectAction.getCurrentText() != "" && _species2SelectAction.getCurrentText() != "")
 		{
 			updateData((_species1SelectAction.getCurrentText()).toStdString(), (_species2SelectAction.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString()/*, (_distanceAction.getValue()), (_crossSpeciesFilterAction.getCurrentText()).toStdString()*/);
-			
+			_linkerSettingHolder.getSelectedCrossspeciescluster().setString("");
 			
 			if (_linkerSettingHolder.getSpeciesEmbedding1LinkerAction().getNumberOfOptions() > 0)
 			{
@@ -778,39 +781,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				_linkerSettingHolder.getSpecies2ScatterplotColorLinkerAction().setCurrentText(species2EmbeddingColorDatasetName);
 				//qDebug() << _linkerSettingHolder.getSpecies2ScatterplotColorLinkerAction().getCurrentText();
 			}
-			if (_linkerSettingHolder.getSpecies1DEStatsLinkerAction().getNumberOfOptions() > 0)
-			{
-				const QString child_DE_Statistics_DatasetName = "DE_Statistics";
-				hdps::Dataset<Clusters> clusterDataset = _linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().getCurrentDataset();
-				QString DatasetGUID = "";
-				const auto& childDatasets = clusterDataset->getChildren({ PointType });
-				for (qsizetype i = 0; i < childDatasets.size(); ++i)
-				{
-					if (childDatasets[i]->getGuiName() == child_DE_Statistics_DatasetName)
-					{
-						DatasetGUID = childDatasets[i].getDatasetGuid();
-						_linkerSettingHolder.getSpecies1DEStatsLinkerAction().setCurrentDataset(DatasetGUID);
-					}
-				}
-				
-				//QString species1DEStatsDatasetName = _species1SelectAction.getCurrentText() + "_" + _neighborhoodAction.getCurrentText() + "_DE_Statistics";
 
-				//_linkerSettingHolder.getSpecies1DEStatsLinkerAction().setCurrentText(species1DEStatsDatasetName);
-			}
-			if (_linkerSettingHolder.getSpecies2DEStatsLinkerAction().getNumberOfOptions() > 0)
-			{
-				const QString child_DE_Statistics_DatasetName = "DE_Statistics";
-				hdps::Dataset<Clusters> clusterDataset = _linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().getCurrentDataset();
-				QString DatasetGUID = "";
-				const auto& childDatasets = clusterDataset->getChildren({ PointType });
-				for (qsizetype i = 0; i < childDatasets.size(); ++i)
-				{
-					if (childDatasets[i]->getGuiName() == child_DE_Statistics_DatasetName)
-					{
-						DatasetGUID = childDatasets[i].getDatasetGuid();
-						_linkerSettingHolder.getSpecies2DEStatsLinkerAction().setCurrentDataset(DatasetGUID);
-					}
-				}
+
 				
 				//QString species2DEStatsDatasetName = _species2SelectAction.getCurrentText() + "_" + _neighborhoodAction.getCurrentText() + "_DE_Statistics";
 
@@ -837,6 +809,41 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				QString species2CrossSpeciesClusterDatasetName = _species2SelectAction.getCurrentText() + "_" + _neighborhoodAction.getCurrentText() + "_cross_species_cluster";
 				_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().setCurrentText(species2CrossSpeciesClusterDatasetName);
 			}
+			if (_linkerSettingHolder.getSpecies1DEStatsLinkerAction().getNumberOfOptions() > 0)
+			{
+				const QString child_DE_Statistics_DatasetName = "DE_Statistics";
+				hdps::Dataset<Clusters> clusterDataset = _linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().getCurrentDataset();
+				QString DatasetGUID = "";
+				const auto& childDatasets = clusterDataset->getChildren({ PointType });
+				for (qsizetype i = 0; i < childDatasets.size(); ++i)
+				{
+					if (childDatasets[i]->getGuiName() == child_DE_Statistics_DatasetName)
+					{
+						DatasetGUID = childDatasets[i].getDatasetGuid();
+						_linkerSettingHolder.getSpecies1DEStatsLinkerAction().setCurrentDataset(DatasetGUID);
+						break;
+					}
+				}
+
+				//QString species1DEStatsDatasetName = _species1SelectAction.getCurrentText() + "_" + _neighborhoodAction.getCurrentText() + "_DE_Statistics";
+
+				//_linkerSettingHolder.getSpecies1DEStatsLinkerAction().setCurrentText(species1DEStatsDatasetName);
+			}
+			if (_linkerSettingHolder.getSpecies2DEStatsLinkerAction().getNumberOfOptions() > 0)
+			{
+				const QString child_DE_Statistics_DatasetName = "DE_Statistics";
+				hdps::Dataset<Clusters> clusterDataset = _linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().getCurrentDataset();
+				QString DatasetGUID = "";
+				const auto& childDatasets = clusterDataset->getChildren({ PointType });
+				for (qsizetype i = 0; i < childDatasets.size(); ++i)
+				{
+					if (childDatasets[i]->getGuiName() == child_DE_Statistics_DatasetName)
+					{
+						DatasetGUID = childDatasets[i].getDatasetGuid();
+						_linkerSettingHolder.getSpecies2DEStatsLinkerAction().setCurrentDataset(DatasetGUID);
+						break;
+					}
+				}
 
 			////have to add this
 //_selectedCrossSpeciesNameList
@@ -2070,7 +2077,7 @@ void SimianOptionsAction::initLoader()
 	}
 
 
-
+	_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().trigger();
 
 }
 
