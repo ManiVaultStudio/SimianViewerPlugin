@@ -1757,9 +1757,9 @@ inline SimianOptionsAction::OptionsHolder::OptionsHolder(SimianOptionsAction& si
 {
 	addAction(simianOptionsAction._species1SelectAction);
 	addAction(simianOptionsAction._species2SelectAction);
-	addAction(simianOptionsAction._histBarAction);
 	addAction(simianOptionsAction._neighborhoodAction);
 	addAction(simianOptionsAction._scatterplotColorControlAction);
+	addAction(simianOptionsAction._histBarAction);
 	addAction(simianOptionsAction._visSettingHolder);
 }
 
