@@ -164,7 +164,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	//_distanceAction.initialize(0, 105, 105, 105);
 	_histBarAction.setDefaultWidgetFlags(ToggleAction::CheckBox);
 	_histBarAction.initialize(false, false);
-	_histBarAction.setDefaultWidgetFlags(ToggleAction::PushButton);
+	//_histBarAction.setDefaultWidgetFlags(ToggleAction::PushButton);
 
 	_linkerSettingHolder.getRemoveLinkingOptionMenuFromUIAction().setDefaultWidgetFlags(ToggleAction::CheckBox);
 	_linkerSettingHolder.getRemoveLinkingOptionMenuFromUIAction().initialize(false, false);
