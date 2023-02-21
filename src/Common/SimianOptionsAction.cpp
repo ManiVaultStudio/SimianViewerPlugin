@@ -494,6 +494,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			//_visSettingHolder.setEnabled(true);
 			//_linkerSettingHolder.setEnabled(true);
 			//_distanceNeighborhoodHolder.setEnabled(true);
+		_linkerSettingHolder.getSpecies2Name().setString(_species2SelectAction.getCurrentText());
 			if (_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().getNumberOfOptions() > 0)
 			{
 				QString species2CrossSpeciesClusterDatasetName = _species2SelectAction.getCurrentText() + "_" + _neighborhoodAction.getCurrentText() + "_cross_species_cluster";
