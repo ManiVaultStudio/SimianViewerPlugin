@@ -1755,12 +1755,12 @@ inline SimianOptionsAction::OptionsHolder::OptionsHolder(SimianOptionsAction& si
 	HorizontalGroupAction(&simianOptionsAction, "Toolbar"),
 	_simianOptionsAction(simianOptionsAction)
 {
-	addAction(simianOptionsAction._species1SelectAction);
-	addAction(simianOptionsAction._species2SelectAction);
-	addAction(simianOptionsAction._neighborhoodAction);
-	addAction(simianOptionsAction._scatterplotColorControlAction);
-	addAction(simianOptionsAction._histBarAction);
-	addAction(simianOptionsAction._visSettingHolder);
+	addAction(&_simianOptionsAction._species1SelectAction);
+	addAction(&_simianOptionsAction._species2SelectAction);
+	addAction(&_simianOptionsAction._neighborhoodAction);
+	addAction(&_simianOptionsAction._scatterplotColorControlAction);
+	addAction(&_simianOptionsAction._histBarAction);
+	addAction(&_simianOptionsAction._visSettingHolder);
 }
 
 //void SimianOptionsAction::updateMultiSelectionDropdown(std::vector<std::vector<std::string>>& filteredVisData)
