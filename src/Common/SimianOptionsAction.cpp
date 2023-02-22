@@ -212,7 +212,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
 	_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().connectToPublicActionByName("Cluster Differential Expression 1::SelectClusters2");
 	_linkerSettingHolder.getHarHcondelCountString().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_linkerSettingHolder.getHarHcondelCountString().connectToPublicActionByName("Cluster Differential Expression l::IntoText");
+	_linkerSettingHolder.getHarHcondelCountString().connectToPublicActionByName("Cluster Differential Expression 1::IntoText");
 
 	_linkerSettingHolder.getSelectedCrossspeciescluster().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
 	_linkerSettingHolder.getSelectedCrossspeciescluster().connectToPublicActionByName("Pop Pyramid:: Selected CrossSpecies Cluster");
