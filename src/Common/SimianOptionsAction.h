@@ -93,7 +93,7 @@ public:
        const  DatasetPickerAction& getInSpecies2DatasetLinkerAction() const { return _inSpecies2DatasetLinkerAction; };
        const VariantAction& getGeneExpressionDatasetVariant() const { return _geneExpressionDatasetVariant; }
        const StringAction& getHarHcondelCountString() const  { return _harHcondelCountString; }
-
+       const VariantAction& getCommandAction() const { return _commandAction; }
 
        const OptionAction& getInSpecies1HeatMapCellAction() const { return _inSpecies1HeatMapCellAction; }
        const OptionAction& getInSpecies2HeatMapCellAction() const { return _inSpecies2HeatMapCellAction; }
@@ -124,6 +124,8 @@ public:
         DatasetPickerAction& getInSpecies1DatasetLinkerAction() { return _inSpecies1DatasetLinkerAction; };
         DatasetPickerAction& getInSpecies2DatasetLinkerAction() { return _inSpecies2DatasetLinkerAction; };
         VariantAction& getGeneExpressionDatasetVariant() { return _geneExpressionDatasetVariant; }
+
+        VariantAction& getCommandAction() { return _commandAction; }
         StringAction& getHarHcondelCountString() { return _harHcondelCountString; }
 
         OptionAction& getInSpecies1HeatMapCellAction() { return _inSpecies1HeatMapCellAction; }
@@ -156,6 +158,7 @@ public:
         DatasetPickerAction          _inSpecies2DatasetLinkerAction;
         ToggleAction                _removeLinkingOptionMenuFromUIAction;
         VariantAction                  _geneExpressionDatasetVariant;
+        VariantAction                       _commandAction;
         StringAction                    _harHcondelCountString;
         TriggerAction                 _modifyDifferentialExpressionAutoUpdate;
         OptionAction                 _inSpecies1HeatMapCellAction;
@@ -283,7 +286,6 @@ protected:
 
 
     bool _isStarted;
-    
     //ColorMapAction _scatterplotColorMapAction;
     //ColorAction              _backgroundColoringAction;
     hdps::EventListener     _eventListener;

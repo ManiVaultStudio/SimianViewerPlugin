@@ -68,6 +68,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		_linkerSettingHolder.getSpecies2Name().setSerializationName( "Species2Name");
 		_linkerSettingHolder.getSelectedCrossspeciescluster().setSerializationName( "Selected CrossSpecies Cluster");
 		_linkerSettingHolder.getGeneExpressionDatasetVariant().setSerializationName( "Gene Expression Variant");
+		_linkerSettingHolder.getCommandAction().setSerializationName( "Command Action Variant");
+
 		_linkerSettingHolder.getSelectedCrossSpeciesNameList().setSerializationName( "Selected Cross Species Name List");
 		_linkerSettingHolder.getHarHcondelCountString().setSerializationName("Har-Hcondel Count String");
 		_visSettingHolder.getColorMapAction().setSerializationName("Color map");
@@ -195,6 +197,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().connectToPublicActionByName("Cluster Differential Expression 1::CalculateDifferentialExpression");
 	_linkerSettingHolder.getGeneExpressionDatasetVariant().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
 	_linkerSettingHolder.getGeneExpressionDatasetVariant().connectToPublicActionByName("Cluster Differential Expression 1::TableViewLeftSideInfo");
+	_linkerSettingHolder.getCommandAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_linkerSettingHolder.getCommandAction().connectToPublicActionByName("Cluster Differential Expression 1::InvokeMethods");
 	_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
 	_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().connectToPublicActionByName("Cluster Differential Expression 1::Dataset1");
 	_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
@@ -626,10 +630,34 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 	const auto updateSelectedCrossSpeciesNameList = [this]() -> void
 	{
-		if(_species1SelectAction.getCurrentText()=="human"|| _species2SelectAction.getCurrentText() == "human")
+		QVariantList commands;
+
+			QVariantList command;
+			command << QString("TableView") << QString("SLOT_setColumnWidth") << int(0) << int(120);
+			commands.push_back(command);
+			command.clear();
+			command << QString("TableView") << QString("SLOT_setColumnWidth") << int(1) << int(40);
+			commands.push_back(command);
+			command.clear();
+			command << QString("TableView") << QString("SLOT_setColumnWidth") << int(2) << int(40);
+			commands.push_back(command);
+			command.clear();
+			command << QString("TableView") << QString("SLOT_setColumnWidth") << int(3) << int(120);
+			commands.push_back(command);
+			command.clear();
+			command << QString("TableView") << QString("SLOT_setColumnWidth") << int(4) << int(120);
+			commands.push_back(command);
+			command.clear();
+			command << QString("TableViewClusterSelection1") << QString("setDisabled") << bool(true);
+			commands.push_back(command);
+			command.clear();
+			command << QString("TableViewClusterSelection2") << QString("setDisabled") << bool(true);
+			commands.push_back(command);
+
+		if((_species1SelectAction.getCurrentText() == "human" || _species2SelectAction.getCurrentText() == "human") && _linkerSettingHolder.getSelectedCrossSpeciesNameList().getString() != "")
 		{
-			if (_linkerSettingHolder.getSelectedCrossSpeciesNameList().getString() != "")
-			{
+			//if (_linkerSettingHolder.getSelectedCrossSpeciesNameList().getString() != "")
+			//{
 				QVariant geneExpValue = CalculateGeneExpressionValues(_linkerSettingHolder.getSelectedCrossSpeciesNameList().getString());
 				QVariantMap geneEXp;
 				QVariantMap HARs;
@@ -683,16 +711,34 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				//qDebug() << geneEXp;
 				/*qDebug() << "Count"<< countValues;*/
 				_linkerSettingHolder.getGeneExpressionDatasetVariant().setVariant(geneEXp);
-			}
+				QVariantList command;
+				command << QString("TableView") << QString("showColumn") << int(1);
+				commands.push_back(command);
+				command.clear();
+				command << QString("TableView") << QString("showColumn") << int(2);
+				commands.push_back(command);
+			//}
 		}
 		
 
 		else
 		{
 			QVariantMap geneEXp;
+			QVariantMap HARs;
+			QVariantMap CONDELs;
+			geneEXp.insert("H A R s", HARs);
+			geneEXp.insert("h C O N D E L s", CONDELs);
 			_linkerSettingHolder.getGeneExpressionDatasetVariant().setVariant(geneEXp);
+			_linkerSettingHolder.getHarHcondelCountString().setString("");
+			QVariantList command;
+			command << QString("TableView") << QString("hideColumn") << int(1);
+			commands.push_back(command);
+			command.clear();
+			command << QString("TableView") << QString("hideColumn") << int(2);
+			commands.push_back(command);
 		}
-
+		_linkerSettingHolder.getCommandAction
+			().setVariant(commands);
 		
 	};
 	const auto updateNeighborhood = [this]() -> void
@@ -1085,6 +1131,11 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 	};
 
+	const auto updatecommandAction = [this]() -> void
+	{
+
+	};
+
 	const auto updateHarHcondelCountString = [this]() -> void
 	{
 
@@ -1383,7 +1434,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		{
 			updateNeighborhood();
 		});
-	connect(&_linkerSettingHolder.getGeneExpressionDatasetVariant(), &VariantAction::variantChanged, this, updateGeneExpressionDatasetVariant);
+	connect(&_linkerSettingHolder.getGeneExpressionDatasetVariant(), &VariantAction::variantChanged, this, updateGeneExpressionDatasetVariant);	
+	connect(&_linkerSettingHolder.getCommandAction(), &VariantAction::variantChanged, this, updatecommandAction);
 
 	connect(&_linkerSettingHolder.getHarHcondelCountString(), &StringAction::stringChanged, this, updateHarHcondelCountString);
 
@@ -1823,6 +1875,7 @@ inline SimianOptionsAction::LinkerSettingHolder::LinkerSettingHolder(SimianOptio
 	_species2Name(this, "Species2Name"),
 	_selectedCrossspeciescluster(this, "Selected CrossSpecies Cluster"),
 	_geneExpressionDatasetVariant(this, "Gene Expression Variant"),
+	_commandAction(this, "Command Action Variant"),
 	_selectedCrossSpeciesNameList(this, "Selected Cross Species Name List"),
 	_harHcondelCountString(this, "Har-Hcondel Count String")
 {
@@ -2111,7 +2164,8 @@ void SimianOptionsAction::fromVariantMap(const QVariantMap& variantMap)
 	_linkerSettingHolder.getSpecies1Name().fromParentVariantMap(variantMap);
 	_linkerSettingHolder.getSpecies2Name().fromParentVariantMap(variantMap);
 	_linkerSettingHolder.getSelectedCrossspeciescluster().fromParentVariantMap(variantMap);
-	_linkerSettingHolder.getGeneExpressionDatasetVariant().fromParentVariantMap(variantMap);
+	_linkerSettingHolder.getGeneExpressionDatasetVariant().fromParentVariantMap(variantMap);	
+	_linkerSettingHolder.getCommandAction().fromParentVariantMap(variantMap);
 	_linkerSettingHolder.getSelectedCrossSpeciesNameList().fromParentVariantMap(variantMap);
 	_linkerSettingHolder.getHarHcondelCountString().fromParentVariantMap(variantMap);
 	_visSettingHolder.getColorMapAction().fromParentVariantMap(variantMap);
@@ -2150,6 +2204,7 @@ QVariantMap SimianOptionsAction::toVariantMap() const
 	_linkerSettingHolder.getSpecies2Name().insertIntoVariantMap(variantMap);
 	_linkerSettingHolder.getSelectedCrossspeciescluster().insertIntoVariantMap(variantMap);
 	_linkerSettingHolder.getGeneExpressionDatasetVariant().insertIntoVariantMap(variantMap);
+	_linkerSettingHolder.getCommandAction().insertIntoVariantMap(variantMap);
 	_linkerSettingHolder.getSelectedCrossSpeciesNameList().insertIntoVariantMap(variantMap);
 	_linkerSettingHolder.getHarHcondelCountString().insertIntoVariantMap(variantMap);
 	_visSettingHolder.getFullHeatmapAction().insertIntoVariantMap(variantMap);
