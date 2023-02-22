@@ -633,19 +633,19 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		QVariantList commands;
 
 			QVariantList command;
-			command << QString("TableView") << QString("SLOT_setColumnWidth") << int(0) << int(26);
+			command << QString("TableView") << QString("SLOT_setColumnWidth") << int(0) << int(120);
 			commands.push_back(command);
 			command.clear();
-			command << QString("TableView") << QString("SLOT_setColumnWidth") << int(1) << int(2);
+			command << QString("TableView") << QString("SLOT_setColumnWidth") << int(1) << int(40);
 			commands.push_back(command);
 			command.clear();
-			command << QString("TableView") << QString("SLOT_setColumnWidth") << int(2) << int(2);
+			command << QString("TableView") << QString("SLOT_setColumnWidth") << int(2) << int(40);
 			commands.push_back(command);
 			command.clear();
-			command << QString("TableView") << QString("SLOT_setColumnWidth") << int(3) << int(35);
+			command << QString("TableView") << QString("SLOT_setColumnWidth") << int(3) << int(120);
 			commands.push_back(command);
 			command.clear();
-			command << QString("TableView") << QString("SLOT_setColumnWidth") << int(4) << int(35);
+			command << QString("TableView") << QString("SLOT_setColumnWidth") << int(4) << int(120);
 			commands.push_back(command);
 			command.clear();
 			command << QString("TableViewClusterSelection1") << QString("setDisabled") << bool(true);
