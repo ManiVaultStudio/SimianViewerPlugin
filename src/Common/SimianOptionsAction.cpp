@@ -659,6 +659,12 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			commands.push_back(command);
 			command.clear();
 
+
+			Qt::SortOrder sortOrder = Qt::DescendingOrder;
+			QVariant sortOrderVariant(QMetaType::fromType<Qt::SortOrder>(), & sortOrder);
+			command<<QString("TableView")<<QString("sortByColumn")<< int(3) <<sortOrderVariant;
+			commands.push_back(command);
+
 		if((_species1SelectAction.getCurrentText() == "human" || _species2SelectAction.getCurrentText() == "human") && _linkerSettingHolder.getSelectedCrossSpeciesNameList().getString() != "")
 		{
 			//if (_linkerSettingHolder.getSelectedCrossSpeciesNameList().getString() != "")
