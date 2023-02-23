@@ -2140,7 +2140,10 @@ void SimianOptionsAction::initLoader()
 			_simianViewerPlugin.getSimianViewerWidget().showFullHeatmap(QString::fromStdString("F"));
 		}
 	}
-
+	QVariant temp = _linkerSettingHolder.getCommandAction().getVariant();
+	//QVariant empty;
+	//_linkerSettingHolder.getCommandAction().setVariant(empty);
+	_linkerSettingHolder.getCommandAction().setVariant(temp);
 
 	_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().trigger();
 
