@@ -653,6 +653,11 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			command.clear();
 			command << QString("TableViewClusterSelection2") << QString("setDisabled") << bool(true);
 			commands.push_back(command);
+			command.clear();
+
+			command << QString("LoadedDataSettings") << "hide";
+			commands.push_back(command);
+			command.clear();
 
 		if((_species1SelectAction.getCurrentText() == "human" || _species2SelectAction.getCurrentText() == "human") && _linkerSettingHolder.getSelectedCrossSpeciesNameList().getString() != "")
 		{
