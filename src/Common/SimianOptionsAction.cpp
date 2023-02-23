@@ -633,37 +633,37 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		QVariantList commands;
 
 			QVariantList command;
-			command << QString("TableView") << QString("SLOT_setColumnWidth") << int(0) << int(120);
-			commands.push_back(command);
-			command.clear();
-			command << QString("TableView") << QString("SLOT_setColumnWidth") << int(1) << int(40);
-			commands.push_back(command);
-			command.clear();
-			command << QString("TableView") << QString("SLOT_setColumnWidth") << int(2) << int(40);
-			commands.push_back(command);
-			command.clear();
-			command << QString("TableView") << QString("SLOT_setColumnWidth") << int(3) << int(120);
-			commands.push_back(command);
-			command.clear();
-			command << QString("TableView") << QString("SLOT_setColumnWidth") << int(4) << int(120);
-			commands.push_back(command);
-			command.clear();
-			command << QString("TableViewClusterSelection1") << QString("setDisabled") << bool(true);
-			commands.push_back(command);
-			command.clear();
-			command << QString("TableViewClusterSelection2") << QString("setDisabled") << bool(true);
-			commands.push_back(command);
-			command.clear();
+			//command << QString("TableView") << QString("SLOT_setColumnWidth") << int(0) << int(120);
+			//commands.push_back(command);
+			//command.clear();
+			//command << QString("TableView") << QString("SLOT_setColumnWidth") << int(1) << int(40);
+			//commands.push_back(command);
+			//command.clear();
+			//command << QString("TableView") << QString("SLOT_setColumnWidth") << int(2) << int(40);
+			//commands.push_back(command);
+			//command.clear();
+			//command << QString("TableView") << QString("SLOT_setColumnWidth") << int(3) << int(120);
+			//commands.push_back(command);
+			//command.clear();
+			//command << QString("TableView") << QString("SLOT_setColumnWidth") << int(4) << int(120);
+			//commands.push_back(command);
+			//command.clear();
+			//command << QString("TableViewClusterSelection1") << QString("setDisabled") << bool(true);
+			//commands.push_back(command);
+			//command.clear();
+			//command << QString("TableViewClusterSelection2") << QString("setDisabled") << bool(true);
+			//commands.push_back(command);
+			//command.clear();
 
-			command << QString("LoadedDataSettings") << "hide";
-			commands.push_back(command);
-			command.clear();
+			//command << QString("LoadedDataSettings") << "hide";
+			//commands.push_back(command);
+			//command.clear();
 
 
-			Qt::SortOrder sortOrder = Qt::DescendingOrder;
-			QVariant sortOrderVariant(QMetaType::fromType<Qt::SortOrder>(), & sortOrder);
-			command<<QString("TableView")<<QString("sortByColumn")<< int(3) <<sortOrderVariant;
-			commands.push_back(command);
+			//Qt::SortOrder sortOrder = Qt::DescendingOrder;
+			//QVariant sortOrderVariant(QMetaType::fromType<Qt::SortOrder>(), & sortOrder);
+			//command<<QString("TableView")<<QString("sortByColumn")<< int(3) <<sortOrderVariant;
+			//commands.push_back(command);
 
 		if((_species1SelectAction.getCurrentText() == "human" || _species2SelectAction.getCurrentText() == "human") && _linkerSettingHolder.getSelectedCrossSpeciesNameList().getString() != "")
 		{
@@ -2140,10 +2140,43 @@ void SimianOptionsAction::initLoader()
 			_simianViewerPlugin.getSimianViewerWidget().showFullHeatmap(QString::fromStdString("F"));
 		}
 	}
-	QVariant temp = _linkerSettingHolder.getCommandAction().getVariant();
-	//QVariant empty;
-	//_linkerSettingHolder.getCommandAction().setVariant(empty);
-	_linkerSettingHolder.getCommandAction().setVariant(temp);
+
+
+	QVariantList commands;
+
+	QVariantList command;
+	command << QString("TableView") << QString("SLOT_setColumnWidth") << int(0) << int(120);
+	commands.push_back(command);
+	command.clear();
+	command << QString("TableView") << QString("SLOT_setColumnWidth") << int(1) << int(40);
+	commands.push_back(command);
+	command.clear();
+	command << QString("TableView") << QString("SLOT_setColumnWidth") << int(2) << int(40);
+	commands.push_back(command);
+	command.clear();
+	command << QString("TableView") << QString("SLOT_setColumnWidth") << int(3) << int(120);
+	commands.push_back(command);
+	command.clear();
+	command << QString("TableView") << QString("SLOT_setColumnWidth") << int(4) << int(120);
+	commands.push_back(command);
+	command.clear();
+	command << QString("TableViewClusterSelection1") << QString("setDisabled") << bool(true);
+	commands.push_back(command);
+	command.clear();
+	command << QString("TableViewClusterSelection2") << QString("setDisabled") << bool(true);
+	commands.push_back(command);
+	command.clear();
+
+	command << QString("LoadedDataSettings") << "hide";
+	commands.push_back(command);
+	command.clear();
+
+
+	Qt::SortOrder sortOrder = Qt::DescendingOrder;
+	QVariant sortOrderVariant(QMetaType::fromType<Qt::SortOrder>(), &sortOrder);
+	command << QString("TableView") << QString("sortByColumn") << int(3) << sortOrderVariant;
+	commands.push_back(command);
+	_linkerSettingHolder.getCommandAction().setVariant(commands);
 
 	_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().trigger();
 
