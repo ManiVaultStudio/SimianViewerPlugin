@@ -101,6 +101,8 @@ public:
 
     hdps::DataTypes supportedDataTypes() const override;
 
+    bool hasHelp() override { return true; };
+
     /**
      * Get plugin trigger actions given \p datasets
      * @param datasets Vector of input datasets
