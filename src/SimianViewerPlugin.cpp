@@ -15,6 +15,8 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <QDesktopServices>
+#include <QUrl>
 
 Q_PLUGIN_METADATA(IID "nl.tudelft.SimianViewerPlugin")
 
@@ -247,12 +249,9 @@ void SimianViewerPlugin::removeSelectionFromScatterplot(std::string clusterName)
 SimianViewerPluginFactory::SimianViewerPluginFactory() :
     ViewPluginFactory()
 {
-    //connect(&getTriggerHelpAction(), &TriggerAction::triggered, this, [this]() -> void {
-    //    // Do your stuff here
-    //   
-    //    showHelpbox();
-
-    //});
+    connect(&getTriggerHelpAction(), &TriggerAction::triggered, this, [this]() -> void {
+        QDesktopServices::openUrl(QUrl("https://www.dropbox.com/s/e9200b3zphzsw3b/Cytosplore_Simian_Viewer_Technical_Document_1.pdf?dl=0"));
+    });
 }
 
 // =============================================================================
