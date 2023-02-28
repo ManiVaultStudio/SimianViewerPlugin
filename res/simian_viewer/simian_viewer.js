@@ -287,13 +287,13 @@ const simianVis = () => {
     }
     var margin;
     if (barflag) {
-        margin = { top: 15, right: 25, bottom: 80, left: 75 },
+        margin = { top: 20, right: 25, bottom: 90, left: 85 },
             width = (heatmapWidth/100*window.innerWidth) * 0.99 - margin.left - margin.right,
             height = window.innerHeight * 0.99 - margin.top - margin.bottom;
 
     }
     else {
-        margin = { top: 1, right: 10, bottom: 80, left: 75 },
+        margin = { top: 1, right: 10, bottom: 90, left: 85 },
             width = (heatmapWidth / 100 * window.innerWidth) * 0.99 - margin.left - margin.right,
             height = window.innerHeight * 0.99 - margin.top - margin.bottom;
     }
@@ -424,7 +424,7 @@ const simianVis = () => {
     svg
         .append("g")
         .attr("class", "xLabel")
-        .style("font-size", "8px")
+        .style("font-size", "9px")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x).tickSize(0))
         .selectAll("text")
@@ -451,7 +451,7 @@ const simianVis = () => {
     svg
         .append("g")
         .attr("class", "yLabel")
-        .style("font-size", "8px")
+        .style("font-size", "9px")
         .call(d3.axisLeft(y).tickSize(0))
         .selectAll("text")
         .on('click', clickYAxisLabels)
