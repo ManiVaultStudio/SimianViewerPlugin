@@ -951,13 +951,33 @@ const simianVis = () => {
                 }
                 var formatTooltipContents = "";
                 formatTooltipContents = "<div id=\"clearTooltip\"> <table  style=\"font-size: 10px; width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=25  /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=25  /></th></tr>";
-
-                //formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Subclass<b/></td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_1] + "; \"> " + d.subclass_1 + "</td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_2] + "; \">" + d.subclass_2 + "</td></tr><tr><td   style=\"\"><b>Class<b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + d.class_1 + "</td><td   style=\" -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_2] + ";\">" + d.class_2 + "</td></tr>"
-               if (d.class_1 == d.class_2) {
-                    formatTooltipContents = formatTooltipContents + "<tr ><td style=\" \"><b>Class<b/></td><td colspan=\"2\" style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + d.class_1 + "</td></tr>"
+                var classContainer1 = "";
+                var classContainer2 = "";
+                if (d.class_1 == "glia") {
+                    classContainer1 = "Non-neuronal";
+                }
+                else if (d.class_1 == "exc") {
+                    classContainer1 = "Excitatory";
                 }
                 else {
-                    formatTooltipContents = formatTooltipContents + "<tr ><td style=\"\"><b>Class<b/></td><td  style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + d.class_1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_2] + ";\">" + d.class_2 + "</td></tr>"
+                    classContainer1 = "Inhibitory";
+                }
+                var classContainer2 = "";
+                if (d.class_2 == "glia") {
+                    classContainer2 = "Non-neuronal";
+                }
+                else if (d.class_2 == "exc") {
+                    classContainer2 = "Excitatory";
+                }
+                else {
+                    classContainer2 = "Inhibitory";
+                }
+                //formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Subclass<b/></td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_1] + "; \"> " + d.subclass_1 + "</td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_2] + "; \">" + d.subclass_2 + "</td></tr><tr><td   style=\"\"><b>Class<b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + d.class_1 + "</td><td   style=\" -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_2] + ";\">" + d.class_2 + "</td></tr>"
+               if (d.class_1 == d.class_2) {
+                   formatTooltipContents = formatTooltipContents + "<tr ><td style=\" \"><b>Class<b/></td><td colspan=\"2\" style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + classContainer1 + "</td></tr>"
+                }
+                else {
+                   formatTooltipContents = formatTooltipContents + "<tr ><td style=\"\"><b>Class<b/></td><td  style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + classContainer1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_2] + ";\">" + classContainer2 + "</td></tr>"
                 }
 
                 if (d.subclass_1 == d.subclass_2) {
@@ -1350,13 +1370,33 @@ const simianVis = () => {
 
                 var formatTooltipContents = "";
                 formatTooltipContents = "<div id=\"clearTooltip\" style=\"top: 0;right:0;position: absolute;\"> <table style=\"font-size: " + tooltipTextsize + "px;  width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=" + tooltipImageHeight + "; /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=" + tooltipImageHeight + ";  /></th></tr>";
-                
-                //formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Subclass<b/></td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_1] + "; \"> " + d.subclass_1 + "</td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_2] + "; \">" + d.subclass_2 + "</td></tr><tr><td   style=\" \"><b>Class<b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + d.class_1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_2] + ";\">" + d.class_2 + "</td></tr>"
-                if (d.class_1 == d.class_2) {
-                    formatTooltipContents = formatTooltipContents + "<tr ><td style=\" \"><b>Class<b/></td><td colspan=\"2\" style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + d.class_1 + "</td></tr>"
+                var classContainer1 = "";
+                var classContainer2 = "";
+                if (d.class_1 == "glia") {
+                    classContainer1 = "Non-neuronal";
+                }
+                else if (d.class_1 == "exc") {
+                    classContainer1 = "Excitatory";
                 }
                 else {
-                    formatTooltipContents = formatTooltipContents + "<tr ><td style=\"\"><b>Class<b/></td><td  style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + d.class_1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_2] + ";\">" + d.class_2 + "</td></tr>"
+                    classContainer1 = "Inhibitory";
+                }
+                var classContainer2 = "";
+                if (d.class_2 == "glia") {
+                    classContainer2 = "Non-neuronal";
+                }
+                else if (d.class_2 == "exc") {
+                    classContainer2 = "Excitatory";
+                }
+                else {
+                    classContainer2 = "Inhibitory";
+                }
+                //formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Subclass<b/></td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_1] + "; \"> " + d.subclass_1 + "</td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_2] + "; \">" + d.subclass_2 + "</td></tr><tr><td   style=\" \"><b>Class<b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + d.class_1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_2] + ";\">" + d.class_2 + "</td></tr>"
+                if (d.class_1 == d.class_2) {
+                    formatTooltipContents = formatTooltipContents + "<tr ><td style=\" \"><b>Class<b/></td><td colspan=\"2\" style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + classContainer1 + "</td></tr>"
+                }
+                else {
+                    formatTooltipContents = formatTooltipContents + "<tr ><td style=\"\"><b>Class<b/></td><td  style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + classContainer1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_2] + ";\">" + classContainer2 + "</td></tr>"
                 }
                 if (d.subclass_1 == d.subclass_2) {
                     formatTooltipContents = formatTooltipContents + "<tr ><td style=\" \"><b>Subclass<b/></td><td colspan=\"2\" style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_1] + ";\">" + d.subclass_1 + "</td></tr>"
@@ -1718,11 +1758,32 @@ const simianVis = () => {
             formatTooltipContents = "<div id=\"clearTooltip\" style=\"top: 0;right:0;position: absolute;\"> <table style=\"font-size: " + tooltipTextsize + "px;  width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=" + tooltipImageHeight + "; /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=" + tooltipImageHeight + ";  /></th></tr>";
             
             //formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Subclass<b/></td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_1] + "; \"> " + d.subclass_1 + "</td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_2] + "; \">" + d.subclass_2 + "</td></tr><tr><td   style=\" \"><b>Class<b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + d.class_1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_2] + ";\">" + d.class_2 + "</td></tr>"
-            if (d.class_1 == d.class_2) {
-                formatTooltipContents = formatTooltipContents + "<tr ><td style=\" \"><b>Class<b/></td><td colspan=\"2\" style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + d.class_1 + "</td></tr>"
+            var classContainer1 = "";
+            var classContainer2 = "";
+            if (d.class_1 == "glia") {
+                classContainer1 = "Non-neuronal";
+            }
+            else if (d.class_1 == "exc") {
+                classContainer1 = "Excitatory";
             }
             else {
-                formatTooltipContents = formatTooltipContents + "<tr ><td style=\"\"><b>Class<b/></td><td  style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + d.class_1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_2] + ";\">" + d.class_2 + "</td></tr>"
+                classContainer1 = "Inhibitory";
+            }
+            var classContainer2 = "";
+            if (d.class_2 == "glia") {
+                classContainer2 = "Non-neuronal";
+            }
+            else if (d.class_2 == "exc") {
+                classContainer2 = "Excitatory";
+            }
+            else {
+                classContainer2 = "Inhibitory";
+            }
+            if (d.class_1 == d.class_2) {
+                formatTooltipContents = formatTooltipContents + "<tr ><td style=\" \"><b>Class<b/></td><td colspan=\"2\" style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + classContainer1 + "</td></tr>"
+            }
+            else {
+                formatTooltipContents = formatTooltipContents + "<tr ><td style=\"\"><b>Class<b/></td><td  style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + classContainer1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_2] + ";\">" + classContainer2 + "</td></tr>"
             }
             if (d.subclass_1 == d.subclass_2) {
                 formatTooltipContents = formatTooltipContents + "<tr ><td style=\" \"><b>Subclass<b/></td><td colspan=\"2\" style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_1] + ";\">" + d.subclass_1 + "</td></tr>"
