@@ -284,7 +284,7 @@ hdps::gui::PluginTriggerActions SimianViewerPluginFactory::getPluginTriggerActio
 	PluginTriggerActions pluginTriggerActions;
 
 	const auto getInstance = [this]() -> SimianViewerPlugin* {
-		return dynamic_cast<SimianViewerPlugin*>(plugins().requestPlugin(getKind()));
+		return dynamic_cast<SimianViewerPlugin*>(plugins().requestViewPlugin(getKind()));
 	};
 
 	const auto numberOfDatasets = datasets.count();
