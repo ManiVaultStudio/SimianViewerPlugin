@@ -31,7 +31,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	//_cellCountHolder(*this),
 	_isStarted(false),
 	_histBarAction(this,"Cell counts")
-
 	/*,
 	_explorationModeAction(this)*/
 	//_helpAction(this, "Help"),
@@ -725,7 +724,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				}
 				geneEXp.insert("H A R s", HARs);
 				geneEXp.insert("h C O N D E L s", CONDELs);
-				_linkerSettingHolder.getHarHcondelCountString().setString( "HARS:"+ QString::number(HARCount)+"\nHCONDELS:"+ QString::number(HCONDELCount));
+				
+				_linkerSettingHolder.getHarHcondelCountString().setString( "Genes associated with HARs: <b>" + QString::number(HARCount) + "</b> and hCONDELs: <b>" + QString::number(HCONDELCount) + "</b>");
 
 				//countValues += "HARS:";
 				//countValues += QString::number(HARCount);

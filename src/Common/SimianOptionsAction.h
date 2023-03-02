@@ -177,7 +177,6 @@ public:
 
         SimianOptionsAction& _simianOptionsAction;
         StringAction                _selectedCrossSpeciesNameList;
-
         // friend class SimianOptionsAction;
     };
 
@@ -279,7 +278,6 @@ protected:
     VisSettingHolder              _visSettingHolder;
     OptionsHolder               _optionsHolder;
     //Species2Holder             _species2Holder;
-    
     LinkerSettingHolder               _linkerSettingHolder;
     //DistanceNeighborhoodHolder                _distanceNeighborhoodHolder;
     //ScatterplotColorHolder         _scatterplotColorHolder;
