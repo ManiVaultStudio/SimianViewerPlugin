@@ -73,6 +73,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		_linkerSettingHolder.getSelectedCrossSpeciesNameList().setSerializationName( "Selected Cross Species Name List");
 		_linkerSettingHolder.getHarHcondelCountString().setSerializationName("Har-Hcondel Count String");
 		_visSettingHolder.getColorMapAction().setSerializationName("Color map");
+
+		_visSettingHolder.getPluginVisibilityAction().setSerializationName("PairwiseORMultiSpeciesComparison");
 		
 		//_backgroundColoringAction.setSerializationName("Select background color");
 		//_scatterplot1ColorMapAction.setSerializationName( "Scatterplot1 color map connection");
@@ -132,6 +134,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_species2SelectAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 	//_species2SelectAction.setPlaceHolderString(QString("Choose Species2"));
 	_species2SelectAction.initialize(QStringList({ "gorilla","human","rhesus","marmoset" }), "human", "human");
+	_visSettingHolder.getPluginVisibilityAction().initialize(QStringList({ "pairwise","all" }), "all", "all");
 	//_crossSpeciesFilterAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 	//_crossSpeciesFilterAction.initialize(QStringList({ "all clusters","cross-species clusters" }), "cross-species clusters", "cross-species clusters");
 	_linkerSettingHolder.getInSpecies1HeatMapCellAction().setDefaultWidgetFlags(OptionAction::ComboBox);
@@ -221,6 +224,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_linkerSettingHolder.getSpecies2DEStatsLinkerAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
 	_linkerSettingHolder.getSpecies2DEStatsLinkerAction().connectToPublicActionByName("Pop Pyramid:: DE Dataset2");
 
+	_linkerSettingHolder.getPopPyramidPluginVisibility().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_linkerSettingHolder.getPopPyramidPluginVisibility().connectToPublicActionByName("Pop Pyramid::PluginVisibility");
 	_linkerSettingHolder.getSpecies1ScatterplotColorLinkerAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
 	_linkerSettingHolder.getSpecies1ScatterplotColorLinkerAction().connectToPublicActionByName("Scatterplot View 1::Color");
 	_linkerSettingHolder.getSpecies2ScatterplotColorLinkerAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
@@ -232,6 +237,9 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 	_neighborhoodAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
 	_neighborhoodAction.connectToPublicActionByName("ParallelBars::Neighbhorhood");
+	_linkerSettingHolder.getParallelBarPluginVisibility().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_linkerSettingHolder.getParallelBarPluginVisibility().connectToPublicActionByName("ParallelBars::PluginVisibility");
+
 
 	//const auto globalColorMapName = "GlobalColorMap";
 	//_scatterplotColorMapAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
@@ -1431,6 +1439,34 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	//	});
 
 	//
+
+	const auto updatePluginvisibility = [this]() -> void
+	{
+		if (_visSettingHolder.getPluginVisibilityAction().getCurrentText()== "pairwise")
+		{
+			_linkerSettingHolder.getPopPyramidPluginVisibility().setChecked(true); 
+			_linkerSettingHolder.getParallelBarPluginVisibility().setChecked(false);
+		}
+		else if (_visSettingHolder.getPluginVisibilityAction().getCurrentText() == "all")
+		{
+			_linkerSettingHolder.getPopPyramidPluginVisibility().setChecked(false);
+			_linkerSettingHolder.getParallelBarPluginVisibility().setChecked(true);
+		}
+	};
+	const auto updateParallelBarPluginVisibility = [this]() -> void
+	{
+
+	};
+	const auto updatePopPyramidPluginVisibility = [this]() -> void
+	{
+
+	};
+	connect(&_visSettingHolder.getPluginVisibilityAction(), &OptionAction::changed, this, updatePluginvisibility);
+	connect(&_linkerSettingHolder.getParallelBarPluginVisibility(), &ToggleAction::toggled, this, updateParallelBarPluginVisibility);
+	connect(&_linkerSettingHolder.getPopPyramidPluginVisibility(), &ToggleAction::toggled, this, updatePopPyramidPluginVisibility);
+
+
+	connect(&_linkerSettingHolder.getSelectedCrossSpeciesNameList(), &StringAction::stringChanged, this, updateSelectedCrossSpeciesNameList);
 	connect(&_linkerSettingHolder.getSelectedCrossSpeciesNameList(), &StringAction::stringChanged, this, updateSelectedCrossSpeciesNameList);
 	connect(&_visSettingHolder.getColorMapAction(), &ColorMapAction::imageChanged, this, colormapFilter);
 
@@ -1860,11 +1896,12 @@ inline SimianOptionsAction::VisSettingHolder::VisSettingHolder(SimianOptionsActi
 	GroupAction(&simianOptionsAction, "Setting Options"),
 	_simianOptionsAction(simianOptionsAction),
 	_fullHeatMapAction(this, "Full distancemap"),
-	_colorMapAction(this, "Color map")
+	_colorMapAction(this, "Color map"),
+	_pluginVisibility(this, "Expression type")
 {
 	setText("Setting Options");
 	setIcon(Application::getIconFont("FontAwesome").getIcon("cog"));
-	setPopupSizeHint(QSize(250, 0));
+	setPopupSizeHint(QSize(350, 0));
 }
 
 inline SimianOptionsAction::LinkerSettingHolder::LinkerSettingHolder(SimianOptionsAction& simianOptionsAction) :
@@ -1892,7 +1929,9 @@ inline SimianOptionsAction::LinkerSettingHolder::LinkerSettingHolder(SimianOptio
 	_geneExpressionDatasetVariant(this, "Gene Expression Variant"),
 	_commandAction(this, "Command Action Variant"),
 	_selectedCrossSpeciesNameList(this, "Selected Cross Species Name List"),
-	_harHcondelCountString(this, "Har-Hcondel Count String")
+	_harHcondelCountString(this, "Har-Hcondel Count String"),
+	_popPyramidPluginVisibility(this,"PopPyramidPluginVisibility"),
+	_parallelBarPluginVisibility(this, "ParallelBarPluginVisibility")
 {
 	setText("Linking Options");
 	setIcon(Application::getIconFont("FontAwesome").getIcon("link"));
@@ -2194,6 +2233,7 @@ void SimianOptionsAction::fromVariantMap(const QVariantMap& variantMap)
 	_species2SelectAction.fromParentVariantMap(variantMap);
 	_neighborhoodAction.fromParentVariantMap(variantMap);
 	_scatterplotColorControlAction.fromParentVariantMap(variantMap);
+	_visSettingHolder.getPluginVisibilityAction().fromParentVariantMap(variantMap);
 	//_distanceAction.fromParentVariantMap(variantMap);
 	_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().fromParentVariantMap(variantMap);
 	_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().fromParentVariantMap(variantMap);
@@ -2259,6 +2299,8 @@ QVariantMap SimianOptionsAction::toVariantMap() const
 	_linkerSettingHolder.getSelectedCrossSpeciesNameList().insertIntoVariantMap(variantMap);
 	_linkerSettingHolder.getHarHcondelCountString().insertIntoVariantMap(variantMap);
 	_visSettingHolder.getFullHeatmapAction().insertIntoVariantMap(variantMap);
+	
+	_visSettingHolder.getPluginVisibilityAction().insertIntoVariantMap(variantMap);
 	//_backgroundColoringAction.insertIntoVariantMap(variantMap);
 	_visSettingHolder.getColorMapAction().insertIntoVariantMap(variantMap);
 	_histBarAction.insertIntoVariantMap(variantMap);

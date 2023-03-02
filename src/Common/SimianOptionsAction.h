@@ -61,14 +61,15 @@ public:
 
         const ToggleAction& getFullHeatmapAction() const { return _fullHeatMapAction; };
         const ColorMapAction& getColorMapAction() const { return _colorMapAction; }
-
+        const OptionAction& getPluginVisibilityAction() const  { return _pluginVisibility; }
         ToggleAction& getFullHeatmapAction() { return _fullHeatMapAction; };
         ColorMapAction& getColorMapAction() { return _colorMapAction; }
-
+        OptionAction& getPluginVisibilityAction() { return _pluginVisibility; }
     protected:
         SimianOptionsAction&    _simianOptionsAction;
         ToggleAction            _fullHeatMapAction;
         ColorMapAction          _colorMapAction;
+        OptionAction            _pluginVisibility;
 
        // friend class SimianOptionsAction;
     };
@@ -108,7 +109,8 @@ public:
        const StringAction& getSpecies2Name() const { return _species2Name; }
        const  StringAction& getSelectedCrossspeciescluster() const { return _selectedCrossspeciescluster; }
 
-
+       const ToggleAction& getParallelBarPluginVisibility() const { return _parallelBarPluginVisibility; }
+       const ToggleAction& getPopPyramidPluginVisibility() const { return _popPyramidPluginVisibility; }
 
         DatasetPickerAction& getCrossSpecies1DatasetLinkerAction() { return _crossSpecies1DatasetLinkerAction; };
         DatasetPickerAction& getCrossSpecies2DatasetLinkerAction() { return _crossSpecies2DatasetLinkerAction; };
@@ -140,8 +142,11 @@ public:
         StringAction& getSelectedCrossSpeciesNameList() { return _selectedCrossSpeciesNameList; }
         StringAction& getSpecies2Name() { return _species2Name; }
         StringAction& getSelectedCrossspeciescluster() { return _selectedCrossspeciescluster; }
-
+        ToggleAction& getParallelBarPluginVisibility() { return _parallelBarPluginVisibility; }
+        ToggleAction& getPopPyramidPluginVisibility() { return _popPyramidPluginVisibility; }
     protected:
+        ToggleAction                _popPyramidPluginVisibility;
+        ToggleAction                _parallelBarPluginVisibility;
         DatasetPickerAction           _crossSpecies1DatasetLinkerAction;
         DatasetPickerAction          _crossSpecies2DatasetLinkerAction;
 
