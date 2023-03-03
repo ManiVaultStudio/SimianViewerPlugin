@@ -133,7 +133,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_species2SelectAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 	//_species2SelectAction.setPlaceHolderString(QString("Choose Species2"));
 	_species2SelectAction.initialize(QStringList({ "gorilla","human","rhesus","marmoset" }), "human", "human");
-	_visSettingHolder.getPluginVisibilityAction().initialize(QStringList({ "pairwise","all" }), "all", "all");
+	_visSettingHolder.getPluginVisibilityAction().initialize(QStringList({ "pairwise","multi" }), "multi", "multi");
 	//_crossSpeciesFilterAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 	//_crossSpeciesFilterAction.initialize(QStringList({ "all clusters","cross-species clusters" }), "cross-species clusters", "cross-species clusters");
 	_linkerSettingHolder.getInSpecies1HeatMapCellAction().setDefaultWidgetFlags(OptionAction::ComboBox);
@@ -1447,7 +1447,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			_linkerSettingHolder.getPopPyramidPluginVisibility().setChecked(true); 
 			_linkerSettingHolder.getParallelBarPluginVisibility().setChecked(false);
 		}
-		else if (_visSettingHolder.getPluginVisibilityAction().getCurrentText() == "all")
+		else if (_visSettingHolder.getPluginVisibilityAction().getCurrentText() == "multi")
 		{
 			_linkerSettingHolder.getPopPyramidPluginVisibility().setChecked(false);
 			_linkerSettingHolder.getParallelBarPluginVisibility().setChecked(true);
@@ -1461,7 +1461,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	{
 
 	};
-	connect(&_visSettingHolder.getPluginVisibilityAction(), &OptionAction::currentIndexChanged, this, updatePluginvisibility);
+	connect(&_visSettingHolder.getPluginVisibilityAction(), &OptionAction::currentTextChanged, this, updatePluginvisibility);
 	connect(&_linkerSettingHolder.getParallelBarPluginVisibility(), &ToggleAction::toggled, this, updateParallelBarPluginVisibility);
 	connect(&_linkerSettingHolder.getPopPyramidPluginVisibility(), &ToggleAction::toggled, this, updatePopPyramidPluginVisibility);
 
@@ -1937,9 +1937,9 @@ inline SimianOptionsAction::LinkerSettingHolder::LinkerSettingHolder(SimianOptio
 	setIcon(Application::getIconFont("FontAwesome").getIcon("link"));
 	setPopupSizeHint(QSize(350, 0));
 
-	connect(&_popPyramidPluginVisibility, &ToggleAction::toggled, this, [](bool toggled) -> void {
-		qDebug() << "_popPyramidPluginVisibility" << "toggled changed to" << toggled;
-		});
+	//connect(&_popPyramidPluginVisibility, &ToggleAction::toggled, this, [](bool toggled) -> void {
+	//	qDebug() << "_popPyramidPluginVisibility" << "toggled changed to" << toggled;
+	//	});
 }
 
 
