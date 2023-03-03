@@ -234,7 +234,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_linkerSettingHolder.getSpeciesEmbedding2LinkerAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
 	_linkerSettingHolder.getSpeciesEmbedding2LinkerAction().connectToPublicActionByName("Scatterplot View 2::Embedding");
 
-	_neighborhoodAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	_neighborhoodAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::ConnectViaApi);
 	_neighborhoodAction.connectToPublicActionByName("ParallelBars::Neighbhorhood");
 	_linkerSettingHolder.getParallelBarPluginVisibility().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
 	_linkerSettingHolder.getParallelBarPluginVisibility().connectToPublicActionByName("ParallelBars::PluginVisibility");
@@ -1461,7 +1461,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	{
 
 	};
-	connect(&_visSettingHolder.getPluginVisibilityAction(), &OptionAction::changed, this, updatePluginvisibility);
+	connect(&_visSettingHolder.getPluginVisibilityAction(), &OptionAction::currentIndexChanged, this, updatePluginvisibility);
 	connect(&_linkerSettingHolder.getParallelBarPluginVisibility(), &ToggleAction::toggled, this, updateParallelBarPluginVisibility);
 	connect(&_linkerSettingHolder.getPopPyramidPluginVisibility(), &ToggleAction::toggled, this, updatePopPyramidPluginVisibility);
 
@@ -1936,6 +1936,10 @@ inline SimianOptionsAction::LinkerSettingHolder::LinkerSettingHolder(SimianOptio
 	setText("Linking Options");
 	setIcon(Application::getIconFont("FontAwesome").getIcon("link"));
 	setPopupSizeHint(QSize(350, 0));
+
+	connect(&_popPyramidPluginVisibility, &ToggleAction::toggled, this, [](bool toggled) -> void {
+		qDebug() << "_popPyramidPluginVisibility" << "toggled changed to" << toggled;
+		});
 }
 
 
