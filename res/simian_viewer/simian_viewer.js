@@ -424,7 +424,7 @@ const simianVis = () => {
     svg
         .append("g")
         .attr("class", "xLabel")
-        .style("font-size", "9px")
+        .style("font-size", "10px").style("font-family", "Arial")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x).tickSize(0))
         .selectAll("text")
@@ -451,7 +451,7 @@ const simianVis = () => {
     svg
         .append("g")
         .attr("class", "yLabel")
-        .style("font-size", "9px")
+        .style("font-size", "10px").style("font-family", "Arial")
         .call(d3.axisLeft(y).tickSize(0))
         .selectAll("text")
         .on('click', clickYAxisLabels)
@@ -950,7 +950,7 @@ const simianVis = () => {
 
                 }
                 var formatTooltipContents = "";
-                formatTooltipContents = "<div id=\"clearTooltip\"> <table  style=\"font-size: 10px; width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=25  /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=25  /></th></tr>";
+                formatTooltipContents = "<div id=\"clearTooltip\"> <table  style=\"font-size: 10px; font-family: Arial; width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=25  /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=25  /></th></tr>";
                 var classContainer1 = "";
                 var classContainer2 = "";
                 if (d.class_1 == "glia") {
@@ -1369,7 +1369,7 @@ const simianVis = () => {
                 var tooltipImageHeight = parseInt(5 * tooltipTextsize);
 
                 var formatTooltipContents = "";
-                formatTooltipContents = "<div id=\"clearTooltip\" style=\"top: 0;right:0;position: absolute;\"> <table style=\"font-size: " + tooltipTextsize + "px;  width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=" + tooltipImageHeight + "; /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=" + tooltipImageHeight + ";  /></th></tr>";
+                formatTooltipContents = "<div id=\"clearTooltip\" style=\"top: 0;right:0;position: absolute;\"> <table style=\"font-size: " + tooltipTextsize + "px; font-family: Arial; width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=" + tooltipImageHeight + "; /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=" + tooltipImageHeight + ";  /></th></tr>";
                 var classContainer1 = "";
                 var classContainer2 = "";
                 if (d.class_1 == "glia") {
@@ -1452,8 +1452,8 @@ const simianVis = () => {
             var xAxisLeftTooltip = d3.axisBottom().scale(xScaleTooltip.copy().range([pointATooltip, 0])).ticks(2);
             var leftBarGroupTooltip = svgTooltip.append('g').attr('transform', translation(pointATooltip, 0) + 'scale(-1,1)');
             var rightBarGroupTooltip = svgTooltip.append('g').attr('transform', translation(pointBTooltip, 0));
-            svgTooltip.append('g').attr('class', 'axis y left').attr('transform', translation(pointATooltip, 0)).call(yAxisLeftTooltip).selectAll('text').attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '8').style('text-anchor', 'middle');
-            svgTooltip.append('g').attr('class', 'axis y right').attr('transform', translation(pointBTooltip, 0)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '8').call(yAxisRightTooltip);
+            svgTooltip.append('g').attr('class', 'axis y left').attr('transform', translation(pointATooltip, 0)).call(yAxisLeftTooltip).selectAll('text').attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '10').style("font-family", "Arial").style('text-anchor', 'middle');
+            svgTooltip.append('g').attr('class', 'axis y right').attr('transform', translation(pointBTooltip, 0)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '10').style("font-family", "Arial").call(yAxisRightTooltip);
             svgTooltip.append('g').attr('class', 'axis x left').attr('transform', translation(0, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#3A3B3C').call(xAxisLeftTooltip).selectAll('text').attr('dy', '.71em');
             svgTooltip.append('g').attr('class', 'axis x right').attr('transform', translation(pointBTooltip, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#3A3B3C').call(xAxisRightTooltip).selectAll('text').attr('dy', '.71em');
             svgTooltip.selectAll(".tick").each(function (d) { if (d === 0.0 || d === 0 || d === 1.0) { this.remove(); } });
@@ -1530,7 +1530,7 @@ const simianVis = () => {
                     .append("text")
                     .attr("x", function () { return xMinMax(Val_Current) })
                     .attr('y', -5)
-                    .style("font-size", 8)
+                    .style("font-size", 10).style("font-family", "Arial")
                     .style("text-anchor", "middle")
                     .text("Curr: " + Val_Current).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
 /*                // Line for min
@@ -1554,7 +1554,7 @@ const simianVis = () => {
                     .append("text")
                     .attr("x", function () { return xMinMax(Val_Min) })
                     .attr('y', 12)
-                    .style("font-size", 8)
+                    .style("font-size", 10).style("font-family", "Arial")
                     .style("text-anchor", "middle")
                     .text("Min: " + Val_Min).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
 /*                // Line for max
@@ -1578,7 +1578,7 @@ const simianVis = () => {
                     .append("text")
                     .attr("x", function () { return xMinMax(Val_Max) })
                     .attr('y', 12)
-                    .style("font-size", 8)
+                    .style("font-size", 10).style("font-family", "Arial")
                     .style("text-anchor", "middle")
                     .text("Max: " + Val_Max).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
             }
@@ -1755,7 +1755,7 @@ const simianVis = () => {
             var tooltipImageHeight = parseInt(5 * tooltipTextsize);
 
             var formatTooltipContents = "";
-            formatTooltipContents = "<div id=\"clearTooltip\" style=\"top: 0;right:0;position: absolute;\"> <table style=\"font-size: " + tooltipTextsize + "px;  width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=" + tooltipImageHeight + "; /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=" + tooltipImageHeight + ";  /></th></tr>";
+            formatTooltipContents = "<div id=\"clearTooltip\" style=\"top: 0;right:0;position: absolute;\"> <table style=\"font-size: " + tooltipTextsize + "px;font-family: Arial;  width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=" + tooltipImageHeight + "; /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=" + tooltipImageHeight + ";  /></th></tr>";
             
             //formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Subclass<b/></td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_1] + "; \"> " + d.subclass_1 + "</td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_2] + "; \">" + d.subclass_2 + "</td></tr><tr><td   style=\" \"><b>Class<b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + d.class_1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_2] + ";\">" + d.class_2 + "</td></tr>"
             var classContainer1 = "";
@@ -1836,8 +1836,8 @@ const simianVis = () => {
         var xAxisLeftTooltip = d3.axisBottom().scale(xScaleTooltip.copy().range([pointATooltip, 0])).ticks(2);
         var leftBarGroupTooltip = svgTooltip.append('g').attr('transform', translation(pointATooltip, 0) + 'scale(-1,1)');
         var rightBarGroupTooltip = svgTooltip.append('g').attr('transform', translation(pointBTooltip, 0));
-        svgTooltip.append('g').attr('class', 'axis y left').attr('transform', translation(pointATooltip, 0)).call(yAxisLeftTooltip).selectAll('text').attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '8').style('text-anchor', 'middle');
-        svgTooltip.append('g').attr('class', 'axis y right').attr('transform', translation(pointBTooltip, 0)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '8').call(yAxisRightTooltip);
+        svgTooltip.append('g').attr('class', 'axis y left').attr('transform', translation(pointATooltip, 0)).call(yAxisLeftTooltip).selectAll('text').attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '10').style("font-family", "Arial").style('text-anchor', 'middle');
+        svgTooltip.append('g').attr('class', 'axis y right').attr('transform', translation(pointBTooltip, 0)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '10').style("font-family", "Arial").call(yAxisRightTooltip);
         svgTooltip.append('g').attr('class', 'axis x left').attr('transform', translation(0, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#3A3B3C').call(xAxisLeftTooltip).selectAll('text').attr('dy', '.71em');
         svgTooltip.append('g').attr('class', 'axis x right').attr('transform', translation(pointBTooltip, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#3A3B3C').call(xAxisRightTooltip).selectAll('text').attr('dy', '.71em');
         svgTooltip.selectAll(".tick").each(function (d) { if (d === 0.0 || d === 0 || d === 1.0) { this.remove(); } });
@@ -1916,7 +1916,7 @@ const simianVis = () => {
                 .append("text")
                 .attr("x", function () { return xMinMax(Val_Current) })
                 .attr('y', -5)
-                .style("font-size", 8)
+                .style("font-size", 10).style("font-family", "Arial")
                 .style("text-anchor", "middle")
                 .text("Curr: " + Val_Current).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
             /*                // Line for min
@@ -1940,7 +1940,7 @@ const simianVis = () => {
                 .append("text")
                 .attr("x", function () { return xMinMax(Val_Min) })
                 .attr('y', 12)
-                .style("font-size", 8)
+                .style("font-size", 10).style("font-family", "Arial")
                 .style("text-anchor", "middle")
                 .text("Min: " + Val_Min).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
             /*                // Line for max
@@ -1964,7 +1964,7 @@ const simianVis = () => {
                 .append("text")
                 .attr("x", function () { return xMinMax(Val_Max) })
                 .attr('y', 12)
-                .style("font-size", 8)
+                .style("font-size", 10).style("font-family", "Arial")
                 .style("text-anchor", "middle")
                 .text("Max: " + Val_Max).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
             }
