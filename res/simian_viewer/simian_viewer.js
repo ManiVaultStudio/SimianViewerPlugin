@@ -1530,7 +1530,7 @@ const simianVis = () => {
                     .append("text")
                     .attr("x", function () { return xMinMax(Val_Current) })
                     .attr('y', -5)
-                    .style("font-size", 10).style("font-family", "Arial")
+                    .style("font-size", 8).style("font-family", "Arial")
                     .style("text-anchor", "middle")
                     .text("Curr: " + Val_Current).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
 /*                // Line for min
@@ -1554,7 +1554,7 @@ const simianVis = () => {
                     .append("text")
                     .attr("x", function () { return xMinMax(Val_Min) })
                     .attr('y', 12)
-                    .style("font-size", 10).style("font-family", "Arial")
+                    .style("font-size", 8).style("font-family", "Arial")
                     .style("text-anchor", "middle")
                     .text("Min: " + Val_Min).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
 /*                // Line for max
@@ -1578,7 +1578,7 @@ const simianVis = () => {
                     .append("text")
                     .attr("x", function () { return xMinMax(Val_Max) })
                     .attr('y', 12)
-                    .style("font-size", 10).style("font-family", "Arial")
+                    .style("font-size", 8).style("font-family", "Arial")
                     .style("text-anchor", "middle")
                     .text("Max: " + Val_Max).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
             }
@@ -1916,7 +1916,7 @@ const simianVis = () => {
                 .append("text")
                 .attr("x", function () { return xMinMax(Val_Current) })
                 .attr('y', -5)
-                .style("font-size", 10).style("font-family", "Arial")
+                .style("font-size", 8).style("font-family", "Arial")
                 .style("text-anchor", "middle")
                 .text("Curr: " + Val_Current).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
             /*                // Line for min
@@ -1940,7 +1940,7 @@ const simianVis = () => {
                 .append("text")
                 .attr("x", function () { return xMinMax(Val_Min) })
                 .attr('y', 12)
-                .style("font-size", 10).style("font-family", "Arial")
+                .style("font-size", 8).style("font-family", "Arial")
                 .style("text-anchor", "middle")
                 .text("Min: " + Val_Min).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
             /*                // Line for max
@@ -1964,7 +1964,7 @@ const simianVis = () => {
                 .append("text")
                 .attr("x", function () { return xMinMax(Val_Max) })
                 .attr('y', 12)
-                .style("font-size", 10).style("font-family", "Arial")
+                .style("font-size", 8).style("font-family", "Arial")
                 .style("text-anchor", "middle")
                 .text("Max: " + Val_Max).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
             }
