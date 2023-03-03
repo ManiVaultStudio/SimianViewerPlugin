@@ -180,8 +180,6 @@ public:
         // friend class SimianOptionsAction;
     };
 
-
-
 public:
     void onDataEvent(hdps::DataEvent* dataEvent);
 protected:
@@ -238,7 +236,8 @@ public: // Action getters
 
     //OptionAction& getScatterplotColorControl() { return _scatterplotColorControlAction; }
 
-
+    bool& getStopMethodFlagFromSpecies1() { return _stopMethodFlagFromSpecies1; }
+    bool& getStopMethodFlagFromSpecies2() { return _stopMethodFlagFromSpecies2; }
     //ColorMapAction& getScatterplotColorMapAction() { return _scatterplotColorMapAction; }
     //ExplorationAction& getExplorationAction() { return _explorationAction; }
 public:
@@ -286,8 +285,8 @@ protected:
 
     //TriggerAction                _helpAction;
     //TriggerAction                _screenshotAction;
-
-
+    bool _stopMethodFlagFromSpecies1 = false;
+    bool _stopMethodFlagFromSpecies2 = false;
     bool _isStarted;
     //ColorMapAction _scatterplotColorMapAction;
     //ColorAction              _backgroundColoringAction;

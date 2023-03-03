@@ -129,10 +129,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	//_distanceNeighborhoodHolder.setEnabled(false);
 	_species1SelectAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 	//_species1SelectAction.setPlaceHolderString(QString("Choose Species1"));
-	_species1SelectAction.initialize(QStringList({ "chimp","gorilla","human","rhesus","marmoset"}), "chimp", "chimp");
+	_species1SelectAction.initialize(QStringList({ "human","chimp","gorilla","rhesus","marmoset"}), "chimp", "chimp");
 	_species2SelectAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 	//_species2SelectAction.setPlaceHolderString(QString("Choose Species2"));
-	_species2SelectAction.initialize(QStringList({ "gorilla","human","rhesus","marmoset" }), "human", "human");
+	_species2SelectAction.initialize(QStringList({ "human","gorilla","rhesus","marmoset" }), "human", "human");
 	_visSettingHolder.getPluginVisibilityAction().initialize(QStringList({ "pairwise","multi" }), "multi", "multi");
 	//_crossSpeciesFilterAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 	//_crossSpeciesFilterAction.initialize(QStringList({ "all clusters","cross-species clusters" }), "cross-species clusters", "cross-species clusters");
@@ -331,10 +331,12 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 	const auto updateSpecies1 = [this]() -> void
 	{
+		_stopMethodFlagFromSpecies1 = true;
 		//if (_species1SelectAction.getCurrentText() != "")
 		//{
 			//_species2SelectAction.setEnabled(true);
 			_linkerSettingHolder.getSpecies1Name().setString(_species1SelectAction.getCurrentText());
+
 			if (_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().getNumberOfOptions() > 0)
 			{
 				QString species1CrossSpeciesClusterDatasetName = _species1SelectAction.getCurrentText() + "_" + _neighborhoodAction.getCurrentText() + "_cross_species_cluster";
@@ -374,8 +376,9 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				//QString species1DEStatsDatasetName = _species1SelectAction.getCurrentText() + "_" + _neighborhoodAction.getCurrentText() + "_DE_Statistics";
 				
 			}
+
 			QString storeSpecies = _species2SelectAction.getCurrentText();
-			QStringList speciesNames = { "gorilla","marmoset","rhesus","chimp","human" };
+			QStringList speciesNames = { "human","chimp","gorilla","rhesus","marmoset"};
 			speciesNames.removeAll(_species1SelectAction.getCurrentText());
 			_species2SelectAction.initialize(QStringList({ speciesNames }), storeSpecies, storeSpecies);
 
@@ -383,7 +386,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			if (_species2SelectAction.getCurrentText() == _species1SelectAction.getCurrentText())
 			{
 
-				QStringList speciesNames = { "gorilla","marmoset","rhesus","chimp","human" };
+				QStringList speciesNames = { "human","chimp","gorilla","rhesus","marmoset" };
 				speciesNames.removeAll(_species1SelectAction.getCurrentText());
 				_species2SelectAction.initialize(QStringList({ speciesNames }), "", "");
 				//QString tempVal = _scatterplotColorControlAction.getCurrentText();
@@ -392,7 +395,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				_species2SelectAction.setCurrentIndex(0);
 				//_simianViewerPlugin.getSimianViewerWidget().resetView("Reset");
 			}
-
+			
 			else
 			{
 				//if (_species2SelectAction.getCurrentText() != "")
@@ -452,8 +455,9 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 					}
 					_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().trigger();
 				//}
-			}
 
+			}
+			_stopMethodFlagFromSpecies1 = false;
 		//}
 		//else
 		//{
@@ -509,7 +513,9 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			//_visSettingHolder.setEnabled(true);
 			//_linkerSettingHolder.setEnabled(true);
 			//_distanceNeighborhoodHolder.setEnabled(true);
+		_stopMethodFlagFromSpecies2 = true;
 		_linkerSettingHolder.getSpecies2Name().setString(_species2SelectAction.getCurrentText());
+
 			if (_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().getNumberOfOptions() > 0)
 			{
 				QString species2CrossSpeciesClusterDatasetName = _species2SelectAction.getCurrentText() + "_" + _neighborhoodAction.getCurrentText() + "_cross_species_cluster";
@@ -523,7 +529,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			}
 			if (_linkerSettingHolder.getSpeciesEmbedding2LinkerAction().getNumberOfOptions() > 0)
 			{
-				QString species2EmbeddingDatasetName = _species2SelectAction.getCurrentText() + "_" + _neighborhoodAction.getCurrentText()+"_embedding";
+				QString species2EmbeddingDatasetName = _species2SelectAction.getCurrentText() + "_" + _neighborhoodAction.getCurrentText() + "_embedding";
 				_linkerSettingHolder.getSpeciesEmbedding2LinkerAction().setCurrentText(species2EmbeddingDatasetName);
 			}
 
@@ -542,8 +548,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 						break;
 					}
 				}
-					
-				
+
+
 				//QString species2DEStatsDatasetName = _species2SelectAction.getCurrentText() + "_" + _neighborhoodAction.getCurrentText() + "_DE_Statistics";
 
 				//_linkerSettingHolder.getSpecies2DEStatsLinkerAction().setCurrentText(species2DEStatsDatasetName);
@@ -551,63 +557,66 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 			//if (_species1SelectAction.getCurrentText() != "")
 			//{
-				updateData((_species1SelectAction.getCurrentText()).toStdString(), (_species2SelectAction.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString()/*, (_distanceAction.getValue()), (_crossSpeciesFilterAction.getCurrentText()).toStdString()*/);
-				QString tempVal = _scatterplotColorControlAction.getCurrentText();
-				_scatterplotColorControlAction.setCurrentText("");
-				_scatterplotColorControlAction.setCurrentText(tempVal);
+			updateData((_species1SelectAction.getCurrentText()).toStdString(), (_species2SelectAction.getCurrentText()).toStdString(), (_neighborhoodAction.getCurrentText()).toStdString()/*, (_distanceAction.getValue()), (_crossSpeciesFilterAction.getCurrentText()).toStdString()*/);
+			QString tempVal = _scatterplotColorControlAction.getCurrentText();
+			_scatterplotColorControlAction.setCurrentText("");
+			_scatterplotColorControlAction.setCurrentText(tempVal);
 
-				if (_neighborhoodAction.getCurrentText() == "Non-neuronal cells")
-				{
-					_linkerSettingHolder.getCrossSpecies1HeatMapCellAction().setSelectedOptions({ "" });
-					_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().setSelectedOptions({ "" });
-					_linkerSettingHolder.getSelectedCrossSpeciesNameList().setString("");
-					_linkerSettingHolder.getCrossSpecies1HeatMapCellAction().setSelectedOptions({ "Astro_1" });
-					_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().setSelectedOptions({ "Astro_1" });
-					_linkerSettingHolder.getSelectedCrossSpeciesNameList().setString("Astro_1");
-				}
-				else if (_neighborhoodAction.getCurrentText() == "IT-projecting excitatory")
-				{
-					_linkerSettingHolder.getCrossSpecies1HeatMapCellAction().setSelectedOptions({ "" });
-					_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().setSelectedOptions({ "" });
-					_linkerSettingHolder.getSelectedCrossSpeciesNameList().setString("");
-					_linkerSettingHolder.getCrossSpecies1HeatMapCellAction().setSelectedOptions({ "L2/3 IT_1" });
-					_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().setSelectedOptions({ "L2/3 IT_1" });
-					_linkerSettingHolder.getSelectedCrossSpeciesNameList().setString("L2/3 IT_1");
-				}
-				else if (_neighborhoodAction.getCurrentText() == "Non-IT-projecting excitatory")
-				{
-					_linkerSettingHolder.getCrossSpecies1HeatMapCellAction().setSelectedOptions({ "" });
-					_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().setSelectedOptions({ "" });
-					_linkerSettingHolder.getSelectedCrossSpeciesNameList().setString("");
-					_linkerSettingHolder.getCrossSpecies1HeatMapCellAction().setSelectedOptions({ "L6 CT_1" });
-					_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().setSelectedOptions({ "L6 CT_1" });
-					_linkerSettingHolder.getSelectedCrossSpeciesNameList().setString("L6 CT_1");
-				}
-				else if (_neighborhoodAction.getCurrentText() == "CGE-derived inhibitory")
-				{
-					_linkerSettingHolder.getCrossSpecies1HeatMapCellAction().setSelectedOptions({ "" });
-					_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().setSelectedOptions({ "" });
-					_linkerSettingHolder.getSelectedCrossSpeciesNameList().setString("");
-					_linkerSettingHolder.getCrossSpecies1HeatMapCellAction().setSelectedOptions({ "Lamp5_1" });
-					_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().setSelectedOptions({ "Lamp5_1" });
-					_linkerSettingHolder.getSelectedCrossSpeciesNameList().setString("Lamp5_1");
-				}
-				else if (_neighborhoodAction.getCurrentText() == "MGE-derived inhibitory")
-				{
-					_linkerSettingHolder.getCrossSpecies1HeatMapCellAction().setSelectedOptions({ "" });
-					_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().setSelectedOptions({ "" });
-					_linkerSettingHolder.getSelectedCrossSpeciesNameList().setString("");
-					_linkerSettingHolder.getCrossSpecies1HeatMapCellAction().setSelectedOptions({ "Sst Chodl_1" });
-					_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().setSelectedOptions({ "Sst Chodl_1" });
-					_linkerSettingHolder.getSelectedCrossSpeciesNameList().setString("Sst Chodl_1");
-				}
-				if (_scatterplotColorControlAction.getCurrentText() == "differential expression")
-				{
-					_scatterplotColorControlAction.setCurrentText("cross-species cluster");
-				}
+			if (_neighborhoodAction.getCurrentText() == "Non-neuronal cells")
+			{
+				_linkerSettingHolder.getCrossSpecies1HeatMapCellAction().setSelectedOptions({ "" });
+				_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().setSelectedOptions({ "" });
+				_linkerSettingHolder.getSelectedCrossSpeciesNameList().setString("");
+				_linkerSettingHolder.getCrossSpecies1HeatMapCellAction().setSelectedOptions({ "Astro_1" });
+				_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().setSelectedOptions({ "Astro_1" });
+				_linkerSettingHolder.getSelectedCrossSpeciesNameList().setString("Astro_1");
+			}
+			else if (_neighborhoodAction.getCurrentText() == "IT-projecting excitatory")
+			{
+				_linkerSettingHolder.getCrossSpecies1HeatMapCellAction().setSelectedOptions({ "" });
+				_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().setSelectedOptions({ "" });
+				_linkerSettingHolder.getSelectedCrossSpeciesNameList().setString("");
+				_linkerSettingHolder.getCrossSpecies1HeatMapCellAction().setSelectedOptions({ "L2/3 IT_1" });
+				_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().setSelectedOptions({ "L2/3 IT_1" });
+				_linkerSettingHolder.getSelectedCrossSpeciesNameList().setString("L2/3 IT_1");
+			}
+			else if (_neighborhoodAction.getCurrentText() == "Non-IT-projecting excitatory")
+			{
+				_linkerSettingHolder.getCrossSpecies1HeatMapCellAction().setSelectedOptions({ "" });
+				_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().setSelectedOptions({ "" });
+				_linkerSettingHolder.getSelectedCrossSpeciesNameList().setString("");
+				_linkerSettingHolder.getCrossSpecies1HeatMapCellAction().setSelectedOptions({ "L6 CT_1" });
+				_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().setSelectedOptions({ "L6 CT_1" });
+				_linkerSettingHolder.getSelectedCrossSpeciesNameList().setString("L6 CT_1");
+			}
+			else if (_neighborhoodAction.getCurrentText() == "CGE-derived inhibitory")
+			{
+				_linkerSettingHolder.getCrossSpecies1HeatMapCellAction().setSelectedOptions({ "" });
+				_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().setSelectedOptions({ "" });
+				_linkerSettingHolder.getSelectedCrossSpeciesNameList().setString("");
+				_linkerSettingHolder.getCrossSpecies1HeatMapCellAction().setSelectedOptions({ "Lamp5_1" });
+				_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().setSelectedOptions({ "Lamp5_1" });
+				_linkerSettingHolder.getSelectedCrossSpeciesNameList().setString("Lamp5_1");
+			}
+			else if (_neighborhoodAction.getCurrentText() == "MGE-derived inhibitory")
+			{
+				_linkerSettingHolder.getCrossSpecies1HeatMapCellAction().setSelectedOptions({ "" });
+				_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().setSelectedOptions({ "" });
+				_linkerSettingHolder.getSelectedCrossSpeciesNameList().setString("");
+				_linkerSettingHolder.getCrossSpecies1HeatMapCellAction().setSelectedOptions({ "Sst Chodl_1" });
+				_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().setSelectedOptions({ "Sst Chodl_1" });
+				_linkerSettingHolder.getSelectedCrossSpeciesNameList().setString("Sst Chodl_1");
+			}
+			if (_scatterplotColorControlAction.getCurrentText() == "differential expression")
+			{
+				_scatterplotColorControlAction.setCurrentText("cross-species cluster");
+			}
+			if (!_stopMethodFlagFromSpecies1)
+			{
 				_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().trigger();
+			}
 			//}
-
+			_stopMethodFlagFromSpecies2 = false;
 		//}
 		//else
 		//{
@@ -956,7 +965,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				_linkerSettingHolder.getSelectedCrossSpeciesNameList().setString("Sst Chodl_1");
 			}
 
-			_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().trigger();
+			if (!_stopMethodFlagFromSpecies1 && !_stopMethodFlagFromSpecies2)
+			{
+				_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().trigger();
+			}
 		}
 	};
 	const auto updateScatterplotColorControl = [this]() -> void
@@ -1261,6 +1273,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 	const auto updateSelectedCrossspeciescluster = [this]() -> void
 	{
+		qDebug() << "updateSelectedCrossspeciescluster : triggered";
 		_simianViewerPlugin.getSimianViewerWidget().borderSelectedCrossspeciesCluster(_linkerSettingHolder.getSelectedCrossspeciescluster().getString());
 
 		if (_linkerSettingHolder.getSelectedCrossspeciescluster().getString() == "")
@@ -1424,7 +1437,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			//	}
 			//}
 		}
-		_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().trigger();
+		if (!_stopMethodFlagFromSpecies1 && !_stopMethodFlagFromSpecies2)
+		{
+			_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().trigger();
+		}
 	};
 
 	connect(&_linkerSettingHolder.getSelectedCrossspeciescluster(), &StringAction::stringChanged, this, updateSelectedCrossspeciescluster);
@@ -2225,7 +2241,10 @@ void SimianOptionsAction::initLoader()
 	commands.push_back(command);
 	_linkerSettingHolder.getCommandAction().setVariant(commands);
 
-	_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().trigger();
+	if (!_stopMethodFlagFromSpecies1 && !_stopMethodFlagFromSpecies2)
+	{
+		_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().trigger();
+	}
 
 }
 
