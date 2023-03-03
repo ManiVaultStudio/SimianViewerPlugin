@@ -251,9 +251,9 @@ const simianVis = () => {
     rightClickSelectedSpecies1 = "";
     rightClickSelectedSpecies2 = "";
     //document.getElementById('axisClickContainer').innerHTML = "";
-    if (isQtAvailable) {
+/*    if (isQtAvailable) {
         QtBridge.js_removeSelectionFromScatterplot("");
-    }
+    }*/
     svg = d3.select("#distanceMapVis")
     svg.selectAll("*").remove();
 

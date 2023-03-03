@@ -332,6 +332,9 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	const auto updateSpecies1 = [this]() -> void
 	{
 		_stopMethodFlagFromSpecies1 = true;
+
+		QString storeCrossSpeciesClusterSelection = _linkerSettingHolder.getSelectedCrossspeciescluster().getString();
+		_linkerSettingHolder.getSelectedCrossspeciescluster().setString("");
 		//if (_species1SelectAction.getCurrentText() != "")
 		//{
 			//_species2SelectAction.setEnabled(true);
@@ -453,6 +456,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 					{
 						_scatterplotColorControlAction.setCurrentText("cross-species cluster");
 					}
+					_linkerSettingHolder.getSelectedCrossspeciescluster().setString("");
+					_linkerSettingHolder.getSelectedCrossspeciescluster().setString(storeCrossSpeciesClusterSelection);
 					_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().trigger();
 				//}
 
@@ -514,6 +519,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			//_linkerSettingHolder.setEnabled(true);
 			//_distanceNeighborhoodHolder.setEnabled(true);
 		_stopMethodFlagFromSpecies2 = true;
+		QString storeCrossSpeciesClusterSelection = _linkerSettingHolder.getSelectedCrossspeciescluster().getString();
+		_linkerSettingHolder.getSelectedCrossspeciescluster().setString("");
 		_linkerSettingHolder.getSpecies2Name().setString(_species2SelectAction.getCurrentText());
 
 			if (_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().getNumberOfOptions() > 0)
@@ -613,6 +620,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			}
 			if (!_stopMethodFlagFromSpecies1)
 			{
+				_linkerSettingHolder.getSelectedCrossspeciescluster().setString("");
+				_linkerSettingHolder.getSelectedCrossspeciescluster().setString(storeCrossSpeciesClusterSelection);
 				_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().trigger();
 			}
 			//}
@@ -1273,7 +1282,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 	const auto updateSelectedCrossspeciescluster = [this]() -> void
 	{
-		qDebug() << "updateSelectedCrossspeciescluster : triggered";
+		//qDebug() << "updateSelectedCrossspeciescluster : triggered "<< _linkerSettingHolder.getSelectedCrossspeciescluster().getString();
 		_simianViewerPlugin.getSimianViewerWidget().borderSelectedCrossspeciesCluster(_linkerSettingHolder.getSelectedCrossspeciescluster().getString());
 
 		if (_linkerSettingHolder.getSelectedCrossspeciescluster().getString() == "")
