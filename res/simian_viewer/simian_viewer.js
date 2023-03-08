@@ -1364,8 +1364,8 @@ const simianVis = () => {
 
 
                 }
-                if (tooltipTextsize > 9) {
-                    tooltipTextsize = 9;
+                if (tooltipTextsize > 10) {
+                    tooltipTextsize = 10;
                 }
 
                 var tooltipImageHeight = parseInt(5 * tooltipTextsize);
@@ -1750,8 +1750,8 @@ const simianVis = () => {
 
 
             }
-            if (tooltipTextsize > 9) {
-                tooltipTextsize = 9;
+            if (tooltipTextsize > 10) {
+                tooltipTextsize = 10;
             }
 
             var tooltipImageHeight = parseInt(5 * tooltipTextsize);
