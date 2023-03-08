@@ -1507,13 +1507,13 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				_linkerSettingHolder.getSelectedCrossspeciescluster().setString("");
 				_linkerSettingHolder.getSelectedCrossspeciescluster().setString(temp);
 			}
-			//QVariantList commands;
-			//QVariantList command;
+			QVariantList commands;
+			QVariantList command;
 
-			//command << QString("setStyleSheet") << QString::fromStdString("QTableView::item:selected { background-color: " + hexValueColor.toStdString() + "; }");
-			//commands.push_back(command);
-			//command.clear();
-			//_linkerSettingHolder.getCommandAction().setVariant(commands);
+			command << QString("TableView") << QString("setStyleSheet") << QString::fromStdString("QTableView::item:selected { background-color: " + hexValueColor.toStdString() + "; }");
+			commands.push_back(command);
+			command.clear();
+			_linkerSettingHolder.getCommandAction().setVariant(commands);
 
 		}
 
@@ -2275,14 +2275,14 @@ void SimianOptionsAction::initLoader()
 	command << QString("LoadedDataSettings") << "hide";
 	commands.push_back(command);
 	command.clear();
-	//QColor color = _visSettingHolder.getSelectionColorAction().getColor();
-	//QString hexValueColor = "#" + QString::number(color.red(), 16).rightJustified(2, '0')
-	//	+ QString::number(color.green(), 16).rightJustified(2, '0')
-	//	+ QString::number(color.blue(), 16).rightJustified(2, '0');
+	QColor color = _visSettingHolder.getSelectionColorAction().getColor();
+	QString hexValueColor = "#" + QString::number(color.red(), 16).rightJustified(2, '0')
+		+ QString::number(color.green(), 16).rightJustified(2, '0')
+		+ QString::number(color.blue(), 16).rightJustified(2, '0');
 
-	//command << QString("setStyleSheet") << QString::fromStdString("QTableView::item:selected { background-color: "+ hexValueColor.toStdString() +"; }");
-	//commands.push_back(command);
-	//command.clear();
+	command << QString("TableView") << QString("setStyleSheet") << QString::fromStdString("QTableView::item:selected { background-color: " + hexValueColor.toStdString() + "; }");
+	commands.push_back(command);
+	command.clear();
 
 	Qt::SortOrder sortOrder = Qt::DescendingOrder;
 	QVariant sortOrderVariant(QMetaType::fromType<Qt::SortOrder>(), &sortOrder);
