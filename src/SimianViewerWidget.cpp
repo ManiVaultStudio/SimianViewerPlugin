@@ -169,6 +169,11 @@ void SimianViewerWidget::showFullHeatmap(QString visColorContent)
     emit _communicationObject->qt_showFullHeatmap(visColorContent);
 }
 
+void SimianViewerWidget::updateSelectionColor(QString visColorContent)
+{
+    emit _communicationObject->qt_updateSelectionColor(visColorContent);
+}
+
 void SimianViewerWidget::borderSelectedCrossspeciesCluster(QString visColorContent)
 {
     emit _communicationObject->qt_borderSelectedCrossspeciesCluster(visColorContent);

@@ -48,6 +48,7 @@ var showFullHeatmapflag = false;
 var showExplorationModeflag = false;
 var layerFlag = false;
 var backgroundColor = "#ffffff";
+var selectioncolor = "#257afd";
 //onresize adjust chart dimensions
 window.onresize = doALoadOfStuff;
 var ximage = "";
@@ -90,6 +91,7 @@ try {
         //QtBridge.qt_setBackgroundColor.connect(function () { setBackgroundColor(arguments[0]); });
         QtBridge.qt_histChart.connect(function () { histChart(arguments[0]); });
         QtBridge.qt_showFullHeatmap.connect(function () { showFullHeatmap(arguments[0]); });
+        QtBridge.qt_updateSelectionColor.connect(function () { updateSelectionColor(arguments[0]); });
         QtBridge.qt_borderSelectedCrossspeciesCluster.connect(function () { borderSelectedCrossspeciesCluster(arguments[0]); });
         //QtBridge.qt_generateScreenshot.connect(function () { generateScreenshot(arguments[0]); });
 /*        QtBridge.qt_showExplorationMode.connect(function () { showExplorationMode(arguments[0]); });*/
@@ -231,7 +233,7 @@ function crossSpeciesBorderSelection(correspondingCrossspeciescluster) {
         svg.append('polygon')
             .attr("id", "axisSelectionpolygon")
             .attr('points', poly)
-            .attr('stroke', "#de2d26")
+            .attr('stroke', selectioncolor)
             .attr("stroke-width", 3)
             .attr('fill', 'none');
     }
@@ -1171,7 +1173,7 @@ const simianVis = () => {
             .selectAll("text")
             .style("fill", function (m) {
                 if (m == cy2) {
-                    return "#de2d26";
+                    return selectioncolor;
                 }
                 else {
                     return "black";
@@ -1182,7 +1184,7 @@ const simianVis = () => {
             .selectAll("text")
             .style("fill", function (m) {
                 if (m == cx1) {
-                    return "#de2d26";
+                    return selectioncolor;
                 }
                 else {
                     return "black";
@@ -1199,7 +1201,7 @@ const simianVis = () => {
                 .attr("y", -(widthValue))
                 .attr("width", (valuenext1 - valnow1) / 2)
                 .attr("height", widthValue)
-                .attr("stroke", "#de2d26").attr("fill", "None");
+                .attr("stroke", selectioncolor).attr("fill", "None");
         }
 
 
@@ -1214,7 +1216,7 @@ const simianVis = () => {
                 .attr("y", + y(cy2) + y.bandwidth() / 4)//((y(cy2) + y.bandwidth()) / 2))//(y.step() - ( (valnow2 - valuenext2) / 2) / 2))
                 .attr("width", widthValue)
                 .attr("height", (valnow2 - valuenext2) / 2)
-                .attr("stroke", "#de2d26").attr("fill", "None");
+                .attr("stroke", selectioncolor).attr("fill", "None");
         }
 
 
@@ -2525,6 +2527,16 @@ function borderSelectedCrossspeciesCluster(d) {
 function showFullHeatmap(d) {
 
     queueshowFullHeatmap(d);
+}
+
+function updateSelectionColor(d) {
+    var regex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+    if (regex.test(d))
+    {
+        selectioncolor = d;
+        simianVis();
+    }
+    
 }
 function queueshowFullHeatmap(valD) {
     if (valD == "F") {

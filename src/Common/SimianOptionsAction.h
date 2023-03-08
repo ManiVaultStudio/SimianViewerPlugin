@@ -62,16 +62,18 @@ public:
         const ToggleAction& getFullHeatmapAction() const { return _fullHeatMapAction; };
         const ColorMapAction& getColorMapAction() const { return _colorMapAction; }
         const OptionAction& getPluginVisibilityAction() const  { return _pluginVisibility; }
+        const ColorAction& getSelectionColorAction() const { return _selectionColorAction; }
         ToggleAction& getFullHeatmapAction() { return _fullHeatMapAction; };
         ColorMapAction& getColorMapAction() { return _colorMapAction; }
         OptionAction& getPluginVisibilityAction() { return _pluginVisibility; }
+        ColorAction& getSelectionColorAction() { return _selectionColorAction; }
     protected:
         SimianOptionsAction&    _simianOptionsAction;
         ToggleAction            _fullHeatMapAction;
         ColorMapAction          _colorMapAction;
         OptionAction            _pluginVisibility;
-
-       // friend class SimianOptionsAction;
+        ColorAction             _selectionColorAction;
+            // friend class SimianOptionsAction;
     };
     class LinkerSettingHolder : public GroupAction
     {
@@ -282,7 +284,6 @@ protected:
     //ScatterplotColorHolder         _scatterplotColorHolder;
     //CellCountHolder              _cellCountHolder;
     //ExplorationAction               _explorationAction;
-
     //TriggerAction                _helpAction;
     //TriggerAction                _screenshotAction;
     bool _stopMethodFlagFromSpecies1 = false;

@@ -79,6 +79,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		//_scatterplot1ColorMapAction.setSerializationName( "Scatterplot1 color map connection");
 		//_scatterplot2ColorMapAction.setSerializationName("Scatterplot2 color map connection");
 		_visSettingHolder.getFullHeatmapAction().setSerializationName("Full distancemap");
+		_visSettingHolder.getSelectionColorAction().setSerializationName("Selection color");
 		_histBarAction.setSerializationName("Cell counts");
 		
 
@@ -239,6 +240,9 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_linkerSettingHolder.getParallelBarPluginVisibility().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
 	_linkerSettingHolder.getParallelBarPluginVisibility().connectToPublicActionByName("ParallelBars::PluginVisibility");
 
+	_visSettingHolder.getSelectionColorAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::ConnectViaApi);
+	_visSettingHolder.getSelectionColorAction().connectToPublicActionByName("Global Selection Color");
+	_visSettingHolder.getSelectionColorAction().setColor(QColor::fromRgb(0x257afd));
 
 	//const auto globalColorMapName = "GlobalColorMap";
 	//_scatterplotColorMapAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
@@ -1486,6 +1490,27 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	{
 
 	};
+	const auto updateSelectionColor = [this]() -> void
+	{
+		if (_visSettingHolder.getSelectionColorAction().getColor().isValid())
+		{
+			QColor color = _visSettingHolder.getSelectionColorAction().getColor();
+			QString hexValueColor = "#" + QString::number(color.red(), 16).rightJustified(2, '0')
+				+ QString::number(color.green(), 16).rightJustified(2, '0')
+				+ QString::number(color.blue(), 16).rightJustified(2, '0');
+
+			_simianViewerPlugin.getSimianViewerWidget().updateSelectionColor(hexValueColor);
+			//QVariantList commands;
+			//QVariantList command;
+
+			//command << QString("setStyleSheet") << QString::fromStdString("QTableView::item:selected { background-color: " + hexValueColor.toStdString() + "; }");
+			//commands.push_back(command);
+			//command.clear();
+			//_linkerSettingHolder.getCommandAction().setVariant(commands);
+
+		}
+
+	};
 	connect(&_visSettingHolder.getPluginVisibilityAction(), &OptionAction::currentTextChanged, this, updatePluginvisibility);
 	connect(&_linkerSettingHolder.getParallelBarPluginVisibility(), &ToggleAction::toggled, this, updateParallelBarPluginVisibility);
 	connect(&_linkerSettingHolder.getPopPyramidPluginVisibility(), &ToggleAction::toggled, this, updatePopPyramidPluginVisibility);
@@ -1532,7 +1557,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	connect(&_linkerSettingHolder.getCrossSpecies2HeatMapCellAction(), &OptionsAction::selectedOptionsChanged, this, updateCrossSpecies2HeatMapCell);
 	connect(&_linkerSettingHolder.getCrossSpecies1HeatMapCellAction(), &OptionsAction::selectedOptionsChanged, this, updateCrossSpecies1HeatMapCell);
 
-
+	connect(&_visSettingHolder.getSelectionColorAction(), &ColorAction::colorChanged, this, updateSelectionColor);
 	//connect(&_distanceAction, &IntegralAction::valueChanged, this, [this, updateDistance](const std::int32_t& value)
 	//	{
 	//		updateDistance();
@@ -1922,7 +1947,8 @@ inline SimianOptionsAction::VisSettingHolder::VisSettingHolder(SimianOptionsActi
 	_simianOptionsAction(simianOptionsAction),
 	_fullHeatMapAction(this, "Full distancemap"),
 	_colorMapAction(this, "Color map"),
-	_pluginVisibility(this, "Expression type")
+	_pluginVisibility(this, "Expression type"),
+	_selectionColorAction(this, "Selection color")
 {
 	setText("Setting Options");
 	setIcon(Application::getIconFont("FontAwesome").getIcon("cog"));
@@ -2242,7 +2268,14 @@ void SimianOptionsAction::initLoader()
 	command << QString("LoadedDataSettings") << "hide";
 	commands.push_back(command);
 	command.clear();
+	//QColor color = _visSettingHolder.getSelectionColorAction().getColor();
+	//QString hexValueColor = "#" + QString::number(color.red(), 16).rightJustified(2, '0')
+	//	+ QString::number(color.green(), 16).rightJustified(2, '0')
+	//	+ QString::number(color.blue(), 16).rightJustified(2, '0');
 
+	//command << QString("setStyleSheet") << QString::fromStdString("QTableView::item:selected { background-color: "+ hexValueColor.toStdString() +"; }");
+	//commands.push_back(command);
+	//command.clear();
 
 	Qt::SortOrder sortOrder = Qt::DescendingOrder;
 	QVariant sortOrderVariant(QMetaType::fromType<Qt::SortOrder>(), &sortOrder);
@@ -2294,6 +2327,7 @@ void SimianOptionsAction::fromVariantMap(const QVariantMap& variantMap)
 	_visSettingHolder.getColorMapAction().fromParentVariantMap(variantMap);
 	//_backgroundColoringAction.fromParentVariantMap(variantMap);
 	_visSettingHolder.getFullHeatmapAction().fromParentVariantMap(variantMap);
+	_visSettingHolder.getSelectionColorAction().fromParentVariantMap(variantMap);
 	_histBarAction.fromParentVariantMap(variantMap);
 }
 
@@ -2331,7 +2365,7 @@ QVariantMap SimianOptionsAction::toVariantMap() const
 	_linkerSettingHolder.getSelectedCrossSpeciesNameList().insertIntoVariantMap(variantMap);
 	_linkerSettingHolder.getHarHcondelCountString().insertIntoVariantMap(variantMap);
 	_visSettingHolder.getFullHeatmapAction().insertIntoVariantMap(variantMap);
-	
+	_visSettingHolder.getSelectionColorAction().insertIntoVariantMap(variantMap);
 	_visSettingHolder.getPluginVisibilityAction().insertIntoVariantMap(variantMap);
 	//_backgroundColoringAction.insertIntoVariantMap(variantMap);
 	_visSettingHolder.getColorMapAction().insertIntoVariantMap(variantMap);
