@@ -1499,7 +1499,14 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				+ QString::number(color.green(), 16).rightJustified(2, '0')
 				+ QString::number(color.blue(), 16).rightJustified(2, '0');
 
+
 			_simianViewerPlugin.getSimianViewerWidget().updateSelectionColor(hexValueColor);
+			if (_linkerSettingHolder.getSelectedCrossspeciescluster().getString() != "")
+			{
+				QString temp= _linkerSettingHolder.getSelectedCrossspeciescluster().getString();
+				_linkerSettingHolder.getSelectedCrossspeciescluster().setString("");
+				_linkerSettingHolder.getSelectedCrossspeciescluster().setString(temp);
+			}
 			//QVariantList commands;
 			//QVariantList command;
 
