@@ -241,8 +241,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_linkerSettingHolder.getParallelBarPluginVisibility().connectToPublicActionByName("ParallelBars::PluginVisibility");
 
 	_visSettingHolder.getSelectionColorAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::ConnectViaApi);
-	_visSettingHolder.getSelectionColorAction().connectToPublicActionByName("Global Selection Color");
-	_visSettingHolder.getSelectionColorAction().setColor(QColor::fromRgb(0x257afd));
+	_visSettingHolder.getSelectionColorAction().connectToPublicActionByName("GlobalSelectionColor");
 
 	//const auto globalColorMapName = "GlobalColorMap";
 	//_scatterplotColorMapAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
@@ -2246,6 +2245,7 @@ void SimianOptionsAction::initLoader()
 		}
 	}
 
+	//_visSettingHolder.getSelectionColorAction().setColor(QColor::fromRgb(0x257afd));
 
 	QVariantList commands;
 
@@ -2289,7 +2289,6 @@ void SimianOptionsAction::initLoader()
 	command << QString("TableView") << QString("sortByColumn") << int(3) << sortOrderVariant;
 	commands.push_back(command);
 	_linkerSettingHolder.getCommandAction().setVariant(commands);
-
 	if (!_stopMethodFlagFromSpecies1 && !_stopMethodFlagFromSpecies2)
 	{
 		_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().trigger();
