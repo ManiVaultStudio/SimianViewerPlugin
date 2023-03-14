@@ -704,9 +704,12 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				QVariant geneExpValue = CalculateGeneExpressionValues(_linkerSettingHolder.getSelectedCrossSpeciesNameList().getString());
 				QVariantMap geneEXp;
 				QVariantMap HARs;
-				QVariantMap CONDELs;
+				QVariantMap HCONDELs;
+				QVariantMap HAQERs;
+
 				int HARCount = 0;
 				int HCONDELCount = 0;
+				int HAQERCount = 0;
 				//tempVariantMap[QString::number(Qt::ForegroundRole)] = QBrush(QColor::fromRgb(128, 128, 128));
 
 				for (auto gene : geneExpValue.toMap().keys())
@@ -739,14 +742,28 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 						tempHCONDELVariantMap[QString::number(Qt::DisplayRole)] = QString(" ");
 						tempHCONDELVariantMap[QString::number(Qt::ToolTipRole)] = QString(geneExpValue.toMap().value(gene).toMap().value("hCONDELs").toString());
 
-						CONDELs.insert(gene, tempHCONDELVariantMap);
+						HCONDELs.insert(gene, tempHCONDELVariantMap);
 						HCONDELCount = HCONDELCount+1;
 					}
+
+					if (geneExpValue.toMap().value(gene).toMap().value("HAQERs").toString() != "0")
+					{
+						QVariantMap tempHAQERVariantMap;
+						//tempHCONDELVariantMap[QString::number(Qt::DecorationRole)] = QColor::fromRgb(0, 0, 0);
+						tempHAQERVariantMap[QString::number(Qt::DecorationRole)] = Application::getIconFont("FontAwesome").getIcon("check", Qt::black);
+						tempHAQERVariantMap[QString::number(Qt::SizeHintRole)] = QSize(1, 1);
+						tempHAQERVariantMap[QString::number(Qt::DisplayRole)] = QString(" ");
+						tempHAQERVariantMap[QString::number(Qt::ToolTipRole)] = QString(geneExpValue.toMap().value(gene).toMap().value("HAQERs").toString());
+
+						HAQERs.insert(gene, tempHAQERVariantMap);
+						HAQERCount = HAQERCount + 1;
+					}
+
 				}
 				geneEXp.insert("H A R s", HARs);
-				geneEXp.insert("h C O N D E L s", CONDELs);
-				
-				_linkerSettingHolder.getHarHcondelCountString().setString( "Genes associated with HARs: <b>" + QString::number(HARCount) + "</b> and hCONDELs: <b>" + QString::number(HCONDELCount) + "</b>");
+				geneEXp.insert("h C O N D E L s", HCONDELs);
+				geneEXp.insert("H A Q E R s", HAQERs);
+				_linkerSettingHolder.getHarHcondelCountString().setString( "Genes associated with HARs: <b>" + QString::number(HARCount) + "</b> ,hCONDELs: <b>" + QString::number(HCONDELCount) + "</b> and HAQERs: <b>" + QString::number(HAQERCount) + "</b>");
 
 				//countValues += "HARS:";
 				//countValues += QString::number(HARCount);
@@ -760,6 +777,9 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				commands.push_back(command);
 				command.clear();
 				command << QString("TableView") << QString("showColumn") << int(2);
+				commands.push_back(command);
+				command.clear();
+				command << QString("TableView") << QString("showColumn") << int(3);
 				commands.push_back(command);
 			//}
 		}
@@ -779,6 +799,9 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			commands.push_back(command);
 			command.clear();
 			command << QString("TableView") << QString("hideColumn") << int(2);
+			commands.push_back(command);
+			command.clear();
+			command << QString("TableView") << QString("hideColumn") << int(3);
 			commands.push_back(command);
 		}
 		_linkerSettingHolder.getCommandAction
@@ -2259,7 +2282,10 @@ void SimianOptionsAction::initLoader()
 	command << QString("TableView") << QString("SLOT_setColumnWidth") << int(2) << int(40);
 	commands.push_back(command);
 	command.clear();
-	command << QString("TableView") << QString("SLOT_setColumnWidth") << int(3) << int(120);
+	command << QString("TableView") << QString("SLOT_setColumnWidth") << int(3) << int(40);
+	commands.push_back(command);
+	command.clear();
+	command << QString("TableView") << QString("SLOT_setColumnWidth") << int(4) << int(120);
 	commands.push_back(command);
 	command.clear();
 	command << QString("TableView") << QString("SLOT_setColumnWidth") << int(4) << int(120);
@@ -2286,7 +2312,7 @@ void SimianOptionsAction::initLoader()
 
 	Qt::SortOrder sortOrder = Qt::DescendingOrder;
 	QVariant sortOrderVariant(QMetaType::fromType<Qt::SortOrder>(), &sortOrder);
-	command << QString("TableView") << QString("sortByColumn") << int(3) << sortOrderVariant;
+	command << QString("TableView") << QString("sortByColumn") << int(4) << sortOrderVariant;
 	commands.push_back(command);
 	_linkerSettingHolder.getCommandAction().setVariant(commands);
 	if (!_stopMethodFlagFromSpecies1 && !_stopMethodFlagFromSpecies2)
