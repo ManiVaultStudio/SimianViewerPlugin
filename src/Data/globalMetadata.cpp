@@ -66,7 +66,7 @@ QByteArray json_bytes = json_string.toLocal8Bit();
 QJsonParseError jsonerror;
 
 auto json_doc = QJsonDocument::fromJson(json_bytes, &jsonerror);
-qDebug() << jsonerror.errorString();
+//qDebug() << jsonerror.errorString();
 
 if (json_doc.isNull()) {
 	std::cout << "Failed to create JSON doc." << std::endl;
