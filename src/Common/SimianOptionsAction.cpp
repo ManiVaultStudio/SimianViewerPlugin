@@ -790,8 +790,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			QVariantMap geneEXp;
 			QVariantMap HARs;
 			QVariantMap CONDELs;
+			QVariantMap HAQERs;
 			geneEXp.insert("H A R s", HARs);
 			geneEXp.insert("h C O N D E L s", CONDELs);
+			geneEXp.insert("H A Q E R s", HAQERs);
 			_linkerSettingHolder.getGeneExpressionDatasetVariant().setVariant(geneEXp);
 			_linkerSettingHolder.getHarHcondelCountString().setString("");
 			QVariantList command;
