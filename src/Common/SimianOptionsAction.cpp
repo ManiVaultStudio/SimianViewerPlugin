@@ -763,7 +763,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				geneEXp.insert("H A R s", HARs);
 				geneEXp.insert("h C O N D E L s", HCONDELs);
 				geneEXp.insert("H A Q E R s", HAQERs);
-				_linkerSettingHolder.getHarHcondelCountString().setString( "Genes associated with HARs: <b>" + QString::number(HARCount) + "</b> ,hCONDELs: <b>" + QString::number(HCONDELCount) + "</b> and HAQERs: <b>" + QString::number(HAQERCount) + "</b>");
+				_linkerSettingHolder.getHarHcondelCountString().setString( "Genes associated with HARs: <b>" + QString::number(HARCount) + "</b>, hCONDELs: <b>" + QString::number(HCONDELCount) + "</b> and HAQERs: <b>" + QString::number(HAQERCount) + "</b>");
 
 				//countValues += "HARS:";
 				//countValues += QString::number(HARCount);
