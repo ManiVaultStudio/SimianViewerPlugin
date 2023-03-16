@@ -2288,7 +2288,10 @@ void SimianOptionsAction::initLoader()
 	command << QString("TableView") << QString("SLOT_setColumnWidth") << int(4) << int(120);
 	commands.push_back(command);
 	command.clear();
-	command << QString("TableView") << QString("SLOT_setColumnWidth") << int(4) << int(120);
+	command << QString("TableView") << QString("SLOT_setColumnWidth") << int(5) << int(120);
+	commands.push_back(command);
+	command.clear();
+	command << QString("TableView") << QString("SLOT_setColumnWidth") << int(6) << int(120);
 	commands.push_back(command);
 	command.clear();
 	command << QString("TableViewClusterSelection1") << QString("setDisabled") << bool(true);
