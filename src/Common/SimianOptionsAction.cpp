@@ -1534,7 +1534,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			QVariantList commands;
 			QVariantList command;
 
-			command << QString("TableView") << QString("setStyleSheet") << QString::fromStdString("QTableView::item:selected { background-color: " + hexValueColor.toStdString() + "; }");
+			command << QString("TableView") << QString("setStyleSheet") << QString::fromStdString("QTableView::item:selected { selection-background-color: " + hexValueColor.toStdString() + "; }");
 			commands.push_back(command);
 			command.clear();
 			_linkerSettingHolder.getCommandAction().setVariant(commands);
@@ -2311,7 +2311,7 @@ void SimianOptionsAction::initLoader()
 		+ QString::number(color.green(), 16).rightJustified(2, '0')
 		+ QString::number(color.blue(), 16).rightJustified(2, '0');
 
-	command << QString("TableView") << QString("setStyleSheet") << QString::fromStdString("QTableView::item:selected { background-color: " + hexValueColor.toStdString() + "; }");
+	command << QString("TableView") << QString("setStyleSheet") << QString::fromStdString("QTableView::item:selected { selection-background-color: " + hexValueColor.toStdString() + "; }");
 	commands.push_back(command);
 	command.clear();
 
