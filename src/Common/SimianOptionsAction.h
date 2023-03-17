@@ -61,16 +61,19 @@ public:
 
         const ToggleAction& getFullHeatmapAction() const { return _fullHeatMapAction; };
         const ColorMapAction& getColorMapAction() const { return _colorMapAction; }
-
+        const OptionAction& getPluginVisibilityAction() const  { return _pluginVisibility; }
+        const ColorAction& getSelectionColorAction() const { return _selectionColorAction; }
         ToggleAction& getFullHeatmapAction() { return _fullHeatMapAction; };
         ColorMapAction& getColorMapAction() { return _colorMapAction; }
-
+        OptionAction& getPluginVisibilityAction() { return _pluginVisibility; }
+        ColorAction& getSelectionColorAction() { return _selectionColorAction; }
     protected:
         SimianOptionsAction&    _simianOptionsAction;
         ToggleAction            _fullHeatMapAction;
         ColorMapAction          _colorMapAction;
-
-       // friend class SimianOptionsAction;
+        OptionAction            _pluginVisibility;
+        ColorAction             _selectionColorAction;
+            // friend class SimianOptionsAction;
     };
     class LinkerSettingHolder : public GroupAction
     {
@@ -108,7 +111,8 @@ public:
        const StringAction& getSpecies2Name() const { return _species2Name; }
        const  StringAction& getSelectedCrossspeciescluster() const { return _selectedCrossspeciescluster; }
 
-
+       const ToggleAction& getParallelBarPluginVisibility() const { return _parallelBarPluginVisibility; }
+       const ToggleAction& getPopPyramidPluginVisibility() const { return _popPyramidPluginVisibility; }
 
         DatasetPickerAction& getCrossSpecies1DatasetLinkerAction() { return _crossSpecies1DatasetLinkerAction; };
         DatasetPickerAction& getCrossSpecies2DatasetLinkerAction() { return _crossSpecies2DatasetLinkerAction; };
@@ -140,8 +144,11 @@ public:
         StringAction& getSelectedCrossSpeciesNameList() { return _selectedCrossSpeciesNameList; }
         StringAction& getSpecies2Name() { return _species2Name; }
         StringAction& getSelectedCrossspeciescluster() { return _selectedCrossspeciescluster; }
-
+        ToggleAction& getParallelBarPluginVisibility() { return _parallelBarPluginVisibility; }
+        ToggleAction& getPopPyramidPluginVisibility() { return _popPyramidPluginVisibility; }
     protected:
+        ToggleAction                _popPyramidPluginVisibility;
+        ToggleAction                _parallelBarPluginVisibility;
         DatasetPickerAction           _crossSpecies1DatasetLinkerAction;
         DatasetPickerAction          _crossSpecies2DatasetLinkerAction;
 
@@ -172,11 +179,8 @@ public:
 
         SimianOptionsAction& _simianOptionsAction;
         StringAction                _selectedCrossSpeciesNameList;
-
         // friend class SimianOptionsAction;
     };
-
-
 
 public:
     void onDataEvent(hdps::DataEvent* dataEvent);
@@ -234,7 +238,8 @@ public: // Action getters
 
     //OptionAction& getScatterplotColorControl() { return _scatterplotColorControlAction; }
 
-
+    bool& getStopMethodFlagFromSpecies1() { return _stopMethodFlagFromSpecies1; }
+    bool& getStopMethodFlagFromSpecies2() { return _stopMethodFlagFromSpecies2; }
     //ColorMapAction& getScatterplotColorMapAction() { return _scatterplotColorMapAction; }
     //ExplorationAction& getExplorationAction() { return _explorationAction; }
 public:
@@ -274,17 +279,15 @@ protected:
     VisSettingHolder              _visSettingHolder;
     OptionsHolder               _optionsHolder;
     //Species2Holder             _species2Holder;
-    
     LinkerSettingHolder               _linkerSettingHolder;
     //DistanceNeighborhoodHolder                _distanceNeighborhoodHolder;
     //ScatterplotColorHolder         _scatterplotColorHolder;
     //CellCountHolder              _cellCountHolder;
     //ExplorationAction               _explorationAction;
-
     //TriggerAction                _helpAction;
     //TriggerAction                _screenshotAction;
-
-
+    bool _stopMethodFlagFromSpecies1 = false;
+    bool _stopMethodFlagFromSpecies2 = false;
     bool _isStarted;
     //ColorMapAction _scatterplotColorMapAction;
     //ColorAction              _backgroundColoringAction;

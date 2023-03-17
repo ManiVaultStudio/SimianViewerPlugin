@@ -48,6 +48,7 @@ var showFullHeatmapflag = false;
 var showExplorationModeflag = false;
 var layerFlag = false;
 var backgroundColor = "#ffffff";
+var selectioncolor = "#257afd";
 //onresize adjust chart dimensions
 window.onresize = doALoadOfStuff;
 var ximage = "";
@@ -90,6 +91,7 @@ try {
         //QtBridge.qt_setBackgroundColor.connect(function () { setBackgroundColor(arguments[0]); });
         QtBridge.qt_histChart.connect(function () { histChart(arguments[0]); });
         QtBridge.qt_showFullHeatmap.connect(function () { showFullHeatmap(arguments[0]); });
+        QtBridge.qt_updateSelectionColor.connect(function () { updateSelectionColor(arguments[0]); });
         QtBridge.qt_borderSelectedCrossspeciesCluster.connect(function () { borderSelectedCrossspeciesCluster(arguments[0]); });
         //QtBridge.qt_generateScreenshot.connect(function () { generateScreenshot(arguments[0]); });
 /*        QtBridge.qt_showExplorationMode.connect(function () { showExplorationMode(arguments[0]); });*/
@@ -231,7 +233,7 @@ function crossSpeciesBorderSelection(correspondingCrossspeciescluster) {
         svg.append('polygon')
             .attr("id", "axisSelectionpolygon")
             .attr('points', poly)
-            .attr('stroke', "#de2d26")
+            .attr('stroke', selectioncolor)
             .attr("stroke-width", 3)
             .attr('fill', 'none');
     }
@@ -251,9 +253,9 @@ const simianVis = () => {
     rightClickSelectedSpecies1 = "";
     rightClickSelectedSpecies2 = "";
     //document.getElementById('axisClickContainer').innerHTML = "";
-    if (isQtAvailable) {
+/*    if (isQtAvailable) {
         QtBridge.js_removeSelectionFromScatterplot("");
-    }
+    }*/
     svg = d3.select("#distanceMapVis")
     svg.selectAll("*").remove();
 
@@ -287,13 +289,13 @@ const simianVis = () => {
     }
     var margin;
     if (barflag) {
-        margin = { top: 15, right: 25, bottom: 80, left: 75 },
+        margin = { top: 20, right: 25, bottom: 90, left: 85 },
             width = (heatmapWidth/100*window.innerWidth) * 0.99 - margin.left - margin.right,
             height = window.innerHeight * 0.99 - margin.top - margin.bottom;
 
     }
     else {
-        margin = { top: 1, right: 10, bottom: 80, left: 75 },
+        margin = { top: 1, right: 10, bottom: 90, left: 85 },
             width = (heatmapWidth / 100 * window.innerWidth) * 0.99 - margin.left - margin.right,
             height = window.innerHeight * 0.99 - margin.top - margin.bottom;
     }
@@ -424,7 +426,7 @@ const simianVis = () => {
     svg
         .append("g")
         .attr("class", "xLabel")
-        .style("font-size", "8px")
+        .style("font-size", "10px").style("font-family", "Arial")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x).tickSize(0))
         .selectAll("text")
@@ -451,7 +453,7 @@ const simianVis = () => {
     svg
         .append("g")
         .attr("class", "yLabel")
-        .style("font-size", "8px")
+        .style("font-size", "10px").style("font-family", "Arial")
         .call(d3.axisLeft(y).tickSize(0))
         .selectAll("text")
         .on('click', clickYAxisLabels)
@@ -950,11 +952,36 @@ const simianVis = () => {
 
                 }
                 var formatTooltipContents = "";
-                formatTooltipContents = "<div id=\"clearTooltip\"> <table  style=\"font-size: 10px; width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=25  /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=25  /></th></tr><tr><td  style=\"  \" ><b>In-species <b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</td><td  style=\"-webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</td></tr>";
-                if (barflag) {
-                    formatTooltipContents = formatTooltipContents + "<tr><td   style=\"  \"><b >Cell count<b/></td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #1b9e77;\">" + inspecies1ClusterCounts[d.cluster_1] + "</td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #d95f02;\">" + inspecies2ClusterCounts[d.cluster_2] + "</td></tr>";
+                formatTooltipContents = "<div id=\"clearTooltip\"> <table  style=\"font-size: 10px; font-family: Arial; width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=25  /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=25  /></th></tr>";
+                var classContainer1 = "";
+                var classContainer2 = "";
+                if (d.class_1 == "glia") {
+                    classContainer1 = "Non-neuronal";
+                }
+                else if (d.class_1 == "exc") {
+                    classContainer1 = "Excitatory";
+                }
+                else {
+                    classContainer1 = "Inhibitory";
+                }
+                var classContainer2 = "";
+                if (d.class_2 == "glia") {
+                    classContainer2 = "Non-neuronal";
+                }
+                else if (d.class_2 == "exc") {
+                    classContainer2 = "Excitatory";
+                }
+                else {
+                    classContainer2 = "Inhibitory";
                 }
                 //formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Subclass<b/></td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_1] + "; \"> " + d.subclass_1 + "</td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_2] + "; \">" + d.subclass_2 + "</td></tr><tr><td   style=\"\"><b>Class<b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + d.class_1 + "</td><td   style=\" -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_2] + ";\">" + d.class_2 + "</td></tr>"
+               if (d.class_1 == d.class_2) {
+                   formatTooltipContents = formatTooltipContents + "<tr ><td style=\" \"><b>Class<b/></td><td colspan=\"2\" style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + classContainer1 + "</td></tr>"
+                }
+                else {
+                   formatTooltipContents = formatTooltipContents + "<tr ><td style=\"\"><b>Class<b/></td><td  style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + classContainer1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_2] + ";\">" + classContainer2 + "</td></tr>"
+                }
+
                 if (d.subclass_1 == d.subclass_2) {
                     formatTooltipContents = formatTooltipContents + "<tr ><td style=\" \"><b>Subclass<b/></td><td colspan=\"2\" style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_1] + ";\">" + d.subclass_1 + "</td></tr>"
                 }
@@ -962,18 +989,16 @@ const simianVis = () => {
                     formatTooltipContents = formatTooltipContents + "<tr ><td style=\"\"><b>Subclass<b/></td><td  style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_1] + ";\">" + d.subclass_1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_2] + ";\">" + d.subclass_2 + "</td></tr>"
                 }
 
-                if (d.class_1 == d.class_2) {
-                    formatTooltipContents = formatTooltipContents + "<tr ><td style=\" \"><b>Class<b/></td><td colspan=\"2\" style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + d.class_1 + "</td></tr>"
-                }
-                else {
-                    formatTooltipContents = formatTooltipContents + "<tr ><td style=\"\"><b>Class<b/></td><td  style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + d.class_1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_2] + ";\">" + d.class_2 + "</td></tr>"
-                }
-
                 if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
                     formatTooltipContents = formatTooltipContents + "<tr ><td style=\" \"><b>Cross-species <b/></td><td colspan=\"2\" style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster1_species_1] + ";\">" + d.cross_species_cluster1_species_1 + "</td></tr>"
                 }
                 else {
                     formatTooltipContents = formatTooltipContents + "<tr ><td style=\" \"><b>Cross-species <b/></td><td  style=\" -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster1_species_1] + ";\">" + d.cross_species_cluster1_species_1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster2_species_2] + ";\">" + d.cross_species_cluster2_species_2 + "</td></tr>"
+                }
+                formatTooltipContents = formatTooltipContents + "<tr><td  style=\"  \" ><b>In-species <b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</td><td  style=\"-webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</td></tr>";
+
+                if (barflag) {
+                    formatTooltipContents = formatTooltipContents + "<tr><td   style=\"  \"><b >Cell count<b/></td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #1b9e77;\">" + inspecies1ClusterCounts[d.cluster_1] + "</td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #d95f02;\">" + inspecies2ClusterCounts[d.cluster_2] + "</td></tr>";
                 }
 
                 if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2 && (cross_speciesClusterInfo[d.cross_species_cluster2_species_2]['numberOfCells']) > 1) {
@@ -1148,7 +1173,7 @@ const simianVis = () => {
             .selectAll("text")
             .style("fill", function (m) {
                 if (m == cy2) {
-                    return "#de2d26";
+                    return selectioncolor;
                 }
                 else {
                     return "black";
@@ -1159,7 +1184,7 @@ const simianVis = () => {
             .selectAll("text")
             .style("fill", function (m) {
                 if (m == cx1) {
-                    return "#de2d26";
+                    return selectioncolor;
                 }
                 else {
                     return "black";
@@ -1176,7 +1201,7 @@ const simianVis = () => {
                 .attr("y", -(widthValue))
                 .attr("width", (valuenext1 - valnow1) / 2)
                 .attr("height", widthValue)
-                .attr("stroke", "#de2d26").attr("fill", "None");
+                .attr("stroke", selectioncolor).attr("fill", "None");
         }
 
 
@@ -1191,7 +1216,7 @@ const simianVis = () => {
                 .attr("y", + y(cy2) + y.bandwidth() / 4)//((y(cy2) + y.bandwidth()) / 2))//(y.step() - ( (valnow2 - valuenext2) / 2) / 2))
                 .attr("width", widthValue)
                 .attr("height", (valnow2 - valuenext2) / 2)
-                .attr("stroke", "#de2d26").attr("fill", "None");
+                .attr("stroke", selectioncolor).attr("fill", "None");
         }
 
 
@@ -1339,18 +1364,42 @@ const simianVis = () => {
 
 
                 }
-                if (tooltipTextsize > 9) {
-                    tooltipTextsize = 9;
+                if (tooltipTextsize > 10) {
+                    tooltipTextsize = 10;
                 }
 
                 var tooltipImageHeight = parseInt(5 * tooltipTextsize);
 
                 var formatTooltipContents = "";
-                formatTooltipContents = "<div id=\"clearTooltip\" style=\"top: 0;right:0;position: absolute;\"> <table style=\"font-size: " + tooltipTextsize + "px;  width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=" + tooltipImageHeight + "; /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=" + tooltipImageHeight + ";  /></th></tr><tr><td  style=\"  \" ><b>In-species <b/></td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</td></tr>";
-                if (barflag) {
-                    formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Cell count<b/></td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #1b9e77;\">" + inspecies1ClusterCounts[d.cluster_1] + "</td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #d95f02;\">" + inspecies2ClusterCounts[d.cluster_2] + "</td></tr>";
+                formatTooltipContents = "<div id=\"clearTooltip\" style=\"top: 0;right:0;position: absolute;\"> <table style=\"font-size: " + tooltipTextsize + "px; font-family: Arial; width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=" + tooltipImageHeight + "; /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=" + tooltipImageHeight + ";  /></th></tr>";
+                var classContainer1 = "";
+                var classContainer2 = "";
+                if (d.class_1 == "glia") {
+                    classContainer1 = "Non-neuronal";
+                }
+                else if (d.class_1 == "exc") {
+                    classContainer1 = "Excitatory";
+                }
+                else {
+                    classContainer1 = "Inhibitory";
+                }
+                var classContainer2 = "";
+                if (d.class_2 == "glia") {
+                    classContainer2 = "Non-neuronal";
+                }
+                else if (d.class_2 == "exc") {
+                    classContainer2 = "Excitatory";
+                }
+                else {
+                    classContainer2 = "Inhibitory";
                 }
                 //formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Subclass<b/></td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_1] + "; \"> " + d.subclass_1 + "</td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_2] + "; \">" + d.subclass_2 + "</td></tr><tr><td   style=\" \"><b>Class<b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + d.class_1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_2] + ";\">" + d.class_2 + "</td></tr>"
+                if (d.class_1 == d.class_2) {
+                    formatTooltipContents = formatTooltipContents + "<tr ><td style=\" \"><b>Class<b/></td><td colspan=\"2\" style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + classContainer1 + "</td></tr>"
+                }
+                else {
+                    formatTooltipContents = formatTooltipContents + "<tr ><td style=\"\"><b>Class<b/></td><td  style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + classContainer1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_2] + ";\">" + classContainer2 + "</td></tr>"
+                }
                 if (d.subclass_1 == d.subclass_2) {
                     formatTooltipContents = formatTooltipContents + "<tr ><td style=\" \"><b>Subclass<b/></td><td colspan=\"2\" style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_1] + ";\">" + d.subclass_1 + "</td></tr>"
                 }
@@ -1358,18 +1407,17 @@ const simianVis = () => {
                     formatTooltipContents = formatTooltipContents + "<tr ><td style=\"\"><b>Subclass<b/></td><td  style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_1] + ";\">" + d.subclass_1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_2] + ";\">" + d.subclass_2 + "</td></tr>"
                 }
 
-                if (d.class_1 == d.class_2) {
-                    formatTooltipContents = formatTooltipContents + "<tr ><td style=\" \"><b>Class<b/></td><td colspan=\"2\" style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + d.class_1 + "</td></tr>"
-                }
-                else {
-                    formatTooltipContents = formatTooltipContents + "<tr ><td style=\"\"><b>Class<b/></td><td  style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + d.class_1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_2] + ";\">" + d.class_2 + "</td></tr>"
-                }
+
 
                 if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
                     formatTooltipContents = formatTooltipContents + "<tr ><td style=\" \"><b>Cross-species <b/></td><td colspan=\"2\" style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster1_species_1] + ";\">" + d.cross_species_cluster1_species_1 + "</td></tr>"
                 }
                 else {
                     formatTooltipContents = formatTooltipContents + "<tr ><td style=\"\"><b>Cross-species <b/></td><td  style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster1_species_1] + ";\">" + d.cross_species_cluster1_species_1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster2_species_2] + ";\">" + d.cross_species_cluster2_species_2 + "</td></tr>"
+                }
+                formatTooltipContents = formatTooltipContents + "<tr><td  style=\"  \" ><b>In-species <b/></td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</td></tr>";
+                if (barflag) {
+                    formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Cell count<b/></td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #1b9e77;\">" + inspecies1ClusterCounts[d.cluster_1] + "</td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #d95f02;\">" + inspecies2ClusterCounts[d.cluster_2] + "</td></tr>";
                 }
                 if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2 && (cross_speciesClusterInfo[d.cross_species_cluster2_species_2]['numberOfCells']) > 1) {
                     formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Distance<b/></td><td colspan=\"2\"    \"><div id=\"my_min_max_viz\"></div></td></tr>";
@@ -1406,8 +1454,8 @@ const simianVis = () => {
             var xAxisLeftTooltip = d3.axisBottom().scale(xScaleTooltip.copy().range([pointATooltip, 0])).ticks(2);
             var leftBarGroupTooltip = svgTooltip.append('g').attr('transform', translation(pointATooltip, 0) + 'scale(-1,1)');
             var rightBarGroupTooltip = svgTooltip.append('g').attr('transform', translation(pointBTooltip, 0));
-            svgTooltip.append('g').attr('class', 'axis y left').attr('transform', translation(pointATooltip, 0)).call(yAxisLeftTooltip).selectAll('text').attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '8').style('text-anchor', 'middle');
-            svgTooltip.append('g').attr('class', 'axis y right').attr('transform', translation(pointBTooltip, 0)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '8').call(yAxisRightTooltip);
+            svgTooltip.append('g').attr('class', 'axis y left').attr('transform', translation(pointATooltip, 0)).call(yAxisLeftTooltip).selectAll('text').attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '10').style("font-family", "Arial").style('text-anchor', 'middle');
+            svgTooltip.append('g').attr('class', 'axis y right').attr('transform', translation(pointBTooltip, 0)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '10').style("font-family", "Arial").call(yAxisRightTooltip);
             svgTooltip.append('g').attr('class', 'axis x left').attr('transform', translation(0, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#3A3B3C').call(xAxisLeftTooltip).selectAll('text').attr('dy', '.71em');
             svgTooltip.append('g').attr('class', 'axis x right').attr('transform', translation(pointBTooltip, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#3A3B3C').call(xAxisRightTooltip).selectAll('text').attr('dy', '.71em');
             svgTooltip.selectAll(".tick").each(function (d) { if (d === 0.0 || d === 0 || d === 1.0) { this.remove(); } });
@@ -1484,7 +1532,7 @@ const simianVis = () => {
                     .append("text")
                     .attr("x", function () { return xMinMax(Val_Current) })
                     .attr('y', -5)
-                    .style("font-size", 8)
+                    .style("font-size", 8).style("font-family", "Arial")
                     .style("text-anchor", "middle")
                     .text("Curr: " + Val_Current).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
 /*                // Line for min
@@ -1508,7 +1556,7 @@ const simianVis = () => {
                     .append("text")
                     .attr("x", function () { return xMinMax(Val_Min) })
                     .attr('y', 12)
-                    .style("font-size", 8)
+                    .style("font-size", 8).style("font-family", "Arial")
                     .style("text-anchor", "middle")
                     .text("Min: " + Val_Min).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
 /*                // Line for max
@@ -1532,7 +1580,7 @@ const simianVis = () => {
                     .append("text")
                     .attr("x", function () { return xMinMax(Val_Max) })
                     .attr('y', 12)
-                    .style("font-size", 8)
+                    .style("font-size", 8).style("font-family", "Arial")
                     .style("text-anchor", "middle")
                     .text("Max: " + Val_Max).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
             }
@@ -1702,19 +1750,43 @@ const simianVis = () => {
 
 
             }
-            if (tooltipTextsize > 9) {
-                tooltipTextsize = 9;
+            if (tooltipTextsize > 10) {
+                tooltipTextsize = 10;
             }
 
             var tooltipImageHeight = parseInt(5 * tooltipTextsize);
 
             var formatTooltipContents = "";
-            formatTooltipContents = "<div id=\"clearTooltip\" style=\"top: 0;right:0;position: absolute;\"> <table style=\"font-size: " + tooltipTextsize + "px;  width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=" + tooltipImageHeight + "; /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=" + tooltipImageHeight + ";  /></th></tr><tr><td  style=\"  \" ><b>In-species <b/></td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</td></tr>";
-            if (barflag) {
-                formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Cell count<b/></td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #1b9e77;\">" + inspecies1ClusterCounts[d.cluster_1] + "</td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #d95f02;\">" + inspecies2ClusterCounts[d.cluster_2] + "</td></tr>";
-            }
+            formatTooltipContents = "<div id=\"clearTooltip\" style=\"top: 0;right:0;position: absolute;\"> <table style=\"font-size: " + tooltipTextsize + "px;font-family: Arial;  width:100% border-spacing: 0; text-align:center;\"><tr ><th ></th><th style=\" \" ><img src=\"" + xTooltipimage + "\" alt=\"" + species1ValueIdentify + "\" height=" + tooltipImageHeight + "; /></th><th style=\" \" ><img src=\"" + yTooltipimage + "\" alt=\"" + species2ValueIdentify + "\" height=" + tooltipImageHeight + ";  /></th></tr>";
+            
             //formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Subclass<b/></td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_1] + "; \"> " + d.subclass_1 + "</td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_2] + "; \">" + d.subclass_2 + "</td></tr><tr><td   style=\" \"><b>Class<b/></td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + d.class_1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_2] + ";\">" + d.class_2 + "</td></tr>"
-
+            var classContainer1 = "";
+            var classContainer2 = "";
+            if (d.class_1 == "glia") {
+                classContainer1 = "Non-neuronal";
+            }
+            else if (d.class_1 == "exc") {
+                classContainer1 = "Excitatory";
+            }
+            else {
+                classContainer1 = "Inhibitory";
+            }
+            var classContainer2 = "";
+            if (d.class_2 == "glia") {
+                classContainer2 = "Non-neuronal";
+            }
+            else if (d.class_2 == "exc") {
+                classContainer2 = "Excitatory";
+            }
+            else {
+                classContainer2 = "Inhibitory";
+            }
+            if (d.class_1 == d.class_2) {
+                formatTooltipContents = formatTooltipContents + "<tr ><td style=\" \"><b>Class<b/></td><td colspan=\"2\" style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + classContainer1 + "</td></tr>"
+            }
+            else {
+                formatTooltipContents = formatTooltipContents + "<tr ><td style=\"\"><b>Class<b/></td><td  style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + classContainer1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_2] + ";\">" + classContainer2 + "</td></tr>"
+            }
             if (d.subclass_1 == d.subclass_2) {
                 formatTooltipContents = formatTooltipContents + "<tr ><td style=\" \"><b>Subclass<b/></td><td colspan=\"2\" style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_1] + ";\">" + d.subclass_1 + "</td></tr>"
             }
@@ -1722,18 +1794,15 @@ const simianVis = () => {
                 formatTooltipContents = formatTooltipContents + "<tr ><td style=\"\"><b>Subclass<b/></td><td  style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_1] + ";\">" + d.subclass_1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + subClassColors[d.subclass_2] + ";\">" + d.subclass_2 + "</td></tr>"
             }
 
-            if (d.class_1 == d.class_2) {
-                formatTooltipContents = formatTooltipContents + "<tr ><td style=\" \"><b>Class<b/></td><td colspan=\"2\" style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + d.class_1 + "</td></tr>"
-            }
-            else {
-                formatTooltipContents = formatTooltipContents + "<tr ><td style=\"\"><b>Class<b/></td><td  style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_1] + ";\">" + d.class_1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + classColors[d.class_2] + ";\">" + d.class_2 + "</td></tr>"
-            }
-
             if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2) {
                 formatTooltipContents = formatTooltipContents + "<tr ><td style=\" \"><b>Cross-species <b/></td><td colspan=\"2\" style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster1_species_1] + ";\">" + d.cross_species_cluster1_species_1 + "</td></tr>"
             }
             else {
                 formatTooltipContents = formatTooltipContents + "<tr ><td style=\"\"><b>Cross-species <b/></td><td  style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster1_species_1] + ";\">" + d.cross_species_cluster1_species_1 + "</td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + cross_speciesClustercolors[d.cross_species_cluster2_species_2] + ";\">" + d.cross_species_cluster2_species_2 + "</td></tr>"
+            }
+            formatTooltipContents = formatTooltipContents + "<tr><td  style=\"  \" ><b>In-species <b/></td><td   style=\"   -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_1] + ";\">" + d.cluster_1 + "</td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: " + in_speciesClustercolors[d.cluster_2] + ";\">" + d.cluster_2 + "</td></tr>";
+            if (barflag) {
+                formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Cell count<b/></td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #1b9e77;\">" + inspecies1ClusterCounts[d.cluster_1] + "</td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #d95f02;\">" + inspecies2ClusterCounts[d.cluster_2] + "</td></tr>";
             }
             if (d.cross_species_cluster1_species_1 == d.cross_species_cluster2_species_2 && (cross_speciesClusterInfo[d.cross_species_cluster2_species_2]['numberOfCells']) > 1) {
                 formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Distance<b/></td><td colspan=\"2\"    \"><div id=\"my_min_max_viz\"></div></td></tr>";
@@ -1769,8 +1838,8 @@ const simianVis = () => {
         var xAxisLeftTooltip = d3.axisBottom().scale(xScaleTooltip.copy().range([pointATooltip, 0])).ticks(2);
         var leftBarGroupTooltip = svgTooltip.append('g').attr('transform', translation(pointATooltip, 0) + 'scale(-1,1)');
         var rightBarGroupTooltip = svgTooltip.append('g').attr('transform', translation(pointBTooltip, 0));
-        svgTooltip.append('g').attr('class', 'axis y left').attr('transform', translation(pointATooltip, 0)).call(yAxisLeftTooltip).selectAll('text').attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '8').style('text-anchor', 'middle');
-        svgTooltip.append('g').attr('class', 'axis y right').attr('transform', translation(pointBTooltip, 0)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '8').call(yAxisRightTooltip);
+        svgTooltip.append('g').attr('class', 'axis y left').attr('transform', translation(pointATooltip, 0)).call(yAxisLeftTooltip).selectAll('text').attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '10').style("font-family", "Arial").style('text-anchor', 'middle');
+        svgTooltip.append('g').attr('class', 'axis y right').attr('transform', translation(pointBTooltip, 0)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#000000').attr('font-size', '10').style("font-family", "Arial").call(yAxisRightTooltip);
         svgTooltip.append('g').attr('class', 'axis x left').attr('transform', translation(0, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#3A3B3C').call(xAxisLeftTooltip).selectAll('text').attr('dy', '.71em');
         svgTooltip.append('g').attr('class', 'axis x right').attr('transform', translation(pointBTooltip, hTooltip)).attr('shape-rendering', 'crispEdges').attr('fill', 'transparent').attr('stroke', '#3A3B3C').call(xAxisRightTooltip).selectAll('text').attr('dy', '.71em');
         svgTooltip.selectAll(".tick").each(function (d) { if (d === 0.0 || d === 0 || d === 1.0) { this.remove(); } });
@@ -1849,7 +1918,7 @@ const simianVis = () => {
                 .append("text")
                 .attr("x", function () { return xMinMax(Val_Current) })
                 .attr('y', -5)
-                .style("font-size", 8)
+                .style("font-size", 8).style("font-family", "Arial")
                 .style("text-anchor", "middle")
                 .text("Curr: " + Val_Current).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
             /*                // Line for min
@@ -1873,7 +1942,7 @@ const simianVis = () => {
                 .append("text")
                 .attr("x", function () { return xMinMax(Val_Min) })
                 .attr('y', 12)
-                .style("font-size", 8)
+                .style("font-size", 8).style("font-family", "Arial")
                 .style("text-anchor", "middle")
                 .text("Min: " + Val_Min).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
             /*                // Line for max
@@ -1897,7 +1966,7 @@ const simianVis = () => {
                 .append("text")
                 .attr("x", function () { return xMinMax(Val_Max) })
                 .attr('y', 12)
-                .style("font-size", 8)
+                .style("font-size", 8).style("font-family", "Arial")
                 .style("text-anchor", "middle")
                 .text("Max: " + Val_Max).style("-webkit-text-stroke-color", coloring).style("-webkit-text-fill-color", "black").style("-webkit-text-stroke-width", "0.4px");
             }
@@ -2458,6 +2527,16 @@ function borderSelectedCrossspeciesCluster(d) {
 function showFullHeatmap(d) {
 
     queueshowFullHeatmap(d);
+}
+
+function updateSelectionColor(d) {
+    var regex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+    if (regex.test(d))
+    {
+        selectioncolor = d;
+        simianVis();
+    }
+    
 }
 function queueshowFullHeatmap(valD) {
     if (valD == "F") {
