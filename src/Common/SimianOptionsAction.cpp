@@ -195,6 +195,9 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	//_scatterplot1ColorMapAction.getSettingsAction().getEditor1DAction().setVisible(false);
 	_visSettingHolder.getColorMapAction().getNumberOfDiscreteStepsAction().setVisible(false);
 	_visSettingHolder.getColorMapAction().getCustomColorMapGroupAction().setVisible(false);
+	_visSettingHolder.getColorMapAction().getCustomColorMapAction().setChecked(true);
+	_visSettingHolder.getColorMapAction().getSettings1DAction().setDisabled(true);
+	_visSettingHolder.getColorMapAction().getSettings1DAction().setVisible(false);
 	//_scatterplot2ColorMapAction.getSettingsAction().getDiscreteAction().setVisible(false);
 	//_scatterplot2ColorMapAction.getSettingsAction().getEditor1DAction().setVisible(false);
 
