@@ -2661,3 +2661,6 @@ function queueInspeciesClusterCounts(clusterspecies1, clusterspecies2) {
     simianVis();
 }
 
+document.addEventListener("DOMContentLoaded", function (event) {
+    if (flag) { simianVis(); }
+});
