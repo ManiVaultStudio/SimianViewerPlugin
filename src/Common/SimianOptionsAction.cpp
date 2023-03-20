@@ -187,9 +187,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_linkerSettingHolder.getSpecies1DEStatsLinkerAction().setDefaultWidgetFlags(OptionAction::ComboBox);
 	_linkerSettingHolder.getInSpecies1DatasetLinkerAction().setDefaultWidgetFlags(OptionAction::ComboBox);
 	_linkerSettingHolder.getInSpecies2DatasetLinkerAction().setDefaultWidgetFlags(OptionAction::ComboBox);
-	_visSettingHolder.getColorMapAction().getSettingsAction().getDiscreteAction().setVisible(false);
-	_visSettingHolder.getColorMapAction().getSettingsAction().getEditor1DAction().setVisible(false);
-
+	_visSettingHolder.getColorMapAction().getDiscretizeAction().setVisible(false);
+	_visSettingHolder.getColorMapAction().getEditor1DAction().setVisible(false);
+	_visSettingHolder.getColorMapAction().getCustomColorMapAction().setVisible(false);
+	_visSettingHolder.getColorMapAction().getDiscretizeAlphaAction().setVisible(false);
 	//_scatterplot1ColorMapAction.getSettingsAction().getDiscreteAction().setVisible(false);
 	//_scatterplot1ColorMapAction.getSettingsAction().getEditor1DAction().setVisible(false);
 
@@ -301,7 +302,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 	const auto colormapFilter = [this]() -> void
 	{
-		const auto& mirrorAction = _visSettingHolder.getColorMapAction().getSettingsAction().getHorizontalAxisAction().getMirrorAction();
+		const auto& mirrorAction = _visSettingHolder.getColorMapAction().getMirrorAction(ColorMapAction::Axis::X);
 		std::string s1 = _visSettingHolder.getColorMapAction().getColorMap().toStdString();
 		std::string s2 = "*%*";
 		std::string s3;
@@ -324,7 +325,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	//};
 	const auto updateColorMapRange = [this]() -> void
 	{
-		const auto& rangeAction = _visSettingHolder.getColorMapAction().getSettingsAction().getHorizontalAxisAction().getRangeAction();
+		const auto& rangeAction = _visSettingHolder.getColorMapAction().getRangeAction(ColorMapAction::Axis::X);
 		std::string s1 = std::to_string(rangeAction.getMinimum());
 		std::string s2 = " ";
 		std::string s3 = std::to_string(rangeAction.getMaximum());
@@ -1553,7 +1554,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 	//connect(&_backgroundColoringAction, &ColorAction::colorChanged, this, backgroundColoringFilter);
 
-	connect(&_visSettingHolder.getColorMapAction().getSettingsAction().getHorizontalAxisAction().getRangeAction(), &DecimalRangeAction::rangeChanged, this, updateColorMapRange);
+	connect(&_visSettingHolder.getColorMapAction().getRangeAction(ColorMapAction::Axis::X), &DecimalRangeAction::rangeChanged, this, updateColorMapRange);
 
 	connect(&_species1SelectAction, &OptionAction::currentIndexChanged, [this, updateSpecies1](const std::int32_t& currentIndex) {
 		updateSpecies1();
@@ -1780,7 +1781,7 @@ void SimianOptionsAction::updateData(std::string Species1, std::string Species2,
 		_jsonObject += "]";
 		_simianViewerPlugin.getSimianViewerWidget().setData(_jsonObject.toStdString());
 
-		auto& colorMapRangeAction = _visSettingHolder.getColorMapAction().getSettingsAction().getHorizontalAxisAction().getRangeAction();
+		auto& colorMapRangeAction = _visSettingHolder.getColorMapAction().getRangeAction(ColorMapAction::Axis::X);
 		float colorMapRangeMin = 1200.0;
 		float colorMapRangeMax = 0.0;
 		for (int i = 0; i < filteredVisData.size(); i++)
@@ -1796,7 +1797,7 @@ void SimianOptionsAction::updateData(std::string Species1, std::string Species2,
 			}
 		}
 		// Initialize the color map range action with the color map range from the scatter plot 
-		colorMapRangeAction.initialize(colorMapRangeMin, colorMapRangeMax, colorMapRangeMin, colorMapRangeMax, colorMapRangeMin, colorMapRangeMax);
+		colorMapRangeAction.initialize({ colorMapRangeMin, colorMapRangeMax }, { colorMapRangeMin, colorMapRangeMax });
 
 		if (!_isStarted)
 		{
@@ -2245,7 +2246,7 @@ void SimianOptionsAction::initLoader()
 			_simianViewerPlugin.getSimianViewerWidget().histChart(QString::fromStdString("F"));
 		}
 
-		const auto& mirrorAction = _visSettingHolder.getColorMapAction().getSettingsAction().getHorizontalAxisAction().getMirrorAction();
+		const auto& mirrorAction = _visSettingHolder.getColorMapAction().getMirrorAction(ColorMapAction::Axis::X);
 		std::string s1 = _visSettingHolder.getColorMapAction().getColorMap().toStdString();
 		std::string s2 = "*%*";
 		std::string s3;
