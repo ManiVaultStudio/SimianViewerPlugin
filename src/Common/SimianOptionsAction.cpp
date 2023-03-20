@@ -193,7 +193,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_visSettingHolder.getColorMapAction().getDiscretizeAlphaAction().setVisible(false);
 	//_scatterplot1ColorMapAction.getSettingsAction().getDiscreteAction().setVisible(false);
 	//_scatterplot1ColorMapAction.getSettingsAction().getEditor1DAction().setVisible(false);
-
+	_visSettingHolder.getColorMapAction().getNumberOfDiscreteStepsAction().setVisible(false);
+	_visSettingHolder.getColorMapAction().getCustomColorMapGroupAction().setVisible(false);
 	//_scatterplot2ColorMapAction.getSettingsAction().getDiscreteAction().setVisible(false);
 	//_scatterplot2ColorMapAction.getSettingsAction().getEditor1DAction().setVisible(false);
 
