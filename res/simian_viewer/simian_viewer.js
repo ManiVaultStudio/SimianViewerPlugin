@@ -249,7 +249,7 @@ function crossSpeciesBorderSelection(correspondingCrossspeciescluster) {
 const simianVis = () => {
     d3.select("g").remove();
     d3.select("svg").remove();
-    leftClickSelectedSpecies = "";
+    //leftClickSelectedSpecies = "";
     rightClickSelectedSpecies1 = "";
     rightClickSelectedSpecies2 = "";
     //document.getElementById('axisClickContainer').innerHTML = "";
@@ -2389,7 +2389,9 @@ const simianVis = () => {
             .attr("y", height - 85)
             .on("click", species1Click);
     }
-
+    if (leftClickSelectedSpecies != "") {
+        crossSpeciesBorderSelection(leftClickSelectedSpecies);
+    }
 };
 
 
