@@ -187,20 +187,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_linkerSettingHolder.getSpecies1DEStatsLinkerAction().setDefaultWidgetFlags(OptionAction::ComboBox);
 	_linkerSettingHolder.getInSpecies1DatasetLinkerAction().setDefaultWidgetFlags(OptionAction::ComboBox);
 	_linkerSettingHolder.getInSpecies2DatasetLinkerAction().setDefaultWidgetFlags(OptionAction::ComboBox);
-	_visSettingHolder.getColorMapAction().getDiscretizeAction().setVisible(false);
-	_visSettingHolder.getColorMapAction().getEditor1DAction().setVisible(false);
-	_visSettingHolder.getColorMapAction().getCustomColorMapAction().setVisible(false);
-	_visSettingHolder.getColorMapAction().getDiscretizeAlphaAction().setVisible(false);
-	//_scatterplot1ColorMapAction.getSettingsAction().getDiscreteAction().setVisible(false);
-	//_scatterplot1ColorMapAction.getSettingsAction().getEditor1DAction().setVisible(false);
-	_visSettingHolder.getColorMapAction().getNumberOfDiscreteStepsAction().setVisible(false);
-	_visSettingHolder.getColorMapAction().getCustomColorMapGroupAction().setVisible(false);
-	_visSettingHolder.getColorMapAction().getCustomColorMapAction().setChecked(true);
-	_visSettingHolder.getColorMapAction().getSettings1DAction().setDisabled(true);
-	_visSettingHolder.getColorMapAction().getSettings1DAction().setVisible(false);
-	//_scatterplot2ColorMapAction.getSettingsAction().getDiscreteAction().setVisible(false);
-	//_scatterplot2ColorMapAction.getSettingsAction().getEditor1DAction().setVisible(false);
-
+	_visSettingHolder.getColorMapAction().getSettingsAction().setDisabled(true);
+	_visSettingHolder.getColorMapAction().getSettingsAction().setVisible(false);
 	_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
 	_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().connectToPublicActionByName("Cluster Differential Expression 1::CalculateDifferentialExpression");
 	_linkerSettingHolder.getGeneExpressionDatasetVariant().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
