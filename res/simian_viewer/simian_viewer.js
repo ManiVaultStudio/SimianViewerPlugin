@@ -1630,7 +1630,7 @@ const simianVis = () => {
     };
     var mouseRightclick = function (d) {
 
-        if (rightClickSelectedSpecies1 == d.cluster_1 && rightClickSelectedSpecies2 == d.cluster_2 && showExplorationModeflag) {
+        if ((rightClickSelectedSpecies1 == d.cluster_1 && rightClickSelectedSpecies2 == d.cluster_2 && showExplorationModeflag) || d3.event.shiftKey) {
             if (showExplorationModeflag) {
                 d3.select("#exploreViewMarker1").remove();
                 d3.select("#exploreViewMarker2").remove();
