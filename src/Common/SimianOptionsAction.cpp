@@ -222,13 +222,13 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_linkerSettingHolder.getPopPyramidPluginVisibility().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
 	_linkerSettingHolder.getPopPyramidPluginVisibility().connectToPublicActionByName("Pop Pyramid::PluginVisibility");
 	_linkerSettingHolder.getSpecies1ScatterplotColorLinkerAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_linkerSettingHolder.getSpecies1ScatterplotColorLinkerAction().connectToPublicActionByName("Scatterplot View 1::Color");
+	_linkerSettingHolder.getSpecies1ScatterplotColorLinkerAction().connectToPublicActionByName("SimianViewerScatterplot View 1::Color");
 	_linkerSettingHolder.getSpecies2ScatterplotColorLinkerAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_linkerSettingHolder.getSpecies2ScatterplotColorLinkerAction().connectToPublicActionByName("Scatterplot View 2::Color");
+	_linkerSettingHolder.getSpecies2ScatterplotColorLinkerAction().connectToPublicActionByName("SimianViewerScatterplot View 2::Color");
 	_linkerSettingHolder.getSpeciesEmbedding1LinkerAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_linkerSettingHolder.getSpeciesEmbedding1LinkerAction().connectToPublicActionByName("Scatterplot View 1::Embedding");
+	_linkerSettingHolder.getSpeciesEmbedding1LinkerAction().connectToPublicActionByName("SimianViewerScatterplot View 1::Embedding");
 	_linkerSettingHolder.getSpeciesEmbedding2LinkerAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_linkerSettingHolder.getSpeciesEmbedding2LinkerAction().connectToPublicActionByName("Scatterplot View 2::Embedding");
+	_linkerSettingHolder.getSpeciesEmbedding2LinkerAction().connectToPublicActionByName("SimianViewerScatterplot View 2::Embedding");
 
 	_neighborhoodAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::ConnectViaApi);
 	_neighborhoodAction.connectToPublicActionByName("ParallelBars::Neighbhorhood");
