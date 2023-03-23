@@ -21,7 +21,7 @@ public:
     SimianViewerCommunicationObject(SimianViewerWidget* parent);
 
 signals:
-    void qt_setData(QString data); 
+    void qt_setData(QString data);
     void qt_setClusters(QString data);
     //void qt_resetView(QString data);
     void qt_setColor(QString data);
@@ -40,7 +40,7 @@ public slots:
     //void js_passSelectionToQt(QVariantList data);
     void js_passClusterToQt(QVariant data);
     void js_removeSelectionFromScatterplot(QVariant data);
-   // void js_generatedScreenshotData(QVariant data);
+    // void js_generatedScreenshotData(QVariant data);
 
 private:
     SimianViewerWidget* _parent;
@@ -54,13 +54,13 @@ public:
     ~SimianViewerWidget() override;
 
     void addDataOption(const QString option);
-    void setData(std::string visDataContent); 
+    void setData(std::string visDataContent);
     //void resetView(std::string visDataContent);
     void setClusters(QStringList visClusterContent);
     void setColor(QString visColorContent);
     //void setBackgroundColor(QString visColorContent);
     void histChart(QString visColorContent);
-    void showFullHeatmap(QString visColorContent); 
+    void showFullHeatmap(QString visColorContent);
     void updateSelectionColor(QString visColorContent);
     void borderSelectedCrossspeciesCluster(QString visColorContent);
     //void generateScreenshot(QString visColorContent);

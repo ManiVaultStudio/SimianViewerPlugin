@@ -1,5 +1,5 @@
 {
-    "name" : "Simian Viewer",
-    "version" : "1",
-    "dependencies" : ["Points"]
+  "name": "Simian Viewer",
+  "version": "1",
+  "dependencies": [ "Points" ]
 }

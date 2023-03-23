@@ -72,7 +72,7 @@ void SimianViewerWidget::addDataOption(const QString option)
 }
 
 void SimianViewerWidget::setData(std::string visDataContent)
-{ 
+{
     //for (int i = 0; i < (*speciesContent).size(); i++)
     //{
     //    for (int j = 0; j < (*speciesContent)[i].size(); j++)
@@ -81,8 +81,8 @@ void SimianViewerWidget::setData(std::string visDataContent)
     //    }
     //    //std::cout << "\n";
     //}
-    
-    
+
+
     //std::string _jsonObject = *speciesContent;
     //_jsonObject += "[";
     //int i = 0;
@@ -123,13 +123,13 @@ void SimianViewerWidget::setData(std::string visDataContent)
 //}
 void SimianViewerWidget::setClusters(QStringList visClusterContent)
 {
-   // qDebug() << "Sending clusters";
+    // qDebug() << "Sending clusters";
 
     std::string _jsonObject;
     _jsonObject += "[";
     int i = 0;
     _jsonObject += "{";
-    for (int j =  0; j < visClusterContent.size(); j++)
+    for (int j = 0; j < visClusterContent.size(); j++)
     {
         _jsonObject += '"';
         _jsonObject += std::to_string(j);
@@ -144,7 +144,7 @@ void SimianViewerWidget::setClusters(QStringList visClusterContent)
         }
         i = i + 1;
     }
-        _jsonObject += "}]";
+    _jsonObject += "}]";
 
     emit _communicationObject->qt_setClusters(QString((_jsonObject).c_str()));
 }
