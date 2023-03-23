@@ -177,6 +177,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_visSettingHolder.getFullHeatmapAction().initialize(false, false);
 	//_explorationModeAction.setDefaultWidgetFlags(ToggleAction::CheckBox);
 	//_explorationModeAction.initialize(false, false);
+
+
 	_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().setDefaultWidgetFlags(OptionAction::ComboBox);
 	_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().setDefaultWidgetFlags(OptionAction::ComboBox);
 	_linkerSettingHolder.getSpecies1ScatterplotColorLinkerAction().setDefaultWidgetFlags(OptionAction::ComboBox);
