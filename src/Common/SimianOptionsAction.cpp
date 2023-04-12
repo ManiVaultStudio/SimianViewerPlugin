@@ -164,7 +164,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_linkerSettingHolder.getInSpecies1HeatMapCellAction().initialize(defaultTotalValues, "", "");
 
 	_scatterplotColorControlAction.setDefaultWidgetFlags(OptionAction::ComboBox);
-	_scatterplotColorControlAction.initialize(QStringList({ "cross-species cluster","in-species cluster","differential expression","cross-species sub-class","in-species subclass","donor" }), "cross-species cluster", "cross-species cluster");
+	_scatterplotColorControlAction.initialize(QStringList({ "cross-species cluster","in-species cluster","expression","cross-species sub-class","in-species subclass","donor" }), "cross-species cluster", "cross-species cluster");
 	//_distanceAction.setDefaultWidgetFlags(IntegralAction::SpinBox | IntegralAction::Slider);
 	//_distanceAction.initialize(0, 105, 105, 105);
 	_histBarAction.setDefaultWidgetFlags(ToggleAction::CheckBox);
@@ -450,7 +450,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().setSelectedOptions({ "Sst Chodl_1" });
 				_linkerSettingHolder.getSelectedCrossSpeciesNameList().setString("Sst Chodl_1");
 			}
-			if (_scatterplotColorControlAction.getCurrentText() == "differential expression")
+			if (_scatterplotColorControlAction.getCurrentText() == "expression")
 			{
 				_scatterplotColorControlAction.setCurrentText("cross-species cluster");
 			}
@@ -612,7 +612,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().setSelectedOptions({ "Sst Chodl_1" });
 			_linkerSettingHolder.getSelectedCrossSpeciesNameList().setString("Sst Chodl_1");
 		}
-		if (_scatterplotColorControlAction.getCurrentText() == "differential expression")
+		if (_scatterplotColorControlAction.getCurrentText() == "expression")
 		{
 			_scatterplotColorControlAction.setCurrentText("cross-species cluster");
 		}
@@ -824,7 +824,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				QString species2EmbeddingDatasetName = _species2SelectAction.getCurrentText() + "_" + _neighborhoodAction.getCurrentText() + "_embedding";
 				_linkerSettingHolder.getSpeciesEmbedding2LinkerAction().setCurrentText(species2EmbeddingDatasetName);
 			}
-			if (_scatterplotColorControlAction.getCurrentText() == "differential expression")
+			if (_scatterplotColorControlAction.getCurrentText() == "expression")
 			{
 				_scatterplotColorControlAction.setCurrentText("cross-species cluster");
 			}
@@ -852,7 +852,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				{
 					species1EmbeddingColorDatasetName = _species1SelectAction.getCurrentText() + "_" + _neighborhoodAction.getCurrentText() + "_donor";
 				}
-				else if (_scatterplotColorControlAction.getCurrentText() == "differential expression")
+				else if (_scatterplotColorControlAction.getCurrentText() == "expression")
 				{
 					species1EmbeddingColorDatasetName = "Cluster Differential Expression 1::SelectedIDMeanExpressionsDataset 0";
 				}
@@ -884,7 +884,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				{
 					species2EmbeddingColorDatasetName = _species2SelectAction.getCurrentText() + "_" + _neighborhoodAction.getCurrentText() + "_donor";
 				}
-				else if (_scatterplotColorControlAction.getCurrentText() == "differential expression")
+				else if (_scatterplotColorControlAction.getCurrentText() == "expression")
 				{
 					species2EmbeddingColorDatasetName = "Cluster Differential Expression 1::SelectedIDMeanExpressionsDataset 1";
 				}
@@ -1030,7 +1030,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			{
 				species1EmbeddingColorDatasetName = _species1SelectAction.getCurrentText() + "_" + _neighborhoodAction.getCurrentText() + "_donor";
 			}
-			else if (_scatterplotColorControlAction.getCurrentText() == "differential expression")
+			else if (_scatterplotColorControlAction.getCurrentText() == "expression")
 			{
 				species1EmbeddingColorDatasetName = "Cluster Differential Expression 1::SelectedIDMeanExpressionsDataset 0";
 			}
@@ -1062,7 +1062,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			{
 				species2EmbeddingColorDatasetName = _species2SelectAction.getCurrentText() + "_" + _neighborhoodAction.getCurrentText() + +"_donor";
 			}
-			else if (_scatterplotColorControlAction.getCurrentText() == "differential expression")
+			else if (_scatterplotColorControlAction.getCurrentText() == "expression")
 			{
 				species2EmbeddingColorDatasetName = "Cluster Differential Expression 1::SelectedIDMeanExpressionsDataset 1";
 			}
