@@ -16,6 +16,12 @@ var crossSpeciesFilterspecies1Cluster = [];
 var crossSpeciesFilterspecies2Cluster = [];
 var inspecies2ClusterCounts = {};
 var inspecies1ClusterCounts = {};
+
+var smartSeqinspecies2ClusterCounts = {};
+var smartSeqinspecies1ClusterCounts = {};
+var smartseq1flag = false;
+var smartseq2flag = false;
+
 var totalInspeciescluster1counts = 0;
 var totalInspeciescluster2counts = 0;
 var x;
@@ -1007,6 +1013,42 @@ const simianVis = () => {
 
                 }
 
+                if (barflag) {
+                    if (smartseq1flag || smartseq2flag) {
+                        formatTooltipContents = formatTooltipContents + "<tr><td   style=\"  \"><b >Layer disection count<b/></td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #1b9e77;\">";
+                        if (smartseq1flag) {
+
+                            if (smartSeqinspecies1ClusterCounts[d.cluster_1] != "undefined") {
+                                formatTooltipContents = formatTooltipContents + smartSeqinspecies1ClusterCounts[d.cluster_1];
+                            }
+                            else {
+                                formatTooltipContents = formatTooltipContents + "0";
+                            }
+                        }
+                        else {
+                            formatTooltipContents = formatTooltipContents + "0";
+                        }
+
+
+                        formatTooltipContents = formatTooltipContents + "</td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #d95f02;\">";
+
+                        if (smartseq2flag) {
+                            if (smartSeqinspecies2ClusterCounts[d.cluster_2] != "undefined") {
+                                formatTooltipContents = formatTooltipContents + smartSeqinspecies2ClusterCounts[d.cluster_2];
+                            }
+                            else {
+                                formatTooltipContents = formatTooltipContents + "0";
+                            }
+
+                        }
+                        else {
+                            formatTooltipContents = formatTooltipContents + "0";
+                        }
+
+                        formatTooltipContents = formatTooltipContents + "</td></tr>";
+                    }
+                }
+
                 if (layercheck.includes(species1ValueIdentify) || layercheck.includes(species2ValueIdentify)) {
                     formatTooltipContents = formatTooltipContents + "<tr><td  style=\" \"><b>Layer distribution<b/></td><td colspan=\"2\"  style=\" \"><div style=\"width:100%\"><div id=\"tipDiv\"></div></div></td></tr>";
                 }
@@ -1424,6 +1466,42 @@ const simianVis = () => {
                     formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Distance<b/></td><td colspan=\"2\"    style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\">" + clustDistVal + "</td></tr>";
 
                 }
+                if (barflag) {
+                    if (smartseq1flag || smartseq2flag) {
+                        formatTooltipContents = formatTooltipContents + "<tr><td   style=\"  \"><b >Layer disection count<b/></td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #1b9e77;\">";
+                        if (smartseq1flag) {
+
+                            if (smartSeqinspecies1ClusterCounts[d.cluster_1] != "undefined") {
+                                formatTooltipContents = formatTooltipContents + smartSeqinspecies1ClusterCounts[d.cluster_1];
+                            }
+                            else {
+                                formatTooltipContents = formatTooltipContents + "0";
+                            }
+                        }
+                        else {
+                            formatTooltipContents = formatTooltipContents + "0";
+                        }
+
+
+                        formatTooltipContents = formatTooltipContents + "</td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #d95f02;\">";
+
+                        if (smartseq2flag) {
+                            if (smartSeqinspecies2ClusterCounts[d.cluster_2] != "undefined") {
+                                formatTooltipContents = formatTooltipContents + smartSeqinspecies2ClusterCounts[d.cluster_2];
+                            }
+                            else {
+                                formatTooltipContents = formatTooltipContents + "0";
+                            }
+
+                        }
+                        else {
+                            formatTooltipContents = formatTooltipContents + "0";
+                        }
+
+                        formatTooltipContents = formatTooltipContents + "</td></tr>";
+                    }
+                }
+
                 if (layercheck.includes(species1ValueIdentify) || layercheck.includes(species2ValueIdentify)) {
                     formatTooltipContents = formatTooltipContents + "<tr><td  style=\"\"><b \">Layer distribution<b/></td><td colspan=\"2\"  style=\" \"><div style=\"width:100%\"><div id=\"tipDiv\"></div></div></td></tr>";
                 }
@@ -1807,7 +1885,41 @@ const simianVis = () => {
             else {
                 formatTooltipContents = formatTooltipContents + "<tr><td   style=\" \"><b>Distance<b/></td><td colspan=\"2\"    style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #3A3B3C;\">" + clustDistVal + "</td></tr>";
             }
+            if (barflag) {
+                if (smartseq1flag || smartseq2flag) {
+                    formatTooltipContents = formatTooltipContents + "<tr><td   style=\"  \"><b >Layer disection count<b/></td><td  style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #1b9e77;\">";
+                    if (smartseq1flag) {
 
+                        if (smartSeqinspecies1ClusterCounts[d.cluster_1] != "undefined") {
+                            formatTooltipContents = formatTooltipContents + smartSeqinspecies1ClusterCounts[d.cluster_1];
+                        }
+                        else {
+                            formatTooltipContents = formatTooltipContents + "0";
+                        }
+                          }
+                    else {
+                        formatTooltipContents = formatTooltipContents + "0";
+                    }
+
+
+                    formatTooltipContents = formatTooltipContents + "</td><td   style=\"  -webkit-text-fill-color: black; -webkit-text-stroke-width: 0.4px; -webkit-text-stroke-color: #d95f02;\">";
+
+                    if (smartseq2flag) {
+                        if (smartSeqinspecies2ClusterCounts[d.cluster_2] != "undefined") {
+                            formatTooltipContents = formatTooltipContents + smartSeqinspecies2ClusterCounts[d.cluster_2];
+                        }
+                        else {
+                            formatTooltipContents = formatTooltipContents + "0";
+                        }
+                        
+                    }
+                    else {
+                        formatTooltipContents = formatTooltipContents + "0";
+                    }
+
+                    formatTooltipContents = formatTooltipContents + "</td></tr>";
+                }
+            }
             if (layercheck.includes(species1ValueIdentify) || layercheck.includes(species2ValueIdentify)) {
                 formatTooltipContents = formatTooltipContents + "<tr><td  style=\"\"><b \">Layer distribution<b/></td><td colspan=\"2\"  style=\" \"><div style=\"width:100%\"><div id=\"tipDiv\"></div></div></td></tr>";
             }
@@ -2619,11 +2731,42 @@ function doALoadOfStuff() {
 
 function setInspeciesClusterCounts(d) {
     const valRa = d.split("*|||*");
-    queueInspeciesClusterCounts(valRa[0], valRa[1]);
+    queueInspeciesClusterCounts(valRa[0], valRa[1],valRa[2],valRa[3]);
 }
-function queueInspeciesClusterCounts(clusterspecies1, clusterspecies2) {
+function queueInspeciesClusterCounts(clusterspecies1, clusterspecies2,smartseq1,smartseq2) {
     const valRa1 = clusterspecies1.split("*||*");
     const valRa2 = clusterspecies2.split("*||*");
+    var valRaSmartsec1;
+    var valRaSmartsec2;
+    if (smartseq1 === "No Data") {
+        smartseq1flag = false;
+        smartSeqinspecies1ClusterCounts = {};
+    }
+    else {
+        smartseq1flag = true;
+        valRaSmartsec1 = smartseq1.split("*||*");
+        for (var i = 0; i < valRaSmartsec1.length; i++) {
+            var temp = valRaSmartsec1[i].split("*|*");
+            if (temp[0] !== "" && parseInt(temp[1]) !== undefined) {
+                smartSeqinspecies1ClusterCounts[temp[0]] = parseInt(temp[1]);
+            }
+        }
+    }
+    if (smartseq2 === "No Data") {
+        smartseq2flag = false;
+        smartSeqinspecies2ClusterCounts = {};
+    }
+    else {
+        smartseq2flag = true;
+        valRaSmartsec2 = smartseq2.split("*||*");
+        for (var i = 0; i < valRaSmartsec2.length; i++) {
+            var temp = valRaSmartsec2[i].split("*|*");
+            if (temp[0] !== "" && parseInt(temp[1]) !== undefined) {
+                smartSeqinspecies2ClusterCounts[temp[0]] = parseInt(temp[1]);
+            }
+        }
+    }
+
     totalInspeciescluster1counts = 0;
     totalInspeciescluster2counts = 0;
     for (var i = 0; i < valRa1.length; i++) {

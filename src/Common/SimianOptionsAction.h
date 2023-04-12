@@ -79,7 +79,8 @@ public:
     {
     public:
         LinkerSettingHolder(SimianOptionsAction& simianOptionsAction);
-
+        const DatasetPickerAction& getSmartSeqDataset1Action() const { return _smartSeqDataset1; };
+        const DatasetPickerAction& getSmartSeqDataset2Action() const { return _smartSeqDataset2; };
 
         const DatasetPickerAction& getCrossSpecies1DatasetLinkerAction() const { return _crossSpecies1DatasetLinkerAction; };
         const DatasetPickerAction& getCrossSpecies2DatasetLinkerAction() const { return _crossSpecies2DatasetLinkerAction; };
@@ -116,6 +117,11 @@ public:
 
         DatasetPickerAction& getCrossSpecies1DatasetLinkerAction() { return _crossSpecies1DatasetLinkerAction; };
         DatasetPickerAction& getCrossSpecies2DatasetLinkerAction() { return _crossSpecies2DatasetLinkerAction; };
+
+
+        DatasetPickerAction& getSmartSeqDataset1Action() { return _smartSeqDataset1; };
+        DatasetPickerAction& getSmartSeqDataset2Action() { return _smartSeqDataset2; };
+
         DatasetPickerAction& getSpecies1ScatterplotColorLinkerAction() { return _species1ScatterplotColorLinkerAction; };
         DatasetPickerAction& getSpecies2ScatterplotColorLinkerAction() { return _species2ScatterplotColorLinkerAction; };
 
@@ -151,6 +157,9 @@ public:
         ToggleAction                _parallelBarPluginVisibility;
         DatasetPickerAction           _crossSpecies1DatasetLinkerAction;
         DatasetPickerAction          _crossSpecies2DatasetLinkerAction;
+
+        DatasetPickerAction _smartSeqDataset1;
+        DatasetPickerAction _smartSeqDataset2;
 
         DatasetPickerAction           _species1ScatterplotColorLinkerAction;
         DatasetPickerAction          _species2ScatterplotColorLinkerAction;
