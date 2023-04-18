@@ -1,6 +1,6 @@
 #pragma once
 
-#include "PointData.h"
+#include "PointData/PointData.h"
 #include "widgets/WebWidget.h"
 #include <QMouseEvent>
 #include <QComboBox>
