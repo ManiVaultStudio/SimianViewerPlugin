@@ -222,7 +222,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_linkerSettingHolder.getHarHcondelCountString().connectToPublicActionByName("Cluster Differential Expression 1::IntoText");
 
 	_linkerSettingHolder.getSelectedCrossspeciescluster().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
-	_linkerSettingHolder.getSelectedCrossspeciescluster().connectToPublicActionByName("Pop Pyramid:: Selected CrossSpecies Cluster");
+	_linkerSettingHolder.getSelectedCrossspeciescluster().connectToPublicActionByName("GlobalSelectedCrossspeciesCluster");
 	_linkerSettingHolder.getSpecies1DEStatsLinkerAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
 	_linkerSettingHolder.getSpecies1DEStatsLinkerAction().connectToPublicActionByName("Pop Pyramid:: DE Dataset1");
 	_linkerSettingHolder.getSpecies2DEStatsLinkerAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
@@ -246,7 +246,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 	_visSettingHolder.getSelectionColorAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::ConnectViaApi);
 	_visSettingHolder.getSelectionColorAction().connectToPublicActionByName("GlobalSelectionColor");
-
+	_scatterplotColorControlAction.connectToPublicActionByName("GlobalScatterplotColorControl");
 	//const auto globalColorMapName = "GlobalColorMap";
 	//_scatterplotColorMapAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
 	//_scatterplotColorMapAction.connectToPublicActionByName(globalColorMapName);
