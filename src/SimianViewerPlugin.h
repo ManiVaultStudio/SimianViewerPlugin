@@ -27,7 +27,7 @@ class Points;
 class SimianViewerPlugin : public ViewPlugin
 {
     Q_OBJECT
-    
+
 public:
     SimianViewerPlugin(const PluginFactory* factory);
     ~SimianViewerPlugin(void) override;
@@ -40,7 +40,7 @@ public:
 
     SimianViewerWidget& getSimianViewerWidget() { return _simian_viewer; }
     SimianOptionsAction& getSimianOptionsAction() { return _simianOptionsAction; }
-    
+
 public: // Serialization
 
     /**
@@ -82,10 +82,10 @@ private:
 class SimianViewerPluginFactory : public ViewPluginFactory
 {
     Q_INTERFACES(hdps::plugin::ViewPluginFactory hdps::plugin::PluginFactory)
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID   "nl.tudelft.SimianViewerPlugin"
-                      FILE  "SimianViewerPlugin.json")
-    
+        Q_OBJECT
+        Q_PLUGIN_METADATA(IID   "nl.tudelft.SimianViewerPlugin"
+            FILE  "SimianViewerPlugin.json")
+
 public:
     SimianViewerPluginFactory(void);
     ~SimianViewerPluginFactory(void) override {}
@@ -96,7 +96,7 @@ public:
      * @return Icon
      */
     QIcon getIcon(const QColor& color = Qt::black) const override;
-    
+
     ViewPlugin* produce() override;
 
     hdps::DataTypes supportedDataTypes() const override;
@@ -110,11 +110,11 @@ public:
      */
     PluginTriggerActions getPluginTriggerActions(const hdps::Datasets& datasets) const override;
 
-//public: // Help
+    //public: // Help
 
-    /**
-     * Get whether the plugin has help information or not
-     * @return Boolean determining whether the plugin has help information or not
-     */
-    //bool hasHelp() override;
+        /**
+         * Get whether the plugin has help information or not
+         * @return Boolean determining whether the plugin has help information or not
+         */
+         //bool hasHelp() override;
 };

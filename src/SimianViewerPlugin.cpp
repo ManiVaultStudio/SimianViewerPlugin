@@ -1,8 +1,8 @@
 #include "SimianViewerPlugin.h"
 
-#include "PointData.h"
+#include "PointData/PointData.h"
 #include "event/Event.h"
-#include "ColorData.h"
+#include "ColorData/ColorData.h"
 #include <QMessageBox>
 #include <actions/PluginTriggerAction.h>
 #include <QFileDialog>
@@ -46,11 +46,11 @@ void SimianViewerPlugin::init()
     _simian_viewer.setPage(":/simian_viewer/simian_viewer.html", "qrc:/simian_viewer/");
     _simian_viewer.setContentsMargins(0, 0, 0, 0);
     _simian_viewer.layout()->setContentsMargins(0, 0, 0, 0);
-    
+
     connect(&_simian_viewer, &SimianViewerWidget::passClusterToQt, this, &SimianViewerPlugin::publishCluster);
     connect(&_simian_viewer, &SimianViewerWidget::removeSelectionFromScatterplot, this, &SimianViewerPlugin::removeSelectionFromScatterplot);
     //connect(_simian_viewer, &SimianViewerWidget::generatedScreenshotData, this, &SimianViewerPlugin::generatedScreenshotData);
-    
+
     _eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataSelectionChanged));
     _eventListener.registerDataEventByType(ClusterType, std::bind(&SimianViewerPlugin::onDataEvent, this, std::placeholders::_1));
 
@@ -85,16 +85,16 @@ void SimianViewerPlugin::init()
     //topToolbarLayout->addWidget(_simianOptionsAction.getLinkerSettingHolder().createCollapsedWidget(&getWidget()));
     //topToolbarLayout->addWidget(_simianOptionsAction.getHelpAction().createWidget(&getWidget()));
 
- 
-    
-    
+
+
+
     auto layout = new QVBoxLayout();
-    
+
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
     layout->addLayout(topToolbarLayout);
     layout->addWidget(&_simian_viewer, 1);
-    
+
     getWidget().setLayout(layout);
 
     //_simianOptionsAction.initLoader();
@@ -124,7 +124,7 @@ void SimianViewerPlugin::onDataEvent(hdps::DataEvent* dataEvent)
     {
         const auto selectionChangedEvent = static_cast<DataSelectionChangedEvent*>(dataEvent);
         const auto& changedDataSet = _core->requestDataset<Clusters>(selectionChangedEvent->getDataset()->getGuid());
-        const auto& selectionSet = changedDataSet->getSelectionNames(); 
+        const auto& selectionSet = changedDataSet->getSelectionNames();
         //qDebug() << selectionSet;
         _simian_viewer.setClusters(selectionSet);
     }
@@ -251,7 +251,7 @@ SimianViewerPluginFactory::SimianViewerPluginFactory() :
 {
     connect(&getTriggerHelpAction(), &TriggerAction::triggered, this, [this]() -> void {
         QDesktopServices::openUrl(QUrl("https://www.dropbox.com/s/e9200b3zphzsw3b/Cytosplore_Simian_Viewer_Technical_Document_1.pdf?dl=0"));
-    });
+        });
 }
 
 // =============================================================================
@@ -277,28 +277,28 @@ hdps::DataTypes SimianViewerPluginFactory::supportedDataTypes() const
 
 hdps::gui::PluginTriggerActions SimianViewerPluginFactory::getPluginTriggerActions(const hdps::Datasets& datasets) const
 {
-	PluginTriggerActions pluginTriggerActions;
+    PluginTriggerActions pluginTriggerActions;
 
-	const auto getInstance = [this]() -> SimianViewerPlugin* {
-		return dynamic_cast<SimianViewerPlugin*>(plugins().requestViewPlugin(getKind()));
-	};
+    const auto getInstance = [this]() -> SimianViewerPlugin* {
+        return dynamic_cast<SimianViewerPlugin*>(plugins().requestViewPlugin(getKind()));
+    };
 
-	const auto numberOfDatasets = datasets.count();
+    const auto numberOfDatasets = datasets.count();
 
-	if (PluginFactory::areAllDatasetsOfTheSameType(datasets, PointType)) {
-		if (numberOfDatasets >= 1) {
-			if (datasets.first()->getDataType() == PointType) {
-				auto pluginTriggerAction = new PluginTriggerAction(const_cast<SimianViewerPluginFactory*>(this), this, "Simian viewer", "Load dataset in Simian viewer", getIcon(), [this, getInstance, datasets](PluginTriggerAction& pluginTriggerAction) -> void {
-					for (auto dataset : datasets)
-						getInstance()->loadData(Datasets({ dataset }));
-                });
+    if (PluginFactory::areAllDatasetsOfTheSameType(datasets, PointType)) {
+        if (numberOfDatasets >= 1) {
+            if (datasets.first()->getDataType() == PointType) {
+                auto pluginTriggerAction = new PluginTriggerAction(const_cast<SimianViewerPluginFactory*>(this), this, "Simian viewer", "Load dataset in Simian viewer", getIcon(), [this, getInstance, datasets](PluginTriggerAction& pluginTriggerAction) -> void {
+                    for (auto dataset : datasets)
+                        getInstance()->loadData(Datasets({ dataset }));
+                    });
 
-				pluginTriggerActions << pluginTriggerAction;
-			}
-		}
-	}
+                pluginTriggerActions << pluginTriggerAction;
+            }
+        }
+    }
 
-	return pluginTriggerActions;
+    return pluginTriggerActions;
 }
 
 //bool SimianViewerPluginFactory::hasHelp()
@@ -447,4 +447,3 @@ void SimianViewerPlugin::selectCrossSpeciesClusterPoints(std::vector<std::string
 //
 //    _simianOptionsAction.getmodifyDifferentialExpressionAutoUpdateAction().trigger();
 //}
-

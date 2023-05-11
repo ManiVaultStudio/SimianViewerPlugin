@@ -6,8 +6,8 @@
 #include <actions/ToggleAction.h>
 #include "actions/DatasetPickerAction.h"
 #include "actions/HorizontalGroupAction.h"
-#include "PointData.h"
-#include "ClusterData.h"
+#include "PointData/PointData.h"
+#include "ClusterData/ClusterData.h"
 #include "event/EventListener.h"
 #include "actions/Actions.h"
 #include "Plugin.h"
@@ -61,61 +61,67 @@ public:
 
         const ToggleAction& getFullHeatmapAction() const { return _fullHeatMapAction; };
         const ColorMapAction& getColorMapAction() const { return _colorMapAction; }
-        const OptionAction& getPluginVisibilityAction() const  { return _pluginVisibility; }
+        const OptionAction& getPluginVisibilityAction() const { return _pluginVisibility; }
         const ColorAction& getSelectionColorAction() const { return _selectionColorAction; }
         ToggleAction& getFullHeatmapAction() { return _fullHeatMapAction; };
         ColorMapAction& getColorMapAction() { return _colorMapAction; }
         OptionAction& getPluginVisibilityAction() { return _pluginVisibility; }
         ColorAction& getSelectionColorAction() { return _selectionColorAction; }
     protected:
-        SimianOptionsAction&    _simianOptionsAction;
+        SimianOptionsAction& _simianOptionsAction;
         ToggleAction            _fullHeatMapAction;
         ColorMapAction          _colorMapAction;
         OptionAction            _pluginVisibility;
         ColorAction             _selectionColorAction;
-            // friend class SimianOptionsAction;
+        // friend class SimianOptionsAction;
     };
     class LinkerSettingHolder : public GroupAction
     {
     public:
         LinkerSettingHolder(SimianOptionsAction& simianOptionsAction);
+        const DatasetPickerAction& getSmartSeqDataset1Action() const { return _smartSeqDataset1; };
+        const DatasetPickerAction& getSmartSeqDataset2Action() const { return _smartSeqDataset2; };
 
+        const DatasetPickerAction& getCrossSpecies1DatasetLinkerAction() const { return _crossSpecies1DatasetLinkerAction; };
+        const DatasetPickerAction& getCrossSpecies2DatasetLinkerAction() const { return _crossSpecies2DatasetLinkerAction; };
+        const DatasetPickerAction& getSpecies1ScatterplotColorLinkerAction() const { return _species1ScatterplotColorLinkerAction; };
+        const DatasetPickerAction& getSpecies2ScatterplotColorLinkerAction()const { return _species2ScatterplotColorLinkerAction; };
 
-       const DatasetPickerAction& getCrossSpecies1DatasetLinkerAction() const { return _crossSpecies1DatasetLinkerAction; };
-       const DatasetPickerAction& getCrossSpecies2DatasetLinkerAction() const { return _crossSpecies2DatasetLinkerAction; };
-       const DatasetPickerAction& getSpecies1ScatterplotColorLinkerAction() const { return _species1ScatterplotColorLinkerAction; };
-       const DatasetPickerAction& getSpecies2ScatterplotColorLinkerAction()const { return _species2ScatterplotColorLinkerAction; };
+        const DatasetPickerAction& getSpeciesEmbedding1LinkerAction() const { return _speciesEmbedding1LinkerAction; };
+        const DatasetPickerAction& getSpeciesEmbedding2LinkerAction() const { return _speciesEmbedding2LinkerAction; };
 
-       const DatasetPickerAction& getSpeciesEmbedding1LinkerAction() const { return _speciesEmbedding1LinkerAction; };
-       const DatasetPickerAction& getSpeciesEmbedding2LinkerAction() const { return _speciesEmbedding2LinkerAction; };
+        const DatasetPickerAction& getSpecies1DEStatsLinkerAction()const { return _species1DEStatsLinkerAction; };
+        const DatasetPickerAction& getSpecies2DEStatsLinkerAction()const { return _species2DEStatsLinkerAction; };
 
-       const DatasetPickerAction& getSpecies1DEStatsLinkerAction()const { return _species1DEStatsLinkerAction; };
-       const DatasetPickerAction& getSpecies2DEStatsLinkerAction()const { return _species2DEStatsLinkerAction; };
+        const DatasetPickerAction& getInSpecies1DatasetLinkerAction()const { return _inSpecies1DatasetLinkerAction; };
+        const  DatasetPickerAction& getInSpecies2DatasetLinkerAction() const { return _inSpecies2DatasetLinkerAction; };
+        const VariantAction& getGeneExpressionDatasetVariant() const { return _geneExpressionDatasetVariant; }
+        const StringAction& getHarHcondelCountString() const { return _harHcondelCountString; }
+        const VariantAction& getCommandAction() const { return _commandAction; }
 
-       const DatasetPickerAction& getInSpecies1DatasetLinkerAction()const { return _inSpecies1DatasetLinkerAction; };
-       const  DatasetPickerAction& getInSpecies2DatasetLinkerAction() const { return _inSpecies2DatasetLinkerAction; };
-       const VariantAction& getGeneExpressionDatasetVariant() const { return _geneExpressionDatasetVariant; }
-       const StringAction& getHarHcondelCountString() const  { return _harHcondelCountString; }
-       const VariantAction& getCommandAction() const { return _commandAction; }
+        const OptionAction& getInSpecies1HeatMapCellAction() const { return _inSpecies1HeatMapCellAction; }
+        const OptionAction& getInSpecies2HeatMapCellAction() const { return _inSpecies2HeatMapCellAction; }
+        const OptionsAction& getCrossSpecies1HeatMapCellAction() const { return _crossSpecies1HeatMapCellAction; }
+        const OptionsAction& getCrossSpecies2HeatMapCellAction() const { return _crossSpecies2HeatMapCellAction; }
 
-       const OptionAction& getInSpecies1HeatMapCellAction() const { return _inSpecies1HeatMapCellAction; }
-       const OptionAction& getInSpecies2HeatMapCellAction() const { return _inSpecies2HeatMapCellAction; }
-       const OptionsAction& getCrossSpecies1HeatMapCellAction() const  { return _crossSpecies1HeatMapCellAction; }
-       const OptionsAction& getCrossSpecies2HeatMapCellAction() const  { return _crossSpecies2HeatMapCellAction; }
+        const TriggerAction& getmodifyDifferentialExpressionAutoUpdateAction()const { return _modifyDifferentialExpressionAutoUpdate; };
+        const ToggleAction& getRemoveLinkingOptionMenuFromUIAction()const { return _removeLinkingOptionMenuFromUIAction; };
 
-       const TriggerAction& getmodifyDifferentialExpressionAutoUpdateAction()const { return _modifyDifferentialExpressionAutoUpdate; };
-       const ToggleAction& getRemoveLinkingOptionMenuFromUIAction()const { return _removeLinkingOptionMenuFromUIAction; };
+        const StringAction& getSpecies1Name() const { return _species1Name; }
+        const StringAction& getSelectedCrossSpeciesNameList() const { return _selectedCrossSpeciesNameList; }
+        const StringAction& getSpecies2Name() const { return _species2Name; }
+        const  StringAction& getSelectedCrossspeciescluster() const { return _selectedCrossspeciescluster; }
 
-       const StringAction& getSpecies1Name() const { return _species1Name; }
-       const StringAction& getSelectedCrossSpeciesNameList() const { return _selectedCrossSpeciesNameList; }
-       const StringAction& getSpecies2Name() const { return _species2Name; }
-       const  StringAction& getSelectedCrossspeciescluster() const { return _selectedCrossspeciescluster; }
-
-       const ToggleAction& getParallelBarPluginVisibility() const { return _parallelBarPluginVisibility; }
-       const ToggleAction& getPopPyramidPluginVisibility() const { return _popPyramidPluginVisibility; }
+        const ToggleAction& getParallelBarPluginVisibility() const { return _parallelBarPluginVisibility; }
+        const ToggleAction& getPopPyramidPluginVisibility() const { return _popPyramidPluginVisibility; }
 
         DatasetPickerAction& getCrossSpecies1DatasetLinkerAction() { return _crossSpecies1DatasetLinkerAction; };
         DatasetPickerAction& getCrossSpecies2DatasetLinkerAction() { return _crossSpecies2DatasetLinkerAction; };
+
+
+        DatasetPickerAction& getSmartSeqDataset1Action() { return _smartSeqDataset1; };
+        DatasetPickerAction& getSmartSeqDataset2Action() { return _smartSeqDataset2; };
+
         DatasetPickerAction& getSpecies1ScatterplotColorLinkerAction() { return _species1ScatterplotColorLinkerAction; };
         DatasetPickerAction& getSpecies2ScatterplotColorLinkerAction() { return _species2ScatterplotColorLinkerAction; };
 
@@ -151,6 +157,9 @@ public:
         ToggleAction                _parallelBarPluginVisibility;
         DatasetPickerAction           _crossSpecies1DatasetLinkerAction;
         DatasetPickerAction          _crossSpecies2DatasetLinkerAction;
+
+        DatasetPickerAction _smartSeqDataset1;
+        DatasetPickerAction _smartSeqDataset2;
 
         DatasetPickerAction           _species1ScatterplotColorLinkerAction;
         DatasetPickerAction          _species2ScatterplotColorLinkerAction;
@@ -217,7 +226,7 @@ public: // Action getters
     //IntegralAction& getDistanceAction() { return _distanceAction; };
     ToggleAction& getHistBarAction() { return _histBarAction; };
 
-    
+
     //ToggleAction& getExplorationModeAction() { return _explorationModeAction; };
 
 
@@ -260,7 +269,7 @@ public: // Serialization
     QVariantMap toVariantMap() const override;
 
 protected:
-    SimianViewerPlugin&          _simianViewerPlugin;
+    SimianViewerPlugin& _simianViewerPlugin;
     OptionAction                 _species1SelectAction;
     OptionAction                 _species2SelectAction;
     OptionAction                 _scatterplotColorControlAction;
@@ -268,13 +277,13 @@ protected:
     //IntegralAction               _distanceAction;
 
     //OptionAction                 _crossSpeciesFilterAction;
-    hdps::CoreInterface*         _core;
-    FetchMetaData*                _metaData;
+    hdps::CoreInterface* _core;
+    FetchMetaData* _metaData;
     std::vector<std::vector<std::string>>                _simianData;
     QVariantMap _geneExpressionData;
     //OptionsAction                 _multiSelectClusterFilterAction;
     ToggleAction _histBarAction;
-    
+
     //ToggleAction _explorationModeAction;
     VisSettingHolder              _visSettingHolder;
     OptionsHolder               _optionsHolder;
