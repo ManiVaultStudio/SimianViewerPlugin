@@ -8,7 +8,7 @@ using namespace hdps::gui;
 const QColor SimianOptionsAction::DEFAULT_CONSTANT_COLOR = qRgb(255, 255, 255);
 
 SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin, hdps::CoreInterface* core) :
-	WidgetAction(&simianViewerPlugin),
+	WidgetAction(&simianViewerPlugin,"simianViewerPlugin"),
 	_simianViewerPlugin(simianViewerPlugin),
 	_core(core),
 	_species1SelectAction(this, "Species1(X-axis)"),
@@ -96,12 +96,12 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	//});
 
 
-	_eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataAdded));
-	_eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataRemoved));
-	_eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataChildAdded));
-	_eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataChildRemoved));
-	_eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataChanged));
-	_eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DataGuiNameChanged));
+	_eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DatasetAdded));
+	_eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DatasetRemoved));
+	_eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DatasetChildAdded));
+	_eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DatasetChildRemoved));
+	_eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DatasetDataChanged)); //DatasetChanged
+	//_eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DatasetGuiNameChanged));
 	_eventListener.registerDataEventByType(PointType, std::bind(&SimianOptionsAction::onDataEvent, this, std::placeholders::_1));
 	_metaData = new FetchMetaData();
 	_metaData->getData(&_simianData);
@@ -135,11 +135,11 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	//_distanceNeighborhoodHolder.setEnabled(false);
 	_species1SelectAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 	//_species1SelectAction.setPlaceHolderString(QString("Choose Species1"));
-	_species1SelectAction.initialize(QStringList({ "human","chimp","gorilla","rhesus","marmoset" }), "chimp", "chimp");
+	_species1SelectAction.initialize(QStringList({ "human","chimp","gorilla","rhesus","marmoset" }), "chimp");
 	_species2SelectAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 	//_species2SelectAction.setPlaceHolderString(QString("Choose Species2"));
-	_species2SelectAction.initialize(QStringList({ "human","gorilla","rhesus","marmoset" }), "human", "human");
-	_visSettingHolder.getPluginVisibilityAction().initialize(QStringList({ "pairwise","multi" }), "multi", "multi");
+	_species2SelectAction.initialize(QStringList({ "human","gorilla","rhesus","marmoset" }), "human");
+	_visSettingHolder.getPluginVisibilityAction().initialize(QStringList({ "pairwise","multi" }), "multi");
 	//_crossSpeciesFilterAction.setDefaultWidgetFlags(OptionAction::ComboBox);
 	//_crossSpeciesFilterAction.initialize(QStringList({ "all clusters","cross-species clusters" }), "cross-species clusters", "cross-species clusters");
 	_linkerSettingHolder.getInSpecies1HeatMapCellAction().setDefaultWidgetFlags(OptionAction::ComboBox);
@@ -150,36 +150,36 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	//_multiSelectClusterFilterAction.setDefaultWidgetFlags(OptionsAction::ComboBox | OptionsAction::Selection | OptionsAction::File);
 	//_multiSelectClusterFilterAction.initialize(QStringList{ "" });
 	//_multiSelectClusterFilterAction.setSelectedOptions(QStringList());
-	_visSettingHolder.getColorMapAction().initialize("Black to white", "Black to white");
-	_visSettingHolder.setConfigurationFlag(WidgetAction::ConfigurationFlag::AlwaysCollapsed);
+	_visSettingHolder.getColorMapAction().initialize("Black to white");
+	_visSettingHolder.setConfigurationFlag(WidgetAction::ConfigurationFlag::ForceCollapsedInGroup);// AlwaysCollapsed);
 	_visSettingHolder.setConfigurationFlag(WidgetAction::ConfigurationFlag::NoLabelInGroup);
 	//_scatterplot1ColorMapAction.initialize("Viridis", "Viridis");
 	//_scatterplot2ColorMapAction.initialize("Viridis", "Viridis");
 	//_backgroundColoringAction.initialize(DEFAULT_CONSTANT_COLOR, DEFAULT_CONSTANT_COLOR);
 	_neighborhoodAction.setDefaultWidgetFlags(OptionAction::ComboBox);
-	_neighborhoodAction.initialize(QStringList({ "Non-neuronal cells","IT-projecting excitatory","Non-IT-projecting excitatory","CGE-derived inhibitory","MGE-derived inhibitory" }), "CGE-derived inhibitory", "CGE-derived inhibitory");
+	_neighborhoodAction.initialize(QStringList({ "Non-neuronal cells","IT-projecting excitatory","Non-IT-projecting excitatory","CGE-derived inhibitory","MGE-derived inhibitory" }), "CGE-derived inhibitory");
 	QStringList defaultTotalValues = QStringList({ " ","exc","glia","inh","Astro_2","Astro_3","Astro_4","Chandelier_1","Chandelier_2","Endo_1","Endo_2","L2/3 IT_1","L2/3 IT_2","L2/3 IT_3","L2/3 IT_4","L4 IT_1","L4 IT_2","L4 IT_3","L4 IT_4","L4 IT_5","L5 ET_1","L5 ET_2","L5 ET_3","L5 ET_4","L5 IT_1","L5 IT_2","L5 IT_3","L5/6 NP_1","L5/6 NP_2","L5/6 NP_3","L5/6 NP_4","L6 CT_1","L6 CT_2","L6 IT Car3_1","L6 IT Car3_2","L6 IT Car3_3","L6 IT_1","L6 IT_2","L6 IT_3","L6b_1","L6b_2","L6b_3","L6b_4","L6b_5","L6b_6","Lamp5_1","Lamp5_2","Lamp5_Lhx6_1","Lamp5_Lhx6_2","Micro-PVM_1","Micro-PVM_2","Micro-PVM_3","OPC_1","OPC_2","OPC_3","Oligo_1","Pax6_1","Pax6_2","Pax6_3","Pax6_4","Pvalb_1","Pvalb_2","Pvalb_3","Pvalb_4","Pvalb_5","Pvalb_6","Pvalb_7","Pvalb_8","Sncg_1","Sncg_2","Sncg_3","Sncg_4","Sncg_5","Sncg_6","Sncg_7","Sst Chodl_1","Sst Chodl_2","Sst Chodl_3","Sst_1","Sst_10","Sst_11","Sst_12","Sst_13","Sst_14","Sst_15","Sst_16","Sst_17","Sst_18","Sst_2","Sst_3","Sst_4","Sst_5","Sst_6","Sst_7","Sst_8","Sst_9","VLMC_1","VLMC_2","VLMC_3","VLMC_4","Vip_1","Vip_10","Vip_11","Vip_12","Vip_13","Vip_14","Vip_15","Vip_16","Vip_17","Vip_2","Vip_3","Vip_4","Vip_5","Vip_6","Vip_7","Vip_8","Vip_9","Astro_5","L2/3 IT_10","L2/3 IT_11","L2/3 IT_12","L2/3 IT_13","L2/3 IT_5","L2/3 IT_6","L2/3 IT_7","L2/3 IT_8","L2/3 IT_9","L5 IT_4","L5 IT_5","L5 IT_6","L5 IT_7","L5/6 NP_5","L5/6 NP_6","L6 CT_3","L6 CT_4","Lamp5_3","Lamp5_4","Lamp5_5","Lamp5_6","Oligo_2","Oligo_3","Oligo_4","Pvalb_10","Pvalb_11","Pvalb_12","Pvalb_13","Pvalb_14","Pvalb_15","Pvalb_9","Sncg_8","Sst_19","Sst_20","Sst_21","Sst_22","Sst_23","Sst_24","Sst_25","Sst_26","Vip_18","Vip_19","Vip_20","Vip_21","Vip_22","Vip_23","Endo_3","L4 IT_6","Micro-PVM_4","OPC_4","Sncg_9","L2/3 IT_14","L2/3 IT_15","L5/6 NP_7","L5/6 NP_8","L6 IT_4","Sncg_10","Glutamatergic","Non-Neuronal","Chandelier","Endo","L2/3 IT","L4 IT","L5 ET","L5 IT","L5/6 NP","L6 CT","L6 IT","L6 IT Car3","L6b","Lamp5","Lamp5_Lhx6","Micro-PVM","OPC","Oligo","Pax6","Pvalb","Sncg","Sst","Sst Chodl","VLMC","Vip","G19.32.002","G20.32.001","G20.32.002","H18.30.002","H19.30.001","H19.30.002","H200.1023","bi006","bi007","Q19.26.011","Q19.26.015","C19.32.002","C19.32.003","C19.32.004","C19.32.005","C19.32.006","C19.32.007","H18.30.001","bi005","Q19.26.010","C19.32.001","it_types","l5et_l56np_l6ct_l6b","lamp5_sncg_vip","sst_sst_chodl_pvalb","Astro_1","GABAergic","Astro","G19.32.001" });
 	_linkerSettingHolder.getCrossSpecies2HeatMapCellAction().initialize(defaultTotalValues, { "" });
 	_linkerSettingHolder.getCrossSpecies1HeatMapCellAction().initialize(defaultTotalValues, { "" });
-	_linkerSettingHolder.getSpecies1Name().initialize("");
-	_linkerSettingHolder.getSpecies2Name().initialize("");
-	_linkerSettingHolder.getSelectedCrossspeciescluster().initialize("");
-	_linkerSettingHolder.getSelectedCrossSpeciesNameList().initialize("");
-	_linkerSettingHolder.getInSpecies2HeatMapCellAction().initialize(defaultTotalValues, "", "");
-	_linkerSettingHolder.getInSpecies1HeatMapCellAction().initialize(defaultTotalValues, "", "");
+	_linkerSettingHolder.getSpecies1Name().setString("");
+	_linkerSettingHolder.getSpecies2Name().setString("");
+	_linkerSettingHolder.getSelectedCrossspeciescluster().setString("");
+	_linkerSettingHolder.getSelectedCrossSpeciesNameList().setString("");
+	_linkerSettingHolder.getInSpecies2HeatMapCellAction().initialize(defaultTotalValues, "");
+	_linkerSettingHolder.getInSpecies1HeatMapCellAction().initialize(defaultTotalValues, "");
 
 	_scatterplotColorControlAction.setDefaultWidgetFlags(OptionAction::ComboBox);
-	_scatterplotColorControlAction.initialize(QStringList({ "cross-species cluster","in-species cluster","expression","cross-species sub-class","in-species subclass","donor" }), "cross-species cluster", "cross-species cluster");
+	_scatterplotColorControlAction.initialize(QStringList({ "cross-species cluster","in-species cluster","expression","cross-species sub-class","in-species subclass","donor" }), "cross-species cluster");
 	//_distanceAction.setDefaultWidgetFlags(IntegralAction::SpinBox | IntegralAction::Slider);
 	//_distanceAction.initialize(0, 105, 105, 105);
 	_histBarAction.setDefaultWidgetFlags(ToggleAction::CheckBox);
-	_histBarAction.initialize(false, false);
+	_histBarAction.setChecked(false);
 	//_histBarAction.setDefaultWidgetFlags(ToggleAction::PushButton);
 
 	_linkerSettingHolder.getRemoveLinkingOptionMenuFromUIAction().setDefaultWidgetFlags(ToggleAction::CheckBox);
-	_linkerSettingHolder.getRemoveLinkingOptionMenuFromUIAction().initialize(false, false);
+	_linkerSettingHolder.getRemoveLinkingOptionMenuFromUIAction().setChecked(false);
 	_visSettingHolder.getFullHeatmapAction().setDefaultWidgetFlags(ToggleAction::CheckBox);
-	_visSettingHolder.getFullHeatmapAction().initialize(false, false);
+	_visSettingHolder.getFullHeatmapAction().setChecked(false);
 	//_explorationModeAction.setDefaultWidgetFlags(ToggleAction::CheckBox);
 	//_explorationModeAction.initialize(false, false);
 
@@ -200,7 +200,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 	_visSettingHolder.getColorMapAction().getSettingsAction().setDisabled(true);
 	_visSettingHolder.getColorMapAction().getSettingsAction().setVisible(false);
-	_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
+	/*_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
 	_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().connectToPublicActionByName("Cluster Differential Expression 1::CalculateDifferentialExpression");
 	_linkerSettingHolder.getGeneExpressionDatasetVariant().setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
 	_linkerSettingHolder.getGeneExpressionDatasetVariant().connectToPublicActionByName("Cluster Differential Expression 1::TableViewLeftSideInfo");
@@ -246,7 +246,9 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 	_visSettingHolder.getSelectionColorAction().setConnectionPermissionsFlag(ConnectionPermissionFlag::ConnectViaApi);
 	_visSettingHolder.getSelectionColorAction().connectToPublicActionByName("GlobalSelectionColor");
-	_scatterplotColorControlAction.connectToPublicActionByName("GlobalScatterplotColorControl");
+	_scatterplotColorControlAction.connectToPublicActionByName("GlobalScatterplotColorControl");*/
+
+
 	//const auto globalColorMapName = "GlobalColorMap";
 	//_scatterplotColorMapAction.setConnectionPermissionsFlag(ConnectionPermissionFlag::All);
 	//_scatterplotColorMapAction.connectToPublicActionByName(globalColorMapName);
@@ -385,7 +387,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			{
 				if (childDatasets[i]->getGuiName() == child_DE_Statistics_DatasetName)
 				{
-					DatasetGUID = childDatasets[i].getDatasetGuid();
+					DatasetGUID = childDatasets[i].getDatasetId();
 					_linkerSettingHolder.getSpecies1DEStatsLinkerAction().setCurrentDataset(DatasetGUID);
 					break;
 				}
@@ -399,7 +401,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		QString storeSpecies = _species2SelectAction.getCurrentText();
 		QStringList speciesNames = { "human","chimp","gorilla","rhesus","marmoset" };
 		speciesNames.removeAll(_species1SelectAction.getCurrentText());
-		_species2SelectAction.initialize(QStringList({ speciesNames }), storeSpecies, storeSpecies);
+		_species2SelectAction.initialize(QStringList({ speciesNames }), storeSpecies);
 
 
 		if (_species2SelectAction.getCurrentText() == _species1SelectAction.getCurrentText())
@@ -407,7 +409,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 			QStringList speciesNames = { "human","chimp","gorilla","rhesus","marmoset" };
 			speciesNames.removeAll(_species1SelectAction.getCurrentText());
-			_species2SelectAction.initialize(QStringList({ speciesNames }), "", "");
+			_species2SelectAction.initialize(QStringList({ speciesNames }), "");
 			//QString tempVal = _scatterplotColorControlAction.getCurrentText();
 			//_scatterplotColorControlAction.setCurrentText("");
 			//_scatterplotColorControlAction.setCurrentText(tempVal);
@@ -577,7 +579,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			{
 				if (childDatasets[i]->getGuiName() == child_DE_Statistics_DatasetName)
 				{
-					DatasetGUID = childDatasets[i].getDatasetGuid();
+					DatasetGUID = childDatasets[i].getDatasetId();
 					_linkerSettingHolder.getSpecies2DEStatsLinkerAction().setCurrentDataset(DatasetGUID);
 					break;
 				}
@@ -959,7 +961,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			{
 				if (childDatasets[i]->getGuiName() == child_DE_Statistics_DatasetName)
 				{
-					DatasetGUID = childDatasets[i].getDatasetGuid();
+					DatasetGUID = childDatasets[i].getDatasetId();
 					_linkerSettingHolder.getSpecies1DEStatsLinkerAction().setCurrentDataset(DatasetGUID);
 					break;
 				}
@@ -979,7 +981,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			{
 				if (childDatasets[i]->getGuiName() == child_DE_Statistics_DatasetName)
 				{
-					DatasetGUID = childDatasets[i].getDatasetGuid();
+					DatasetGUID = childDatasets[i].getDatasetId();
 					_linkerSettingHolder.getSpecies2DEStatsLinkerAction().setCurrentDataset(DatasetGUID);
 					break;
 				}
@@ -1345,7 +1347,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			if (_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().getCurrentText() != "")
 			{
 				auto dataset1 = _linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().getCurrentDataset();
-				const auto candidateDataset1 = _core->requestDataset<Clusters>(dataset1.getDatasetGuid());
+				const auto candidateDataset1 = _core->requestDataset<Clusters>(dataset1.getDatasetId());
 				std::vector<std::uint32_t> selectedIndices1;
 
 
@@ -1353,18 +1355,18 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				candidateDataset1->getParent()->setSelectionIndices(selectedIndices1);
 
 
-				events().notifyDatasetSelectionChanged(candidateDataset1->getParent());
+				events().notifyDatasetDataSelectionChanged(candidateDataset1->getParent());
 
 			}
 			if (_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().getCurrentText() != "")
 			{
 				auto dataset2 = _linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().getCurrentDataset();
-				const auto candidateDataset2 = _core->requestDataset<Clusters>(dataset2.getDatasetGuid());
+				const auto candidateDataset2 = _core->requestDataset<Clusters>(dataset2.getDatasetId());
 				std::vector<std::uint32_t> selectedIndices2;
 
 
 				candidateDataset2->getParent()->setSelectionIndices(selectedIndices2);
-				events().notifyDatasetSelectionChanged(candidateDataset2->getParent());
+				events().notifyDatasetDataSelectionChanged(candidateDataset2->getParent());
 			}
 			//}
 			//else
@@ -1408,7 +1410,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			if (_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().getCurrentText() != "")
 			{
 				auto dataset1 = _linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().getCurrentDataset();
-				const auto candidateDataset1 = _core->requestDataset<Clusters>(dataset1.getDatasetGuid());
+				const auto candidateDataset1 = _core->requestDataset<Clusters>(dataset1.getDatasetId());
 				std::vector<std::uint32_t> selectedIndices1;
 
 				for (const auto& cluster : candidateDataset1->getClusters())
@@ -1426,13 +1428,13 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				candidateDataset1->getParent()->setSelectionIndices(selectedIndices1);
 
 
-				events().notifyDatasetSelectionChanged(candidateDataset1->getParent());
+				events().notifyDatasetDataSelectionChanged(candidateDataset1->getParent());
 
 			}
 			if (_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().getCurrentText() != "")
 			{
 				auto dataset2 = _linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().getCurrentDataset();
-				const auto candidateDataset2 = _core->requestDataset<Clusters>(dataset2.getDatasetGuid());
+				const auto candidateDataset2 = _core->requestDataset<Clusters>(dataset2.getDatasetId());
 				std::vector<std::uint32_t> selectedIndices2;
 				for (const auto& cluster : candidateDataset2->getClusters())
 				{
@@ -1447,7 +1449,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				}
 
 				candidateDataset2->getParent()->setSelectionIndices(selectedIndices2);
-				events().notifyDatasetSelectionChanged(candidateDataset2->getParent());
+				events().notifyDatasetDataSelectionChanged(candidateDataset2->getParent());
 			}
 			//}
 			//else
@@ -1686,8 +1688,8 @@ void SimianOptionsAction::sendClusterCountInfoToJS()
 {
 	auto dataset1 = _linkerSettingHolder.getInSpecies1DatasetLinkerAction().getCurrentDataset();
 	auto dataset2 = _linkerSettingHolder.getInSpecies2DatasetLinkerAction().getCurrentDataset();
-	const auto candidateDataset1 = _core->requestDataset<Clusters>(dataset1.getDatasetGuid());
-	const auto candidateDataset2 = _core->requestDataset<Clusters>(dataset2.getDatasetGuid());
+	const auto candidateDataset1 = _core->requestDataset<Clusters>(dataset1.getDatasetId());
+	const auto candidateDataset2 = _core->requestDataset<Clusters>(dataset2.getDatasetId());
 
 	std::string jsonSend = "";
 	for (const auto& cluster : candidateDataset1->getClusters())
@@ -1723,7 +1725,7 @@ void SimianOptionsAction::sendClusterCountInfoToJS()
 		if (_species1SelectAction.getCurrentText() == "gorilla" || _species1SelectAction.getCurrentText() == "chimp" || _species1SelectAction.getCurrentText() == "human" && _linkerSettingHolder.getSmartSeqDataset1Action().getCurrentText() != "")
 		{
 			auto smartseqdataset1 = _linkerSettingHolder.getSmartSeqDataset1Action().getCurrentDataset();
-			const auto candidateSmartSeqDataset1 = _core->requestDataset<Clusters>(smartseqdataset1.getDatasetGuid());
+			const auto candidateSmartSeqDataset1 = _core->requestDataset<Clusters>(smartseqdataset1.getDatasetId());
 
 			for (const auto& cluster : candidateSmartSeqDataset1->getClusters())
 			{
@@ -1744,7 +1746,7 @@ void SimianOptionsAction::sendClusterCountInfoToJS()
 		{
 			auto smartseqdataset2 = _linkerSettingHolder.getSmartSeqDataset2Action().getCurrentDataset();
 
-			const auto candidateSmartSeqDataset2 = _core->requestDataset<Clusters>(smartseqdataset2.getDatasetGuid());
+			const auto candidateSmartSeqDataset2 = _core->requestDataset<Clusters>(smartseqdataset2.getDatasetId());
 			for (const auto& cluster : candidateSmartSeqDataset2->getClusters())
 			{
 
@@ -1769,7 +1771,7 @@ void SimianOptionsAction::sendClusterCountInfoToJS()
 
 }
 
-void SimianOptionsAction::onDataEvent(hdps::DataEvent* dataEvent)
+void SimianOptionsAction::onDataEvent(hdps::DatasetEvent* dataEvent)
 {
 	//if (dataEvent->getType() == hdps::EventType::DataAdded)
 	//{

@@ -30,6 +30,7 @@
 #include <event/Event.h>
 #include <QDebug>
 #include <QLabel>
+#include<actions/ColorMap1DAction.h>
 
 using namespace hdps::gui;
 class QMenu;
@@ -70,7 +71,7 @@ public:
     protected:
         SimianOptionsAction& _simianOptionsAction;
         ToggleAction            _fullHeatMapAction;
-        ColorMapAction          _colorMapAction;
+        ColorMap1DAction          _colorMapAction;
         OptionAction            _pluginVisibility;
         ColorAction             _selectionColorAction;
         // friend class SimianOptionsAction;
@@ -192,7 +193,7 @@ public:
     };
 
 public:
-    void onDataEvent(hdps::DataEvent* dataEvent);
+    void onDataEvent(hdps::DatasetEvent* dataEvent);
 protected:
 
     class Widget : public hdps::gui::WidgetActionWidget {
