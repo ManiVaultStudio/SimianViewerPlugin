@@ -1679,7 +1679,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 }
 
 SimianOptionsAction::Widget::Widget(QWidget* parent, SimianOptionsAction* SimianOptionsAction) :
-	WidgetActionWidget(parent, SimianOptionsAction, State::Standard)
+	WidgetActionWidget(parent, SimianOptionsAction)
 {
 
 }
