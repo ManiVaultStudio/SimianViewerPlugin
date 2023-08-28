@@ -14,7 +14,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_species1SelectAction(this, "Species1(X-axis)"),
 	_species2SelectAction(this, "Species2(Y-axis)"),
 	_neighborhoodAction(this, "Neighborhood"),
-	_scatterplotColorControlAction(this, "Scatterplot color"),
+	_scatterplotColorControlAction(this, "Scatterplot color control"),
 	//_distanceAction(this, "Filter distance :"),
 
 	//_crossSpeciesFilterAction(this, "Filter clusters"),
@@ -45,7 +45,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_species2SelectAction.setSerializationName("Species2(Y-axis)");
 	_neighborhoodAction.setSerializationName("Neighborhood");
 	_scatterplotColorControlAction.setSerializationName("Scatterplot color");
-	//_distanceAction.setSerializationName( "Filter distance :");
 	_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().setSerializationName("Cross-species cluster dataset1");
 	_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().setSerializationName("Cross-species  cluster dataset2");
 	_linkerSettingHolder.getSpecies1ScatterplotColorLinkerAction().setSerializationName("Scatterplot color linker species1");
@@ -60,8 +59,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 	_linkerSettingHolder.getInSpecies1DatasetLinkerAction().setSerializationName("In-species  cluster dataset1");
 	_linkerSettingHolder.getInSpecies2DatasetLinkerAction().setSerializationName("In-species  cluster dataset2");
-
-	//_crossSpeciesFilterAction.setSerializationName( "Filter clusters");
 	_linkerSettingHolder.getInSpecies1HeatMapCellAction().setSerializationName("Link in-species1 heatmap cell");
 	_linkerSettingHolder.getInSpecies2HeatMapCellAction().setSerializationName("Link in-species2 heatmap cell");
 	_linkerSettingHolder.getCrossSpecies1HeatMapCellAction().setSerializationName("Link cross-species1 heatmap cell");
@@ -79,10 +76,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_visSettingHolder.getColorMapAction().setSerializationName("Color map");
 
 	_visSettingHolder.getPluginVisibilityAction().setSerializationName("PairwiseORMultiSpeciesComparison");
-
-	//_backgroundColoringAction.setSerializationName("Select background color");
-	//_scatterplot1ColorMapAction.setSerializationName( "Scatterplot1 color map connection");
-	//_scatterplot2ColorMapAction.setSerializationName("Scatterplot2 color map connection");
 	_visSettingHolder.getFullHeatmapAction().setSerializationName("Full distancemap");
 	_visSettingHolder.getSelectionColorAction().setSerializationName("Selection color");
 	_histBarAction.setSerializationName("Cell counts");
@@ -2088,38 +2081,45 @@ inline SimianOptionsAction::VisSettingHolder::VisSettingHolder(SimianOptionsActi
 	_colorMapAction(this, "Color map"),
 	_pluginVisibility(this, "Expression type"),
 	_selectionColorAction(this, "Selection color")
+
+
 {
 	setText("Setting Options");
 	setIcon(Application::getIconFont("FontAwesome").getIcon("cog"));
 	setPopupSizeHint(QSize(350, 0));
+	addAction(&_fullHeatMapAction);
+	addAction(&_colorMapAction);
+	//addAction(&_pluginVisibility);
+	addAction(&_selectionColorAction);
+
 }
 
 inline SimianOptionsAction::LinkerSettingHolder::LinkerSettingHolder(SimianOptionsAction& simianOptionsAction) :
 	GroupAction(&simianOptionsAction, "Linking Options"),
 	_simianOptionsAction(simianOptionsAction),
-	_crossSpecies1DatasetLinkerAction(this, "Cross-species cluster dataset1"),
-	_crossSpecies2DatasetLinkerAction(this, "Cross-species  cluster dataset2"),
-	_species1ScatterplotColorLinkerAction(this, "Scatterplot color linker species1"),
-	_species2ScatterplotColorLinkerAction(this, "Scatterplot color linker species2"),
-	_speciesEmbedding1LinkerAction(this, "Embedding dataset1"),
-	_speciesEmbedding2LinkerAction(this, "Embedding dataset2"),
-	_species1DEStatsLinkerAction(this, "DEStats dataset1"),
-	_species2DEStatsLinkerAction(this, "DEStats dataset2"),
+	_crossSpecies1DatasetLinkerAction(this, "Cross-species Dataset1"),
+	_crossSpecies2DatasetLinkerAction(this, "Cross-species Dataset2"),
+	_species1ScatterplotColorLinkerAction(this, "ScatterplotView1Color"),
+	_species2ScatterplotColorLinkerAction(this, "ScatterplotView2Color"),
+	_speciesEmbedding1LinkerAction(this, "ScatterplotView1Position"),
+	_speciesEmbedding2LinkerAction(this, "ScatterplotView2Position"),
+	_species1DEStatsLinkerAction(this, "DE Dataset1"),
+	_species2DEStatsLinkerAction(this, "DE Dataset2"),
 	_inSpecies1DatasetLinkerAction(this, "In-species  cluster dataset1"),
 	_inSpecies2DatasetLinkerAction(this, "In-species  cluster dataset2"),
 	_inSpecies1HeatMapCellAction(this, "Link in-species1 heatmap cell"),
 	_inSpecies2HeatMapCellAction(this, "Link in-species2 heatmap cell"),
-	_crossSpecies1HeatMapCellAction(this, "Link cross-species1 heatmap cell"),
-	_crossSpecies2HeatMapCellAction(this, "Link cross-species2 heatmap cell"),
-	_modifyDifferentialExpressionAutoUpdate(this, "Automatic Update Switch"),
+	_crossSpecies1HeatMapCellAction(this, "Select cross-species Clusters1"),
+	_crossSpecies2HeatMapCellAction(this, "Select cross-species Clusters2"),
+	_modifyDifferentialExpressionAutoUpdate(this, "CalculateDifferentialExpression"),
 	_removeLinkingOptionMenuFromUIAction(this, "Remove widget"),
 	_species1Name(this, "Species1Name"),
 	_species2Name(this, "Species2Name"),
 	_selectedCrossspeciescluster(this, "Selected CrossSpecies Cluster"),
-	_geneExpressionDatasetVariant(this, "Gene Expression Variant"),
-	_commandAction(this, "Command Action Variant"),
+	_geneExpressionDatasetVariant(this, "TableViewLeftSideInfo"),
+	_commandAction(this, "InvokeMethods"),
 	_selectedCrossSpeciesNameList(this, "Selected Cross Species Name List"),
-	_harHcondelCountString(this, "Har-Hcondel Count String"),
+	_harHcondelCountString(this, "Har-Hcondel IntoText"),
 	_popPyramidPluginVisibility(this, "PopPyramidPluginVisibility"),
 	_parallelBarPluginVisibility(this, "ParallelBarPluginVisibility"),
 	_smartSeqDataset1(this,"SmartSecDataset1"),
