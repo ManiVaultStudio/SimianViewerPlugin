@@ -80,7 +80,6 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	_visSettingHolder.getSelectionColorAction().setSerializationName("Selection color");
 	_histBarAction.setSerializationName("Cell counts");
 
-
 	//_helpAction.setDefaultWidgetFlags(TriggerAction::Icon);
 	//_screenshotAction.setDefaultWidgetFlags(TriggerAction::Icon);
 
@@ -88,7 +87,211 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	//	_simianViewerPlugin.getTriggerHelpAction().trigger();
 	//});
 
+	_linkerSettingHolder.getSpecies1DEStatsLinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
+		Datasets statsDatasets;
 
+		for (auto dataset : datasets)
+			if (dataset->getDataType() == PointType)
+			{
+				std::string str1 = dataset->getGuiName().toStdString();
+				std::string str2 = "DE_Statistics";
+				if (strstr(str1.c_str(), str2.c_str()))
+				{
+					statsDatasets << dataset;
+				}
+			}
+		return statsDatasets;
+		});
+	_linkerSettingHolder.getSpecies2DEStatsLinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
+		Datasets statsDatasets;
+
+		for (auto dataset : datasets)
+			if (dataset->getDataType() == PointType)
+			{
+				std::string str1 = dataset->getGuiName().toStdString();
+				std::string str2 = "DE_Statistics";
+				if (strstr(str1.c_str(), str2.c_str()))
+				{
+					statsDatasets << dataset;
+				}
+			}
+		return statsDatasets;
+		});
+
+	_linkerSettingHolder.getSpeciesEmbedding1LinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
+		Datasets statsDatasets;
+
+		for (auto dataset : datasets)
+			if (dataset->getDataType() == PointType)
+			{
+				std::string str1 = dataset->getGuiName().toStdString();
+				std::string str2 = "embedding";
+				if (strstr(str1.c_str(), str2.c_str()))
+				{
+					statsDatasets << dataset;
+				}
+			}
+		return statsDatasets;
+		});
+
+	_linkerSettingHolder.getSpeciesEmbedding2LinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
+		Datasets statsDatasets;
+
+		for (auto dataset : datasets)
+			if (dataset->getDataType() == PointType)
+			{
+				std::string str1 = dataset->getGuiName().toStdString();
+				std::string str2 = "embedding";
+				if (strstr(str1.c_str(), str2.c_str()))
+				{
+					statsDatasets << dataset;
+				}
+			}
+		return statsDatasets;
+		});
+
+	_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
+		Datasets statsDatasets;
+
+		for (auto dataset : datasets)
+			if (dataset->getDataType() == ClusterType)
+			{
+				std::string str1 = dataset->getGuiName().toStdString();
+				std::string str2 = "cluster";
+				if (strstr(str1.c_str(), str2.c_str()))
+				{
+					std::string str3 = "cross";
+					if (strstr(str1.c_str(), str3.c_str()))
+					{
+						statsDatasets << dataset;
+					}
+					
+				}
+			}
+		return statsDatasets;
+		});
+	_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
+		Datasets statsDatasets;
+
+		for (auto dataset : datasets)
+			if (dataset->getDataType() == ClusterType)
+			{
+				std::string str1 = dataset->getGuiName().toStdString();
+				std::string str2 = "cluster";
+				if (strstr(str1.c_str(), str2.c_str()))
+				{
+					std::string str3 = "cross";
+					if (strstr(str1.c_str(), str3.c_str()))
+					{
+						statsDatasets << dataset;
+					}
+
+				}
+			}
+		return statsDatasets;
+		});
+
+	_linkerSettingHolder.getInSpecies1DatasetLinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
+		Datasets statsDatasets;
+
+		for (auto dataset : datasets)
+			if (dataset->getDataType() == ClusterType)
+			{
+				std::string str1 = dataset->getGuiName().toStdString();
+				std::string str2 = "cluster";
+				if (strstr(str1.c_str(), str2.c_str()))
+				{
+					std::string str3 = "cross";
+					if (strstr(str1.c_str(), str3.c_str()))
+					{
+						
+					}
+					else
+					{
+						statsDatasets << dataset;
+					}
+
+				}
+			}
+		return statsDatasets;
+		});
+	_linkerSettingHolder.getInSpecies2DatasetLinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
+		Datasets statsDatasets;
+
+		for (auto dataset : datasets)
+			if (dataset->getDataType() == ClusterType)
+			{
+				std::string str1 = dataset->getGuiName().toStdString();
+				std::string str2 = "cluster";
+				if (strstr(str1.c_str(), str2.c_str()))
+				{
+					std::string str3 = "cross";
+					if (strstr(str1.c_str(), str3.c_str()))
+					{
+
+					}
+					else
+					{
+						statsDatasets << dataset;
+					}
+
+				}
+			}
+		return statsDatasets;
+		});
+
+
+	_linkerSettingHolder.getSmartSeqDataset1Action().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
+		Datasets statsDatasets;
+
+		for (auto dataset : datasets)
+			if (dataset->getDataType() == ClusterType)
+			{
+				std::string str1 = dataset->getGuiName().toStdString();
+				std::string str2 = "-SmartSeq-cluster";
+				if (strstr(str1.c_str(), str2.c_str()))
+				{
+					statsDatasets << dataset;
+				}
+			}
+		return statsDatasets;
+		});
+	_linkerSettingHolder.getSmartSeqDataset2Action().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
+		Datasets statsDatasets;
+
+		for (auto dataset : datasets)
+			if (dataset->getDataType() == ClusterType)
+			{
+				std::string str1 = dataset->getGuiName().toStdString();
+				std::string str2 = "-SmartSeq-cluster";
+				if (strstr(str1.c_str(), str2.c_str()))
+				{
+					statsDatasets << dataset;
+				}
+			}
+		return statsDatasets;
+		});
+
+	_linkerSettingHolder.getSpecies1ScatterplotColorLinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
+		Datasets statsDatasets;
+
+		for (auto dataset : datasets)
+		{
+			statsDatasets << dataset;
+		}
+		
+		return statsDatasets;
+		});
+	_linkerSettingHolder.getSpecies2ScatterplotColorLinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
+		Datasets statsDatasets;
+
+		for (auto dataset : datasets)
+		{
+			statsDatasets << dataset;
+		}
+
+		return statsDatasets;
+		});
 	_eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DatasetAdded));
 	_eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DatasetRemoved));
 	_eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DatasetChildAdded));
@@ -1667,7 +1870,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 	connect(&_linkerSettingHolder.getSmartSeqDataset1Action(), &OptionAction::currentIndexChanged, this, updateInSpecies1DatasetLinker);
 	connect(&_linkerSettingHolder.getSmartSeqDataset2Action(), &OptionAction::currentIndexChanged, this, updateInSpecies2DatasetLinker);
-	updateDatasetPickerAction();
+	//updateDatasetPickerAction();
 
 }
 
@@ -1922,118 +2125,118 @@ void SimianOptionsAction::updateData(std::string Species1, std::string Species2,
 
 
 
-void SimianOptionsAction::updateDatasetPickerAction()
-{
-	auto colorDatasets = _core->requestAllDataSets();
-	_linkerSettingHolder.getSpecies1ScatterplotColorLinkerAction().setDatasets(colorDatasets);
-	_linkerSettingHolder.getSpecies1ScatterplotColorLinkerAction().setPlaceHolderString("Species1 scatterplot color linker");
-	_linkerSettingHolder.getSpecies2ScatterplotColorLinkerAction().setDatasets(colorDatasets);
-	_linkerSettingHolder.getSpecies2ScatterplotColorLinkerAction().setPlaceHolderString("Species2 scatterplot color linker");
-
-	//////
-	auto datasetsSmartSeq = _core->requestAllDataSets(QVector<hdps::DataType> {ClusterType});
-	auto filteredSmartSeqSatasets = datasetsSmartSeq;
-	for (auto smartSeqdataset : datasetsSmartSeq)
-	{
-		std::string str1 = smartSeqdataset->getGuiName().toStdString();
-		std::string str2 = "-SmartSeq-cluster";
-		if (strstr(str1.c_str(), str2.c_str()))
-		{
-		}
-		else {
-			filteredSmartSeqSatasets.removeOne(smartSeqdataset);
-		}
-	}
-	_linkerSettingHolder.getSmartSeqDataset2Action().setDatasets(filteredSmartSeqSatasets);
-	_linkerSettingHolder.getSmartSeqDataset2Action().setPlaceHolderString("Smart Seq Dataset2");
-
-	_linkerSettingHolder.getSmartSeqDataset1Action().setDatasets(filteredSmartSeqSatasets);
-	_linkerSettingHolder.getSmartSeqDataset1Action().setPlaceHolderString("Smart Seq Dataset1");
-
-
-	//////
-
-	auto datasets = _core->requestAllDataSets(QVector<hdps::DataType> {ClusterType});
-	auto filteredCrossSpeciesDatasets = datasets;
-	auto filteredInSpeciesDatasets = datasets;
-	for (auto dataset : datasets)
-	{
-		std::string str1 = dataset->getGuiName().toStdString();
-		std::string str2 = "cluster";
-		if (strstr(str1.c_str(), str2.c_str()))
-		{
-		}
-		else {
-			filteredCrossSpeciesDatasets.removeOne(dataset);
-			filteredInSpeciesDatasets.removeOne(dataset);
-		}
-	}
-
-	datasets = filteredCrossSpeciesDatasets;
-	for (auto dataset : datasets)
-	{
-		std::string str3 = dataset->getGuiName().toStdString();
-		std::string str4 = "cross";
-
-		if (strstr(str3.c_str(), str4.c_str()))
-		{
-			filteredInSpeciesDatasets.removeOne(dataset);
-		}
-		else
-		{
-			filteredCrossSpeciesDatasets.removeOne(dataset);
-		}
-	}
-
-	_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().setDatasets(filteredCrossSpeciesDatasets);
-	_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().setPlaceHolderString("Species1 cross-species clusters");
-	_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().setDatasets(filteredCrossSpeciesDatasets);
-	_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().setPlaceHolderString("Species2 cross-species clusters");
-	_linkerSettingHolder.getInSpecies1DatasetLinkerAction().setDatasets(filteredInSpeciesDatasets);
-	_linkerSettingHolder.getInSpecies1DatasetLinkerAction().setPlaceHolderString("Species1 in-species clusters");
-	_linkerSettingHolder.getInSpecies2DatasetLinkerAction().setDatasets(filteredInSpeciesDatasets);
-	_linkerSettingHolder.getInSpecies2DatasetLinkerAction().setPlaceHolderString("Species2 in-species clusters");
-
-	auto embeddings = _core->requestAllDataSets(QVector<hdps::DataType> {PointType});
-	auto filteredEmbeddingDatasets = embeddings;
-	for (auto embedding : embeddings)
-	{
-		std::string str1 = embedding->getGuiName().toStdString();
-		/*qDebug() << QString::fromStdString(str1);*/
-		std::string str2 = "embedding";
-		if (strstr(str1.c_str(), str2.c_str()))
-		{
-		}
-		else {
-			filteredEmbeddingDatasets.removeOne(embedding);
-		}
-	}
-
-	_linkerSettingHolder.getSpeciesEmbedding1LinkerAction().setDatasets(filteredEmbeddingDatasets);
-	_linkerSettingHolder.getSpeciesEmbedding1LinkerAction().setPlaceHolderString("Embedding1 dataset");
-	_linkerSettingHolder.getSpeciesEmbedding2LinkerAction().setDatasets(filteredEmbeddingDatasets);
-	_linkerSettingHolder.getSpeciesEmbedding2LinkerAction().setPlaceHolderString("Embedding2 dataset");
-
-	auto deStats = _core->requestAllDataSets(QVector<hdps::DataType> {PointType});
-	auto filteredDEStatsDatasets = deStats;
-	for (auto deStat : deStats)
-	{
-		std::string str1 = deStat->getGuiName().toStdString();
-		std::string str2 = "DE_Statistics";
-		if (strstr(str1.c_str(), str2.c_str()))
-		{
-		}
-		else {
-			filteredDEStatsDatasets.removeOne(deStat);
-		}
-	}
-
-	_linkerSettingHolder.getSpecies1DEStatsLinkerAction().setDatasets(filteredDEStatsDatasets);
-	_linkerSettingHolder.getSpecies1DEStatsLinkerAction().setPlaceHolderString("DEStats dataset1");
-	_linkerSettingHolder.getSpecies2DEStatsLinkerAction().setDatasets(filteredDEStatsDatasets);
-	_linkerSettingHolder.getSpecies2DEStatsLinkerAction().setPlaceHolderString("DEStats dataset2");
-
-}
+//void SimianOptionsAction::updateDatasetPickerAction()
+//{
+//	auto colorDatasets = _core->requestAllDataSets();
+//	_linkerSettingHolder.getSpecies1ScatterplotColorLinkerAction().setDatasets(colorDatasets);
+//	_linkerSettingHolder.getSpecies1ScatterplotColorLinkerAction().setPlaceHolderString("Species1 scatterplot color linker");
+//	_linkerSettingHolder.getSpecies2ScatterplotColorLinkerAction().setDatasets(colorDatasets);
+//	_linkerSettingHolder.getSpecies2ScatterplotColorLinkerAction().setPlaceHolderString("Species2 scatterplot color linker");
+//
+//	//////
+//	auto datasetsSmartSeq = _core->requestAllDataSets(QVector<hdps::DataType> {ClusterType});
+//	auto filteredSmartSeqSatasets = datasetsSmartSeq;
+//	for (auto smartSeqdataset : datasetsSmartSeq)
+//	{
+//		std::string str1 = smartSeqdataset->getGuiName().toStdString();
+//		std::string str2 = "-SmartSeq-cluster";
+//		if (strstr(str1.c_str(), str2.c_str()))
+//		{
+//		}
+//		else {
+//			filteredSmartSeqSatasets.removeOne(smartSeqdataset);
+//		}
+//	}
+//	_linkerSettingHolder.getSmartSeqDataset2Action().setDatasets(filteredSmartSeqSatasets);
+//	_linkerSettingHolder.getSmartSeqDataset2Action().setPlaceHolderString("Smart Seq Dataset2");
+//
+//	_linkerSettingHolder.getSmartSeqDataset1Action().setDatasets(filteredSmartSeqSatasets);
+//	_linkerSettingHolder.getSmartSeqDataset1Action().setPlaceHolderString("Smart Seq Dataset1");
+//
+//
+//	//////
+//
+//	auto datasets = _core->requestAllDataSets(QVector<hdps::DataType> {ClusterType});
+//	auto filteredCrossSpeciesDatasets = datasets;
+//	auto filteredInSpeciesDatasets = datasets;
+//	for (auto dataset : datasets)
+//	{
+//		std::string str1 = dataset->getGuiName().toStdString();
+//		std::string str2 = "cluster";
+//		if (strstr(str1.c_str(), str2.c_str()))
+//		{
+//		}
+//		else {
+//			filteredCrossSpeciesDatasets.removeOne(dataset);
+//			filteredInSpeciesDatasets.removeOne(dataset);
+//		}
+//	}
+//
+//	datasets = filteredCrossSpeciesDatasets;
+//	for (auto dataset : datasets)
+//	{
+//		std::string str3 = dataset->getGuiName().toStdString();
+//		std::string str4 = "cross";
+//
+//		if (strstr(str3.c_str(), str4.c_str()))
+//		{
+//			filteredInSpeciesDatasets.removeOne(dataset);
+//		}
+//		else
+//		{
+//			filteredCrossSpeciesDatasets.removeOne(dataset);
+//		}
+//	}
+//
+//	_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().setDatasets(filteredCrossSpeciesDatasets);
+//	_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().setPlaceHolderString("Species1 cross-species clusters");
+//	_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().setDatasets(filteredCrossSpeciesDatasets);
+//	_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().setPlaceHolderString("Species2 cross-species clusters");
+//	_linkerSettingHolder.getInSpecies1DatasetLinkerAction().setDatasets(filteredInSpeciesDatasets);
+//	_linkerSettingHolder.getInSpecies1DatasetLinkerAction().setPlaceHolderString("Species1 in-species clusters");
+//	_linkerSettingHolder.getInSpecies2DatasetLinkerAction().setDatasets(filteredInSpeciesDatasets);
+//	_linkerSettingHolder.getInSpecies2DatasetLinkerAction().setPlaceHolderString("Species2 in-species clusters");
+//
+//	auto embeddings = _core->requestAllDataSets(QVector<hdps::DataType> {PointType});
+//	auto filteredEmbeddingDatasets = embeddings;
+//	for (auto embedding : embeddings)
+//	{
+//		std::string str1 = embedding->getGuiName().toStdString();
+//		/*qDebug() << QString::fromStdString(str1);*/
+//		std::string str2 = "embedding";
+//		if (strstr(str1.c_str(), str2.c_str()))
+//		{
+//		}
+//		else {
+//			filteredEmbeddingDatasets.removeOne(embedding);
+//		}
+//	}
+//
+//	_linkerSettingHolder.getSpeciesEmbedding1LinkerAction().setDatasets(filteredEmbeddingDatasets);
+//	_linkerSettingHolder.getSpeciesEmbedding1LinkerAction().setPlaceHolderString("Embedding1 dataset");
+//	_linkerSettingHolder.getSpeciesEmbedding2LinkerAction().setDatasets(filteredEmbeddingDatasets);
+//	_linkerSettingHolder.getSpeciesEmbedding2LinkerAction().setPlaceHolderString("Embedding2 dataset");
+//
+//	auto deStats = _core->requestAllDataSets(QVector<hdps::DataType> {PointType});
+//	auto filteredDEStatsDatasets = deStats;
+//	for (auto deStat : deStats)
+//	{
+//		std::string str1 = deStat->getGuiName().toStdString();
+//		std::string str2 = "DE_Statistics";
+//		if (strstr(str1.c_str(), str2.c_str()))
+//		{
+//		}
+//		else {
+//			filteredDEStatsDatasets.removeOne(deStat);
+//		}
+//	}
+//
+//	_linkerSettingHolder.getSpecies1DEStatsLinkerAction().setDatasets(filteredDEStatsDatasets);
+//	_linkerSettingHolder.getSpecies1DEStatsLinkerAction().setPlaceHolderString("DEStats dataset1");
+//	_linkerSettingHolder.getSpecies2DEStatsLinkerAction().setDatasets(filteredDEStatsDatasets);
+//	_linkerSettingHolder.getSpecies2DEStatsLinkerAction().setPlaceHolderString("DEStats dataset2");
+//
+//}
 
 
 
