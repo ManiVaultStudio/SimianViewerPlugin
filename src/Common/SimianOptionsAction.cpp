@@ -2312,7 +2312,7 @@ inline SimianOptionsAction::VisSettingHolder::VisSettingHolder(SimianOptionsActi
 	setPopupSizeHint(QSize(350, 0));
 	addAction(&_fullHeatMapAction);
 	addAction(&_colorMapAction);
-	//addAction(&_pluginVisibility);
+	addAction(&_pluginVisibility);
 	addAction(&_selectionColorAction);
 
 }
