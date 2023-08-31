@@ -553,7 +553,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		if (_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().getNumberOfOptions() > 0)
 		{
 			QString species1CrossSpeciesClusterDatasetName = _species1SelectAction.getCurrentText() + "_" + _neighborhoodAction.getCurrentText() + "_cross_species_cluster";
-			qDebug() << "*********************" << species1CrossSpeciesClusterDatasetName << "*********************";
+			//qDebug() << "*********************" << species1CrossSpeciesClusterDatasetName << "*********************";
 			_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().setCurrentText(species1CrossSpeciesClusterDatasetName);
 		}
 		if (_linkerSettingHolder.getSmartSeqDataset1Action().getNumberOfOptions() > 0 && _species1SelectAction.getCurrentText() == "human" || _species1SelectAction.getCurrentText() == "chimp" || _species1SelectAction.getCurrentText() == "gorilla")
