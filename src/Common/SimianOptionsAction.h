@@ -299,6 +299,7 @@ protected:
     bool _stopMethodFlagFromSpecies1 = false;
     bool _stopMethodFlagFromSpecies2 = false;
     bool _isStarted;
+    bool isInitSerialGate = false;
     //ColorMapAction _scatterplotColorMapAction;
     //ColorAction              _backgroundColoringAction;
     hdps::EventListener     _eventListener;

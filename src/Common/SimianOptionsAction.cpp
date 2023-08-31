@@ -86,7 +86,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	//connect(&_helpAction, &TriggerAction::triggered, this, [this]() -> void {
 	//	_simianViewerPlugin.getTriggerHelpAction().trigger();
 	//});
-
+	_linkerSettingHolder.getSpecies1DEStatsLinkerAction().setShowFullPathName(false);
 	_linkerSettingHolder.getSpecies1DEStatsLinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
 		Datasets statsDatasets;
 
@@ -102,6 +102,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			}
 		return statsDatasets;
 		});
+	_linkerSettingHolder.getSpecies2DEStatsLinkerAction().setShowFullPathName(false);
 	_linkerSettingHolder.getSpecies2DEStatsLinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
 		Datasets statsDatasets;
 
@@ -117,7 +118,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			}
 		return statsDatasets;
 		});
-
+	_linkerSettingHolder.getSpeciesEmbedding1LinkerAction().setShowFullPathName(false);
 	_linkerSettingHolder.getSpeciesEmbedding1LinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
 		Datasets statsDatasets;
 
@@ -133,7 +134,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			}
 		return statsDatasets;
 		});
-
+	_linkerSettingHolder.getSpeciesEmbedding2LinkerAction().setShowFullPathName(false);
 	_linkerSettingHolder.getSpeciesEmbedding2LinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
 		Datasets statsDatasets;
 
@@ -149,7 +150,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			}
 		return statsDatasets;
 		});
-
+	_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().setShowFullPathName(false);
 	_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
 		Datasets statsDatasets;
 
@@ -170,6 +171,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			}
 		return statsDatasets;
 		});
+	_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().setShowFullPathName(false);
 	_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
 		Datasets statsDatasets;
 
@@ -190,7 +192,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			}
 		return statsDatasets;
 		});
-
+	_linkerSettingHolder.getInSpecies1DatasetLinkerAction().setShowFullPathName(false);
 	_linkerSettingHolder.getInSpecies1DatasetLinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
 		Datasets statsDatasets;
 
@@ -215,6 +217,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			}
 		return statsDatasets;
 		});
+	_linkerSettingHolder.getInSpecies2DatasetLinkerAction().setShowFullPathName(false);
 	_linkerSettingHolder.getInSpecies2DatasetLinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
 		Datasets statsDatasets;
 
@@ -240,7 +243,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		return statsDatasets;
 		});
 
-
+	_linkerSettingHolder.getSmartSeqDataset1Action().setShowFullPathName(false);
 	_linkerSettingHolder.getSmartSeqDataset1Action().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
 		Datasets statsDatasets;
 
@@ -256,6 +259,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			}
 		return statsDatasets;
 		});
+	_linkerSettingHolder.getSmartSeqDataset2Action().setShowFullPathName(false);
 	_linkerSettingHolder.getSmartSeqDataset2Action().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
 		Datasets statsDatasets;
 
@@ -271,7 +275,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			}
 		return statsDatasets;
 		});
-
+	_linkerSettingHolder.getSpecies1ScatterplotColorLinkerAction().setShowFullPathName(false);
 	_linkerSettingHolder.getSpecies1ScatterplotColorLinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
 		Datasets statsDatasets;
 
@@ -282,6 +286,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		
 		return statsDatasets;
 		});
+	_linkerSettingHolder.getSpecies2ScatterplotColorLinkerAction().setShowFullPathName(false);
 	_linkerSettingHolder.getSpecies2ScatterplotColorLinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
 		Datasets statsDatasets;
 
@@ -548,6 +553,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		if (_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().getNumberOfOptions() > 0)
 		{
 			QString species1CrossSpeciesClusterDatasetName = _species1SelectAction.getCurrentText() + "_" + _neighborhoodAction.getCurrentText() + "_cross_species_cluster";
+			qDebug() << "*********************" << species1CrossSpeciesClusterDatasetName << "*********************";
 			_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().setCurrentText(species1CrossSpeciesClusterDatasetName);
 		}
 		if (_linkerSettingHolder.getSmartSeqDataset1Action().getNumberOfOptions() > 0 && _species1SelectAction.getCurrentText() == "human" || _species1SelectAction.getCurrentText() == "chimp" || _species1SelectAction.getCurrentText() == "gorilla")
@@ -594,27 +600,38 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 		}
 
-		QString storeSpecies = _species2SelectAction.getCurrentText();
-		QStringList speciesNames = { "human","chimp","gorilla","rhesus","marmoset" };
-		speciesNames.removeAll(_species1SelectAction.getCurrentText());
-		_species2SelectAction.initialize(QStringList({ speciesNames }), storeSpecies);
+
+
 
 
 		if (_species2SelectAction.getCurrentText() == _species1SelectAction.getCurrentText())
 		{
-
+			if (isInitSerialGate)
+			{
+				isInitSerialGate = false;
+			}
 			QStringList speciesNames = { "human","chimp","gorilla","rhesus","marmoset" };
 			speciesNames.removeAll(_species1SelectAction.getCurrentText());
-			_species2SelectAction.initialize(QStringList({ speciesNames }), "");
+			_species2SelectAction.initialize(speciesNames, "");
 			//QString tempVal = _scatterplotColorControlAction.getCurrentText();
 			//_scatterplotColorControlAction.setCurrentText("");
 			//_scatterplotColorControlAction.setCurrentText(tempVal);
-			_species2SelectAction.setCurrentIndex(0);
+			if (!isInitSerialGate)
+			{
+				isInitSerialGate = true;
+			}
+			
+			_species2SelectAction.setCurrentText(speciesNames.takeFirst());
 			//_simianViewerPlugin.getSimianViewerWidget().resetView("Reset");
 		}
 
 		else
 		{
+
+			QString storeSpecies = _species2SelectAction.getCurrentText();
+			QStringList speciesNames = { "human","chimp","gorilla","rhesus","marmoset" };
+			speciesNames.removeAll(_species1SelectAction.getCurrentText());
+			_species2SelectAction.initialize(speciesNames, storeSpecies);
 			//if (_species2SelectAction.getCurrentText() != "")
 			//{
 			QString tempVal = _scatterplotColorControlAction.getCurrentText();
@@ -712,6 +729,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 	const auto updateSpecies2 = [this]() -> void
 	{
+		if(isInitSerialGate){
 		//if (_species2SelectAction.getCurrentText() != "")
 		//{
 			//_neighborhoodAction.setEnabled(true);
@@ -742,7 +760,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			QString species2CrossSpeciesClusterDatasetName = _species2SelectAction.getCurrentText() + "_" + _neighborhoodAction.getCurrentText() + "_cross_species_cluster";
 			_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().setCurrentText(species2CrossSpeciesClusterDatasetName);
 		}
-		
+
 		if (_linkerSettingHolder.getSmartSeqDataset2Action().getNumberOfOptions() > 0 && _species2SelectAction.getCurrentText() == "human" || _species2SelectAction.getCurrentText() == "chimp" || _species2SelectAction.getCurrentText() == "gorilla")
 		{
 			QString species2InSpeciesClusterDatasetName = _species2SelectAction.getCurrentText() + "-SmartSeq-cluster";
@@ -878,6 +896,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			//_linkerSettingHolder.setEnabled(false);
 			//_distanceNeighborhoodHolder.setEnabled(false);
 		//}
+
+	}
 	};
 
 
@@ -2331,7 +2351,8 @@ inline SimianOptionsAction::LinkerSettingHolder::LinkerSettingHolder(SimianOptio
 	setText("Linking Options");
 	setIcon(Application::getIconFont("FontAwesome").getIcon("link"));
 	setPopupSizeHint(QSize(350, 0));
-
+	//addAction(&_smartSeqDataset1);
+	//addAction(&_smartSeqDataset2);
 	//connect(&_popPyramidPluginVisibility, &ToggleAction::toggled, this, [](bool toggled) -> void {
 	//	qDebug() << "_popPyramidPluginVisibility" << "toggled changed to" << toggled;
 	//	});
