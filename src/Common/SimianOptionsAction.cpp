@@ -729,6 +729,10 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 	const auto updateSpecies2 = [this]() -> void
 	{
+		if (_species2SelectAction.getCurrentText()!="")
+		{
+			isInitSerialGate = true;
+		}
 		if(isInitSerialGate){
 		//if (_species2SelectAction.getCurrentText() != "")
 		//{

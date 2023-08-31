@@ -294,13 +294,13 @@ const simianVis = () => {
     }
     var margin;
     if (barflag) {
-        margin = { top: 20, right: 25, bottom: 90, left: 85 },
+        margin = { top: 20, right: 25, bottom: 95, left: 85 },
             width = (heatmapWidth / 100 * window.innerWidth) * 0.99 - margin.left - margin.right,
             height = window.innerHeight * 0.99 - margin.top - margin.bottom;
 
     }
     else {
-        margin = { top: 1, right: 10, bottom: 90, left: 85 },
+        margin = { top: 1, right: 10, bottom: 95, left: 85 },
             width = (heatmapWidth / 100 * window.innerWidth) * 0.99 - margin.left - margin.right,
             height = window.innerHeight * 0.99 - margin.top - margin.bottom;
     }
