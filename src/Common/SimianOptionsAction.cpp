@@ -1794,7 +1794,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 
 
 	connect(&_linkerSettingHolder.getSelectedCrossSpeciesNameList(), &StringAction::stringChanged, this, updateSelectedCrossSpeciesNameList);
-	connect(&_linkerSettingHolder.getSelectedCrossSpeciesNameList(), &StringAction::stringChanged, this, updateSelectedCrossSpeciesNameList);
+	//connect(&_linkerSettingHolder.getSelectedCrossSpeciesNameList(), &StringAction::stringChanged, this, updateSelectedCrossSpeciesNameList);
 	connect(&_visSettingHolder.getColorMapAction(), &ColorMapAction::imageChanged, this, colormapFilter);
 
 	//connect(&_backgroundColoringAction, &ColorAction::colorChanged, this, backgroundColoringFilter);
