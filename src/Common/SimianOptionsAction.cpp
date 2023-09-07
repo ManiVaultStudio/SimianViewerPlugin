@@ -2688,7 +2688,8 @@ void SimianOptionsAction::fromVariantMap(const QVariantMap& variantMap)
 
 	_linkerSettingHolder.getSmartSeqDataset1Action().fromParentVariantMap(variantMap);
 	_linkerSettingHolder.getSmartSeqDataset2Action().fromParentVariantMap(variantMap);
-
+	_linkerSettingHolder.getPopPyramidPluginVisibility().fromParentVariantMap(variantMap);
+	_linkerSettingHolder.getParallelBarPluginVisibility().fromParentVariantMap(variantMap);
 	//_crossSpeciesFilterAction.fromParentVariantMap(variantMap);
 	_linkerSettingHolder.getInSpecies1HeatMapCellAction().fromParentVariantMap(variantMap);
 	_linkerSettingHolder.getInSpecies2HeatMapCellAction().fromParentVariantMap(variantMap);
@@ -2750,6 +2751,8 @@ QVariantMap SimianOptionsAction::toVariantMap() const
 	_visSettingHolder.getFullHeatmapAction().insertIntoVariantMap(variantMap);
 	_visSettingHolder.getSelectionColorAction().insertIntoVariantMap(variantMap);
 	_visSettingHolder.getPluginVisibilityAction().insertIntoVariantMap(variantMap);
+	_linkerSettingHolder.getPopPyramidPluginVisibility().insertIntoVariantMap(variantMap);
+	_linkerSettingHolder.getParallelBarPluginVisibility().insertIntoVariantMap(variantMap);
 	//_backgroundColoringAction.insertIntoVariantMap(variantMap);
 	_visSettingHolder.getColorMapAction().insertIntoVariantMap(variantMap);
 	_histBarAction.insertIntoVariantMap(variantMap);
