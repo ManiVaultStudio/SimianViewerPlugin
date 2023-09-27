@@ -46,7 +46,7 @@ If you use this project in your research or find it helpful, please consider cit
 - **Cytosplore Simian Viewer: Visual Exploration for Multi-Species Single-Cell RNA Sequencing Data**
   - *Authors*: Soumyadeep Basu, Jeroen Eggermont, Thomas Kroes, Nicholas L. Jorstad, Trygve Bakken, Ed Lein, Boudewijn P.F. Lelieveldt, Thomas Höllt
   - *Published in*: Eurographics Workshop on Visual Computing for Biology and Medicine, page 111-120 - Sep 2023
-  - *Link*: [Paper](https://diglib.eg.org/handle/10.2312/vcbm20231219
+  - *Link*: [Paper](https://diglib.eg.org/handle/10.2312/vcbm20231219)
   - *BibTeX*:
     ```bibtex
     @article{10.2312:vcbm.20231219,
