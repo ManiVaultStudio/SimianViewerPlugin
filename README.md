@@ -4,7 +4,7 @@
 ![App Screenshot](https://www.thomashollt.com/assets/papers/2023_vcbm_soumyadeep/2023_vcbm_soumyadeep_teaser.png)
 
 The Cytosplore Simian Viewer system is designed to enable researchers to analyze and compare cell and gene expression variations across multiple species.
-## Other Repositories Used
+##Repositories Used
 
 The Cytosplore Simian Viewer system makes use of the following repositories:
 
