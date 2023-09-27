@@ -1051,10 +1051,9 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			command.clear();
 			command << QString("TableView") << QString("hideColumn") << int(3);
 			commands.push_back(command);
-		}
-		_linkerSettingHolder.getCommandAction
-		().setVariant(commands);
 
+		}
+		_linkerSettingHolder.getCommandAction().setVariant(commands);
 	};
 	const auto updateNeighborhood = [this]() -> void
 	{
@@ -2609,6 +2608,10 @@ void SimianOptionsAction::initLoader()
 	}
 
 	//_visSettingHolder.getSelectionColorAction().setColor(QColor::fromRgb(0x257afd));
+
+	// extra update
+	auto crossSpeciesNameList = _linkerSettingHolder.getSelectedCrossSpeciesNameList().getString();
+	emit _linkerSettingHolder.getSelectedCrossSpeciesNameList().stringChanged(crossSpeciesNameList);
 
 	QVariantList commands;
 

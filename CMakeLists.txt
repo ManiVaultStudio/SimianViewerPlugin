@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 3.1.0)
-
+cmake_minimum_required(VERSION 3.15)
+cmake_policy(SET CMP0058 NEW) # suppress Ninja warning on Linux about /res files
 set(PROJECT "SimianViewerPlugin")
 
 PROJECT(${PROJECT})
