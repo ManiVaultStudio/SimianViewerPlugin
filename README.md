@@ -12,25 +12,21 @@ The Cytosplore Simian Viewer system makes use of the following repositories:
    - Description: Core application manages data sets and plugins.
    - Repository Link: [ManiVaultCore](https://github.com/ManiVaultStudio/core.git)
 
-2. **SimianViewerScatterplotPlugin**
-   - Description: Plugin for Scatterplot view.
+2. **Scatterplot View Plugin**
    - Repository Link: [SimianViewerScatterplotPlugin](https://github.com/ManiVaultStudio/SimianViewerScatterplotPlugin.git)
 
-3. **ClusterDifferentialExpressionPlugin**
-   - Description: Plugin to compute and view Differential Expression.
+3. **Differential Expression View Plugin**
    - Repository Link: [ClusterDifferentialExpressionPlugin](https://github.com/ManiVaultStudio/ClusterDifferentialExpressionPlugin.git)
 
-4. **SimianViewerPairExpCompPlugin**
-   - Description: Plugin for Pairwise Expression Comparison.
+4. **Pairwise Expression Comparison View Plugin**
    - Repository Link: [SimianViewerPairExpCompPlugin](https://github.com/ManiVaultStudio/SimianViewerPairExpCompPlugin.git)   
 
-5. **SimianViewerMultExpCompPlugin**
-   - Description: Plugin for Multi-Species Expression Comparison.
+5. **Multi-species Expression Comparison View Plugin**
    - Repository Link: [SimianViewerMultExpCompPlugin](https://github.com/ManiVaultStudio/SimianViewerMultExpCompPlugin.git)
 
-5. **SimianViewerPlugin**
-   - Description: Plugin for Distancemap view.
+5. **Distancemap View Plugin**
    - Repository Link: [SimianViewerPlugin](https://github.com/ManiVaultStudio/SimianViewerPlugin.git)
+
 ## Installers
 
 Installer executables can be downloaded from the [Cytosplore website](https://viewer.cytosplore.org/).
