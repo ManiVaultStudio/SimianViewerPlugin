@@ -35,10 +35,6 @@ The Cytosplore Simian Viewer system makes use of the following repositories:
 
 Installer executables can be downloaded from the [Cytosplore website](https://viewer.cytosplore.org/) or using the links below:
 
-[![Online Installer](https://img.shields.io/badge/Download-Online%20Installer-brightgreen.svg)](https://github.com/ManiVaultStudio/Installer/releases/download/ManiVaultStudio_simian_viewer_online/ManiVault_simian_viewer_online.exe)
-
-[![Offline Installer](https://img.shields.io/badge/Download-Offline%20Installer-brightgreen.svg)](https://github.com/ManiVaultStudio/Installer/releases/download/ManiVaultStudio_simian_viewer_offline/ManiVault_simian_viewer_offline.exe)
-
 ## Publications
 
 If you use this project in your research or find it helpful, please consider citing the publications:
