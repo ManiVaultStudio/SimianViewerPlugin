@@ -33,7 +33,7 @@ The Cytosplore Simian Viewer system makes use of the following repositories:
    - Repository Link: [SimianViewerPlugin](https://github.com/ManiVaultStudio/SimianViewerPlugin.git)
 ## Installers
 
-Installer executables can be downloaded from the [Cytosplore website](https://viewer.cytosplore.org/) or using the links below:
+Installer executables can be downloaded from the [Cytosplore website](https://viewer.cytosplore.org/).
 
 ## Publications
 
