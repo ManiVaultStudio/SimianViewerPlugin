@@ -29,7 +29,7 @@ The Cytosplore Simian Viewer system makes use of the following repositories:
 
 ## Installers
 
-Installer executables can be downloaded from the [Cytosplore website](https://viewer.cytosplore.org/).
+Installer executables can soon be downloaded from the [Cytosplore website](https://viewer.cytosplore.org/).
 
 ## Publications
 
