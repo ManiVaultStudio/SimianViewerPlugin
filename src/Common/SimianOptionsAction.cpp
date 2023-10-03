@@ -687,12 +687,13 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			{
 				_scatterplotColorControlAction.setCurrentText("cross-species cluster");
 			}
-			_linkerSettingHolder.getSelectedCrossspeciescluster().setString("");
-			_linkerSettingHolder.getSelectedCrossspeciescluster().setString(storeCrossSpeciesClusterSelection);
-			_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().trigger();
+
 			//}
 
 		}
+		_linkerSettingHolder.getSelectedCrossspeciescluster().setString("");
+		_linkerSettingHolder.getSelectedCrossspeciescluster().setString(storeCrossSpeciesClusterSelection);
+		_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().trigger();
 		_stopMethodFlagFromSpecies1 = false;
 		//}
 		//else
