@@ -29,9 +29,9 @@ The Cytosplore Simian Viewer system makes use of the following repositories:
 
 ## Installers
 
-Installer executables can soon be downloaded from the [Cytosplore website](https://viewer.cytosplore.org/). 
+The installer can be downloaded currently using: [![Installer](https://img.shields.io/badge/Download-Offline%20Installer-brightgreen.svg)](https://surfdrive.surf.nl/files/index.php/s/6sw8LIzpjct71Ep/download)
 
-The installer can also be downloaded currently using: [![Installer](https://img.shields.io/badge/Download-Offline%20Installer-brightgreen.svg)](https://surfdrive.surf.nl/files/index.php/s/6sw8LIzpjct71Ep/download)
+Installer executables can soon be downloaded from the [Cytosplore website](https://viewer.cytosplore.org/). 
 
 ## Publications
 
