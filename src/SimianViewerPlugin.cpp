@@ -16,7 +16,11 @@
 #include <vector>
 #include <sstream>
 #include <QDesktopServices>
+#include <QMainWindow>
+#include <QMenuBar>
 #include <QUrl>
+#include <QWindowList>
+#include <QWindow>
 
 Q_PLUGIN_METADATA(IID "nl.tudelft.SimianViewerPlugin")
 
@@ -264,8 +268,60 @@ QIcon SimianViewerPluginFactory::getIcon(const QColor& color /*= Qt::black*/) co
     return Application::getIconFont("FontAwesome").getIcon("chart-area", color);
 }
 
+
+QMenu *findHelpMenu()
+{
+    // find the mainwindow
+    foreach(QWidget * widget, qApp->topLevelWidgets())
+        if (QMainWindow* mainWindow = qobject_cast<QMainWindow*>(widget))
+        {
+            // now get the menu bar and find the Help menu
+            QMenuBar* theMenuBar = mainWindow->menuBar();
+            auto menuBarActions = theMenuBar->actions();
+            for (auto it = menuBarActions.begin(); it != menuBarActions.end(); ++it)
+            {
+               
+                if ((*it)->text() == "Help")
+                {
+                    QMenu *helpMenu =  QMenu::menuInAction(*it);
+                    return helpMenu;
+                }
+                
+            }
+
+        }
+    return nullptr;
+}
 ViewPlugin* SimianViewerPluginFactory::produce()
 {
+    
+    static bool first = true;
+
+    
+    if(first)
+    {
+
+        QMenu *helpMenu = findHelpMenu();
+        if(helpMenu)
+        {
+           
+            auto *documentation = new TriggerAction(this, " Documentation");
+            QIcon icon = Application::getIconFont("FontAwesome").getIcon("file-pdf", Qt::black);
+            documentation->setIcon(icon);
+            connect(documentation, &QAction::triggered, this, [this](bool)
+            {
+            	auto urlString = QString("file:///") + QApplication::applicationDirPath() + "/SimianViewerDocumentation.pdf";
+	            QDesktopServices::openUrl(QUrl(urlString, QUrl::TolerantMode));
+            });
+            helpMenu->addAction(documentation);
+            first = false;
+        }
+
+
+
+    }
+    
+    
     return new SimianViewerPlugin(this);
 }
 
