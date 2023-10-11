@@ -1720,7 +1720,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			//	}
 			//}
 		}
-		if (!_stopMethodFlagFromSpecies1 && !_stopMethodFlagFromSpecies2)
+		if (!_stopMethodFlagFromSpecies1 && !_stopMethodFlagFromSpecies2 && _linkerSettingHolder.getSelectedCrossspeciescluster().getString() != "")
 		{
 			_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().trigger();
 		}
