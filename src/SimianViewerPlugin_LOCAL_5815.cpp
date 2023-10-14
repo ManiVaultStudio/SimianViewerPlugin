@@ -18,7 +18,7 @@
 
 Q_PLUGIN_METADATA(IID "nl.tudelft.SimianViewerPlugin")
 
-using namespace hdps;
+using namespace mv;
 
 // =============================================================================
 // View
@@ -98,9 +98,9 @@ void SimianViewerPlugin::init()
 
 }
 
-void SimianViewerPlugin::onDataEvent(hdps::DataEvent* dataEvent)
+void SimianViewerPlugin::onDataEvent(mv::DataEvent* dataEvent)
 {
-    if (dataEvent->getType() == hdps::EventType::DataSelectionChanged)
+    if (dataEvent->getType() == mv::EventType::DataSelectionChanged)
     {
         const auto selectionChangedEvent = static_cast<DataSelectionChangedEvent*>(dataEvent);
         const auto& changedDataSet = _core->requestDataset<Clusters>(selectionChangedEvent->getDataset()->getGuid());
@@ -235,14 +235,14 @@ ViewPlugin* SimianViewerPluginFactory::produce()
     return new SimianViewerPlugin(this);
 }
 
-hdps::DataTypes SimianViewerPluginFactory::supportedDataTypes() const
+mv::DataTypes SimianViewerPluginFactory::supportedDataTypes() const
 {
     DataTypes supportedTypes;
     return supportedTypes;
 }
 
 
-hdps::gui::PluginTriggerActions SimianViewerPluginFactory::getPluginTriggerActions(const hdps::Datasets& datasets) const
+mv::gui::PluginTriggerActions SimianViewerPluginFactory::getPluginTriggerActions(const mv::Datasets& datasets) const
 {
 	PluginTriggerActions pluginTriggerActions;
 

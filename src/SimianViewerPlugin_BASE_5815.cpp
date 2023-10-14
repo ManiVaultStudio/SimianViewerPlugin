@@ -15,7 +15,7 @@
 
 Q_PLUGIN_METADATA(IID "nl.tudelft.SimianViewerPlugin")
 
-using namespace hdps;
+using namespace mv;
 
 // =============================================================================
 // View
@@ -109,10 +109,10 @@ void SimianViewerPlugin::init()
 
 }
 
-void SimianViewerPlugin::onDataEvent(hdps::DataEvent* dataEvent)
+void SimianViewerPlugin::onDataEvent(mv::DataEvent* dataEvent)
 {
     //qDebug() << "dataset has changed" << (int) dataEvent->getType() << dataEvent->getDataset()->getGuiName();
-    if (dataEvent->getType() == hdps::EventType::DataSelectionChanged)
+    if (dataEvent->getType() == mv::EventType::DataSelectionChanged)
     {
         const auto selectionChangedEvent = static_cast<DataSelectionChangedEvent*>(dataEvent);
         const auto& changedDataSet = _core->requestDataset<Clusters>(selectionChangedEvent->getDataset()->getGuid());
@@ -120,7 +120,7 @@ void SimianViewerPlugin::onDataEvent(hdps::DataEvent* dataEvent)
         qDebug() << selectionSet;
         _simian_viewer->setClusters(selectionSet);
     }
-    //if (dataEvent->getType() == hdps::EventType::Data)
+    //if (dataEvent->getType() == mv::EventType::Data)
     //{
     //    _simian_viewer->setClusters(QStringList());
     //}
@@ -216,7 +216,7 @@ ViewPlugin* SimianViewerPluginFactory::produce()
     return new SimianViewerPlugin(this);
 }
 
-hdps::DataTypes SimianViewerPluginFactory::supportedDataTypes() const
+mv::DataTypes SimianViewerPluginFactory::supportedDataTypes() const
 {
     DataTypes supportedTypes;
     return supportedTypes;

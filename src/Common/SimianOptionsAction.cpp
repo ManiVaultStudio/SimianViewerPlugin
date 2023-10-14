@@ -3,11 +3,11 @@
 #include <QFileDialog>
 #include <QPageLayout>
 #include <QWebEngineView>
-using namespace hdps;
-using namespace hdps::gui;
+using namespace mv;
+using namespace mv::gui;
 const QColor SimianOptionsAction::DEFAULT_CONSTANT_COLOR = qRgb(255, 255, 255);
 
-SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin, hdps::CoreInterface* core) :
+SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin, mv::CoreInterface* core) :
 	WidgetAction(&simianViewerPlugin,"simianViewerPlugin"),
 	_simianViewerPlugin(simianViewerPlugin),
 	_core(core),
@@ -87,7 +87,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	//	_simianViewerPlugin.getTriggerHelpAction().trigger();
 	//});
 	_linkerSettingHolder.getSpecies1DEStatsLinkerAction().setShowFullPathName(false);
-	_linkerSettingHolder.getSpecies1DEStatsLinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
+	_linkerSettingHolder.getSpecies1DEStatsLinkerAction().setDatasetsFilterFunction([this](const mv::Datasets& datasets) ->mv::Datasets {
 		Datasets statsDatasets;
 
 		for (auto dataset : datasets)
@@ -103,7 +103,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		return statsDatasets;
 		});
 	_linkerSettingHolder.getSpecies2DEStatsLinkerAction().setShowFullPathName(false);
-	_linkerSettingHolder.getSpecies2DEStatsLinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
+	_linkerSettingHolder.getSpecies2DEStatsLinkerAction().setDatasetsFilterFunction([this](const mv::Datasets& datasets) ->mv::Datasets {
 		Datasets statsDatasets;
 
 		for (auto dataset : datasets)
@@ -119,7 +119,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		return statsDatasets;
 		});
 	_linkerSettingHolder.getSpeciesEmbedding1LinkerAction().setShowFullPathName(false);
-	_linkerSettingHolder.getSpeciesEmbedding1LinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
+	_linkerSettingHolder.getSpeciesEmbedding1LinkerAction().setDatasetsFilterFunction([this](const mv::Datasets& datasets) ->mv::Datasets {
 		Datasets statsDatasets;
 
 		for (auto dataset : datasets)
@@ -135,7 +135,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		return statsDatasets;
 		});
 	_linkerSettingHolder.getSpeciesEmbedding2LinkerAction().setShowFullPathName(false);
-	_linkerSettingHolder.getSpeciesEmbedding2LinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
+	_linkerSettingHolder.getSpeciesEmbedding2LinkerAction().setDatasetsFilterFunction([this](const mv::Datasets& datasets) ->mv::Datasets {
 		Datasets statsDatasets;
 
 		for (auto dataset : datasets)
@@ -151,7 +151,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		return statsDatasets;
 		});
 	_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().setShowFullPathName(false);
-	_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
+	_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().setDatasetsFilterFunction([this](const mv::Datasets& datasets) ->mv::Datasets {
 		Datasets statsDatasets;
 
 		for (auto dataset : datasets)
@@ -172,7 +172,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		return statsDatasets;
 		});
 	_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().setShowFullPathName(false);
-	_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
+	_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().setDatasetsFilterFunction([this](const mv::Datasets& datasets) ->mv::Datasets {
 		Datasets statsDatasets;
 
 		for (auto dataset : datasets)
@@ -193,7 +193,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		return statsDatasets;
 		});
 	_linkerSettingHolder.getInSpecies1DatasetLinkerAction().setShowFullPathName(false);
-	_linkerSettingHolder.getInSpecies1DatasetLinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
+	_linkerSettingHolder.getInSpecies1DatasetLinkerAction().setDatasetsFilterFunction([this](const mv::Datasets& datasets) ->mv::Datasets {
 		Datasets statsDatasets;
 
 		for (auto dataset : datasets)
@@ -218,7 +218,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		return statsDatasets;
 		});
 	_linkerSettingHolder.getInSpecies2DatasetLinkerAction().setShowFullPathName(false);
-	_linkerSettingHolder.getInSpecies2DatasetLinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
+	_linkerSettingHolder.getInSpecies2DatasetLinkerAction().setDatasetsFilterFunction([this](const mv::Datasets& datasets) ->mv::Datasets {
 		Datasets statsDatasets;
 
 		for (auto dataset : datasets)
@@ -244,7 +244,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		});
 
 	_linkerSettingHolder.getSmartSeqDataset1Action().setShowFullPathName(false);
-	_linkerSettingHolder.getSmartSeqDataset1Action().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
+	_linkerSettingHolder.getSmartSeqDataset1Action().setDatasetsFilterFunction([this](const mv::Datasets& datasets) ->mv::Datasets {
 		Datasets statsDatasets;
 
 		for (auto dataset : datasets)
@@ -260,7 +260,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		return statsDatasets;
 		});
 	_linkerSettingHolder.getSmartSeqDataset2Action().setShowFullPathName(false);
-	_linkerSettingHolder.getSmartSeqDataset2Action().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
+	_linkerSettingHolder.getSmartSeqDataset2Action().setDatasetsFilterFunction([this](const mv::Datasets& datasets) ->mv::Datasets {
 		Datasets statsDatasets;
 
 		for (auto dataset : datasets)
@@ -276,7 +276,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		return statsDatasets;
 		});
 	_linkerSettingHolder.getSpecies1ScatterplotColorLinkerAction().setShowFullPathName(false);
-	_linkerSettingHolder.getSpecies1ScatterplotColorLinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
+	_linkerSettingHolder.getSpecies1ScatterplotColorLinkerAction().setDatasetsFilterFunction([this](const mv::Datasets& datasets) ->mv::Datasets {
 		Datasets statsDatasets;
 
 		for (auto dataset : datasets)
@@ -287,7 +287,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		return statsDatasets;
 		});
 	_linkerSettingHolder.getSpecies2ScatterplotColorLinkerAction().setShowFullPathName(false);
-	_linkerSettingHolder.getSpecies2ScatterplotColorLinkerAction().setDatasetsFilterFunction([this](const hdps::Datasets& datasets) ->hdps::Datasets {
+	_linkerSettingHolder.getSpecies2ScatterplotColorLinkerAction().setDatasetsFilterFunction([this](const mv::Datasets& datasets) ->mv::Datasets {
 		Datasets statsDatasets;
 
 		for (auto dataset : datasets)
@@ -582,7 +582,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		{
 
 			const QString child_DE_Statistics_DatasetName = "DE_Statistics";
-			hdps::Dataset<Clusters> clusterDataset = _linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().getCurrentDataset();
+			mv::Dataset<Clusters> clusterDataset = _linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().getCurrentDataset();
 			QString DatasetGUID = "";
 			const auto& childDatasets = clusterDataset->getChildren({ PointType });
 			for (qsizetype i = 0; i < childDatasets.size(); ++i)
@@ -791,7 +791,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		if (_linkerSettingHolder.getSpecies2DEStatsLinkerAction().getNumberOfOptions() > 0)
 		{
 			const QString child_DE_Statistics_DatasetName = "DE_Statistics";
-			hdps::Dataset<Clusters> clusterDataset = _linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().getCurrentDataset();
+			mv::Dataset<Clusters> clusterDataset = _linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().getCurrentDataset();
 			QString DatasetGUID = "";
 			const auto& childDatasets = clusterDataset->getChildren({ PointType });
 			for (qsizetype i = 0; i < childDatasets.size(); ++i)
@@ -1174,7 +1174,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		if (_linkerSettingHolder.getSpecies1DEStatsLinkerAction().getNumberOfOptions() > 0)
 		{
 			const QString child_DE_Statistics_DatasetName = "DE_Statistics";
-			hdps::Dataset<Clusters> clusterDataset = _linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().getCurrentDataset();
+			mv::Dataset<Clusters> clusterDataset = _linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().getCurrentDataset();
 			QString DatasetGUID = "";
 			const auto& childDatasets = clusterDataset->getChildren({ PointType });
 			for (qsizetype i = 0; i < childDatasets.size(); ++i)
@@ -1194,7 +1194,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 		if (_linkerSettingHolder.getSpecies2DEStatsLinkerAction().getNumberOfOptions() > 0)
 		{
 			const QString child_DE_Statistics_DatasetName = "DE_Statistics";
-			hdps::Dataset<Clusters> clusterDataset = _linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().getCurrentDataset();
+			mv::Dataset<Clusters> clusterDataset = _linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().getCurrentDataset();
 			QString DatasetGUID = "";
 			const auto& childDatasets = clusterDataset->getChildren({ PointType });
 			for (qsizetype i = 0; i < childDatasets.size(); ++i)
@@ -1991,29 +1991,29 @@ void SimianOptionsAction::sendClusterCountInfoToJS()
 
 }
 
-void SimianOptionsAction::onDataEvent(hdps::DatasetEvent* dataEvent)
+void SimianOptionsAction::onDataEvent(mv::DatasetEvent* dataEvent)
 {
-	//if (dataEvent->getType() == hdps::EventType::DataAdded)
+	//if (dataEvent->getType() == mv::EventType::DataAdded)
 	//{
 	//	updateDatasetPickerAction();
 	//}
-	//if (dataEvent->getType() == hdps::EventType::DataRemoved)
+	//if (dataEvent->getType() == mv::EventType::DataRemoved)
 	//{
 	//	updateDatasetPickerAction();
 	//}
-	//if (dataEvent->getType() == hdps::EventType::DataChildAdded)
+	//if (dataEvent->getType() == mv::EventType::DataChildAdded)
 	//{
 	//	updateDatasetPickerAction();
 	//}
-	//if (dataEvent->getType() == hdps::EventType::DataChildRemoved)
+	//if (dataEvent->getType() == mv::EventType::DataChildRemoved)
 	//{
 	//	updateDatasetPickerAction();
 	//}
-	//if (dataEvent->getType() == hdps::EventType::DataChanged)
+	//if (dataEvent->getType() == mv::EventType::DataChanged)
 	//{
 	//	updateDatasetPickerAction();
 	//}
-	//if (dataEvent->getType() == hdps::EventType::DataGuiNameChanged)
+	//if (dataEvent->getType() == mv::EventType::DataGuiNameChanged)
 	//{
 	//	updateDatasetPickerAction();
 	//}
@@ -2158,7 +2158,7 @@ void SimianOptionsAction::updateData(std::string Species1, std::string Species2,
 //	_linkerSettingHolder.getSpecies2ScatterplotColorLinkerAction().setPlaceHolderString("Species2 scatterplot color linker");
 //
 //	//////
-//	auto datasetsSmartSeq = _core->requestAllDataSets(QVector<hdps::DataType> {ClusterType});
+//	auto datasetsSmartSeq = _core->requestAllDataSets(QVector<mv::DataType> {ClusterType});
 //	auto filteredSmartSeqSatasets = datasetsSmartSeq;
 //	for (auto smartSeqdataset : datasetsSmartSeq)
 //	{
@@ -2180,7 +2180,7 @@ void SimianOptionsAction::updateData(std::string Species1, std::string Species2,
 //
 //	//////
 //
-//	auto datasets = _core->requestAllDataSets(QVector<hdps::DataType> {ClusterType});
+//	auto datasets = _core->requestAllDataSets(QVector<mv::DataType> {ClusterType});
 //	auto filteredCrossSpeciesDatasets = datasets;
 //	auto filteredInSpeciesDatasets = datasets;
 //	for (auto dataset : datasets)
@@ -2221,7 +2221,7 @@ void SimianOptionsAction::updateData(std::string Species1, std::string Species2,
 //	_linkerSettingHolder.getInSpecies2DatasetLinkerAction().setDatasets(filteredInSpeciesDatasets);
 //	_linkerSettingHolder.getInSpecies2DatasetLinkerAction().setPlaceHolderString("Species2 in-species clusters");
 //
-//	auto embeddings = _core->requestAllDataSets(QVector<hdps::DataType> {PointType});
+//	auto embeddings = _core->requestAllDataSets(QVector<mv::DataType> {PointType});
 //	auto filteredEmbeddingDatasets = embeddings;
 //	for (auto embedding : embeddings)
 //	{
@@ -2241,7 +2241,7 @@ void SimianOptionsAction::updateData(std::string Species1, std::string Species2,
 //	_linkerSettingHolder.getSpeciesEmbedding2LinkerAction().setDatasets(filteredEmbeddingDatasets);
 //	_linkerSettingHolder.getSpeciesEmbedding2LinkerAction().setPlaceHolderString("Embedding2 dataset");
 //
-//	auto deStats = _core->requestAllDataSets(QVector<hdps::DataType> {PointType});
+//	auto deStats = _core->requestAllDataSets(QVector<mv::DataType> {PointType});
 //	auto filteredDEStatsDatasets = deStats;
 //	for (auto deStat : deStats)
 //	{

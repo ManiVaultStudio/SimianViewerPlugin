@@ -14,7 +14,7 @@ class QWebChannel;
 
 class SimianViewerWidget;
 
-class SimianViewerCommunicationObject : public hdps::gui::WebCommunicationObject
+class SimianViewerCommunicationObject : public mv::gui::WebCommunicationObject
 {
     Q_OBJECT
 public:
@@ -46,7 +46,7 @@ private:
     SimianViewerWidget* _parent;
 };
 
-class SimianViewerWidget : public hdps::gui::WebWidget
+class SimianViewerWidget : public mv::gui::WebWidget
 {
     Q_OBJECT
 public:

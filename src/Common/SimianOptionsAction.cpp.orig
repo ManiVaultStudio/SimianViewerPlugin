@@ -3,11 +3,11 @@
 #include <QFileDialog>
 #include <QPageLayout>
 #include <QWebEngineView>
-using namespace hdps;
-using namespace hdps::gui;
+using namespace mv;
+using namespace mv::gui;
 const QColor SimianOptionsAction::DEFAULT_CONSTANT_COLOR = qRgb(255, 255, 255);
 
-SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin, hdps::CoreInterface* core) :
+SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin, mv::CoreInterface* core) :
 	WidgetAction(&simianViewerPlugin),
 	_simianViewerPlugin(simianViewerPlugin),
 	_core(core),
@@ -1487,29 +1487,29 @@ void SimianOptionsAction::sendClusterCountInfoToJS()
 
 }
 
-void SimianOptionsAction::onDataEvent(hdps::DataEvent* dataEvent)
+void SimianOptionsAction::onDataEvent(mv::DataEvent* dataEvent)
 {
-	if (dataEvent->getType() == hdps::EventType::DataAdded)
+	if (dataEvent->getType() == mv::EventType::DataAdded)
 	{
 		updateDatasetPickerAction();
 	}
-	if (dataEvent->getType() == hdps::EventType::DataRemoved)
+	if (dataEvent->getType() == mv::EventType::DataRemoved)
 	{
 		updateDatasetPickerAction();
 	}
-	if (dataEvent->getType() == hdps::EventType::DataChildAdded)
+	if (dataEvent->getType() == mv::EventType::DataChildAdded)
 	{
 		updateDatasetPickerAction();
 	}
-	if (dataEvent->getType() == hdps::EventType::DataChildRemoved)
+	if (dataEvent->getType() == mv::EventType::DataChildRemoved)
 	{
 		updateDatasetPickerAction();
 	}
-	if (dataEvent->getType() == hdps::EventType::DataChanged)
+	if (dataEvent->getType() == mv::EventType::DataChanged)
 	{
 		updateDatasetPickerAction();
 	}
-	if (dataEvent->getType() == hdps::EventType::DataGuiNameChanged)
+	if (dataEvent->getType() == mv::EventType::DataGuiNameChanged)
 	{
 		updateDatasetPickerAction();
 	}
@@ -1641,7 +1641,7 @@ void SimianOptionsAction::updateDatasetPickerAction()
 	_species2ScatterplotColorLinkerAction.setPlaceHolderString("Species2 scatterplot color linker");
 
 
-	auto datasets = _core->requestAllDataSets(QVector<hdps::DataType> {ClusterType});
+	auto datasets = _core->requestAllDataSets(QVector<mv::DataType> {ClusterType});
 	auto filteredCrossSpeciesDatasets = datasets;
 	auto filteredInSpeciesDatasets = datasets;
 	for (auto dataset : datasets)
@@ -1682,7 +1682,7 @@ void SimianOptionsAction::updateDatasetPickerAction()
 	_inSpecies2DatasetLinkerAction.setDatasets(filteredInSpeciesDatasets);
 	_inSpecies2DatasetLinkerAction.setPlaceHolderString("Species2 in-species clusters");
 
-	auto embeddings = _core->requestAllDataSets(QVector<hdps::DataType> {PointType});
+	auto embeddings = _core->requestAllDataSets(QVector<mv::DataType> {PointType});
 	auto filteredEmbeddingDatasets = embeddings;
 	for (auto embedding : embeddings)
 	{
@@ -1701,7 +1701,7 @@ void SimianOptionsAction::updateDatasetPickerAction()
 	_speciesEmbedding2LinkerAction.setDatasets(filteredEmbeddingDatasets);
 	_speciesEmbedding2LinkerAction.setPlaceHolderString("Embedding2 dataset");
 	
-	auto deStats = _core->requestAllDataSets(QVector<hdps::DataType> {PointType});
+	auto deStats = _core->requestAllDataSets(QVector<mv::DataType> {PointType});
 	auto filteredDEStatsDatasets = deStats;
 	for (auto deStat : deStats)
 	{

@@ -32,12 +32,12 @@
 #include <QLabel>
 #include<actions/ColorMap1DAction.h>
 
-using namespace hdps::gui;
+using namespace mv::gui;
 class QMenu;
 class SimianViewerPlugin;
 //class SimianViewerWidget;
 class FetchMetaData;
-namespace hdps
+namespace mv
 {
     class CoreInterface;
 }
@@ -193,10 +193,10 @@ public:
     };
 
 public:
-    void onDataEvent(hdps::DatasetEvent* dataEvent);
+    void onDataEvent(mv::DatasetEvent* dataEvent);
 protected:
 
-    class Widget : public hdps::gui::WidgetActionWidget {
+    class Widget : public mv::gui::WidgetActionWidget {
     public:
         Widget(QWidget* parent, SimianOptionsAction* simianOptionsAction);
     };
@@ -206,7 +206,7 @@ protected:
     };
 
 public:
-    SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin, hdps::CoreInterface* core);
+    SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin, mv::CoreInterface* core);
 
 private:
     void updateData(std::string Species1, std::string Species2, std::string neighborhood/*, int distance, std::string CrossSpeciesFilter*/);
@@ -278,7 +278,7 @@ protected:
     //IntegralAction               _distanceAction;
 
     //OptionAction                 _crossSpeciesFilterAction;
-    hdps::CoreInterface* _core;
+    mv::CoreInterface* _core;
     FetchMetaData* _metaData;
     std::vector<std::vector<std::string>>                _simianData;
     QVariantMap _geneExpressionData;
@@ -302,7 +302,7 @@ protected:
     bool isInitSerialGate = false;
     //ColorMapAction _scatterplotColorMapAction;
     //ColorAction              _backgroundColoringAction;
-    hdps::EventListener     _eventListener;
+    mv::EventListener     _eventListener;
     /** Default constant color */
     static const QColor DEFAULT_CONSTANT_COLOR;
     friend class ChannelAction;
