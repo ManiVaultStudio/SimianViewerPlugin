@@ -57,7 +57,7 @@ If you use this project in your research or find it helpful, please consider cit
 
 - **Comparative transcriptomics reveals human-specific cortical features**
   - *Authors*: Nikolas L Jorstad, Janet HT Song, David Exposito-Alonso, Hamsini Suresh, Nathan Castro, et al.
-  - *Published in*: bioRxiv, 2022
+  - *Published in*: Science, 2023
   - *Link*: [Publisher](https://doi.org/10.1126/science.ade9516)
   - *BibTeX*:
     ```bibtex
