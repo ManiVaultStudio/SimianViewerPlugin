@@ -38,7 +38,7 @@ If you use this project in your research or find it helpful, please consider cit
 - **Cytosplore Simian Viewer: Visual Exploration for Multi-Species Single-Cell RNA Sequencing Data**
   - *Authors*: Soumyadeep Basu, Jeroen Eggermont, Thomas Kroes, Nicholas L. Jorstad, Trygve Bakken, Ed Lein, Boudewijn P.F. Lelieveldt, Thomas Höllt
   - *Published in*: Eurographics Workshop on Visual Computing for Biology and Medicine, page 111-120 - Sep 2023
-  - *Link*: [Paper](https://diglib.eg.org/handle/10.2312/vcbm20231219)
+  - *Link*: [Publisher](https://doi.org/10.2312/vcbm.20231219)
   - *BibTeX*:
     ```bibtex
     @article{10.2312:vcbm.20231219,
@@ -58,16 +58,21 @@ If you use this project in your research or find it helpful, please consider cit
 - **Comparative transcriptomics reveals human-specific cortical features**
   - *Authors*: Nikolas L Jorstad, Janet HT Song, David Exposito-Alonso, Hamsini Suresh, Nathan Castro, et al.
   - *Published in*: bioRxiv, 2022
-  - *Link*: [Paper](https://www.biorxiv.org/content/10.1101/2022.09.19.508480v1)
+  - *Link*: [Publisher](https://doi.org/10.1126/science.ade9516)
   - *BibTeX*:
     ```bibtex
     @article{jorstad2022comparative
-      title={Comparative transcriptomics reveals human-specific cortical features},
-      author={Jorstad, Nikolas L and Song, Janet HT and Exposito-Alonso, David and Suresh, Hamsini and Castro, Nathan and Krienen, Fenna M and Yanny, Anna Marie and Close, Jennie and Gelfand, Emily and Travaglini, Kyle J and others},
-      journal={bioRxiv},
-      pages={2022--09},
-      year={2022},
-      publisher={Cold Spring Harbor Laboratory}
-      DOI = {10.1101/2022.09.19.508480}
+      doi:10.1126/science.ade9516,
+      author = {Nikolas L. Jorstad  and Janet H. T. Song  and David Exposito-Alonso  and Hamsini Suresh  and Nathan Castro-Pacheco  and Fenna M. Krienen  and Anna Marie Yanny  and Jennie Close  and Emily Gelfand  and Brian Long  and Stephanie C. Seeman  and Kyle J. Travaglini  and Soumyadeep Basu  and Marc Beaudin  and Darren Bertagnolli  and Megan Crow  and Song-Lin Ding  and Jeroen Eggermont  and Alexandra Glandon  and Jeff Goldy  and Katelyn Kiick  and Thomas Kroes  and Delissa McMillen  and Trangthanh Pham  and Christine Rimorin  and Kimberly Siletti  and Saroja Somasundaram  and Michael Tieu  and Amy Torkelson  and Guoping Feng  and William D. Hopkins  and Thomas Höllt  and C. Dirk Keene  and Sten Linnarsson  and Steven A. McCarroll  and Boudewijn P. Lelieveldt  and Chet C. Sherwood  and Kimberly Smith  and Christopher A. Walsh  and Alexander Dobin  and Jesse Gillis  and Ed S. Lein  and Rebecca D. Hodge  and Trygve E. Bakken },
+      title = {Comparative transcriptomics reveals human-specific cortical features},
+      journal = {Science},
+      volume = {382},
+      number = {6667},
+      pages = {eade9516},
+      year = {2023},
+      doi = {10.1126/science.ade9516},
+      URL = {https://www.science.org/doi/abs/10.1126/science.ade9516},
+      eprint = {https://www.science.org/doi/pdf/10.1126/science.ade9516},
     }
-  -*Abstract:* Humans have unique cognitive abilities among primates, including language, but their molecular, cellular, and circuit substrates are poorly understood. We used comparative single nucleus transcriptomics in adult humans, chimpanzees, gorillas, rhesus macaques, and common marmosets from the middle temporal gyrus (MTG) to understand human-specific features of cellular and molecular organization. Human, chimpanzee, and gorilla MTG showed highly similar cell type composition and laminar organization, and a large shift in proportions of deep layer intratelencephalic-projecting neurons compared to macaque and marmoset. Species differences in gene expression generally mirrored evolutionary distance and were seen in all cell types, although chimpanzees were more similar to gorillas than humans, consistent with faster divergence along the human lineage. Microglia, astrocytes, and oligodendrocytes showed accelerated gene expression changes compared to neurons or oligodendrocyte precursor cells, indicating either relaxed evolutionary constraints or positive selection in these cell types. Only a few hundred genes showed human-specific patterning in all or specific cell types, and were significantly enriched near human accelerated regions (HARs) and conserved deletions (hCONDELS) and in cell adhesion and intercellular signaling pathways. These results suggest that relatively few cellular and molecular changes uniquely define adult human cortical structure, particularly by affecting circuit connectivity and glial cell function
+       
+  -*Abstract:* The cognitive abilities of humans are distinctive among primates, but their molecular and cellular substrates are poorly understood. We used comparative single-nucleus transcriptomics to analyze samples of the middle temporal gyrus (MTG) from adult humans, chimpanzees, gorillas, rhesus macaques, and common marmosets to understand human-specific features of the neocortex. Human, chimpanzee, and gorilla MTG showed highly similar cell-type composition and laminar organization as well as a large shift in proportions of deep-layer intratelencephalic-projecting neurons compared with macaque and marmoset MTG. Microglia, astrocytes, and oligodendrocytes had more-divergent expression across species compared with neurons or oligodendrocyte precursor cells, and neuronal expression diverged more rapidly on the human lineage. Only a few hundred genes showed human-specific patterning, suggesting that relatively few cellular and molecular changes distinctively define adult human cortical structure.
