@@ -62,7 +62,7 @@ If you use this project in your research or find it helpful, please consider cit
   - *BibTeX*:
     ```bibtex
     @article{jorstad2022comparative,
-      doi:10.1126/science.ade9516,
+      DOI={10.1126/science.ade9516},
       author = {Nikolas L. Jorstad  and Janet H. T. Song  and David Exposito-Alonso  and Hamsini Suresh  and Nathan Castro-Pacheco  and Fenna M. Krienen  and Anna Marie Yanny  and Jennie Close  and Emily Gelfand  and Brian Long  and Stephanie C. Seeman  and Kyle J. Travaglini  and Soumyadeep Basu  and Marc Beaudin  and Darren Bertagnolli  and Megan Crow  and Song-Lin Ding  and Jeroen Eggermont  and Alexandra Glandon  and Jeff Goldy  and Katelyn Kiick  and Thomas Kroes  and Delissa McMillen  and Trangthanh Pham  and Christine Rimorin  and Kimberly Siletti  and Saroja Somasundaram  and Michael Tieu  and Amy Torkelson  and Guoping Feng  and William D. Hopkins  and Thomas Höllt  and C. Dirk Keene  and Sten Linnarsson  and Steven A. McCarroll  and Boudewijn P. Lelieveldt  and Chet C. Sherwood  and Kimberly Smith  and Christopher A. Walsh  and Alexander Dobin  and Jesse Gillis  and Ed S. Lein  and Rebecca D. Hodge  and Trygve E. Bakken },
       title = {Comparative transcriptomics reveals human-specific cortical features},
       journal = {Science},
