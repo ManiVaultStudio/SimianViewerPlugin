@@ -1567,7 +1567,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			if (_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().getCurrentText() != "")
 			{
 				auto dataset1 = _linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().getCurrentDataset();
-				const auto candidateDataset1 = _core->requestDataset<Clusters>(dataset1.getDatasetId());
+				const auto candidateDataset1 = mv::data().getDataset<Clusters>(dataset1.getDatasetId());
 				std::vector<std::uint32_t> selectedIndices1;
 
 
@@ -1581,7 +1581,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			if (_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().getCurrentText() != "")
 			{
 				auto dataset2 = _linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().getCurrentDataset();
-				const auto candidateDataset2 = _core->requestDataset<Clusters>(dataset2.getDatasetId());
+				const auto candidateDataset2 = mv::data().getDataset<Clusters>(dataset2.getDatasetId());
 				std::vector<std::uint32_t> selectedIndices2;
 
 
@@ -1630,7 +1630,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			if (_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().getCurrentText() != "")
 			{
 				auto dataset1 = _linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().getCurrentDataset();
-				const auto candidateDataset1 = _core->requestDataset<Clusters>(dataset1.getDatasetId());
+				const auto candidateDataset1 = mv::data().getDataset<Clusters>(dataset1.getDatasetId());
 				std::vector<std::uint32_t> selectedIndices1;
 
 				for (const auto& cluster : candidateDataset1->getClusters())
@@ -1654,7 +1654,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			if (_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().getCurrentText() != "")
 			{
 				auto dataset2 = _linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().getCurrentDataset();
-				const auto candidateDataset2 = _core->requestDataset<Clusters>(dataset2.getDatasetId());
+				const auto candidateDataset2 = mv::data().getDataset<Clusters>(dataset2.getDatasetId());
 				std::vector<std::uint32_t> selectedIndices2;
 				for (const auto& cluster : candidateDataset2->getClusters())
 				{
@@ -1908,8 +1908,8 @@ void SimianOptionsAction::sendClusterCountInfoToJS()
 {
 	auto dataset1 = _linkerSettingHolder.getInSpecies1DatasetLinkerAction().getCurrentDataset();
 	auto dataset2 = _linkerSettingHolder.getInSpecies2DatasetLinkerAction().getCurrentDataset();
-	const auto candidateDataset1 = _core->requestDataset<Clusters>(dataset1.getDatasetId());
-	const auto candidateDataset2 = _core->requestDataset<Clusters>(dataset2.getDatasetId());
+	const auto candidateDataset1 = mv::data().getDataset<Clusters>(dataset1.getDatasetId());
+	const auto candidateDataset2 = mv::data().getDataset<Clusters>(dataset2.getDatasetId());
 
 	std::string jsonSend = "";
 	for (const auto& cluster : candidateDataset1->getClusters())
@@ -1945,7 +1945,7 @@ void SimianOptionsAction::sendClusterCountInfoToJS()
 		if (_species1SelectAction.getCurrentText() == "gorilla" || _species1SelectAction.getCurrentText() == "chimp" || _species1SelectAction.getCurrentText() == "human" && _linkerSettingHolder.getSmartSeqDataset1Action().getCurrentText() != "")
 		{
 			auto smartseqdataset1 = _linkerSettingHolder.getSmartSeqDataset1Action().getCurrentDataset();
-			const auto candidateSmartSeqDataset1 = _core->requestDataset<Clusters>(smartseqdataset1.getDatasetId());
+			const auto candidateSmartSeqDataset1 = mv::data().getDataset<Clusters>(smartseqdataset1.getDatasetId());
 
 			for (const auto& cluster : candidateSmartSeqDataset1->getClusters())
 			{
@@ -1966,7 +1966,7 @@ void SimianOptionsAction::sendClusterCountInfoToJS()
 		{
 			auto smartseqdataset2 = _linkerSettingHolder.getSmartSeqDataset2Action().getCurrentDataset();
 
-			const auto candidateSmartSeqDataset2 = _core->requestDataset<Clusters>(smartseqdataset2.getDatasetId());
+			const auto candidateSmartSeqDataset2 = mv::data().getDataset<Clusters>(smartseqdataset2.getDatasetId());
 			for (const auto& cluster : candidateSmartSeqDataset2->getClusters())
 			{
 
