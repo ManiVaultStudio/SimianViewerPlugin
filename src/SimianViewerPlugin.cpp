@@ -128,7 +128,7 @@ void SimianViewerPlugin::onDataEvent(mv::DatasetEvent* dataEvent)
     if (dataEvent->getType() == mv::EventType::DatasetDataSelectionChanged)
     {
         const auto selectionChangedEvent = static_cast<DatasetDataSelectionChangedEvent*>(dataEvent);
-        const auto& changedDataSet = _core->requestDataset<Clusters>(selectionChangedEvent->getDataset()->getId());
+        const auto& changedDataSet = mv::data().getDataset<Clusters>(selectionChangedEvent->getDataset()->getId());
         const auto& selectionSet = changedDataSet->getSelectionNames();
         //qDebug() << selectionSet;
         _simian_viewer.setClusters(selectionSet);
@@ -372,7 +372,7 @@ void SimianViewerPlugin::selectCrossSpeciesClusterPoints(std::vector<std::string
         if (_simianOptionsAction.getLinkerSettingHolder().getCrossSpecies1DatasetLinkerAction().getCurrentText() != "")
         {
             auto dataset1 = _simianOptionsAction.getLinkerSettingHolder().getCrossSpecies1DatasetLinkerAction().getCurrentDataset();
-            const auto candidateDataset1 = _core->requestDataset<Clusters>(dataset1.getDatasetId());
+            const auto candidateDataset1 = mv::data().getDataset<Clusters>(dataset1.getDatasetId());
             std::vector<std::uint32_t> selectedIndices1;
 
             for (const auto& cluster : candidateDataset1->getClusters())
@@ -396,7 +396,7 @@ void SimianViewerPlugin::selectCrossSpeciesClusterPoints(std::vector<std::string
         if (_simianOptionsAction.getLinkerSettingHolder().getCrossSpecies2DatasetLinkerAction().getCurrentText() != "")
         {
             auto dataset2 = _simianOptionsAction.getLinkerSettingHolder().getCrossSpecies2DatasetLinkerAction().getCurrentDataset();
-            const auto candidateDataset2 = _core->requestDataset<Clusters>(dataset2.getDatasetId());
+            const auto candidateDataset2 = mv::data().getDataset<Clusters>(dataset2.getDatasetId());
             std::vector<std::uint32_t> selectedIndices2;
             for (const auto& cluster : candidateDataset2->getClusters())
             {
@@ -421,7 +421,7 @@ void SimianViewerPlugin::selectCrossSpeciesClusterPoints(std::vector<std::string
         if (_simianOptionsAction.getLinkerSettingHolder().getCrossSpecies1DatasetLinkerAction().getCurrentText() != "")
         {
             auto dataset1 = _simianOptionsAction.getLinkerSettingHolder().getCrossSpecies1DatasetLinkerAction().getCurrentDataset();
-            const auto candidateDataset1 = _core->requestDataset<Clusters>(dataset1.getDatasetId());
+            const auto candidateDataset1 = mv::data().getDataset<Clusters>(dataset1.getDatasetId());
             std::vector<std::uint32_t> selectedIndices1;
             candidateDataset1->getParent()->setSelectionIndices(selectedIndices1);
             events().notifyDatasetDataSelectionChanged(candidateDataset1->getParent());
@@ -429,7 +429,7 @@ void SimianViewerPlugin::selectCrossSpeciesClusterPoints(std::vector<std::string
         if (_simianOptionsAction.getLinkerSettingHolder().getCrossSpecies2DatasetLinkerAction().getCurrentText() != "")
         {
             auto dataset2 = _simianOptionsAction.getLinkerSettingHolder().getCrossSpecies2DatasetLinkerAction().getCurrentDataset();
-            const auto candidateDataset2 = _core->requestDataset<Clusters>(dataset2.getDatasetId());
+            const auto candidateDataset2 = mv::data().getDataset<Clusters>(dataset2.getDatasetId());
             std::vector<std::uint32_t> selectedIndices2;
             candidateDataset2->getParent()->setSelectionIndices(selectedIndices2);
             events().notifyDatasetDataSelectionChanged(candidateDataset2->getParent());
