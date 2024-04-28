@@ -86,217 +86,165 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 	//connect(&_helpAction, &TriggerAction::triggered, this, [this]() -> void {
 	//	_simianViewerPlugin.getTriggerHelpAction().trigger();
 	//});
-	_linkerSettingHolder.getSpecies1DEStatsLinkerAction().setShowFullPathName(false);
-	_linkerSettingHolder.getSpecies1DEStatsLinkerAction().setDatasetsFilterFunction([this](const mv::Datasets& datasets) ->mv::Datasets {
-		Datasets statsDatasets;
-
-		for (auto dataset : datasets)
-			if (dataset->getDataType() == PointType)
-			{
-				std::string str1 = dataset->getGuiName().toStdString();
-				std::string str2 = "DE_Statistics";
-				if (strstr(str1.c_str(), str2.c_str()))
-				{
-					statsDatasets << dataset;
-				}
-			}
-		return statsDatasets;
-		});
-	_linkerSettingHolder.getSpecies2DEStatsLinkerAction().setShowFullPathName(false);
-	_linkerSettingHolder.getSpecies2DEStatsLinkerAction().setDatasetsFilterFunction([this](const mv::Datasets& datasets) ->mv::Datasets {
-		Datasets statsDatasets;
-
-		for (auto dataset : datasets)
-			if (dataset->getDataType() == PointType)
-			{
-				std::string str1 = dataset->getGuiName().toStdString();
-				std::string str2 = "DE_Statistics";
-				if (strstr(str1.c_str(), str2.c_str()))
-				{
-					statsDatasets << dataset;
-				}
-			}
-		return statsDatasets;
-		});
-	_linkerSettingHolder.getSpeciesEmbedding1LinkerAction().setShowFullPathName(false);
-	_linkerSettingHolder.getSpeciesEmbedding1LinkerAction().setDatasetsFilterFunction([this](const mv::Datasets& datasets) ->mv::Datasets {
-		Datasets statsDatasets;
-
-		for (auto dataset : datasets)
-			if (dataset->getDataType() == PointType)
-			{
-				std::string str1 = dataset->getGuiName().toStdString();
-				std::string str2 = "embedding";
-				if (strstr(str1.c_str(), str2.c_str()))
-				{
-					statsDatasets << dataset;
-				}
-			}
-		return statsDatasets;
-		});
-	_linkerSettingHolder.getSpeciesEmbedding2LinkerAction().setShowFullPathName(false);
-	_linkerSettingHolder.getSpeciesEmbedding2LinkerAction().setDatasetsFilterFunction([this](const mv::Datasets& datasets) ->mv::Datasets {
-		Datasets statsDatasets;
-
-		for (auto dataset : datasets)
-			if (dataset->getDataType() == PointType)
-			{
-				std::string str1 = dataset->getGuiName().toStdString();
-				std::string str2 = "embedding";
-				if (strstr(str1.c_str(), str2.c_str()))
-				{
-					statsDatasets << dataset;
-				}
-			}
-		return statsDatasets;
-		});
-	_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().setShowFullPathName(false);
-	_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().setDatasetsFilterFunction([this](const mv::Datasets& datasets) ->mv::Datasets {
-		Datasets statsDatasets;
-
-		for (auto dataset : datasets)
-			if (dataset->getDataType() == ClusterType)
-			{
-				std::string str1 = dataset->getGuiName().toStdString();
-				std::string str2 = "cluster";
-				if (strstr(str1.c_str(), str2.c_str()))
-				{
-					std::string str3 = "cross";
-					if (strstr(str1.c_str(), str3.c_str()))
-					{
-						statsDatasets << dataset;
-					}
-					
-				}
-			}
-		return statsDatasets;
-		});
-	_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().setShowFullPathName(false);
-	_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().setDatasetsFilterFunction([this](const mv::Datasets& datasets) ->mv::Datasets {
-		Datasets statsDatasets;
-
-		for (auto dataset : datasets)
-			if (dataset->getDataType() == ClusterType)
-			{
-				std::string str1 = dataset->getGuiName().toStdString();
-				std::string str2 = "cluster";
-				if (strstr(str1.c_str(), str2.c_str()))
-				{
-					std::string str3 = "cross";
-					if (strstr(str1.c_str(), str3.c_str()))
-					{
-						statsDatasets << dataset;
-					}
-
-				}
-			}
-		return statsDatasets;
-		});
-	_linkerSettingHolder.getInSpecies1DatasetLinkerAction().setShowFullPathName(false);
-	_linkerSettingHolder.getInSpecies1DatasetLinkerAction().setDatasetsFilterFunction([this](const mv::Datasets& datasets) ->mv::Datasets {
-		Datasets statsDatasets;
-
-		for (auto dataset : datasets)
-			if (dataset->getDataType() == ClusterType)
-			{
-				std::string str1 = dataset->getGuiName().toStdString();
-				std::string str2 = "cluster";
-				if (strstr(str1.c_str(), str2.c_str()))
-				{
-					std::string str3 = "cross";
-					if (strstr(str1.c_str(), str3.c_str()))
-					{
-						
-					}
-					else
-					{
-						statsDatasets << dataset;
-					}
-
-				}
-			}
-		return statsDatasets;
-		});
-	_linkerSettingHolder.getInSpecies2DatasetLinkerAction().setShowFullPathName(false);
-	_linkerSettingHolder.getInSpecies2DatasetLinkerAction().setDatasetsFilterFunction([this](const mv::Datasets& datasets) ->mv::Datasets {
-		Datasets statsDatasets;
-
-		for (auto dataset : datasets)
-			if (dataset->getDataType() == ClusterType)
-			{
-				std::string str1 = dataset->getGuiName().toStdString();
-				std::string str2 = "cluster";
-				if (strstr(str1.c_str(), str2.c_str()))
-				{
-					std::string str3 = "cross";
-					if (strstr(str1.c_str(), str3.c_str()))
-					{
-
-					}
-					else
-					{
-						statsDatasets << dataset;
-					}
-
-				}
-			}
-		return statsDatasets;
-		});
-
-	_linkerSettingHolder.getSmartSeqDataset1Action().setShowFullPathName(false);
-	_linkerSettingHolder.getSmartSeqDataset1Action().setDatasetsFilterFunction([this](const mv::Datasets& datasets) ->mv::Datasets {
-		Datasets statsDatasets;
-
-		for (auto dataset : datasets)
-			if (dataset->getDataType() == ClusterType)
-			{
-				std::string str1 = dataset->getGuiName().toStdString();
-				std::string str2 = "-SmartSeq-cluster";
-				if (strstr(str1.c_str(), str2.c_str()))
-				{
-					statsDatasets << dataset;
-				}
-			}
-		return statsDatasets;
-		});
-	_linkerSettingHolder.getSmartSeqDataset2Action().setShowFullPathName(false);
-	_linkerSettingHolder.getSmartSeqDataset2Action().setDatasetsFilterFunction([this](const mv::Datasets& datasets) ->mv::Datasets {
-		Datasets statsDatasets;
-
-		for (auto dataset : datasets)
-			if (dataset->getDataType() == ClusterType)
-			{
-				std::string str1 = dataset->getGuiName().toStdString();
-				std::string str2 = "-SmartSeq-cluster";
-				if (strstr(str1.c_str(), str2.c_str()))
-				{
-					statsDatasets << dataset;
-				}
-			}
-		return statsDatasets;
-		});
-	_linkerSettingHolder.getSpecies1ScatterplotColorLinkerAction().setShowFullPathName(false);
-	_linkerSettingHolder.getSpecies1ScatterplotColorLinkerAction().setDatasetsFilterFunction([this](const mv::Datasets& datasets) ->mv::Datasets {
-		Datasets statsDatasets;
-
-		for (auto dataset : datasets)
+	_linkerSettingHolder.getSpecies1DEStatsLinkerAction().setFilterFunction([this](const Dataset<DatasetImpl>& dataset) -> bool {
+		if (dataset->getDataType() == PointType)
 		{
-			statsDatasets << dataset;
+			std::string str1 = dataset->getGuiName().toStdString();
+			std::string str2 = "DE_Statistics";
+			
+			if (strstr(str1.c_str(), str2.c_str()))
+				return true;
 		}
 		
-		return statsDatasets;
-		});
-	_linkerSettingHolder.getSpecies2ScatterplotColorLinkerAction().setShowFullPathName(false);
-	_linkerSettingHolder.getSpecies2ScatterplotColorLinkerAction().setDatasetsFilterFunction([this](const mv::Datasets& datasets) ->mv::Datasets {
-		Datasets statsDatasets;
+		return false;
+	});
 
-		for (auto dataset : datasets)
+	_linkerSettingHolder.getSpecies2DEStatsLinkerAction().setFilterFunction([this](const Dataset<DatasetImpl>& dataset) -> bool {
+		if (dataset->getDataType() == PointType)
 		{
-			statsDatasets << dataset;
+			std::string str1 = dataset->getGuiName().toStdString();
+			std::string str2 = "DE_Statistics";
+			
+			if (strstr(str1.c_str(), str2.c_str()))
+				return true;
 		}
 
-		return statsDatasets;
-		});
+		return false;
+	});
+
+	_linkerSettingHolder.getSpeciesEmbedding1LinkerAction().setFilterFunction([this](const Dataset<DatasetImpl>& dataset) -> bool {
+		if (dataset->getDataType() == PointType)
+		{
+			std::string str1 = dataset->getGuiName().toStdString();
+			std::string str2 = "embedding";
+			
+			if (strstr(str1.c_str(), str2.c_str()))
+				return true;
+		}
+		
+		return false;
+	});
+
+	_linkerSettingHolder.getSpeciesEmbedding2LinkerAction().setFilterFunction([this](const Dataset<DatasetImpl>& dataset) -> bool {
+		if (dataset->getDataType() == PointType)
+		{
+			std::string str1 = dataset->getGuiName().toStdString();
+			std::string str2 = "embedding";
+			
+			if (strstr(str1.c_str(), str2.c_str()))
+				return true;
+		}
+		
+		return false;
+	});
+
+	_linkerSettingHolder.getCrossSpecies1DatasetLinkerAction().setFilterFunction([this](const Dataset<DatasetImpl>& dataset) -> bool {
+		if (dataset->getDataType() == ClusterType)
+		{
+			std::string str1 = dataset->getGuiName().toStdString();
+			std::string str2 = "cluster";
+			if (strstr(str1.c_str(), str2.c_str()))
+			{
+				std::string str3 = "cross";
+				if (strstr(str1.c_str(), str3.c_str()))
+					return true;
+			}
+		}
+		
+		return false;
+	});
+
+	_linkerSettingHolder.getCrossSpecies2DatasetLinkerAction().setFilterFunction([this](const Dataset<DatasetImpl>& dataset) -> bool {
+		if (dataset->getDataType() == ClusterType)
+		{
+			std::string str1 = dataset->getGuiName().toStdString();
+			std::string str2 = "cluster";
+			if (strstr(str1.c_str(), str2.c_str()))
+			{
+				std::string str3 = "cross";
+				if (strstr(str1.c_str(), str3.c_str()))
+					return true;
+			}
+		}
+		
+		return false;
+	});
+
+	_linkerSettingHolder.getInSpecies1DatasetLinkerAction().setFilterFunction([this](const Dataset<DatasetImpl>& dataset) -> bool {
+		if (dataset->getDataType() == ClusterType)
+		{
+			std::string str1 = dataset->getGuiName().toStdString();
+			std::string str2 = "cluster";
+			if (strstr(str1.c_str(), str2.c_str()))
+			{
+				std::string str3 = "cross";
+				if (strstr(str1.c_str(), str3.c_str()))
+				{
+					
+				}
+				else
+					return true;
+			}
+		}
+		
+		return false;
+	});
+
+	_linkerSettingHolder.getInSpecies2DatasetLinkerAction().setFilterFunction([this](const Dataset<DatasetImpl>& dataset) -> bool {
+		if (dataset->getDataType() == ClusterType)
+		{
+			std::string str1 = dataset->getGuiName().toStdString();
+			std::string str2 = "cluster";
+			if (strstr(str1.c_str(), str2.c_str()))
+			{
+				std::string str3 = "cross";
+				if (strstr(str1.c_str(), str3.c_str()))
+				{
+
+				}
+				else
+				{
+					return true;
+				}
+
+			}
+		}
+		
+		return false;
+	});
+
+	_linkerSettingHolder.getSmartSeqDataset1Action().setFilterFunction([this](const Dataset<DatasetImpl>& dataset) -> bool {
+		if (dataset->getDataType() == ClusterType)
+		{
+			std::string str1 = dataset->getGuiName().toStdString();
+			std::string str2 = "-SmartSeq-cluster";
+			if (strstr(str1.c_str(), str2.c_str()))
+				return true;
+		}
+		
+		return false;
+	});
+
+	_linkerSettingHolder.getSmartSeqDataset2Action().setFilterFunction([this](const Dataset<DatasetImpl>& dataset) -> bool {
+		if (dataset->getDataType() == ClusterType)
+		{
+			std::string str1 = dataset->getGuiName().toStdString();
+			std::string str2 = "-SmartSeq-cluster";
+			if (strstr(str1.c_str(), str2.c_str()))
+				return true;
+		}
+		
+		return false;
+	});
+
+	_linkerSettingHolder.getSpecies1ScatterplotColorLinkerAction().setFilterFunction([this](const Dataset<DatasetImpl>& dataset) -> bool {
+		return true;
+	});
+
+	_linkerSettingHolder.getSpecies2ScatterplotColorLinkerAction().setFilterFunction([this](const Dataset<DatasetImpl>& dataset) -> bool {
+		return true;
+	});
+
 	_eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DatasetAdded));
 	_eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DatasetRemoved));
 	_eventListener.addSupportedEventType(static_cast<std::uint32_t>(EventType::DatasetChildAdded));
