@@ -8,6 +8,7 @@
         <file>simian_viewer/simian_viewer.queue.js</file>
 		<file>fullDataSimian.csv</file>
 		<file>GeneExpression.json</file>
+		<file>SimianViewerDocumentation.pdf</file>
 		<file>simian_viewer/images/dark/chimpanzee-dark.png</file>
 		<file>simian_viewer/images/dark/human-dark.png</file>
 		<file>simian_viewer/images/dark/marmoset-dark.png</file>
