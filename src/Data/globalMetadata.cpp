@@ -12,7 +12,7 @@ void FetchMetaData::getData(std::vector<std::vector<std::string>>* simianData)
 
 	std::vector<std::string> row;
 	std::string  word;
-	std::string fname = ":/fullDataSimian.csv";
+	std::string fname = ":/simian_viewer/fullDataSimian.csv";
 	QFile file(QString(fname.c_str()));
 
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -44,7 +44,7 @@ void FetchMetaData::getData(std::vector<std::vector<std::string>>* simianData)
 void FetchMetaData::getGeneExpressionData(QVariantMap* geneExpressionFinalData)
 {
 
-std::string fname = ":/GeneExpression.json";
+std::string fname = ":/simian_viewer/GeneExpression.json";
 
 
 // step 1

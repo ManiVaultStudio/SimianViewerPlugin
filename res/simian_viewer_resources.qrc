@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="">
+    <qresource prefix="simian_viewer">
         <file>simian_viewer/simian_viewer.html</file>
         <file>simian_viewer/simian_viewer.css</file>
         <file>simian_viewer/simian_viewer.js</file>
@@ -25,7 +25,7 @@
 		<file>simian_viewer/images/color/gorilla-color.png</file>
 		<file>simian_viewer/images/color/rhesus-color.png</file>
     </qresource>
-    <qresource prefix="">
+    <qresource prefix="simian_viewer">
         <file>jslibs/d3.v4.js</file>
 		<file>jslibs/d3-tip.min.js</file>
 		<file>jslibs/d3-tip.js</file>
@@ -40,7 +40,7 @@
         <file>jslibs/cbuffer.js</file>
         <file>jslibs/qwebchannel.js</file>
     </qresource>
-    <qresource prefix="">
+    <qresource prefix="simian_viewer">
         <file>jstools/debug_data.js</file>
         <file>jstools/globals.js</file>
         <file>jstools/tools.js</file>
