@@ -21,6 +21,9 @@
 #include <QUrl>
 #include <QWindowList>
 #include <QWindow>
+#include <QFile>
+#include <QDebug>
+#include <QTemporaryFile>
 
 Q_PLUGIN_METADATA(IID "nl.tudelft.SimianViewerPlugin")
 
@@ -305,13 +308,50 @@ ViewPlugin* SimianViewerPluginFactory::produce()
         if(helpMenu)
         {
            
-            auto *documentation = new TriggerAction(this, " Documentation");
+            auto *documentation = new TriggerAction(this, "Simian Viewer documentation");
             QIcon icon = Application::getIconFont("FontAwesome").getIcon("file-pdf", Qt::black);
             documentation->setIcon(icon);
             connect(documentation, &QAction::triggered, this, [this](bool)
             {
-            	auto urlString = QString("file:///") + QApplication::applicationDirPath() + "/SimianViewerDocumentation.pdf";
-	            QDesktopServices::openUrl(QUrl(urlString, QUrl::TolerantMode));
+                    QString tempPath = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
+                    QString tempFileName = tempPath + "/SimianViewerDoc.pdf";
+
+                    QFile tempFile(tempFileName);
+
+                    // Check if the file is open and close it
+                    if (tempFile.isOpen()) {
+                        tempFile.close();
+                    }
+
+                    // Check if the file is read-only and change its permissions
+                    if (tempFile.permissions() & QFile::ReadOwner) {
+                        tempFile.setPermissions(QFile::WriteOwner);
+                    }
+
+                    // Remove the temporary file if it exists
+                    if (tempFile.exists()) {
+                        if (!tempFile.remove()) {
+                            qDebug() << "Failed to remove existing temporary file.";
+                            return;
+                        }
+                    }
+
+
+                    // Copy the resource file to a temporary file
+                    if (QFile::copy(":/SimianViewerDocumentation.pdf", tempFileName)) {
+                        //qDebug() << "Temporary file created at: " << tempFileName;
+                    }
+                    else {
+                        qDebug() << "Failed to create temporary file.";
+                        return;
+                    }
+
+                    // Open the temporary file with the default application
+                    QDesktopServices::openUrl(QUrl::fromLocalFile(tempFileName));
+
+
+
+
             });
             helpMenu->addAction(documentation);
             first = false;
