@@ -50,7 +50,7 @@ void SimianViewerPlugin::init()
 {
     connect(&_simian_viewer, &SimianViewerWidget::widgetInitialized, &_simianOptionsAction, &SimianOptionsAction::initLoader);
 
-    _simian_viewer.setPage(":/simian_viewer/simian_viewer.html", "qrc:/simian_viewer/");
+    _simian_viewer.setPage(":/simian_viewer/simian_viewer/simian_viewer.html", "qrc:/simian_viewer/simian_viewer/");
     _simian_viewer.setContentsMargins(0, 0, 0, 0);
     _simian_viewer.layout()->setContentsMargins(0, 0, 0, 0);
 
@@ -338,7 +338,7 @@ ViewPlugin* SimianViewerPluginFactory::produce()
 
 
                     // Copy the resource file to a temporary file
-                    if (QFile::copy(":/SimianViewerDocumentation.pdf", tempFileName)) {
+                    if (QFile::copy(":/simian_viewer/SimianViewerDocumentation.pdf", tempFileName)) {
                         //qDebug() << "Temporary file created at: " << tempFileName;
                     }
                     else {
