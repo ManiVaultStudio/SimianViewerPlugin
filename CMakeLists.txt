@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.22)
 cmake_policy(SET CMP0058 NEW) # suppress Ninja warning on Linux about /res files
 set(PROJECT "SimianViewerPlugin")
 
@@ -88,7 +88,16 @@ add_library(${PROJECT} SHARED ${SOURCES} ${RESOURCES} ${RESOURCE_FILES} ${Data} 
 target_include_directories(${PROJECT} PRIVATE "${MV_INSTALL_DIR}/$<CONFIGURATION>/include/")
 target_include_directories(${PROJECT} PRIVATE ${PROJECT_SOURCE_DIR}/src)
 
-target_compile_features(${PROJECT} PRIVATE cxx_std_17)
+# -----------------------------------------------------------------------------
+# Target properties
+# -----------------------------------------------------------------------------
+target_compile_features(${PROJECT} PRIVATE cxx_std_20)
+
+set_target_properties(${PROJECT}
+    PROPERTIES
+    FOLDER ViewPlugins
+)
+
 
 set(MV_LINK_PATH "${MV_INSTALL_DIR}/$<CONFIGURATION>/lib")
 set(PLUGIN_LINK_PATH "${MV_INSTALL_DIR}/$<CONFIGURATION>/$<IF:$<CXX_COMPILER_ID:MSVC>,lib,Plugins>")

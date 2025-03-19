@@ -918,7 +918,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				{
 					QVariantMap tempHARVariantMap;
 					//tempHARVariantMap[QString::number(Qt::DecorationRole)] = QColor::fromRgb(0, 0, 0);
-					tempHARVariantMap[QString::number(Qt::DecorationRole)] = Application::getIconFont("FontAwesome").getIcon("check", Qt::black);
+					tempHARVariantMap[QString::number(Qt::DecorationRole)] = mv::util::StyledIcon("check");
 					tempHARVariantMap[QString::number(Qt::SizeHintRole)] = QSize(1, 1);
 					tempHARVariantMap[QString::number(Qt::DisplayRole)] = QString(" ");
 					tempHARVariantMap[QString::number(Qt::ToolTipRole)] = QString(geneExpValue.toMap().value(gene).toMap().value("HARs").toString());
@@ -932,7 +932,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				{
 					QVariantMap tempHCONDELVariantMap;
 					//tempHCONDELVariantMap[QString::number(Qt::DecorationRole)] = QColor::fromRgb(0, 0, 0);
-					tempHCONDELVariantMap[QString::number(Qt::DecorationRole)] = Application::getIconFont("FontAwesome").getIcon("check", Qt::black);
+					tempHCONDELVariantMap[QString::number(Qt::DecorationRole)] = mv::util::StyledIcon("check");
 					tempHCONDELVariantMap[QString::number(Qt::SizeHintRole)] = QSize(1, 1);
 					tempHCONDELVariantMap[QString::number(Qt::DisplayRole)] = QString(" ");
 					tempHCONDELVariantMap[QString::number(Qt::ToolTipRole)] = QString(geneExpValue.toMap().value(gene).toMap().value("hCONDELs").toString());
@@ -945,7 +945,7 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				{
 					QVariantMap tempHAQERVariantMap;
 					//tempHCONDELVariantMap[QString::number(Qt::DecorationRole)] = QColor::fromRgb(0, 0, 0);
-					tempHAQERVariantMap[QString::number(Qt::DecorationRole)] = Application::getIconFont("FontAwesome").getIcon("check", Qt::black);
+					tempHAQERVariantMap[QString::number(Qt::DecorationRole)] = mv::util::StyledIcon("check");
 					tempHAQERVariantMap[QString::number(Qt::SizeHintRole)] = QSize(1, 1);
 					tempHAQERVariantMap[QString::number(Qt::DisplayRole)] = QString(" ");
 					tempHAQERVariantMap[QString::number(Qt::ToolTipRole)] = QString(geneExpValue.toMap().value(gene).toMap().value("HAQERs").toString());
@@ -2260,7 +2260,7 @@ inline SimianOptionsAction::VisSettingHolder::VisSettingHolder(SimianOptionsActi
 
 {
 	setText("Setting Options");
-	setIcon(Application::getIconFont("FontAwesome").getIcon("cog"));
+	setIcon(mv::util::StyledIcon("cog"));
 	setPopupSizeHint(QSize(350, 0));
 	addAction(&_fullHeatMapAction);
 	addAction(&_colorMapAction);
@@ -2301,7 +2301,7 @@ inline SimianOptionsAction::LinkerSettingHolder::LinkerSettingHolder(SimianOptio
 	_smartSeqDataset2(this, "SmartSecDataset2")
 {
 	setText("Linking Options");
-	setIcon(Application::getIconFont("FontAwesome").getIcon("link"));
+	setIcon(mv::util::StyledIcon("link"));
 	setPopupSizeHint(QSize(350, 0));
 	//addAction(&_smartSeqDataset1);
 	//addAction(&_smartSeqDataset2);

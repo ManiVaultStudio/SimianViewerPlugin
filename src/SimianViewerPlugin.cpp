@@ -257,20 +257,15 @@ void SimianViewerPlugin::removeSelectionFromScatterplot(std::string clusterName)
 SimianViewerPluginFactory::SimianViewerPluginFactory() :
     ViewPluginFactory()
 {
-    connect(&getTriggerHelpAction(), &TriggerAction::triggered, this, [this]() -> void {
-        QDesktopServices::openUrl(QUrl("https://www.dropbox.com/s/e9200b3zphzsw3b/Cytosplore_Simian_Viewer_Technical_Document_1.pdf?dl=0"));
-        });
+    //connect(&getTriggerHelpAction(), &TriggerAction::triggered, this, [this]() -> void {
+    //    QDesktopServices::openUrl(QUrl("https://www.dropbox.com/s/e9200b3zphzsw3b/Cytosplore_Simian_Viewer_Technical_Document_1.pdf?dl=0"));
+    //    });
+    setIconByName("chart-area");
 }
 
 // =============================================================================
 // Factory
 // =============================================================================
-
-QIcon SimianViewerPluginFactory::getIcon(const QColor& color /*= Qt::black*/) const
-{
-    return Application::getIconFont("FontAwesome").getIcon("chart-area", color);
-}
-
 
 QMenu *findHelpMenu()
 {
@@ -309,7 +304,7 @@ ViewPlugin* SimianViewerPluginFactory::produce()
         {
            
             auto *documentation = new TriggerAction(this, "Simian Viewer documentation");
-            QIcon icon = Application::getIconFont("FontAwesome").getIcon("file-pdf", Qt::black);
+            QIcon icon = mv::util::StyledIcon("file-pdf");
             documentation->setIcon(icon);
             connect(documentation, &QAction::triggered, this, [this](bool)
             {
@@ -385,7 +380,7 @@ mv::gui::PluginTriggerActions SimianViewerPluginFactory::getPluginTriggerActions
     if (PluginFactory::areAllDatasetsOfTheSameType(datasets, PointType)) {
         if (numberOfDatasets >= 1) {
             if (datasets.first()->getDataType() == PointType) {
-                auto pluginTriggerAction = new PluginTriggerAction(const_cast<SimianViewerPluginFactory*>(this), this, "Simian viewer", "Load dataset in Simian viewer", getIcon(), [this, getInstance, datasets](PluginTriggerAction& pluginTriggerAction) -> void {
+                auto pluginTriggerAction = new PluginTriggerAction(const_cast<SimianViewerPluginFactory*>(this), this, "Simian viewer", "Load dataset in Simian viewer", StyledIcon("chart-area"), [this, getInstance, datasets](PluginTriggerAction& pluginTriggerAction) -> void {
                     for (auto dataset : datasets)
                         getInstance()->loadData(Datasets({ dataset }));
                     });
