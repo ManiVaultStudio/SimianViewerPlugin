@@ -906,7 +906,16 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 			int HCONDELCount = 0;
 			int HAQERCount = 0;
 			//tempVariantMap[QString::number(Qt::ForegroundRole)] = QBrush(QColor::fromRgb(128, 128, 128));
+				// Create a custom QIcon from a checkmark image
+			QPixmap checkPixmap(16, 16); // Size of the icon
+			checkPixmap.fill(Qt::transparent); // Transparent background
 
+			QPainter painter(&checkPixmap);
+			painter.setRenderHint(QPainter::Antialiasing);
+			painter.setPen(QPen(Qt::black, 2)); // Black checkmark
+			painter.drawLine(2, 8, 6, 12); // Draw the checkmark lines
+			painter.drawLine(6, 12, 14, 4);
+			QIcon checkIcon(checkPixmap);
 			for (auto gene : geneExpValue.toMap().keys())
 			{
 				//qDebug() << geneExpValue.toMap().value(gene).toMap().value("HARs").toString() << '\n';
@@ -918,7 +927,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				{
 					QVariantMap tempHARVariantMap;
 					//tempHARVariantMap[QString::number(Qt::DecorationRole)] = QColor::fromRgb(0, 0, 0);
-					tempHARVariantMap[QString::number(Qt::DecorationRole)] = mv::util::StyledIcon("check");
+					//tempHARVariantMap[QString::number(Qt::DecorationRole)] = mv::util::StyledIcon("check");
+					tempHARVariantMap[QString::number(Qt::DecorationRole)] = checkIcon;
 					tempHARVariantMap[QString::number(Qt::SizeHintRole)] = QSize(1, 1);
 					tempHARVariantMap[QString::number(Qt::DisplayRole)] = QString(" ");
 					tempHARVariantMap[QString::number(Qt::ToolTipRole)] = QString(geneExpValue.toMap().value(gene).toMap().value("HARs").toString());
@@ -932,7 +942,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				{
 					QVariantMap tempHCONDELVariantMap;
 					//tempHCONDELVariantMap[QString::number(Qt::DecorationRole)] = QColor::fromRgb(0, 0, 0);
-					tempHCONDELVariantMap[QString::number(Qt::DecorationRole)] = mv::util::StyledIcon("check");
+					//tempHCONDELVariantMap[QString::number(Qt::DecorationRole)] = mv::util::StyledIcon("check");
+					tempHCONDELVariantMap[QString::number(Qt::DecorationRole)] = checkIcon;
 					tempHCONDELVariantMap[QString::number(Qt::SizeHintRole)] = QSize(1, 1);
 					tempHCONDELVariantMap[QString::number(Qt::DisplayRole)] = QString(" ");
 					tempHCONDELVariantMap[QString::number(Qt::ToolTipRole)] = QString(geneExpValue.toMap().value(gene).toMap().value("hCONDELs").toString());
@@ -945,7 +956,8 @@ SimianOptionsAction::SimianOptionsAction(SimianViewerPlugin& simianViewerPlugin,
 				{
 					QVariantMap tempHAQERVariantMap;
 					//tempHCONDELVariantMap[QString::number(Qt::DecorationRole)] = QColor::fromRgb(0, 0, 0);
-					tempHAQERVariantMap[QString::number(Qt::DecorationRole)] = mv::util::StyledIcon("check");
+					//tempHAQERVariantMap[QString::number(Qt::DecorationRole)] = mv::util::StyledIcon("check");
+					tempHAQERVariantMap[QString::number(Qt::DecorationRole)] = checkIcon;
 					tempHAQERVariantMap[QString::number(Qt::SizeHintRole)] = QSize(1, 1);
 					tempHAQERVariantMap[QString::number(Qt::DisplayRole)] = QString(" ");
 					tempHAQERVariantMap[QString::number(Qt::ToolTipRole)] = QString(geneExpValue.toMap().value(gene).toMap().value("HAQERs").toString());
