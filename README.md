@@ -28,7 +28,7 @@ The Cytosplore Simian Viewer system makes use of the following repositories:
    - Repository Link: [SimianViewerPlugin](https://github.com/ManiVaultStudio/SimianViewerPlugin.git)
 
 7. **ChartLegend View Plugin**
-   - Repository Link: [ChartLegendPlugin](https://github.com/ManiVaultStudio/ChartLegendPlugin.git)
+   - Repository Link: [ChartLegendPlugin](https://github.com/ManiVaultStudio/ChartLegendViewPlugin.git)
 
 ## Installers
 
