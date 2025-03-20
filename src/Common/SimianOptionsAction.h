@@ -254,7 +254,7 @@ public: // Action getters
     //ExplorationAction& getExplorationAction() { return _explorationAction; }
 public:
     void initLoader();
-
+    void triggerDEMethod();
 public: // Serialization
 
     /**

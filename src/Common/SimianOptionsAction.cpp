@@ -2622,6 +2622,15 @@ void SimianOptionsAction::initLoader()
 	command << QString("TableView") << QString("sortByColumn") << int(4) << sortOrderVariant;
 	commands.push_back(command);
 	_linkerSettingHolder.getCommandAction().setVariant(commands);
+
+	if (!_stopMethodFlagFromSpecies1 && !_stopMethodFlagFromSpecies2)
+	{
+		_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().trigger();
+	}
+}
+void SimianOptionsAction::triggerDEMethod()
+{
+	initLoader();
 	if (!_stopMethodFlagFromSpecies1 && !_stopMethodFlagFromSpecies2)
 	{
 		_linkerSettingHolder.getmodifyDifferentialExpressionAutoUpdateAction().trigger();

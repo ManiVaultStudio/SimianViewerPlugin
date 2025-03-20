@@ -50,6 +50,8 @@ void SimianViewerPlugin::init()
 {
     connect(&_simian_viewer, &SimianViewerWidget::widgetInitialized, &_simianOptionsAction, &SimianOptionsAction::initLoader);
 
+    connect(&mv::projects(), &AbstractProjectManager::projectOpened, &_simianOptionsAction, &SimianOptionsAction::triggerDEMethod);
+
     _simian_viewer.setPage(":/simian_viewer/simian_viewer/simian_viewer.html", "qrc:/simian_viewer/simian_viewer/");
     _simian_viewer.setContentsMargins(0, 0, 0, 0);
     _simian_viewer.layout()->setContentsMargins(0, 0, 0, 0);
