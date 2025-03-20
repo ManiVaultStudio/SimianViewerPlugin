@@ -24,8 +24,11 @@ The Cytosplore Simian Viewer system makes use of the following repositories:
 5. **Multi-species Expression Comparison View Plugin**
    - Repository Link: [SimianViewerMultExpCompPlugin](https://github.com/ManiVaultStudio/SimianViewerMultExpCompPlugin.git)
 
-5. **Distancemap View Plugin**
+6. **Distancemap View Plugin**
    - Repository Link: [SimianViewerPlugin](https://github.com/ManiVaultStudio/SimianViewerPlugin.git)
+
+7. **ChartLegend View Plugin**
+   - Repository Link: [ChartLegendPlugin](https://github.com/ManiVaultStudio/ChartLegendPlugin.git)
 
 ## Installers
 
