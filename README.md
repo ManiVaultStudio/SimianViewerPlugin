@@ -13,7 +13,7 @@ The Cytosplore Simian Viewer system makes use of the following repositories:
    - Repository Link: [ManiVaultCore](https://github.com/ManiVaultStudio/core.git)
 
 2. **Scatterplot View Plugin**
-   - Repository Link: [SimianViewerScatterplotPlugin](https://github.com/ManiVaultStudio/SimianViewerScatterplotPlugin.git)
+   - Repository Link: [ScatterplotPlugin](https://github.com/ManiVaultStudio/Scatterplot)
 
 3. **Differential Expression View Plugin**
    - Repository Link: [ClusterDifferentialExpressionPlugin](https://github.com/ManiVaultStudio/ClusterDifferentialExpressionPlugin.git)
@@ -24,8 +24,11 @@ The Cytosplore Simian Viewer system makes use of the following repositories:
 5. **Multi-species Expression Comparison View Plugin**
    - Repository Link: [SimianViewerMultExpCompPlugin](https://github.com/ManiVaultStudio/SimianViewerMultExpCompPlugin.git)
 
-5. **Distancemap View Plugin**
+6. **Distancemap View Plugin**
    - Repository Link: [SimianViewerPlugin](https://github.com/ManiVaultStudio/SimianViewerPlugin.git)
+
+7. **ChartLegend View Plugin**
+   - Repository Link: [ChartLegendPlugin](https://github.com/ManiVaultStudio/ChartLegendViewPlugin.git)
 
 ## Installers
 
@@ -81,68 +84,74 @@ If you use this project in your research or find it helpful, please consider cit
 ## Connecting Actions Used
 This plugin uses the Manivault action system to communicate between plugins.
 Below is a list of published actions and their connections:
-| ConcernedPlugin                | PublishedFrom                  | Type                | ActionName                                       | PublishedActionName                                                | Type    |
-| ------------------------------ | ------------------------------ | ------------------- | ------------------------------------------------ | ------------------------------------------------------------------ | ------- |
-| SimianViewerPlugin             | DifferentialExpression         | TriggerAction       | CalculateDifferentialExpression                  | Cluster Differential Expression 1::CalculateDifferentialExpression | Connect |
-| SimianViewerPlugin             | DifferentialExpression         | VariantAction       | TableViewLeftSideInfo                            | Cluster Differential Expression 1::TableViewLeftSideInfo           | Connect |
-| SimianViewerPlugin             | DifferentialExpression         | VariantAction       | InvokeMethods                                    | Cluster Differential Expression 1::InvokeMethods                   | Connect |
-| SimianViewerPlugin             | DifferentialExpression         | DatasetPickerAction | Cross-species Dataset1                           | Cluster Differential Expression 1::Dataset1                        | Connect |
-| SimianViewerPlugin             | DifferentialExpression         | DatasetPickerAction | Cross-species Dataset2                           | Cluster Differential Expression 1::Dataset2                        | Connect |
-| SimianViewerPlugin             | DifferentialExpression         | StringAction        | Species1Name                                     | Cluster Differential Expression 1::DatasetName1                    | Connect |
-| SimianViewerPlugin             | DifferentialExpression         | StringAction        | Species2Name                                     | Cluster Differential Expression 1::DatasetName2                    | Connect |
-| SimianViewerPlugin             | DifferentialExpression         | OptionsAction       | Select cross-species Clusters1                   | Cluster Differential Expression 1::SelectClusters1                 | Connect |
-| SimianViewerPlugin             | DifferentialExpression         | OptionsAction       | Select cross-species Clusters2                   | Cluster Differential Expression 1::SelectClusters2                 | Connect |
-| SimianViewerPlugin             | DifferentialExpression         | StringAction        | Har-Hcondel IntoText                             | Cluster Differential Expression 1::IntoText                        | Connect |
-| SimianViewerPlugin             | SimianViewerPlugin             | OptionAction        | Scatterplot color control                        | Simian::ScatterplotColorControl                                    | Publish |
-| SimianViewerPlugin             | SimianViewerPlugin             | ColorAction         | Selection color                                  | Simian::SelectionColor                                             | Publish |
-| SimianViewerPlugin             | SimianViewerPlugin             | StringAction        | Selected Crossspecies Cluster                    | Simian::SelectedCrossspeciesCluster                                | Publish |
-| SimianViewerPlugin             | SimianViewerPlugin             | DatasetPickerAction | ScatterplotView1Color                            | Simian::ScatterplotView1Color                                      | Publish |
-| SimianViewerPlugin             | SimianViewerPlugin             | DatasetPickerAction | ScatterplotView1Position                         | Simian::ScatterplotView1Position                                   | Publish |
-| SimianViewerPlugin             | SimianViewerPlugin             | DatasetPickerAction | ScatterplotView2Color                            | Simian::ScatterplotView2Color                                      | Publish |
-| SimianViewerPlugin             | SimianViewerPlugin             | DatasetPickerAction | ScatterplotView2Position                         | Simian::ScatterplotView2Position                                   | Publish |
-| SimianViewerPlugin             | SimianViewerPlugin             | OptionAction        | Neighborhood                                     | Simian::Neighborhood                                               | Publish |
-| SimianViewerPlugin             | SimianViewerPlugin             | ToggleAction        | ParallelBarPluginVisibility                      | Simian::SimianViewerMultExpCompPluginVisibility                    | Publish |
-| SimianViewerPlugin             | SimianViewerPlugin             | DatasetPickerAction | DE Dataset1                                      | Simian::DE Dataset1                                                | Publish |
-| SimianViewerPlugin             | SimianViewerPlugin             | DatasetPickerAction | DE Dataset2                                      | Simian::DE Dataset2                                                | Publish |
-| SimianViewerPlugin             | SimianViewerPlugin             | ToggleAction        | PopPyramidPluginVisibility                       | Simian::SimianViewerPairExpCompPluginVisibility                    | Publish |
-| ~                              | ~                              | ~                   | ~                                                | ~                                                                  | ~       |
-| SimianViewerMultExpCompPlugin  | SimianViewerPlugin             | ColorAction         | Selection color                                  | Simian::SelectionColor                                             | Connect |
-| SimianViewerMultExpCompPlugin  | SimianViewerPlugin             | StringAction        | Selected CrossSpecies Cluster                    | Simian::SelectedCrossspeciesCluster                                | Connect |
-| SimianViewerMultExpCompPlugin  | SimianViewerPlugin             | OptionAction        | Neighborhood                                     | Simian::Neighborhood                                               | Connect |
-| SimianViewerMultExpCompPlugin  | DifferentialExpression         | StringAction        | SelectedID                                       | Cluster Differential Expression 1::LastSelectedId                  | Connect |
-| SimianViewerMultExpCompPlugin  | DifferentialExpression         | StringAction        | Species1Name                                     | Cluster Differential Expression 1::DatasetName1                    | Connect |
-| SimianViewerMultExpCompPlugin  | DifferentialExpression         | StringAction        | Species2Name                                     | Cluster Differential Expression 1::DatasetName2                    | Connect |
-| SimianViewerMultExpCompPlugin  | SimianViewerPlugin             | DatasetPickerAction | DE Dataset1                                      | Simian::DE Dataset1                                                | Connect |
-| SimianViewerMultExpCompPlugin  | SimianViewerPlugin             | DatasetPickerAction | DE Dataset2                                      | Simian::DE Dataset2                                                | Connect |
-| SimianViewerMultExpCompPlugin  | SimianViewerPlugin             | ToggleAction        | Visible                                          | Simian::SimianViewerMultExpCompPluginVisibility                    | Connect |
-| ~                              | ~                              | ~                   | ~                                                | ~                                                                  | ~       |
-| SimianViewerPairExpCompPlugin  | SimianViewerPlugin             | ColorAction         | Selection color                                  | Simian::SelectionColor                                             | Connect |
-| SimianViewerPairExpCompPlugin  | SimianViewerPlugin             | StringAction        | Selected CrossSpecies Cluster                    | Simian::SelectedCrossspeciesCluster                                | Connect |
-| SimianViewerPairExpCompPlugin  | SimianViewerPlugin             | DatasetPickerAction | DE Dataset1                                      | Simian::DE Dataset1                                                | Connect |
-| SimianViewerPairExpCompPlugin  | SimianViewerPlugin             | DatasetPickerAction | DE Dataset2                                      | Simian::DE Dataset2                                                | Connect |
-| SimianViewerPairExpCompPlugin  | DifferentialExpression         | StringAction        | SelectedID                                       | Cluster Differential Expression 1::LastSelectedId                  | Connect |
-| SimianViewerPairExpCompPlugin  | DifferentialExpression         | StringAction        | Species1Name                                     | Cluster Differential Expression 1::DatasetName1                    | Connect |
-| SimianViewerPairExpCompPlugin  | DifferentialExpression         | StringAction        | Species2Name                                     | Cluster Differential Expression 1::DatasetName2                    | Connect |
-| SimianViewerPairExpCompPlugin  | SimianViewerPlugin             | ToggleAction        | Visible                                          | Simian::PopPyramidVisibility                                       | Connect |
-| ~                              | ~                              | ~                   | ~                                                | ~                                                                  | ~       |
-| SimianViewerScatterplotPlugin1 | SimianViewerPlugin             | DatasetPickerAction | Settings/Datasets/Color                          | Simian::ScatterplotView1Color                                      | Connect |
-| SimianViewerScatterplotPlugin1 | SimianViewerPlugin             | DatasetPickerAction | Settings/Datasets/Position                       | Simian::ScatterplotView1Position                                   | Connect |
-| SimianViewerScatterplotPlugin1 | SimianViewerScatterplotPlugin1 | ColorAction         | Settings/Coloring/1D Color map/Current color map | Scatterplot::1DColormap                                            | Publish |
-| SimianViewerScatterplotPlugin1 | SimianViewerScatterplotPlugin1 | ScalarAction        | Settings/Plot/Point/Point Size                   | Scatterplot::PointSize                                             | Publish |
-| SimianViewerScatterplotPlugin1 | SimianViewerScatterplotPlugin1 | ScalarAction        | Settings/Plot/Point/Point opacity                | Scatterplot::PointOpacity                                          | Publish |
-| SimianViewerScatterplotPlugin1 | SimianViewerPlugin             | OptionsAction       | Scatterplot Expression color control             | Simian::ScatterplotColorControl                                    | Connect |
-| SimianViewerScatterplotPlugin1 | SimianViewerPlugin             | ColorAction         | Settings/Selection/Point Selection/Color         | Simian::SelectionColor                                             | Connect |
-| SimianViewerScatterplotPlugin1 | SimianViewerPlugin             | StringAction        | CrossSpeciesclusterSelection                     | Simian::SelectedCrossspeciesCluster                                | Connect |
-| SimianViewerScatterplotPlugin1 | SimianViewerScatterplotPlugin1 | ScalarAction        | Focus Selection                                  | Scatterplot::FocusSelection                                        | Publish |
-| SimianViewerScatterplotPlugin1 | SimianViewerScatterplotPlugin1 | ScalarAction        | Settings/Selection/Opacity                       | Scatterplot::Opacity                                               | Publish |
-| ~                              | ~                              | ~                   | ~                                                | ~                                                                  | ~       |
-| SimianViewerScatterplotPlugin2 | SimianViewerPlugin             | DatasetPickerAction | Settings/Datasets/Color                          | Simian::ScatterplotView2Color                                      | Connect |
-| SimianViewerScatterplotPlugin2 | SimianViewerPlugin             | DatasetPickerAction | Settings/Datasets/Position                       | Simian::ScatterplotView2Position                                   | Connect |
-| SimianViewerScatterplotPlugin2 | SimianViewerScatterplotPlugin1 | ColorAction         | Settings/Coloring/1D Color map/Current color map | Scatterplot::1DColormap                                            | Connect |
-| SimianViewerScatterplotPlugin2 | SimianViewerScatterplotPlugin1 | ScalarAction        | Settings/Plot/Point/Point Size                   | Scatterplot::PointSize                                             | Connect |
-| SimianViewerScatterplotPlugin2 | SimianViewerScatterplotPlugin1 | ScalarAction        | Settings/Plot/Point/Point opacity                | Scatterplot::PointOpacity                                          | Connect |
-| SimianViewerScatterplotPlugin2 | SimianViewerPlugin             | OptionsAction       | Scatterplot Expression color control             | Simian::ScatterplotColorControl                                    | Connect |
-| SimianViewerScatterplotPlugin2 | SimianViewerPlugin             | ColorAction         | Settings/Selection/Point Selection/Color         | Simian::SelectionColor                                             | Connect |
-| SimianViewerScatterplotPlugin2 | SimianViewerPlugin             | StringAction        | CrossSpeciesclusterSelection                     | Simian::SelectedCrossspeciesCluster                                | Connect |
-| SimianViewerScatterplotPlugin2 | SimianViewerScatterplotPlugin1 | ScalarAction        | Focus Selection                                  | Scatterplot::FocusSelection                                        | Connect |
-| SimianViewerScatterplotPlugin2 | SimianViewerScatterplotPlugin1 | ScalarAction        | Settings/Selection/Opacity                       | Scatterplot::Opacity                                               | Connect |
+## Published Actions Table
+
+| PublishedFrom            | Type            | ToName                          | FromName | PublishedName                                             | ConcernedPlugin        |
+|--------------------------|-----------------|---------------------------------|----------|-----------------------------------------------------------|------------------------|
+| DifferentialExpression   | TriggerAction   | CalculateDifferentialExpression |          | Cluster Differential Expression 1::CalculateDifferentialExpression | Connect | SimianViewerPlugin |
+| DifferentialExpression   | VariantAction   | TableViewLeftSideInfo           |          | Cluster Differential Expression 1::TableViewLeftSideInfo  | Connect | SimianViewerPlugin |
+| DifferentialExpression   | VariantAction   | InvokeMethods                   |          | Cluster Differential Expression 1::InvokeMethods          | Connect | SimianViewerPlugin |
+| DifferentialExpression   | DatasetPickerAction | Cross-species Dataset1         |          | Cluster Differential Expression 1::Dataset1               | Connect | SimianViewerPlugin |
+| DifferentialExpression   | DatasetPickerAction | Cross-species Dataset2         |          | Cluster Differential Expression 1::Dataset2               | Connect | SimianViewerPlugin |
+| DifferentialExpression   | StringAction    | Species1Name                    |          | Cluster Differential Expression 1::DatasetName1           | Connect | SimianViewerPlugin |
+| DifferentialExpression   | StringAction    | Species2Name                    |          | Cluster Differential Expression 1::DatasetName2           | Connect | SimianViewerPlugin |
+| DifferentialExpression   | OptionsAction   | Select cross-species Clusters1  |          | Cluster Differential Expression 1::SelectClusters1        | Connect | SimianViewerPlugin |
+| DifferentialExpression   | OptionsAction   | Select cross-species Clusters2  |          | Cluster Differential Expression 1::SelectClusters2        | Connect | SimianViewerPlugin |
+| DifferentialExpression   | StringAction    | Har-Hcondel IntoText            |          | Cluster Differential Expression 1::IntoText               | Connect | SimianViewerPlugin |
+| SimianViewer             | OptionAction    | Scatterplot color control       |          | Simian::ScatterplotColorControl                            | Publish | SimianViewerPlugin |
+| SimianViewer             | ColorAction     | Selection color                 |          | Simian::SelectionColor                                     | Publish | SimianViewerPlugin |
+| SimianViewer             | StringAction    | Selected Crossspecies Cluster   |          | Simian::SelectedCrossspeciesCluster                        | Publish | SimianViewerPlugin |
+| SimianViewer             | DatasetPickerAction | ScatterplotView1Color          |          | Simian::ScatterplotView1Color                              | Publish | SimianViewerPlugin |
+| SimianViewer             | DatasetPickerAction | ScatterplotView1Position       |          | Simian::ScatterplotView1Position                           | Publish | SimianViewerPlugin |
+| SimianViewer             | DatasetPickerAction | ScatterplotView2Color          |          | Simian::ScatterplotView2Color                              | Publish | SimianViewerPlugin |
+| SimianViewer             | DatasetPickerAction | ScatterplotView2Position       |          | Simian::ScatterplotView2Position                           | Publish | SimianViewerPlugin |
+| SimianViewer             | OptionAction    | Neighborhood                    |          | Simian::Neighborhood                                       | Publish | SimianViewerPlugin |
+| SimianViewer             | ToggleAction    | ParallelBarPluginVisibility     |          | Simian::ParallelBarsVisibility                             | Publish | SimianViewerPlugin |
+| SimianViewer             | DatasetPickerAction | DE Dataset1                    |          | Simian::DE Dataset1                                        | Publish | SimianViewerPlugin |
+| SimianViewer             | DatasetPickerAction | DE Dataset2                    |          | Simian::DE Dataset2                                        | Publish | SimianViewerPlugin |
+| SimianViewer             | ToggleAction    | PopPyramidPluginVisibility      |          | Simian::PopPyramidVisibility                               | Publish | SimianViewerPlugin |
+| SimianViewer             | ColorAction     | Selection color                 |          | Simian::SelectionColor                                     | Connect | ParallelBars       |
+| SimianViewer             | StringAction    | Selected CrossSpecies Cluster   |          | Simian::SelectedCrossspeciesCluster                        | Connect | ParallelBars       |
+| SimianViewer             | OptionAction    | Neighborhood                    |          | Simian::Neighbhorhood                                      | Connect | ParallelBars       |
+| DifferentialExpression   | StringAction    | SelectedID                      |          | Cluster Differential Expression 1::LastSelectedId         | Connect | ParallelBars       |
+| DifferentialExpression   | StringAction    | Species1Name                    |          | Cluster Differential Expression 1::DatasetName1           | Connect | ParallelBars       |
+| DifferentialExpression   | StringAction    | Species2Name                    |          | Cluster Differential Expression 1::DatasetName2           | Connect | ParallelBars       |
+| SimianViewer             | DatasetPickerAction | DE Dataset1                    |          | Simian::DE Dataset1                                        | Connect | ParallelBars       |
+| SimianViewer             | DatasetPickerAction | DE Dataset2                    |          | Simian::DE Dataset2                                        | Connect | ParallelBars       |
+| SimianViewer             | ToggleAction    | Visible                         |          | Simian::ParallelBarsVisibility                             | Connect | ParallelBars       |
+| SimianViewer             | ColorAction     | Selection color                 |          | Simian::SelectionColor                                     | Connect | PopulationPyramid  |
+| SimianViewer             | StringAction    | Selected CrossSpecies Cluster   |          | Simian::SelectedCrossspeciesCluster                        | Connect | PopulationPyramid  |
+| SimianViewer             | DatasetPickerAction | DE Dataset1                    |          | Simian::DE Dataset1                                        | Connect | PopulationPyramid  |
+| SimianViewer             | DatasetPickerAction | DE Dataset2                    |          | Simian::DE Dataset2                                        | Connect | PopulationPyramid  |
+| DifferentialExpression   | StringAction    | SelectedID                      |          | Cluster Differential Expression 1::LastSelectedId         | Connect | PopulationPyramid  |
+| DifferentialExpression   | StringAction    | Species1Name                    |          | Cluster Differential Expression 1::DatasetName1           | Connect | PopulationPyramid  |
+| DifferentialExpression   | StringAction    | Species2Name                    |          | Cluster Differential Expression 1::DatasetName2           | Connect | PopulationPyramid  |
+| SimianViewer             | ToggleAction    | Visible                         |          | Simian::PopPyramidVisibility                               | Connect | PopulationPyramid  |
+| SimianViewer             | DatasetPickerAction | Settings/Datasets/Color         |          | Simian::ScatterplotView1Color                              | Connect | Scatterplot1       |
+| SimianViewer             | DatasetPickerAction | Settings/Datasets/Position      |          | Simian::ScatterplotView1Position                           | Connect | Scatterplot1       |
+| Scatterplot1             | ColorAction     | Settings/Coloring/1D Color map/Current color map |          | Scatterplot::1DColormap                                    | Publish | Scatterplot1       |
+| Scatterplot1             | ScalarAction    | Settings/Plot/Point/Point Size  |          | Scatterplot::PointSize                                     | Publish | Scatterplot1       |
+| Scatterplot1             | ScalarAction    | Settings/Plot/Point/Point opacity |          | Scatterplot::PointOpacity                                  | Publish | Scatterplot1       |
+| SimianViewer             | OptionsAction   | Scatterplot Expression color control |          | Simian::ScatterplotColorControl                            | Connect | Scatterplot1       |
+| SimianViewer             | ColorAction     | Settings/Selection/Point Selection/Color |          | Simian::SelectionColor                                     | Connect | Scatterplot1       |
+| Scatterplot1             | ScalarAction    | Focus Selection                 |          | Scatterplot::FocusSelection                                | Publish | Scatterplot1       |
+| Scatterplot1             | ScalarAction    | Settings/Selection/Opacity      |          | Scatterplot::SelectionOpacity                              | Publish | Scatterplot1       |
+| SimianViewer             | DatasetPickerAction | Cluster dataset                |          | Simian::ScatterplotView1Color                              | Publish | ChartLegend1       |
+| Scatterplot1             | StringAction    | Color map                       |          | Scatterplot::1DColormap                                    | Publish | ChartLegend1       |
+| SimianViewer             | StringAction    | Cluster Selection String        |          | Simian::SelectedCrossspeciesCluster                        | Publish | ChartLegend1       |
+| DifferentialExpression   | StringAction    | Chart Title                     |          | Cluster Differential Expression 1::DatasetName1           | Publish | ChartLegend1       |
+| SimianViewer             | DatasetPickerAction | Settings/Datasets/Color         |          | Simian::ScatterplotView2Color                              | Connect | Scatterplot2       |
+| SimianViewer             | DatasetPickerAction | Settings/Datasets/Position      |          | Simian::ScatterplotView2Position                           | Connect | Scatterplot2       |
+| Scatterplot1             | ColorAction     | Settings/Coloring/1D Color map/Current color map |          | Scatterplot::1DColormap                                    | Connect | Scatterplot2       |
+| Scatterplot1             | ScalarAction    | Settings/Plot/Point/Point Size  |          | Scatterplot::PointSize                                     | Connect | Scatterplot2       |
+| Scatterplot1             | ScalarAction    | Settings/Plot/Point/Point opacity |          | Scatterplot::PointOpacity                                  | Connect | Scatterplot2       |
+| SimianViewer             | OptionsAction   | Scatterplot Expression color control |          | Simian::ScatterplotColorControl                            | Connect | Scatterplot2       |
+| SimianViewer             | ColorAction     | Settings/Selection/Point Selection/Color |          | Simian::SelectionColor                                     | Connect | Scatterplot2       |
+| Scatterplot1             | ScalarAction    | Focus Selection                 |          | Scatterplot::FocusSelection                                | Connect | Scatterplot2       |
+| Scatterplot1             | ScalarAction    | Settings/Selection/Opacity      |          | Scatterplot::SelectionOpacity                              | Connect | Scatterplot2       |
+| SimianViewer             | DatasetPickerAction | Cluster dataset                |          | Simian::ScatterplotView2Color                              | Connect | ChartLegend2       |
+| Scatterplot1             | StringAction    | Color map                       |          | Scatterplot::1DColormap                                    | Connect | ChartLegend2       |
+| SimianViewer             | StringAction    | Cluster Selection String        |          | Simian::SelectedCrossspeciesCluster                        | Connect | ChartLegend2       |
+| DifferentialExpression   | StringAction    | Chart Title                     |          | Cluster Differential Expression 1::DatasetName2           | Connect | ChartLegend2       |
+
+
