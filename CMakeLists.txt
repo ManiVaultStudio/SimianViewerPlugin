@@ -5,7 +5,7 @@ option(MV_UNITY_BUILD "Combine target source files into batches for faster compi
 # -----------------------------------------------------------------------------
 # ChartLegendView Plugin
 # -----------------------------------------------------------------------------
-PROJECT("SimianViewerPlugin")
+project(SimianViewerPlugin)
 
 # -----------------------------------------------------------------------------
 # CMake Options
@@ -88,19 +88,28 @@ source_group( DataFiles FILES ${Data})
 source_group( WebFiles FILES ${Web})
 source_group( ActionFiles FILES ${Common})
 
-
+qt_add_resources(RESOURCE_FILES ${RESOURCES})
 # -----------------------------------------------------------------------------
 # CMake Target
 # -----------------------------------------------------------------------------
 # Create dynamic library for the plugin
-add_library(${PROJECT_NAME} SHARED ${SOURCES} ${RESOURCES} ${RESOURCE_FILES} ${Data} ${Web} ${Common})
-
+add_library(${PROJECT_NAME} SHARED 
+    ${SOURCES} 
+    ${RESOURCE_FILES}  # This was missing
+    ${Data} 
+    ${Web} 
+    ${Common}
+)
 # -----------------------------------------------------------------------------
 # Target include directories
 # -----------------------------------------------------------------------------
 # Include ManiVault headers, including system data plugins
-target_include_directories(${PROJECT_NAME} PRIVATE "${ManiVault_INCLUDE_DIR}")
-
+target_include_directories(${PROJECT_NAME} PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/src  # For SimianViewerPlugin.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Common  # For Common headers
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Data  # For Data headers
+    "${ManiVault_INCLUDE_DIR}"
+)
 # -----------------------------------------------------------------------------
 # Target properties
 # -----------------------------------------------------------------------------
