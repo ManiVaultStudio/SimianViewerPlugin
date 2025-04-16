@@ -93,7 +93,7 @@ source_group( ActionFiles FILES ${Common})
 # CMake Target
 # -----------------------------------------------------------------------------
 # Create dynamic library for the plugin
-add_library(${PROJECT} SHARED ${SOURCES} ${RESOURCES} ${RESOURCE_FILES} ${Data} ${Web} ${Common})
+add_library(${PROJECT_NAME} SHARED ${SOURCES} ${RESOURCES} ${RESOURCE_FILES} ${Data} ${Web} ${Common})
 
 # -----------------------------------------------------------------------------
 # Target include directories
