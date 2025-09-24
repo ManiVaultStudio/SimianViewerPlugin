@@ -262,7 +262,7 @@ SimianViewerPluginFactory::SimianViewerPluginFactory() :
     //connect(&getTriggerHelpAction(), &TriggerAction::triggered, this, [this]() -> void {
     //    QDesktopServices::openUrl(QUrl("https://www.dropbox.com/s/e9200b3zphzsw3b/Cytosplore_Simian_Viewer_Technical_Document_1.pdf?dl=0"));
     //    });
-    getProjectsDsnsAction().addString("https://sec.lumc.nl/mtg-viewer/MV_data/CytosploreViewer/CytosploreViewerProjectInfo.json");
+    //getProjectsDsnsAction().addString("https://sec.lumc.nl/mtg-viewer/MV_data/CytosploreViewer/CytosploreViewerProjectInfo.json");
     setIconByName("chart-area");
 }
 
